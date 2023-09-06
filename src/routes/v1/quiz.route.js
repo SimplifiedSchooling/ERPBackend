@@ -66,7 +66,7 @@ module.exports = router;
  *             example:
  *               quizname: Which of the following colors are primary colors?
  *               options: ["Red", "Green", "Blue", "Yellow" ]
- *               correctOptions: [0, 2 ]
+ *               correctOptions: ["0", "2" ]
  *               explain: Explanation for the correct option
  *               hint: Hint for solving the quiz
  *               types: easy
@@ -218,7 +218,7 @@ module.exports = router;
  *             example:
  *               quizname: Which of the following colors are primary colors?
  *               options: ["Red", "Green", "Blue", "Yellow" ]
- *               correctOptions: [0, 2 ]
+ *               correctOptions: ["0", "2" ]
  *               explain: Explanation for the correct option
  *               hint: Hint for solving the quiz
  *               types: easy
@@ -297,7 +297,7 @@ module.exports = router;
  *                 items:
  *                   type: number
  *             example:
- *               answer: [0, 2]
+ *               answer: ["0", "2"]
  *     responses:
  *       "200":
  *         description: Quiz answer submitted successfully
@@ -401,8 +401,8 @@ module.exports = router;
  *               correctOptions:
  *                 type: array
  *                 items:
- *                   type: integer
- *                 example: [2]
+ *                   type: string
+ *                 example: ["2"]
  *               explain:
  *                 type: string
  *                 example: "Explanation for the correct option"

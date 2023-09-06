@@ -14,7 +14,7 @@ const quizeSchema = mongoose.Schema(
       required: true,
     },
     correctOptions: {
-      type: [Number], // An array of indices (0 to 3) of correct options
+      type: [String], // An array of indices (0 to 3) of correct options
       required: true,
     },
     explain: {
@@ -31,7 +31,7 @@ const quizeSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    userAnswers: [Number],
+    userAnswers: [String],
     marks: {
       type: Number,
     },

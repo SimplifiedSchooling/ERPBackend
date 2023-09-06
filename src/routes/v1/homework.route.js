@@ -22,7 +22,7 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: homework
- *   description: Quize management and retrieval
+ *   description: homework management and retrieval
  */
 
 /**
@@ -135,7 +135,7 @@ module.exports = router;
  * @swagger
  * /homework/{id}:
  *   get:
- *     summary: Get a Quize
+ *     summary: Get a homework
  *     tags: [homework]
  *     security:
  *       - bearerAuth: []
@@ -145,7 +145,7 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: Quize
+ *         description: homework
  *     responses:
  *       "200":
  *         description: OK
@@ -160,7 +160,7 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Quize
+ *     summary: Update a homework
  *     tags: [homework]
  *     security:
  *       - bearerAuth: []
