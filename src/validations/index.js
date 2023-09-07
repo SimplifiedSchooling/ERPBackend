@@ -15,3 +15,4 @@ module.exports.planvideoValidation = require('./planvideo.validation');
 module.exports.mediumValidation = require('./multimedia.validation');
 module.exports.ebookValidation = require('./ebook.validation');
 module.exports.HomeworkValidation = require('./homework.validation');
+module.exports.quickRecapValidation = require('./quickrecap.validation');

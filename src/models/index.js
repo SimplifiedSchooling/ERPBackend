@@ -17,3 +17,4 @@ module.exports.Studio = require('./studio.model');
 module.exports.Multimedia = require('./multimedia.model');
 module.exports.Ebook = require('./ebook.model');
 module.exports.Homework = require('./homework.model');
+module.exports.Quickrecap = require('./quickrecap.model');

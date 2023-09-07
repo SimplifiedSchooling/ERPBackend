@@ -268,7 +268,6 @@ components:
     Ebook: 
       type: object
       properties:
-
         path: 
           type: string
         order: 
@@ -294,6 +293,33 @@ components:
         subjectId: 64ca45e050227f21d906d
         bookId: 64ca45e050227f21d906d
         chapterId: 64ca45e050227f21d906d83c
+
+    QuickRecap: 
+      type: object
+      properties:
+        description: 
+          type: string
+        boardId:
+          type: string
+        mediumId: 
+          type: string
+        classId:
+          type: string
+        subjectId:
+          type: string
+        bookId:
+          type: string          
+        chapterId:
+          type: string
+      example:
+        description: multimedia cfgvnhb  bbh 
+        boardId: 64ca45e050227f21d906d83c
+        mediumId: 64ca45e050227f21d906d
+        classId: 64ca45e050227f21d906d
+        subjectId: 64ca45e050227f21d906d
+        bookId: 64ca45e050227f21d906d
+        chapterId: 64ca45e050227f21d906d83c
+
     Token:
       type: object
       properties:
