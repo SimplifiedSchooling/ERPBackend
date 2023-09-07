@@ -18,3 +18,4 @@ module.exports.Presentator = require('./presentator.model');
 module.exports.Studio = require('./studio.model');
 module.exports.Multimedia = require('./multimedia.model');
 module.exports.Ebook =  require('./ebook.model')
+module.exports.SchoolLocationType =  require('../models/masterModels/school-location-type.model')
