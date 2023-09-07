@@ -5,12 +5,12 @@ const createQuize = {
   body: Joi.object().keys({
     quizname: Joi.string(),
     options: Joi.array().items(Joi.string()),
-    correctOptions: Joi.array().items(Joi.number()),
+    correctOptions: Joi.array().items(Joi.string()),
     explain: Joi.string(),
     hint: Joi.string(),
     types: Joi.string(),
     isVerified: Joi.boolean(),
-    userAnswers: Joi.array().items(Joi.number()),
+    userAnswers: Joi.array().items(Joi.string()),
     marks: Joi.number(),
     boardId: Joi.string(),
     mediumId: Joi.string(),
@@ -57,7 +57,7 @@ const submitQuize = {
     quizeId: Joi.string().custom(objectId),
   }),
   body: Joi.object().keys({
-    answer: Joi.array().items(Joi.number()),
+    answer: Joi.array().items(Joi.string()),
   }),
 };
 
@@ -69,12 +69,12 @@ const updateQuize = {
     .keys({
       quizname: Joi.string(),
       options: Joi.array().items(Joi.string()),
-      correctOptions: Joi.array().items(Joi.number()),
+      correctOptions: Joi.array().items(Joi.string()),
       explain: Joi.string(),
       hint: Joi.string(),
       types: Joi.string(),
       isVerified: Joi.boolean(),
-      userAnswers: Joi.array().items(Joi.number()),
+      userAnswers: Joi.array().items(Joi.string()),
       marks: Joi.number(),
       boardId: Joi.string(),
       mediumId: Joi.string(),

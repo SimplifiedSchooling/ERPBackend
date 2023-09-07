@@ -1,42 +1,49 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const ebookSchema = mongoose.Schema(
+const homeworkSchema = mongoose.Schema(
   {
-    chapterId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Chapter',
+    Question: {
+      type: String,
       required: true,
     },
-    path: {
+    veryShortAnswer: {
       type: String,
     },
-    order: {
-      type: Number,
+    shortAnswer: {
+      type: String,
+    },
+    longAnswer: {
+      type: String,
     },
     boardId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Board',
+      ref: 'board',
       required: true,
     },
     mediumId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Medium',
+      ref: 'medium',
       required: true,
     },
     classId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Classes',
-      required: true,
-    },
-    subjectId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Subject',
+      ref: 'class',
       required: true,
     },
     bookId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Book',
+      ref: 'book',
+      required: true,
+    },
+    subjectId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'subject',
+      required: true,
+    },
+    chapterId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'chapter',
       required: true,
     },
   },
@@ -46,9 +53,9 @@ const ebookSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-ebookSchema.plugin(toJSON);
-ebookSchema.plugin(paginate);
+homeworkSchema.plugin(toJSON);
+homeworkSchema.plugin(paginate);
 
-const Ebook = mongoose.model('Ebook', ebookSchema);
+const Homework = mongoose.model('Homework', homeworkSchema);
 
-module.exports = Ebook;
+module.exports = Homework;
