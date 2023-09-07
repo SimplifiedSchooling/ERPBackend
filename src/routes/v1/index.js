@@ -19,6 +19,7 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
+const quickRecapRoute = require('./quickrecap.route');
 
 const router = express.Router();
 
@@ -94,6 +95,10 @@ const defaultRoutes = [
   {
     path: '/homework',
     route: homeworkRoute,
+  },
+  {
+    path: '/quickrecaps',
+    route: quickRecapRoute,
   },
 ];
 
