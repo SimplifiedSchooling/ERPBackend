@@ -72,13 +72,11 @@ const QuizeByIdSubmit = async (quizeId, updateBody) => {
   await quizes.save();
   return quizes;
 };
-
 const CheckoutAnswer = async (correctOptions, answer) => {
   const quiz = await QuizeByIdSubmit(correctOptions);
-  const correctAnswerSet = new Set(quiz.correctOptions);
-  const userAnswerSet = new Set(answer);
-  const allSelectedCorrect = Array.from(userAnswerSet).every((index) => correctAnswerSet.has(index));
-  const atLeastOneCorrect = Array.from(userAnswerSet).some((index) => correctAnswerSet.has(index));
+  const correctAnswerSet = new Set(correctOptions);
+  const allSelectedCorrect = answer.every((userAnswer) => correctAnswerSet.has(userAnswer));
+  const atLeastOneCorrect = answer.some((userAnswer) => correctAnswerSet.has(userAnswer));
   if (allSelectedCorrect) {
     quiz.userAnswers = answer;
     await quiz.save();
