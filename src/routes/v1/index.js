@@ -20,6 +20,11 @@ const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
 const quickRecapRoute = require('./quickrecap.route');
+const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route')
+const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route')
+const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route')
+const respondentRoute = require('./masterRoutes/respondent.route');
+const schooleBuildingRout = require('./masterRoutes/school.building.route');
 
 const router = express.Router();
 
@@ -100,6 +105,27 @@ const defaultRoutes = [
     path: '/quickrecaps',
     route: quickRecapRoute,
   },
+  {
+    path:'/managgroupschool',
+    route: managmentGroupSchoolRoute
+  },
+  {
+    path:'/managCodeschool',
+    route: managmentCodeSchoolRoute
+  },
+  {
+    path:'/managAdministrationType',
+    route: managementAdministrationTypeRoute
+  },
+  {
+    path:'/RespondentType',
+    route: respondentRoute
+  },
+  {
+    path:'/schoolBuilding',
+    route: schooleBuildingRout
+  }
+
 ];
 
 const devRoutes = [
