@@ -15,6 +15,14 @@ module.exports.Broadcast = require('./brandcast.model');
 module.exports.Presentator = require('./presentator.model');
 module.exports.Studio = require('./studio.model');
 module.exports.Multimedia = require('./multimedia.model');
+
+module.exports.Ebook = require('./ebook.model');
+module.exports.SchoolLocationType = require('./masterModels/school-location-type.model');
+
+module.exports.Ebook = require('./ebook.model');
+module.exports.Homework = require('./homework.model');
+
+module.exports.Residentialschool = require('./masterModels/Residential_school.model');
 module.exports.Ebook = require('./ebook.model');
 module.exports.SchoolLocationType = require('./masterModels/school-location-type.model');
 module.exports.Ebook = require('./ebook.model');
