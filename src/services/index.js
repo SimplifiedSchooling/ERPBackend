@@ -19,3 +19,4 @@ module.exports.multimediaService = require('./multimedia.service');
 module.exports.ebookService = require('./ebook.service');
 module.exports.HomeworkSerices = require('./homework.services');
 module.exports.quickRecapService = require('./quickrecap.service');
+module.exports.languageService = require('./masterService/language.service');

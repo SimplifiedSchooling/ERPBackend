@@ -20,3 +20,4 @@ module.exports.SchoolLocationType = require('./masterModels/school-location-type
 module.exports.Ebook = require('./ebook.model');
 module.exports.Homework = require('./homework.model');
 module.exports.Quickrecap = require('./quickrecap.model');
+module.exports.Language = require('./masterModels/language.model');

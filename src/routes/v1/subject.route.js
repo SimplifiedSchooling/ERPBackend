@@ -16,6 +16,8 @@ router
   .delete(validate(subjectValidation.deleteSubject), subjectController.deleteSubject)
   .get(validate(subjectValidation.getSubject), subjectController.getSubjectById);
 
+router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClassId), subjectController.getSubjectByClassId);
+
 module.exports = router;
 
 /**
@@ -41,29 +43,20 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - boardId
- *               - mediumId
- *               - classId
  *               - order
  *             properties:
  *               name:
- *                 type: string
- *               classId:
- *                 type: string
- *               boardId:
- *                 type: string
- *               mediumId:
  *                 type: string
  *               order:
  *                 type: number
  *               thumbnail:
  *                 type: string
+ *               code:
+ *                 type: number
  *             example:
  *               name: CBSC
- *               boardId: 614a7e7d7f1d813bbf8e89b9
- *               mediumId: 614a7e7d7f1d813bbf8e89b8
- *               classId: 614a7e7d7f1d813bbf8e89b7
  *               order: 2
+ *               code: 334
  *               thumbnail: ajfvshBa/asfbjgvjcav
  *     responses:
  *       "201":
@@ -136,6 +129,7 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  */
+
 /**
  * @swagger
  * /subjects/{subjectId}:
@@ -191,22 +185,16 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               classId:
- *                 type: string
- *               boardId:
- *                 type: string
- *               mediumId:
- *                 type: string
  *               order:
  *                 type: number
  *               thumbnail:
  *                 type: string
+ *               code:
+ *                 type: number
  *             example:
  *               name: CBSC
- *               boardId: 614a7e7d7f1d813bbf8e89b9
- *               mediumId: 614a7e7d7f1d813bbf8e89b8
- *               classId: 614a7e7d7f1d813bbf8e89b7
  *               order: 2
+ *               code: 35
  *               thumbnail: fvacgjhbzjnkl/aclhgh
  *     responses:
  *       "200":
@@ -243,4 +231,34 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /subjects/class/{classId}:
+ *   get:
+ *     summary: Get a class
+ *     tags: [Subject]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *               schema:
+ *                $ref: '#/components/schemas/Subject'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
  */
