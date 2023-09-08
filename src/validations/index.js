@@ -19,3 +19,4 @@ module.exports.HomeworkValidation = require('./homework.validation');
 module.exports.quickRecapValidation = require('./quickrecap.validation');
 module.exports.MinorityManageSchoolValidation = require('./masterValidations/minority_manage_school.validation');
 module.exports.languageValidation = require('./masterValidations/language.validation');
+module.exports.boundarywallValidation = require('./masterValidations/boundarywall.validation');

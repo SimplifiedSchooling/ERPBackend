@@ -25,3 +25,4 @@ module.exports.languageService = require('./masterService/language.service');
 module.exports.TypeResidentialSchoolService = require('./masterService/type_residential_School.service');
 module.exports.BoardingResidentialSchoolService = require('./masterService/boarding_residential_school.service');
 module.exports.MinoritySchoolService = require('./masterService/minority_manage_school.service');
+module.exports.BoundaryWallService = require('./masterService/boundarywall.services');
