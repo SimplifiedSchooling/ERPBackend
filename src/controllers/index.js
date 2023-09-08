@@ -14,3 +14,4 @@ module.exports.broadcastController = require('./broadcast.controller');
 module.exports.studioController = require('./studio.controller');
 module.exports.multimediaController = require('./multimedia.controller');
 module.exports.homeworkController = require('./homework.controller');
+module.exports.languageController = require('./masterControllers/language.controller');
