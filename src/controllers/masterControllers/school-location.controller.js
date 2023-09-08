@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
 const schoolLocationServices = require('../../services/masterService/school.location.type.service');
+const ApiError = require('../../utils/ApiError');
 
 const createSchoolLocationType = catchAsync(async (req, res) => {
   const newSchoolLocationType = await schoolLocationServices.createSchoolLocation(req.body);
@@ -8,8 +9,8 @@ const createSchoolLocationType = catchAsync(async (req, res) => {
 });
 
 const getAllSchoolLocation = catchAsync(async (req, res) => {
-  const getAllSchoolLocation = await schoolLocationServices.getAllSchoolLocation();
-  res.send(getAllSchoolLocation);
+  const getAllSchoolLocations = await schoolLocationServices.getAllSchoolLocation();
+  res.send(getAllSchoolLocations);
 });
 
 const getSchoolLocationById = catchAsync(async (req, res) => {
@@ -31,9 +32,9 @@ const deleteSchoolLocationTypeById = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-    createSchoolLocationType,
-    getAllSchoolLocation,
-    getSchoolLocationById,
-    updateSchoolLocationTypeyId,
-    deleteSchoolLocationTypeById,
+  createSchoolLocationType,
+  getAllSchoolLocation,
+  getSchoolLocationById,
+  updateSchoolLocationTypeyId,
+  deleteSchoolLocationTypeById,
 };

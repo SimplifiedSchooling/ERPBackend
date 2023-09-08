@@ -12,8 +12,14 @@ router
 router
   .route('/:safetyAndSecurityId')
   .get(validate(safetyAndSecurityValidation.getSafetyAndSecurityById), safetyAndSecurityController.getSafetyAndSecurityById)
-  .patch(validate(safetyAndSecurityValidation.updateSafetyAndSecurityId), safetyAndSecurityController.updateSafetyAndSecurityById)
-  .delete(validate(safetyAndSecurityValidation.deleteSafetyAndSecurityById), safetyAndSecurityController.deleteSafetyAndSecurityById);
+  .patch(
+    validate(safetyAndSecurityValidation.updateSafetyAndSecurityId),
+    safetyAndSecurityController.updateSafetyAndSecurityById
+  )
+  .delete(
+    validate(safetyAndSecurityValidation.deleteSafetyAndSecurityById),
+    safetyAndSecurityController.deleteSafetyAndSecurityById
+  );
 
 module.exports = router;
 /**
@@ -111,7 +117,7 @@ module.exports = router;
  *         name:
  *           type: string
  *       example:
- *         name: once a year 
+ *         name: once a year
  */
 
 /**

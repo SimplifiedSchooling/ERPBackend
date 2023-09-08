@@ -1,9 +1,10 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
 const inchargeTypeService = require('../../services/masterService/head.of.school.service');
+const ApiError = require('../../utils/ApiError');
 
 const createInchargeType = catchAsync(async (req, res) => {
-const newInchargeType = await inchargeTypeService.createInchargeType(req.body);
+  const newInchargeType = await inchargeTypeService.createInchargeType(req.body);
   res.status(httpStatus.CREATED).send(newInchargeType);
 });
 
@@ -31,9 +32,9 @@ const deleteInchargeTypeById = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-    createInchargeType,
-    getAllInchargeType,
-    getInchargeTypeById,
-    updateInchargeTypeyId,
-    deleteInchargeTypeById,
+  createInchargeType,
+  getAllInchargeType,
+  getInchargeTypeById,
+  updateInchargeTypeyId,
+  deleteInchargeTypeById,
 };

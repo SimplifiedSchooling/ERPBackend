@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {District}  = require('../../models');
+const { District } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**
@@ -41,7 +41,7 @@ const getDistrictById = async (id) => {
  * @returns {Promise<District>}
  */
 const updateDistrictyId = async (DistrictId, updateBody) => {
-  const district = await getSchoolLocationById(DistrictId);
+  const district = await getDistrictById(DistrictId);
   if (!district) {
     throw new ApiError(httpStatus.NOT_FOUND, 'District not found');
   }

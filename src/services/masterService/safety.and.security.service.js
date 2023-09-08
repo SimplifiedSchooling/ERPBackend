@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {SafetyAndSecurity}  = require('../../models');
+const { SafetyAndSecurity } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**

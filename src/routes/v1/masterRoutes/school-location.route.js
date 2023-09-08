@@ -13,7 +13,10 @@ router
   .route('/:schoolLocationId')
   .get(validate(schoolLocalValidation.getSchoolLocationById), schoolLocationController.getSchoolLocationById)
   .patch(validate(schoolLocalValidation.updateSchoolLocationTypeyId), schoolLocationController.updateSchoolLocationTypeyId)
-  .delete(validate(schoolLocalValidation.deleteSchoolLocationTypeById), schoolLocationController.deleteSchoolLocationTypeById);
+  .delete(
+    validate(schoolLocalValidation.deleteSchoolLocationTypeById),
+    schoolLocationController.deleteSchoolLocationTypeById
+  );
 
 module.exports = router;
 /**
@@ -124,5 +127,5 @@ module.exports = router;
  *         locationType:
  *           type: string
  *       example:
- *         location: rular,urban
+ *         locationType: rular,urban
  */

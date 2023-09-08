@@ -24,4 +24,3 @@ module.exports.districtController = require('./masterControllers/district.contro
 
 module.exports.ResidentialSchooolController = require('./masterControllers/residential_school.controller');
 module.exports.languageController = require('./masterControllers/language.controller');
-

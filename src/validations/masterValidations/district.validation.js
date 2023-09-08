@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('../../validations/custom.validation');
+const { objectId } = require('../custom.validation');
 
 const createDistrict = {
   body: Joi.object().keys({
@@ -25,7 +25,7 @@ const updateDistrictTypeyId = {
   }),
   body: Joi.object()
     .keys({
-        districtName: Joi.string().required(),
+      districtName: Joi.string().required(),
     })
     .min(1),
 };

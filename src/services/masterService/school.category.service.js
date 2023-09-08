@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {SchoolCategory}  = require('../../models');
+const { SchoolCategory } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**
@@ -41,13 +41,13 @@ const getSchoolCategoryById = async (id) => {
  * @returns {Promise<SchoolCategory>}
  */
 const updateSchoolCategoryyId = async (SchoolCategoryId, updateBody) => {
-  const SchoolCategory = await getSchoolCategoryById(SchoolCategoryId);
-  if (!SchoolCategory) {
+  const schoolCategory = await getSchoolCategoryById(SchoolCategoryId);
+  if (!schoolCategory) {
     throw new ApiError(httpStatus.NOT_FOUND, 'SchoolCategory not found');
   }
-  Object.assign(SchoolCategory, updateBody);
-  await SchoolCategory.save();
-  return SchoolCategory;
+  Object.assign(schoolCategory, updateBody);
+  await schoolCategory.save();
+  return schoolCategory;
 };
 
 /**
@@ -56,12 +56,12 @@ const updateSchoolCategoryyId = async (SchoolCategoryId, updateBody) => {
  * @returns {Promise<SchoolCategory>}
  */
 const deleteSchoolCategoryById = async (SchoolCategoryId) => {
-  const SchoolCategory = await getSchoolCategoryById(SchoolCategoryId);
-  if (!SchoolCategory) {
+  const schoolCategory = await getSchoolCategoryById(SchoolCategoryId);
+  if (!schoolCategory) {
     throw new ApiError(httpStatus.NOT_FOUND, 'SchoolCategory not found');
   }
-  await SchoolCategory.remove();
-  return SchoolCategory;
+  await schoolCategory.remove();
+  return schoolCategory;
 };
 
 module.exports = {

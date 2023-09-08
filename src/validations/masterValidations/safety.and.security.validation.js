@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('../../validations/custom.validation');
+const { objectId } = require('../custom.validation');
 
 const createSafetyAndSecurity = {
   body: Joi.object().keys({
@@ -25,7 +25,7 @@ const updateSafetyAndSecurityId = {
   }),
   body: Joi.object()
     .keys({
-        name: Joi.string().required(),
+      name: Joi.string().required(),
     })
     .min(1),
 };

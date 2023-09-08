@@ -31,7 +31,6 @@ const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route
 
 const languageRoute = require('./masterRoutes/language.route');
 
-
 const router = express.Router();
 
 const defaultRoutes = [
@@ -116,7 +115,6 @@ const defaultRoutes = [
     route: quickRecapRoute,
   },
   {
-
     path: '/schoollocationtype',
     route: schoolLocationRoute,
   },
@@ -135,14 +133,14 @@ const defaultRoutes = [
   {
     path: '/safetyandsecurity',
     route: safetyAndSecurityRoute,
-
+  },
+  {
     path: '/language',
     route: languageRoute,
   },
   {
     path: '/roles',
     route: roleRoute,
-
   },
 ];
 
