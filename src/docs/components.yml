@@ -19,10 +19,48 @@ components:
         name: fake name
         role: user
 
+    Role:
+      type: object
+      properties:
+        role:
+          type: string
+          description: Role of user
+      example:
+        role: admin
+
     Board:
       type: object
       properties:
         name:
+          type: string
+    ManagementAdministrationType:
+      type: object
+      properties:
+        type:
+          type: string
+    ManagementCode:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: number
+        group:
+          type: string
+    ManagementGroup:
+      type: object
+      properties:
+        name:
+          type: string
+    Respondent:
+      type: object
+      properties:
+        type:
+          type: string
+    Building:
+      type: object
+      properties:
+        buildingName:
           type: string
     Book:
       type: object
@@ -313,6 +351,35 @@ components:
         subjectId: 64ca45e050227f21d906d
         bookId: 64ca45e050227f21d906d
         chapterId: 64ca45e050227f21d906d83c
+
+    Demolished: 
+      type: object
+      properties:
+        reference_no: 
+          type: number
+        to_title: 
+          type: string  
+        address:
+          type: string
+        note: 
+          type: string
+        from_title:
+          type: string
+        date:
+          type: number
+        imagePath:
+          type: string          
+        type:
+          type: string
+      example:
+        reference_no: 65
+        to_title: gdffg
+        address: pune, kharadi
+        note: asasfhaskausbv
+        from_title: afhgasfkh
+        date: 01-01-1970 00:00:00
+        imagePath: sgdd/sgdgds/sdg
+        type: demolished
 
     Token:
       type: object

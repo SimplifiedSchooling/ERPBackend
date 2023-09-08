@@ -103,6 +103,8 @@ module.exports = router;
  *         Code:
  *           type: number
  *           example: 1, 2, 3
+ *       example:
+ *         Code: 1,2,3
  *         broadCategory:
  *           type: string
  *           example: primary
@@ -125,6 +127,8 @@ module.exports = router;
  *         Code:
  *           type: number
  *           example: 1, 2, 3
+ *       example:
+ *         Code: 1,2,3
  *         broadCategory:
  *           type: string
  *           example: primary, upper primary

@@ -1,36 +1,52 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const managmentAdministrationType = require('../../../validations/masterValidations/management.codeSchool.validation');
+const managementAdministrationType = require('../../../controllers/masterControllers/management.administration.type.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(languageController.getAllLanguage);
+  .post(
+    validate(managmentAdministrationType.createManagementAdministrationType),
+    managementAdministrationType.createManagementAdministrationType
+  )
+  .get(
+    validate(managmentAdministrationType.getAllManagementAdministrationTypes),
+    managementAdministrationType.getManagementAdministrationTypes
+  );
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:managementAdmTypeId')
+  .get(
+    validate(managmentAdministrationType.getManagementAdministrationType),
+    managementAdministrationType.getManagementAdministrationType
+  )
+  .patch(
+    validate(managmentAdministrationType.updateManagementAdministrationType),
+    managementAdministrationType.updateManagementAdministrationType
+  )
+  .delete(
+    validate(managmentAdministrationType.deleteManagementAdministrationType),
+    managementAdministrationType.deleteManagementAdministrationType
+  );
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: ManagementAdministrationType
+ *   description: Management Administration type
  */
 
 /**
  * @swagger
- * /language:
+ * /managAdministrationType:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a Management Administration
+ *     tags: [ManagementAdministrationType]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,15 +56,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - type
  *             properties:
- *               name:
+ *               type:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               type: xyz
  *
  *     responses:
  *       "201":
@@ -56,30 +69,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementAdministrationType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all Management Administration type
+ *     tags: [ManagementAdministrationType]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: build
  *         schema:
- *           type: string
- *         description: Board name *
+ *           name: string
+ *         description: Management Administration *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementAdministrationType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +101,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /managAdministrationType/{managementAdmTypeId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a Management Administration type
+ *     tags: [ManagementAdministrationType]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: managementAdmTypeId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementAdministrationType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +128,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a Management Administration
+ *     tags: [ManagementAdministrationType]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: managementAdmTypeId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -134,20 +145,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               type:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
- *               name: fake name*
- *               code: 34
+ *               type: fake name*
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementAdministrationType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +164,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a Management Administrator Type
+ *     tags: [ManagementAdministrationType]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: managementAdmTypeId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: managementAdmTypeId
  *     responses:
  *       "200":
  *         description: No content

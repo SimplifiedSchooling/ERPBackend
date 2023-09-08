@@ -20,7 +20,7 @@ const createLanguage = async (reqBody) => {
  * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const querylanguage = async () => {
+const getAlllanguage = async () => {
   const language = await Language.find();
   return language;
 };
@@ -66,7 +66,7 @@ const deleteLanguageById = async (languageId) => {
 
 module.exports = {
   createLanguage,
-  querylanguage,
+  getAlllanguage,
   updateLanguageById,
   deleteLanguageById,
   getLanguageById,
