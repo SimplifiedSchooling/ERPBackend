@@ -11,7 +11,6 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
 
   if (requiredRights.length) {
     const userRights = Role.find(user._id);
-  // const hasRequiredRights = requiredRights.every((requiredRight) => userRights.includes(requiredRight));
     if (userRights.role !== user.role && req.params.userId !== user.id) {
       return reject(new ApiError(httpStatus.FORBIDDEN, 'Forbidden'));
     }
