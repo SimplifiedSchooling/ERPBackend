@@ -29,5 +29,12 @@ module.exports.SchoolLocationType = require('./masterModels/school-location-type
 module.exports.Ebook = require('./ebook.model');
 module.exports.Homework = require('./homework.model');
 module.exports.Quickrecap = require('./quickrecap.model');
+
+module.exports.InchargeType = require('./masterModels/head.of.school.model');
+module.exports.SchoolCategory = require('./masterModels/school.category.model');
+module.exports.District = require('./masterModels/district.model');
+module.exports.SafetyAndSecurity = require('./masterModels/safety.and.security.model');
+
 module.exports.Language = require('./masterModels/language.model');
 module.exports.Demolished = require('./demolished.model');
+

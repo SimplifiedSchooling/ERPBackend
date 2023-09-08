@@ -22,7 +22,15 @@ const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
 const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
+
+const schoolLocationRoute = require('./masterRoutes/school-location.route');
+const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
+const schoolcategoryRoute = require('./masterRoutes/school.category.route');
+const districtRoute = require('./masterRoutes/distict.route');
+const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
+
 const languageRoute = require('./masterRoutes/language.route');
+
 
 const router = express.Router();
 
@@ -108,12 +116,33 @@ const defaultRoutes = [
     route: quickRecapRoute,
   },
   {
+
+    path: '/schoollocationtype',
+    route: schoolLocationRoute,
+  },
+  {
+    path: '/inchargetype',
+    route: inChargeTypeRoute,
+  },
+  {
+    path: '/schoolcategory',
+    route: schoolcategoryRoute,
+  },
+  {
+    path: '/district',
+    route: districtRoute,
+  },
+  {
+    path: '/safetyandsecurity',
+    route: safetyAndSecurityRoute,
+
     path: '/language',
     route: languageRoute,
   },
   {
     path: '/roles',
     route: roleRoute,
+
   },
 ];
 
