@@ -1,36 +1,36 @@
 const express = require('express');
-const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const { languageValidation } = require('../../../validations');
+const validate = require('../../middlewares/validate');
+const { roleController } = require('../../controllers');
+const { roleValidation } = require('../../validations');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .post(validate(roleValidation.createBoard), roleController.createRole)
+  .get(validate(roleValidation.getAllBoard), roleController.getAllRole);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:roleId')
+  .get(validate(roleValidation.getRoleById), roleController.getRole)
+  .patch(validate(roleValidation.updateRoleById), roleController.updateRoleById)
+  .delete(validate(roleValidation.deleteRoleById), roleController.deleteRoleById);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: Role
+ *   description: Role management
  */
 
 /**
  * @swagger
- * /language:
+ * /roles:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,15 +40,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - role
  *             properties:
- *               name:
+ *               naboardme:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               role: admin
  *
  *     responses:
  *       "201":
@@ -56,23 +53,17 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Role'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: board
- *         schema:
- *           type: string
- *         description: Board name *
  *     responses:
  *       "200":
  *         description: OK
@@ -88,26 +79,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /roles/{roleId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: roleId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: roleId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Role'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +107,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: roleId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: roleId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +127,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
- *               name: fake name*
- *               code: 34
+ *               role: admin
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Role'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +144,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: roleId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: roleId
  *     responses:
  *       "200":
  *         description: No content
