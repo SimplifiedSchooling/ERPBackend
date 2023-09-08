@@ -1,36 +1,38 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const schooleBuilding = require('../../../validations/masterValidations/schoole.building.validation');
+const SchoolBuilding = require('../../../controllers/masterControllers/school.building.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .post(validate(schooleBuilding.createBuilding), SchoolBuilding.createSchoolBuilding)
+  .get(validate(schooleBuilding.getAllBuildings), SchoolBuilding.getAllSchoolBuilding);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:buildingId')
+  .get(validate(schooleBuilding.getBuilding), SchoolBuilding.getSchoolBuilding)
+  .patch(validate(schooleBuilding.updateBuilding), SchoolBuilding.updateSchoolBuilding)
+  .delete(validate(schooleBuilding.deleteBuilding), SchoolBuilding.deleteSchoolBuilding);
 
 module.exports = router;
+
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: Building
+ *   description: School building management
  */
 
 /**
  * @swagger
- * /language:
+ * /schoolBuilding:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a School building
+ *     tags: [Building]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,15 +42,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - buildingName
  *             properties:
- *               name:
+ *               buildingName:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               buildingName: xyz
  *
  *     responses:
  *       "201":
@@ -56,30 +55,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Building'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all school building
+ *     tags: [Building]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: build
  *         schema:
- *           type: string
- *         description: Board name *
+ *           buildingName: string
+ *         description: School Building *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Building'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +87,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /schoolBuilding/{buildingId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a School Building
+ *     tags: [Building]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: buildingId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Building'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +114,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a School Building
+ *     tags: [Building]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: buildingId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -134,20 +131,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               buildingName:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
- *               name: fake name*
- *               code: 34
+ *               buildingName: fake name*
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Building'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +150,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a School Building
+ *     tags: [Building]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: buildingId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: buildingId
  *     responses:
  *       "200":
  *         description: No content
@@ -177,3 +171,4 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
+

@@ -1,36 +1,39 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const managmentCodeschool = require('../../../validations/masterValidations/management.codeSchool.validation');
+const managmentCodeSchool = require('../../../controllers/masterControllers/managment.codeSchool.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .post(validate(managmentCodeschool.createManaCodeSchool), managmentCodeSchool.createManagmentCodeSchool)
+  .get(validate(managmentCodeschool.getAllManaCodeSchools), managmentCodeSchool.getManagmentCodeSchools);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:managementCodeId')
+  .get(validate(managmentCodeschool.getManaCodeSchool), managmentCodeSchool.getManagmentCodeSchool)
+  .patch(validate(managmentCodeschool.updateManaCodeSchool), managmentCodeSchool.updateManagmentCodeSchool)
+  .delete(validate(managmentCodeschool.deleteManaCodeSchool), managmentCodeSchool.deleteManagmentCodeSchool);
 
 module.exports = router;
+
+
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: ManagementCode
+ *   description: Management code of school
  */
 
 /**
  * @swagger
- * /language:
+ * /managCodeschool:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a Management Code
+ *     tags: [ManagementCode]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -41,14 +44,19 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
+ *               - code
+ *               - group
  *             properties:
  *               name:
  *                 type: string *
  *               code:
+ *                 type: number
+ *               group:
  *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               name: xyz
+ *               code: 12
+ *               group: A
  *
  *     responses:
  *       "201":
@@ -56,30 +64,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementCode'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all Management Code
+ *     tags: [ManagementCode]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: build
  *         schema:
- *           type: string
- *         description: Board name *
+ *           name: string
+ *         description: Management Code *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementCode'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +96,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /managCodeschool/{managementCodeId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a Management code
+ *     tags: [ManagementCode]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: managementCodeId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementCode'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +123,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a Management Code
+ *     tags: [ManagementCode]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: managementCodeId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +142,21 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
+ *               code: 
  *                 type: number
+ *               group: 
+ *                 type: string
  *             example:
  *               name: fake name*
- *               code: 34
+ *               code: 12
+ *               group: fake group
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementCode'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +165,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a Management Code
+ *     tags: [ManagementCode]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: managementCodeId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: managementCodeId
  *     responses:
  *       "200":
  *         description: No content

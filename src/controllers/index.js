@@ -15,6 +15,11 @@ module.exports.broadcastController = require('./broadcast.controller');
 module.exports.studioController = require('./studio.controller');
 module.exports.multimediaController = require('./multimedia.controller');
 module.exports.homeworkController = require('./homework.controller');
+module.exports.managmentGroupSchool = require('./masterControllers/managment.groupSchool.controller')
+module.exports.managmentCodeSchool = require('./masterControllers/managment.codeSchool.controller')
+module.exports.managementAdministrationType = require('./masterControllers/management.administration.type.controller')
+module.exports.Respondent = require('./masterControllers/respondent.controller')
+module.exports.SchoolBuilding = require('./masterControllers/school.building.controller')
 
 module.exports.schoolLocationController = require('./masterControllers/school-location.controller');
 module.exports.inChargeTypeController = require('./masterControllers/head.of.school.controller');

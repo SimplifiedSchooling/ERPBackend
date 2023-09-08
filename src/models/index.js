@@ -29,6 +29,11 @@ module.exports.SchoolLocationType = require('./masterModels/school-location-type
 module.exports.Ebook = require('./ebook.model');
 module.exports.Homework = require('./homework.model');
 module.exports.Quickrecap = require('./quickrecap.model');
+module.exports.Managmentgroupschool = require('./masterModels/managment-school.model')
+module.exports.ManagmentCodeSchool = require('./masterModels/management.codeSchool.model')
+module.exports.managementAdministrationType = require('./masterModels/management.administration.type.model')
+module.exports.Respondent = require('./masterModels/respondent.model')
+module.exports.SchoolBuilding = require('./masterModels/school.building.model')
 
 module.exports.InchargeType = require('./masterModels/head.of.school.model');
 module.exports.SchoolCategory = require('./masterModels/school.category.model');
