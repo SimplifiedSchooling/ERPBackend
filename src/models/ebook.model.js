@@ -17,7 +17,7 @@ const ebookSchema = mongoose.Schema(
       required: true,
     },
     chapterName: {
-      type: Number,
+      type: String,
       required: true,
     },
     boardId: {

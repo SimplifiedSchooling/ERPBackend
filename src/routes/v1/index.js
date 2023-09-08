@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
+const roleRoute = require('./role.route');
 const videoRoute = require('./video.route');
 const planvideoRoute = require('./planvideo.route');
 const boardRoute = require('./board.route');
@@ -104,6 +105,10 @@ const defaultRoutes = [
   {
     path: '/language',
     route: languageRoute,
+  },
+  {
+    path: '/roles',
+    route: roleRoute,
   },
 ];
 
