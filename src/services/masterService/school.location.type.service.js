@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const { SchoolLocationType } = require('../../models/index');
-const ApiError = require('../utils/ApiError');
+const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a SchoolLocationType

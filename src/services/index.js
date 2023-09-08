@@ -21,3 +21,4 @@ module.exports.HomeworkSerices = require('./homework.services');
 module.exports.ResidentialSchoolService = require('./masterService/residential_school.service');
 module.exports.quickRecapService = require('./quickrecap.service');
 module.exports.languageService = require('./masterService/language.service');
+module.exports.TypeResidentialSchoolService = require('./masterService/type_residential_School.service');
