@@ -1,5 +1,6 @@
 module.exports.authController = require('./auth.controller');
 module.exports.userController = require('./user.controller');
+module.exports.roleController = require('./role.comtroller');
 module.exports.videoController = require('./video.controller');
 module.exports.planvideoController = require('./planvideo.controller');
 module.exports.boardController = require('./board.controller');
