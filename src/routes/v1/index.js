@@ -19,6 +19,7 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
+const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 
 const router = express.Router();
 
@@ -94,6 +95,10 @@ const defaultRoutes = [
   {
     path: '/homework',
     route: homeworkRoute,
+  },
+  {
+    path: '/residentialschool',
+    route: residentialschoolRouter,
   },
 ];
 
