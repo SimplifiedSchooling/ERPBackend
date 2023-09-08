@@ -20,17 +20,14 @@ module.exports.managmentCodeSchool = require('./masterControllers/managment.code
 module.exports.managementAdministrationType = require('./masterControllers/management.administration.type.controller');
 module.exports.Respondent = require('./masterControllers/respondent.controller');
 module.exports.SchoolBuilding = require('./masterControllers/school.building.controller');
-
 module.exports.schoolLocationController = require('./masterControllers/school-location.controller');
 module.exports.inChargeTypeController = require('./masterControllers/head.of.school.controller');
 module.exports.schoolCategoryController = require('./masterControllers/school.category.controller');
 module.exports.safetyAndSecurityController = require('./masterControllers/safety.and.security.controller');
 module.exports.districtController = require('./masterControllers/district.controller');
-
 module.exports.ResidentialSchooolController = require('./masterControllers/residential_school.controller');
 module.exports.languageController = require('./masterControllers/language.controller');
-
-
+module.exports.demolishedController = require('./demolished.controller');
 module.exports.BoardingResidentialSchoolController = require('./masterControllers/boarding_residential_school.controller');
 module.exports.MinorityManageSchoolController = require('./masterControllers/minority_manage_school.controller');
 module.exports.BoundaryWallController = require('./masterControllers/boundarywall.controller');

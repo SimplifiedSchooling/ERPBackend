@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .get(languageController.getAllLanguage);
 
 router
   .route('/:languageId')

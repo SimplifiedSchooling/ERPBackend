@@ -35,6 +35,7 @@ const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 
 const languageRoute = require('./masterRoutes/language.route');
+const demolishedRoute = require('./demolished.route');
 
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
@@ -194,6 +195,10 @@ const defaultRoutes = [
     path: '/boundarywall',
     route: BoundaryWall,
 
+  },
+  {
+    path: '/demolished',
+    route: demolishedRoute,
   },
 ];
 
