@@ -30,3 +30,4 @@ module.exports.Homework = require('./homework.model');
 module.exports.Quickrecap = require('./quickrecap.model');
 module.exports.Language = require('./masterModels/language.model');
 module.exports.BoardingResidentialschool = require('./masterModels/boarding_residential_school.model');
+module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');

@@ -24,6 +24,7 @@ const quickRecapRoute = require('./quickrecap.route');
 const languageRoute = require('./masterRoutes/language.route');
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
+const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
 
 const router = express.Router();
 
@@ -119,6 +120,10 @@ const defaultRoutes = [
   {
     path: '/boardresidentialschool',
     route: Boardresidentialschool,
+  },
+  {
+    path: '/minoritymanageschool',
+    route: MinorityManageSchool,
   },
 ];
 
