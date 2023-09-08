@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('../plugins');
-const schoolLocationSchema = mongoose.Schema(
+const safetyAndSecuritySchema = mongoose.Schema(
   {
-    locationType: {
+    name: {
       type: String,
       required: true,
       trim: true,
@@ -14,8 +14,8 @@ const schoolLocationSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-schoolLocationSchema.plugin(toJSON);
+safetyAndSecuritySchema.plugin(toJSON);
 
-const SchoolLocationType = mongoose.model('SchoolLocationType', schoolLocationSchema);
+const SafetyAndSecurity = mongoose.model('SafetyAndSecurity', safetyAndSecuritySchema);
 
-module.exports = SchoolLocationType;
+module.exports = SafetyAndSecurity;

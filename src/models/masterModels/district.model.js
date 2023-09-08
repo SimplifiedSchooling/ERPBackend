@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('../plugins');
-const schoolLocationSchema = mongoose.Schema(
+const districtSchema = mongoose.Schema(
   {
-    locationType: {
+    districtName: {
       type: String,
       required: true,
       trim: true,
@@ -14,8 +14,8 @@ const schoolLocationSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-schoolLocationSchema.plugin(toJSON);
+districtSchema.plugin(toJSON);
 
-const SchoolLocationType = mongoose.model('SchoolLocationType', schoolLocationSchema);
+const District = mongoose.model('District', districtSchema);
 
-module.exports = SchoolLocationType;
+module.exports = District;
