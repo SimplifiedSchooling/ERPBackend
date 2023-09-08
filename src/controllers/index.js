@@ -24,3 +24,10 @@ module.exports.districtController = require('./masterControllers/district.contro
 
 module.exports.ResidentialSchooolController = require('./masterControllers/residential_school.controller');
 module.exports.languageController = require('./masterControllers/language.controller');
+<<<<<<< Updated upstream
+=======
+
+module.exports.BoardingResidentialSchoolController = require('./masterControllers/boarding_residential_school.controller');
+module.exports.MinorityManageSchoolController = require('./masterControllers/minority_manage_school.controller');
+module.exports.BoundaryWallController = require('./masterControllers/boundarywall.controller');
+>>>>>>> Stashed changes

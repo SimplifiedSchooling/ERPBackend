@@ -36,4 +36,11 @@ module.exports.District = require('./masterModels/district.model');
 module.exports.SafetyAndSecurity = require('./masterModels/safety.and.security.model');
 
 module.exports.Language = require('./masterModels/language.model');
+<<<<<<< Updated upstream
+=======
+module.exports.BoardingResidentialschool = require('./masterModels/boarding_residential_school.model');
+module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');
+module.exports.Role = require('./role.model');
+module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model');
+>>>>>>> Stashed changes
 module.exports.Demolished = require('./demolished.model');

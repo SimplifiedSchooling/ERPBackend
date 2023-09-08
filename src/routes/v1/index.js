@@ -31,6 +31,14 @@ const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route
 
 const languageRoute = require('./masterRoutes/language.route');
 
+<<<<<<< Updated upstream
+=======
+const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
+const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
+const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
+const BoundaryWall = require('./masterRoutes/boundarywall.route');
+
+>>>>>>> Stashed changes
 const router = express.Router();
 
 const defaultRoutes = [
@@ -115,6 +123,29 @@ const defaultRoutes = [
     route: quickRecapRoute,
   },
   {
+<<<<<<< Updated upstream
+=======
+    path: '/managgroupschool',
+    route: managmentGroupSchoolRoute,
+  },
+  {
+    path: '/managCodeschool',
+    route: managmentCodeSchoolRoute,
+  },
+  {
+    path: '/managAdministrationType',
+    route: managementAdministrationTypeRoute,
+  },
+  {
+    path: '/RespondentType',
+    route: respondentRoute,
+  },
+  {
+    path: '/schoolBuilding',
+    route: schooleBuildingRout,
+  },
+  {
+>>>>>>> Stashed changes
     path: '/schoollocationtype',
     route: schoolLocationRoute,
   },
@@ -141,6 +172,13 @@ const defaultRoutes = [
   {
     path: '/roles',
     route: roleRoute,
+<<<<<<< Updated upstream
+=======
+  },
+  {
+    path: '/boundarywall',
+    route: BoundaryWall,
+>>>>>>> Stashed changes
   },
 ];
 
