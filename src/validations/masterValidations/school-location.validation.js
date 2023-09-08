@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('../../validations/custom.validation');
+const { objectId } = require('../custom.validation');
 
 const createSchoolLocation = {
   body: Joi.object().keys({
@@ -25,7 +25,7 @@ const updateSchoolLocationTypeyId = {
   }),
   body: Joi.object()
     .keys({
-        locationType: Joi.string().required(),
+      locationType: Joi.string().required(),
     })
     .min(1),
 };

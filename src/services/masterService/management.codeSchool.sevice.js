@@ -66,7 +66,7 @@ const deleteManagmentCodeById = async (managementCodeId) => {
 };
 
 module.exports = {
-    createManagmentCodeSchool,
+  createManagmentCodeSchool,
   getAllmanagCodeSchool,
   getManagementCodeById,
   updateManamentCodeById,

@@ -21,7 +21,10 @@ const getSafetyAndSecurityById = catchAsync(async (req, res) => {
 });
 
 const updateSafetyAndSecurityById = catchAsync(async (req, res) => {
-  const updateLocationType = await safetyAndSecurityServices.updateSafetyAndSecurityyId(req.params.safetyAndSecurityId, req.body);
+  const updateLocationType = await safetyAndSecurityServices.updateSafetyAndSecurityyId(
+    req.params.safetyAndSecurityId,
+    req.body
+  );
   res.send(updateLocationType);
 });
 
@@ -31,9 +34,9 @@ const deleteSafetyAndSecurityById = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-    createSafetyAndSecurity,
-    getAllSafetyAndSecurity,
-    getSafetyAndSecurityById,
-    updateSafetyAndSecurityById,
-    deleteSafetyAndSecurityById,
+  createSafetyAndSecurity,
+  getAllSafetyAndSecurity,
+  getSafetyAndSecurityById,
+  updateSafetyAndSecurityById,
+  deleteSafetyAndSecurityById,
 };

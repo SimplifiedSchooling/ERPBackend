@@ -31,9 +31,9 @@ const deleteSchoolLocationTypeById = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-    createSchoolLocationType,
-    getAllSchoolLocation,
-    getSchoolLocationById,
-    updateSchoolLocationTypeyId,
-    deleteSchoolLocationTypeById,
+  createSchoolLocationType,
+  getAllSchoolLocation,
+  getSchoolLocationById,
+  updateSchoolLocationTypeyId,
+  deleteSchoolLocationTypeById,
 };

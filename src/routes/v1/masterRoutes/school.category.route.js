@@ -6,14 +6,17 @@ const SchoolCategoryController = require('../../../controllers/masterControllers
 const router = express.Router();
 router
   .route('/')
-  .post(validate(schoolCategoryValidation.createSchoolCategory),SchoolCategoryController.createSchoolCategoryType)
-  .get(validate(schoolCategoryValidation.getAllSchoolCategory),SchoolCategoryController.getAllSchoolCategory);
+  .post(validate(schoolCategoryValidation.createSchoolCategory), SchoolCategoryController.createSchoolCategoryType)
+  .get(validate(schoolCategoryValidation.getAllSchoolCategory), SchoolCategoryController.getAllSchoolCategory);
 
 router
   .route('/:SchoolCategoryId')
-  .get(validate(schoolCategoryValidation.getSchoolCategoryById),SchoolCategoryController.getSchoolCategoryById)
-  .patch(validate(schoolCategoryValidation.updateSchoolCategoryId),SchoolCategoryController.updateSchoolCategoryTypeyId)
-  .delete(validate(schoolCategoryValidation.deleteSchoolCategoryById),SchoolCategoryController.deleteSchoolCategoryTypeById);
+  .get(validate(schoolCategoryValidation.getSchoolCategoryById), SchoolCategoryController.getSchoolCategoryById)
+  .patch(validate(schoolCategoryValidation.updateSchoolCategoryId), SchoolCategoryController.updateSchoolCategoryTypeyId)
+  .delete(
+    validate(schoolCategoryValidation.deleteSchoolCategoryById),
+    SchoolCategoryController.deleteSchoolCategoryTypeById
+  );
 
 module.exports = router;
 /**
@@ -115,7 +118,7 @@ module.exports = router;
  *         Code:
  *           type: number
  *       example:
- *         Code: 1,2,3  
+ *         Code: 1,2,3
  *         broadCategory:
  *           type: string
  *       example:
@@ -136,7 +139,7 @@ module.exports = router;
  *         Code:
  *           type: number
  *       example:
- *         Code: 1,2,3  
+ *         Code: 1,2,3
  *         broadCategory:
  *           type: string
  *       example:

@@ -8,18 +8,31 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(validate(managmentAdministrationType.createManagementAdministrationType), managementAdministrationType.createManagementAdministrationType)
-  .get(validate(managmentAdministrationType.getAllManagementAdministrationTypes), managementAdministrationType.getManagementAdministrationTypes);
+  .post(
+    validate(managmentAdministrationType.createManagementAdministrationType),
+    managementAdministrationType.createManagementAdministrationType
+  )
+  .get(
+    validate(managmentAdministrationType.getAllManagementAdministrationTypes),
+    managementAdministrationType.getManagementAdministrationTypes
+  );
 
 router
   .route('/:managementAdmTypeId')
-  .get(validate(managmentAdministrationType.getManagementAdministrationType), managementAdministrationType.getManagementAdministrationType)
-  .patch(validate(managmentAdministrationType.updateManagementAdministrationType), managementAdministrationType.updateManagementAdministrationType)
-  .delete(validate(managmentAdministrationType.deleteManagementAdministrationType), managementAdministrationType.deleteManagementAdministrationType);
+  .get(
+    validate(managmentAdministrationType.getManagementAdministrationType),
+    managementAdministrationType.getManagementAdministrationType
+  )
+  .patch(
+    validate(managmentAdministrationType.updateManagementAdministrationType),
+    managementAdministrationType.updateManagementAdministrationType
+  )
+  .delete(
+    validate(managmentAdministrationType.deleteManagementAdministrationType),
+    managementAdministrationType.deleteManagementAdministrationType
+  );
 
 module.exports = router;
-
-
 
 /**
  * @swagger
@@ -115,7 +128,7 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Management Administration 
+ *     summary: Update a Management Administration
  *     tags: [ManagementAdministrationType]
  *     security:
  *       - bearerAuth: []
@@ -172,4 +185,3 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-

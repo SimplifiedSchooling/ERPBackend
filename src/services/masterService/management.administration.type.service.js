@@ -66,9 +66,9 @@ const deleteManagementAdministrationTypeById = async (managementAdmTypeId) => {
 };
 
 module.exports = {
-    createManagementAdministrationType,
-    getAllManagementAdministrationTypes,
-    getManagementAdministrationTypeById,
-    updateManagementAdministrationTypeById,
-    deleteManagementAdministrationTypeById
+  createManagementAdministrationType,
+  getAllManagementAdministrationTypes,
+  getManagementAdministrationTypeById,
+  updateManagementAdministrationTypeById,
+  deleteManagementAdministrationTypeById,
 };

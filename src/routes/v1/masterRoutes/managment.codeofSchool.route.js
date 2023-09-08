@@ -19,8 +19,6 @@ router
 
 module.exports = router;
 
-
-
 /**
  * @swagger
  * tags:
@@ -142,9 +140,9 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code: 
+ *               code:
  *                 type: number
- *               group: 
+ *               group:
  *                 type: string
  *             example:
  *               name: fake name*

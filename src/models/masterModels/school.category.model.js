@@ -1,22 +1,23 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('../plugins');
+
 const schoolCategorySchema = mongoose.Schema(
   {
-    detailsOfCategory : {
+    detailsOfCategory: {
       type: String,
       required: true,
       trim: true,
     },
-    Code : {
-        type: Number,
-        required: true,
-        trim: true,
-      },
-      broadCategory : {
-        type: String,
-        required: true,
-        trim: true,
-      },
+    Code: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+    broadCategory: {
+      type: String,
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

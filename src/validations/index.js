@@ -17,12 +17,9 @@ module.exports.mediumValidation = require('./multimedia.validation');
 module.exports.ebookValidation = require('./ebook.validation');
 module.exports.HomeworkValidation = require('./homework.validation');
 module.exports.quickRecapValidation = require('./quickrecap.validation');
-
-module.exports.schoolLocalValidation = require('../validations/masterValidations/school-location.validation');
-module.exports.inchargeTypeValidation = require('../validations/masterValidations/head.of.school.validation');
-module.exports.schoolCategoryValidation = require('../validations/masterValidations/school.category.validation');
-module.exports.districtNameValidation = require('../validations/masterValidations/district.validation');
-module.exports.safetyValidation = require('../validations/masterValidations/safety.and.security.validation');
-
+module.exports.managmentGroupschool = require('./masterValidations/managment.groupschool.validation');
+module.exports.managmentCodeschool = require('./masterValidations/management.codeSchool.validation');
+module.exports.managmentAdministrationType = require('./masterValidations/management.administration.type.validation');
+module.exports.Respondents = require('./masterValidations/respondent.validation');
+module.exports.schooleBuilding = require('./masterValidations/schoole.building.validation');
 module.exports.languageValidation = require('./masterValidations/language.validation');
-
