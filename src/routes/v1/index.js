@@ -35,10 +35,12 @@ const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 
 const languageRoute = require('./masterRoutes/language.route');
+
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
 const BoundaryWall = require('./masterRoutes/boundarywall.route');
+
 
 const router = express.Router();
 
@@ -124,6 +126,8 @@ const defaultRoutes = [
     route: quickRecapRoute,
   },
   {
+
+
     path: '/managgroupschool',
     route: managmentGroupSchoolRoute,
   },
@@ -144,6 +148,7 @@ const defaultRoutes = [
     route: schooleBuildingRout,
   },
   {
+
     path: '/schoollocationtype',
     route: schoolLocationRoute,
   },
@@ -162,7 +167,8 @@ const defaultRoutes = [
   {
     path: '/safetyandsecurity',
     route: safetyAndSecurityRoute,
-
+  },
+  {
     path: '/language',
     route: languageRoute,
   },
@@ -181,10 +187,13 @@ const defaultRoutes = [
   {
     path: '/roles',
     route: roleRoute,
+
+
   }, 
   {
     path: '/boundarywall',
     route: BoundaryWall,
+
   },
 ];
 

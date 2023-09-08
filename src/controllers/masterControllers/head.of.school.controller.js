@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
 const inchargeTypeService = require('../../services/masterService/head.of.school.service');
+const ApiError = require('../../utils/ApiError');
 
 const createInchargeType = catchAsync(async (req, res) => {
   const newInchargeType = await inchargeTypeService.createInchargeType(req.body);

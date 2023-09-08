@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
 const SchoolCategoryServices = require('../../services/masterService/school.category.service');
+const ApiError = require('../../utils/ApiError');
 
 const createSchoolCategoryType = catchAsync(async (req, res) => {
   const newSchoolCategory = await SchoolCategoryServices.createSchoolCategory(req.body);
@@ -8,8 +9,8 @@ const createSchoolCategoryType = catchAsync(async (req, res) => {
 });
 
 const getAllSchoolCategory = catchAsync(async (req, res) => {
-  const getAllSchoolCategory = await SchoolCategoryServices.getAllSchoolCategory();
-  res.send(getAllSchoolCategory);
+  const getAllSchoolCategories = await SchoolCategoryServices.getAllSchoolCategory();
+  res.send(getAllSchoolCategories);
 });
 
 const getSchoolCategoryById = catchAsync(async (req, res) => {

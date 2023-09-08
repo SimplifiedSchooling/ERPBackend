@@ -127,5 +127,5 @@ module.exports = router;
  *         locationType:
  *           type: string
  *       example:
- *         location: rular,urban
+ *         locationType: rular,urban
  */

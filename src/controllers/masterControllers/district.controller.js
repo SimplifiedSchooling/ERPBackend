@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
 const districtServices = require('../../services/masterService/district.service');
+const ApiError = require('../../utils/ApiError');
 
 const createDistrict = catchAsync(async (req, res) => {
   const district = await districtServices.createDistrict(req.body);
@@ -8,8 +9,8 @@ const createDistrict = catchAsync(async (req, res) => {
 });
 
 const getAllDistrict = catchAsync(async (req, res) => {
-  const getAllDistrict = await districtServices.getAllDistrict();
-  res.send(getAllDistrict);
+  const getAllDistricts = await districtServices.getAllDistrict();
+  res.send(getAllDistricts);
 });
 
 const getDistrictById = catchAsync(async (req, res) => {

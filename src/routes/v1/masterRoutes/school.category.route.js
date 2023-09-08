@@ -22,18 +22,18 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name:SchoolCategoryType
- *   description:  SchoolCategoryType Management System
+ *   name: SchoolCategoryType
+ *   description: SchoolCategoryType Management System
  */
 
 /**
  * @swagger
  * /schoolcategory:
  *   post:
- *     summary: Create a newSchoolCategoryType
+ *     summary: Create a new SchoolCategoryType
  *     tags: [SchoolCategoryType]
  *     requestBody:
- *       description:SchoolCategoryType object to be created
+ *       description: SchoolCategoryType object to be created
  *       required: true
  *       content:
  *         application/json:
@@ -41,25 +41,25 @@ module.exports = router;
  *             $ref: '#/components/schemas/SchoolCategoryTypeInput'
  *     responses:
  *       200:
- *         description:SchoolCategoryType created successfully
+ *         description: SchoolCategoryType created successfully
  *   get:
- *     summary: Get list ofSchoolCategoryType
+ *     summary: Get a list of SchoolCategoryType
  *     tags: [SchoolCategoryType]
  *     responses:
  *       200:
- *         description: List ofSchoolCategoryType retrieved successfully
- *
+ *         description: List of SchoolCategoryType retrieved successfully
+
  * /schoolcategory/{SchoolCategoryId}:
+ *   parameters:
+ *     - in: path
+ *       name: SchoolCategoryId
+ *       required: true
+ *       schema:
+ *         type: string
+ *       description: ID of the SchoolCategory
  *   patch:
- *     summary: Update a singleSchoolCategoryType by ID
+ *     summary: Update a single SchoolCategoryType by ID
  *     tags: [SchoolCategoryType]
- *     parameters:
- *       - in: path
- *         name:SchoolCategoryId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the SchoolCategory
  *     requestBody:
  *       content:
  *         application/json:
@@ -71,77 +71,61 @@ module.exports = router;
  *       400:
  *         description: Bad request
  *       404:
- *         description:SchoolCategoryType not found
+ *         description: SchoolCategoryType not found
  *   delete:
- *     summary: Delete a singleSchoolCategoryType by ID
+ *     summary: Delete a single SchoolCategoryType by ID
  *     tags: [SchoolCategoryType]
- *     parameters:
- *       - in: path
- *         name:SchoolCategoryId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the SchoolCategory
  *     responses:
  *       204:
  *         description: No content
  *       404:
- *         description:SchoolCategoryType not found
+ *         description: SchoolCategoryType not found
  *   get:
- *     summary: Get a singleSchoolCategoryType by ID
+ *     summary: Get a single SchoolCategoryType by ID
  *     tags: [SchoolCategoryType]
- *     parameters:
- *       - in: path
- *         name:SchoolCategoryId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the SchoolCategory
  *     responses:
  *       200:
  *         description: Successful response
  *       404:
- *         description:SchoolCategory not found
+ *         description: SchoolCategory not found
  */
 
 /**
  * @swagger
  * components:
  *   schemas:
- *    SchoolCategoryTypeInput:
+ *     SchoolCategoryTypeInput:
  *       type: object
  *       properties:
  *         detailsOfCategory:
  *           type: string
- *       example:
- *         detailsOfCategory: Primary only with grades 1 to 5,Upper Primary with grades 1 to 8 (
+ *           example: Primary only with grades 1 to 5, Upper Primary with grades 1 to 8
  *         Code:
  *           type: number
+ *           example: 1, 2, 3
  *       example:
  *         Code: 1,2,3
  *         broadCategory:
  *           type: string
- *       example:
- *         broadCategory: primary,upper primary
+ *           example: primary, upper primary
  */
 
 /**
  * @swagger
  * components:
  *   schemas:
- *   SchoolCategoryTypeUpdateInput:
+ *     SchoolCategoryTypeUpdateInput:
  *       type: object
  *       properties:
  *         detailsOfCategory:
  *           type: string
- *       example:
- *         detailsOfCategory: Primary only with grades 1 to 5,Upper Primary with grades 1 to 8 (
+ *           example: Primary only with grades 1 to 5, Upper Primary with grades 1 to 8
  *         Code:
  *           type: number
+ *           example: 1, 2, 3
  *       example:
  *         Code: 1,2,3
  *         broadCategory:
  *           type: string
- *       example:
- *         broadCategory: primary,upper primary
+ *           example: primary, upper primary
  */

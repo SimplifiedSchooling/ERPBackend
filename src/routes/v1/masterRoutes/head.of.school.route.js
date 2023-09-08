@@ -46,7 +46,7 @@ module.exports = router;
  *       200:
  *         description: List of inChargeType retrieved successfully
  *
- * /inchargetype/{schoolLocationId}:
+ * /inchargetype/{inchargeId}:
  *   patch:
  *     summary: Update a single inCharge by ID
  *     tags: [inChargeType]

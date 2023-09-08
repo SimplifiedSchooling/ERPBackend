@@ -4,11 +4,11 @@ const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a InchargeType
- * @param {Object} inchargeType
+ * @param {Object} inchargeTypeData
  * @returns {Promise<InchargeType>}
  */
-const createInchargeType = async (inchargeType) => {
-  return InchargeType.create(inchargeType);
+const createInchargeType = async (inchargeTypeData) => {
+  return InchargeType.create(inchargeTypeData);
 };
 
 /**
@@ -21,8 +21,8 @@ const createInchargeType = async (inchargeType) => {
  * @returns {Promise<QueryResult>}
  */
 const getAllInchargeType = async () => {
-  const AllInchargeType = await InchargeType.find({});
-  return AllInchargeType;
+  const AllInchargeTypes = await InchargeType.find({});
+  return AllInchargeTypes;
 };
 
 /**
@@ -41,13 +41,13 @@ const getInchargeTypeById = async (id) => {
  * @returns {Promise<InchargeType>}
  */
 const updateInchargeTypeyId = async (inChargeTypeId, updateBody) => {
-  const InchargeType = await getInchargeTypeById(inChargeTypeId);
-  if (!InchargeType) {
+  const inchargeType = await getInchargeTypeById(inChargeTypeId);
+  if (!inchargeType) {
     throw new ApiError(httpStatus.NOT_FOUND, 'InchargeType not found');
   }
-  Object.assign(InchargeType, updateBody);
-  await InchargeType.save();
-  return InchargeType;
+  Object.assign(inchargeType, updateBody);
+  await inchargeType.save();
+  return inchargeType;
 };
 
 /**
@@ -56,12 +56,12 @@ const updateInchargeTypeyId = async (inChargeTypeId, updateBody) => {
  * @returns {Promise<InchargeType>}
  */
 const deleteInchargeTypeById = async (inChargeTypeId) => {
-  const InchargeType = await getInchargeTypeById(inChargeTypeId);
-  if (!InchargeType) {
+  const inchargeType = await getInchargeTypeById(inChargeTypeId);
+  if (!inchargeType) {
     throw new ApiError(httpStatus.NOT_FOUND, 'InchargeType not found');
   }
-  await InchargeType.remove();
-  return InchargeType;
+  await inchargeType.remove();
+  return inchargeType;
 };
 
 module.exports = {

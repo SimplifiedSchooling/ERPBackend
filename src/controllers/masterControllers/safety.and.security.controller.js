@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
 const safetyAndSecurityServices = require('../../services/masterService/safety.and.security.service');
+const ApiError = require('../../utils/ApiError');
 
 const createSafetyAndSecurity = catchAsync(async (req, res) => {
   const newsafetyAndSecurity = await safetyAndSecurityServices.createSafetyAndSecurity(req.body);
