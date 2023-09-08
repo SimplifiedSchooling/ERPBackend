@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { objectId } = require('./custom.validation');
 
 const createSubject = {
   body: Joi.object().keys({
@@ -23,10 +24,15 @@ const getSubject = {
     subjectId: Joi.string(),
   }),
 };
+const getSubjectByClassId = {
+  params: Joi.object().keys({
+    classId: Joi.string().custom(objectId).required(),
+  }),
+};
 
 const updateSubject = {
   params: Joi.object().keys({
-    subjectId: Joi.string().required(),
+    subjectId: Joi.string().custom(objectId).required(),
   }),
   body: Joi.object()
     .keys({
@@ -50,4 +56,5 @@ module.exports = {
   updateSubject,
   deleteSubject,
   getAllSubject,
+  getSubjectByClassId,
 };

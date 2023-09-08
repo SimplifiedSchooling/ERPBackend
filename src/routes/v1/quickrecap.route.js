@@ -1,41 +1,39 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const multimediaController = require('../../controllers/multimedia.controller');
-const multimediaValidation = require('../../validations/multimedia.validation');
+const quickRecapController = require('../../controllers/quickrecap.controller');
+const { quickRecapValidation } = require('../../validations');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(multimediaValidation.createMultimeda), multimediaController.createMultimedia)
-  .get(validate(multimediaValidation.getAllMultimedia), multimediaController.getMultimedia);
+  .post(validate(quickRecapValidation.createQuickRecap), quickRecapController.createQuickRecap)
+  .get(validate(quickRecapValidation.getAllQuickRecap), quickRecapController.getAllQuickRecap);
 
 router
-  .route('/:multimediaId')
-  .get(validate(multimediaValidation.getMultimediaById), multimediaController.getMultimediaById)
-  .patch(validate(multimediaValidation.updateMultimedia), multimediaController.updateMultimedia)
-  .delete(validate(multimediaValidation.deleteMultimedia), multimediaController.deleteMultimedia);
+  .route('/:quickRecapId')
+  .get(validate(quickRecapValidation.getQuickRecapById), quickRecapController.getByQuickRecapId)
+  .patch(validate(quickRecapValidation.updateQuickRecap), quickRecapController.updateQuickRecap)
+  .delete(validate(quickRecapValidation.deleteQuickRecap), quickRecapController.deleteQuickRecap);
 
 router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId/:chapterId')
-  .get(validate(multimediaValidation.getMultimediaByFilter), multimediaController.getMultimediaByFilter);
+  .get(validate(quickRecapValidation.getQuickRecapByFilter), quickRecapController.getQuickRecapByFilter);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Multimedia
- *   description: Medium management and retrieval
+ *   name: QuickRecap
+ *   description: QuickRecap management and retrieval
  */
-
 /**
  * @swagger
- * /multimedia:
+ * /quickrecaps:
  *   post:
- *     summary: Create a multimedia
- *     description: Create other multimedia.
- *     tags: [Multimedia]
+ *     summary: Create a QuickRecap
+ *     tags: [QuickRecap]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -45,26 +43,19 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - lessionName
- *               - path
+ *               - description
+ *               - boardId
+ *               - mediumId
+ *               - classId
+ *               - subjectId
+ *               - bookId
+ *               - chapterId
  *             properties:
- *               lessionName:
- *                 type: string
- *               icon1:
- *                 type: string
- *               icon2:
- *                 type: string
- *               path:
- *                 type: string
- *               multimediaType:
- *                 type: string
- *               order:
- *                 type: number
- *               videoType:
- *                 type: string
  *               boardId:
  *                 type: string
  *               mediumId:
+ *                 type: string
+ *               classId:
  *                 type: string
  *               subjectId:
  *                 type: string
@@ -72,52 +63,41 @@ module.exports = router;
  *                 type: string
  *               chapterId:
  *                 type: string
+ *               description:
+ *                 type: string
  *             example:
- *               lessionName: English
- *               icon1: imagelink/icon1
- *               icon2: imagelink/icon2
- *               path: multimedia/path
- *               multimediaType: video
- *               order: 1
- *               videoType: dhkbs
- *               boardId: 64d9ceaef49e9f5dc06502c6
- *               mediumId: 64d327a41128844220f0cce4
- *               classId: 64d327811128844220f0cce0
- *               subjectId: 64d9d4666205c371563fcadb
- *               bookId: 64d9d7143ac675796cdcd433
- *               chapterId: 64d327811128844220f0cce0
+ *               description: English gfklgj   hbhb
+ *               boardId: 64ca45e050227f21d906d83c
+ *               mediumId: 64d0bc1d18f7609763d21063
+ *               classId: 64b122401b4cf04c356b8fc2
+ *               subjectId: 64b122d49ddf324d2a8d12d3
+ *               bookId: 64b8f019ba89c333de42f169
+ *               chapterId: 64b8f094050c643582b80481
+ *
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Multimedia'
+ *                $ref: '#/components/schemas/QuickRecap'
  *       "401":
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/responses/Unauthorized'
+ *         $ref: '#/components/responses/Unauthorized'
  *       "403":
- *         description: Forbidden
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/responses/Forbidden'
- *
+ *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Multimedia
- *     description: all mulrimedia.
- *     tags: [Multimedia]
+ *     summary: Get all QuickRecap
+ *     description: all QuickRecap.
+ *     tags: [QuickRecap]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: lessionName
+ *         name: description
  *         schema:
  *           type: string
+ *         description: QuickRecap description *
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -129,7 +109,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of Multimedia
+ *         description: Maximum number of lession
  *       - in: query
  *         name: page
  *         schema:
@@ -148,7 +128,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Multimedia'
+ *                     $ref: '#/components/schemas/QuickRecap'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -166,27 +146,29 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  */
+
 /**
  * @swagger
- * /multimedia/{multimediaId}:
+ * /quickrecaps/{quickRecapId}:
  *   get:
- *     summary: Get a multimedia
- *     tags: [Multimedia]
+ *     summary: Get a QuickRecap
+ *     tags: [QuickRecap]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: multimediaId
+ *         name: quickRecapId
  *         required: true
  *         schema:
  *           type: string
+ *         description: quickRecap id
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Multimedia'
+ *                $ref: '#/components/schemas/QuickRecap'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -195,16 +177,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a multimedia
- *     tags: [Multimedia]
+ *     summary: Update a QuickRecap
+ *     tags: [QuickRecap]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: multimediaId
+ *         name: quickRecaId
  *         required: true
  *         schema:
  *           type: string
+ *         description: quickRecap id
  *     requestBody:
  *       required: true
  *       content:
@@ -212,23 +195,11 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               lessionName:
- *                 type: string
- *               icon1:
- *                 type: string
- *               icon2:
- *                 type: string
- *               path:
- *                 type: string
- *               mediumType:
- *                 type: string
- *               order:
- *                 type: string
- *               videoType:
- *                 type: string
  *               boardId:
  *                 type: string
  *               mediumId:
+ *                 type: string
+ *               classId:
  *                 type: string
  *               subjectId:
  *                 type: string
@@ -236,27 +207,23 @@ module.exports = router;
  *                 type: string
  *               chapterId:
  *                 type: string
+ *               description:
+ *                 type: string
  *             example:
- *               lessionName: English
- *               icon1: imagelink/icon1
- *               icon2: imagelink/icon2
- *               path: multimedia/path
- *               multimediaType: video
- *               order: 1
- *               videoType: yujvghgkk
- *               boardId: 64d9ceaef49e9f5dc06502c6
- *               mediumId: 64d327a41128844220f0cce4
- *               classId: 64d327811128844220f0cce0
- *               subjectId: 64d9d4666205c371563fcadb
- *               bookId: 64d9d7143ac675796cdcd433
- *               chapterId: 64d327811128844220f0cce0
+ *               description: English gfklgj   hbhb
+ *               boardId: 64ca45e050227f21d906d83c
+ *               mediumId: 64d0bc1d18f7609763d21063
+ *               classId: 64b122401b4cf04c356b8fc2
+ *               subjectId: 64b122d49ddf324d2a8d12d3
+ *               bookId: 64b8f019ba89c333de42f169
+ *               chapterId: 64b8f094050c643582b80481
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Multimedia'
+ *                $ref: '#/components/schemas/QuickRecap'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -265,17 +232,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a multimedia
- *     tags: [Multimedia]
+ *     summary: Delete a QuickRecap
+ *     tags: [QuickRecap]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: multimediaId
+ *         name: quickRecapId
  *         required: true
  *         schema:
  *           type: string
- *         description: multimediaId
+ *         description: quickRecap id
  *     responses:
  *       "200":
  *         description: No content
@@ -285,14 +252,15 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ *
  */
 
 /**
  * @swagger
- * /multimedia/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}/{chapterId}:
+ * /quickrecaps/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}/{chapterId}:
  *   get:
- *     summary: Get a multimedia
- *     tags: [Multimedia]
+ *     summary: Get a QuickRecap
+ *     tags: [QuickRecap]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -306,6 +274,8 @@ module.exports = router;
  *         name: mediumId
  *         required: true
  *         description: The ID of the medium
+ *         schema:
+ *           type: string
  *       - in: path
  *         name: classId
  *         required: true
@@ -330,7 +300,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Multimedia'
+ *               $ref: '#/components/schemas/QuickRecap'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

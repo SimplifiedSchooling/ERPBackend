@@ -1,15 +1,9 @@
 const Joi = require('joi');
 const { objectId } = require('./custom.validation');
 
-const createMultimeda = {
+const createQuickRecap = {
   body: Joi.object().keys({
-    lessionName: Joi.string().required(),
-    icon1: Joi.string().required(),
-    icon2: Joi.string().required(),
-    path: Joi.string().required(),
-    multimediaType: Joi.string(),
-    order: Joi.number().required(),
-    videoType: Joi.string().required(),
+    discription: Joi.string().required(),
     boardId: Joi.string().custom(objectId).required(),
     mediumId: Joi.string().custom(objectId).required(),
     classId: Joi.string().custom(objectId).required(),
@@ -19,22 +13,22 @@ const createMultimeda = {
   }),
 };
 
-const getAllMultimedia = {
+const getAllQuickRecap = {
   query: Joi.object().keys({
     sortBy: Joi.string(),
-    lessionName: Joi.string(),
+    discription: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
 };
 
-const getMultimediaById = {
+const getQuickRecapById = {
   params: Joi.object().keys({
-    multimediaId: Joi.string().custom(objectId),
+    quickRecapId: Joi.string().custom(objectId),
   }),
 };
 
-const getMultimediaByFilter = {
+const getQuickRecapByFilter = {
   params: Joi.object().keys({
     boardId: Joi.string().custom(objectId).required(),
     mediumId: Joi.string().custom(objectId).required(),
@@ -45,19 +39,13 @@ const getMultimediaByFilter = {
   }),
 };
 
-const updateMultimedia = {
+const updateQuickRecap = {
   params: Joi.object().keys({
-    multimediaId: Joi.required().custom(objectId),
+    quickRecapId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
-      lessionName: Joi.string(),
-      icon1: Joi.string(),
-      icon2: Joi.string(),
-      path: Joi.number(),
-      multimediaType: Joi.string(),
-      order: Joi.string(),
-      videoType: Joi.string(),
+      discription: Joi.string(),
       boardId: Joi.string().custom(objectId),
       mediumId: Joi.string().custom(objectId),
       classId: Joi.string().custom(objectId),
@@ -68,17 +56,17 @@ const updateMultimedia = {
     .min(1),
 };
 
-const deleteMultimedia = {
+const deleteQuickRecap = {
   params: Joi.object().keys({
-    multimediaId: Joi.string().custom(objectId),
+    quickRecapId: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createMultimeda,
-  getAllMultimedia,
-  getMultimediaById,
-  getMultimediaByFilter,
-  updateMultimedia,
-  deleteMultimedia,
+  createQuickRecap,
+  getAllQuickRecap,
+  getQuickRecapById,
+  getQuickRecapByFilter,
+  updateQuickRecap,
+  deleteQuickRecap,
 };

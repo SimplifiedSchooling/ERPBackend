@@ -23,3 +23,9 @@ module.exports.Ebook = require('./ebook.model');
 module.exports.Homework = require('./homework.model');
 
 module.exports.Residentialschool = require('./masterModels/Residential_school.model');
+module.exports.Ebook = require('./ebook.model');
+module.exports.SchoolLocationType = require('./masterModels/school-location-type.model');
+module.exports.Ebook = require('./ebook.model');
+module.exports.Homework = require('./homework.model');
+module.exports.Quickrecap = require('./quickrecap.model');
+module.exports.Language = require('./masterModels/language.model');
