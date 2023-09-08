@@ -55,6 +55,8 @@ module.exports = router;
  *                 type: string
  *               order:
  *                 type: number
+ *               chapterName:
+ *                 type: string
  *               boardId:
  *                 type: string
  *               mediumId:
@@ -68,6 +70,7 @@ module.exports = router;
  *             example:
  *               path: multimedia/path
  *               order: 1
+ *               chapterName: topic
  *               boardId: 64d9ceaef49e9f5dc06502c6
  *               mediumId: 64d327a41128844220f0cce4
  *               classId: 64d327811128844220f0cce0
@@ -183,7 +186,7 @@ module.exports = router;
  *
  *   patch:
  *     summary: Update a ebook
- *     tags: [Multimedia]
+ *     tags: [Ebook]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -203,6 +206,8 @@ module.exports = router;
  *                 type: string
  *               order:
  *                 type: string
+ *               chapterName:
+ *                 type: string
  *               boardId:
  *                 type: string
  *               mediumId:
@@ -216,6 +221,7 @@ module.exports = router;
  *             example:
  *               path: multimedia/path
  *               order: 1
+ *               chapterName: topic
  *               boardId: 64d9ceaef49e9f5dc06502c6
  *               mediumId: 64d327a41128844220f0cce4
  *               classId: 64d327811128844220f0cce0

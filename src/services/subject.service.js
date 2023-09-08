@@ -33,10 +33,18 @@ const querySubject = async (filter, options) => {
 const getSubjectById = async (id) => {
   return Subject.findById(id);
 };
+/**
+ * Get subject by classId
+ * @param {ObjectId} classId
+ * @returns {Promise<Subject>}
+ */
+const getSubjectByClassId = async (classId) => {
+  return Subject.find({ classId });
+};
 
 /**
  * Update subject by id
- * @param {ObjectId} userId
+ * @param {ObjectId} subjectId
  * @param {Object} updateBody
  * @returns {Promise<Board>}
  */
@@ -70,4 +78,5 @@ module.exports = {
   getSubjectById,
   updatSubjectById,
   deleteSubjectById,
+  getSubjectByClassId,
 };

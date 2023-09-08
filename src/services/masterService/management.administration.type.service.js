@@ -52,7 +52,7 @@ const updateManagementAdministrationTypeById = async (managementAdmTypeId, updat
 };
 
 /**
- * Delete Managmentcodeschool by id
+ * Delete Managment Administration type by id
  * @param {ObjectId} managementAdmTypeId
  * @returns {Promise<managementAdministrationType>}
  */

@@ -1,5 +1,6 @@
 module.exports.authValidation = require('./auth.validation');
 module.exports.userValidation = require('./user.validation');
+module.exports.roleValidation = require('./role.validation');
 module.exports.mediumValidation = require('./medium.validation');
 module.exports.lessionValidation = require('./lession.validation');
 module.exports.classValidation = require('./class.validation');
@@ -16,8 +17,3 @@ module.exports.mediumValidation = require('./multimedia.validation');
 module.exports.ebookValidation = require('./ebook.validation');
 module.exports.HomeworkValidation = require('./homework.validation');
 module.exports.quickRecapValidation = require('./quickrecap.validation');
-module.exports.managmentGroupschool = require('./masterValidations/managment.groupschool.validation')
-module.exports.managmentCodeschool = require('./masterValidations/management.codeSchool.validation')
-module.exports.managmentAdministrationType = require('./masterValidations/management.administration.type.validation')
-module.exports.Respondents = require('./masterValidations/respondent.validation')
-module.exports.schooleBuilding = require('./masterValidations/schoole.building.validation')

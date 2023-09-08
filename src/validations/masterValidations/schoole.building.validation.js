@@ -3,13 +3,13 @@ const { objectId } = require('../custom.validation');
 
 const createBuilding = {
     body: Joi.object().keys({
-        BuildingName: Joi.string().required(),
+        buildingName: Joi.string().required(),
     }),
 };
 
 const getAllBuildings = {
     query: Joi.object().keys({
-        BuildingName: Joi.string(),
+        buildingName: Joi.string(),
     }),
 };
 
@@ -25,7 +25,7 @@ const updateBuilding = {
     }),
     body: Joi.object()
         .keys({
-            BuildingName: Joi.string().required(),
+            buildingName: Joi.string().required(),
         })
         .min(1),
 };

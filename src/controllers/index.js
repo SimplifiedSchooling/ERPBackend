@@ -1,5 +1,6 @@
 module.exports.authController = require('./auth.controller');
 module.exports.userController = require('./user.controller');
+module.exports.roleController = require('./role.comtroller');
 module.exports.videoController = require('./video.controller');
 module.exports.planvideoController = require('./planvideo.controller');
 module.exports.boardController = require('./board.controller');
@@ -14,9 +15,11 @@ module.exports.broadcastController = require('./broadcast.controller');
 module.exports.studioController = require('./studio.controller');
 module.exports.multimediaController = require('./multimedia.controller');
 module.exports.homeworkController = require('./homework.controller');
-module.exports.managmentGroupSchool = require('./masterRoutes/managment.groupschool.route')
+module.exports.managmentGroupSchool = require('./masterControllers/managment.groupSchool.controller')
 module.exports.managmentCodeSchool = require('./masterControllers/managment.codeSchool.controller')
 module.exports.managementAdministrationType = require('./masterControllers/management.administration.type.controller')
 module.exports.Respondent = require('./masterControllers/respondent.controller')
 module.exports.SchoolBuilding = require('./masterControllers/school.building.controller')
 
+module.exports.ResidentialSchooolController = require('./masterControllers/residential_school.controller');
+module.exports.languageController = require('./masterControllers/language.controller');

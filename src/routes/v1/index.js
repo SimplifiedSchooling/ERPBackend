@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
+const roleRoute = require('./role.route');
 const videoRoute = require('./video.route');
 const planvideoRoute = require('./planvideo.route');
 const boardRoute = require('./board.route');
@@ -19,12 +20,14 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
+const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
 const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route')
 const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route')
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route')
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
+const languageRoute = require('./masterRoutes/language.route');
 
 const router = express.Router();
 
@@ -102,30 +105,41 @@ const defaultRoutes = [
     route: homeworkRoute,
   },
   {
+    path: '/residentialschool',
+    route: residentialschoolRouter,
+  },
+  {
     path: '/quickrecaps',
     route: quickRecapRoute,
   },
   {
-    path:'/managgroupschool',
+    path: '/managgroupschool',
     route: managmentGroupSchoolRoute
   },
   {
-    path:'/managCodeschool',
+    path: '/managCodeschool',
     route: managmentCodeSchoolRoute
   },
   {
-    path:'/managAdministrationType',
+    path: '/managAdministrationType',
     route: managementAdministrationTypeRoute
   },
   {
-    path:'/RespondentType',
+    path: '/RespondentType',
     route: respondentRoute
   },
   {
-    path:'/schoolBuilding',
+    path: '/schoolBuilding',
     route: schooleBuildingRout
-  }
-
+  },
+  {
+    path: '/language',
+    route: languageRoute,
+  },
+  {
+    path: '/roles',
+    route: roleRoute,
+  },
 ];
 
 const devRoutes = [

@@ -1,38 +1,36 @@
 const express = require('express');
-
-const validate = require('../../../middlewares/validate');
-const schooleBuilding = require('../../../validations/masterValidations/schoole.building.validation');
-const SchoolBuilding = require('../../../controllers/masterControllers/school.building.controller');
+const validate = require('../../middlewares/validate');
+const { roleController } = require('../../controllers');
+const { roleValidation } = require('../../validations');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(schooleBuilding.createBuilding), SchoolBuilding.createSchoolBuilding)
-  .get(validate(schooleBuilding.getAllBuildings), SchoolBuilding.getAllSchoolBuilding);
+  .post(validate(roleValidation.createBoard), roleController.createRole)
+  .get(validate(roleValidation.getAllBoard), roleController.getAllRole);
 
 router
-  .route('/:buildingId')
-  .get(validate(schooleBuilding.getBuilding), SchoolBuilding.getSchoolBuilding)
-  .patch(validate(schooleBuilding.updateBuilding), SchoolBuilding.updateSchoolBuilding)
-  .delete(validate(schooleBuilding.deleteBuilding), SchoolBuilding.deleteSchoolBuilding);
+  .route('/:roleId')
+  .get(validate(roleValidation.getRoleById), roleController.getRole)
+  .patch(validate(roleValidation.updateRoleById), roleController.updateRoleById)
+  .delete(validate(roleValidation.deleteRoleById), roleController.deleteRoleById);
 
 module.exports = router;
-
 
 /**
  * @swagger
  * tags:
- *   name: Building
- *   description: School building management
+ *   name: Role
+ *   description: Role management
  */
 
 /**
  * @swagger
- * /schoolBuilding:
+ * /roles:
  *   post:
- *     summary: Create a School building
- *     tags: [Building]
+ *     summary: Create a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -42,12 +40,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - buildingName
+ *               - role
  *             properties:
- *               buildingName:
+ *               naboardme:
  *                 type: string *
  *             example:
- *               buildingName: xyz
+ *               role: admin
  *
  *     responses:
  *       "201":
@@ -55,30 +53,24 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Building'
+ *                $ref: '#/components/schemas/Role'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all school building
- *     tags: [Building]
+ *     summary: Get all role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         type: build
- *         schema:
- *           buildingName: string
- *         description: School Building *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Building'
+ *                $ref: '#/components/schemas/Language'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -87,25 +79,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /schoolBuilding/{buildingId}:
+ * /roles/{roleId}:
  *   get:
- *     summary: Get a School Building
- *     tags: [Building]
+ *     summary: Get a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: buildingId
+ *         name: roleId
  *         required: true
  *         schema:
  *           type: string
+ *         description: roleId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Building'
+ *                $ref: '#/components/schemas/Role'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -114,16 +107,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a School Building
- *     tags: [Building]
+ *     summary: Update a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: buildingId
+ *         name: roleId
  *         required: true
  *         schema:
  *           type: string
+ *         description: roleId
  *     requestBody:
  *       required: true
  *       content:
@@ -131,17 +125,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               buildingName:
+ *               name:
  *                 type: string
  *             example:
- *               buildingName: fake name*
+ *               role: admin
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Building'
+ *                $ref: '#/components/schemas/Role'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -150,17 +144,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a School Building
- *     tags: [Building]
+ *     summary: Delete a role
+ *     tags: [Role]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: buildingId
+ *         name: roleId
  *         required: true
  *         schema:
  *           type: string
- *         description: buildingId
+ *         description: roleId
  *     responses:
  *       "200":
  *         description: No content
@@ -171,4 +165,3 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-

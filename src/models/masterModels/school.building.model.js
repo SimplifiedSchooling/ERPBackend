@@ -4,7 +4,7 @@ const { toJSON, paginate } = require('../plugins');
 const schoolBuildingSchema = mongoose.Schema(
     {
         
-        BuildingName: {
+        buildingName: {
             type: String,
             required: true,
             trim: true,

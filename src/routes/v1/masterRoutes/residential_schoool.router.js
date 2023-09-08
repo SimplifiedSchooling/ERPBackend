@@ -1,39 +1,36 @@
 const express = require('express');
-
 const validate = require('../../../middlewares/validate');
-const managmentCodeschool = require('../../../validations/masterValidations/management.codeSchool.validation');
-const managmentCodeSchool = require('../../../controllers/masterControllers/managment.codeSchool.controller');
+const ResidentialSchooolController = require('../../../controllers/masterControllers/residential_school.controller');
+const residentialschoolValidation = require('../../../validations/masterValidations/residential_school.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(managmentCodeschool.createManaCodeSchool), managmentCodeSchool.createManagmentCodeSchool)
-  .get(validate(managmentCodeschool.getAllManaCodeSchools), managmentCodeSchool.getManagmentCodeSchools);
+  .post(validate(residentialschoolValidation.createresidential), ResidentialSchooolController.createResidential)
+  .get(validate(residentialschoolValidation.getAllresidential), ResidentialSchooolController.getAllResidential);
 
 router
-  .route('/:managementCodeId')
-  .get(validate(managmentCodeschool.getManaCodeSchool), managmentCodeSchool.getManagmentCodeSchool)
-  .patch(validate(managmentCodeschool.updateManaCodeSchool), managmentCodeSchool.updateManagmentCodeSchool)
-  .delete(validate(managmentCodeschool.deleteManaCodeSchool), managmentCodeSchool.deleteManagmentCodeSchool);
+  .route('/:ResidentialId')
+  .get(validate(residentialschoolValidation.getresidential), ResidentialSchooolController.getResidentialById)
+  .patch(validate(residentialschoolValidation.updateresidential), ResidentialSchooolController.updateResidential)
+  .delete(validate(residentialschoolValidation.deleteresidential), ResidentialSchooolController.deleteResidential);
 
 module.exports = router;
-
-
 
 /**
  * @swagger
  * tags:
- *   name: ManagementCode
- *   description: Management code of school
+ *   name: residentialschool
+ *   description: residentialschool management
  */
 
 /**
  * @swagger
- * /managCodeschool:
+ * /residentialschool:
  *   post:
- *     summary: Create a Management Code
- *     tags: [ManagementCode]
+ *     summary: Create a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -44,19 +41,11 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - code
- *               - group
  *             properties:
- *               name:
+ *               naboardme:
  *                 type: string *
- *               code:
- *                 type: number
- *               group:
- *                 type: string
  *             example:
- *               name: xyz
- *               code: 12
- *               group: A
+ *               name: CBSC
  *
  *     responses:
  *       "201":
@@ -64,30 +53,65 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/ManagementCode'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Management Code
- *     tags: [ManagementCode]
+ *     summary: Get all Residential
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         type: build
+ *         name: Residential
  *         schema:
- *           name: string
- *         description: Management Code *
+ *           type: string
+ *         description: Residential name *
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of users
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/ManagementCode'
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Residential'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -96,25 +120,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /managCodeschool/{managementCodeId}:
+ * /residentialschool/{ResidentialId}:
  *   get:
- *     summary: Get a Management code
- *     tags: [ManagementCode]
+ *     summary: Get a Residential
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: managementCodeId
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
+ *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/ManagementCode'
+ *                $ref: '#/components/schemas/residentialschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -123,16 +148,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Management Code
- *     tags: [ManagementCode]
+ *     summary: Update a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: managementCodeId
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
+ *         description: ResidentialId
  *     requestBody:
  *       required: true
  *       content:
@@ -142,21 +168,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code: 
- *                 type: number
- *               group: 
- *                 type: string
  *             example:
  *               name: fake name*
- *               code: 12
- *               group: fake group
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/ManagementCode'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -165,17 +185,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a Management Code
- *     tags: [ManagementCode]
+ *     summary: Delete a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: managementCodeId
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: managementCodeId
+ *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: No content
