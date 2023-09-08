@@ -1,36 +1,36 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const ResidentialSchooolController = require('../../../controllers/masterControllers/residential_school.controller');
+const residentialschoolValidation = require('../../../validations/masterValidations/residential_school.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(languageController.getAllLanguage);
+  .post(validate(residentialschoolValidation.createresidential), ResidentialSchooolController.createResidential)
+  .get(validate(residentialschoolValidation.getAllresidential), ResidentialSchooolController.getAllResidential);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:ResidentialId')
+  .get(validate(residentialschoolValidation.getresidential), ResidentialSchooolController.getResidentialById)
+  .patch(validate(residentialschoolValidation.updateresidential), ResidentialSchooolController.updateResidential)
+  .delete(validate(residentialschoolValidation.deleteresidential), ResidentialSchooolController.deleteResidential);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: residentialschool
+ *   description: residentialschool management
  */
 
 /**
  * @swagger
- * /language:
+ * /residentialschool:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -42,13 +42,10 @@ module.exports = router;
  *             required:
  *               - name
  *             properties:
- *               name:
+ *               naboardme:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               name: CBSC
  *
  *     responses:
  *       "201":
@@ -56,30 +53,65 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all Residential
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         name: Residential
  *         schema:
  *           type: string
- *         description: Board name *
+ *         description: Residential name *
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of users
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Residential'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +120,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /residentialschool/{ResidentialId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a Residential
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/residentialschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +148,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: ResidentialId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +168,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
  *               name: fake name*
- *               code: 34
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +185,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: No content

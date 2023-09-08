@@ -20,9 +20,28 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
+const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
+const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route');
+const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route');
+const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
+const respondentRoute = require('./masterRoutes/respondent.route');
+const schooleBuildingRout = require('./masterRoutes/school.building.route');
+
+const schoolLocationRoute = require('./masterRoutes/school-location.route');
+const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
+const schoolcategoryRoute = require('./masterRoutes/school.category.route');
+const districtRoute = require('./masterRoutes/distict.route');
+const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
+
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
+
+const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
+const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
+const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
+const BoundaryWall = require('./masterRoutes/boundarywall.route');
+
 
 const router = express.Router();
 
@@ -100,16 +119,82 @@ const defaultRoutes = [
     route: homeworkRoute,
   },
   {
+    path: '/residentialschool',
+    route: residentialschoolRouter,
+  },
+  {
     path: '/quickrecaps',
     route: quickRecapRoute,
+  },
+  {
+
+
+    path: '/managgroupschool',
+    route: managmentGroupSchoolRoute,
+  },
+  {
+    path: '/managCodeschool',
+    route: managmentCodeSchoolRoute,
+  },
+  {
+    path: '/managAdministrationType',
+    route: managementAdministrationTypeRoute,
+  },
+  {
+    path: '/RespondentType',
+    route: respondentRoute,
+  },
+  {
+    path: '/schoolBuilding',
+    route: schooleBuildingRout,
+  },
+  {
+
+    path: '/schoollocationtype',
+    route: schoolLocationRoute,
+  },
+  {
+    path: '/inchargetype',
+    route: inChargeTypeRoute,
+  },
+  {
+    path: '/schoolcategory',
+    route: schoolcategoryRoute,
+  },
+  {
+    path: '/district',
+    route: districtRoute,
+  },
+  {
+    path: '/safetyandsecurity',
+    route: safetyAndSecurityRoute,
   },
   {
     path: '/language',
     route: languageRoute,
   },
   {
+    path: '/typeresidentialschool',
+    route: typeresidentialschoolRouter,
+  },
+  {
+    path: '/boardresidentialschool',
+    route: Boardresidentialschool,
+  },
+  {
+    path: '/minoritymanageschool',
+    route: MinorityManageSchool,
+  },
+  {
     path: '/roles',
     route: roleRoute,
+
+
+  }, 
+  {
+    path: '/boundarywall',
+    route: BoundaryWall,
+
   },
   {
     path: '/demolished',
