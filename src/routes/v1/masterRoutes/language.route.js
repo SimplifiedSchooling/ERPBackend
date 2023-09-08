@@ -1,16 +1,20 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
 const languageController = require('../../../controllers/masterControllers/language.controller');
+const { languageValidation } = require('../../../validations');
 
 const router = express.Router();
 
-router.route('/').post(languageController.createLanguage).get(languageController.getAllLanguage);
+router
+  .route('/')
+  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
+  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
 
 router
   .route('/:languageId')
-  .get(languageController.getLanguageById)
-  .patch(languageController.updateLanguageById)
-  .delete(languageController.deleteLanguageById);
+  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
+  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
+  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
 
 module.exports = router;
 
