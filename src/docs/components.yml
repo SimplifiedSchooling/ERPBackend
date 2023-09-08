@@ -203,15 +203,9 @@ components:
       properties:
         name:
           type: string
-        boardId:
-          type: string
-          description: Id of board
-        mediumId:
-          type: string
-          description: Id of medium
-        classId:
-          type: string
-          description: ID of the classId
+        code:
+          type: number
+          description: subject code
         order:
           type: string
         thumbnail:
