@@ -1,36 +1,36 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const MinorityManageSchoolController = require('../../../controllers/masterControllers/minority_manage_school.controller');
+const MinorityManageSchoolValidation = require('../../../validations/masterValidations/minority_manage_school.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .post(validate(MinorityManageSchoolValidation.createminority), MinorityManageSchoolController.createminority)
+  .get(validate(MinorityManageSchoolValidation.getAllminority), MinorityManageSchoolController.getAllminority);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:minorityId')
+  .get(validate(MinorityManageSchoolValidation.getAllminority), MinorityManageSchoolController.getminorityById)
+  .patch(validate(MinorityManageSchoolValidation.updateminority), MinorityManageSchoolController.updateminority)
+  .delete(validate(MinorityManageSchoolValidation.deleteminority), MinorityManageSchoolController.deleteminority);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: minoritymanageschool
+ *   description: minoritymanageschool management
  */
 
 /**
  * @swagger
- * /language:
+ * /minoritymanageschool:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a minoritymanageschool
+ *     tags: [minoritymanageschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -44,11 +44,8 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               name: CBSC
  *
  *     responses:
  *       "201":
@@ -56,30 +53,65 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/minoritymanageschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all minority
+ *     tags: [minoritymanageschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         name: minority
  *         schema:
  *           type: string
- *         description: Board name *
+ *         description: minority name *
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of users
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/minoritymanageschool'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +120,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /minoritymanageschool/{minorityId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a minoritymanageschool
+ *     tags: [minoritymanageschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: minorityId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: minorityId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/minoritymanageschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +148,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a minoritymanageschool
+ *     tags: [minoritymanageschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: minorityId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: minorityId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +168,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
  *               name: fake name*
- *               code: 34
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/minoritymanageschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +185,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a minoritymanageschool
+ *     tags: [minoritymanageschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: minorityId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: minorityId
  *     responses:
  *       "200":
  *         description: No content

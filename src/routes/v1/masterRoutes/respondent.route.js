@@ -1,36 +1,37 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const Respondents = require('../../../validations/masterValidations/respondent.validation');
+const Respondent = require('../../../controllers/masterControllers/respondent.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .post(validate(Respondents.createRespondent), Respondent.createRespondent)
+  .get(validate(Respondents.getAllRespondents), Respondent.getAllRespondents);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:respondentId')
+  .get(validate(Respondents.getRespondent), Respondent.getRespondent)
+  .patch(validate(Respondents.updateRespondent), Respondent.updateRespondent)
+  .delete(validate(Respondents.deleteRespondent), Respondent.deleteRespondent);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: Respondent
+ *   description: Respondent
  */
 
 /**
  * @swagger
- * /language:
+ * /RespondentType:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a Respondent Type
+ *     tags: [Respondent]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,15 +41,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - type
  *             properties:
- *               name:
+ *               type:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               type: abc
  *
  *     responses:
  *       "201":
@@ -56,30 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Respondent'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all Respondent Type
+ *     tags: [Respondent]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: board
  *         schema:
  *           type: string
- *         description: Board name *
+ *         description: respondent type *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Respondent'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +86,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /RespondentType/{respondentId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a Respondent type
+ *     tags: [Respondent]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: respondentId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Respondent'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +113,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a Respondent type
+ *     tags: [Respondent]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: respondentId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -134,20 +130,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               type:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
- *               name: fake name*
- *               code: 34
+ *               type: fake name*
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/Respondent'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a Respondent type
+ *     tags: [Respondent]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: respondentId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: respondentId
  *     responses:
  *       "200":
  *         description: No content
