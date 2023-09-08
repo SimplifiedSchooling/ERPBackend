@@ -107,7 +107,11 @@ module.exports = router;
  *         Code: 1,2,3
  *         broadCategory:
  *           type: string
- *           example: primary, upper primary
+ *           example: primary
+ *       example:
+ *         Code: 1, 2, 3
+ *         broadCategory: primary, upper primary
+ *         detailsOfCategory: Primary only with grades 1 to 5, Upper Primary with grades 1 to 8
  */
 
 /**
@@ -128,4 +132,9 @@ module.exports = router;
  *         broadCategory:
  *           type: string
  *           example: primary, upper primary
+ *       example:
+ *         Code: 1, 2, 3
+ *         broadCategory: primary, upper primary
+ *         detailsOfCategory: Primary only with grades 1 to 5, Upper Primary with grades 1 to 8
  */
+

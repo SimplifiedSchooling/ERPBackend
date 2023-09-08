@@ -43,6 +43,13 @@ const MinorityManageSchool = require('./masterRoutes/minority_manage_school.rout
 const BoundaryWall = require('./masterRoutes/boundarywall.route');
 
 
+
+const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
+const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
+const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
+const BoundaryWall = require('./masterRoutes/boundarywall.route');
+
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -128,7 +135,6 @@ const defaultRoutes = [
   },
   {
 
-
     path: '/managgroupschool',
     route: managmentGroupSchoolRoute,
   },
@@ -189,6 +195,12 @@ const defaultRoutes = [
     path: '/roles',
     route: roleRoute,
 
+  },
+  {
+    path: '/boundarywall',
+    route: BoundaryWall,
+
+
 
   }, 
   {
@@ -199,6 +211,7 @@ const defaultRoutes = [
   {
     path: '/demolished',
     route: demolishedRoute,
+
   },
 ];
 
