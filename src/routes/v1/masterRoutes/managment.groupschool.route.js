@@ -1,36 +1,37 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const managmentGroupschool = require('../../../validations/masterValidations/managment.groupschool.validation');
+const managmentGroupSchool = require('../../../controllers/masterControllers/managment.groupSchool.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(validate(languageValidation.getAllLanguage), languageController.getAllLanguage);
+  .post(validate(managmentGroupschool.createManaGroupSchool), managmentGroupSchool.createManagmentGroupSchool)
+  .get(validate(managmentGroupschool.getAllManaGroupSchools), managmentGroupSchool.getManagmentGroupSchools);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:managementId')
+  .get(validate(managmentGroupschool.getManaGroupSchool), managmentGroupSchool.getManagmentGroupSchool)
+  .patch(validate(managmentGroupschool.updateManaGroupSchool), managmentGroupSchool.updateManagmentGroupSchool)
+  .delete(validate(managmentGroupschool.deleteManaGroupSchool), managmentGroupSchool.deleteManagmentGroupSchool);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: ManagementGroup
+ *   description: Management Group of school
  */
 
 /**
  * @swagger
- * /language:
+ * /managgroupschool:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a Management Group
+ *     tags: [ManagementGroup]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -44,11 +45,8 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               name: xyz
  *
  *     responses:
  *       "201":
@@ -56,30 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementGroup'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all Management Group
+ *     tags: [ManagementGroup]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: build
  *         schema:
- *           type: string
- *         description: Board name *
+ *           name: string
+ *         description: Management Group *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementGroup'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +86,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /managgroupschool/{managementId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a Management Group
+ *     tags: [ManagementGroup]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: managementId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementGroup'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +113,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a Management Group
+ *     tags: [ManagementGroup]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: managementId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +132,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
  *               name: fake name*
- *               code: 34
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ManagementGroup'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a Management Group
+ *     tags: [ManagementGroup]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: managementId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: buildingId
  *     responses:
  *       "200":
  *         description: No content
