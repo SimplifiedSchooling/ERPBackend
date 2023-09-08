@@ -4,7 +4,7 @@ const {SchoolLocationType}  = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 const { SchoolLocationType } = require('../../models/index');
-const ApiError = require('../utils/ApiError');
+const ApiError = require('../../utils/ApiError');
 
 
 /**
