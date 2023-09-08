@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
 const respondentSchema = mongoose.Schema(
-    {
-        type: {
-            type: String,
-            required: true,
-            trim: true,
-        },
+  {
+    type: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    {
-        timestamps: true,
-    }
+  },
+  {
+    timestamps: true,
+  }
 );
 
 // add plugin that converts mongoose to json

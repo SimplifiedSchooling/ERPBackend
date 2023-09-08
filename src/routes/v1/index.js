@@ -22,9 +22,9 @@ const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
 const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
-const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route')
-const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route')
-const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route')
+const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route');
+const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route');
+const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
 
@@ -35,7 +35,6 @@ const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 
 const languageRoute = require('./masterRoutes/language.route');
-
 
 const router = express.Router();
 
@@ -122,26 +121,25 @@ const defaultRoutes = [
   },
   {
     path: '/managgroupschool',
-    route: managmentGroupSchoolRoute
+    route: managmentGroupSchoolRoute,
   },
   {
     path: '/managCodeschool',
-    route: managmentCodeSchoolRoute
+    route: managmentCodeSchoolRoute,
   },
   {
     path: '/managAdministrationType',
-    route: managementAdministrationTypeRoute
+    route: managementAdministrationTypeRoute,
   },
   {
     path: '/RespondentType',
-    route: respondentRoute
+    route: respondentRoute,
   },
   {
     path: '/schoolBuilding',
-    route: schooleBuildingRout
+    route: schooleBuildingRout,
   },
   {
-
     path: '/schoollocationtype',
     route: schoolLocationRoute,
   },
@@ -167,7 +165,6 @@ const defaultRoutes = [
   {
     path: '/roles',
     route: roleRoute,
-
   },
 ];
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('../plugins');
+
 const districtSchema = mongoose.Schema(
   {
     districtName: {

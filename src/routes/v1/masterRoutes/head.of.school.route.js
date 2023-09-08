@@ -111,7 +111,7 @@ module.exports = router;
  *         inChargeType:
  *           type: string
  *       example:
- *         inChargeType: head oF school , Principal 
+ *         inChargeType: head oF school , Principal
  */
 
 /**
@@ -124,5 +124,5 @@ module.exports = router;
  *         inChargeType:
  *           type: string
  *       example:
- *         inChargeType: head oF school , Principal 
+ *         inChargeType: head oF school , Principal
  */

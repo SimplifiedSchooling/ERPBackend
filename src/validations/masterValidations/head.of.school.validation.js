@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('../../validations/custom.validation');
+const { objectId } = require('../custom.validation');
 
 const createInchargeType = {
   body: Joi.object().keys({
@@ -25,7 +25,7 @@ const updateInchargeTypeyId = {
   }),
   body: Joi.object()
     .keys({
-        inChargeType: Joi.string().required(),
+      inChargeType: Joi.string().required(),
     })
     .min(1),
 };

@@ -2,17 +2,16 @@ const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
 const schoolBuildingSchema = mongoose.Schema(
-    {
-        
-        buildingName: {
-            type: String,
-            required: true,
-            trim: true,
-        },
+  {
+    buildingName: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    {
-        timestamps: true,
-    }
+  },
+  {
+    timestamps: true,
+  }
 );
 
 // add plugin that converts mongoose to json

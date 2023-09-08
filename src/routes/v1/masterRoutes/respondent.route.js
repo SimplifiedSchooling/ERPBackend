@@ -23,7 +23,7 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: Respondent
- *   description: Respondent 
+ *   description: Respondent
  */
 
 /**
@@ -170,4 +170,3 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-

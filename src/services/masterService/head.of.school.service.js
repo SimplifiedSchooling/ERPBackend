@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const {InchargeType}  = require('../../models');
+const { InchargeType } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**

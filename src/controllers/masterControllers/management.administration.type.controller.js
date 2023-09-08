@@ -14,7 +14,9 @@ const getManagementAdministrationTypes = catchAsync(async (req, res) => {
 });
 
 const getManagementAdministrationType = catchAsync(async (req, res) => {
-  const administrationType = await managmentAdministrationType.getManagementAdministrationTypeById(req.params.managementAdmTypeId);
+  const administrationType = await managmentAdministrationType.getManagementAdministrationTypeById(
+    req.params.managementAdmTypeId
+  );
   if (!administrationType) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Management AdministrationcType not found');
   }
@@ -22,7 +24,10 @@ const getManagementAdministrationType = catchAsync(async (req, res) => {
 });
 
 const updateManagementAdministrationType = catchAsync(async (req, res) => {
-  const administrationType = await managmentAdministrationType.updateManagementAdministrationTypeById(req.params.managementAdmTypeId, req.body);
+  const administrationType = await managmentAdministrationType.updateManagementAdministrationTypeById(
+    req.params.managementAdmTypeId,
+    req.body
+  );
   res.send(administrationType);
 });
 

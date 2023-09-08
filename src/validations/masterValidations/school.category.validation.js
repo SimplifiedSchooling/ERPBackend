@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('../../validations/custom.validation');
+const { objectId } = require('../custom.validation');
 
 const createSchoolCategory = {
   body: Joi.object().keys({
@@ -27,9 +27,9 @@ const updateSchoolCategoryId = {
   }),
   body: Joi.object()
     .keys({
-        detailsOfCategory: Joi.string().required(),
-        Code: Joi.number().required(),
-        broadCategory: Joi.string().required(),
+      detailsOfCategory: Joi.string().required(),
+      Code: Joi.number().required(),
+      broadCategory: Joi.string().required(),
     })
     .min(1),
 };
