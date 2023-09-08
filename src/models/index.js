@@ -1,5 +1,6 @@
 module.exports.Token = require('./token.model');
 module.exports.User = require('./user.model');
+module.exports.Role = require('./role.model');
 module.exports.Video = require('./video.model');
 module.exports.Planvideo = require('./planvideo.model');
 module.exports.Board = require('./board.model');
@@ -33,5 +34,12 @@ module.exports.ManagmentCodeSchool = require('./masterModels/management.codeScho
 module.exports.managementAdministrationType = require('./masterModels/management.administration.type.model')
 module.exports.Respondent = require('./masterModels/respondent.model')
 module.exports.SchoolBuilding = require('./masterModels/school.building.model')
+
+module.exports.InchargeType = require('./masterModels/head.of.school.model');
+module.exports.SchoolCategory = require('./masterModels/school.category.model');
+module.exports.District = require('./masterModels/district.model');
+module.exports.SafetyAndSecurity = require('./masterModels/safety.and.security.model');
+
 module.exports.Language = require('./masterModels/language.model');
-module.exports.Role = require('./role.model');
+module.exports.Demolished = require('./demolished.model');
+

@@ -27,7 +27,15 @@ const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route')
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
+
+const schoolLocationRoute = require('./masterRoutes/school-location.route');
+const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
+const schoolcategoryRoute = require('./masterRoutes/school.category.route');
+const districtRoute = require('./masterRoutes/distict.route');
+const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
+
 const languageRoute = require('./masterRoutes/language.route');
+
 
 const router = express.Router();
 
@@ -133,12 +141,33 @@ const defaultRoutes = [
     route: schooleBuildingRout
   },
   {
+
+    path: '/schoollocationtype',
+    route: schoolLocationRoute,
+  },
+  {
+    path: '/inchargetype',
+    route: inChargeTypeRoute,
+  },
+  {
+    path: '/schoolcategory',
+    route: schoolcategoryRoute,
+  },
+  {
+    path: '/district',
+    route: districtRoute,
+  },
+  {
+    path: '/safetyandsecurity',
+    route: safetyAndSecurityRoute,
+
     path: '/language',
     route: languageRoute,
   },
   {
     path: '/roles',
     route: roleRoute,
+
   },
 ];
 

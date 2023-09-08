@@ -28,4 +28,12 @@ module.exports.Respondent = require('./masterService/respondent.services')
 module.exports.SchoolBuilding = require('./masterService/school.building.services')
 
 
+module.exports.schoolLocationType=require('./masterService/school.location.type.service');
+module.exports.inchargeTypeService=require('./masterService/head.of.school.service');
+module.exports.schoolCategoryService=require('./masterService/school.category.service');
+module.exports.districtService=require('./masterService/district.service');
+module.exports.safetyServices=require('./masterService/safety.and.security.service');
+
 module.exports.languageService = require('./masterService/language.service');
+module.exports.demolishedService = require('./demolished.service');
+

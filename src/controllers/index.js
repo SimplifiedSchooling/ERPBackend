@@ -21,5 +21,12 @@ module.exports.managementAdministrationType = require('./masterControllers/manag
 module.exports.Respondent = require('./masterControllers/respondent.controller')
 module.exports.SchoolBuilding = require('./masterControllers/school.building.controller')
 
+module.exports.schoolLocationController = require('./masterControllers/school-location.controller');
+module.exports.inChargeTypeController = require('./masterControllers/head.of.school.controller');
+module.exports.schoolCategoryController = require('./masterControllers/school.category.controller');
+module.exports.safetyAndSecurityController = require('./masterControllers/safety.and.security.controller');
+module.exports.districtController = require('./masterControllers/district.controller');
+
 module.exports.ResidentialSchooolController = require('./masterControllers/residential_school.controller');
 module.exports.languageController = require('./masterControllers/language.controller');
+
