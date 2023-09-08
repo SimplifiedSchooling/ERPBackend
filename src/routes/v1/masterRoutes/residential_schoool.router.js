@@ -1,38 +1,36 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
-const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+const validate = require('../../../middlewares/validate');
+const ResidentialSchooolController = require('../../../controllers/masterControllers/residential_school.controller');
+const residentialschoolValidation = require('../../../validations/masterValidations/residential_school.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(auth(), validate(userValidation.createUser), userController.createUser)
-  .get(auth(), validate(userValidation.getUsers), userController.getUsers);
+  .post(validate(residentialschoolValidation.createresidential), ResidentialSchooolController.createResidential)
+  .get(validate(residentialschoolValidation.getAllresidential), ResidentialSchooolController.getAllResidential);
 
 router
-  .route('/:userId')
-  .get(auth(), validate(userValidation.getUser), userController.getUser)
-  .patch(auth(), validate(userValidation.updateUser), userController.updateUser)
-  .delete(auth(), validate(userValidation.deleteUser), userController.deleteUser);
+  .route('/:ResidentialId')
+  .get(validate(residentialschoolValidation.getresidential), ResidentialSchooolController.getResidentialById)
+  .patch(validate(residentialschoolValidation.updateresidential), ResidentialSchooolController.updateResidential)
+  .delete(validate(residentialschoolValidation.deleteresidential), ResidentialSchooolController.deleteResidential);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Users
- *   description: User management and retrieval
+ *   name: residentialschool
+ *   description: residentialschool management
  */
 
 /**
  * @swagger
- * /users:
+ * /residentialschool:
  *   post:
- *     summary: Create a user
- *     description: Only admins can create other users.
- *     tags: [Users]
+ *     summary: Create a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -43,65 +41,39 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - email
- *               - password
- *               - role
  *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *                 format: email
- *                 description: must be unique
- *               password:
- *                 type: string
- *                 format: password
- *                 minLength: 8
- *                 description: At least one number and one letter
- *               role:
- *                  type: string
- *                  enum: [user, admin]
+ *               naboardme:
+ *                 type: string *
  *             example:
- *               name: fake name
- *               email: fake@example.com
- *               password: password1
- *               role: user
+ *               name: CBSC
+ *
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/User'
- *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all users
- *     description: Only admins can retrieve all users.
- *     tags: [Users]
+ *     summary: Get all Residential
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: name
+ *         name: Residential
  *         schema:
  *           type: string
- *         description: User name
- *       - in: query
- *         name: role
- *         schema:
- *           type: string
- *         description: User role
+ *         description: Residential name *
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. name:asc)
  *       - in: query
  *         name: limit
  *         schema:
@@ -127,7 +99,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/User'
+ *                     $ref: '#/components/schemas/Residential'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -148,27 +120,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /users/{id}:
+ * /residentialschool/{ResidentialId}:
  *   get:
- *     summary: Get a user
- *     description: Logged in users can fetch only their own user information. Only admins can fetch other users.
- *     tags: [Users]
+ *     summary: Get a Residential
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: User id
+ *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/User'
+ *                $ref: '#/components/schemas/residentialschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -177,18 +148,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a user
- *     description: Logged in users can only update their own information. Only admins can update other users.
- *     tags: [Users]
+ *     summary: Update a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: User id
+ *         description: ResidentialId
  *     requestBody:
  *       required: true
  *       content:
@@ -198,28 +168,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               email:
- *                 type: string
- *                 format: email
- *                 description: must be unique
- *               password:
- *                 type: string
- *                 format: password
- *                 minLength: 8
- *                 description: At least one number and one letter
  *             example:
- *               name: fake name
- *               email: fake@example.com
- *               password: password1
+ *               name: fake name*
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/User'
- *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -228,18 +185,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a user
- *     description: Logged in users can delete only themselves. Only admins can delete other users.
- *     tags: [Users]
+ *     summary: Delete a residentialschool
+ *     tags: [residentialschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: ResidentialId
  *         required: true
  *         schema:
  *           type: string
- *         description: User id
+ *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: No content

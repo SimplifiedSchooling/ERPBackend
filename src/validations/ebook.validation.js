@@ -5,6 +5,7 @@ const createEbook = {
   body: Joi.object().keys({
     chapterId: Joi.string().custom(objectId),
     path: Joi.string(),
+    chapterName: Joi.string(),
     order: Joi.number(),
     boardId: Joi.string().custom(objectId),
     mediumId: Joi.string().custom(objectId),
@@ -47,6 +48,7 @@ const updateEbook = {
       chapterId: Joi.string().custom(objectId),
       path: Joi.string(),
       order: Joi.number(),
+      chapterName: Joi.string(),
       boardId: Joi.string().custom(objectId),
       mediumId: Joi.string().custom(objectId),
       classId: Joi.string().custom(objectId),

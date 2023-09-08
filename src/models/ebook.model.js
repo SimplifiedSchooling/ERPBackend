@@ -10,9 +10,15 @@ const ebookSchema = mongoose.Schema(
     },
     path: {
       type: String,
+      required: true,
     },
     order: {
       type: Number,
+      required: true,
+    },
+    chapterName: {
+      type: String,
+      required: true,
     },
     boardId: {
       type: mongoose.SchemaTypes.ObjectId,

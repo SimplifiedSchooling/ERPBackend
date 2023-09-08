@@ -2,6 +2,7 @@ module.exports.authService = require('./auth.service');
 module.exports.emailService = require('./email.service');
 module.exports.tokenService = require('./token.service');
 module.exports.userService = require('./user.service');
+module.exports.roleService = require('./role.service');
 module.exports.videoService = require('./video.service');
 module.exports.planvideoService = require('./planvideo.service');
 module.exports.boardService = require('./board.service');
@@ -18,9 +19,15 @@ module.exports.studioService = require('./studio.service');
 module.exports.multimediaService = require('./multimedia.service');
 module.exports.ebookService = require('./ebook.service');
 module.exports.HomeworkSerices = require('./homework.services');
+module.exports.ResidentialSchoolService = require('./masterService/residential_school.service');
 module.exports.quickRecapService = require('./quickrecap.service');
+
 module.exports.schoolLocationType=require('./masterService/school.location.type.service');
 module.exports.inchargeTypeService=require('./masterService/head.of.school.service');
 module.exports.schoolCategoryService=require('./masterService/school.category.service');
 module.exports.districtService=require('./masterService/district.service');
 module.exports.safetyServices=require('./masterService/safety.and.security.service');
+
+module.exports.languageService = require('./masterService/language.service');
+module.exports.demolishedService = require('./demolished.service');
+

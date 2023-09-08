@@ -1,6 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
+const roleRoute = require('./role.route');
 const videoRoute = require('./video.route');
 const planvideoRoute = require('./planvideo.route');
 const boardRoute = require('./board.route');
@@ -19,12 +20,18 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
+const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
+
 const schoolLocationRoute = require('./masterRoutes/school-location.route');
 const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
 const schoolcategoryRoute = require('./masterRoutes/school.category.route');
 const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
+
+const languageRoute = require('./masterRoutes/language.route');
+
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -101,10 +108,15 @@ const defaultRoutes = [
     route: homeworkRoute,
   },
   {
+    path: '/residentialschool',
+    route: residentialschoolRouter,
+  },
+  {
     path: '/quickrecaps',
     route: quickRecapRoute,
   },
   {
+
     path: '/schoollocationtype',
     route: schoolLocationRoute,
   },
@@ -123,6 +135,14 @@ const defaultRoutes = [
   {
     path: '/safetyandsecurity',
     route: safetyAndSecurityRoute,
+
+    path: '/language',
+    route: languageRoute,
+  },
+  {
+    path: '/roles',
+    route: roleRoute,
+
   },
 ];
 
