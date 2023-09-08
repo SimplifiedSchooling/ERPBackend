@@ -9,7 +9,7 @@ const createLanguage = catchAsync(async (req, res) => {
 });
 
 const getAllLanguage = catchAsync(async (req, res) => {
-  const result = await languageService.querylanguage();
+  const result = await languageService.getAlllanguage();
   res.send(result);
 });
 

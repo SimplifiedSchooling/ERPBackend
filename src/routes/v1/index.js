@@ -22,6 +22,7 @@ const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
 const quickRecapRoute = require('./quickrecap.route');
 const languageRoute = require('./masterRoutes/language.route');
+const demolishedRoute = require('./demolished.route');
 
 const router = express.Router();
 
@@ -109,6 +110,10 @@ const defaultRoutes = [
   {
     path: '/roles',
     route: roleRoute,
+  },
+  {
+    path: '/demolished',
+    route: demolishedRoute,
   },
 ];
 

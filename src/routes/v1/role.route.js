@@ -5,10 +5,7 @@ const { roleValidation } = require('../../validations');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .post(validate(roleValidation.createBoard), roleController.createRole)
-  .get(validate(roleValidation.getAllBoard), roleController.getAllRole);
+router.route('/').post(validate(roleValidation.createRole), roleController.createRole).get(roleController.getAllRole);
 
 router
   .route('/:roleId')
