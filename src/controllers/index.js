@@ -16,3 +16,4 @@ module.exports.multimediaController = require('./multimedia.controller');
 module.exports.homeworkController = require('./homework.controller');
 module.exports.ResidentialSchooolController = require('./masterControllers/residential_school.controller');
 module.exports.languageController = require('./masterControllers/language.controller');
+module.exports.BoardingResidentialSchoolController = require('./masterControllers/boarding_residential_school.controller');
