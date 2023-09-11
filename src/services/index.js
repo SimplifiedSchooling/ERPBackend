@@ -39,3 +39,4 @@ module.exports.BoardingResidentialSchoolService = require('./masterService/board
 module.exports.MinoritySchoolService = require('./masterService/minority_manage_school.service');
 module.exports.BoundaryWallService = require('./masterService/boundarywall.services');
 module.exports.demolishedService = require('./demolished.service');
+module.exports.ClassroomAvailableService = require('./masterService/Classroom_available.service');
