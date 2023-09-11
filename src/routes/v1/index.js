@@ -26,8 +26,8 @@ const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
-
-
+const ictgovschoolRoute = require('./masterRoutes/ICTGovSchool.route');
+const typeofictschoolRoute = require('./masterRoutes/typeOfICT.route');
 
 const router = express.Router();
 
@@ -130,7 +130,14 @@ const defaultRoutes = [
     path: '/schoolBuilding',
     route: schooleBuildingRout,
   },
-  
+  {
+    path:'/ictgovschool',
+    route:ictgovschoolRoute
+  },
+  {
+    path:'/typeictgovschool',
+    route:typeofictschoolRoute
+  },
 ];
 
 const devRoutes = [

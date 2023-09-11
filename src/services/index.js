@@ -25,4 +25,5 @@ module.exports.managmentCodeschool = require('./masterService/management.codeSch
 module.exports.managmentAdministrationType = require('./masterService/management.administration.type.service');
 module.exports.Respondent = require('./masterService/respondent.services');
 module.exports.SchoolBuilding = require('./masterService/school.building.services');
-
+module.exports.ICTGovSchool = require('./masterService/ICTGovSchool.services');
+module.exports.typeOfICTSchool = require('./masterService/typeofICT.services')

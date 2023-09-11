@@ -20,4 +20,5 @@ module.exports.managmentCodeSchool = require('./masterControllers/managment.code
 module.exports.managementAdministrationType = require('./masterControllers/management.administration.type.controller');
 module.exports.Respondent = require('./masterControllers/respondent.controller');
 module.exports.SchoolBuilding = require('./masterControllers/school.building.controller');
-
+module.exports.ICTGovImplementSchool = require('./masterControllers/ICTGovSchool.controller');
+module.exports.typeOfICT = require('./masterControllers/typeofICT.controller')
