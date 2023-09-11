@@ -44,6 +44,7 @@ module.exports.BoardingResidentialschool = require('./masterModels/boarding_resi
 module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');
 module.exports.Role = require('./role.model');
 module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model');
+module.exports.ClassroomAvailableSchema = require('./masterModels/classroom_available.model');
 module.exports.Demolished = require('./demolished.model');
 module.exports.InternetType = require('./masterModels/type.of.internet.model');
 module.exports.SpecialEducator = require('./masterModels/special.educator.model');

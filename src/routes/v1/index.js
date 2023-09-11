@@ -41,6 +41,7 @@ const typeresidentialschoolRouter = require('./masterRoutes/type_residential_sch
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
 const BoundaryWall = require('./masterRoutes/boundarywall.route');
+const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.route');
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
@@ -192,12 +193,20 @@ const defaultRoutes = [
     route: BoundaryWall,
   },
   {
+    path: '/boundarywall',
+    route: BoundaryWall
+  },
+  {
     path: '/internetType',
     route: internetTypeRoute,
   },
   {
     path: '/demolished',
     route: demolishedRoute,
+  },
+  {
+    path: '/classroomavailable',
+    route: ClassroomAvailableRouter,
   },
   {
     path: '/specialEducator',

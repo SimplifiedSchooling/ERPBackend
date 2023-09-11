@@ -6,6 +6,10 @@ const roleSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    actions: {
+      type: String,
+      trim: true,
+    },
   },
   {
     timestamps: true,

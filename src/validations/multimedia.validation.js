@@ -34,6 +34,12 @@ const getMultimediaById = {
   }),
 };
 
+const getMultimediaByType = {
+  params: Joi.object().keys({
+    multimediaType: Joi.string(),
+  }),
+};
+
 const getMultimediaByFilter = {
   params: Joi.object().keys({
     boardId: Joi.string().custom(objectId).required(),
@@ -81,4 +87,5 @@ module.exports = {
   getMultimediaByFilter,
   updateMultimedia,
   deleteMultimedia,
+  getMultimediaByType,
 };
