@@ -38,11 +38,15 @@ module.exports = router;
  *             type: object
  *             required:
  *               - role
+ *               - actions
  *             properties:
- *               naboardme:
+ *               role:
  *                 type: string *
+ *               actions:
+ *                 type: array
  *             example:
  *               role: admin
+ *               actions: [CREATE, GET, UPDATE, DELETE]
  *
  *     responses:
  *       "201":
@@ -122,10 +126,13 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               role:
  *                 type: string
+ *               actions:
+ *                 type: array
  *             example:
  *               role: admin
+ *               actions: [CREATE, GET, UPDATE, DELETE]
  *     responses:
  *       "200":
  *         description: OK
