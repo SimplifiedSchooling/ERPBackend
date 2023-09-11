@@ -20,6 +20,8 @@ module.exports.managmentCodeSchool = require('./masterControllers/managment.code
 module.exports.managementAdministrationType = require('./masterControllers/management.administration.type.controller');
 module.exports.Respondent = require('./masterControllers/respondent.controller');
 module.exports.SchoolBuilding = require('./masterControllers/school.building.controller');
+module.exports.ICTGovImplementSchool = require('./masterControllers/ICTGovSchool.controller');
+module.exports.typeOfICT = require('./masterControllers/typeofICT.controller')
 module.exports.schoolLocationController = require('./masterControllers/school-location.controller');
 module.exports.inChargeTypeController = require('./masterControllers/head.of.school.controller');
 module.exports.schoolCategoryController = require('./masterControllers/school.category.controller');
@@ -36,3 +38,5 @@ module.exports.MinorityManageSchoolController = require('./masterControllers/min
 module.exports.BoundaryWallController = require('./masterControllers/boundarywall.controller');
 module.exports.specialEducatorController = require('./masterControllers/special.educator.controller');
 module.exports.laboratoryController = require('./masterControllers/special.educator.controller');
+module.exports.ClassroomAvailableController = require('./masterControllers/classroom_available.controller');
+

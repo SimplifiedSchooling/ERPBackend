@@ -20,13 +20,14 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
-const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
 const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route');
 const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route');
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
+const ictgovschoolRoute = require('./masterRoutes/ICTGovSchool.route');
+const typeofictschoolRoute = require('./masterRoutes/typeOfICT.route');
 
 const schoolLocationRoute = require('./masterRoutes/school-location.route');
 const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
@@ -44,6 +45,10 @@ const BoundaryWall = require('./masterRoutes/boundarywall.route');
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
+const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.route');
+
+
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -119,10 +124,7 @@ const defaultRoutes = [
     path: '/homework',
     route: homeworkRoute,
   },
-  {
-    path: '/residentialschool',
-    route: residentialschoolRouter,
-  },
+  
   {
     path: '/quickrecaps',
     route: quickRecapRoute,
@@ -152,8 +154,16 @@ const defaultRoutes = [
     route: schoolLocationRoute,
   },
   {
+    path:'/ictgovschool',
+    route:ictgovschoolRoute
+  },
+  {
+    path:'/typeictgovschool',
+    route:typeofictschoolRoute
+  },
+  {
     path: '/inchargetype',
-    route: inChargeTypeRoute,
+    route: inChargeTypeRoute
   },
   {
     path: '/schoolcategory',
@@ -196,8 +206,16 @@ const defaultRoutes = [
     route: internetTypeRoute,
   },
   {
+    path: '/boundarywall',
+    route: BoundaryWall,
+  },
+  {
     path: '/demolished',
     route: demolishedRoute,
+  },
+  {
+    path: '/classroomavailable',
+    route: ClassroomAvailableRouter,
   },
   {
     path: '/specialEducator',

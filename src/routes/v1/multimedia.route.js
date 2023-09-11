@@ -20,6 +20,10 @@ router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId/:chapterId')
   .get(validate(multimediaValidation.getMultimediaByFilter), multimediaController.getMultimediaByFilter);
 
+router
+  .route('/getByType/:multimediaType')
+  .get(validate(multimediaValidation.getMultimediaByType), multimediaController.getMultimediaByType);
+
 module.exports = router;
 
 /**
@@ -287,6 +291,35 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  */
 
+/**
+ * @swagger
+ * /multimedia/getByType/{multimediaType}:
+ *   get:
+ *     summary: Get a multimedia
+ *     tags: [Multimedia]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: multimediaType
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Multimedia'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ */
 /**
  * @swagger
  * /multimedia/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}/{chapterId}:

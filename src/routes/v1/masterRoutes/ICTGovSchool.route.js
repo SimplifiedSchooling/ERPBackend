@@ -1,36 +1,37 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const ICTGovSchool = require('../../../validations/masterValidations/ICTGovSchool.validation');
+const ICTGovImplementSchool = require('../../../controllers/masterControllers/ICTGovSchool.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(languageController.getAllLanguage);
+  .post(validate(ICTGovSchool.createICTGovSchool), ICTGovImplementSchool.createICTGovSchool)
+  .get(validate(ICTGovSchool.getAllICTGovSchools), ICTGovImplementSchool.getAllICTGovSchool);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:ictGovSchoolId')
+  .get(validate(ICTGovSchool.getICTGovSchool), ICTGovImplementSchool.getICTGovSchool)
+  .patch(validate(ICTGovSchool.updateICTGovSchool), ICTGovImplementSchool.updateICTGovSchool)
+  .delete(validate(ICTGovSchool.deleteICTGovSchool), ICTGovImplementSchool.deleteICTGovSchool);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: ICTgovschool
+ *   description: ICT gov Implement school
  */
 
 /**
  * @swagger
- * /language:
+ * /ICTgovschool:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a ICT gov school
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -44,11 +45,8 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               name: xyz
  *
  *     responses:
  *       "201":
@@ -56,30 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all ICT gov school
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: build
  *         schema:
- *           type: string
- *         description: Board name *
+ *           name: string
+ *         description: ICT gov school *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +86,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /ICTgovschool/{ictGovSchoolId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a ICT gov School
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: ictGovSchoolId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +113,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a ICT gov School
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: ictGovSchoolId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +132,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
  *               name: fake name*
- *               code: 34
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a School Building
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: ictGovSchoolId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: ictGovSchoolId
  *     responses:
  *       "200":
  *         description: No content

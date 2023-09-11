@@ -1,36 +1,36 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
-const BoundaryWallController = require('../../../controllers/masterControllers/boundarywall.controller');
-const boundarywallValidation = require('../../../validations/masterValidations/boundarywall.validation');
+const ClassroomAvailableController = require('../../../controllers/masterControllers/classroom_available.controller');
+const classroomAvailableValidation = require('../../../validations/masterValidations/classroom_available.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(boundarywallValidation.createboundarywall), BoundaryWallController.createboundarywall)
-  .get(validate(boundarywallValidation.getAllboundarywall), BoundaryWallController.getAllboundarywall);
+  .post(validate(classroomAvailableValidation.createclassroom), ClassroomAvailableController.createclassroom)
+  .get(validate(classroomAvailableValidation.getAllclassroom), ClassroomAvailableController.getAllclassroom);
 
 router
-  .route('/:boundarywallId')
-  .get(validate(boundarywallValidation.getboundarywall), BoundaryWallController.getboundarywallById)
-  .patch(validate(boundarywallValidation.updateboundarywall), BoundaryWallController.updateboundarywall)
-  .delete(validate(boundarywallValidation.deleteboundarywall), BoundaryWallController.deleteboundarywall);
+  .route('/:classroomId')
+  .get(validate(classroomAvailableValidation.getclassroom), ClassroomAvailableController.getclassroomById)
+  .patch(validate(classroomAvailableValidation.updateclassroom), ClassroomAvailableController.updateclassroom)
+  .delete(validate(classroomAvailableValidation.deleteclassroom), ClassroomAvailableController.deleteclassroom);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: typeresidentialschool
- *   description: typeresidentialschool management
+ *   name: classroomavailable
+ *   description: classroomavailable management
  */
 
 /**
  * @swagger
- * /typeresidentialschool:
+ * /classroomavailable:
  *   post:
- *     summary: Create a typeresidentialschool
- *     tags: [typeresidentialschool]
+ *     summary: Create a classroomavailable
+ *     tags: [classroomavailable]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,12 +40,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - description
+ *               - count
  *             properties:
- *               name:
+ *               description:
+ *                 type: string
+ *               count:
  *                 type: string
  *             example:
- *               name: New insert school
+ *               description: New insert school
+ *               count: New insert school
  *
  *     responses:
  *       "201":
@@ -53,15 +57,15 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/classroomavailable'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Type Residential School
- *     tags: [typeresidentialschool]
+ *     summary: Get all classroomavailable
+ *     tags: [classroomavailable]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -99,7 +103,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/typeresidentialschool'
+ *                     $ref: '#/components/schemas/classroomavailable'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -120,26 +124,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /typeresidentialschool/{ResidentialId}:
+ * /classroomavailable/{classroomId}:
  *   get:
- *     summary: Get a Type Residential school
- *     tags: [typeresidentialschool]
+ *     summary: Get a classroomavailable
+ *     tags: [classroomavailable]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: classroomId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: classroomId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/classroomavailable'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -154,11 +158,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: classroomId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: classroomId
  *     requestBody:
  *       required: true
  *       content:
@@ -166,17 +170,20 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               description:
+ *                 type: string
+ *               count:
  *                 type: string
  *             example:
- *               name: fake name*
+ *               description: fake name*
+ *               count: 3
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/classroomavailable'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -185,17 +192,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a type residential school
- *     tags: [typeresidentialschool]
+ *     summary: Delete a classroomavailable
+ *     tags: [classroomavailable]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: classroomId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: classroomId
  *     responses:
  *       "200":
  *         description: No content
