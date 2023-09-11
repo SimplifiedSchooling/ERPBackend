@@ -44,10 +44,7 @@ const BoundaryWall = require('./masterRoutes/boundarywall.route');
 
 
 
-const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
-const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
-const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
-const BoundaryWall = require('./masterRoutes/boundarywall.route');
+
 
 
 const router = express.Router();
