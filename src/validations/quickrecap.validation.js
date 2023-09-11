@@ -3,7 +3,7 @@ const { objectId } = require('./custom.validation');
 
 const createQuickRecap = {
   body: Joi.object().keys({
-    discription: Joi.string().required(),
+    description: Joi.string().required(),
     boardId: Joi.string().custom(objectId).required(),
     mediumId: Joi.string().custom(objectId).required(),
     classId: Joi.string().custom(objectId).required(),
@@ -45,7 +45,7 @@ const updateQuickRecap = {
   }),
   body: Joi.object()
     .keys({
-      discription: Joi.string(),
+      description: Joi.string(),
       boardId: Joi.string().custom(objectId),
       mediumId: Joi.string().custom(objectId),
       classId: Joi.string().custom(objectId),
