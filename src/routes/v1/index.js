@@ -29,6 +29,23 @@ const schooleBuildingRout = require('./masterRoutes/school.building.route');
 const ictgovschoolRoute = require('./masterRoutes/ICTGovSchool.route');
 const typeofictschoolRoute = require('./masterRoutes/typeOfICT.route');
 
+const schoolLocationRoute = require('./masterRoutes/school-location.route');
+const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
+const schoolcategoryRoute = require('./masterRoutes/school.category.route');
+const districtRoute = require('./masterRoutes/distict.route');
+const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
+
+const languageRoute = require('./masterRoutes/language.route');
+const demolishedRoute = require('./demolished.route');
+
+const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
+const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
+const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
+const BoundaryWall = require('./masterRoutes/boundarywall.route');
+const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.route');
+
+
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -137,6 +154,62 @@ const defaultRoutes = [
   {
     path:'/typeictgovschool',
     route:typeofictschoolRoute
+  },
+  {
+    path: '/inchargetype',
+    route: inChargeTypeRoute
+  },
+  {
+    path: '/schoolcategory',
+    route: schoolcategoryRoute,
+  },
+  {
+    path: '/district',
+    route: districtRoute,
+  },
+  {
+    path: '/safetyandsecurity',
+    route: safetyAndSecurityRoute,
+  },
+  {
+    path: '/language',
+    route: languageRoute,
+  },
+  {
+    path: '/typeresidentialschool',
+    route: typeresidentialschoolRouter,
+  },
+  {
+    path: '/boardresidentialschool',
+    route: Boardresidentialschool,
+  },
+  {
+    path: '/minoritymanageschool',
+    route: MinorityManageSchool,
+  },
+  {
+    path: '/roles',
+    route: roleRoute,
+
+  },
+  {
+    path: '/boundarywall',
+    route: BoundaryWall,
+
+
+
+  }, 
+  {
+    path: '/boundarywall',
+    route: BoundaryWall,
+  },
+  {
+    path: '/demolished',
+    route: demolishedRoute,
+  },
+  {
+    path: '/classroomavailable',
+    route: ClassroomAvailableRouter,
   },
 ];
 

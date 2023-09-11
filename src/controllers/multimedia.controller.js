@@ -24,6 +24,14 @@ const getMultimediaById = catchAsync(async (req, res) => {
   res.send(multimedia);
 });
 
+const getMultimediaByType = catchAsync(async (req, res) => {
+  const multimedia = await multimediaService.getMultimediaByType(req.params.multimediaType);
+  if (!multimedia) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Mltimedia not found');
+  }
+  res.send(multimedia);
+});
+
 const getMultimediaByFilter = catchAsync(async (req, res) => {
   const { boardId, mediumId, classId, subjectId, bookId, chapterId } = req.params;
   const multimedia = await multimediaService.getMultimediaByFilter(boardId, mediumId, classId, subjectId, bookId, chapterId);
@@ -50,4 +58,5 @@ module.exports = {
   getMultimediaByFilter,
   updateMultimedia,
   deleteMultimedia,
+  getMultimediaByType,
 };

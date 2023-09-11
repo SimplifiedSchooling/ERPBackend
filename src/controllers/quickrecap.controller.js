@@ -10,7 +10,7 @@ const createQuickRecap = catchAsync(async (req, res) => {
 });
 
 const getAllQuickRecap = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['description']);
+  const filter = pick(req.query, ['chapterName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await quickRecapService.queryQuickRecap(filter, options);
   res.send(result);

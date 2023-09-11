@@ -36,4 +36,5 @@ module.exports.languageValidation = require('./masterValidations/language.valida
 module.exports.boundarywallValidation = require('./masterValidations/boundarywall.validation');
 module.exports.ICTGovSchool = require('./masterValidations/ICTGovSchool.validation');
 module.exports.typeOfICTSchool = require('./masterValidations/typeofICT.validation');
+module.exports.classroomAvailableValidation = require('./masterValidations/classroom_available.validation');
 

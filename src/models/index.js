@@ -36,3 +36,23 @@ module.exports.Respondent = require('./masterModels/respondent.model');
 module.exports.SchoolBuilding = require('./masterModels/school.building.model');
 module.exports.ICTGovSchool = require('./masterModels/ICTGovSchool.model');
 module.exports.typeOfICTSchool = require('./masterModels/typeofICT.model');
+
+module.exports.InchargeType = require('./masterModels/head.of.school.model');
+module.exports.SchoolCategory = require('./masterModels/school.category.model');
+module.exports.District = require('./masterModels/district.model');
+module.exports.SafetyAndSecurity = require('./masterModels/safety.and.security.model');
+
+module.exports.Language = require('./masterModels/language.model');
+
+module.exports.BoardingResidentialschool = require('./masterModels/boarding_residential_school.model');
+module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');
+module.exports.Role = require('./role.model');
+module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model');
+
+module.exports.BoardingResidentialschool = require('./masterModels/boarding_residential_school.model');
+module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');
+module.exports.Role = require('./role.model');
+module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model');
+module.exports.ClassroomAvailableSchema = require('./masterModels/classroom_available.model');
+
+module.exports.Demolished = require('./demolished.model');
