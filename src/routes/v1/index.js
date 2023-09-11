@@ -41,9 +41,7 @@ const typeresidentialschoolRouter = require('./masterRoutes/type_residential_sch
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
 const BoundaryWall = require('./masterRoutes/boundarywall.route');
-
-
-
+const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.route');
 
 
 
@@ -203,12 +201,14 @@ const defaultRoutes = [
   {
     path: '/boundarywall',
     route: BoundaryWall,
-
   },
   {
     path: '/demolished',
     route: demolishedRoute,
-
+  },
+  {
+    path: '/classroomavailable',
+    route: ClassroomAvailableRouter,
   },
 ];
 

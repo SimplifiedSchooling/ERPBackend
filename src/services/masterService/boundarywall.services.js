@@ -1,4 +1,3 @@
-
 const httpStatus = require('http-status');
 const BoundarywallSchema = require('../../models/masterModels/boundarywall.model');
 const ApiError = require('../../utils/ApiError');
