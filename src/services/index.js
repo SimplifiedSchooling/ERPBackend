@@ -19,13 +19,14 @@ module.exports.studioService = require('./studio.service');
 module.exports.multimediaService = require('./multimedia.service');
 module.exports.ebookService = require('./ebook.service');
 module.exports.HomeworkSerices = require('./homework.services');
-module.exports.ResidentialSchoolService = require('./masterService/residential_school.service');
 module.exports.quickRecapService = require('./quickrecap.service');
 module.exports.managmentGroupschool = require('./masterService/management.groupschool.service');
 module.exports.managmentCodeschool = require('./masterService/management.codeSchool.sevice');
 module.exports.managmentAdministrationType = require('./masterService/management.administration.type.service');
 module.exports.Respondent = require('./masterService/respondent.services');
 module.exports.SchoolBuilding = require('./masterService/school.building.services');
+module.exports.ICTGovSchool = require('./masterService/ICTGovSchool.services');
+module.exports.typeOfICTSchool = require('./masterService/typeofICT.services')
 
 module.exports.schoolLocationType = require('./masterService/school.location.type.service');
 module.exports.inchargeTypeService = require('./masterService/head.of.school.service');

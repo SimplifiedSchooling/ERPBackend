@@ -1,36 +1,37 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const languageController = require('../../../controllers/masterControllers/language.controller');
-const languageValidation = require('../../../validations');
+const typeOfICTSchool = require('../../../validations/masterValidations/typeofICT.validation');
+const typeOfICT = require('../../../controllers/masterControllers/typeofICT.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(languageValidation.createLanguage), languageController.createLanguage)
-  .get(languageController.getAllLanguage);
+  .post(validate(typeOfICTSchool.createTypeOfICTGovSchool), typeOfICT.createTypeOfICTGovSchool)
+  .get(validate(typeOfICTSchool.getAllTypeOfICTGovSchools), typeOfICT.getAllTypeOfICTGovSchool);
 
 router
-  .route('/:languageId')
-  .get(validate(languageValidation.getLanguageById), languageController.getLanguageById)
-  .patch(validate(languageValidation.updateLanguage), languageController.updateLanguageById)
-  .delete(validate(languageValidation.deleteLanguage), languageController.deleteLanguageById);
+  .route('/:typeOfICTId')
+  .get(validate(typeOfICTSchool.getTypeOfICTGovSchool), typeOfICT.getTypeOfICTGovSchool)
+  .patch(validate(typeOfICTSchool.updateTypeOfICTGovSchool), typeOfICT.updateTypeOfICTGovSchool)
+  .delete(validate(typeOfICTSchool.deleteTypeOfICTGovSchool), typeOfICT.deleteTypeOfICTGovSchool);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Language
- *   description: Language management
+ *   name: TypeOfICTgovschool
+ *   description: Type of ICT gov school
  */
 
 /**
  * @swagger
- * /language:
+ * /TypeOfICTgovschool:
  *   post:
- *     summary: Create a Language
- *     tags: [Language]
+ *     summary: Create a Type of ICT gov school
+ *     tags: [TypeOfICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -44,11 +45,8 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string *
- *               code:
- *                 type: string
  *             example:
- *               name: english
- *               code: 34
+ *               name: xyz
  *
  *     responses:
  *       "201":
@@ -56,30 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/TypeOfICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all language
- *     tags: [Language]
+ *     summary: Get all type of ICT gov school
+ *     tags: [TypeOfICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         type: build
  *         schema:
- *           type: string
- *         description: Board name *
+ *           name: string
+ *         description: ICT gov school *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/TypeOfICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -88,26 +86,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /language/{lanuageId}:
+ * /TypeOfICTgovschool/{typeOfICTId}:
  *   get:
- *     summary: Get a board
- *     tags: [Language]
+ *     summary: Get a ICT gov School
+ *     tags: [TypeOfICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: typeOfICTId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/TypeOfICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -116,17 +113,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a language
- *     tags: [Language]
+ *     summary: Update a ICT gov School
+ *     tags: [TypeOfICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: typeOfICTId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
  *     requestBody:
  *       required: true
  *       content:
@@ -136,18 +132,15 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               code:
- *                 type: number
  *             example:
  *               name: fake name*
- *               code: 34
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Language'
+ *                $ref: '#/components/schemas/TypeOfICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -156,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a language
- *     tags: [Language]
+ *     summary: Delete a School Building
+ *     tags: [TypeOfICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: languageId
+ *         name: typeOfICTId
  *         required: true
  *         schema:
  *           type: string
- *         description: languageId
+ *         description: typeOfICTId
  *     responses:
  *       "200":
  *         description: No content

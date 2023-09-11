@@ -20,13 +20,14 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
-const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
 const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route');
 const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route');
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
+const ictgovschoolRoute = require('./masterRoutes/ICTGovSchool.route');
+const typeofictschoolRoute = require('./masterRoutes/typeOfICT.route');
 
 const schoolLocationRoute = require('./masterRoutes/school-location.route');
 const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
@@ -120,10 +121,7 @@ const defaultRoutes = [
     path: '/homework',
     route: homeworkRoute,
   },
-  {
-    path: '/residentialschool',
-    route: residentialschoolRouter,
-  },
+  
   {
     path: '/quickrecaps',
     route: quickRecapRoute,
@@ -150,13 +148,16 @@ const defaultRoutes = [
     route: schooleBuildingRout,
   },
   {
-
-    path: '/schoollocationtype',
-    route: schoolLocationRoute,
+    path:'/ictgovschool',
+    route:ictgovschoolRoute
+  },
+  {
+    path:'/typeictgovschool',
+    route:typeofictschoolRoute
   },
   {
     path: '/inchargetype',
-    route: inChargeTypeRoute,
+    route: inChargeTypeRoute
   },
   {
     path: '/schoolcategory',

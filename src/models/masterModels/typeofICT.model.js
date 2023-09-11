@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
-const minorityschoolSchema = mongoose.Schema(
+const typeOfICTGovSchoolSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -15,9 +15,9 @@ const minorityschoolSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-minorityschoolSchema.plugin(toJSON);
-minorityschoolSchema.plugin(paginate);
+typeOfICTGovSchoolSchema.plugin(toJSON);
+typeOfICTGovSchoolSchema.plugin(paginate);
 
-const MinorityschoolSchema = mongoose.model('minorityschoolSchema', minorityschoolSchema);
+const typeOfICTGovSchool = mongoose.model('typeofict', typeOfICTGovSchoolSchema);
 
-module.exports = MinorityschoolSchema;
+module.exports = typeOfICTGovSchool;

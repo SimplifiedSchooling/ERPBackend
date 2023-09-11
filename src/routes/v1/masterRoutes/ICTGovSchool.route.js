@@ -1,36 +1,37 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const BoundaryWallController = require('../../../controllers/masterControllers/boundarywall.controller');
-const boundarywallValidation = require('../../../validations/masterValidations/boundarywall.validation');
+const ICTGovSchool = require('../../../validations/masterValidations/ICTGovSchool.validation');
+const ICTGovImplementSchool = require('../../../controllers/masterControllers/ICTGovSchool.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(boundarywallValidation.createboundarywall), BoundaryWallController.createboundarywall)
-  .get(validate(boundarywallValidation.getAllboundarywall), BoundaryWallController.getAllboundarywall);
+  .post(validate(ICTGovSchool.createICTGovSchool), ICTGovImplementSchool.createICTGovSchool)
+  .get(validate(ICTGovSchool.getAllICTGovSchools), ICTGovImplementSchool.getAllICTGovSchool);
 
 router
-  .route('/:boundarywallId')
-  .get(validate(boundarywallValidation.getboundarywall), BoundaryWallController.getboundarywallById)
-  .patch(validate(boundarywallValidation.updateboundarywall), BoundaryWallController.updateboundarywall)
-  .delete(validate(boundarywallValidation.deleteboundarywall), BoundaryWallController.deleteboundarywall);
+  .route('/:ictGovSchoolId')
+  .get(validate(ICTGovSchool.getICTGovSchool), ICTGovImplementSchool.getICTGovSchool)
+  .patch(validate(ICTGovSchool.updateICTGovSchool), ICTGovImplementSchool.updateICTGovSchool)
+  .delete(validate(ICTGovSchool.deleteICTGovSchool), ICTGovImplementSchool.deleteICTGovSchool);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: typeresidentialschool
- *   description: typeresidentialschool management
+ *   name: ICTgovschool
+ *   description: ICT gov Implement school
  */
 
 /**
  * @swagger
- * /typeresidentialschool:
+ * /ICTgovschool:
  *   post:
- *     summary: Create a typeresidentialschool
- *     tags: [typeresidentialschool]
+ *     summary: Create a ICT gov school
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -43,9 +44,9 @@ module.exports = router;
  *               - name
  *             properties:
  *               name:
- *                 type: string
+ *                 type: string *
  *             example:
- *               name: New insert school
+ *               name: xyz
  *
  *     responses:
  *       "201":
@@ -53,65 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Type Residential School
- *     tags: [typeresidentialschool]
+ *     summary: Get all ICT gov school
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: Residential
+ *         type: build
  *         schema:
- *           type: string
- *         description: Residential name
- *       - in: query
- *         name: sortBy
- *         schema:
- *           type: string
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           minimum: 1
- *         default: 10
- *         description: Maximum number of users
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           minimum: 1
- *           default: 1
- *         description: Page number
+ *           name: string
+ *         description: ICT gov school *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 results:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/typeresidentialschool'
- *                 page:
- *                   type: integer
- *                   example: 1
- *                 limit:
- *                   type: integer
- *                   example: 10
- *                 totalPages:
- *                   type: integer
- *                   example: 1
- *                 totalResults:
- *                   type: integer
- *                   example: 1
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -120,26 +86,25 @@ module.exports = router;
 
 /**
  * @swagger
- * /typeresidentialschool/{ResidentialId}:
+ * /ICTgovschool/{ictGovSchoolId}:
  *   get:
- *     summary: Get a Type Residential school
- *     tags: [typeresidentialschool]
+ *     summary: Get a ICT gov School
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: ictGovSchoolId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -148,17 +113,16 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a type residential school
- *     tags: [typeresidentialschool]
+ *     summary: Update a ICT gov School
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: ictGovSchoolId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
  *     requestBody:
  *       required: true
  *       content:
@@ -176,7 +140,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/ICTgovschool'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -185,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a type residential school
- *     tags: [typeresidentialschool]
+ *     summary: Delete a School Building
+ *     tags: [ICTgovschool]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: ictGovSchoolId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: ictGovSchoolId
  *     responses:
  *       "200":
  *         description: No content
