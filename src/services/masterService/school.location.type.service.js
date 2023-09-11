@@ -3,10 +3,6 @@ const httpStatus = require('http-status');
 const { SchoolLocationType } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
-
-
-
-
 /**
  * Create a SchoolLocationType
  * @param {Object} schoolLocation

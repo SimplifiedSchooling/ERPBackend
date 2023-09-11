@@ -26,13 +26,11 @@ module.exports.managmentCodeschool = require('./masterService/management.codeSch
 module.exports.managmentAdministrationType = require('./masterService/management.administration.type.service');
 module.exports.Respondent = require('./masterService/respondent.services');
 module.exports.SchoolBuilding = require('./masterService/school.building.services');
-
 module.exports.schoolLocationType = require('./masterService/school.location.type.service');
 module.exports.inchargeTypeService = require('./masterService/head.of.school.service');
 module.exports.schoolCategoryService = require('./masterService/school.category.service');
 module.exports.districtService = require('./masterService/district.service');
 module.exports.safetyServices = require('./masterService/safety.and.security.service');
-
 module.exports.languageService = require('./masterService/language.service');
 module.exports.TypeResidentialSchoolService = require('./masterService/type_residential_School.service');
 module.exports.BoardingResidentialSchoolService = require('./masterService/boarding_residential_school.service');
@@ -40,3 +38,6 @@ module.exports.MinoritySchoolService = require('./masterService/minority_manage_
 module.exports.BoundaryWallService = require('./masterService/boundarywall.services');
 module.exports.demolishedService = require('./demolished.service');
 module.exports.ClassroomAvailableService = require('./masterService/Classroom_available.service');
+module.exports.iternetTypeService = require('./masterService/type.of.internet.service');
+module.exports.specialEducatorService = require('./masterService/special.educator.service');
+module.exports.laboratoryService = require('./masterService/laboratory.service');

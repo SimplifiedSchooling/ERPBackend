@@ -42,9 +42,9 @@ const Boardresidentialschool = require('./masterRoutes/boarding_residential_scho
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
 const BoundaryWall = require('./masterRoutes/boundarywall.route');
 const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.route');
-
-
-
+const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
+const specialEducatorRoute = require('./masterRoutes/special.educator.route');
+const laboratoryRoute = require('./masterRoutes/laboratories.route');
 const router = express.Router();
 
 const defaultRoutes = [
@@ -129,7 +129,6 @@ const defaultRoutes = [
     route: quickRecapRoute,
   },
   {
-
     path: '/managgroupschool',
     route: managmentGroupSchoolRoute,
   },
@@ -150,7 +149,6 @@ const defaultRoutes = [
     route: schooleBuildingRout,
   },
   {
-
     path: '/schoollocationtype',
     route: schoolLocationRoute,
   },
@@ -189,18 +187,18 @@ const defaultRoutes = [
   {
     path: '/roles',
     route: roleRoute,
-
   },
   {
     path: '/boundarywall',
     route: BoundaryWall,
-
-
-
-  }, 
+  },
   {
     path: '/boundarywall',
-    route: BoundaryWall,
+    route: BoundaryWall
+  },
+  {
+    path: '/internetType',
+    route: internetTypeRoute,
   },
   {
     path: '/demolished',
@@ -210,6 +208,14 @@ const defaultRoutes = [
     path: '/classroomavailable',
     route: ClassroomAvailableRouter,
   },
+  {
+    path: '/specialEducator',
+    route: specialEducatorRoute,
+  },
+  {
+    path: '/laboratory',
+    route: laboratoryRoute,
+  }
 ];
 
 const devRoutes = [

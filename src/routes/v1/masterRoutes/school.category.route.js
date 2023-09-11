@@ -130,4 +130,3 @@ module.exports = router;
  *         broadCategory: primary, upper primary
  *         detailsOfCategory: Primary only with grades 1 to 5, Upper Primary with grades 1 to 8
  */
-
