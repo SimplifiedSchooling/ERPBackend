@@ -20,7 +20,6 @@ const studioRoute = require('./studio.route');
 const multimediaRoute = require('./multimedia.route');
 const ebookRoute = require('./ebook.route');
 const homeworkRoute = require('./homework.route');
-const residentialschoolRouter = require('./masterRoutes/residential_schoool.router');
 const quickRecapRoute = require('./quickrecap.route');
 const managmentGroupSchoolRoute = require('./masterRoutes/managment.groupschool.route');
 const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.route');
@@ -28,13 +27,7 @@ const managementAdministrationTypeRoute = require('./masterRoutes/management.adm
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
 
-const schoolLocationRoute = require('./masterRoutes/school-location.route');
-const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
-const schoolcategoryRoute = require('./masterRoutes/school.category.route');
-const districtRoute = require('./masterRoutes/distict.route');
-const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 
-const languageRoute = require('./masterRoutes/language.route');
 
 const router = express.Router();
 
@@ -111,10 +104,7 @@ const defaultRoutes = [
     path: '/homework',
     route: homeworkRoute,
   },
-  {
-    path: '/residentialschool',
-    route: residentialschoolRouter,
-  },
+  
   {
     path: '/quickrecaps',
     route: quickRecapRoute,
@@ -139,33 +129,7 @@ const defaultRoutes = [
     path: '/schoolBuilding',
     route: schooleBuildingRout,
   },
-  {
-    path: '/schoollocationtype',
-    route: schoolLocationRoute,
-  },
-  {
-    path: '/inchargetype',
-    route: inChargeTypeRoute,
-  },
-  {
-    path: '/schoolcategory',
-    route: schoolcategoryRoute,
-  },
-  {
-    path: '/district',
-    route: districtRoute,
-  },
-  {
-    path: '/safetyandsecurity',
-    route: safetyAndSecurityRoute,
-
-    path: '/language',
-    route: languageRoute,
-  },
-  {
-    path: '/roles',
-    route: roleRoute,
-  },
+  
 ];
 
 const devRoutes = [
