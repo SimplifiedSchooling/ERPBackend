@@ -10,13 +10,14 @@ const createQuickRecap = {
     subjectId: Joi.string().custom(objectId).required(),
     bookId: Joi.string().custom(objectId).required(),
     chapterId: Joi.string().custom(objectId).required(),
+    chapterName: Joi.string().required(),
   }),
 };
 
 const getAllQuickRecap = {
   query: Joi.object().keys({
     sortBy: Joi.string(),
-    discription: Joi.string(),
+    chapterName: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
@@ -52,6 +53,7 @@ const updateQuickRecap = {
       subjectId: Joi.string().custom(objectId),
       bookId: Joi.string().custom(objectId),
       chapterId: Joi.string().custom(objectId),
+      chapterName: Joi.string(),
     })
     .min(1),
 };

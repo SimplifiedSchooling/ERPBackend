@@ -50,6 +50,7 @@ module.exports = router;
  *               - subjectId
  *               - bookId
  *               - chapterId
+ *               - chapterName
  *             properties:
  *               boardId:
  *                 type: string
@@ -65,6 +66,8 @@ module.exports = router;
  *                 type: string
  *               description:
  *                 type: string
+ *               chapterName:
+ *                 type: string
  *             example:
  *               description: English gfklgj   hbhb
  *               boardId: 64ca45e050227f21d906d83c
@@ -73,6 +76,7 @@ module.exports = router;
  *               subjectId: 64b122d49ddf324d2a8d12d3
  *               bookId: 64b8f019ba89c333de42f169
  *               chapterId: 64b8f094050c643582b80481
+ *               chapterName: fundamentals
  *
  *     responses:
  *       "201":
@@ -94,7 +98,7 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: description
+ *         name: chapterName
  *         schema:
  *           type: string
  *         description: QuickRecap description *
@@ -209,6 +213,8 @@ module.exports = router;
  *                 type: string
  *               description:
  *                 type: string
+ *               chapterName:
+ *                 type: string
  *             example:
  *               description: English gfklgj   hbhb
  *               boardId: 64ca45e050227f21d906d83c
@@ -217,6 +223,7 @@ module.exports = router;
  *               subjectId: 64b122d49ddf324d2a8d12d3
  *               bookId: 64b8f019ba89c333de42f169
  *               chapterId: 64b8f094050c643582b80481
+ *               chapterName: fundamentals
  *     responses:
  *       "200":
  *         description: OK
