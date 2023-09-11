@@ -16,13 +16,10 @@ module.exports.Broadcast = require('./brandcast.model');
 module.exports.Presentator = require('./presentator.model');
 module.exports.Studio = require('./studio.model');
 module.exports.Multimedia = require('./multimedia.model');
-
 module.exports.Ebook = require('./ebook.model');
 module.exports.SchoolLocationType = require('./masterModels/school-location-type.model');
-
 module.exports.Ebook = require('./ebook.model');
 module.exports.Homework = require('./homework.model');
-
 module.exports.Residentialschool = require('./masterModels/Residential_school.model');
 module.exports.Ebook = require('./ebook.model');
 module.exports.SchoolLocationType = require('./masterModels/school-location-type.model');
@@ -34,22 +31,20 @@ module.exports.ManagmentCodeSchool = require('./masterModels/management.codeScho
 module.exports.managementAdministrationType = require('./masterModels/management.administration.type.model');
 module.exports.Respondent = require('./masterModels/respondent.model');
 module.exports.SchoolBuilding = require('./masterModels/school.building.model');
-
 module.exports.InchargeType = require('./masterModels/head.of.school.model');
 module.exports.SchoolCategory = require('./masterModels/school.category.model');
 module.exports.District = require('./masterModels/district.model');
 module.exports.SafetyAndSecurity = require('./masterModels/safety.and.security.model');
-
 module.exports.Language = require('./masterModels/language.model');
-
 module.exports.BoardingResidentialschool = require('./masterModels/boarding_residential_school.model');
 module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');
 module.exports.Role = require('./role.model');
 module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model');
-
 module.exports.BoardingResidentialschool = require('./masterModels/boarding_residential_school.model');
 module.exports.minorityschoolSchema = require('./masterModels/minority_managed_school.model');
 module.exports.Role = require('./role.model');
-module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model')
-
+module.exports.BoundarywallSchema = require('./masterModels/boundarywall.model');
 module.exports.Demolished = require('./demolished.model');
+module.exports.InternetType = require('./masterModels/type.of.internet.model');
+module.exports.SpecialEducator = require('./masterModels/special.educator.model');
+module.exports.Laboratories = require('./masterModels/laboratories.model');

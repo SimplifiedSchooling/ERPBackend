@@ -35,3 +35,6 @@ module.exports.schooleBuilding = require('./masterValidations/schoole.building.v
 module.exports.languageValidation = require('./masterValidations/language.validation');
 module.exports.boundarywallValidation = require('./masterValidations/boundarywall.validation');
 
+module.exports.internetTypeValidation = require('./masterValidations/type.of.internet.validation');
+module.exports.specialEducatorValidation = require('./masterValidations/special.educator.validation');
+module.exports.laboratoryValidation = require('./masterValidations/laboratories.validation');
