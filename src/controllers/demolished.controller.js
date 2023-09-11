@@ -25,19 +25,19 @@ const getDemolishedById = catchAsync(async (req, res) => {
 });
 
 const updateDemolishedById = catchAsync(async (req, res) => {
-  const user = await demolishedService.updateDemolishedById(req.params.demolishedId, req.body);
-  res.send(user);
+  const demolished = await demolishedService.updateDemolishedById(req.params.demolishedId, req.body);
+  res.send(demolished);
 });
 
-const deleteBoard = catchAsync(async (req, res) => {
-  await demolishedService.deleteBoardById(req.params.boardId);
+const deleteDemolishedById = catchAsync(async (req, res) => {
+  await demolishedService.deleteDemolishedById(req.params.demolishedId);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
 module.exports = {
-  createBoard,
-  getAllBoard,
-  getBoard,
-  updateBoard,
-  deleteBoard,
+  createDemolished,
+  getAllDemolished,
+  getDemolishedById,
+  updateDemolishedById,
+  deleteDemolishedById,
 };
