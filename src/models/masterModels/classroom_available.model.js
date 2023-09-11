@@ -11,7 +11,7 @@ const classroomAvailableSchema = mongoose.Schema(
     count: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
   },
   {
