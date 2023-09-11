@@ -28,7 +28,6 @@ const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
 
 
-const languageRoute = require('./masterRoutes/language.route');
 
 const router = express.Router();
 
@@ -131,33 +130,7 @@ const defaultRoutes = [
     path: '/schoolBuilding',
     route: schooleBuildingRout,
   },
-  {
-    path: '/schoollocationtype',
-    route: schoolLocationRoute,
-  },
-  {
-    path: '/inchargetype',
-    route: inChargeTypeRoute,
-  },
-  {
-    path: '/schoolcategory',
-    route: schoolcategoryRoute,
-  },
-  {
-    path: '/district',
-    route: districtRoute,
-  },
-  {
-    path: '/safetyandsecurity',
-    route: safetyAndSecurityRoute,
-
-    path: '/language',
-    route: languageRoute,
-  },
-  {
-    path: '/roles',
-    route: roleRoute,
-  },
+  
 ];
 
 const devRoutes = [

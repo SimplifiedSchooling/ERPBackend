@@ -35,10 +35,3 @@ module.exports.managementAdministrationType = require('./masterModels/management
 module.exports.Respondent = require('./masterModels/respondent.model');
 module.exports.SchoolBuilding = require('./masterModels/school.building.model');
 
-module.exports.InchargeType = require('./masterModels/head.of.school.model');
-module.exports.SchoolCategory = require('./masterModels/school.category.model');
-module.exports.District = require('./masterModels/district.model');
-module.exports.SafetyAndSecurity = require('./masterModels/safety.and.security.model');
-
-module.exports.Language = require('./masterModels/language.model');
-module.exports.Demolished = require('./demolished.model');
