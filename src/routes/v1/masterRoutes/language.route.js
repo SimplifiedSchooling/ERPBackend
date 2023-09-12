@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
 const languageController = require('../../../controllers/masterControllers/language.controller');
-const { languageValidation } = require('../../../validations');
+const languageValidation = require('../../../validations');
 
 const router = express.Router();
 

@@ -1,13 +1,14 @@
 const httpStatus = require('http-status');
-const { SchoolLocationType } = require('../models');
-const ApiError = require('../utils/ApiError');
+
+const { SchoolLocationType } = require('../../models');
+const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a SchoolLocationType
  * @param {Object} schoolLocation
  * @returns {Promise<SchoolLocationType>}
  */
-const createStudio = async (schoolLocation) => {
+const createSchoolLocation = async (schoolLocation) => {
   return SchoolLocationType.create(schoolLocation);
 };
 
@@ -20,9 +21,9 @@ const createStudio = async (schoolLocation) => {
  * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const getAllStudios = async (filter, options) => {
-  const studios = await SchoolLocationType.paginate(filter, options);
-  return studios;
+const getAllSchoolLocation = async () => {
+  const SchoolLocation = await SchoolLocationType.find({});
+  return SchoolLocation;
 };
 
 /**
@@ -30,44 +31,44 @@ const getAllStudios = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<SchoolLocationType>}
  */
-const getStudioById = async (id) => {
+const getSchoolLocationById = async (id) => {
   return SchoolLocationType.findById(id);
 };
 
 /**
  * Update SchoolLocationType by id
- * @param {ObjectId} studioId
+ * @param {ObjectId} schoolLocationId
  * @param {Object} updateBody
  * @returns {Promise<SchoolLocationType>}
  */
-const updateStudioById = async (studioId, updateBody) => {
-  const studio = await getStudioById(studioId);
-  if (!studio) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Studio not found');
+const updateSchoolLocationTypeyId = async (schoolLocationId, updateBody) => {
+  const schoolLocation = await getSchoolLocationById(schoolLocationId);
+  if (!schoolLocation) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'schoolLocationType not found');
   }
-  Object.assign(studio, updateBody);
-  await studio.save();
-  return studio;
+  Object.assign(schoolLocation, updateBody);
+  await schoolLocation.save();
+  return schoolLocation;
 };
 
 /**
  * Delete SchoolLocationType by id
- * @param {ObjectId} studioId
+ * @param {ObjectId} schoolLocationId
  * @returns {Promise<SchoolLocationType>}
  */
-const deleteStudioById = async (studioId) => {
-  const studio = await getStudioById(studioId);
-  if (!studio) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Studio not found');
+const deleteSchoolLocationTypeById = async (schoolLocationId) => {
+  const schoolLocation = await getSchoolLocationById(schoolLocationId);
+  if (!schoolLocation) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'schoolLocationType not found');
   }
-  await studio.remove();
-  return studio;
+  await schoolLocation.remove();
+  return schoolLocation;
 };
 
 module.exports = {
-  createStudio,
-  getAllStudios,
-  getStudioById,
-  updateStudioById,
-  deleteStudioById,
+  createSchoolLocation,
+  getAllSchoolLocation,
+  getSchoolLocationById,
+  updateSchoolLocationTypeyId,
+  deleteSchoolLocationTypeById,
 };

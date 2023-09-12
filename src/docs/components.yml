@@ -33,6 +33,35 @@ components:
       properties:
         name:
           type: string
+    ManagementAdministrationType:
+      type: object
+      properties:
+        type:
+          type: string
+    ManagementCode:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: number
+        group:
+          type: string
+    ManagementGroup:
+      type: object
+      properties:
+        name:
+          type: string
+    Respondent:
+      type: object
+      properties:
+        type:
+          type: string
+    Building:
+      type: object
+      properties:
+        buildingName:
+          type: string
     Book:
       type: object
       properties:

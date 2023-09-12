@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const { toJSON, paginate } = require('../plugins');
+
+const { toJSON } = require('../plugins');
 
 const schoolLocationSchema = mongoose.Schema(
   {
@@ -16,7 +17,6 @@ const schoolLocationSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 schoolLocationSchema.plugin(toJSON);
-schoolLocationSchema.plugin(paginate);
 
 const SchoolLocationType = mongoose.model('SchoolLocationType', schoolLocationSchema);
 
