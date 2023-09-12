@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const staffschema = mongoose.Schema(
+const staffSchema = mongoose.Schema(
   {
-    _id: {
-      type: String,
-    },
     saral_id: {
       type: String,
       required: true,
@@ -219,7 +216,7 @@ const staffschema = mongoose.Schema(
       required: true,
     },
     is_active: {
-      type: Boolean,
+      type: String,
       required: true,
     },
     verification_code: {
@@ -367,18 +364,11 @@ const staffschema = mongoose.Schema(
   }
 );
 // add plugin that converts mongoose to json
-staffschema.plugin(toJSON);
-staffschema.plugin(paginate);
+staffSchema.plugin(toJSON);
+staffSchema.plugin(paginate);
 
-staffschema.index({ saral_id: 1 }, { unique: true });
-const staffs = mongoose.model('staffs', staffschema);
-staffs.createIndexes();
+staffSchema.index({ saral_id: 1 }, { unique: true });
+const Staffs = mongoose.model('Staffs', staffSchema);
+Staffs.createIndexes();
 
-module.exports = mongoose.model('staffs', staffschema);
-
-/**
- * The schema for a staff.
- * @typedef {object} staffs
- * @property {string} saral_id The user's saral_id.
- * @property {string} scode The user's scode.
- */
+module.exports = Staffs;

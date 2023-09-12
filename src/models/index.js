@@ -23,3 +23,4 @@ module.exports.Homework = require('./homework.model');
 module.exports.Quickrecap = require('./quickrecap.model');
 module.exports.Language = require('./masterModels/language.model');
 module.exports.Demolished = require('./demolished.model');
+module.exports.Staff = require('./staff.model');

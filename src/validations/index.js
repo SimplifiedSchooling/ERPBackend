@@ -19,3 +19,4 @@ module.exports.HomeworkValidation = require('./homework.validation');
 module.exports.quickRecapValidation = require('./quickrecap.validation');
 module.exports.languageValidation = require('./masterValidations/language.validation');
 module.exports.demolishedValidation = require('./demolished.validation');
+module.exports.staffValidation = require('./staff.validation');

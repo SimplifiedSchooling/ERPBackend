@@ -17,3 +17,4 @@ module.exports.multimediaController = require('./multimedia.controller');
 module.exports.homeworkController = require('./homework.controller');
 module.exports.languageController = require('./masterControllers/language.controller');
 module.exports.demolishedController = require('./demolished.controller');
+module.exports.staffController = require('./staff.controller');

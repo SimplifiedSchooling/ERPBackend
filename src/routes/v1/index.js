@@ -23,6 +23,7 @@ const homeworkRoute = require('./homework.route');
 const quickRecapRoute = require('./quickrecap.route');
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
+const staffRoute = require('./staff.route');
 
 const router = express.Router();
 
@@ -114,6 +115,10 @@ const defaultRoutes = [
   {
     path: '/demolished',
     route: demolishedRoute,
+  },
+  {
+    path: '/staff',
+    route: staffRoute,
   },
 ];
 
