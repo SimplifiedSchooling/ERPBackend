@@ -43,6 +43,7 @@ const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
 const UdiseblockRoute = require('./masterRoutes/udiseblock.route');
+const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
 
 const router = express.Router();
 
@@ -218,6 +219,10 @@ const defaultRoutes = [
   {
     path: '/udiseblock',
     route: UdiseblockRoute,
+  },
+  {
+    path: '/section1A10',
+    route: Section1A10Route,
   },
 ];
 

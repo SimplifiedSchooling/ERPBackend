@@ -42,3 +42,4 @@ module.exports.iternetTypeService = require('./masterService/type.of.internet.se
 module.exports.specialEducatorService = require('./masterService/special.educator.service');
 module.exports.laboratoryService = require('./masterService/laboratory.service');
 module.exports.udiseblockService = require('./masterService/udiseblock.service');
+module.exports.Section1A10Service = require('./masterService/section1A(1.1 to 1.10).service');
