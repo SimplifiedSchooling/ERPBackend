@@ -49,3 +49,4 @@ module.exports.Demolished = require('./demolished.model');
 module.exports.InternetType = require('./masterModels/type.of.internet.model');
 module.exports.SpecialEducator = require('./masterModels/special.educator.model');
 module.exports.Laboratories = require('./masterModels/laboratories.model');
+module.exports.UdiseblockSchema = require('./masterModels/udiseblock.model');

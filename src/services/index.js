@@ -41,3 +41,4 @@ module.exports.ClassroomAvailableService = require('./masterService/Classroom_av
 module.exports.iternetTypeService = require('./masterService/type.of.internet.service');
 module.exports.specialEducatorService = require('./masterService/special.educator.service');
 module.exports.laboratoryService = require('./masterService/laboratory.service');
+module.exports.udiseblockService = require('./masterService/udiseblock.service');
