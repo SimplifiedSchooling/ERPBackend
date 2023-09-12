@@ -13,7 +13,6 @@ const getAllStaff = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['name', 'username']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await staffService.queryStaff(filter, options);
-  console.log(result);
   res.send(result);
 });
 
