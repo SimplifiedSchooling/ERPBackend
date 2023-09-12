@@ -35,8 +35,8 @@ const updateClassById = {
   }),
   body: Joi.object()
     .keys({
-      mediumId: Joi.string().required(),
-      className: Joi.string().required(),
+      mediumId: Joi.string(),
+      className: Joi.string(),
       order: Joi.number().required(),
     })
     .min(1),

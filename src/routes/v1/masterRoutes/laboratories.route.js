@@ -1,34 +1,19 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
-const laboratoryValidation
- = require('../../../validations/masterValidations/laboratories.validation');
-const laboratoryController
- = require('../../../controllers/masterControllers/laboratories.controller');
+const laboratoryValidation = require('../../../validations/masterValidations/laboratories.validation');
+const laboratoryController = require('../../../controllers/masterControllers/laboratories.controller');
 
 const router = express.Router();
 router
   .route('/')
-  .post(validate(laboratoryValidation
-.createLaboratory), laboratoryController
-.createLaboratory)
-  .get(validate(laboratoryValidation
-.getAllLaboratory), laboratoryController
-.getAllLaboratory);
+  .post(validate(laboratoryValidation.createLaboratory), laboratoryController.createLaboratory)
+  .get(validate(laboratoryValidation.getAllLaboratory), laboratoryController.getAllLaboratory);
 
 router
   .route('/:laboratoryId')
-  .get(validate(laboratoryValidation
-.getLaboratoryById), laboratoryController
-.getLaboratoryById)
-  .patch(validate(laboratoryValidation
-.updateLaboratoryId), laboratoryController
-.updateLaboratoryById)
-  .delete(
-    validate(laboratoryValidation
-.deleteLaboratoryById),
-    laboratoryController
-.deleteLaboratoryById
-  );
+  .get(validate(laboratoryValidation.getLaboratoryById), laboratoryController.getLaboratoryById)
+  .patch(validate(laboratoryValidation.updateLaboratoryId), laboratoryController.updateLaboratoryById)
+  .delete(validate(laboratoryValidation.deleteLaboratoryById), laboratoryController.deleteLaboratoryById);
 
 module.exports = router;
 /**
@@ -128,6 +113,3 @@ module.exports = router;
  *       example:
  *         laboratoryName: Physics,chemistry
  */
-
-
-
