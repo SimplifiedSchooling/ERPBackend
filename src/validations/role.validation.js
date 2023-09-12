@@ -4,6 +4,7 @@ const { objectId } = require('./custom.validation');
 const createRole = {
   body: Joi.object().keys({
     role: Joi.string().required(),
+    actions: Joi.array(),
   }),
 };
 
@@ -20,6 +21,7 @@ const updateRoleById = {
   body: Joi.object()
     .keys({
       role: Joi.string(),
+      actions: Joi.array(),
     })
     .min(1),
 };

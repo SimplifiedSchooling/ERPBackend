@@ -31,6 +31,7 @@ module.exports.BoardingResidentialSchoolController = require('./masterController
 module.exports.MinorityManageSchoolController = require('./masterControllers/minority_manage_school.controller');
 module.exports.BoundaryWallController = require('./masterControllers/boundarywall.controller');
 module.exports.demolishedController = require('./demolished.controller');
+module.exports.staffController = require('./staff.controller');
 module.exports.ClassroomAvailableController = require('./masterControllers/classroom_available.controller');
 module.exports.specialEducatorController = require('./masterControllers/special.educator.controller');
 module.exports.laboratoryController = require('./masterControllers/special.educator.controller');

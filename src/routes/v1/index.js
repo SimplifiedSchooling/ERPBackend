@@ -34,6 +34,7 @@ const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
+const staffRoute = require('./staff.route');
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
@@ -202,6 +203,10 @@ const defaultRoutes = [
   {
     path: '/demolished',
     route: demolishedRoute,
+  },
+  {
+    path: '/staff',
+    route: staffRoute,
   },
   {
     path: '/classroomavailable',

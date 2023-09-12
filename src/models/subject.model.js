@@ -9,7 +9,7 @@ const subjectSchema = mongoose.Schema(
       required: true,
     },
     code: {
-      type: Number,
+      type: String,
     },
     order: {
       type: Number,
