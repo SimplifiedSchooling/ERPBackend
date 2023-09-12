@@ -3,27 +3,78 @@
 
 // const section1A_10Schema = mongoose.Schema(
 //   {
-//     UDISE_Code: {
+//     udise_code: {
 //       type: String,
 //       required: true,
 //       trim: true,
 //       unique: true,
 //     },
 //     schoolname: {
-//         type: String,
-//         required: true,
-//         trim: true,
+//       type: String,
+//       required: true,
+//       trim: true,
 //     },
 //     schoolname: {
-//         type: String,
-//         required: true,
-//         trim: true,
+//       type: String,
+//       required: true,
+//       trim: true,
 //     },
 //     districtId: {
-//         type: mongoose.SchemaTypes.ObjectId,
-//         ref: 'district',
-//         required: true,
-//         trim: true,
+//       type: mongoose.SchemaTypes.ObjectId,
+//       ref: 'district',
+//       required: true,
+//       trim: true,
+//     },
+//     udiseblockId: {
+//       type: mongoose.SchemaTypes.ObjectId,
+//       ref: 'udiseblock',
+//       required: true,
+//       trim: true,
+//     },
+//     typeofschool: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     revenueblock: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     villagename: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     grampanchayatname: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     urbanlocalbodies: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     wardname: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     address: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     pincode: {
+//       type: String,
+//       required: false,
+//       trim: true,
+//     },
+//     assembly_constituency: {
+//       type: String,
+//       required: false,
+//       trim: true,
 //     },
 //   },
 //   {
