@@ -234,7 +234,7 @@ const defaultRoutes = [
   {
     path: '/section1A20',
     route: Section1A20Route,
-  }, 
+  },
   {
     path: '/section1A30',
     route: Section1A30Route,
