@@ -43,6 +43,8 @@ const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.rou
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
+const saralRoute = require('./saral.info.route');
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -207,6 +209,10 @@ const defaultRoutes = [
     route: staffRoute,
   },
   {
+    path: '/saralInfo',
+    route: saralRoute,
+  },
+  {
     path: '/classroomavailable',
     route: ClassroomAvailableRouter,
   },
@@ -217,7 +223,7 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
-  }
+  },
 ];
 
 const devRoutes = [
