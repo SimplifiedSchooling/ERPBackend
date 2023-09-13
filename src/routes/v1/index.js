@@ -44,6 +44,9 @@ const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
 const saralRoute = require('./saral.info.route');
+const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
+const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
+const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
 
 const router = express.Router();
 
@@ -223,6 +226,18 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
+  },
+  {
+    path: '/section1A10',
+    route: Section1A10Route,
+  },
+  {
+    path: '/section1A20',
+    route: Section1A20Route,
+  },
+  {
+    path: '/section1A30',
+    route: Section1A30Route,
   },
 ];
 
