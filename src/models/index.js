@@ -50,3 +50,4 @@ module.exports.UdiseblockSchema = require('./masterModels/udiseblock.model');
 module.exports.Campus = require('./campus.model');
 module.exports.Section1A10Schema = require('./masterModels/section1A(1.1 to 1.10).model');
 module.exports.Section1A20Schema = require('./masterModels/section1A(1.11 to 1.20).model');
+module.exports.Section1A30Schema = require('./masterModels/section1A(1.21 to 1.30).model');

@@ -38,3 +38,4 @@ module.exports.specialEducatorValidation = require('./masterValidations/special.
 module.exports.laboratoryValidation = require('./masterValidations/laboratories.validation');
 module.exports.Section1A10Validation = require('./masterValidations/section1A(1.1 to 1.10).validation');
 module.exports.Section1A20Validation = require('./masterValidations/section1A(1.1 to 1.20).validation');
+module.exports.Section1A30Validation = require('./masterValidations/section1A(1.21 to 1.30).validation');
