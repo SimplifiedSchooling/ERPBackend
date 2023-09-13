@@ -38,3 +38,8 @@ module.exports.ClassroomAvailableController = require('./masterControllers/class
 
 module.exports.specialEducatorController = require('./masterControllers/special.educator.controller');
 module.exports.laboratoryController = require('./masterControllers/special.educator.controller');
+module.exports.studentSocialCategory = require('./masterControllers/student.social.category.controller');
+module.exports.studentTypeController = require('./masterControllers/student.type.controller');
+module.exports.SaralController = require('./saral.info.controller');
+module.exports.studentController = require('./masterControllers/student.Minority.group.controller');
+module.exports.studentAdmissionController = require('./masterControllers/student.admission.type.controller');

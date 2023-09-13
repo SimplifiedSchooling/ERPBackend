@@ -45,6 +45,13 @@ const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.rou
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
+const studentSocialCategoryRoute = require('./masterRoutes/student.social.category.route');
+const studentTypeRoute = require('./masterRoutes/student.type.route');
+const saralInfoRoute = require('./saral.info.route');
+const studentMinorityRoute = require('./masterRoutes/student.Minority.group.route');
+const studentAdmisionRoute = require('./masterRoutes/student.admission.type.route');
+
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -194,7 +201,7 @@ const defaultRoutes = [
   },
   {
     path: '/boundarywall',
-    route: BoundaryWall
+    route: BoundaryWall,
   },
   {
     path: '/internetType',
@@ -215,7 +222,27 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
-  }
+  },
+  {
+    path: '/socialCategory',
+    route: studentSocialCategoryRoute,
+  },
+  {
+    path: '/studentType',
+    route: studentTypeRoute,
+  },
+  {
+    path: '/saralInfo',
+    route: saralInfoRoute,
+  },
+  {
+    path: '/studentMinorityGroup',
+    route: studentMinorityRoute,
+  },
+  {
+    path: '/studentAdmissionGroup',
+    route: studentAdmisionRoute,
+  },
 ];
 
 const devRoutes = [

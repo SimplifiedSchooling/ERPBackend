@@ -25,7 +25,7 @@ const updateLaboratoryId = {
   }),
   body: Joi.object()
     .keys({
-        laboratoryName: Joi.string().required(),
+      laboratoryName: Joi.string().required(),
     })
     .min(1),
 };
