@@ -46,6 +46,12 @@ module.exports.Staff = require('./staff.model');
 module.exports.InternetType = require('./masterModels/type.of.internet.model');
 module.exports.SpecialEducator = require('./masterModels/special.educator.model');
 module.exports.Laboratories = require('./masterModels/laboratories.model');
+module.exports.StudentSocialCategory = require('./masterModels/student.social.category.model');
+module.exports.StudentType = require('./masterModels/student.type.model');
+module.exports.SaralInfo = require('./saral.info.model');
+module.exports.Student = require('./masterModels/student.Minority.group.model');
+module.exports.StudentAdmission = require('./masterModels/student.admission.type.model');
+
 module.exports.UdiseblockSchema = require('./masterModels/udiseblock.model');
 module.exports.Campus = require('./campus.model');
 module.exports.Section1A10Schema = require('./masterModels/section1A(1.1 to 1.10).model');

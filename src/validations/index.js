@@ -36,5 +36,11 @@ module.exports.classroomAvailableValidation = require('./masterValidations/class
 module.exports.internetTypeValidation = require('./masterValidations/type.of.internet.validation');
 module.exports.specialEducatorValidation = require('./masterValidations/special.educator.validation');
 module.exports.laboratoryValidation = require('./masterValidations/laboratories.validation');
+module.exports.socialCategoryValidation = require('./masterValidations/student.social.category.validation');
+module.exports.studentTypeValidation = require('./masterValidations/student.type.validation');
+module.exports.saralValidation = require('./saral.info.validation');
+module.exports.studentValidation = require('./masterValidations/student.Minority.group.validation');
+module.exports.studentAdmissionValidation = require('./masterValidations/student.admission.type.validation');
+
 module.exports.Section1A10Validation = require('./masterValidations/section1A(1.1 to 1.10).validation');
 module.exports.Section1A20Validation = require('./masterValidations/section1A(1.1 to 1.20).validation');
