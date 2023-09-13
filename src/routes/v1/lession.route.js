@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(lessionValidation.createLession), lessionController.createLession)
-  .get(validate(lessionValidation.getLessions), lessionController.getLessions);
+  .get(validate(lessionValidation.getLessions), lessionController.queryLessions);
 
 router
   .route('/:lessionId')
@@ -31,7 +31,7 @@ module.exports = router;
  * /lession:
  *   post:
  *     summary: Create a lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -94,7 +94,7 @@ module.exports = router;
  *   get:
  *     summary: Get all lession
  *     description: all lession.
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -157,7 +157,7 @@ module.exports = router;
  * /lession/{id}:
  *   get:
  *     summary: Get a lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -183,7 +183,7 @@ module.exports = router;
  *
  *   patch:
  *     summary: Update a Lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -250,7 +250,7 @@ module.exports = router;
  *
  *   delete:
  *     summary: Delete a lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -270,34 +270,6 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
- *
- * /lession/getallLession/{chapterId}:
- *   get:
- *     summary: Get a lession by chapter id
- *     tags: [Lession]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: chapterId
- *         required: true
- *         schema:
- *           type: string
- *         description: Chapter id
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: '#/components/schemas/Lession'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
  */
 
 /**
@@ -305,7 +277,7 @@ module.exports = router;
  * /lession/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}/{chapterId}:
  *   get:
  *     summary: Get a chapter
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:

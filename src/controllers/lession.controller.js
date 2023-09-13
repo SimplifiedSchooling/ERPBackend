@@ -9,7 +9,7 @@ const createLession = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(lession);
 });
 
-const getLessions = catchAsync(async (req, res) => {
+const queryLessions = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['board']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await lessionService.queryLessions(filter, options);
@@ -53,7 +53,7 @@ const deleteLession = catchAsync(async (req, res) => {
 
 module.exports = {
   createLession,
-  getLessions,
+  queryLessions,
   getLession,
   updateLession,
   deleteLession,
