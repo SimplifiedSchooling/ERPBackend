@@ -16,12 +16,6 @@ const queryBoard = {
   }),
 };
 
-const getAllBoard = {
-  body: Joi.object().keys({
-    name: Joi.string(),
-  }),
-};
-
 const getBoard = {
   params: Joi.object().keys({
     boardId: Joi.string().custom(objectId),
@@ -47,7 +41,6 @@ const deleteBoard = {
 
 module.exports = {
   createBoard,
-  getAllBoard,
   queryBoard,
   getBoard,
   updateBoard,
