@@ -41,6 +41,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - scode
  *               - anganwadicenteradj
  *               - noofanganwadinear
  *               - noofsevika
@@ -341,6 +342,7 @@ module.exports = router;
  *               progress_count2: string
  *               progress_count3: string
  *             example:
+ *               scode: mh00001
  *               anganwadicenteradj: fake anganwadicenter
  *               noofanganwadinear: 1
  *               noofsevika: 2

@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
 const saralSchema = new mongoose.Schema({
+    scode: {
+        type: String,
+        required: true,
+        unique: true
+      },
     anganwadicenteradj: {
         type: String,
         required: true,
@@ -713,6 +718,8 @@ const saralSchema = new mongoose.Schema({
 saralSchema.plugin(toJSON);
 saralSchema.plugin(paginate);
 
-const saral = mongoose.model("Saralinfo", saralSchema);
+saralSchema.index({ scode: 1 }, { unique: true });
+const SaralInfo = mongoose.model("Saral", saralSchema);
+SaralInfo.createIndexes();
 
-module.exports = saral;
+module.exports = SaralInfo;
