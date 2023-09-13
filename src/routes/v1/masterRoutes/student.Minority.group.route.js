@@ -4,13 +4,14 @@ const validate = require('../../../middlewares/validate');
 const studentValidation = require('../../../validations/masterValidations/student.Minority.group.validation');
 const studentController = require('../../../controllers/masterControllers/student.Minority.group.controller');
 
+
 const router = express.Router();
 
 router
   .route('/')
   .post(validate(studentValidation.createStudent), studentController.createStudentMinorityGroup)
   .get(validate(studentValidation.getAllStudents), studentController.getAllStudentMinorityGroups);
-
+ 
 router
   .route('/:studentId')
   .get(validate(studentValidation.getStudent), studentController.getStudentMinorityGroup)
