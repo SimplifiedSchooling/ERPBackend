@@ -1,36 +1,36 @@
 const express = require('express');
-const validate = require('../../middlewares/validate');
-const boardController = require('../../controllers/board.controller');
-const boardValidation = require('../../validations/board.validation');
+const validate = require('../../../middlewares/validate');
+const UdiseblockController = require('../../../controllers/masterControllers/udiseblock.controller');
+const UdiseblockValidation = require('../../../validations/masterValidations/udiseblock.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(boardValidation.createBoard), boardController.createBoard)
-  .get(validate(boardValidation.queryBoard), boardController.queryBoard);
+  .post(validate(UdiseblockValidation.createudiseblock), UdiseblockController.createudiseblock)
+  .get(validate(UdiseblockValidation.getAlludiseblock), UdiseblockController.getAlludiseblock);
 
 router
-  .route('/:boardId')
-  .get(validate(boardValidation.getBoard), boardController.getBoard)
-  .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
-  .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
+  .route('/:udiseblockId')
+  .get(validate(UdiseblockValidation.getudiseblock), UdiseblockController.getudiseblockById)
+  .patch(validate(UdiseblockValidation.updateudiseblock), UdiseblockController.updateudiseblock)
+  .delete(validate(UdiseblockValidation.deleteudiseblock), UdiseblockController.deleteudiseblock);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Board
- *   description: Board management
+ *   name: Udiseblock
+ *   description: Udiseblock management
  */
 
 /**
  * @swagger
- * /boards:
+ * /udiseblock:
  *   post:
- *     summary: Create a board
- *     tags: [Board]
+ *     summary: Create a Udiseblock
+ *     tags: [Udiseblock]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -42,10 +42,10 @@ module.exports = router;
  *             required:
  *               - name
  *             properties:
- *               naboardme:
- *                 type: string *
+ *               name:
+ *                 type: string
  *             example:
- *               name: CBSC
+ *               name: nagar
  *
  *     responses:
  *       "201":
@@ -53,23 +53,23 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Board'
+ *                $ref: '#/components/schemas/Udiseblock'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get query boards
- *     tags: [Board]
+ *     summary: Get all Udiseblock
+ *     tags: [Udiseblock]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: board
+ *         name: Residential
  *         schema:
  *           type: string
- *         description: Board name *
+ *         description: Residential name
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -99,7 +99,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Board'
+ *                     $ref: '#/components/schemas/Udiseblock'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -120,26 +120,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /boards/{boardId}:
+ * /udiseblock/{udiseblockId}:
  *   get:
- *     summary: Get a board
- *     tags: [Board]
+ *     summary: Get a Type Residential school
+ *     tags: [Udiseblock]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: udiseblockId
  *         required: true
  *         schema:
  *           type: string
- *         description: boardId
+ *         description: udiseblockId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Board'
+ *                $ref: '#/components/schemas/Udiseblock'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -148,17 +148,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a board
- *     tags: [Board]
+ *     summary: Update a Udiseblock
+ *     tags: [Udiseblock]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: udiseblockId
  *         required: true
  *         schema:
  *           type: string
- *         description: boardId
+ *         description: udiseblockId
  *     requestBody:
  *       required: true
  *       content:
@@ -169,14 +169,14 @@ module.exports = router;
  *               name:
  *                 type: string
  *             example:
- *               name: fake name*
+ *               name: fake name
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Board'
+ *                $ref: '#/components/schemas/Udiseblock'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -185,17 +185,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a board
- *     tags: [Board]
+ *     summary: Delete a type Udiseblock
+ *     tags: [Udiseblock]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: boardId
+ *         name: udiseblockId
  *         required: true
  *         schema:
  *           type: string
- *         description: boardId
+ *         description: udiseblockId
  *     responses:
  *       "200":
  *         description: No content

@@ -1,13 +1,13 @@
 const Joi = require('joi');
-const { objectId } = require('./custom.validation');
+const { objectId } = require('../custom.validation');
 
-const createBoard = {
+const createudiseblock = {
   body: Joi.object().keys({
     name: Joi.string().required(),
   }),
 };
 
-const queryBoard = {
+const getAlludiseblock = {
   query: Joi.object().keys({
     name: Joi.string(),
     sortBy: Joi.string(),
@@ -16,15 +16,15 @@ const queryBoard = {
   }),
 };
 
-const getBoard = {
+const getudiseblock = {
   params: Joi.object().keys({
-    boardId: Joi.string().custom(objectId),
+    udiseblockId: Joi.string().custom(objectId),
   }),
 };
 
-const updateBoard = {
+const updateudiseblock = {
   params: Joi.object().keys({
-    boardId: Joi.required().custom(objectId),
+    udiseblockId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -33,16 +33,16 @@ const updateBoard = {
     .min(1),
 };
 
-const deleteBoard = {
+const deleteudiseblock = {
   params: Joi.object().keys({
-    boardId: Joi.string().custom(objectId),
+    udiseblockId: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createBoard,
-  queryBoard,
-  getBoard,
-  updateBoard,
-  deleteBoard,
+  createudiseblock,
+  getAlludiseblock,
+  getudiseblock,
+  updateudiseblock,
+  deleteudiseblock,
 };

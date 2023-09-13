@@ -9,7 +9,7 @@ const createBook = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(book);
 });
 
-const getAllBook = catchAsync(async (req, res) => {
+const queryBook = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['board']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await bookService.queryBook(filter, options);
@@ -53,8 +53,8 @@ const deleteBook = catchAsync(async (req, res) => {
 
 module.exports = {
   createBook,
-  getAllBook,
   getBookById,
+  queryBook,
   updateBook,
   deleteBook,
   getBookByFilter,

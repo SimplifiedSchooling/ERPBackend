@@ -1,17 +1,21 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
+const auth = require('../../middlewares/auth');
 const { demolishedController } = require('../../controllers');
 const { demolishedValidation } = require('../../validations');
 
 const router = express.Router();
 
-router.route('/').post(demolishedController.createDemolished).get(demolishedController.getAllDemolished);
+router
+  .route('/')
+  .post(auth('CREATE'), validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
+  .get(auth('GET'), validate(demolishedValidation.getAllDemolished), demolishedController.getAllDemolished);
 
 router
   .route('/:demolishedId')
-  .get(validate(demolishedValidation.getDemolishedById), demolishedController.getDemolishedById)
-  .patch(validate(demolishedValidation.updateDemolishedById), demolishedController.updateDemolishedById)
-  .delete(validate(demolishedValidation.deleteDemolishedById), demolishedController.deleteDemolishedById);
+  .get(auth('GET'), validate(demolishedValidation.getDemolishedById), demolishedController.getDemolishedById)
+  .patch(auth('UPDATE'), validate(demolishedValidation.updateDemolishedById), demolishedController.updateDemolishedById)
+  .delete(auth('DELETE'), validate(demolishedValidation.deleteDemolishedById), demolishedController.deleteDemolishedById);
 
 module.exports = router;
 

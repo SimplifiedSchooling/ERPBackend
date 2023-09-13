@@ -27,16 +27,14 @@ const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
-
 const schoolLocationRoute = require('./masterRoutes/school-location.route');
 const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
 const schoolcategoryRoute = require('./masterRoutes/school.category.route');
 const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
-
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
-
+const staffRoute = require('./staff.route');
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
@@ -45,13 +43,6 @@ const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.rou
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
-const studentSocialCategoryRoute = require('./masterRoutes/student.social.category.route');
-const studentTypeRoute = require('./masterRoutes/student.type.route');
-const saralInfoRoute = require('./saral.info.route');
-const studentMinorityRoute = require('./masterRoutes/student.Minority.group.route');
-const studentAdmisionRoute = require('./masterRoutes/student.admission.type.route');
-
-
 const router = express.Router();
 
 const defaultRoutes = [
@@ -212,6 +203,10 @@ const defaultRoutes = [
     route: demolishedRoute,
   },
   {
+    path: '/staff',
+    route: staffRoute,
+  },
+  {
     path: '/classroomavailable',
     route: ClassroomAvailableRouter,
   },
@@ -222,27 +217,7 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
-  },
-  {
-    path: '/socialCategory',
-    route: studentSocialCategoryRoute,
-  },
-  {
-    path: '/studentType',
-    route: studentTypeRoute,
-  },
-  {
-    path: '/saralInfo',
-    route: saralInfoRoute,
-  },
-  {
-    path: '/studentMinorityGroup',
-    route: studentMinorityRoute,
-  },
-  {
-    path: '/studentAdmissionGroup',
-    route: studentAdmisionRoute,
-  },
+  }
 ];
 
 const devRoutes = [
