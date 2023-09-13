@@ -223,7 +223,7 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
-  }
+  },
 ];
 
 const devRoutes = [

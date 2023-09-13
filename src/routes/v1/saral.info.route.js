@@ -5,7 +5,6 @@ const SaralController = require('../../controllers/saral.info.controller');
 
 const router = express.Router();
 
-
 router
   .route('/')
   .post(validate(saralValidation.createSaral), SaralController.createSaral)
@@ -23,7 +22,7 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: Sarals
- *   description: Saral Information 
+ *   description: Saral Information
  */
 
 /**
@@ -192,21 +191,21 @@ module.exports = router;
  *                 type: number
  *               noofsevika:
  *                 type: number
- *               agewiseboy: 
+ *               agewiseboy:
  *                 type: number
- *               agewisegirl: 
+ *               agewisegirl:
  *                 type: number
  *               recognizbalwadi:
  *                 type: number
  *               recognitiondate:
  *                 type: number
- *               noofteacher: 
+ *               noofteacher:
  *                 type: number
- *               eodeputyvisit: 
+ *               eodeputyvisit:
  *                 type: number
  *               eovisit:
  *                 type: number
- *               dodeputyvisit: 
+ *               dodeputyvisit:
  *                 type: number
  *               ddvisits:
  *                 type: number
@@ -607,21 +606,21 @@ module.exports = router;
  *                 type: number
  *               noofsevika:
  *                 type: number
- *               agewiseboy: 
+ *               agewiseboy:
  *                 type: number
- *               agewisegirl: 
+ *               agewisegirl:
  *                 type: number
  *               recognizbalwadi:
  *                 type: number
  *               recognitiondate:
  *                 type: number
- *               noofteacher: 
+ *               noofteacher:
  *                 type: number
- *               eodeputyvisit: 
+ *               eodeputyvisit:
  *                 type: number
  *               eovisit:
  *                 type: number
- *               dodeputyvisit: 
+ *               dodeputyvisit:
  *                 type: number
  *               ddvisits:
  *                 type: number
@@ -938,6 +937,3 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-
-
-
