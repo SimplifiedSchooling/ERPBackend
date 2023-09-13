@@ -27,6 +27,13 @@ const queryLessions = async (filter, options) => {
 };
 
 /**
+ * Get All lession
+ * @returns {Promise<Lession>}
+ */
+const getAllLession = async () => {
+  return Lession.find();
+};
+/**
  * Get lession by id
  * @param {ObjectId} id
  * @returns {Promise<Lession>}
@@ -96,4 +103,5 @@ module.exports = {
   deleteLessionById,
   getLessionbychapterId,
   getLessionByFilter,
+  getAllLession,
 };

@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(boardValidation.createBoard), boardController.createBoard)
-  .get(validate(boardValidation.getAllBoard), boardController.getAllBoard);
+  .get(validate(boardValidation.queryBoard), boardController.queryBoard);
 
 router
   .route('/:boardId')
@@ -16,6 +16,7 @@ router
   .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
   .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
 
+router.route('/get/allBoard').get(validate(boardValidation.getAllBoard), boardController.getAllBoard);
 module.exports = router;
 
 /**
@@ -60,7 +61,7 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all boards
+ *     summary: Get query boards
  *     tags: [Board]
  *     security:
  *       - bearerAuth: []
@@ -116,6 +117,30 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
+ * /boards/get/allBoard:
+ *   get:
+ *     summary: Get a board
+ *     tags: [Board]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Board'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
  */
 
 /**

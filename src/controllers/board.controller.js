@@ -9,10 +9,15 @@ const createBoard = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(board);
 });
 
-const getAllBoard = catchAsync(async (req, res) => {
+const queryBoard = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['name']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await boardService.queryBoard(filter, options);
+  res.send(result);
+});
+
+const getAllBoard = catchAsync(async (req, res) => {
+  const result = await boardService.getAllBoard();
   res.send(result);
 });
 
@@ -25,8 +30,8 @@ const getBoard = catchAsync(async (req, res) => {
 });
 
 const updateBoard = catchAsync(async (req, res) => {
-  const user = await boardService.updateBoardById(req.params.boardId, req.body);
-  res.send(user);
+  const board = await boardService.updateBoardById(req.params.boardId, req.body);
+  res.send(board);
 });
 
 const deleteBoard = catchAsync(async (req, res) => {
@@ -36,6 +41,7 @@ const deleteBoard = catchAsync(async (req, res) => {
 
 module.exports = {
   createBoard,
+  queryBoard,
   getAllBoard,
   getBoard,
   updateBoard,

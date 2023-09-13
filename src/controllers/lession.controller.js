@@ -9,7 +9,7 @@ const createLession = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(lession);
 });
 
-const getLessions = catchAsync(async (req, res) => {
+const queryLessions = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['board']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await lessionService.queryLessions(filter, options);
@@ -18,6 +18,14 @@ const getLessions = catchAsync(async (req, res) => {
 
 const getLession = catchAsync(async (req, res) => {
   const lession = await lessionService.getLessionById(req.params.lessionId);
+  if (!lession) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Lession not found');
+  }
+  res.send(lession);
+});
+
+const getAllLession = catchAsync(async (req, res) => {
+  const lession = await lessionService.getAllLession();
   if (!lession) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Lession not found');
   }
@@ -53,7 +61,8 @@ const deleteLession = catchAsync(async (req, res) => {
 
 module.exports = {
   createLession,
-  getLessions,
+  queryLessions,
+  getAllLession,
   getLession,
   updateLession,
   deleteLession,
