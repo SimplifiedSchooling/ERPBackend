@@ -16,11 +16,6 @@ const queryBoard = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const getAllBoard = catchAsync(async (req, res) => {
-  const result = await boardService.getAllBoard();
-  res.send(result);
-});
-
 const getBoard = catchAsync(async (req, res) => {
   const board = await boardService.getBoardById(req.params.boardId);
   if (!board) {
@@ -42,7 +37,6 @@ const deleteBoard = catchAsync(async (req, res) => {
 module.exports = {
   createBoard,
   queryBoard,
-  getAllBoard,
   getBoard,
   updateBoard,
   deleteBoard,

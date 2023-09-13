@@ -24,8 +24,6 @@ router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId/:chapterId')
   .get(validate(lessionValidation.getLessionByFilter), lessionController.getLessionByFilter);
 
-router.route('/get/allLession').get(lessionController.getAllLession);
-
 module.exports = router;
 
 /**
@@ -156,29 +154,6 @@ module.exports = router;
 
 /**
  * @swagger
- * /lession/get/allLession:
- *   get:
- *     summary: Get a lesson
- *     tags: [Lesson]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: '#/components/schemas/Lession'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
- */
-/**
- * @swagger
  * /lession/{id}:
  *   get:
  *     summary: Get a lession
@@ -288,34 +263,6 @@ module.exports = router;
  *     responses:
  *       "200":
  *         description: No content
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
- *
- * /lession/getallLession/{chapterId}:
- *   get:
- *     summary: Get a lession by chapter id
- *     tags: [Lesson]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: chapterId
- *         required: true
- *         schema:
- *           type: string
- *         description: Chapter id
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: '#/components/schemas/Lession'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
