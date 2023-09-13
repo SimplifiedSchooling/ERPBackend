@@ -45,3 +45,4 @@ module.exports.laboratoryService = require('./masterService/laboratory.service')
 module.exports.udiseblockService = require('./masterService/udiseblock.service');
 module.exports.campusService = require('./campus.service');
 module.exports.Section1A10Service = require('./masterService/section1A(1.1 to 1.10).service');
+module.exports.Section1A20Service = require('./masterService/section1A(1.1 to 1.20).service');
