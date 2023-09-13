@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(lessionValidation.createLession), lessionController.createLession)
-  .get(validate(lessionValidation.getLessions), lessionController.getLessions);
+  .get(validate(lessionValidation.getLessions), lessionController.queryLessions);
 
 router
   .route('/:lessionId')
@@ -24,6 +24,8 @@ router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId/:chapterId')
   .get(validate(lessionValidation.getLessionByFilter), lessionController.getLessionByFilter);
 
+router.route('/get/allLession').get(lessionController.getAllLession);
+
 module.exports = router;
 
 /**
@@ -31,7 +33,7 @@ module.exports = router;
  * /lession:
  *   post:
  *     summary: Create a lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -94,7 +96,7 @@ module.exports = router;
  *   get:
  *     summary: Get all lession
  *     description: all lession.
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -154,10 +156,33 @@ module.exports = router;
 
 /**
  * @swagger
+ * /lession/get/allLession:
+ *   get:
+ *     summary: Get a lesson
+ *     tags: [Lesson]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Lession'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ */
+/**
+ * @swagger
  * /lession/{id}:
  *   get:
  *     summary: Get a lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -183,7 +208,7 @@ module.exports = router;
  *
  *   patch:
  *     summary: Update a Lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -250,7 +275,7 @@ module.exports = router;
  *
  *   delete:
  *     summary: Delete a lession
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -274,7 +299,7 @@ module.exports = router;
  * /lession/getallLession/{chapterId}:
  *   get:
  *     summary: Get a lession by chapter id
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -305,7 +330,7 @@ module.exports = router;
  * /lession/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}/{chapterId}:
  *   get:
  *     summary: Get a chapter
- *     tags: [Lession]
+ *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
  *     parameters:

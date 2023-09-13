@@ -26,6 +26,14 @@ const queryBoard = async (filter, options) => {
 };
 
 /**
+ * get all board
+ * @returns {Promise<QueryResult>}
+ */
+const getAllBoard = async () => {
+  const boards = await Board.find();
+  return boards;
+};
+/**
  * Get board by id
  * @param {ObjectId} id
  * @returns {Promise<Board>}
@@ -55,8 +63,8 @@ const updateBoardById = async (boardId, updateBody) => {
  * @param {ObjectId} boardId
  * @returns {Promise<Board>}
  */
-const deleteBoardById = async (userId) => {
-  const board = await getBoardById(userId);
+const deleteBoardById = async (boardId) => {
+  const board = await getBoardById(boardId);
   if (!board) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Board not found');
   }
@@ -67,6 +75,7 @@ const deleteBoardById = async (userId) => {
 module.exports = {
   createBoard,
   queryBoard,
+  getAllBoard,
   getBoardById,
   updateBoardById,
   deleteBoardById,

@@ -7,12 +7,18 @@ const createBoard = {
   }),
 };
 
-const getAllBoard = {
+const queryBoard = {
   query: Joi.object().keys({
     name: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
+  }),
+};
+
+const getAllBoard = {
+  body: Joi.object().keys({
+    name: Joi.string(),
   }),
 };
 
@@ -42,6 +48,7 @@ const deleteBoard = {
 module.exports = {
   createBoard,
   getAllBoard,
+  queryBoard,
   getBoard,
   updateBoard,
   deleteBoard,
