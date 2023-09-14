@@ -58,11 +58,11 @@ const updateSection1A10 = {
   }),
   body: Joi.object()
     .keys({
-      udisecode: Joi.string().required(),
-      schoolname: Joi.string().required(),
-      districtId: Joi.string().required(),
-      udiseblockId: Joi.string().required(),
-      typeofschool: Joi.string().required(),
+      udisecode: Joi.string(),
+      schoolname: Joi.string(),
+      districtId: Joi.string(),
+      udiseblockId: Joi.string(),
+      typeofschool: Joi.string(),
       revenueblock: Joi.string(),
       villagename: Joi.string(),
       grampanchayatname: Joi.string(),
