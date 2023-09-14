@@ -330,6 +330,8 @@ const defaultRoutes = [
   {
     path: '/studentMinority',
     route: StudentMinorityRoute,
+  },
+  {
     path: '/student_session',
     route: student_Session_Route,
   },
