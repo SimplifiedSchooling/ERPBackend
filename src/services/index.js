@@ -44,3 +44,6 @@ module.exports.specialEducatorService = require('./masterService/special.educato
 module.exports.laboratoryService = require('./masterService/laboratory.service');
 module.exports.udiseblockService = require('./masterService/udiseblock.service');
 module.exports.Section1A10Service = require('./masterService/section1A(1.1 to 1.10).service');
+module.exports.AppliedForPlacement = require('./masterService/applied_for_placement.service');
+module.exports.AppliedForApprenticeship = require('./masterService/applied_for_apprenticeship.service');
+module.exports.sessionService  = require('./masterService/session.service');

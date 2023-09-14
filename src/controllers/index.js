@@ -37,3 +37,6 @@ module.exports.specialEducatorController = require('./masterControllers/special.
 module.exports.laboratoryController = require('./masterControllers/special.educator.controller');
 module.exports.UdiseblockController = require('./masterControllers/udiseblock.controller');
 module.exports.Section1A10Controller = require('./masterControllers/section1A(1.1 to 1.10).controller');
+module.exports.AppliedForPlacementController = require('./masterControllers/applied_for_placement.controller');
+module.exports.AppliedForApprenticeshipController = require('./masterControllers/applied_for_apprenticeship.controller');
+module.exports.SessionController = require('./masterControllers/sessions.controller');

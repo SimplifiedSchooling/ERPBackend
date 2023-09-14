@@ -48,3 +48,6 @@ module.exports.SpecialEducator = require('./masterModels/special.educator.model'
 module.exports.Laboratories = require('./masterModels/laboratories.model');
 module.exports.UdiseblockSchema = require('./masterModels/udiseblock.model');
 module.exports.Section1A10Schema = require('./masterModels/section1A(1.1 to 1.10).model');
+module.exports.AppliedForPlacement = require('./masterModels/applied_for_placement.model');
+module.exports.AppliedForApprenticeship = require('./masterModels/applied_for_apprenticeship.model');
+module.exports.Sessions = require('./masterModels/sessions.model'); 
