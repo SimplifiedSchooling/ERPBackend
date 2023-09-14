@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { subjectService } = require('../services');
 
 const createSubject = catchAsync(async (req, res) => {
+  req.body.thumbnail = await req.file.path;
   const subject = await subjectService.createSubject(req.body);
   res.status(httpStatus.CREATED).send(subject);
 });
@@ -23,6 +24,14 @@ const getSubjectById = catchAsync(async (req, res) => {
   }
   res.send(subject);
 });
+
+const getSubjectOfClass = catchAsync(async (req, res) => {
+  const subject = await subjectService.getSubjectOfClass();
+  if (!subject) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Subject not found');
+  }
+  res.send(subject);
+});
 const getSubjectByClassId = catchAsync(async (req, res) => {
   const subject = await subjectService.getSubjectByClassId(req.params.classId);
   if (!subject) {
@@ -32,6 +41,9 @@ const getSubjectByClassId = catchAsync(async (req, res) => {
 });
 
 const updateSubject = catchAsync(async (req, res) => {
+  if (req.file) {
+    req.body = req.file.thumbnail;
+  }
   const subject = await subjectService.updatSubjectById(req.params.subjectId, req.body);
   res.send(subject);
 });
@@ -48,4 +60,5 @@ module.exports = {
   updateSubject,
   deleteSubject,
   getSubjectByClassId,
+  getSubjectOfClass,
 };

@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { chapterService } = require('../services');
 
 const createChapter = catchAsync(async (req, res) => {
+  req.body.thumbnail = await req.file.path;
   const newChapter = await chapterService.createChapter(req.body);
   res.status(httpStatus.CREATED).send(newChapter);
 });

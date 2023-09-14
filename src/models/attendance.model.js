@@ -17,7 +17,7 @@ const attendancechema = mongoose.Schema(
     attedance_type: {
       type: String,
       required: true,
-      trim: true,
+      enum: ['holiday', 'late', 'present', 'absent', 'halfday'],
     },
     remark: {
       type: String,

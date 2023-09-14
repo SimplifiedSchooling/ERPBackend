@@ -1,23 +1,37 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const subjectController = require('../../controllers/subject.controller');
 const subjectValidation = require('../../validations/subject.validation');
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 router
   .route('/')
-  .post(validate(subjectValidation.createSubject), subjectController.createSubject)
+  .post(upload.single('thumbnail'), validate(subjectValidation.createSubject), subjectController.createSubject)
   .get(validate(subjectValidation.getAllSubject), subjectController.getAllSubject);
 
 router
   .route('/:subjectId')
-  .patch(validate(subjectValidation.updateSubject), subjectController.updateSubject)
+  .patch(upload.single('thumbnail'), validate(subjectValidation.updateSubject), subjectController.updateSubject)
   .delete(validate(subjectValidation.deleteSubject), subjectController.deleteSubject)
   .get(validate(subjectValidation.getSubject), subjectController.getSubjectById);
 
 router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClassId), subjectController.getSubjectByClassId);
 
+router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClass);
 module.exports = router;
 
 /**
@@ -38,12 +52,9 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - name
- *               - order
  *             properties:
  *               name:
  *                 type: string
@@ -51,13 +62,14 @@ module.exports = router;
  *                 type: number
  *               thumbnail:
  *                 type: string
+ *                 format: binary
  *               code:
- *                 type: number
- *             example:
- *               name: CBSC
- *               order: 2
- *               code: 334
- *               thumbnail: ajfvshBa/asfbjgvjcav
+ *                 type: string
+ *             required:
+ *              - name
+ *              - order
+ *              - code
+ *              - thumbnail
  *     responses:
  *       "201":
  *         description: Created
@@ -179,7 +191,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -189,13 +201,14 @@ module.exports = router;
  *                 type: number
  *               thumbnail:
  *                 type: string
+ *                 format: binary
  *               code:
- *                 type: number
- *             example:
- *               name: CBSC
- *               order: 2
- *               code: 35
- *               thumbnail: fvacgjhbzjnkl/aclhgh
+ *                 type: string
+ *             required:
+ *              - name
+ *              - order
+ *              - code
+ *              - thumbnail
  *     responses:
  *       "200":
  *         description: OK

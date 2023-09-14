@@ -47,7 +47,13 @@ module.exports.studentTypeValidation = require('./masterValidations/student.type
 module.exports.saralValidation = require('./saral.info.validation');
 module.exports.studentValidation = require('./masterValidations/student.Minority.group.validation');
 module.exports.studentAdmissionValidation = require('./masterValidations/student.admission.type.validation');
-
 module.exports.Section1A10Validation = require('./masterValidations/section1A(1.1 to 1.10).validation');
+module.exports.campusValidation = require('./campus.validation');
+module.exports.mappingValidation = require('./mapping.validation');
+module.exports.AppliedForPlacement = require('./masterValidations/applied_for_placement.validation');
+module.exports.AppliedForApprenticeship = require('./masterValidations/applied_for_apprenticeship.validation');
+module.exports.Session = require('./masterValidations/sessions.validation');
 module.exports.Section1A20Validation = require('./masterValidations/section1A(1.1 to 1.20).validation');
 module.exports.Section1A30Validation = require('./masterValidations/section1A(1.21 to 1.30).validation');
+module.exports.Student_Session_Validation = require('./student_session.validation');
+module.exports.SectionValidation = require('./section.validation');

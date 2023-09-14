@@ -116,6 +116,7 @@ const updateStudentById = {
   body: Joi.object()
     .keys({
       saral_id: Joi.string().required(),
+      campusId: Joi.string().required(),
       scode: Joi.string().required(),
       parent_id: Joi.string(),
       admission_no: Joi.string(),
