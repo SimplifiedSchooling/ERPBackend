@@ -24,14 +24,6 @@ const getSingleClass = catchAsync(async (req, res) => {
   res.send(singleClass);
 });
 
-// const getAllClassByMediumId = catchAsync(async (req, res) => {
-//   const allClasses = await classesService.getClassesByMediumId(req.params.mediumId);
-//   if (!allClasses) {
-//     throw new ApiError(httpStatus.NOT_FOUND, 'Classes not found');
-//   }
-//   res.send(allClasses);
-// });
-
 const updateSingleClass = catchAsync(async (req, res) => {
   const updateddClass = await classesService.updateClassById(req.params.classId, req.body);
   res.send(updateddClass);

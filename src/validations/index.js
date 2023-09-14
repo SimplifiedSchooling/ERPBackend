@@ -37,3 +37,5 @@ module.exports.internetTypeValidation = require('./masterValidations/type.of.int
 module.exports.specialEducatorValidation = require('./masterValidations/special.educator.validation');
 module.exports.laboratoryValidation = require('./masterValidations/laboratories.validation');
 module.exports.Section1A10Validation = require('./masterValidations/section1A(1.1 to 1.10).validation');
+module.exports.campusValidation = require('./campus.validation');
+module.exports.mappingValidation = require('./mapping.validation');

@@ -242,7 +242,7 @@ components:
         name:
           type: string
         code:
-          type: number
+          type: string
           description: subject code
         order:
           type: string
@@ -250,10 +250,8 @@ components:
           type: string  
       example:
         name: Example Subject
-        classId: 614a7e7d7f1d813bbf8e89b7  
         order: 2
-        boardId: 614a7e7d7f1d813bbf8e89b8
-        mediumId: 614a7e7d7f1d813bbf8e89b9
+        code: '123'
         thumbnail: sdfgjjhsdgjsf/sdghdgs
 
     Multimedia: 
@@ -351,6 +349,34 @@ components:
         subjectId: 64ca45e050227f21d906d
         bookId: 64ca45e050227f21d906d
         chapterId: 64ca45e050227f21d906d83c
+    Mapping:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the class
+        boardId:
+          type: string
+          description: ID of the boardId
+        mediumId:
+          type: string
+          description: ID of the mediumId
+        classId:
+          type: string
+          description: ID of the classId
+        subjectId:
+          type: string
+          description: ID of the subjectId
+        bookId:
+          type: string
+          description: ID of the bookId
+      example:
+        name: class10
+        boardId: 614a7e7d7f1d813bbf8e89b7  
+        mediumId: 614a7e7d7f1d813bbf8e89a9 
+        classId: 614a7e7d7f1d813bbf8e89b7  
+        subjectId: 614a7e7d7f1d813bbf8e89a9 
+        bookId: 614a7e7d7f1d813bbf8e89a9
 
     Demolished: 
       type: object
@@ -695,6 +721,25 @@ components:
         avgict: "Average ICT"
         lang_id: "Language ID"                                                                                          
       
+    Campus:
+      type: object
+      properties:
+        name:
+          type: string
+        mId:
+          type: string
+        contact_number:
+          type: string 
+        address:
+          type: string
+        date:
+          type: date    
+      example:
+        name: fake name
+        mId: 'sdvbjh2376r37862'
+        contact_number: fake contact 765368723632
+        address: fake address
+        date: 2020-05-12T16:18:04.793Z
 
     Token:
       type: object

@@ -27,11 +27,11 @@ const queryStaff = async (filter, options) => {
 
 /**
  * Get Staff by id
- * @param {ObjectId} id
+ * @param {ObjectId} _id
  * @returns {Promise<Staff>}
  */
-const getStaffById = async (id) => {
-  return Staff.findById(id);
+const getStaffById = async (_id) => {
+  return Staff.find({ _id });
 };
 
 /**

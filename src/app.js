@@ -50,6 +50,9 @@ if (config.env === 'production') {
   app.use('/v1/auth', authLimiter);
 }
 
+// Middleware for serving static files
+app.use(express.static('uploads'));
+
 // Apply the basic authentication middleware to the /v1/docs path
 app.use('/v1', routes);
 

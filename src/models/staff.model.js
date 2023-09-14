@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
+const uuid = require('node-uuid/uuid');
 const { toJSON, paginate } = require('./plugins');
 
 const staffSchema = mongoose.Schema(
   {
+    _id: {
+      type: String,
+      default: uuid.v1,
+    },
     saral_id: {
       type: String,
       required: true,
