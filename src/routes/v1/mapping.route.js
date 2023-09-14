@@ -27,7 +27,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /mapping:
+ * /mapping/{mappingId}:
  *   post:
  *     summary: Create a mapping
  *     tags: [Mapping]
@@ -81,62 +81,49 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get query mapping
+ *     summary: Create a mapping
  *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: board
- *         schema:
- *           type: string
- *         description: mapping name *
- *       - in: query
- *         name: sortBy
- *         schema:
- *           type: string
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           minimum: 1
- *         default: 10
- *         description: Maximum number of mapping
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           minimum: 1
- *           default: 1
- *         description: Page number
  *     responses:
- *       "200":
+ *       '200':
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 results:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Mapping'
- *                 page:
- *                   type: integer
- *                   example: 1
- *                 limit:
- *                   type: integer
- *                   example: 10
- *                 totalPages:
- *                   type: integer
- *                   example: 1
- *                 totalResults:
- *                   type: integer
- *                   example: 1
- *       "401":
+ *                 name:
+ *                   type: string
+ *                 boardId:
+ *                   type: string
+ *                 mediumId:
+ *                   type: string
+ *                 classId:
+ *                   type: string
+ *                 subjectId:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                     order:
+ *                       type: integer
+ *                     code:
+ *                       type: string
+ *                     thumbnail:
+ *                       type: string
+ *                     id:
+ *                       type: string
+ *                 bookId:
+ *                   type: string
+ *                 id:
+ *                   type: string
+ *       '401':
  *         $ref: '#/components/responses/Unauthorized'
- *       "403":
+ *       '403':
  *         $ref: '#/components/responses/Forbidden'
+ *       '404':
+ *         $ref: '#/components/responses/NotFound'
  */
 
 /**
