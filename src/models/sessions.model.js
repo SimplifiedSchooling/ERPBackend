@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { toJSON } = require('../plugins');
+const { toJSON } = require('./plugins');
 
 const sessionsSchema = mongoose.Schema(
   {
