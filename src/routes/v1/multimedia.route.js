@@ -24,6 +24,10 @@ router
   .route('/getByType/:multimediaType')
   .get(validate(multimediaValidation.getMultimediaByType), multimediaController.getMultimediaByType);
 
+router
+  .route('/getMultimedia/:chapterId')
+  .get(validate(multimediaValidation.getMultimediaByChaperId), multimediaController.getMultimediaByChaper);
+
 module.exports = router;
 
 /**
@@ -355,6 +359,34 @@ module.exports = router;
  *         name: chapterId
  *         required: true
  *         description: The ID of the chapter
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Multimedia'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+/**
+ * @swagger
+ * /multimedia/getMultimedia/{chapterId}:
+ *   get:
+ *     summary: Get a multimedia by chapterId
+ *     tags: [Multimedia]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: chapterId
+ *         required: true
  *         schema:
  *           type: string
  *     responses:
