@@ -47,6 +47,7 @@ const saralRoute = require('./saral.info.route');
 const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
 const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
+const Section1A40Route = require('./masterRoutes/section1A(1.31 to 1.40).route');
 
 const router = express.Router();
 
@@ -238,6 +239,10 @@ const defaultRoutes = [
   {
     path: '/section1A30',
     route: Section1A30Route,
+  },
+  {
+    path: '/section1A40',
+    route: Section1A40Route,
   },
 ];
 
