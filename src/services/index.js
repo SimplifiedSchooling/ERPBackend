@@ -62,3 +62,4 @@ module.exports.sessionService = require('./masterService/session.service');
 module.exports.Section1A20Service = require('./masterService/section1A(1.1 to 1.20).service');
 module.exports.Section1A30Service = require('./masterService/section1A(1.21 to 1.30).service');
 module.exports.Section1A40Service = require('./masterService/section1A(1.31 to 1.40).service');
+module.exports.Section1A50Service = require('./masterService/section1A(1.41 to 1.50).service');
