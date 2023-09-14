@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { objectId } = require('./custom.validation');
 
-const createStudent_session = {
+const createStudentSession = {
   body: Joi.object().keys({
     session_Id: Joi.string().required(),
     student_Id: Joi.string().required(),
@@ -10,13 +10,13 @@ const createStudent_session = {
   }),
 };
 
-const getStudent_session = {
+const getStudentSession = {
   params: Joi.object().keys({
     student_session_Id: Joi.string().custom(objectId).required(),
   }),
 };
 
-const getAllStudent_session = {
+const getAllStudentSession = {
   query: Joi.object().keys({
     attedance_type: Joi.string(),
     sortBy: Joi.string(),
@@ -25,7 +25,7 @@ const getAllStudent_session = {
   }),
 };
 
-const updateStudent_sessionById = {
+const updateStudentSessionById = {
   params: Joi.object().keys({
     student_session_Id: Joi.required().custom(objectId).required(),
   }),
@@ -38,16 +38,16 @@ const updateStudent_sessionById = {
     })
     .min(1),
 };
-const deleteStudent_sessionById = {
+const deleteStudentSessionById = {
   params: Joi.object().keys({
     student_session_Id: Joi.string().custom(objectId).required(),
   }),
 };
 
 module.exports = {
-  createStudent_session,
-  getStudent_session,
-  getAllStudent_session,
-  updateStudent_sessionById,
-  deleteStudent_sessionById,
+  createStudentSession,
+  getAllStudentSession,
+  getStudentSession,
+  updateStudentSessionById,
+  deleteStudentSessionById,
 };

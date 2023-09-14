@@ -36,6 +36,6 @@ const studentSessionSchema = mongoose.Schema(
 studentSessionSchema.plugin(toJSON);
 studentSessionSchema.plugin(paginate);
 
-const Student_session = mongoose.model('Student_session', studentSessionSchema);
+const StudentSession = mongoose.model('StudentSession', studentSessionSchema);
 
-module.exports = Student_session;
+module.exports = StudentSession;

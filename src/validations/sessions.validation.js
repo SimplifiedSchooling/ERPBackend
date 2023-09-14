@@ -1,6 +1,5 @@
 const Joi = require('joi');
-const { objectId } = require('../custom.validation');
-
+const { objectId } = require('../validations/custom.validation')
 const createSession = {
   body: Joi.object().keys({
     sessionName: Joi.string().required(),
