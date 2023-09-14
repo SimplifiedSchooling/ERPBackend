@@ -50,9 +50,15 @@ const resultTypeRoute = require('./masterRoutes/results.route');
 const studentRoute = require('./student.route');
 const attendanceRoute = require('./attendance.route');
 const saralRoute = require('./saral.info.route');
+const ictRoute = require('./masterRoutes/ICTGovSchool.route');
+const studentAdmissionRoute = require('./masterRoutes/student.admission.type.route');
+const studentSocialRoute = require('./masterRoutes/student.social.category.route');
+const studenttypeRoute = require('./masterRoutes/student.type.route');
+const typeOfictRoute = require('./masterRoutes/typeOfICT.route');
 const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
 const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
+const StudentMinorityRoute = require('./masterRoutes/student.Minority.group.route');
 
 const router = express.Router();
 
@@ -158,8 +164,20 @@ const defaultRoutes = [
     route: schooleBuildingRout,
   },
   {
+    path: '/studentAdmissionGroup',
+    route: studentAdmissionRoute,
+  },
+  {
     path: '/schoollocationtype',
     route: schoolLocationRoute,
+  },
+  {
+    path: '/studentType',
+    route: studenttypeRoute
+  },
+  {
+    path: '/socialCategory',
+    route: studentSocialRoute
   },
   {
     path: '/inchargetype',
@@ -218,6 +236,14 @@ const defaultRoutes = [
     route: staffRoute,
   },
   {
+    path: '/ICTgovschool',
+    route: ictRoute,
+  },
+  {
+    path: '/TypeOfICTgovschool',
+    route: typeOfictRoute,
+  },
+  {
     path: '/saralInfo',
     route: saralRoute,
   },
@@ -268,6 +294,10 @@ const defaultRoutes = [
   {
     path: '/section1A30',
     route: Section1A30Route,
+  },
+  {
+    path: '/studentMinority',
+    route: StudentMinorityRoute,
   },
 ];
 
