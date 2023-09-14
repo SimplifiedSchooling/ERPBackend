@@ -4,12 +4,17 @@ const roleSchema = mongoose.Schema(
   {
     role: {
       type: String,
+      unique: true,
+      required: true,
       trim: true,
     },
-    actions: {
-      type: String,
-      trim: true,
-    },
+    actions: [
+      {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    ],
   },
   {
     timestamps: true,

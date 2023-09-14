@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(boardValidation.createBoard), boardController.createBoard)
-  .get(validate(boardValidation.getAllBoard), boardController.getAllBoard);
+  .get(validate(boardValidation.queryBoard), boardController.queryBoard);
 
 router
   .route('/:boardId')
@@ -60,7 +60,7 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all boards
+ *     summary: Get query boards
  *     tags: [Board]
  *     security:
  *       - bearerAuth: []

@@ -34,6 +34,7 @@ const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
+const staffRoute = require('./staff.route');
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
@@ -48,6 +49,10 @@ const admitRoute = require('./masterRoutes/admitted.routes');
 const resultTypeRoute = require('./masterRoutes/results.route');
 const studentRoute = require('./student.route');
 const attendanceRoute = require('./attendance.route');
+const saralRoute = require('./saral.info.route');
+const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
+const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
+const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
 
 const router = express.Router();
 
@@ -209,6 +214,14 @@ const defaultRoutes = [
     route: demolishedRoute,
   },
   {
+    path: '/staff',
+    route: staffRoute,
+  },
+  {
+    path: '/saralInfo',
+    route: saralRoute,
+  },
+  {
     path: '/classroomavailable',
     route: ClassroomAvailableRouter,
   },
@@ -221,6 +234,7 @@ const defaultRoutes = [
     route: laboratoryRoute,
   },
   {
+<<<<<<< HEAD
     path: '/academics',
     route: academicsRoute,
   },
@@ -243,6 +257,18 @@ const defaultRoutes = [
   {
     path: '/attendance',
     route: attendanceRoute,
+=======
+    path: '/section1A10',
+    route: Section1A10Route,
+  },
+  {
+    path: '/section1A20',
+    route: Section1A20Route,
+  },
+  {
+    path: '/section1A30',
+    route: Section1A30Route,
+>>>>>>> origin/main
   },
 ];
 
