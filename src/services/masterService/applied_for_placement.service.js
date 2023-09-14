@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { AppliedForPlacement } = require('../../models');
+const AppliedForPlacement = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**

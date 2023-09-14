@@ -3,20 +3,36 @@ const validate = require('../../../middlewares/validate');
 const AppliedForPlacementValidation = require('../../../validations/masterValidations/applied_for_placement.validation');
 const AppliedForPlacementController = require('../../../controllers/masterControllers/applied_for_placement.controller');
 
-
 const router = express.Router();
+
 router
   .route('/')
-  .post(validate(AppliedForPlacementValidation.createAppliedForPlacement), AppliedForPlacementController.createAppliedForPlacement)
-  .get(validate(AppliedForPlacementValidation.getAllAppliedForPlacement), AppliedForPlacementController.getAllAppliedForPlacement);
+  .post(
+    validate(AppliedForPlacementValidation.createappliedForPlacement),
+    AppliedForPlacementController.createAppliedForPlacement
+  )
+  .get(
+    validate(AppliedForPlacementValidation.getAllappliedForPlacement),
+    AppliedForPlacementController.getAllAppliedForPlacement
+  );
 
 router
   .route('/:placementId')
-  .get(validate(AppliedForPlacementValidation.getAppliedForPlacementById), AppliedForPlacementController.getAppliedForPlacementById)
-  .patch(validate(AppliedForPlacementValidation.updateAppliedForPlacementId), AppliedForPlacementController.updateAppliedForPlacementById)
-  .delete(validate(AppliedForPlacementValidation.deleteAppliedForPlacementById), AppliedForPlacementController.deleteAppliedForPlacementById);
+  .get(
+    validate(AppliedForPlacementValidation.getappliedForPlacementById),
+    AppliedForPlacementController.getAppliedForPlacementById
+  )
+  .patch(
+    validate(AppliedForPlacementValidation.updateappliedForPlacementId),
+    AppliedForPlacementController.updateAppliedForPlacementById
+  )
+  .delete(
+    validate(AppliedForPlacementValidation.deleteappliedForPlacementById),
+    AppliedForPlacementController.deleteAppliedForPlacementById
+  );
 
 module.exports = router;
+
 /**
  * @swagger
  * tags:

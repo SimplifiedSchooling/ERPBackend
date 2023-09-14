@@ -1,25 +1,25 @@
 const Joi = require('joi');
 const { objectId } = require('../custom.validation');
 
-const createAppliedForApprenticeship = {
+const createappliedForApprenticeship = {
   body: Joi.object().keys({
     apprenticeshipName: Joi.string().required(),
   }),
 };
 
-const getAppliedForApprenticeshipById = {
+const getappliedForApprenticeshipById = {
   params: Joi.object().keys({
     apprenticeshipId: Joi.string().custom(objectId),
   }),
 };
 
-const getAllAppliedForApprenticeship = {
+const getAllappliedForApprenticeship = {
   query: Joi.object().keys({
     apprenticeshipName: Joi.string(),
   }),
 };
 
-const updateAppliedForApprenticeshipId = {
+const updateappliedForApprenticeshipId = {
   params: Joi.object().keys({
     apprenticeshipId: Joi.required().custom(objectId),
   }),
@@ -29,16 +29,16 @@ const updateAppliedForApprenticeshipId = {
     })
     .min(1),
 };
-const deleteAppliedForApprenticeshipById = {
+const deleteappliedForApprenticeshipById = {
   params: Joi.object().keys({
     apprenticeshipId: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createAppliedForApprenticeship,
-  getAllAppliedForApprenticeship,
-  getAppliedForApprenticeshipById,
-  updateAppliedForApprenticeshipId,
-  deleteAppliedForApprenticeshipById,
+  createappliedForApprenticeship,
+  getAllappliedForApprenticeship,
+  getappliedForApprenticeshipById,
+  updateappliedForApprenticeshipId,
+  deleteappliedForApprenticeshipById,
 };

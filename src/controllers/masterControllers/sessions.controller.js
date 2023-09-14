@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
-const { sessionService } = require('../../services');
+const sessionService = require('../../services');
 
 const createSession = catchAsync(async (req, res) => {
   const data = await sessionService.createSessions(req.body);
@@ -31,7 +31,7 @@ const deleteSessionById = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-module.exports = { 
+module.exports = {
   createSession,
   getAllSession,
   getSessionById,

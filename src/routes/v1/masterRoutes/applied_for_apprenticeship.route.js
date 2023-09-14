@@ -3,20 +3,36 @@ const validate = require('../../../middlewares/validate');
 const AppliedForApprenticeshipValidation = require('../../../validations/masterValidations/applied_for_apprenticeship.validation');
 const AppliedForApprenticeshipController = require('../../../controllers/masterControllers/applied_for_apprenticeship.controller');
 
-
 const router = express.Router();
+
 router
   .route('/')
-  .post(validate(AppliedForApprenticeshipValidation.createAppliedForApprenticeship), AppliedForApprenticeshipController.createAppliedForApprenticeship)
-  .get(validate(AppliedForApprenticeshipValidation.getAllAppliedForApprenticeship), AppliedForApprenticeshipController.getAllAppliedForApprenticeship);
+  .post(
+    validate(AppliedForApprenticeshipValidation.createappliedForApprenticeship),
+    AppliedForApprenticeshipController.createAppliedForApprenticeship
+  )
+  .get(
+    validate(AppliedForApprenticeshipValidation.getAllappliedForApprenticeship),
+    AppliedForApprenticeshipController.getAllAppliedForApprenticeship
+  );
 
 router
   .route('/:apprenticeshipId')
-  .get(validate(AppliedForApprenticeshipValidation.getAppliedForApprenticeshipById), AppliedForApprenticeshipController.getAppliedForApprenticeshipById)
-  .patch(validate(AppliedForApprenticeshipValidation.updateAppliedForApprenticeshipId), AppliedForApprenticeshipController.updateAppliedForApprenticeshipById)
-  .delete(validate(AppliedForApprenticeshipValidation.deleteAppliedForApprenticeshipById), AppliedForApprenticeshipController.deleteAppliedForApprenticeshipById);
+  .get(
+    validate(AppliedForApprenticeshipValidation.getappliedForApprenticeshipById),
+    AppliedForApprenticeshipController.getAppliedForApprenticeshipById
+  )
+  .patch(
+    validate(AppliedForApprenticeshipValidation.updateappliedForApprenticeshipId),
+    AppliedForApprenticeshipController.updateAppliedForApprenticeshipById
+  )
+  .delete(
+    validate(AppliedForApprenticeshipValidation.deleteappliedForApprenticeshipById),
+    AppliedForApprenticeshipController.deleteAppliedForApprenticeshipById
+  );
 
 module.exports = router;
+
 /**
  * @swagger
  * tags:

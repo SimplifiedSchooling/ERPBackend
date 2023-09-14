@@ -1,13 +1,12 @@
 const httpStatus = require('http-status');
 const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
-const { AppliedForApprenticeship } = require('../../services');
- 
+const AppliedForApprenticeship = require('../../services/masterService/applied_for_apprenticeship.service');
+
 const createAppliedForApprenticeship = catchAsync(async (req, res) => {
-   const data = await AppliedForApprenticeship.createAppliedForApprenticeship(req.body);
+  const data = await AppliedForApprenticeship.createAppliedForApprenticeship(req.body);
   res.status(httpStatus.CREATED).send(data);
 });
- 
 
 const getAllAppliedForApprenticeship = catchAsync(async (req, res) => {
   const result = await AppliedForApprenticeship.getAllAppliedForApprenticeship();

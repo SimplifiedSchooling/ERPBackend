@@ -1,13 +1,12 @@
 const httpStatus = require('http-status');
 const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
-const { AppliedForPlacement } = require('../../services');
- 
+const AppliedForPlacement = require('../../services/masterService/applied_for_placement.service');
+
 const createAppliedForPlacement = catchAsync(async (req, res) => {
-   const data = await AppliedForPlacement.createAppliedForPlacement(req.body);
+  const data = await AppliedForPlacement.createAppliedForPlacement(req.body);
   res.status(httpStatus.CREATED).send(data);
 });
- 
 
 const getAllAppliedForPlacement = catchAsync(async (req, res) => {
   const result = await AppliedForPlacement.getAllAppliedForPlacement();

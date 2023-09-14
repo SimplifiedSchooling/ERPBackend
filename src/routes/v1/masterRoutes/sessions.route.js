@@ -16,6 +16,7 @@ router
   .delete(validate(sessionValidation.deleteSessionById), sessionController.deleteSessionById);
 
 module.exports = router;
+
 /**
  * @swagger
  * tags:

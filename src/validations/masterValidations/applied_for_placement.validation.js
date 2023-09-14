@@ -1,25 +1,25 @@
 const Joi = require('joi');
 const { objectId } = require('../custom.validation');
 
-const createAppliedForPlacement = {
+const createappliedForPlacement = {
   body: Joi.object().keys({
     placementName: Joi.string().required(),
   }),
 };
 
-const getAppliedForPlacementById = {
+const getappliedForPlacementById = {
   params: Joi.object().keys({
     placementId: Joi.string().custom(objectId),
   }),
 };
 
-const getAllAppliedForPlacement = {
+const getAllappliedForPlacement = {
   query: Joi.object().keys({
     placementName: Joi.string(),
   }),
 };
 
-const updateAppliedForPlacementId = {
+const updateappliedForPlacementId = {
   params: Joi.object().keys({
     placementId: Joi.required().custom(objectId),
   }),
@@ -29,16 +29,16 @@ const updateAppliedForPlacementId = {
     })
     .min(1),
 };
-const deleteAppliedForPlacementById = {
+const deleteappliedForPlacementById = {
   params: Joi.object().keys({
     placementId: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createAppliedForPlacement,
-  getAllAppliedForPlacement,
-  getAppliedForPlacementById,
-  updateAppliedForPlacementId,
-  deleteAppliedForPlacementById,
+  createappliedForPlacement,
+  getAllappliedForPlacement,
+  getappliedForPlacementById,
+  updateappliedForPlacementId,
+  deleteappliedForPlacementById,
 };
