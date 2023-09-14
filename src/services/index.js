@@ -61,4 +61,6 @@ module.exports.AppliedForApprenticeship = require('./masterService/applied_for_a
 module.exports.sessionService = require('./masterService/session.service');
 module.exports.Section1A20Service = require('./masterService/section1A(1.1 to 1.20).service');
 module.exports.Section1A30Service = require('./masterService/section1A(1.21 to 1.30).service');
+module.exports.student_Session_Service = require('./student_session.service');
+module.exports.sectionService = require('./section.service');
 module.exports.Section1A40Service = require('./masterService/section1A(1.31 to 1.40).service');

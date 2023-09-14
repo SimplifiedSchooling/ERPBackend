@@ -53,3 +53,5 @@ module.exports.AppliedForApprenticeship = require('./masterValidations/applied_f
 module.exports.Session = require('./masterValidations/sessions.validation');
 module.exports.Section1A20Validation = require('./masterValidations/section1A(1.1 to 1.20).validation');
 module.exports.Section1A30Validation = require('./masterValidations/section1A(1.21 to 1.30).validation');
+module.exports.Student_Session_Validation = require('./student_session.validation');
+module.exports.SectionValidation = require('./section.validation');
