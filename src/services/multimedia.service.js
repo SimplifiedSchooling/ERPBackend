@@ -36,6 +36,15 @@ const getMultimediaById = async (id) => {
 };
 
 /**
+ * Get Multimedia by chapterId
+ * @param {ObjectId} chapterId
+ * @returns {Promise<Multimedia>}
+ */
+const getMultimediaByChaperId = async (chapterId) => {
+  return Multimedia.find({ chapterId });
+};
+
+/**
  * Get multimedia by multimedia Type
  * @param {ObjectId} imultimediaTyped
  * @returns {Promise<Multimedia>}
@@ -96,4 +105,5 @@ module.exports = {
   deleteMultimediaById,
   getMultimediaById,
   getMultimediaByType,
+  getMultimediaByChaperId,
 };
