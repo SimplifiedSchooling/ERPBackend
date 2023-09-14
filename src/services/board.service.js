@@ -55,8 +55,8 @@ const updateBoardById = async (boardId, updateBody) => {
  * @param {ObjectId} boardId
  * @returns {Promise<Board>}
  */
-const deleteBoardById = async (userId) => {
-  const board = await getBoardById(userId);
+const deleteBoardById = async (boardId) => {
+  const board = await getBoardById(boardId);
   if (!board) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Board not found');
   }

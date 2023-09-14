@@ -62,6 +62,218 @@ components:
       properties:
         buildingName:
           type: string
+    StudentSocialCategory:
+      type: object
+      properties:
+        name:
+          type: string
+    ICTgovschool:
+      type: object
+      properties:
+        name:
+          type: string
+    TypeOfICTgovschool:
+      type: object
+      properties:
+        name:
+          type: string
+    StudentType:
+      type: object
+      properties:
+        type:
+          type: string
+    StudentMinority:
+      type: object
+      properties:
+        name:
+          type: string
+    StudentAdmission:
+      type: object
+      properties:
+        type:
+          type: string
+    Sarals:
+      type: object
+      properties:
+        scode:
+          type: string
+        anganwadicenteradj:
+          type: string
+        noofanganwadinear:
+          type: number
+        noofsevika:
+          type: number
+        agewiseboy:
+          type: number
+        agewisegirl:
+          type: number
+        recognizbalwadi:
+          type: number
+        recognitiondate:
+          type: number
+        noofteacher:
+          type: number
+        eodeputyvisit:
+          type: number
+        eovisit:
+          type: number
+        dodeputyvisit:
+          type: number
+        ddvisits:
+          type: number
+        dvisitno: 
+          type: number
+        zmdvisits:
+          type: number
+        mdminspno:
+          type: number
+        internalaudit:
+          type: number
+        externalaudit:
+          type: number
+        localauditb:
+          type: number
+        auditorauditbgen:
+          type: number
+        boarddisplay:
+          type: number
+        socialaudit:
+          type: number
+        grantssa:
+          type: string
+        spillapril:
+          type: number
+        expenditurers:
+          type: number
+        sdevelopgrant:
+          type: string
+        smaintenancegrant:
+          type: string
+        tlmgrant:
+          type: string
+        fundscwsn:
+          type: string
+        grantcontingency:
+          type: string
+        contingengrantob:
+          type: number
+        modelschool1:
+          type: number
+        sbpgadoptscheme:
+          type: number
+        hostelallowance:
+          type: number
+        publiccontribut:
+          type: number
+        attendallowance:
+          type: number
+        examfeerefund:
+          type: number
+        csr:
+          type: number
+        shetkiallowance:
+          type: number
+        idmifund:
+          type: number
+        maintenancegrant:
+          type: string
+        buildingrant:
+          type: string
+        pariposhan:
+          type: string
+        buildingrent:
+          type: number
+        othergrant:
+          type: string
+        childenroll:
+          type: number
+        nostuadmissionquota:
+          type: number
+        nobookfiction:
+          type: number
+        nobooknonfiction:
+          type: number
+        magazine:
+          type: string
+        jsmagazine:
+          type: number
+        rbook:
+          type: string
+        tobaccoinside: 
+          type: string
+        smokingarea:
+          type: string
+        infotobacco:
+          type: string
+        cotpa:
+          type: string
+        tobaccoinsideper:
+          type: string
+        signage:
+          type: string
+        controltobacco: 
+          type: string
+        intiativetobacco:
+          type: string
+        statenodaloff:
+          type: string
+        antitobacco:
+          type: string
+        controltobaccocommite:
+          type: string
+        meetreport:
+          type: string
+        tobaccofreeschool:
+          type: string
+        tobaccoyard:
+          type: string
+        tfet:
+          type: string
+        evidencetobacco:
+          type: string
+        totallaptop:
+          type: number
+        totalprinter:
+          type: number
+        totalprinterfun:
+          type: number
+        laptopteacpurp:
+          type: string
+        complearnpurp:
+          type: string
+        computeradminpurp:
+          type: string
+        schoolnetwork:
+          type: string
+        bandwidth:
+          type: string
+        serviceprovider:
+          type: string
+        campusplan: 
+          type: string
+        englishkit:
+          type: string
+        geographickit:
+          type: string
+        braillebooks:
+          type: string
+        largeprint:
+          type: string
+        noofutensils:
+          type: number
+        statusofutensils:
+          type: string
+        utensilsfrom:
+          type: string
+        noofplates:
+          type: number
+        noofspoons:
+          type: number
+        noofglass:
+          type: number
+        weighingmachine:
+          type: string
+
     Book:
       type: object
       properties:

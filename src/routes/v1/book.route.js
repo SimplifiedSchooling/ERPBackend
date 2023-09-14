@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(bookValidation.createBook), bookController.createBook)
-  .get(validate(bookValidation.getBooks), bookController.getAllBook);
+  .get(validate(bookValidation.getBooks), bookController.queryBook);
 
 router
   .route('/:bookId')
