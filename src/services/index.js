@@ -56,6 +56,7 @@ module.exports.studentAdmissionService = require('./masterService/student.admiss
 module.exports.udiseblockService = require('./masterService/udiseblock.service');
 module.exports.campusService = require('./campus.service');
 module.exports.Section1A10Service = require('./masterService/section1A(1.1 to 1.10).service');
+module.exports.mappingService = require('./mapping.service');
 module.exports.AppliedForPlacement = require('./masterService/applied_for_placement.service');
 module.exports.AppliedForApprenticeship = require('./masterService/applied_for_apprenticeship.service');
 module.exports.sessionService = require('./session.service');

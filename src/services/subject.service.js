@@ -41,6 +41,13 @@ const getSubjectById = async (id) => {
 const getSubjectByClassId = async (classId) => {
   return Subject.find({ classId });
 };
+/**
+ * Get subject
+ * @returns {Promise<Subject>}
+ */
+const getSubjectOfClass = async () => {
+  return Subject.find().populate('Class');
+};
 
 /**
  * Update subject by id
@@ -79,4 +86,5 @@ module.exports = {
   updatSubjectById,
   deleteSubjectById,
   getSubjectByClassId,
+  getSubjectOfClass,
 };

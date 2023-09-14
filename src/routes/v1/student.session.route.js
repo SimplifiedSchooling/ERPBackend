@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
 const { StudentSessionValidation } = require('../../validations');
-const {studentSessionController} = require('../../controllers');
+const { studentSessionController } = require('../../controllers');
 
 const router = express.Router();
 router
@@ -184,7 +184,7 @@ module.exports = router;
  *   schemas:
  *     StudentSessionUpdateInput:
  *       type: object
-  *       properties:
+ *       properties:
  *         session_Id:
  *           type: string
  *           description: ID of the session_Id

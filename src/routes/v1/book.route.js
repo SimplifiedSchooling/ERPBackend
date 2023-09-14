@@ -1,13 +1,26 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const bookController = require('../../controllers/book.controller');
 const bookValidation = require('../../validations/book.validation');
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 router
   .route('/')
-  .post(validate(bookValidation.createBook), bookController.createBook)
+  .post(upload.single('thumbnail'), validate(bookValidation.createBook), bookController.createBook)
   .get(validate(bookValidation.getBooks), bookController.queryBook);
 
 router
@@ -35,42 +48,47 @@ module.exports = router;
  * /books:
  *   post:
  *     summary: Create a book
- *     tags: [Book]
+ *     tags:
+ *       - Book
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
+ *               subjectId:
+ *                 type: string
+ *               thumbnail:
+ *                 type: string
+ *                 format: binary
  *             required:
  *               - name
  *               - boardId
  *               - mediumId
  *               - classId
  *               - subjectId
- *             properties:
- *               name:
- *                 type: string
- *               classId: string
- *             example:
- *               name: History
- *               boardId: 64d9ceaef49e9f5dc06502c6
- *               mediumId: 64d327a41128844220f0cce4
- *               classId: 64d327811128844220f0cce0
- *               subjectId: 64d9d4666205c371563fcadb
- *               thumbnail: afllnEGAS/AGSJAGSNL
+ *               - thumbnail
  *     responses:
- *       "201":
+ *       '201':
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Book'
- *       "401":
+ *               $ref: '#/components/schemas/Book'
+ *       '401':
  *         $ref: '#/components/responses/Unauthorized'
- *       "403":
+ *       '403':
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
