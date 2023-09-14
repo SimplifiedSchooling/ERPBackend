@@ -53,6 +53,8 @@ const saralRoute = require('./saral.info.route');
 const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
 const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
+const student_Session_Route = require('./student_session.route');
+const sectionRoute = require('./section.route');
 
 const router = express.Router();
 
@@ -64,6 +66,10 @@ const defaultRoutes = [
   {
     path: '/users',
     route: userRoute,
+  },
+  {
+    path: '/sections',
+    route: sectionRoute,
   },
   {
     path: '/videos',
@@ -269,6 +275,11 @@ const defaultRoutes = [
     path: '/section1A30',
     route: Section1A30Route,
   },
+  {
+    path: '/student_session',
+    route: student_Session_Route,
+  },
+  
 ];
 
 const devRoutes = [

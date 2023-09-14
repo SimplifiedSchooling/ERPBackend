@@ -58,3 +58,5 @@ module.exports.campusService = require('./campus.service');
 module.exports.Section1A10Service = require('./masterService/section1A(1.1 to 1.10).service');
 module.exports.Section1A20Service = require('./masterService/section1A(1.1 to 1.20).service');
 module.exports.Section1A30Service = require('./masterService/section1A(1.21 to 1.30).service');
+module.exports.student_Session_Service = require('./student_session.service');
+module.exports.sectionService = require('./section.service');

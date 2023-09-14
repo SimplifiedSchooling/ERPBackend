@@ -50,3 +50,5 @@ module.exports.UdiseblockController = require('./masterControllers/udiseblock.co
 module.exports.Section1A10Controller = require('./masterControllers/section1A(1.1 to 1.10).controller');
 module.exports.Section1A20Controller = require('./masterControllers/section1A(1.1 to 1.20).controller');
 module.exports.Section1A30Controller = require('./masterControllers/section1A(1.21 to 1.30).controller');
+module.exports.Student_Session_controller = require('./student_session.controller');
+module.exports.sectionController = require('./section.controller');

@@ -28,6 +28,15 @@ components:
       example:
         role: admin
 
+    Section:
+      type: object
+      properties:
+        name:
+          type: string
+          description: section name
+      example:
+        name: A,B,C,D,Commerce,science
+
     Board:
       type: object
       properties:

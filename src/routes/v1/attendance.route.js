@@ -167,7 +167,7 @@ module.exports = router;
  *           description: date
  *         attedance_type:
  *           type: string
- *           description: attedance_type
+ *           enum: [ holiday,late,present,absent,halfday ]
  *         remark:
  *           type: string
  *           description: remark
@@ -193,7 +193,7 @@ module.exports = router;
  *           description: date
  *         attedance_type:
  *           type: string
- *           description: attedance_type
+ *           enum: [ holiday,late,present,absent,halfday ]
  *         remark:
  *           type: string
  *           description: remark
