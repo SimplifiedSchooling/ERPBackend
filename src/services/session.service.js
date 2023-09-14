@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
-const { Sessions } = require('../../models');
-const ApiError = require('../../utils/ApiError');
+const { Sessions } = require('../models');
+const ApiError = require('../utils/ApiError');
 
 /**
  * Create a Sessions

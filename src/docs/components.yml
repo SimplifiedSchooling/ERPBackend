@@ -47,6 +47,8 @@ components:
       properties:
         type:
           type: string
+      example:
+        type: abc
     ManagementCode:
       type: object
       properties:
@@ -56,51 +58,73 @@ components:
           type: number
         group:
           type: string
+      example:
+        name: abc
+        code: 1
+        group: A
     ManagementGroup:
       type: object
       properties:
         name:
           type: string
+      example:
+        name: abc
     Respondent:
       type: object
       properties:
         type:
           type: string
+      example:
+        type: abc
     Building:
       type: object
       properties:
         buildingName:
           type: string
+      example:
+        buildingName: abc
     StudentSocialCategory:
       type: object
       properties:
         name:
           type: string
+      example:
+        name: abc
     ICTgovschool:
       type: object
       properties:
         name:
           type: string
+      example:
+        name: abc
     TypeOfICTgovschool:
       type: object
       properties:
         name:
           type: string
+      example:
+        name: abc
     StudentType:
       type: object
       properties:
         type:
           type: string
+      example:
+        type: abc
     StudentMinority:
       type: object
       properties:
         name:
           type: string
+      example:
+        name: abc
     StudentAdmission:
       type: object
       properties:
         type:
           type: string
+      example:
+        type: abc
     Sarals:
       type: object
       properties:
@@ -282,7 +306,261 @@ components:
           type: number
         weighingmachine:
           type: string
-
+        heightmeastool:
+          type: string
+        yearofprocurement:
+          type: number
+        badminton:
+          type: string
+        basketball:
+          type: string
+        carrom:
+          type: string
+        yoga:
+          type: string
+        football:
+          type: string
+        meterrun:
+          type: string
+        allequipments:
+          type: number
+        seatingarrang:
+          type: string
+        seatingarrangava:
+          type: string
+        seatingarrangereq:
+          type: string
+        transportprovider:
+          type: string
+        vehicaltype:
+          type: string
+        contractorowner:
+          type: string
+        rtoregistration:
+          type: string
+        drivername:
+          type: string
+        driverlicenseno:
+          type: string
+        driveraadharno:
+          type: string
+        helpername:
+          type: string
+        balwadicenter:
+          type: number
+        teacherresearch:
+          type: number
+        teacherarticlepublish:
+          type: string
+        curriculumdetails:
+          type: string
+        typeofactivity:
+          type: string
+        ptaexecutive:
+          type: string
+        dateofapproval:
+          type: string
+        feestructapprove:
+          type: string
+        feerevisionpendstatelev:
+          type: string
+        committeesmc: 
+          type: string
+        smcacademicyear:
+          type: number
+        smccommitteplan:
+          type: string
+        committedetail1:
+          type: string
+        committeeconstitute:
+          type: string
+        smcsmdccommitte:
+          type: string
+        smdcpreviousyear:
+          type: number
+        smdccommitteimprove:
+          type: string
+        committedetail:
+          type: string
+        committeeconstitutepta:
+          type: string
+        noofmeetingpta: 
+          type: number
+        committedetailpta:
+          type: string
+        committeeconstitutemta:
+          type: string
+        committedetailmta:
+          type: string
+        committeeconstituteac:
+          type: string
+        committedetailac: 
+          type: string
+        committeeconstitutetc:
+          type: string
+        committedetailtc:
+          type: string
+        committeeconstitutesc:
+          type: string
+        committedetailsc:
+          type: string
+        committeeconstitutemdmc:
+          type: string
+        committedetailmdmc:
+          type: string
+        progress_count:
+          type: string
+        progress_count1:
+          type: string
+        progress_count2:
+          type: string
+        progress_count3:
+          type: string
+      example:
+        scode: mh00001
+        anganwadicenteradj: fake anganwadicenter
+        noofanganwadinear: 1
+        noofsevika: 2
+        agewiseboy: 3
+        agewisegirl: 10
+        recognizbalwadi: 12
+        recognitiondate: 2023
+        noofteacher: 5
+        eodeputyvisit: 3
+        eovisit: 4
+        dodeputyvisit: 5
+        ddvisits: 6
+        dvisitno: 5
+        zmdvisits: 3
+        mdminspno: 6
+        internalaudit: 8
+        externalaudit: 9
+        localauditb: 7
+        auditorauditbgen: 9
+        boarddisplay: 2
+        socialaudit: test
+        grantssa: yes
+        spillapril: 2
+        expenditurers: 4
+        sdevelopgrant: no
+        smaintenancegrant: yes
+        tlmgrant: no
+        fundscwsn: no
+        grantcontingency: no
+        contingengrantob: 3
+        modelschool1: 4
+        sbpgadoptscheme: 5
+        hostelallowance: 6
+        publiccontribut: 7
+        attendallowance: 2
+        examfeerefund: 2
+        csr: 4
+        shetkiallowance: 5
+        idmifund: 5
+        maintenancegrant: Yes
+        buildingrant: No
+        pariposhan: No
+        buildingrent: 5
+        othergrant: Yes
+        childenroll: 8
+        nostuadmissionquota: 0
+        nobookfiction: 9
+        nobooknonfiction: 4
+        magazine: Yes
+        jsmagazine: 2
+        rbook: Test
+        tobaccoinside: Test
+        smokingarea: Yes
+        infotobacco: No
+        cotpa: No
+        tobaccoinsideper: No
+        signage: No
+        controltobacco: No
+        intiativetobacco: No
+        statenodaloff: No
+        antitobacco: No
+        controltobaccocommite: Yes
+        meetreport: Yes
+        tobaccofreeschool: Yes
+        tobaccoyard: Yes
+        tfet: Yes
+        evidencetobacco: Yes
+        totallaptop: 3
+        totalprinter: 4
+        totalprinterfun: 1
+        laptopteacpurp: Yes
+        complearnpurp: No
+        computeradminpurp: No
+        schoolnetwork: No
+        bandwidth: No
+        serviceprovider: No
+        campusplan: Yes
+        englishkit: Yes
+        geographickit: Yes
+        braillebooks: Yes
+        largeprint: Yes
+        noofutensils: 3
+        balwadicenter: 4
+        statusofutensils: No
+        utensilsfrom: No
+        noofplates: 8
+        noofspoons: 8
+        noofglass: 8
+        weighingmachine: No
+        heightmeastool: No
+        yearofprocurement: 8
+        badminton: No
+        basketball: Test
+        carrom: Test
+        yoga: Test
+        football: Test
+        meterrun: Test
+        allequipments: 4
+        seatingarrang: Test
+        seatingarrangava: Test
+        seatingarrangereq: Yes
+        transportprovider: Yes
+        vehicaltype: Yes
+        contractorowner: Yes
+        rtoregistration: Yes
+        drivername: Yes
+        driverlicenseno: Yes
+        driveraadharno: Yes
+        helpername: Yes
+        teacherresearch: 5
+        teacherarticlepublish: Test1
+        curriculumdetails: Test1
+        typeofactivity: Test1
+        ptaexecutive: Test1
+        dateofapproval: Test1
+        feestructapprove: Test1
+        feerevisionpendstatelev: Test1
+        committeesmc: Test1
+        smcacademicyear: 5
+        smccommitteplan: Yes
+        committedetail1: Yes
+        committeeconstitute: Yes
+        smcsmdccommitte: Yes
+        smdcpreviousyear: 7
+        smdccommitteimprove: Yes
+        committedetail: Yes
+        committeeconstitutepta: Yes
+        noofmeetingpta: 7
+        committedetailpta: Yes
+        committeeconstitutemta: Yes
+        committedetailmta: Yes
+        committeeconstituteac: Yes
+        committedetailac: Yes
+        committeeconstitutetc: Yes
+        committedetailtc: Yes
+        committeeconstitutesc: Yes
+        committedetailsc: Yes
+        committeeconstitutemdmc: Yes
+        committedetailmdmc: Yes
+        progress_count: Yes
+        progress_count1: Yes
+        progress_count2: Yes
+        progress_count3: Yes
     Book:
       type: object
       properties:

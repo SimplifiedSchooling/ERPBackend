@@ -1,14 +1,14 @@
 const httpStatus = require('http-status');
-const { Student } = require('../../models');
+const { StudentMinority } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a Student Minority Group
  * @param {Object} student
- * @returns {Promise<Student>}
+ * @returns {Promise<StudentMinority>}
  */
 const createStudentMinority = async (student) => {
-  return Student.create(student);
+  return StudentMinority.create(student);
 };
 
 /**
@@ -22,24 +22,24 @@ const createStudentMinority = async (student) => {
  */
 
 const getAllStudentMinority = async () => {
-  const student = await Student.find();
+  const student = await StudentMinority.find();
   return student;
 };
 
 /**
  * Get Student Minority Group by id
  * @param {ObjectId} id
- * @returns {Promise<Student>}
+ * @returns {Promise<StudentMinority>}
  */
 const getStudentMinorityById = async (id) => {
-  return Student.findById(id);
+  return StudentMinority.findById(id);
 };
 
 /**
  * Update Student Minority Group by id
  * @param {ObjectId} studentId
  * @param {Object} updateBody
- * @returns {Promise<Student>}
+ * @returns {Promise<StudentMinority>}
  */
 const updateStudentMinorityById = async (studentId, updateBody) => {
   const student = await getStudentMinorityById(studentId);
@@ -54,7 +54,7 @@ const updateStudentMinorityById = async (studentId, updateBody) => {
 /**
  * Delete Student Monority Group by id
  * @param {ObjectId} studentId
- * @returns {Promise<Student>}
+ * @returns {Promise<StudentMinority>}
  */
 const deleteStudentMinorityById = async (studentId) => {
   const student = await getStudentMinorityById(studentId);

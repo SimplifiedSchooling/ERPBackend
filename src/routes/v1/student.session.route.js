@@ -1,59 +1,53 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const student_sessionValidation = require('../../validations/student_session.validation');
-const student_sessionController = require('../../controllers/student_session.controller');
+const { StudentSessionValidation } = require('../../validations');
+const { studentSessionController } = require('../../controllers');
 
 const router = express.Router();
 router
   .route('/')
-  .post(validate(student_sessionValidation.createStudent_session), student_sessionController.createStudent_session)
-  .get(validate(student_sessionValidation.getAllStudent_session), student_sessionController.getStudent_session);
+  .post(validate(StudentSessionValidation.createStudentSession), studentSessionController.createStudentSession)
+  .get(validate(StudentSessionValidation.getAllStudentSession), studentSessionController.getSingleStudentSession);
 
 router
-  .route('/:student_session_Id')
-  .get(validate(student_sessionValidation.getStudent_session), student_sessionController.getSingleStudent_session)
-  .patch(
-    validate(student_sessionValidation.updateStudent_sessionById),
-    student_sessionController.updateSingleStudent_session
-  )
-  .delete(
-    validate(student_sessionValidation.deleteStudent_sessionById),
-    student_sessionController.deleteSingleStudent_session
-  );
+  .route('/:studentSessionId')
+  .get(validate(StudentSessionValidation.getStudentSession), studentSessionController.getStudentSession)
+  .patch(validate(StudentSessionValidation.updateStudentSessionById), studentSessionController.updateSingleStudentSession)
+  .delete(validate(StudentSessionValidation.deleteStudentSessionById), studentSessionController.deleteSingleStudentSession);
 
 module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: Student_session
- *   description:   student_session Management System
+ *   name: StudentSession
+ *   description:   studentSession Management System
  */
 
 /**
  * @swagger
- * /student_session:
+ * /studentSession:
  *   post:
- *     summary: Create a new student_session
- *     tags: [Student_session]
+ *     summary: Create a new studentSession
+ *     tags: [StudentSession]
  *     requestBody:
- *       description: Student_session object to be created
+ *       description: StudentSession object to be created
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Student_sessionInput'
+ *             $ref: '#/components/schemas/StudentSessionInput'
  *     responses:
  *       200:
- *         description: Student_session created successfully
+ *         description: StudentSession created successfully
  *   get:
- *     summary: Get all student_sessions
- *     tags: [Student_session]
+ *     summary: Get all studentSessions
+ *     tags: [StudentSession]
  *     parameters:
  *       - in: query
- *         name: student_sessionName
+ *         name: studentSessionName
  *         schema:
  *           type: string
- *         description: student_session name
+ *         description: studentSession name
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -65,7 +59,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of student_sessions
+ *         description: Maximum number of studentSessions
  *       - in: query
  *         name: page
  *         schema:
@@ -84,7 +78,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Student_sessionInput'
+ *                     $ref: '#/components/schemas/StudentSessionInput'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -102,59 +96,59 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /student_session/{student_session_Id}:
+ * /studentSession/{studentSessionId}:
  *   patch:
- *     summary: Update a single student_session by ID
- *     tags: [Student_session]
+ *     summary: Update a single studentSession by ID
+ *     tags: [StudentSession]
  *     parameters:
  *       - in: path
- *         name: student_session_Id
+ *         name: studentSessionId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the student_session
+ *         description: ID of the studentSession
  *     requestBody:
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Student_sessionUpdateInput'
+ *             $ref: '#/components/schemas/StudentSessionUpdateInput'
  *     responses:
  *       200:
  *         description: Successful response
  *       400:
  *         description: Bad request
  *       404:
- *         description: Student_session not found
+ *         description: StudentSession not found
  *   delete:
- *     summary: Delete a single student_session by ID
- *     tags: [Student_session]
+ *     summary: Delete a single studentSession by ID
+ *     tags: [StudentSession]
  *     parameters:
  *       - in: path
- *         name: student_session_Id
+ *         name: studentSessionId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the student_session
+ *         description: ID of the studentSession
  *     responses:
  *       204:
  *         description: No content
  *       404:
- *         description: Student_session not found
+ *         description: StudentSession not found
  *   get:
- *     summary: Get a single student_session by ID
- *     tags: [Student_session]
+ *     summary: Get a single studentSession by ID
+ *     tags: [StudentSession]
  *     parameters:
  *       - in: path
- *         name: student_session_Id
+ *         name: studentSessionId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the student_session
+ *         description: ID of the studentSession
  *     responses:
  *       200:
  *         description: Successful response
  *       404:
- *         description: Student_session not found
+ *         description: StudentSession not found
  *
  */
 
@@ -162,7 +156,7 @@ module.exports = router;
  * @swagger
  * components:
  *   schemas:
- *     Student_sessionInput:
+ *     StudentSessionInput:
  *       type: object
  *       properties:
  *         session_Id:
@@ -188,7 +182,7 @@ module.exports = router;
  * @swagger
  * components:
  *   schemas:
- *     Student_sessionUpdateInput:
+ *     StudentSessionUpdateInput:
  *       type: object
  *       properties:
  *         session_Id:
