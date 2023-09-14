@@ -51,6 +51,8 @@ const studentRoute = require('./student.route');
 const attendanceRoute = require('./attendance.route');
 const saralRoute = require('./saral.info.route');
 const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
+const campusRoute = require('./campus.route');
+const mappingRoute = require('./mapping.route');
 const AppliedForPlacementRoute = require('./masterRoutes/applied_for_placement.route');
 const AppliedForApprenticeshipRoute = require('./masterRoutes/applied_for_apprenticeship.route');
 const SessionRoute = require('./masterRoutes/sessions.route');
@@ -272,6 +274,14 @@ const defaultRoutes = [
     route: Section1A10Route,
   },
   {
+    path: '/campus',
+    route: campusRoute,
+  },
+  {
+    path: '/mapping',
+    route: mappingRoute,
+  },
+  {
     path: '/appliedforplacement',
     route: AppliedForPlacementRoute,
   },
@@ -296,7 +306,6 @@ const defaultRoutes = [
     route: student_Session_Route,
   },
   {
-  
     path: '/section1A40',
     route: Section1A40Route,
   },

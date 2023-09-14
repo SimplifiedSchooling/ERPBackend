@@ -31,10 +31,10 @@ const updateStudent_sessionById = {
   }),
   body: Joi.object()
     .keys({
-        session_Id: Joi.string().required(),
-        student_Id: Joi.string().required(),
-        class_Id: Joi.string().required(),
-        section_Id: Joi.string().required(),
+      session_Id: Joi.string().required(),
+      student_Id: Joi.string().required(),
+      class_Id: Joi.string().required(),
+      section_Id: Joi.string().required(),
     })
     .min(1),
 };

@@ -1,110 +1,107 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
-const subjectController = require('../../controllers/subject.controller');
-const subjectValidation = require('../../validations/subject.validation');
+const { mappingController } = require('../../controllers');
+const { mappingValidation } = require('../../validations');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
-
 router
   .route('/')
-  .post(upload.single('thumbnail'), validate(subjectValidation.createSubject), subjectController.createSubject)
-  .get(validate(subjectValidation.getAllSubject), subjectController.getAllSubject);
+  .post(validate(mappingValidation.createMapping), mappingController.createMapping)
+  .get(validate(mappingValidation.queryMapping), mappingController.queryMapping);
 
 router
-  .route('/:subjectId')
-  .patch(upload.single('thumbnail'), validate(subjectValidation.updateSubject), subjectController.updateSubject)
-  .delete(validate(subjectValidation.deleteSubject), subjectController.deleteSubject)
-  .get(validate(subjectValidation.getSubject), subjectController.getSubjectById);
+  .route('/:mappingId')
+  .get(validate(mappingValidation.getMappingById), mappingController.getMappingById)
+  .patch(validate(mappingValidation.updateMapping), mappingController.updateMappingById)
+  .delete(validate(mappingValidation.deleteMappingById), mappingController.deleteMapping);
 
-router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClassId), subjectController.getSubjectByClassId);
-
-router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClass);
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Subject
- *   description: Subject management
+ *   name: Mapping
+ *   description: Mapping management
  */
 
 /**
  * @swagger
- * /subjects:
+ * /mapping:
  *   post:
- *     summary: Create a subject
- *     tags: [Subject]
+ *     summary: Create a mapping
+ *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - name
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
- *               thumbnail:
+ *                 description: Name of the class
+ *               boardId:
  *                 type: string
- *                 format: binary
- *               code:
+ *                 description: ID of the boardId
+ *               mediumId:
  *                 type: string
- *             required:
- *              - name
- *              - order
- *              - code
- *              - thumbnail
+ *                 description: ID of the mediumId
+ *               classId:
+ *                 type: string
+ *                 description: ID of the classId
+ *               subjectId:
+ *                 type: string
+ *                 description: ID of the subjectId
+ *               bookId:
+ *                 type: string
+ *                 description: ID of the bookId
+ *             example:
+ *               name: class10
+ *               boardId: 614a7e7d7f1d813bbf8e89b7
+ *               mediumId: 614a7e7d7f1d813bbf8e89a9
+ *               classId: 614a7e7d7f1d813bbf8e89b7
+ *               subjectId: 614a7e7d7f1d813bbf8e89a9
+ *               bookId: 614a7e7d7f1d813bbf8e89a9
+ *
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Subject'
+ *                $ref: '#/components/schemas/Mapping'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all subjects
- *     tags: [Subject]
+ *     summary: Get query mapping
+ *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: subject
+ *         name: board
  *         schema:
  *           type: string
- *         description: Subject name *
+ *         description: mapping name *
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. name:asc)
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of subject
+ *         description: Maximum number of mapping
  *       - in: query
  *         name: page
  *         schema:
@@ -123,7 +120,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Subject'
+ *                     $ref: '#/components/schemas/Mapping'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -144,26 +141,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /subjects/{subjectId}:
+ * /mapping/{mappingId}:
  *   get:
- *     summary: Get a subject
- *     tags: [Subject]
+ *     summary: Get a mapping
+ *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: subjectId
+ *         name: mappingId
  *         required: true
  *         schema:
  *           type: string
- *         description: subjectId
+ *         description: mappingId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Subject'
+ *                $ref: '#/components/schemas/Mapping'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -171,51 +168,57 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
- */
-
-/**
- * @swagger
- * /subjects/{subjectId}:
  *   patch:
- *     summary: Update a subject
- *     tags: [Subject]
+ *     summary: Update a mapping
+ *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: subjectId
+ *         name: mappingId
  *         required: true
  *         schema:
  *           type: string
- *         description: subjectId
+ *         description: mappingId
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
- *               thumbnail:
+ *                 description: Name of the class
+ *               boardId:
  *                 type: string
- *                 format: binary
- *               code:
+ *                 description: ID of the boardId
+ *               mediumId:
  *                 type: string
- *             required:
- *              - name
- *              - order
- *              - code
- *              - thumbnail
+ *                 description: ID of the mediumId
+ *               classId:
+ *                 type: string
+ *                 description: ID of the classId
+ *               subjectId:
+ *                 type: string
+ *                 description: ID of the subjectId
+ *               bookId:
+ *                 type: string
+ *                 description: ID of the bookId
+ *             example:
+ *               name: class10
+ *               boardId: 614a7e7d7f1d813bbf8e89b7
+ *               mediumId: 614a7e7d7f1d813bbf8e89a9
+ *               classId: 614a7e7d7f1d813bbf8e89b7
+ *               subjectId: 614a7e7d7f1d813bbf8e89a9
+ *               bookId: 614a7e7d7f1d813bbf8e89a9
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
- *               schema:
- *                $ref: '#/components/schemas/Subject'
+ *             schema:
+ *                $ref: '#/components/schemas/Mapping'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -224,17 +227,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a subject
- *     tags: [Subject]
+ *     summary: Delete a mapping
+ *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: subjectId
+ *         name: mappingId
  *         required: true
  *         schema:
  *           type: string
- *         description: subjectId
+ *         description: mappingId
  *     responses:
  *       "200":
  *         description: No content
@@ -244,34 +247,4 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- */
-
-/**
- * @swagger
- * /subjects/class/{classId}:
- *   get:
- *     summary: Get a class
- *     tags: [Subject]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: classId
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *               schema:
- *                $ref: '#/components/schemas/Subject'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
  */

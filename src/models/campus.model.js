@@ -3,8 +3,8 @@ const { toJSON, paginate } = require('./plugins');
 
 const campusSchema = mongoose.Schema(
   {
-    mid: {
-      type: Number,
+    mId: {
+      type: String,
     },
     name: {
       type: String,

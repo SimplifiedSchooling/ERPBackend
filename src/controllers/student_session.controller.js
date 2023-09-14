@@ -25,7 +25,10 @@ const getSingleStudent_session = catchAsync(async (req, res) => {
 });
 
 const updateSingleStudent_session = catchAsync(async (req, res) => {
-  const updatedStudent_Session = await student_Session_Service.updateStudent_sessionById(req.params.student_session_Id, req.body);
+  const updatedStudent_Session = await student_Session_Service.updateStudent_sessionById(
+    req.params.student_session_Id,
+    req.body
+  );
   res.send(updatedStudent_Session);
 });
 
