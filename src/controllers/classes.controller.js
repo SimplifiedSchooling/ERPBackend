@@ -16,7 +16,6 @@ const getClasses = catchAsync(async (req, res) => {
   res.send(allClasses);
 });
 
-
 const getSingleClass = catchAsync(async (req, res) => {
   const singleClass = await classesService.getClassById(req.params.classId);
   if (!singleClass) {

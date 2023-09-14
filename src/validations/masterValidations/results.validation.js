@@ -25,7 +25,7 @@ const updateResultTypeId = {
   }),
   body: Joi.object()
     .keys({
-        resultType: Joi.string().required(),
+      resultType: Joi.string().required(),
     })
     .min(1),
 };

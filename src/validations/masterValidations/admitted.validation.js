@@ -25,7 +25,7 @@ const updateAdmitbyId = {
   }),
   body: Joi.object()
     .keys({
-        admitType: Joi.string().required(),
+      admitType: Joi.string().required(),
     })
     .min(1),
 };

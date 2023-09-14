@@ -10,19 +10,19 @@ const attendancechema = mongoose.Schema(
       trim: true,
     },
     date: {
-      type:String,
+      type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     attedance_type: {
-        type:String,
+      type: String,
       required: true,
       trim: true,
     },
     remark: {
-        type:String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true,
     },
   },
   {

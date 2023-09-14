@@ -31,10 +31,10 @@ const updateAttendanceById = {
   }),
   body: Joi.object()
     .keys({
-        student_session_id: Joi.string().required(),
-        date: Joi.string().required(),
-        attedance_type: Joi.string().required(),
-        remark: Joi.string().required(),
+      student_session_id: Joi.string().required(),
+      date: Joi.string().required(),
+      attedance_type: Joi.string().required(),
+      remark: Joi.string().required(),
     })
     .min(1),
 };

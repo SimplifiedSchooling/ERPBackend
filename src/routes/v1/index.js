@@ -234,7 +234,6 @@ const defaultRoutes = [
     route: laboratoryRoute,
   },
   {
-<<<<<<< HEAD
     path: '/academics',
     route: academicsRoute,
   },
@@ -257,7 +256,8 @@ const defaultRoutes = [
   {
     path: '/attendance',
     route: attendanceRoute,
-=======
+  },
+  {
     path: '/section1A10',
     route: Section1A10Route,
   },
@@ -268,7 +268,6 @@ const defaultRoutes = [
   {
     path: '/section1A30',
     route: Section1A30Route,
->>>>>>> origin/main
   },
 ];
 

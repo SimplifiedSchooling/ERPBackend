@@ -11,7 +11,7 @@ router
 
 router
   .route('/:studentId')
-  .get( StudentController.getStudent)
+  .get(StudentController.getStudent)
   .patch(validate(StudentValidation.updateStudentById), StudentController.updateStudent)
   .delete(validate(StudentValidation.deleteStudentById), StudentController.deleteStudent);
 
@@ -418,7 +418,7 @@ module.exports = router;
  *         guardian_name: "Guardian Name"
  *         guardian_relation: "Guardian Relation"
  *         guardian_phone: "987-654-3212"
- *         guardian_occupation: "Guardian Occupation" 
+ *         guardian_occupation: "Guardian Occupation"
  *         guardian_address: "789 Elm St"
  *         guardian_email: "guardian@example.com"
  *         father_pic: "https://example.com/father-pic.jpg"
@@ -435,7 +435,7 @@ module.exports = router;
  *         disability1: "Specific type of disability"
  *         disability_type: "Type of disability"
  *         percentage: "10%"
- *         certifi_number: "CERT12345" 
+ *         certifi_number: "CERT12345"
  *         certifi_date: "2023-08-01"
  *         certifi_auth: "Certifying Authority"
  *         certificate_up: "https://example.com/disability-certificate.jpg"
@@ -461,7 +461,7 @@ module.exports = router;
  *         disable_at: "2023-08-15"
  *         created_at: "2023-09-01"
  *         updated_at: "2023-09-10"
- */  
+ */
 
 /**
  * @swagger
@@ -771,7 +771,7 @@ module.exports = router;
  *         guardian_name: "Guardian Name"
  *         guardian_relation: "Guardian Relation"
  *         guardian_phone: "987-654-3212"
- *         guardian_occupation: "Guardian Occupation" 
+ *         guardian_occupation: "Guardian Occupation"
  *         guardian_address: "789 Elm St"
  *         guardian_email: "guardian@example.com"
  *         father_pic: "https://example.com/father-pic.jpg"
@@ -788,7 +788,7 @@ module.exports = router;
  *         disability1: "Specific type of disability"
  *         disability_type: "Type of disability"
  *         percentage: "10%"
- *         certifi_number: "CERT12345" 
+ *         certifi_number: "CERT12345"
  *         certifi_date: "2023-08-01"
  *         certifi_auth: "Certifying Authority"
  *         certificate_up: "https://example.com/disability-certificate.jpg"
@@ -811,4 +811,4 @@ module.exports = router;
  *         dis_note: "Note related to disability"
  *         app_key: "APPKEY123"
  *         parent_app_key: "PARENTAPPKEY123"
- */ 
+ */

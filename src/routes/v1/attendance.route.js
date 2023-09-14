@@ -9,7 +9,6 @@ router
   .post(validate(attendanceValidation.createAttendance), attendanceController.createAttendance)
   .get(validate(attendanceValidation.getAllAttendance), attendanceController.getAttendance);
 
-
 router
   .route('/:attendanceId')
   .get(validate(attendanceValidation.getAttendance), attendanceController.getSingleAttendance)
@@ -165,10 +164,10 @@ module.exports = router;
  *           description: ID of the student_session_id
  *         date:
  *           type: string
- *           description: date 
+ *           description: date
  *         attedance_type:
  *           type: string
- *           description: attedance_type 
+ *           description: attedance_type
  *         remark:
  *           type: string
  *           description: remark
@@ -191,10 +190,10 @@ module.exports = router;
  *           description: ID of the student_session_id
  *         date:
  *           type: string
- *           description: date 
+ *           description: date
  *         attedance_type:
  *           type: string
- *           description: attedance_type 
+ *           description: attedance_type
  *         remark:
  *           type: string
  *           description: remark

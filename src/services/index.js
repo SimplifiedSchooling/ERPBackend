@@ -42,14 +42,12 @@ module.exports.ClassroomAvailableService = require('./masterService/Classroom_av
 module.exports.iternetTypeService = require('./masterService/type.of.internet.service');
 module.exports.specialEducatorService = require('./masterService/special.educator.service');
 module.exports.laboratoryService = require('./masterService/laboratory.service');
-<<<<<<< HEAD
 module.exports.academicsService = require('./masterService/academics.service');
 module.exports.StudentStatusService = require('./masterService/student.status.service');
 module.exports.admitService = require('./masterService/admitted.service');
 module.exports.resultService = require('./masterService/results.service');
 module.exports.studentService = require('./student.service');
 module.exports.attendanceService = require('./attendance.service');
-=======
 module.exports.studentSocialCategory = require('./masterService/student.social.category.services');
 module.exports.studentTypeService = require('./masterService/student.type.services');
 module.exports.SaralServices = require('./saral.info.services');
@@ -60,4 +58,3 @@ module.exports.campusService = require('./campus.service');
 module.exports.Section1A10Service = require('./masterService/section1A(1.1 to 1.10).service');
 module.exports.Section1A20Service = require('./masterService/section1A(1.1 to 1.20).service');
 module.exports.Section1A30Service = require('./masterService/section1A(1.21 to 1.30).service');
->>>>>>> origin/main

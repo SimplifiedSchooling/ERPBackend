@@ -1,21 +1,21 @@
 const mongoose = require('mongoose');
-const uuid = require('node-uuid')
-const validate = require('validator')
+const uuid = require('node-uuid');
 const { toJSON, paginate } = require('./plugins');
 
-const studentSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema(
+  {
     studentId: {
-    type: String,
-    default: uuid.v1
-  },
-  saral_id: {
-    type: String,
-    required: true,
-  },
-  scode: {
-    type: String,
-    required: true,
-  },
+      type: String,
+      default: uuid.v1,
+    },
+    saral_id: {
+      type: String,
+      required: true,
+    },
+    scode: {
+      type: String,
+      required: true,
+    },
     parent_id: String,
     admission_no: String,
     roll_no: String,
@@ -102,14 +102,15 @@ const studentSchema = new mongoose.Schema({
     disable_at: String,
     created_at: String,
     updated_at: String,
-},
- { 
-    timestamps: true 
-})
+  },
+  {
+    timestamps: true,
+  }
+);
 
 // add plugin that converts mongoose to json
 studentSchema.plugin(toJSON);
 studentSchema.plugin(paginate);
-studentSchema.index({saral_id:1},{unique:true});
-const Students = mongoose.model('Students', studentSchema)
-module.exports = Students
+studentSchema.index({ saral_id: 1 }, { unique: true });
+const Students = mongoose.model('Students', studentSchema);
+module.exports = Students;
