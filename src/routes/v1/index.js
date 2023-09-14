@@ -43,6 +43,12 @@ const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.rou
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
+const academicsRoute = require('./masterRoutes/academics.route');
+const studentStatusRoute = require('./masterRoutes/student.status.route');
+const admitRoute = require('./masterRoutes/admitted.routes');
+const resultTypeRoute = require('./masterRoutes/results.route');
+const studentRoute = require('./student.route');
+const attendanceRoute = require('./attendance.route');
 const saralRoute = require('./saral.info.route');
 const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
@@ -226,6 +232,30 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
+  },
+  {
+    path: '/academics',
+    route: academicsRoute,
+  },
+  {
+    path: '/studentStatus',
+    route: studentStatusRoute,
+  },
+  {
+    path: '/admit',
+    route: admitRoute,
+  },
+  {
+    path: '/resultType',
+    route: resultTypeRoute,
+  },
+  {
+    path: '/student',
+    route: studentRoute,
+  },
+  {
+    path: '/attendance',
+    route: attendanceRoute,
   },
   {
     path: '/section1A10',
