@@ -13,7 +13,7 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: Videos
- *   description: User management and retrieval
+ *   description: Videos management and retrieval
  */
 
 /**
