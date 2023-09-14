@@ -55,3 +55,4 @@ module.exports.Section1A20Validation = require('./masterValidations/section1A(1.
 module.exports.Section1A30Validation = require('./masterValidations/section1A(1.21 to 1.30).validation');
 module.exports.Section1A40Validation = require('./masterValidations/section1A(1.31 to 1.40).validation');
 module.exports.Section1A50Validation = require('./masterValidations/section1A(1.41 to 1.50).validation');
+module.exports.Section1A53Validation = require('./masterValidations/section1A(1.51 to 1.53).validation');
