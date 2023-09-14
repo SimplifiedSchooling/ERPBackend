@@ -35,6 +35,11 @@ module.exports.BoardingResidentialSchoolController = require('./masterController
 module.exports.MinorityManageSchoolController = require('./masterControllers/minority_manage_school.controller');
 module.exports.BoundaryWallController = require('./masterControllers/boundarywall.controller');
 module.exports.ClassroomAvailableController = require('./masterControllers/classroom_available.controller');
-
 module.exports.specialEducatorController = require('./masterControllers/special.educator.controller');
 module.exports.laboratoryController = require('./masterControllers/special.educator.controller');
+module.exports.academicsController = require('./masterControllers/academics.controller');
+module.exports.studentStatusController = require('./masterControllers/student.status.controller');
+module.exports.admitController = require('./masterControllers/admitted.controller');
+module.exports.resultController = require('./masterControllers/results.controller');
+module.exports.studentController = require('./student.controller');
+module.exports.attendaceController = require('./attendance.controller');

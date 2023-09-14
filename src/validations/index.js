@@ -23,9 +23,7 @@ module.exports.schoolCategoryValidation = require('./masterValidations/school.ca
 module.exports.districtNameValidation = require('./masterValidations/district.validation');
 module.exports.safetyValidation = require('./masterValidations/safety.and.security.validation');
 module.exports.languageValidation = require('./masterValidations/language.validation');
-
 module.exports.demolishedValidation = require('./demolished.validation');
-
 module.exports.MinorityManageSchoolValidation = require('./masterValidations/minority_manage_school.validation');
 module.exports.managmentGroupschool = require('./masterValidations/managment.groupschool.validation');
 module.exports.managmentCodeschool = require('./masterValidations/management.codeSchool.validation');
@@ -35,7 +33,12 @@ module.exports.schooleBuilding = require('./masterValidations/schoole.building.v
 module.exports.languageValidation = require('./masterValidations/language.validation');
 module.exports.boundarywallValidation = require('./masterValidations/boundarywall.validation');
 module.exports.classroomAvailableValidation = require('./masterValidations/classroom_available.validation');
-
 module.exports.internetTypeValidation = require('./masterValidations/type.of.internet.validation');
 module.exports.specialEducatorValidation = require('./masterValidations/special.educator.validation');
 module.exports.laboratoryValidation = require('./masterValidations/laboratories.validation');
+module.exports.academicsValidation = require('./masterValidations/academics.validation');
+module.exports.studentStatusValidation = require('./masterValidations/student.status.validation');
+module.exports.admitValidation = require('./masterValidations/admitted.validation');
+module.exports.resultValidation = require('./masterValidations/results.validation');
+module.exports.studentValidation = require('./student.validation');
+module.exports.attedanceValidation = require('./attendance.validation');

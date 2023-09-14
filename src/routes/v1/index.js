@@ -27,16 +27,13 @@ const managmentCodeSchoolRoute = require('./masterRoutes/managment.codeofSchool.
 const managementAdministrationTypeRoute = require('./masterRoutes/management.administration.type.route');
 const respondentRoute = require('./masterRoutes/respondent.route');
 const schooleBuildingRout = require('./masterRoutes/school.building.route');
-
 const schoolLocationRoute = require('./masterRoutes/school-location.route');
 const inChargeTypeRoute = require('./masterRoutes/head.of.school.route');
 const schoolcategoryRoute = require('./masterRoutes/school.category.route');
 const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
-
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
-
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
@@ -45,6 +42,13 @@ const ClassroomAvailableRouter = require('./masterRoutes/classromm_available.rou
 const internetTypeRoute = require('./masterRoutes/type.of.internet.route');
 const specialEducatorRoute = require('./masterRoutes/special.educator.route');
 const laboratoryRoute = require('./masterRoutes/laboratories.route');
+const academicsRoute = require('./masterRoutes/academics.route');
+const studentStatusRoute = require('./masterRoutes/student.status.route');
+const admitRoute = require('./masterRoutes/admitted.routes');
+const resultTypeRoute = require('./masterRoutes/results.route');
+const studentRoute = require('./student.route');
+const attendanceRoute = require('./attendance.route');
+
 const router = express.Router();
 
 const defaultRoutes = [
@@ -194,7 +198,7 @@ const defaultRoutes = [
   },
   {
     path: '/boundarywall',
-    route: BoundaryWall
+    route: BoundaryWall,
   },
   {
     path: '/internetType',
@@ -215,7 +219,31 @@ const defaultRoutes = [
   {
     path: '/laboratory',
     route: laboratoryRoute,
-  }
+  },
+  {
+    path: '/academics',
+    route: academicsRoute,
+  },
+  {
+    path: '/studentStatus',
+    route: studentStatusRoute,
+  },
+  {
+    path: '/admit',
+    route: admitRoute,
+  },
+  {
+    path: '/resultType',
+    route: resultTypeRoute,
+  },
+  {
+    path: '/student',
+    route: studentRoute,
+  },
+  {
+    path: '/attendance',
+    route: attendanceRoute,
+  },
 ];
 
 const devRoutes = [
