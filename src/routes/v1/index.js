@@ -276,6 +276,8 @@ const defaultRoutes = [
   {
     path: '/session',
     route: SessionRoute,
+  },
+  {
     path: '/section1A20',
     route: Section1A20Route,
   },
