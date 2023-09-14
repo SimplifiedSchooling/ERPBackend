@@ -34,6 +34,12 @@ const getMultimediaById = {
   }),
 };
 
+const getMultimediaByChaperId = {
+  params: Joi.object().keys({
+    chapterId: Joi.string().custom(objectId),
+  }),
+};
+
 const getMultimediaByType = {
   params: Joi.object().keys({
     multimediaType: Joi.string(),
@@ -88,4 +94,5 @@ module.exports = {
   updateMultimedia,
   deleteMultimedia,
   getMultimediaByType,
+  getMultimediaByChaperId
 };

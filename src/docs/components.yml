@@ -95,6 +95,8 @@ components:
     Sarals:
       type: object
       properties:
+        scode:
+          type: string
         anganwadicenteradj:
           type: string
         noofanganwadinear:
