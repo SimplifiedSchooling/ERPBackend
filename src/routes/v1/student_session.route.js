@@ -12,8 +12,14 @@ router
 router
   .route('/:student_session_Id')
   .get(validate(student_sessionValidation.getStudent_session), student_sessionController.getSingleStudent_session)
-  .patch(validate(student_sessionValidation.updateStudent_sessionById), student_sessionController.updateSingleStudent_session)
-  .delete(validate(student_sessionValidation.deleteStudent_sessionById), student_sessionController.deleteSingleStudent_session);
+  .patch(
+    validate(student_sessionValidation.updateStudent_sessionById),
+    student_sessionController.updateSingleStudent_session
+  )
+  .delete(
+    validate(student_sessionValidation.deleteStudent_sessionById),
+    student_sessionController.deleteSingleStudent_session
+  );
 
 module.exports = router;
 /**
@@ -184,7 +190,7 @@ module.exports = router;
  *   schemas:
  *     Student_sessionUpdateInput:
  *       type: object
-  *       properties:
+ *       properties:
  *         session_Id:
  *           type: string
  *           description: ID of the session_Id
