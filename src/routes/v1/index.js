@@ -60,11 +60,11 @@ const campusRoute = require('./campus.route');
 const mappingRoute = require('./mapping.route');
 const AppliedForPlacementRoute = require('./masterRoutes/applied_for_placement.route');
 const AppliedForApprenticeshipRoute = require('./masterRoutes/applied_for_apprenticeship.route');
-const SessionRoute = require('./masterRoutes/sessions.route');
+const SessionRoute = require('./sessions.route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
 const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
+const studentSessionRoute = require('./student.session.route');
 const StudentMinorityRoute = require('./masterRoutes/student.Minority.group.route');
-const student_Session_Route = require('./student_session.route');
 const sectionRoute = require('./section.route');
 const Section1A40Route = require('./masterRoutes/section1A(1.31 to 1.40).route');
 
@@ -185,11 +185,11 @@ const defaultRoutes = [
   },
   {
     path: '/studentType',
-    route: studenttypeRoute
+    route: studenttypeRoute,
   },
   {
     path: '/socialCategory',
-    route: studentSocialRoute
+    route: studentSocialRoute,
   },
   {
     path: '/inchargetype',
@@ -328,10 +328,12 @@ const defaultRoutes = [
     route: Section1A30Route,
   },
   {
+    path: '/studentSession',
+    route: studentSessionRoute,
+  },
+  {
     path: '/studentMinority',
     route: StudentMinorityRoute,
-    path: '/student_session',
-    route: student_Session_Route,
   },
   {
     path: '/section1A40',

@@ -111,9 +111,6 @@ module.exports = router;
  *         saral_id:
  *           type: string
  *           description: SARAL ID for the student
- *         campusId:
- *           type: string
- *           description:  ID for the campusId
  *         scode:
  *           type: string
  *           description: School code for the student
@@ -378,7 +375,6 @@ module.exports = router;
  *       example:
  *         saral_id: "ABC12345"
  *         scode: "XYZ456"
- *         campusId: "ABC12345"
  *         parent_id: "67890"
  *         admission_no: "A12345"
  *         roll_no: "R67890"
@@ -477,9 +473,6 @@ module.exports = router;
  *         saral_id:
  *           type: string
  *           description: SARAL ID for the student
- *         campusId:
- *           type: string
- *           description:  ID for the campusId
  *         scode:
  *           type: string
  *           description: School code for the student
@@ -734,7 +727,6 @@ module.exports = router;
  *           description: Parent's application key
  *       example:
  *         saral_id: "ABC12345"
- *         campusId: "ABC12345"
  *         scode: "XYZ456"
  *         parent_id: "67890"
  *         admission_no: "A12345"

@@ -16,12 +16,6 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    campusId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Campus',
-      required: true,
-      trim: true,
-    },
     parent_id: String,
     admission_no: String,
     roll_no: String,

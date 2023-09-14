@@ -1,7 +1,7 @@
 const express = require('express');
-const validate = require('../../../middlewares/validate');
-const sessionValidation = require('../../../validations/masterValidations/sessions.validation');
-const sessionController = require('../../../controllers/masterControllers/sessions.controller');
+const validate = require('../../middlewares/validate');
+const sessionValidation = require('../../validations/sessions.validation');
+const sessionController = require('../../controllers/sessions.controller');
 
 const router = express.Router();
 router
