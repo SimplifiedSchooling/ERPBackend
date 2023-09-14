@@ -3,6 +3,7 @@ const { objectId } = require('./custom.validation');
 
 const createSaral = {
   body: Joi.object().keys({
+    scode: Joi.string().required(),
     anganwadicenteradj: Joi.string().required(),
     noofanganwadinear: Joi.number().required(),
     noofsevika: Joi.number().required(),
