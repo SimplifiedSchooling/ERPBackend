@@ -185,11 +185,11 @@ const defaultRoutes = [
   },
   {
     path: '/studentType',
-    route: studenttypeRoute
+    route: studenttypeRoute,
   },
   {
     path: '/socialCategory',
-    route: studentSocialRoute
+    route: studentSocialRoute,
   },
   {
     path: '/inchargetype',
