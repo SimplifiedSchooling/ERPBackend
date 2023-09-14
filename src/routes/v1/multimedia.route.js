@@ -24,10 +24,9 @@ router
   .route('/getByType/:multimediaType')
   .get(validate(multimediaValidation.getMultimediaByType), multimediaController.getMultimediaByType);
 
-  router
+router
   .route('/getMultimedia/:chapterId')
   .get(validate(multimediaValidation.getMultimediaByChaperId), multimediaController.getMultimediaByChaper);
-
 
 module.exports = router;
 
@@ -404,4 +403,3 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-

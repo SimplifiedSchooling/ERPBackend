@@ -94,5 +94,5 @@ module.exports = {
   updateMultimedia,
   deleteMultimedia,
   getMultimediaByType,
-  getMultimediaByChaperId
+  getMultimediaByChaperId,
 };

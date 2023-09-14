@@ -35,7 +35,6 @@ const getMultimediaById = async (id) => {
   return Multimedia.findById(id);
 };
 
-
 /**
  * Get Multimedia by chapterId
  * @param {ObjectId} chapterId
@@ -44,7 +43,6 @@ const getMultimediaById = async (id) => {
 const getMultimediaByChaperId = async (chapterId) => {
   return Multimedia.find({ chapterId });
 };
-
 
 /**
  * Get multimedia by multimedia Type
@@ -107,5 +105,5 @@ module.exports = {
   deleteMultimediaById,
   getMultimediaById,
   getMultimediaByType,
-  getMultimediaByChaperId
+  getMultimediaByChaperId,
 };
