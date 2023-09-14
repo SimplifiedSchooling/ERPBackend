@@ -27,7 +27,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /mapping/{mappingId}:
+ * /mapping:
  *   post:
  *     summary: Create a mapping
  *     tags: [Mapping]
