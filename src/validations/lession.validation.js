@@ -12,7 +12,7 @@ const createLession = {
     name: Joi.string().required(),
     type: Joi.string().required(),
     order: Joi.number().required(),
-    thumbnail: Joi.string().required(),
+    thumbnail: Joi.string(),
     poster: Joi.string(),
   }),
 };

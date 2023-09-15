@@ -5,8 +5,10 @@ const catchAsync = require('../utils/catchAsync');
 const { lessionService } = require('../services');
 
 const createLession = catchAsync(async (req, res) => {
-  const lession = await lessionService.createLession(req.body);
-  res.status(httpStatus.CREATED).send(lession);
+  req.body.thumbnail = await req.files.thumbnail[0].path;
+  req.body.poster = await req.files.poster[0].path;
+  const lesson = await lessionService.createLession(req.body);
+  res.status(httpStatus.CREATED).send(lesson);
 });
 
 const queryLessions = catchAsync(async (req, res) => {
