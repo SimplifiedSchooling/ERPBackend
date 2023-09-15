@@ -12,6 +12,21 @@ const createMapping = async (mappingBody) => {
 };
 
 /**
+ * Query for medium
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<Mapping>}
+ */
+
+const getAllMaping = async (filter, options) => {
+  const mapping = await Mapping.paginate(filter, options);
+  return mapping;
+};
+
+/**
  *  mapping
  * @returns {Promise<AggegateResult>}
  */
@@ -209,4 +224,5 @@ module.exports = {
   updateMappingById,
   deleteMappingById,
   queryMappingByBookId,
+  getAllMaping,
 };
