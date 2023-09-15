@@ -1,13 +1,33 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const lessionController = require('../../controllers/lession.controller');
 const lessionValidation = require('../../validations/lession.validation');
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 router
   .route('/')
-  .post(validate(lessionValidation.createLession), lessionController.createLession)
+  .post(
+    upload.fields([
+      { name: 'thumbnail', maxCount: 1 },
+      { name: 'poster', maxCount: 1 },
+    ]),
+    validate(lessionValidation.createLession),
+    lessionController.createLession
+  )
   .get(validate(lessionValidation.getLessions), lessionController.queryLessions);
 
 router
@@ -37,7 +57,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             required:
@@ -63,9 +83,10 @@ module.exports = router;
  *                 type: number
  *               thumbnail:
  *                 type: string
+ *                 format: binary
  *               poster:
  *                 type: string
- *
+ *                 format: binary
  *             example:
  *               name: English
  *               type: "https://www.youtube.com/watch?v=D52_BL9sVMU"

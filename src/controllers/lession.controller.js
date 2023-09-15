@@ -5,8 +5,25 @@ const catchAsync = require('../utils/catchAsync');
 const { lessionService } = require('../services');
 
 const createLession = catchAsync(async (req, res) => {
-  const lession = await lessionService.createLession(req.body);
-  res.status(httpStatus.CREATED).send(lession);
+  const thumbnailPath = req.files.thumbnail[0].path;
+  const posterPath = req.files.poster[0].path;
+
+  const lessonData = {
+    thumbnail: thumbnailPath,
+    poster: posterPath,
+    boardId:req.body.boardId,
+    mediumId:req.body.mediumId,
+    classId:req.body.classId,
+    subjectId:req.body.subjectId,
+    bookId:req.body.bookId,
+    chapterId:req.body.chapterId,
+    name:req.body.name,
+    type:req.body.type,
+    order:req.body.order,
+  };
+
+  const lesson = await lessionService.createLession(lessonData);
+  res.status(httpStatus.CREATED).send(lesson);
 });
 
 const queryLessions = catchAsync(async (req, res) => {

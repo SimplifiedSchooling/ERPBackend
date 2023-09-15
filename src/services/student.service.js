@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { Student } = require('../models');
+const { StudentSession } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -33,6 +34,8 @@ const getAllStudents = async (filter, options) => {
 const getStudentById = async (id) => {
   return Student.findById(id);
 };
+
+
 
 /**
  * Update Classes by id

@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { studentSessionService } = require('../services');
+const  studentSessionService  = require('../services/student.session.service');
 
 const createStudentSession = catchAsync(async (req, res) => {
   const newStudentSession = await studentSessionService.createStudentSession(req.body);
@@ -16,6 +16,8 @@ const getStudentSession = catchAsync(async (req, res) => {
   res.send(allStudentSession);
 });
 
+
+
 const getSingleStudentSession = catchAsync(async (req, res) => {
   const singleStudentSession = await studentSessionService.getStudentSessionById(req.params.studentSessionId);
   if (!singleStudentSession) {
@@ -26,7 +28,7 @@ const getSingleStudentSession = catchAsync(async (req, res) => {
 
 const updateSingleStudentSession = catchAsync(async (req, res) => {
   const updatedStudentSession = await studentSessionService.updateStudentSessionById(
-    req.params.student_session_Id,
+    req.params.studentSessionId,
     req.body
   );
   res.send(updatedStudentSession);

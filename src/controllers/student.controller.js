@@ -16,6 +16,7 @@ const getStudents = catchAsync(async (req, res) => {
   res.send(allStudents);
 });
 
+ 
 const getStudent = catchAsync(async (req, res) => {
   const singleStudent = await studentService.getStudentById(req.params.studentId);
   if (!singleStudent) {
@@ -40,4 +41,5 @@ module.exports = {
   getStudent,
   updateStudent,
   deleteStudent,
+
 };
