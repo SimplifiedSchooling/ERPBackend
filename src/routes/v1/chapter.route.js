@@ -363,7 +363,7 @@ module.exports = router;
  * @swagger
  * /chapter/mobile/getbybookId/{bookId}:
  *   get:
- *     summary: Get chapter and lesson by book
+ *     summary: Get chapter and lesson multimedia by book
  *     tags: [Chapters]
  *     parameters:
  *       - in: path
@@ -380,53 +380,37 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 _id:
- *                   type: string
- *                 boardId:
- *                   type: string
- *                 mediumId:
- *                   type: string
- *                 classId:
- *                   type: string
- *                 bookId:
- *                   type: string
- *                 chapterName:
- *                   type: string
- *                 order:
- *                   type: integer
- *                 thumbnail:
- *                   type: string
- *                 createdAt:
- *                   type: string
- *                 updatedAt:
- *                   type: string
- *                 multimedia:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       lessionName:
- *                         type: array
- *                         items:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   chapterName:
+ *                     type: string
+ *                   order:
+ *                     type: integer
+ *                   thumbnail:
+ *                     type: string
+ *                   multimedia:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         lessionName:
  *                           type: string
- *                       icon1:
- *                         type: array
- *                         items:
+ *                         icon1:
  *                           type: string
- *                       icon2:
- *                         type: array
- *                         items:
+ *                         icon2:
  *                           type: string
- *                       path:
- *                         type: array
- *                         items:
+ *                         path:
  *                           type: string
- *                       multimediaType:
- *                         type: array
- *                         items:
+ *                         multimediaType:
  *                           type: string
+ *                   createdAt:
+ *                     type: string
+ *                   updatedAt:
+ *                     type: string
  *       '401':
  *         $ref: '#/components/responses/Unauthorized'
  *       '403':
