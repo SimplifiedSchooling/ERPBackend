@@ -66,6 +66,8 @@ const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route')
 const studentSessionRoute = require('./student.session.route');
 const sectionRoute = require('./section.route');
 const Section1A40Route = require('./masterRoutes/section1A(1.31 to 1.40).route');
+const Section1A50Route = require('./masterRoutes/section1A(1.41 to 1.50).route');
+const Section1A53Route = require('./masterRoutes/section1A(1.51 to 1.53).route');
 
 const router = express.Router();
 
@@ -333,6 +335,14 @@ const defaultRoutes = [
   {
     path: '/section1A40',
     route: Section1A40Route,
+  },
+  {
+    path: '/section1A50',
+    route: Section1A50Route,
+  },
+  {
+    path: '/section1A53',
+    route: Section1A53Route,
   },
 ];
 
