@@ -66,6 +66,8 @@ const studentSessionRoute = require('./student.session.route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
 const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
 const Section1A40Route = require('./masterRoutes/section1A(1.31 to 1.40).route');
+const StudentMinorityGroupRoute = require('./masterRoutes/student.Minority.group.route');
+const SectorRoute = require('./masterRoutes/sector.route');
 const Section1A50Route = require('./masterRoutes/section1A(1.41 to 1.50).route');
 const Section1A53Route = require('./masterRoutes/section1A(1.51 to 1.53).route');
 const Section1B54Route = require('./masterRoutes/section1B(1.54 to 1.54.12).route');
@@ -336,6 +338,14 @@ const defaultRoutes = [
   {
     path: '/section1A40',
     route: Section1A40Route,
+  },
+  {
+    path: '/studentMinorityGroup',
+    route: StudentMinorityGroupRoute,
+  },
+  {
+    path: '/sector',
+    route: SectorRoute,
   },
   {
     path: '/section1A50',

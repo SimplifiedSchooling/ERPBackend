@@ -74,3 +74,4 @@ module.exports.Section1A53Schema = require('./masterModels/section1A(1.51 to 1.5
 module.exports.Section1B54Schema = require('./masterModels/section1B(1.54 to 1.54.12).model');
 module.exports.ICTGovSchool = require('./masterModels/ICTGovSchool.model');
 module.exports.typeOfICTSchool = require('./masterModels/typeofICT.model');
+module.exports.Sector = require('./masterModels/sector.model');

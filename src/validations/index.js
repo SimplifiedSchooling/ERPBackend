@@ -61,3 +61,4 @@ module.exports.Section1A53Validation = require('./masterValidations/section1A(1.
 module.exports.Section1B43Validation = require('./masterValidations/section1B(1.54 to 1.54.12).validation');
 module.exports.StudentSessionValidation = require('./student.session.validation');
 module.exports.SectionValidation = require('./section.validation');
+module.exports.sectorValidation = require('./masterValidations/sector.validation');
