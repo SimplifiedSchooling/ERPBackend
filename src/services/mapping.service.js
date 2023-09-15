@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-const mongoose = require('mongoose');
 const { Mapping, Chapter } = require('../models');
 const ApiError = require('../utils/ApiError');
 
@@ -10,6 +9,21 @@ const ApiError = require('../utils/ApiError');
  */
 const createMapping = async (mappingBody) => {
   return Mapping.create(mappingBody);
+};
+
+/**
+ * Query for medium
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<Mapping>}
+ */
+
+const getAllMaping = async (filter, options) => {
+  const mapping = await Mapping.paginate(filter, options);
+  return mapping;
 };
 
 /**
@@ -217,4 +231,6 @@ module.exports = {
   getMappingById,
   updateMappingById,
   deleteMappingById,
+  queryMappingByBookId,
+  getAllMaping,
 };
