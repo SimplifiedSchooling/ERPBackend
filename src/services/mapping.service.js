@@ -31,6 +31,68 @@ const getAllMaping = async (filter, options) => {
  * @returns {Promise<AggegateResult>}
  */
 
+// const queryMapping = async () => {
+//   const result = await Mapping.aggregate([
+//     {
+//       $lookup: {
+//         from: 'subjects', // The name of the subject collection in your database
+//         localField: 'subjectId',
+//         foreignField: '_id',
+//         as: 'subject',
+//       },
+//     },
+//     {
+//       $unwind: '$subject', // Unwind the subject array created by the $lookup stage
+//     },
+//     {
+//       $project: {
+//         boardId: 1,
+//         mediumId: 1,
+//         classId: 1,
+//         'subject.name': 1, // Include subject fields from the unwound array
+//         'subject.code': 1,
+//         'subject.order': 1,
+//         'subject.thumbnail': 1,
+//         bookId: 1,
+//         name: 1,
+//         createdAt: 1,
+//         updatedAt: 1,
+//       },
+//     },
+//     {
+//       $group: {
+//         _id: '$classId',
+//         subjects: {
+//           $push: '$subject',
+//         },
+//         boardId: {
+//           $first: '$boardId',
+//         },
+//         mediumId: {
+//           $first: '$mediumId',
+//         },
+//         classId: {
+//           $first: '$classId',
+//         },
+//         bookId: {
+//           $first: '$bookId',
+//         },
+//         name: {
+//           $first: '$name',
+//         },
+//         createdAt: {
+//           $first: '$createdAt',
+//         },
+//         updatedAt: {
+//           $first: '$updatedAt',
+//         },
+//       },
+//     },
+//   ]);
+
+//   return result;
+// };
+
 const queryMapping = async () => {
   const result = await Mapping.aggregate([
     {
@@ -57,6 +119,35 @@ const queryMapping = async () => {
         name: 1,
         createdAt: 1,
         updatedAt: 1,
+      },
+    },
+    {
+      $group: {
+        _id: '$classId',
+        subjects: {
+          $push: '$subject',
+        },
+        boardId: {
+          $first: '$boardId',
+        },
+        mediumId: {
+          $first: '$mediumId',
+        },
+        classId: {
+          $first: '$classId',
+        },
+        bookId: {
+          $first: '$bookId',
+        },
+        name: {
+          $first: '$name',
+        },
+        createdAt: {
+          $first: '$createdAt',
+        },
+        updatedAt: {
+          $first: '$updatedAt',
+        },
       },
     },
   ]);
