@@ -9,6 +9,7 @@ router
   .post(validate(StudentValidation.createStudent), StudentController.createStudent)
   .get(validate(StudentValidation.getAllStudents), StudentController.getStudents);
 
+
 router
   .route('/:studentId')
   .get(StudentController.getStudent)

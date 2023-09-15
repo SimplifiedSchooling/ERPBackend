@@ -34,6 +34,74 @@ const getStudentSessionById = async (studentSessionId) => {
   return StudentSession.findById(studentSessionId);
 };
 
+
+// const getStudentsByClassAndSection =async (classId, sectionId) => {
+//   try {
+//     // Find all student sessions matching the provided classId and sectionId
+//     const studentSessions = await StudentSession.find({ classId, sectionId }).exec();
+
+//     // Extract student IDs from the student sessions
+//     const studentIds = studentSessions.map((session) => session.studentId);
+
+//     // Use the student IDs to fetch student documents from the Students collection
+//     const students = await Student.find({ _id: { $in: studentIds } }).exec();
+
+//     return students;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
+// const getAllStudentSession = async () => {
+//   const result = await StudentSession.aggregate([
+//     {
+//       $lookup: {
+//         from: 'Students', // The name of the subject collection in your database
+//         localField: 'studentId',
+//         foreignField: '_id',
+//         as: 'student',
+//       },
+//     },
+//     {
+//       $unwind: '$student', // Unwind the subject array created by the $lookup stage
+//     },
+//     {
+//       $project: {
+//         sessionId: 1,
+//         studentId: 1,
+//         classId: 1,
+//         'student.firstname': 1, // Include subject fields from the unwound array
+//         'student.middlename': 1,
+//         'student.lastname': 1,
+//         createdAt: 1,
+//         updatedAt: 1,
+//       },
+//     },
+//     {
+//       $group: {
+//         _id: '$classId',
+//         subjects: {
+//           $push: '$student',
+//         },
+//         sessionId: {
+//           $first: '$sessionId',
+//         },
+//         classId: {
+//           $first: '$classId',
+//         },          
+//         createdAt: {
+//           $first: '$createdAt',
+//         },
+//         updatedAt: {
+//           $first: '$updatedAt',
+//         },
+//       },
+//     },
+//   ]);
+
+//   return result;
+// };
+
 /**
  * Update StudentSession by id
  * @param {ObjectId} studentSessionId

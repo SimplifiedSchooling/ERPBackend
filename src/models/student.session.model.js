@@ -3,24 +3,24 @@ const { toJSON, paginate } = require('./plugins');
 
 const studentSessionSchema = mongoose.Schema(
   {
-    session_Id: {
+    sessionId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Session',
+      ref: 'sessions',
       required: true,
       trim: true,
     },
-    student_Id: {
+    studentId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Student',
+      ref: 'Students',
       required: true,
       trim: true,
     },
-    class_Id: {
+    classId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Class',
+      ref: 'Classes',
       trim: true,
     },
-    section_Id: {
+    sectionId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Section',
       required: true,
