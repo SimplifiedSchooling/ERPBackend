@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const Section1D60Schema = require('../../models/masterModels/section1D(1.58.1 to 1.60.3).model.js');
+const Section1D60Schema = require('../../models/masterModels/section1D(1.58.1 to 1.60.3).model');
 const ApiError = require('../../utils/ApiError');
 
 /**
