@@ -10,13 +10,13 @@ router
   .post(validate(mappingValidation.createMapping), mappingController.createMapping)
   .get(validate(mappingValidation.queryMapping), mappingController.queryMapping);
 
+router.route('/getAllMaping').get(validate(mappingValidation.queryMapping), mappingController.getAllMaping);
+
 router
   .route('/:mappingId')
   .get(validate(mappingValidation.getMappingById), mappingController.getMappingById)
   .patch(validate(mappingValidation.updateMapping), mappingController.updateMappingById)
   .delete(validate(mappingValidation.deleteMappingById), mappingController.deleteMapping);
-
-router.route('/mobile/getbybookId').get(mappingController.queryMappingByBookId);
 
 module.exports = router;
 
@@ -84,6 +84,55 @@ module.exports = router;
  *
  *   get:
  *     summary: Create a mapping
+ *     tags: [Mapping]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                 boardId:
+ *                   type: string
+ *                 mediumId:
+ *                   type: string
+ *                 classId:
+ *                   type: string
+ *                 subjectId:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                     order:
+ *                       type: integer
+ *                     code:
+ *                       type: string
+ *                     thumbnail:
+ *                       type: string
+ *                     id:
+ *                       type: string
+ *                 bookId:
+ *                   type: string
+ *                 id:
+ *                   type: string
+ *       '401':
+ *         $ref: '#/components/responses/Unauthorized'
+ *       '403':
+ *         $ref: '#/components/responses/Forbidden'
+ *       '404':
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /mapping/getAllMaping:
+ *   get:
+ *     summary: Get all mapping
  *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
@@ -240,7 +289,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /mapping/mobile/getbybookId:
+ * /mapping/mobile/getbybookId/{bookId}:
  *   get:
  *     summary: get chapter and lesson by book
  *     tags: [Mapping]

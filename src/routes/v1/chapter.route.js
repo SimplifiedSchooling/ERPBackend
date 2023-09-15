@@ -36,6 +36,7 @@ router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId')
   .get(validate(chapterValidation.getChaptersByFilter), chaterController.getChapterByFilter);
 
+router.route('/mobile/getbybookId/:bookId').get(chaterController.getByBookIdChapter);
 module.exports = router;
 /**
  * @swagger
@@ -356,5 +357,81 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /chapter/mobile/getbybookId/{bookId}:
+ *   get:
+ *     summary: Get chapter and lesson by book
+ *     tags: [Chapters]
+ *     parameters:
+ *       - in: path
+ *         name: bookId
+ *         required: true
+ *         description: The ID of the book
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 boardId:
+ *                   type: string
+ *                 mediumId:
+ *                   type: string
+ *                 classId:
+ *                   type: string
+ *                 bookId:
+ *                   type: string
+ *                 chapterName:
+ *                   type: string
+ *                 order:
+ *                   type: integer
+ *                 thumbnail:
+ *                   type: string
+ *                 createdAt:
+ *                   type: string
+ *                 updatedAt:
+ *                   type: string
+ *                 multimedia:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       lessionName:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                       icon1:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                       icon2:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                       path:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                       multimediaType:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *       '401':
+ *         $ref: '#/components/responses/Unauthorized'
+ *       '403':
+ *         $ref: '#/components/responses/Forbidden'
+ *       '404':
  *         $ref: '#/components/responses/NotFound'
  */

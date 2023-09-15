@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
+const pick = require('../utils/pick');
 const catchAsync = require('../utils/catchAsync');
 const { mappingService } = require('../services');
 
@@ -8,12 +9,15 @@ const createMapping = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(mapping);
 });
 
-const queryMapping = catchAsync(async (req, res) => {
-  const result = await mappingService.queryMapping();
+const getAllMaping = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['board']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await mappingService.getAllMaping(filter, options);
   res.send(result);
 });
-const queryMappingByBookId = catchAsync(async (req, res) => {
-  const result = await mappingService.queryMappingByBookId();
+
+const queryMapping = catchAsync(async (req, res) => {
+  const result = await mappingService.queryMapping();
   res.send(result);
 });
 
@@ -42,4 +46,5 @@ module.exports = {
   updateMappingById,
   deleteMapping,
   queryMappingByBookId,
+  getAllMaping,
 };

@@ -17,6 +17,11 @@ const getChapter = catchAsync(async (req, res) => {
   res.send(allChapter);
 });
 
+const getByBookIdChapter = catchAsync(async (req, res) => {
+  const result = await chapterService.getByBookIdChapter(req.params.bookId);
+  res.send(result);
+});
+
 const getSingleChapter = catchAsync(async (req, res) => {
   const singleChapter = await chapterService.getChapterById(req.params.chapterId);
   if (!singleChapter) {
@@ -60,4 +65,5 @@ module.exports = {
   deleteSingleChapter,
   getChaptersByBookId,
   getChapterByFilter,
+  getByBookIdChapter,
 };
