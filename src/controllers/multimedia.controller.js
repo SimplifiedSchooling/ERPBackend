@@ -5,6 +5,8 @@ const catchAsync = require('../utils/catchAsync');
 const { multimediaService } = require('../services');
 
 const createMultimedia = catchAsync(async (req, res) => {
+  req.body.icon1 = await req.files.icon1[0].path;
+  req.body.icon2 = await req.files.icon2[0].path;
   const multimedia = await multimediaService.createMultimedia(req.body);
   res.status(httpStatus.CREATED).send(multimedia);
 });

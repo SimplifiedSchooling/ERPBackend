@@ -67,3 +67,4 @@ module.exports.student_Session_Service = require('./student.session.service');
 module.exports.sectionService = require('./section.service');
 module.exports.Section1A40Service = require('./masterService/section1A(1.31 to 1.40).service');
 module.exports.typeOfICTSchool = require('./masterService/typeofICT.services');
+module.exports.sectorService = require('./masterService/sector.service');

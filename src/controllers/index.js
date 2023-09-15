@@ -58,3 +58,4 @@ module.exports.Section1A30Controller = require('./masterControllers/section1A(1.
 module.exports.studentSessionController = require('./student.session.controller');
 module.exports.sectionController = require('./section.controller');
 module.exports.Section1A40Controller = require('./masterControllers/section1A(1.31 to 1.40).controller');
+module.exports.sectorController = require('./masterControllers/sector.controller');

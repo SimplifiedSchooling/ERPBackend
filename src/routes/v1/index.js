@@ -67,8 +67,7 @@ const studentSessionRoute = require('./student.session.route');
 const sectionRoute = require('./section.route');
 const Section1A40Route = require('./masterRoutes/section1A(1.31 to 1.40).route');
 const StudentMinorityGroupRoute = require('./masterRoutes/student.Minority.group.route');
-
-
+const SectorRoute = require('./masterRoutes/sector.route');
 
 const router = express.Router();
 
@@ -340,7 +339,11 @@ const defaultRoutes = [
   {
     path: '/studentMinorityGroup',
     route: StudentMinorityGroupRoute,
-  }
+  },
+  {
+    path: '/sector',
+    route: SectorRoute,
+  },
 ];
 
 const devRoutes = [
