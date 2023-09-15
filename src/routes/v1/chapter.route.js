@@ -1,12 +1,25 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const chapterValidation = require('../../validations/chapter.validation');
 const chaterController = require('../../controllers/chapter.controller');
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
 router
   .route('/')
-  .post(validate(chapterValidation.createChapter), chaterController.createChapter)
+  .post(upload.single('thumbnail'), validate(chapterValidation.createChapter), chaterController.createChapter)
   .get(validate(chapterValidation.getAllChapter), chaterController.getChapter);
 
 router
@@ -38,15 +51,56 @@ module.exports = router;
  *     summary: Create a new chapter
  *     tags: [Chapters]
  *     requestBody:
- *       description: Chapter object to be created
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/ChapterInput'
+ *             type: object
+ *             properties:
+ *               boardId:
+ *                 type: string
+ *                 description: ID of the board
+ *               mediumId:
+ *                 type: string
+ *                 description: ID of the medium
+ *               classId:
+ *                 type: string
+ *                 description: ID of the class
+ *               subjectId:
+ *                 type: string
+ *                 description: ID of the subject
+ *               bookId:
+ *                 type: string
+ *                 description: ID of the book
+ *               chapterName:
+ *                 type: string
+ *                 description: Name of the chapter
+ *               thumbnail:
+ *                 type: string
+ *                 format: binary
+ *               order:
+ *                 type: number
+ *             required:
+ *               - boardId
+ *               - mediumId
+ *               - classId
+ *               - subjectId
+ *               - bookId
+ *               - chapterName
+ *               - thumbnail
+ *               - order
  *     responses:
- *       200:
- *         description: Chapter created successfully
+ *       '201':
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ChapterInput'
+ *       '401':
+ *         $ref: '#/components/responses/Unauthorized'
+ *       '403':
+ *         $ref: '#/components/responses/Forbidden'
+ *
  *   get:
  *     summary: Get all chapters
  *     tags: [Chapters]
@@ -204,6 +258,8 @@ module.exports = router;
  *         thumbnail:
  *           type: string
  *           description: path of thumbnail
+ *         order:
+ *           type: number
  *       example:
  *         boardId: 614a7e7d7f1d813bbf8e89a9
  *         mediumId: 614a7e7d7f1d813bbf8e89b0

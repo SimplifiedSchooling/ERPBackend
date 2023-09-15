@@ -1,110 +1,96 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
-const subjectController = require('../../controllers/subject.controller');
-const subjectValidation = require('../../validations/subject.validation');
+const { campusController } = require('../../controllers');
+const { campusValidation } = require('../../validations');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
-
 router
   .route('/')
-  .post(upload.single('thumbnail'), validate(subjectValidation.createSubject), subjectController.createSubject)
-  .get(validate(subjectValidation.getAllSubject), subjectController.getAllSubject);
+  .post(validate(campusValidation.createCampus), campusController.createCampus)
+  .get(validate(campusValidation.queryCampus), campusController.queryCampus);
 
 router
-  .route('/:subjectId')
-  .patch(upload.single('thumbnail'), validate(subjectValidation.updateSubject), subjectController.updateSubject)
-  .delete(validate(subjectValidation.deleteSubject), subjectController.deleteSubject)
-  .get(validate(subjectValidation.getSubject), subjectController.getSubjectById);
+  .route('/:campusId')
+  .get(validate(campusValidation.getCampusById), campusController.getCampusById)
+  .patch(validate(campusValidation.updateCampus), campusController.updateCampus)
+  .delete(validate(campusValidation.deleteCampusById), campusController.deleteCampus);
 
-router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClassId), subjectController.getSubjectByClassId);
-
-router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClass);
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Subject
- *   description: Subject management
+ *   name: Campus
+ *   description: Campus management
  */
 
 /**
  * @swagger
- * /subjects:
+ * /campus:
  *   post:
- *     summary: Create a subject
- *     tags: [Subject]
+ *     summary: Create a campus
+ *     tags: [Campus]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
- *               thumbnail:
+ *               mid:
  *                 type: string
- *                 format: binary
- *               code:
+ *               contact_number:
  *                 type: string
- *             required:
- *              - name
- *              - order
- *              - code
- *              - thumbnail
+ *               address:
+ *                 type: string
+ *               date:
+ *                 type: date
+ *             example:
+ *               name: fake name
+ *               mId: "5635578as764s9ad"
+ *               contact_number: fake contact 765368723632
+ *               address: fake address
+ *               date: 2020-05-12T16:18:04.793Z
+ *
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Subject'
+ *                $ref: '#/components/schemas/Campus'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all subjects
- *     tags: [Subject]
+ *     summary: Get query campus
+ *     tags: [Campus]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: subject
+ *         name: name
  *         schema:
  *           type: string
- *         description: Subject name *
+ *         description: campus name *
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. name:asc)
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of subject
+ *         description: Maximum number of campus
  *       - in: query
  *         name: page
  *         schema:
@@ -123,7 +109,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Subject'
+ *                     $ref: '#/components/schemas/Campus'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -144,26 +130,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /subjects/{subjectId}:
+ * /campus/{campusId}:
  *   get:
- *     summary: Get a subject
- *     tags: [Subject]
+ *     summary: Get a campus
+ *     tags: [Campus]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: subjectId
+ *         name: campusId
  *         required: true
  *         schema:
  *           type: string
- *         description: subjectId
+ *         description: campusId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Subject'
+ *                $ref: '#/components/schemas/Campus'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -171,51 +157,48 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
- */
-
-/**
- * @swagger
- * /subjects/{subjectId}:
  *   patch:
- *     summary: Update a subject
- *     tags: [Subject]
+ *     summary: Update a campus
+ *     tags: [Campus]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: subjectId
+ *         name: campusId
  *         required: true
  *         schema:
  *           type: string
- *         description: subjectId
+ *         description: campusId
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
- *               thumbnail:
+ *               mid:
  *                 type: string
- *                 format: binary
- *               code:
+ *               contact_number:
  *                 type: string
- *             required:
- *              - name
- *              - order
- *              - code
- *              - thumbnail
+ *               address:
+ *                 type: string
+ *               date:
+ *                 type: date
+ *             example:
+ *               name: fake name
+ *               mId: "5635578as764s9ad"
+ *               contact_number: fake contact 765368723632
+ *               address: fake address
+ *               date: 2020-05-12T16:18:04.793Z
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
- *               schema:
- *                $ref: '#/components/schemas/Subject'
+ *             schema:
+ *                $ref: '#/components/schemas/Campus'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -224,17 +207,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a subject
- *     tags: [Subject]
+ *     summary: Delete a campus
+ *     tags: [Campus]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: subjectId
+ *         name: campusId
  *         required: true
  *         schema:
  *           type: string
- *         description: subjectId
+ *         description: campusId
  *     responses:
  *       "200":
  *         description: No content
@@ -244,34 +227,4 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- */
-
-/**
- * @swagger
- * /subjects/class/{classId}:
- *   get:
- *     summary: Get a class
- *     tags: [Subject]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: classId
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *               schema:
- *                $ref: '#/components/schemas/Subject'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
  */

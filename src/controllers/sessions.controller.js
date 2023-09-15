@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
-const ApiError = require('../../utils/ApiError');
-const catchAsync = require('../../utils/catchAsync');
-const sessionService = require('../../services');
+const ApiError = require('../utils/ApiError');
+const catchAsync = require('../utils/catchAsync');
+const sessionService = require('../services/session.service');
 
 const createSession = catchAsync(async (req, res) => {
   const data = await sessionService.createSessions(req.body);

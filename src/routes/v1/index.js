@@ -50,12 +50,21 @@ const resultTypeRoute = require('./masterRoutes/results.route');
 const studentRoute = require('./student.route');
 const attendanceRoute = require('./attendance.route');
 const saralRoute = require('./saral.info.route');
+const ictRoute = require('./masterRoutes/ICTGovSchool.route');
+const studentAdmissionRoute = require('./masterRoutes/student.admission.type.route');
+const studentSocialRoute = require('./masterRoutes/student.social.category.route');
+const studenttypeRoute = require('./masterRoutes/student.type.route');
+const typeOfictRoute = require('./masterRoutes/typeOfICT.route');
 const Section1A10Route = require('./masterRoutes/section1A(1.1 to 1.10).route');
+const campusRoute = require('./campus.route');
+const mappingRoute = require('./mapping.route');
 const AppliedForPlacementRoute = require('./masterRoutes/applied_for_placement.route');
 const AppliedForApprenticeshipRoute = require('./masterRoutes/applied_for_apprenticeship.route');
-const SessionRoute = require('./masterRoutes/sessions.route');
+const SessionRoute = require('./sessions.route');
 const Section1A20Route = require('./masterRoutes/section1A(1.1 to 1.20).route');
 const Section1A30Route = require('./masterRoutes/section1A(1.21 to 1.30).route');
+const studentSessionRoute = require('./student.session.route');
+const sectionRoute = require('./section.route');
 const Section1A40Route = require('./masterRoutes/section1A(1.31 to 1.40).route');
 const Section1A50Route = require('./masterRoutes/section1A(1.41 to 1.50).route');
 const Section1A53Route = require('./masterRoutes/section1A(1.51 to 1.53).route');
@@ -70,6 +79,10 @@ const defaultRoutes = [
   {
     path: '/users',
     route: userRoute,
+  },
+  {
+    path: '/sections',
+    route: sectionRoute,
   },
   {
     path: '/videos',
@@ -164,8 +177,20 @@ const defaultRoutes = [
     route: schooleBuildingRout,
   },
   {
+    path: '/studentAdmissionGroup',
+    route: studentAdmissionRoute,
+  },
+  {
     path: '/schoollocationtype',
     route: schoolLocationRoute,
+  },
+  {
+    path: '/studentType',
+    route: studenttypeRoute,
+  },
+  {
+    path: '/socialCategory',
+    route: studentSocialRoute,
   },
   {
     path: '/inchargetype',
@@ -224,6 +249,14 @@ const defaultRoutes = [
     route: staffRoute,
   },
   {
+    path: '/ICTgovschool',
+    route: ictRoute,
+  },
+  {
+    path: '/TypeOfICTgovschool',
+    route: typeOfictRoute,
+  },
+  {
     path: '/saralInfo',
     route: saralRoute,
   },
@@ -268,6 +301,14 @@ const defaultRoutes = [
     route: Section1A10Route,
   },
   {
+    path: '/campus',
+    route: campusRoute,
+  },
+  {
+    path: '/mapping',
+    route: mappingRoute,
+  },
+  {
     path: '/appliedforplacement',
     route: AppliedForPlacementRoute,
   },
@@ -286,6 +327,10 @@ const defaultRoutes = [
   {
     path: '/section1A30',
     route: Section1A30Route,
+  },
+  {
+    path: '/studentSession',
+    route: studentSessionRoute,
   },
   {
     path: '/section1A40',

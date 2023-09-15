@@ -5,7 +5,7 @@ const createAttendance = {
   body: Joi.object().keys({
     student_session_id: Joi.string().required(),
     date: Joi.string().required(),
-    attedance_type: Joi.string().required(),
+    attedance_type: Joi.string().required().valid('holiday', 'late', 'present', 'absent', 'halfday'),
     remark: Joi.string().required(),
   }),
 };
