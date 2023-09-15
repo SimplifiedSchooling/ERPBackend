@@ -1,13 +1,33 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const multimediaController = require('../../controllers/multimedia.controller');
 const multimediaValidation = require('../../validations/multimedia.validation');
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 router
   .route('/')
-  .post(validate(multimediaValidation.createMultimeda), multimediaController.createMultimedia)
+  .post(
+    upload.fields([
+      { name: 'icon2', maxCount: 1 },
+      { name: 'icon1', maxCount: 1 },
+    ]),
+    validate(multimediaValidation.createMultimeda),
+    multimediaController.createMultimedia
+  )
   .get(validate(multimediaValidation.getAllMultimedia), multimediaController.getMultimedia);
 
 router
@@ -49,19 +69,30 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             required:
  *               - lessionName
  *               - path
+ *               - multimediaType
+ *               - order
+ *               - videoType
+ *               - boardId
+ *               - mediumId
+ *               - classId
+ *               - subjectId
+ *               - bookId
+ *               - chapterId
  *             properties:
  *               lessionName:
  *                 type: string
  *               icon1:
  *                 type: string
+ *                 format: binary
  *               icon2:
  *                 type: string
+ *                 format: binary
  *               path:
  *                 type: string
  *               multimediaType:
@@ -73,6 +104,8 @@ module.exports = router;
  *               boardId:
  *                 type: string
  *               mediumId:
+ *                 type: string
+ *               classId:
  *                 type: string
  *               subjectId:
  *                 type: string
