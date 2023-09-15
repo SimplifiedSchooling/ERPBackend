@@ -61,8 +61,11 @@ const getByBookIdChapter = async (bookId) => {
       },
     },
     {
+      $unwind: '$multimedia', // Unwind the multimedia array
+    },
+    {
       $group: {
-        _id: '$chapterId',
+        _id: null,
         multimedias: {
           $push: '$multimedia',
         },
