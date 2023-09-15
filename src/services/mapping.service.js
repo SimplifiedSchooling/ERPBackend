@@ -79,6 +79,91 @@ const queryMapping = async () => {
 };
 
 /**
+ *  mapping
+ * @returns {Promise<AggegateResult>}
+ */
+
+const queryMappingByBookId = async () => {
+  const result = await Mapping.aggregate([
+    {
+      $lookup: {
+        from: 'chapters',
+        localField: 'bookId',
+        foreignField: 'bookId',
+        as: 'chapter',
+      },
+    },
+    {
+      $unwind: '$chapter',
+    },
+    {
+      $lookup: {
+        from: 'lessions',
+        localField: 'chapter._id',
+        foreignField: 'chapterId',
+        as: 'lesson',
+      },
+    },
+    {
+      $unwind: '$lesson',
+    },
+    {
+      $project: {
+        boardId: 1,
+        mediumId: 1,
+        classId: 1,
+        'chapter.chapterName': 1,
+        'chapter.code': 1,
+        'chapter.order': 1,
+        'chapter.thumbnail': 1,
+        'lesson.name': 1,
+        'lesson._id': 1,
+        'lesson.type': 1,
+        'lesson.order': 1,
+        'lesson.thumbnail': 1,
+        subjectId: 1,
+        bookId: 1,
+        name: 1,
+        createdAt: 1,
+        updatedAt: 1,
+      },
+    },
+    {
+      $group: {
+        _id: '$bookId',
+        chapters: {
+          $push: '$chapter',
+        },
+        lessons: {
+          $push: '$lesson',
+        },
+        boardId: {
+          $first: '$boardId',
+        },
+        mediumId: {
+          $first: '$mediumId',
+        },
+        classId: {
+          $first: '$classId',
+        },
+        bookId: {
+          $first: '$bookId',
+        },
+        name: {
+          $first: '$name',
+        },
+        createdAt: {
+          $first: '$createdAt',
+        },
+        updatedAt: {
+          $first: '$updatedAt',
+        },
+      },
+    },
+  ]);
+  return result;
+};
+/**
  * Get mapping by id
  * @param {ObjectId} id
  * @returns {Promise<Mapping>}
@@ -123,4 +208,5 @@ module.exports = {
   getMappingById,
   updateMappingById,
   deleteMappingById,
+  queryMappingByBookId,
 };
