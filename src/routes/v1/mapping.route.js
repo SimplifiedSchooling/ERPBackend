@@ -16,6 +16,8 @@ router
   .patch(validate(mappingValidation.updateMapping), mappingController.updateMappingById)
   .delete(validate(mappingValidation.deleteMappingById), mappingController.deleteMapping);
 
+router.route('/mobile/getbybookId').get(mappingController.queryMappingByBookId);
+
 module.exports = router;
 
 /**
@@ -233,5 +235,80 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /mapping/mobile/getbybookId:
+ *   get:
+ *     summary: get chapter and lesson by book
+ *     tags: [Mapping]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                 boardId:
+ *                   type: string
+ *                 mediumId:
+ *                   type: string
+ *                 classId:
+ *                   type: string
+ *                 subjectId:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                     order:
+ *                       type: integer
+ *                     code:
+ *                       type: string
+ *                     thumbnail:
+ *                       type: string
+ *                     id:
+ *                       type: string
+ *                 bookId:
+ *                   type: string
+ *                 chapters:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       chapterName:
+ *                         type: string
+ *                       order:
+ *                         type: integer
+ *                       thumbnail:
+ *                         type: string
+ *                 multimedia:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       path:
+ *                         type: string
+ *                       lessionName:
+ *                         type: string
+ *                       icon1:
+ *                         type: string
+ *                       icon2:
+ *                         type: integer
+ *                       multimediaType:
+ *                         type: string
+ *                 id:
+ *                   type: string
+ *       '401':
+ *         $ref: '#/components/responses/Unauthorized'
+ *       '403':
+ *         $ref: '#/components/responses/Forbidden'
+ *       '404':
  *         $ref: '#/components/responses/NotFound'
  */

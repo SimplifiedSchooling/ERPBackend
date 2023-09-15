@@ -71,3 +71,4 @@ module.exports.Section1A53Service = require('./masterService/section1A(1.51 to 1
 module.exports.Section1B54Service = require('./masterService/section1B(1.54 to 1.54.12).service');
 module.exports.Section1C57Service = require('./masterService/section1C(1.55 to 1.57.8).service');
 module.exports.typeOfICTSchool = require('./masterService/typeofICT.services');
+module.exports.sectorService = require('./masterService/sector.service');

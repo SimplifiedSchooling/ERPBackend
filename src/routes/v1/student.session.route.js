@@ -1,13 +1,13 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const { StudentSessionValidation } = require('../../validations');
-const { studentSessionController } = require('../../controllers');
+const StudentSessionValidation = require('../../validations/student.session.validation');
+const studentSessionController = require('../../controllers/student.session.controller');
 
 const router = express.Router();
 router
   .route('/')
   .post(validate(StudentSessionValidation.createStudentSession), studentSessionController.createStudentSession)
-  .get(validate(StudentSessionValidation.getAllStudentSession), studentSessionController.getSingleStudentSession);
+  .get(validate(StudentSessionValidation.getAllStudentSession), studentSessionController.getStudentSession);
 
 router
   .route('/:studentSessionId')
