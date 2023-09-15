@@ -34,7 +34,6 @@ const getStudentSessionById = async (studentSessionId) => {
   return StudentSession.findById(studentSessionId);
 };
 
-
 // const getStudentsByClassAndSection =async (classId, sectionId) => {
 //   try {
 //     // Find all student sessions matching the provided classId and sectionId
@@ -88,7 +87,7 @@ const getStudentSessionById = async (studentSessionId) => {
 //         },
 //         classId: {
 //           $first: '$classId',
-//         },          
+//         },
 //         createdAt: {
 //           $first: '$createdAt',
 //         },
