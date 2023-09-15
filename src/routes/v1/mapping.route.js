@@ -16,8 +16,6 @@ router
   .patch(validate(mappingValidation.updateMapping), mappingController.updateMappingById)
   .delete(validate(mappingValidation.deleteMappingById), mappingController.deleteMapping);
 
-router.route('/mobile/getbybookId').get(mappingController.queryMappingByBookId);
-
 module.exports = router;
 
 /**
@@ -240,7 +238,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /mapping/mobile/getbybookId:
+ * /mapping/mobile/getbybookId/{bookId}:
  *   get:
  *     summary: get chapter and lesson by book
  *     tags: [Mapping]

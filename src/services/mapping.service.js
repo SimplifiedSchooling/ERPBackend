@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
-const { Mapping } = require('../models');
+const mongoose = require('mongoose');
+const { Mapping, Chapter } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -83,87 +84,94 @@ const queryMapping = async () => {
  * @returns {Promise<AggegateResult>}
  */
 
-const queryMappingByBookId = async () => {
-  const result = await Mapping.aggregate([
-    {
-      $lookup: {
-        from: 'chapters',
-        localField: 'bookId',
-        foreignField: 'bookId',
-        as: 'chapter',
-      },
-    },
-    {
-      $unwind: '$chapter',
-    },
-    {
-      $lookup: {
-        from: 'multimedias',
-        localField: 'chapter._id',
-        foreignField: 'chapterId',
-        as: 'multimedia',
-      },
-    },
-    {
-      $unwind: '$multimedia',
-    },
-    {
-      $project: {
-        boardId: 1,
-        mediumId: 1,
-        classId: 1,
-        'chapter.chapterName': 1,
-        'chapter.code': 1,
-        'chapter.order': 1,
-        'chapter.thumbnail': 1,
-        'multimedia.lessionName': 1,
-        'multimedia.icon1': 1,
-        'multimedia.icon2': 1,
-        'multimedia.path': 1,
-        'multimedia.multimediaType': 1,
-        'multimedia.videoType': 1,
-        subjectId: 1,
-        bookId: 1,
-        name: 1,
-        createdAt: 1,
-        updatedAt: 1,
-      },
-    },
-    {
-      $group: {
-        _id: '$bookId',
-        chapters: {
-          $push: '$chapter',
-        },
-        multimedia: {
-          $push: '$multimedia',
-        },
-        boardId: {
-          $first: '$boardId',
-        },
-        mediumId: {
-          $first: '$mediumId',
-        },
-        classId: {
-          $first: '$classId',
-        },
-        bookId: {
-          $first: '$bookId',
-        },
-        name: {
-          $first: '$name',
-        },
-        createdAt: {
-          $first: '$createdAt',
-        },
-        updatedAt: {
-          $first: '$updatedAt',
-        },
-      },
-    },
-  ]);
-  return result;
-};
+// const queryMappingByBookId = async (bookId) => {
+//   console.log(bookId)
+//   const result = await Chapter.aggregate([
+//     {
+//       $match: {
+//         bookId: mongoose.Types.ObjectId(bookId), // Convert bookId to ObjectId if it's not already
+//       },
+//     },
+//     // {
+//     //   $lookup: {
+//     //     from: 'chapters',
+//     //     localField: 'bookId',
+//     //     foreignField: 'bookId',
+//     //     as: 'chapter',
+//     //   },
+//     // },
+//     // {
+//     //   $unwind: '$chapter',
+//     // },
+//     {
+//       $lookup: {
+//         from: 'multimedias',
+//         localField: '_id',
+//         foreignField: 'chapterId',
+//         as: 'multimedia',
+//       },
+//     },
+//     {
+//       $unwind: '$multimedia',
+//     },
+//     {
+//       $project: {
+//         // boardId: 1,
+//         // mediumId: 1,
+//         // classId: 1,
+//         // 'chapter.chapterName': 1,
+//         // 'chapter.code': 1,
+//         // 'chapter.order': 1,
+//         // 'chapter.thumbnail': 1,
+//         'multimedia.lessionName': 1,
+//         'multimedia.icon1': 1,
+//         'multimedia.icon2': 1,
+//         'multimedia.path': 1,
+//         'multimedia.multimediaType': 1,
+//         'multimedia.videoType': 1,
+//         // subjectId: 1,
+//         // bookId: 1,
+//         // name: 1,
+//         // createdAt: 1,
+//         // updatedAt: 1,
+//       },
+//     },
+//     {
+//       $group: {
+//         _id: '$bookId',
+//         // chapters: {
+//         //   $push: '$chapter',
+//         // },
+//         multimedia: {
+//           $push: '$multimedia',
+//         },
+//         // boardId: {
+//         //   $first: '$boardId',
+//         // },
+//         // mediumId: {
+//         //   $first: '$mediumId',
+//         // },
+//         // classId: {
+//         //   $first: '$classId',
+//         // },
+//         // bookId: {
+//         //   $first: '$bookId',
+//         // },
+//         // name: {
+//         //   $first: '$name',
+//         // },
+//         // createdAt: {
+//         //   $first: '$createdAt',
+//         // },
+//         // updatedAt: {
+//         //   $first: '$updatedAt',
+//         // },
+//       },
+//     },
+//   ]);
+//   return result;
+// };
+
 /**
  * Get mapping by id
  * @param {ObjectId} id
@@ -209,5 +217,4 @@ module.exports = {
   getMappingById,
   updateMappingById,
   deleteMappingById,
-  queryMappingByBookId,
 };
