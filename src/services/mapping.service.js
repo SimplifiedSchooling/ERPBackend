@@ -1,6 +1,5 @@
 const httpStatus = require('http-status');
-const mongoose = require('mongoose');
-const { Mapping, Chapter } = require('../models');
+const { Mapping } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -43,35 +42,6 @@ const queryMapping = async () => {
         name: 1,
         createdAt: 1,
         updatedAt: 1,
-      },
-    },
-    {
-      $group: {
-        _id: '$classId',
-        subjects: {
-          $push: '$subject',
-        },
-        boardId: {
-          $first: '$boardId',
-        },
-        mediumId: {
-          $first: '$mediumId',
-        },
-        classId: {
-          $first: '$classId',
-        },
-        bookId: {
-          $first: '$bookId',
-        },
-        name: {
-          $first: '$name',
-        },
-        createdAt: {
-          $first: '$createdAt',
-        },
-        updatedAt: {
-          $first: '$updatedAt',
-        },
       },
     },
   ]);

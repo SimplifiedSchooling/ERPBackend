@@ -45,30 +45,35 @@ const getByBookIdChapter = async (bookId) => {
     {
       $lookup: {
         from: 'multimedias', // The name of your multimedia collection
-        localField: '_id', // Use chapter's _id as local field
+        localField: '_id', // Use chapter's _id as the local field
         foreignField: 'chapterId', // Matching multimedia's chapterId
         as: 'multimedia',
       },
     },
     {
       $project: {
-        _id: 1,
         chapterName: 1,
+        chapterId: 1,
         order: 1,
         thumbnail: 1,
-        boardId: 1,
-        mediumId: 1,
-        classId: 1,
-        bookId: 1,
+        multimedia: 1,
         name: 1,
-        createdAt: 1,
-        updatedAt: 1,
-        multimedia: {
-          lessionName: '$multimedia.lessionName',
-          icon1: '$multimedia.icon1',
-          icon2: '$multimedia.icon2',
-          path: '$multimedia.path',
-          multimediaType: '$multimedia.multimediaType',
+      },
+    },
+    {
+      $group: {
+        _id: '$chapterId',
+        multimedias: {
+          $push: '$multimedia',
+        },
+        chapterName: {
+          $first: '$chapterName',
+        },
+        order: {
+          $first: '$order',
+        },
+        thumbnail: {
+          $first: '$thumbnail',
         },
       },
     },
