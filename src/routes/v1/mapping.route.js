@@ -242,9 +242,8 @@ module.exports = router;
  * @swagger
  * /mapping/mobile/getbybookId:
  *   get:
- *     summary: Get Mapping Data
- *     tags:
- *       - Mapping
+ *     summary: get chapter and lesson by book
+ *     tags: [Mapping]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -289,20 +288,20 @@ module.exports = router;
  *                         type: integer
  *                       thumbnail:
  *                         type: string
- *                 lessons:
+ *                 multimedia:
  *                   type: array
  *                   items:
  *                     type: object
  *                     properties:
- *                       _id:
+ *                       path:
  *                         type: string
- *                       name:
+ *                       lessionName:
  *                         type: string
- *                       type:
+ *                       icon1:
  *                         type: string
- *                       order:
+ *                       icon2:
  *                         type: integer
- *                       thumbnail:
+ *                       multimediaType:
  *                         type: string
  *                 id:
  *                   type: string
