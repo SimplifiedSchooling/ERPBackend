@@ -98,14 +98,14 @@ const queryMappingByBookId = async () => {
     },
     {
       $lookup: {
-        from: 'lessions',
+        from: 'multimedias',
         localField: 'chapter._id',
         foreignField: 'chapterId',
-        as: 'lesson',
+        as: 'multimedia',
       },
     },
     {
-      $unwind: '$lesson',
+      $unwind: '$multimedia',
     },
     {
       $project: {
@@ -116,11 +116,12 @@ const queryMappingByBookId = async () => {
         'chapter.code': 1,
         'chapter.order': 1,
         'chapter.thumbnail': 1,
-        'lesson.name': 1,
-        'lesson._id': 1,
-        'lesson.type': 1,
-        'lesson.order': 1,
-        'lesson.thumbnail': 1,
+        'multimedia.lessionName': 1,
+        'multimedia.icon1': 1,
+        'multimedia.icon2': 1,
+        'multimedia.path': 1,
+        'multimedia.multimediaType': 1,
+        'multimedia.videoType': 1,
         subjectId: 1,
         bookId: 1,
         name: 1,
@@ -134,8 +135,8 @@ const queryMappingByBookId = async () => {
         chapters: {
           $push: '$chapter',
         },
-        lessons: {
-          $push: '$lesson',
+        multimedia: {
+          $push: '$multimedia',
         },
         boardId: {
           $first: '$boardId',
