@@ -1,8 +1,7 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const  StudentSessionValidation  = require('../../validations/student.session.validation');
+const StudentSessionValidation = require('../../validations/student.session.validation');
 const studentSessionController = require('../../controllers/student.session.controller');
-
 
 const router = express.Router();
 router
