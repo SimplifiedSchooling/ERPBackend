@@ -561,6 +561,16 @@ components:
         progress_count1: Yes
         progress_count2: Yes
         progress_count3: Yes
+    Sector:
+      type: object
+      properties:
+        sector:
+          type: string
+        year:
+          type: string
+      example:
+        sector: Example sector
+        year: 2016
     Book:
       type: object
       properties:

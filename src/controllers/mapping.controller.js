@@ -20,10 +20,6 @@ const queryMapping = catchAsync(async (req, res) => {
   const result = await mappingService.queryMapping();
   res.send(result);
 });
-const queryMappingByBookId = catchAsync(async (req, res) => {
-  const result = await mappingService.queryMappingByBookId();
-  res.send(result);
-});
 
 const getMappingById = catchAsync(async (req, res) => {
   const mapping = await mappingService.getMappingById(req.params.mappingId);
