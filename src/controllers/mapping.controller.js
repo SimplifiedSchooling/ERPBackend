@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { mappingService } = require('../services');
@@ -10,9 +9,7 @@ const createMapping = catchAsync(async (req, res) => {
 });
 
 const queryMapping = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name']);
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await mappingService.queryMapping(filter, options);
+  const result = await mappingService.queryMapping();
   res.send(result);
 });
 
