@@ -45,6 +45,5 @@ module.exports = {
   getMappingById,
   updateMappingById,
   deleteMapping,
-  queryMappingByBookId,
   getAllMaping,
 };
