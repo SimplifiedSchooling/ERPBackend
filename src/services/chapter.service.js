@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 const { Chapter } = require('../models');
 const ApiError = require('../utils/ApiError');
 
@@ -32,6 +33,48 @@ const getAllChapter = async (filter, options) => {
  */
 const getChapterById = async (chapterId) => {
   return Chapter.findById(chapterId);
+};
+
+const getByBookIdChapter = async (bookId) => {
+  const result = await Chapter.aggregate([
+    {
+      $match: {
+        bookId: mongoose.Types.ObjectId(bookId),
+      },
+    },
+    {
+      $lookup: {
+        from: 'multimedias', // The name of your multimedia collection
+        localField: '_id', // Use chapter's _id as local field
+        foreignField: 'chapterId', // Matching multimedia's chapterId
+        as: 'multimedia',
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        chapterName: 1,
+        order: 1,
+        thumbnail: 1,
+        boardId: 1,
+        mediumId: 1,
+        classId: 1,
+        bookId: 1,
+        name: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        multimedia: {
+          lessionName: '$multimedia.lessionName',
+          icon1: '$multimedia.icon1',
+          icon2: '$multimedia.icon2',
+          path: '$multimedia.path',
+          multimediaType: '$multimedia.multimediaType',
+        },
+      },
+    },
+  ]);
+
+  return result;
 };
 
 /**
@@ -93,4 +136,5 @@ module.exports = {
   deleteChapterById,
   getChaptersByBookId,
   getChaptersByFilter,
+  getByBookIdChapter,
 };
