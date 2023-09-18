@@ -70,3 +70,4 @@ module.exports.Section1D60Controller = require('./masterControllers/section1D(1.
 module.exports.Section1E62Controller = require('./masterControllers/section1E(1.62 to 1.62).controller');
 module.exports.Section2A21Controller = require('./masterControllers/section2A(2.1 to 2.21).controller');
 module.exports.Section2B27Controller = require('./masterControllers/section2B(2.2 to 2.27).controller');
+module.exports.Section3AController = require('./masterControllers/section3A(3.1 to 3.4).controller');
