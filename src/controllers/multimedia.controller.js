@@ -52,6 +52,10 @@ const getMultimediaByFilter = catchAsync(async (req, res) => {
 });
 
 const updateMultimedia = catchAsync(async (req, res) => {
+  if (req.file) {
+    req.body = req.file.icon1;
+    req.body = req.file.icon2;
+  }
   const multimedia = await multimediaService.updateMultimediaById(req.params.multimediaId, req.body);
   res.send(multimedia);
 });
