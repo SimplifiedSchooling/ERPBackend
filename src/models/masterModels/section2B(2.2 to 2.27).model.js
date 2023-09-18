@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
-const section2A21 = mongoose.Schema(
+const section2B27 = mongoose.Schema(
   {
     totalpcavi: {
       type: String,
@@ -193,9 +193,9 @@ const section2A21 = mongoose.Schema(
   }
 );
 // add plugin that converts mongoose to json
-section2A21.plugin(toJSON);
-section2A21.plugin(paginate);
+section2B27.plugin(toJSON);
+section2B27.plugin(paginate);
 
-const Section2A21 = mongoose.model('section2A21', section2A21);
+const Section2B27 = mongoose.model('section2B27', section2B27);
 
-module.exports = Section2A21;
+module.exports = Section2B27;
