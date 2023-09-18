@@ -33,7 +33,10 @@ router
 router
   .route('/:multimediaId')
   .get(validate(multimediaValidation.getMultimediaById), multimediaController.getMultimediaById)
-  .patch(validate(multimediaValidation.updateMultimedia), multimediaController.updateMultimedia)
+  .patch(upload.fields([
+    { name: 'icon2', maxCount: 1 },
+    { name: 'icon1', maxCount: 1 },
+  ]), validate(multimediaValidation.updateMultimedia), multimediaController.updateMultimedia)
   .delete(validate(multimediaValidation.deleteMultimedia), multimediaController.deleteMultimedia);
 
 router
@@ -249,7 +252,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -257,19 +260,23 @@ module.exports = router;
  *                 type: string
  *               icon1:
  *                 type: string
+ *                 format: binary
  *               icon2:
  *                 type: string
+ *                 format: binary
  *               path:
  *                 type: string
- *               mediumType:
+ *               multimediaType:
  *                 type: string
  *               order:
- *                 type: string
+ *                 type: number
  *               videoType:
  *                 type: string
  *               boardId:
  *                 type: string
  *               mediumId:
+ *                 type: string
+ *               classId:
  *                 type: string
  *               subjectId:
  *                 type: string
