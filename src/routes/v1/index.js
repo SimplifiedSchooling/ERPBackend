@@ -369,7 +369,7 @@ const defaultRoutes = [
   {
     path: '/section1D60',
     route: Section1D60Route,
-  }, 
+  },
   {
     path: '/section1E62',
     route: Section1E62Route,

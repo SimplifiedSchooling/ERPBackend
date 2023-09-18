@@ -15,7 +15,7 @@ const section1E62 = mongoose.Schema(
     },
     sector1year: {
       type: String,
-       trim: true,
+      trim: true,
     },
     sector2Id: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -25,7 +25,7 @@ const section1E62 = mongoose.Schema(
     },
     sector2year: {
       type: String,
-       trim: true,
+      trim: true,
     },
     sector3Id: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -35,7 +35,7 @@ const section1E62 = mongoose.Schema(
     },
     sector3year: {
       type: String,
-       trim: true,
+      trim: true,
     },
     sector4Id: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -45,7 +45,7 @@ const section1E62 = mongoose.Schema(
     },
     sector4year: {
       type: String,
-       trim: true,
+      trim: true,
     },
     vocCourseunder: {
       type: String,
@@ -65,19 +65,19 @@ const section1E62 = mongoose.Schema(
     },
     trainingduration: {
       type: String,
-       trim: true,
+      trim: true,
     },
     servicetrainingDuration: {
       type: String,
-       trim: true,
+      trim: true,
     },
     Noofcalss10studentselfemppreyaer: {
       type: String,
-       trim: true,
+      trim: true,
     },
     Noofcalss12studentselfemppreyaer: {
       type: String,
-       trim: true,
+      trim: true,
     },
     avaiwithpresentcodition1: {
       type: String,
