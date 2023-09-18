@@ -1,36 +1,36 @@
 const express = require('express');
 const validate = require('../../../middlewares/validate');
-const Section2A21Controller = require('../../../controllers/masterControllers/section2A(2.1 to 1.21).controller');
-const Section2A21Validation = require('../../../validations/masterValidations/section2A(2.1 to 1.21).validation');
+const Section2B27Controller = require('../../../controllers/masterControllers/section2B(2.2 to 2.27).controller');
+const Section2B27Validation = require('../../../validations/masterValidations/section2B(2.2 to 2.27).validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(Section2A21Validation.createSection2A21), Section2A21Controller.createSection2A21)
-  .get(validate(Section2A21Validation.getAllSection2A21), Section2A21Controller.getAllSection2A21);
+  .post(validate(Section2B27Validation.createSection2B27), Section2B27Controller.createSection2B27)
+  .get(validate(Section2B27Validation.getAllSection2B27), Section2B27Controller.getAllSection2B27);
 
 router
-  .route('/:Section2A21Id')
-  .get(validate(Section2A21Validation.getSection2A21), Section2A21Controller.getSection2A21ById)
-  .patch(validate(Section2A21Validation.updateSection2A21), Section2A21Controller.updateSection2A21)
-  .delete(validate(Section2A21Validation.deleteSection2A21), Section2A21Controller.deleteSection2A21);
+  .route('/:Section2B27Id')
+  .get(validate(Section2B27Validation.getSection2B27), Section2B27Controller.getSection2B27ById)
+  .patch(validate(Section2B27Validation.updateSection2B27), Section2B27Controller.updateSection2B27)
+  .delete(validate(Section2B27Validation.deleteSection2B27), Section2B27Controller.deleteSection2B27);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Section2A21
- *   description: section1E(1.61-1.62) form-10
+ *   name: Section2B27
+ *   description: Section2B27(2.22-2.27) form-12
  */
 
 /**
  * @swagger
- * /Section2A21:
+ * /Section2B27:
  *   post:
- *     summary: Create a Section2A21
- *     tags: [Section2A21]
+ *     summary: Create a Section2B27
+ *     tags: [Section2B27]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -139,15 +139,15 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Section2A21'
+ *                $ref: '#/components/schemas/Section2B27'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Section2A21
- *     tags: [Section2A21]
+ *     summary: Get all Section2B27
+ *     tags: [Section2B27]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -185,7 +185,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Section2A21'
+ *                     $ref: '#/components/schemas/Section2B27'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -206,26 +206,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /Section2A21/{Section2A21Id}:
+ * /Section2B27/{Section2B27Id}:
  *   get:
- *     summary: Get a Section2A21
- *     tags: [Section2A21]
+ *     summary: Get a Section2B27
+ *     tags: [Section2B27]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: Section2A21Id
+ *         name: Section2B27Id
  *         required: true
  *         schema:
  *           type: string
- *         description: Section2A21Id
+ *         description: Section2B27Id
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Section2A21'
+ *                $ref: '#/components/schemas/Section2B27'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -234,17 +234,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Section2A21
- *     tags: [Section2A21]
+ *     summary: Update a Section2B27
+ *     tags: [Section2B27]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: Section2A21Id
+ *         name: Section2B27Id
  *         required: true
  *         schema:
  *           type: string
- *         description: Section2A21Id
+ *         description: Section2B27Id
  *     requestBody:
  *       required: true
  *       content:
@@ -351,7 +351,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Section2A21'
+ *                $ref: '#/components/schemas/Section2B27'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -360,17 +360,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a type Section2A21
- *     tags: [Section2A21]
+ *     summary: Delete a type Section2B27
+ *     tags: [Section2B27]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: Section2A21Id
+ *         name: Section2B27Id
  *         required: true
  *         schema:
  *           type: string
- *         description: Section2A21Id
+ *         description: Section2B27Id
  *     responses:
  *       "200":
  *         description: No content
