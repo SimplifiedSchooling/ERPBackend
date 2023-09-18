@@ -33,10 +33,14 @@ router
 router
   .route('/:multimediaId')
   .get(validate(multimediaValidation.getMultimediaById), multimediaController.getMultimediaById)
-  .patch(upload.fields([
-    { name: 'icon2', maxCount: 1 },
-    { name: 'icon1', maxCount: 1 },
-  ]), validate(multimediaValidation.updateMultimedia), multimediaController.updateMultimedia)
+  .patch(
+    upload.fields([
+      { name: 'icon2', maxCount: 1 },
+      { name: 'icon1', maxCount: 1 },
+    ]),
+    validate(multimediaValidation.updateMultimedia),
+    multimediaController.updateMultimedia
+  )
   .delete(validate(multimediaValidation.deleteMultimedia), multimediaController.deleteMultimedia);
 
 router
