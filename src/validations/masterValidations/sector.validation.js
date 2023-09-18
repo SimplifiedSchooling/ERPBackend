@@ -4,7 +4,6 @@ const { objectId } = require('../custom.validation');
 const createSector = {
   body: Joi.object().keys({
     sector: Joi.string().required(),
-    year: Joi.string().required(),
   }),
 };
 
@@ -27,7 +26,6 @@ const updateSector = {
   body: Joi.object()
     .keys({
       sector: Joi.string().required(),
-      year: Joi.string().required(),
     })
     .min(1),
 };

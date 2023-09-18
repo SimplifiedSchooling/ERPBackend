@@ -45,11 +45,8 @@ module.exports = router;
  *             properties:
  *               sector:
  *                 type: string *
- *               year:
- *                 type: string
  *             example:
  *               sector: "New"
- *               year: "2014"
  *
  *     responses:
  *       "201":
@@ -135,11 +132,8 @@ module.exports = router;
  *             properties:
  *               sector:
  *                 type: string
- *               year:
- *                 type: string
  *             example:
  *               sector: fake name*
- *               year: "2014"
  *     responses:
  *       "200":
  *         description: OK
