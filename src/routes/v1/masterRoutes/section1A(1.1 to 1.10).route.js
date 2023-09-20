@@ -40,10 +40,10 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - udisecode
+ *               - UDISEcode
  *               - schoolname
- *               - districtId
- *               - udiseblockId
+ *               - districtname
+ *               - udiseblock
  *               - typeofschool
  *               - revenueblock
  *               - villagename
@@ -52,8 +52,9 @@ module.exports = router;
  *               - wardname
  *               - address
  *               - pincode
- *               - assemblyconstituency
- *               - parliamentaryconstituency
+ *               - crc
+ *               - assembly
+ *               - parliamentary
  *               - latitude
  *               - longitude
  *               - stdcode
@@ -61,13 +62,13 @@ module.exports = router;
  *               - mobileno
  *               - email
  *               - website
- *               - profilecount
+ *               - profile_count
  *               - scode
  *             example:
- *               udisecode: UDISE_CODE_VALUE
+ *               UDISEcode: UDISE_CODE_VALUE
  *               schoolname: SCHOOL_NAME_VALUE
- *               districtId: 64d327a41128844220f0cce4
- *               udiseblockId: 64d327a41128844220f0cce4
+ *               districtname: 64d327a41128844220f0cce4
+ *               udiseblock: 64d327a41128844220f0cce4
  *               typeofschool: TYPE_OF_SCHOOL_VALUE
  *               revenueblock: REVENUE_BLOCK_VALUE
  *               villagename: VILLAGE_NAME_VALUE
@@ -76,8 +77,9 @@ module.exports = router;
  *               wardname: WARD_NAME_VALUE
  *               address: ADDRESS_VALUE
  *               pincode: "123123"
- *               assemblyconstituency: ASSEMBLY_CONSTITUENCY_VALUE
- *               parliamentaryconstituency: PARLIAMENTARY_CONSTITUENCY_VALUE
+ *               crc: "CRC"
+ *               assembly: ASSEMBLY_CONSTITUENCY_VALUE
+ *               parliamentary: PARLIAMENTARY_CONSTITUENCY_VALUE
  *               latitude: LATITUDE_VALUE
  *               longitude: LONGITUDE_VALUE
  *               stdcode: "123"
@@ -85,7 +87,7 @@ module.exports = router;
  *               mobileno: "9049114189"
  *               email: manishspatil345@gmail.com
  *               website: https://www.example.com
- *               profilecount: PROFILE_COUNT_VALUE
+ *               profile_count: PROFILE_COUNT_VALUE
  *               scode: SCODE_VALUE
  *
  *     responses:
@@ -207,10 +209,10 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - udisecode
+ *               - UDISEcode
  *               - schoolname
- *               - districtId
- *               - udiseblockId
+ *               - districtname
+ *               - udiseblock
  *               - typeofschool
  *               - revenueblock
  *               - villagename
@@ -219,8 +221,9 @@ module.exports = router;
  *               - wardname
  *               - address
  *               - pincode
- *               - assemblyconstituency
- *               - parliamentaryconstituency
+ *               - crc
+ *               - assembly
+ *               - parliamentary
  *               - latitude
  *               - longitude
  *               - stdcode
@@ -228,13 +231,13 @@ module.exports = router;
  *               - mobileno
  *               - email
  *               - website
- *               - profilecount
+ *               - profile_count
  *               - scode
  *             example:
- *               udisecode: UDISE_CODE_VALUE
+ *               UDISEcode: UDISE_CODE_VALUE
  *               schoolname: SCHOOL_NAME_VALUE
- *               districtId: 64d327a41128844220f0cce4
- *               udiseblockId: 64d327a41128844220f0cce4
+ *               districtname: 64d327a41128844220f0cce4
+ *               udiseblock: 64d327a41128844220f0cce4
  *               typeofschool: TYPE_OF_SCHOOL_VALUE
  *               revenueblock: REVENUE_BLOCK_VALUE
  *               villagename: VILLAGE_NAME_VALUE
@@ -243,16 +246,17 @@ module.exports = router;
  *               wardname: WARD_NAME_VALUE
  *               address: ADDRESS_VALUE
  *               pincode: "123123"
- *               assemblyconstituency: ASSEMBLY_CONSTITUENCY_VALUE
- *               parliamentaryconstituency: PARLIAMENTARY_CONSTITUENCY_VALUE
+ *               crc: "CRC"
+ *               assembly: ASSEMBLY_CONSTITUENCY_VALUE
+ *               parliamentary: PARLIAMENTARY_CONSTITUENCY_VALUE
  *               latitude: LATITUDE_VALUE
  *               longitude: LONGITUDE_VALUE
  *               stdcode: "123"
- *               landline: "12344321"
+ *               landline: "12312321"
  *               mobileno: "9049114189"
  *               email: manishspatil345@gmail.com
  *               website: https://www.example.com
- *               profilecount: PROFILE_COUNT_VALUE
+ *               profile_count: PROFILE_COUNT_VALUE
  *               scode: SCODE_VALUE
  *     responses:
  *       "200":
