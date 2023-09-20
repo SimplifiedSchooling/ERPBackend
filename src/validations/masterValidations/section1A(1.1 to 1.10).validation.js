@@ -3,10 +3,10 @@ const { objectId } = require('../custom.validation');
 
 const createSection1A10 = {
   body: Joi.object().keys({
-    udisecode: Joi.string().required(),
+    UDISEcode: Joi.string().required(),
     schoolname: Joi.string().required(),
-    districtId: Joi.string().required(),
-    udiseblockId: Joi.string().required(),
+    districtname: Joi.string().required(),
+    udiseblock: Joi.string().required(),
     typeofschool: Joi.string().required(),
     revenueblock: Joi.string(),
     villagename: Joi.string(),
@@ -17,8 +17,9 @@ const createSection1A10 = {
     pincode: Joi.string()
       .regex(/^\d{6}$/)
       .optional(),
-    assemblyconstituency: Joi.string(),
-    parliamentaryconstituency: Joi.string(),
+    crc: Joi.string(),
+    assembly: Joi.string(),
+    parliamentary: Joi.string(),
     latitude: Joi.string(),
     longitude: Joi.string(),
     stdcode: Joi.string()
@@ -32,7 +33,7 @@ const createSection1A10 = {
       .optional(),
     email: Joi.string().email().optional(),
     website: Joi.string().uri().optional(),
-    profilecount: Joi.string(),
+    profile_count: Joi.string(),
     scode: Joi.string(),
   }),
 };
@@ -58,11 +59,11 @@ const updateSection1A10 = {
   }),
   body: Joi.object()
     .keys({
-      udisecode: Joi.string(),
-      schoolname: Joi.string(),
-      districtId: Joi.string(),
-      udiseblockId: Joi.string(),
-      typeofschool: Joi.string(),
+      UDISEcode: Joi.string().required(),
+      schoolname: Joi.string().required(),
+      districtname: Joi.string().required(),
+      udiseblock: Joi.string().required(),
+      typeofschool: Joi.string().required(),
       revenueblock: Joi.string(),
       villagename: Joi.string(),
       grampanchayatname: Joi.string(),
@@ -72,8 +73,9 @@ const updateSection1A10 = {
       pincode: Joi.string()
         .regex(/^\d{6}$/)
         .optional(),
-      assemblyconstituency: Joi.string(),
-      parliamentaryconstituency: Joi.string(),
+      crc: Joi.string(),
+      assembly: Joi.string(),
+      parliamentary: Joi.string(),
       latitude: Joi.string(),
       longitude: Joi.string(),
       stdcode: Joi.string()
@@ -87,7 +89,7 @@ const updateSection1A10 = {
         .optional(),
       email: Joi.string().email().optional(),
       website: Joi.string().uri().optional(),
-      profilecount: Joi.string(),
+      profile_count: Joi.string(),
       scode: Joi.string(),
     })
     .min(1),
