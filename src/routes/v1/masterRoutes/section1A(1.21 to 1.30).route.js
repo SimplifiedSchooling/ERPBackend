@@ -42,7 +42,7 @@ module.exports = router;
  *             properties:
  *               - primaryclass
  *               - upperprimary
- *               - secondary
+ *               - Secondary
  *               - languageId
  *               - cwsnschool
  *               - cwsnschooltype
@@ -80,10 +80,10 @@ module.exports = router;
  *               - minorityschool
  *               - minoritytype
  *               - mothertongue
- *               - medium1Id
- *               - medium2Id
- *               - medium3Id
- *               - medium4Id
+ *               - medium1
+ *               - medium2
+ *               - medium3
+ *               - medium4
  *               - othermedium
  *               - languagetaught1
  *               - classtaught1
@@ -114,7 +114,7 @@ module.exports = router;
  *             example:
  *               primaryclass: Primary Class Value
  *               upperprimary: Upper Primary Value
- *               secondary: Secondary Value
+ *               Secondary: Secondary Value
  *               languageId: 64d327a41128844220f0cce4
  *               cwsnschool: CWSN School Value
  *               cwsnschooltype: CWSN School Type Value
@@ -151,10 +151,10 @@ module.exports = router;
  *               minorityschool: Minority School Value
  *               minoritytype: Minority Type Value
  *               mothertongue: Mother Tongue Value
- *               medium1Id: 64d327a41128844220f0cce4
- *               medium2Id: 64d327a41128844220f0cce4
- *               medium3Id: 64d327a41128844220f0cce4
- *               medium4Id: 64d327a41128844220f0cce4
+ *               medium1: 64d327a41128844220f0cce4
+ *               medium2: 64d327a41128844220f0cce4
+ *               medium3: 64d327a41128844220f0cce4
+ *               medium4: 64d327a41128844220f0cce4
  *               othermedium: Other Medium Value
  *               languagetaught1: 64d327a41128844220f0cce4
  *               classtaught1: Class Taught 1 Value
@@ -303,7 +303,7 @@ module.exports = router;
  *             properties:
  *               - primaryclass
  *               - upperprimary
- *               - secondary
+ *               - Secondary
  *               - languageId
  *               - cwsnschool
  *               - cwsnschooltype
@@ -341,10 +341,10 @@ module.exports = router;
  *               - minorityschool
  *               - minoritytype
  *               - mothertongue
- *               - medium1Id
- *               - medium2Id
- *               - medium3Id
- *               - medium4Id
+ *               - medium1
+ *               - medium2
+ *               - medium3
+ *               - medium4
  *               - othermedium
  *               - languagetaught1
  *               - classtaught1
@@ -375,7 +375,7 @@ module.exports = router;
  *             example:
  *               primaryclass: Primary Class Value
  *               upperprimary: Upper Primary Value
- *               secondary: Secondary Value
+ *               Secondary: Secondary Value
  *               languageId: 64d327a41128844220f0cce4
  *               cwsnschool: CWSN School Value
  *               cwsnschooltype: CWSN School Type Value
@@ -412,10 +412,10 @@ module.exports = router;
  *               minorityschool: Minority School Value
  *               minoritytype: Minority Type Value
  *               mothertongue: Mother Tongue Value
- *               medium1Id: 64d327a41128844220f0cce4
- *               medium2Id: 64d327a41128844220f0cce4
- *               medium3Id: 64d327a41128844220f0cce4
- *               medium4Id: 64d327a41128844220f0cce4
+ *               medium1: 64d327a41128844220f0cce4
+ *               medium2: 64d327a41128844220f0cce4
+ *               medium3: 64d327a41128844220f0cce4
+ *               medium4: 64d327a41128844220f0cce4
  *               othermedium: Other Medium Value
  *               languagetaught1: 64d327a41128844220f0cce4
  *               classtaught1: Class Taught 1 Value
