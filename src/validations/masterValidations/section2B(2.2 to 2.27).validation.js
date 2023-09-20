@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { objectId } = require('../custom.validation');
 
-const createSection2A21 = {
+const createSection2B27 = {
   body: Joi.object().keys({
     totalpcavi: Joi.string().trim(),
     functpcavai: Joi.string().trim(),
@@ -52,7 +52,7 @@ const createSection2A21 = {
   }),
 };
 
-const getAllSection2A21 = {
+const getAllSection2B27 = {
   query: Joi.object().keys({
     totalpcavi: Joi.string(),
     sortBy: Joi.string(),
@@ -61,15 +61,15 @@ const getAllSection2A21 = {
   }),
 };
 
-const getSection2A21 = {
+const getSection2B27 = {
   params: Joi.object().keys({
-    Section2A21Id: Joi.string().custom(objectId),
+    Section2B27Id: Joi.string().custom(objectId),
   }),
 };
 
-const updateSection2A21 = {
+const updateSection2B27 = {
   params: Joi.object().keys({
-    Section2A21Id: Joi.required().custom(objectId),
+    Section2B27Id: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -123,16 +123,16 @@ const updateSection2A21 = {
     .min(1),
 };
 
-const deleteSection2A21 = {
+const deleteSection2B27 = {
   params: Joi.object().keys({
-    Section2A21Id: Joi.string().custom(objectId),
+    Section2B27Id: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createSection2A21,
-  getAllSection2A21,
-  getSection2A21,
-  updateSection2A21,
-  deleteSection2A21,
+  createSection2B27,
+  getAllSection2B27,
+  getSection2B27,
+  updateSection2B27,
+  deleteSection2B27,
 };
