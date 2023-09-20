@@ -10,8 +10,6 @@ const section1A10Schema = mongoose.Schema(
     UDISEcode: {
       type: String,
       required: true,
-
-      unique: true,
     },
     districtname: {
       type: mongoose.SchemaTypes.ObjectId,
