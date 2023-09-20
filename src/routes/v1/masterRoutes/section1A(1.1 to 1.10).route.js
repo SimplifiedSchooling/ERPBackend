@@ -65,7 +65,7 @@ module.exports = router;
  *               - profile_count
  *               - scode
  *             example:
- *               UDISEcode: UDISE_CODE_VALUE
+ *               UDISEcode : UDISE_CODE_VALUE
  *               schoolname: SCHOOL_NAME_VALUE
  *               districtname: 64d327a41128844220f0cce4
  *               udiseblock: 64d327a41128844220f0cce4
@@ -234,7 +234,7 @@ module.exports = router;
  *               - profile_count
  *               - scode
  *             example:
- *               UDISEcode: UDISE_CODE_VALUE
+ *               UDISEcode : UDISE_CODE_VALUE
  *               schoolname: SCHOOL_NAME_VALUE
  *               districtname: 64d327a41128844220f0cce4
  *               udiseblock: 64d327a41128844220f0cce4
