@@ -1,18 +1,18 @@
 const httpStatus = require('http-status');
-const { Attendance } = require('../models');
+const { staffAttendance } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
- * Create a chapter
- * @param {Object} attendance
- * @returns {Promise<Attendance>}
+ * Create a staff atttendance
+ * @param {Object} attendanceBody
+ * @returns {Promise<staffAttendance>}
  */
-const createAttendance = async (attendance) => {
-  return Attendance.create(attendance);
+const createAttendance = async (attendanceBody) => {
+  return staffAttendance.create(attendanceBody);
 };
 
 /**
- * Query for Attendance
+ * Query for staff attendace
  * @param {Object} filter - Mongo filter
  * @param {Object} options - Query options
  * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
@@ -21,24 +21,24 @@ const createAttendance = async (attendance) => {
  * @returns {Promise<QueryResult>}
  */
 const getAllAttendance = async (filter, options) => {
-  const allAttendance = await Attendance.paginate(filter, options);
+  const allAttendance = await staffAttendance.paginate(filter, options);
   return allAttendance;
 };
 
 /**
- * Get Attendance by id
+ * Get staff Attendance by id
  * @param {ObjectId} attendanceId
- * @returns {Promise<Attendance>}
+ * @returns {Promise<staffAttendance>}
  */
 const getAttendanceById = async (attendanceId) => {
-  return Attendance.findById(attendanceId);
+  return staffAttendance.findById(attendanceId);
 };
 
 /**
- * Update Attendance by id
+ * Update Staff Attendance by id
  * @param {ObjectId} attendanceId
  * @param {Object} updateBody
- * @returns {Promise<Attendance>}
+ * @returns {Promise<staffAttendance>}
  */
 const updateAttendanceById = async (attendanceId, updateBody) => {
   const singleAttendance = await getAttendanceById(attendanceId);
@@ -51,9 +51,9 @@ const updateAttendanceById = async (attendanceId, updateBody) => {
 };
 
 /**
- * Delete Attendance by id
+ * Delete Staff Attendance by id
  * @param {ObjectId} attendanceId
- * @returns {Promise<Attendance>}
+ * @returns {Promise<staffAttendance>}
  */
 const deleteAttendanceById = async (attendanceId) => {
   const attendance = await getAttendanceById(attendanceId);

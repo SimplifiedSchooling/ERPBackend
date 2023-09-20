@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const attendancechema = mongoose.Schema(
+const staffAttendanceSchema = mongoose.Schema(
   {
-    student_session_id: {
+    staffId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Student_session',
+      ref: 'Staffs',
       required: true,
       trim: true,
     },
@@ -31,9 +31,9 @@ const attendancechema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-attendancechema.plugin(toJSON);
-attendancechema.plugin(paginate);
+staffAttendanceSchema.plugin(toJSON);
+staffAttendanceSchema.plugin(paginate);
 
-const Attendance = mongoose.model('Attendance', attendancechema);
+const staffAttendance = mongoose.model('staffAttendance', staffAttendanceSchema);
 
-module.exports = Attendance;
+module.exports = staffAttendance;

@@ -3,7 +3,7 @@ const { objectId } = require('./custom.validation');
 
 const createAttendance = {
   body: Joi.object().keys({
-    student_session_id: Joi.string().required(),
+    staffId: Joi.string().required(),
     date: Joi.string().required(),
     attedance_type: Joi.string().required().valid('holiday', 'late', 'present', 'absent', 'halfday'),
     remark: Joi.string().required(),
@@ -31,10 +31,10 @@ const updateAttendanceById = {
   }),
   body: Joi.object()
     .keys({
-      student_session_id: Joi.string().required(),
-      date: Joi.string().required(),
-      attedance_type: Joi.string().required(),
-      remark: Joi.string().required(),
+      staffId: Joi.string(),
+      date: Joi.string(),
+      attedance_type: Joi.string(),
+      remark: Joi.string(),
     })
     .min(1),
 };
