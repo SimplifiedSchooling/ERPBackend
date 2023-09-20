@@ -7,7 +7,7 @@ const section1E62 = mongoose.Schema(
       type: String,
       trim: true,
     },
-    sector1Id: {
+    sector1: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'sector',
       required: true,
@@ -17,7 +17,7 @@ const section1E62 = mongoose.Schema(
       type: String,
       trim: true,
     },
-    sector2Id: {
+    sector2: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'sector',
       required: true,
@@ -27,7 +27,7 @@ const section1E62 = mongoose.Schema(
       type: String,
       trim: true,
     },
-    sector3Id: {
+    sector3: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'sector',
       required: true,
@@ -37,7 +37,7 @@ const section1E62 = mongoose.Schema(
       type: String,
       trim: true,
     },
-    sector4Id: {
+    sector4: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'sector',
       required: true,
