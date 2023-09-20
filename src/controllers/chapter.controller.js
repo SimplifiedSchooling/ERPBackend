@@ -48,6 +48,9 @@ const getChaptersByBookId = catchAsync(async (req, res) => {
 });
 
 const updateSingleClass = catchAsync(async (req, res) => {
+  if (req.file) {
+    req.body = req.file.thumbnail;
+  }
   const updateddClass = await chapterService.updateChapterById(req.params.chapterId, req.body);
   res.send(updateddClass);
 });
