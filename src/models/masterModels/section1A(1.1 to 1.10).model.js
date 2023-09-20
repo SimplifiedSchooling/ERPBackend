@@ -3,24 +3,24 @@ const { toJSON, paginate } = require('../plugins');
 
 const section1A10Schema = mongoose.Schema(
   {
-    udisecode: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-    },
     schoolname: {
       type: String,
       required: true,
       trim: true,
     },
-    districtId: {
+    UDISEcode: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+    },
+    districtname: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'district',
       required: true,
       trim: true,
     },
-    udiseblockId: {
+    udiseblock: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'udiseblock',
       required: true,
@@ -66,12 +66,17 @@ const section1A10Schema = mongoose.Schema(
       required: false,
       trim: true,
     },
-    assemblyconstituency: {
+    crc: {
       type: String,
       required: false,
       trim: true,
     },
-    parliamentaryconstituency: {
+    assembly: {
+      type: String,
+      required: false,
+      trim: true,
+    },
+    parliamentary: {
       type: String,
       required: false,
       trim: true,
@@ -86,7 +91,7 @@ const section1A10Schema = mongoose.Schema(
       required: false,
       trim: true,
     },
-    std_code: {
+    stdcode: {
       type: String,
       required: false,
       trim: true,
@@ -111,7 +116,7 @@ const section1A10Schema = mongoose.Schema(
       required: false,
       trim: true,
     },
-    profilecount: {
+    profile_count: {
       type: String,
       required: false,
       trim: true,
