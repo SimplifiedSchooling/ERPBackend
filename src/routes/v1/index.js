@@ -289,7 +289,7 @@ const defaultRoutes = [
   {
     path: '/studentStatus',
     route: studentStatusRoute,
-  }, 
+  },
   {
     path: '/udiseblock',
     route: UdiseblockRoute,
