@@ -26,7 +26,7 @@ router
 router
   .route('/:bookId')
   .get(validate(bookValidation.getBook), bookController.getBookById)
-  .patch(validate(bookValidation.updateBook), bookController.updateBook)
+  .patch(upload.single('thumbnail'), validate(bookValidation.updateBook), bookController.updateBook)
   .delete(validate(bookValidation.deleteBook), bookController.deleteBook);
 
 router
@@ -195,29 +195,30 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
  *               name:
  *                 type: string
- *               classId:
- *                 type: string
  *               boardId:
  *                 type: string
  *               mediumId:
  *                 type: string
- *               thumbnail:
+ *               classId:
  *                 type: string
  *               subjectId:
  *                 type: string
- *             example:
- *               name: fake name
- *               classId: 64d9d4666205c371563fcadb
- *               thumbnail: afllnEGAS/AGSJAGSNL
- *               boardId: 614a7e7d7f1d813bbf8e89b7
- *               mediumId: 614a7e7d7f1d813bbf8e89a9
- *               subjectId: 614a7e7d7f1d813bbf8e89a9,
+ *               thumbnail:
+ *                 type: string
+ *                 format: binary
+ *             required:
+ *               - name
+ *               - boardId
+ *               - mediumId
+ *               - classId
+ *               - subjectId
+ *               - thumbnail
  *     responses:
  *       "200":
  *         description: OK

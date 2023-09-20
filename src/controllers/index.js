@@ -67,3 +67,5 @@ module.exports.Section1A53Controller = require('./masterControllers/section1A(1.
 module.exports.Section1B54Controller = require('./masterControllers/section1B(1.54 to 1.54.12).controller');
 module.exports.Section1C57Controller = require('./masterControllers/section1C(1.55 to 1.57.8).controller');
 module.exports.Section1D60Controller = require('./masterControllers/section1D(1.58.1 to 1.60.3).controller');
+module.exports.Section1E62Controller = require('./masterControllers/section1E(1.62 to 1.62).controller');
+module.exports.Section2B27Controller = require('./masterControllers/section2B(2.2 to 2.27).controller');
