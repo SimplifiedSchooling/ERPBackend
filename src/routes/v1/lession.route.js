@@ -33,7 +33,14 @@ router
 router
   .route('/:lessionId')
   .get(validate(lessionValidation.getLession), lessionController.getLession)
-  .patch(validate(lessionValidation.updateLession), lessionController.updateLession)
+  .patch(
+    upload.fields([
+      { name: 'thumbnail', maxCount: 1 },
+      { name: 'poster', maxCount: 1 },
+    ]),
+    validate(lessionValidation.updateLession),
+    lessionController.updateLession
+  )
   .delete(validate(lessionValidation.deleteLession), lessionController.deleteLession);
 
 router
@@ -217,7 +224,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -241,8 +248,10 @@ module.exports = router;
  *                 type: number
  *               thumbnail:
  *                 type: string
+ *                 format: binary
  *               poster:
  *                 type: string
+ *                 format: binary
  *             example:
  *               name: English
  *               type: "https://www.youtube.com/watch?v=D52_BL9sVMU"
