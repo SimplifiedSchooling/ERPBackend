@@ -605,44 +605,8 @@ components:
           type: string
           description: Name of the Medium
       example:
-        name: Example Medium
-        
-    Chapter:
-      type: object
-      properties:
-        chapterName:
-          type: string
-          description: Name of the chapter
-        boardId:
-          type: string
-          description: ID of the boardId
-        mediumId:
-          type: string
-          description: ID of the boardId
-        classId:
-          type: string
-          description: ID of the boardId
-        subjectId:
-          type: string
-          description: ID of the boardId
-        bookId:
-          type: string
-          description: ID of the boardId
-        order:
-          type: number
-          description: order number
-        thumbnail:
-          type: string 
-      example:
-        name: Example Medium
-        boardId: 614a7e7d7f1d813bbf8e89b7
-        mediumId: 614a7e7d7f1d813bbf8e89b7
-        classId: 614a7e7d7f1d813bbf8e89b7
-        subjectId: 614a7e7d7f1d813bbf8e89b7
-        bookId: 614a7e7d7f1d813bbf8e89b7
-        order: 1
-        chapterName: friction
-        thumbnail: afllnEGAS/AGSJAGSNL
+        name: Example Medium    
+ 
 
     Class:
       type: object
@@ -745,6 +709,43 @@ components:
         bookId: 614a7e7d7f1d813bbf8e89a9
         chapterId: 614a7e7d7f1d813bbf8e89a9
 
+    Chapter:
+      type: object
+      properties:
+        chapterName:
+          type: string
+          description: Name of the Chapter
+        order:
+          type: number
+          description: Number of order
+        thumbnail:
+          type: string
+          description: Thumbnail
+        boardId:
+          type: string
+          description: ID of the boardId
+        mediumId:
+          type: string
+          description: ID of the mediumId
+        classId:
+          type: string
+          description: ID of the classId
+        subjectId:
+          type: string
+          description: ID of the subjectId
+        bookId:
+          type: string
+          description: ID of the bookId
+      example:
+        chapterName: Example Chapter
+        order: 2
+        thumbnail: "http://example.com"
+        boardId: 614a7e7d7f1d813bbf8e89b7  
+        mediumId: 614a7e7d7f1d813bbf8e89a9 
+        classId: 614a7e7d7f1d813bbf8e89b7  
+        subjectId: 614a7e7d7f1d813bbf8e89a9
+        bookId: 614a7e7d7f1d813bbf8e89a9
+ 
     Subject:
       type: object
       properties:

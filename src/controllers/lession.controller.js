@@ -44,6 +44,10 @@ const getLessionByFilter = catchAsync(async (req, res) => {
 });
 
 const updateLession = catchAsync(async (req, res) => {
+  if (req.file) {
+    req.body = req.file.thumbnail;
+    req.body = req.file.poster;
+  }
   const lession = await lessionService.updateLessionById(req.params.lessionId, req.body);
   res.send(lession);
 });

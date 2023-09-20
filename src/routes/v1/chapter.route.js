@@ -36,14 +36,9 @@ router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId')
   .get(validate(chapterValidation.getChaptersByFilter), chaterController.getChapterByFilter);
 
-  router
-  .route('/mobile/getbybookId/:bookId')
-  .get(chaterController.getByBookIdChapter);
-
-
+router.route('/mobile/getbybookId/:bookId').get(chaterController.getByBookIdChapter);
 
 module.exports = router;
-
 
 /**
  * @swagger
