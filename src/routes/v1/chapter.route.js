@@ -29,7 +29,7 @@ router
 router
   .route('/:chapterId')
   .get(validate(chapterValidation.getChapter), chaterController.getSingleChapter)
-  .patch(validate(chapterValidation.updateChapterById), chaterController.updateSingleClass)
+  .patch(upload.single('thumbnail'), validate(chapterValidation.updateChapterById), chaterController.updateSingleClass)
   .delete(validate(chapterValidation.deleteChapterById), chaterController.deleteSingleChapter);
 
 router
@@ -37,20 +37,25 @@ router
   .get(validate(chapterValidation.getChaptersByFilter), chaterController.getChapterByFilter);
 
 router.route('/mobile/getbybookId/:bookId').get(chaterController.getByBookIdChapter);
+
 module.exports = router;
+
 /**
  * @swagger
  * tags:
- *   name: Chapters
- *   description:   Chapters Management System
+ *   name: Chapter
+ *   description: Chapter management and retrieval
  */
 
 /**
  * @swagger
  * /chapter:
  *   post:
- *     summary: Create a new chapter
- *     tags: [Chapters]
+ *     summary: Create a Chapter
+ *     description: Create other Chapter.
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -58,59 +63,64 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               boardId:
- *                 type: string
- *                 description: ID of the board
- *               mediumId:
- *                 type: string
- *                 description: ID of the medium
- *               classId:
- *                 type: string
- *                 description: ID of the class
- *               subjectId:
- *                 type: string
- *                 description: ID of the subject
- *               bookId:
- *                 type: string
- *                 description: ID of the book
  *               chapterName:
  *                 type: string
- *                 description: Name of the chapter
  *               thumbnail:
  *                 type: string
  *                 format: binary
  *               order:
  *                 type: number
- *             required:
- *               - boardId
- *               - mediumId
- *               - classId
- *               - subjectId
- *               - bookId
- *               - chapterName
- *               - thumbnail
- *               - order
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
+ *               subjectId:
+ *                 type: string
+ *               bookId:
+ *                 type: string
+ *             example:
+ *               chapterName: English
+ *               thumbnail: imagelink/icon1
+ *               order: 1
+ *               boardId: 64d9ceaef49e9f5dc06502c6
+ *               mediumId: 64d327a41128844220f0cce4
+ *               classId: 64d327811128844220f0cce0
+ *               subjectId: 64d9d4666205c371563fcadb
+ *               bookId: 64d9d7143ac675796cdcd433
  *     responses:
- *       '201':
+ *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ChapterInput'
- *       '401':
- *         $ref: '#/components/responses/Unauthorized'
- *       '403':
- *         $ref: '#/components/responses/Forbidden'
+ *               $ref: '#/components/schemas/Chapter'
+ *       "401":
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         description: Forbidden
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Forbidden'
+ *
  *
  *   get:
- *     summary: Get all chapters
- *     tags: [Chapters]
+ *     summary: Get all chapter
+ *     description: all chapter.
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: chapterName
  *         schema:
  *           type: string
- *         description: chapter name
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -122,7 +132,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of chapters
+ *         description: Maximum number of Chapter
  *       - in: query
  *         name: page
  *         schema:
@@ -141,7 +151,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/ChapterInput'
+ *                     $ref: '#/components/schemas/Chapter'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -158,164 +168,151 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
- *
+ */
+/**
+ * @swagger
  * /chapter/{chapterId}:
- *   patch:
- *     summary: Update a single chapter by ID
- *     tags: [Chapters]
- *     parameters:
- *       - in: path
- *         name: chapterId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the chapter
- *     requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ChapterUpdateInput'
- *     responses:
- *       200:
- *         description: Successful response
- *       400:
- *         description: Bad request
- *       404:
- *         description: Chapter not found
- *   delete:
- *     summary: Delete a single chapter by ID
- *     tags: [Chapters]
- *     parameters:
- *       - in: path
- *         name: chapterId
- *         required: true
- *         schema:
- *           type: string
- *         description: ID of the chapter
- *     responses:
- *       204:
- *         description: No content
- *       404:
- *         description: Chapter not found
  *   get:
- *     summary: Get a single chapter by ID
- *     tags: [Chapters]
+ *     summary: Get a Chapter
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: chapterId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the chapter
  *     responses:
- *       200:
- *         description: Successful response
- *       404:
- *         description: Chapter not found
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Chapter'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  *
+ *   patch:
+ *     summary: Update a Chapter
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: chapterId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               chapterName:
+ *                 type: string
+ *               thumbnail:
+ *                 type: string
+ *                 format: binary
+ *               order:
+ *                 type: number
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
+ *               subjectId:
+ *                 type: string
+ *               bookId:
+ *                 type: string
+ *             example:
+ *               chapterName: English
+ *               thumbnail: imagelink/icon1
+ *               order: 1
+ *               boardId: 64d9ceaef49e9f5dc06502c6
+ *               mediumId: 64d327a41128844220f0cce4
+ *               classId: 64d327811128844220f0cce0
+ *               subjectId: 64d9d4666205c371563fcadb
+ *               bookId: 64d9d7143ac675796cdcd433
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Chapter'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ *   delete:
+ *     summary: Delete a Chapter
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: chapterId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: chapterId
+ *     responses:
+ *       "200":
+ *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
  * /chapter/getChaptersByBookid/{bookId}:
- *    get:
- *     summary: Get all chapters by bookId
- *     tags: [Chapters]
+ *   get:
+ *     summary: Get a Chapter by book
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: bookId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the bookId
  *     responses:
- *       200:
- *         description: Successful response
- *       404:
- *         description: Chapters not found
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     ChapterInput:
- *       type: object
- *       properties:
- *         boardId:
- *           type: string
- *           description: ID of the board
- *         mediumId:
- *           type: string
- *           description: ID of the medium
- *         classId:
- *           type: string
- *           description: ID of the class
- *         subjectId:
- *           type: string
- *           description: ID of the subject
- *         bookId:
- *           type: string
- *           description: ID of the book
- *         chapterName:
- *           type: string
- *           description: Name of the chapter
- *         thumbnail:
- *           type: string
- *           description: path of thumbnail
- *         order:
- *           type: number
- *       example:
- *         boardId: 614a7e7d7f1d813bbf8e89a9
- *         mediumId: 614a7e7d7f1d813bbf8e89b0
- *         classId: 614a7e7d7f1d813bbf8e89b7
- *         subjectId: 614a7e7d7f1d813bbf8e89c2
- *         bookId: 614a7e7d7f1d813bbf8e89d0
- *         chapterName: Chapter 1
- *         order:  1
- *         thumbnail: dvhjgsdv/dshbvhdsgh
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     ChapterUpdateInput:
- *       type: object
- *       properties:
- *         boardId:
- *           type: string
- *           description: ID of the board
- *         mediumId:
- *           type: string
- *           description: ID of the medium
- *         classId:
- *           type: string
- *           description: ID of the class
- *         subjectId:
- *           type: string
- *           description: ID of the subject
- *         bookId:
- *           type: string
- *           description: ID of the book
- *         chapterName:
- *           type: string
- *           description: Name of the chapter
- *         thumbnail:
- *           type: string
- *           description: path of thumbnail
- *       example:
- *         boardId: 614a7e7d7f1d813bbf8e89a9
- *         mediumId: 614a7e7d7f1d813bbf8e89b0
- *         classId: 614a7e7d7f1d813bbf8e89b7
- *         subjectId: 614a7e7d7f1d813bbf8e89c2
- *         bookId: 614a7e7d7f1d813bbf8e89d0
- *         chapterName: Chapter 1
- *         order:  1
- *         thumbnail: dvhjgsdv/dshbvhdsgh
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Chapter'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
  */
 /**
  * @swagger
  * /chapter/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}:
  *   get:
- *     summary: Get a chapter
- *     tags: [Chapters]
+ *     summary: Get a Chapter from Filter
+ *     tags: [Chapter]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -329,8 +326,6 @@ module.exports = router;
  *         name: mediumId
  *         required: true
  *         description: The ID of the medium
- *         schema:
- *           type: string
  *       - in: path
  *         name: classId
  *         required: true
@@ -351,7 +346,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ChapterInput'
+ *               $ref: '#/components/schemas/Chapter'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -364,7 +359,7 @@ module.exports = router;
  * /chapter/mobile/getbybookId/{bookId}:
  *   get:
  *     summary: Get chapter and lesson multimedia by book
- *     tags: [Chapters]
+ *     tags: [Chapter]
  *     parameters:
  *       - in: path
  *         name: bookId

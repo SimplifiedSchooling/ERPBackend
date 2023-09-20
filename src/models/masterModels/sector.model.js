@@ -8,11 +8,6 @@ const sectorSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    year: {
-      type: String,
-      required: true,
-      trim: true,
-    },
   },
   {
     timestamps: true,
