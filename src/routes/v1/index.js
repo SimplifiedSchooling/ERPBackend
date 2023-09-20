@@ -60,6 +60,7 @@ const campusRoute = require('./campus.route');
 const mappingRoute = require('./mapping.route');
 const AppliedForPlacementRoute = require('./masterRoutes/applied_for_placement.route');
 const AppliedForApprenticeshipRoute = require('./masterRoutes/applied_for_apprenticeship.route');
+const UdiseblockRoute = require('./masterRoutes/udiseblock.route');
 const SessionRoute = require('./sessions.route');
 const sectionRoute = require('./section.route');
 const studentSessionRoute = require('./student.session.route');
@@ -288,6 +289,10 @@ const defaultRoutes = [
   {
     path: '/studentStatus',
     route: studentStatusRoute,
+  }, 
+  {
+    path: '/udiseblock',
+    route: UdiseblockRoute,
   },
   {
     path: '/admit',
