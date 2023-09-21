@@ -41,13 +41,13 @@ module.exports = router;
  *             type: object
  *             properties:
  *               - vocationalNSQF
- *               - sector1Id
+ *               - sector1
  *               - sector1year
- *               - sector2Id
+ *               - sector2
  *               - sector2year
- *               - sector3Id
+ *               - sector3
  *               - sector3year
- *               - sector4Id
+ *               - sector4
  *               - sector4year
  *               - vocCourseunder
  *               - schoolsetoftextbook
@@ -67,13 +67,13 @@ module.exports = router;
  *               - sepratrroomavai4
  *             example:
  *               vocationalNSQF: Level 3
- *               sector1Id: 6507e6b492dbd7a5da3a0003
+ *               sector1: 6507e6b492dbd7a5da3a0003
  *               sector1year: "2022"
- *               sector2Id: 6507e6b492dbd7a5da3a0003
+ *               sector2: 6507e6b492dbd7a5da3a0003
  *               sector2year: "2022"
- *               sector3Id: 6507e6b492dbd7a5da3a0003
+ *               sector3: 6507e6b492dbd7a5da3a0003
  *               sector3year: "2022"
- *               sector4Id: 6507e6b492dbd7a5da3a0003
+ *               sector4: 6507e6b492dbd7a5da3a0003
  *               sector4year: "2022"
  *               vocCourseunder: Government
  *               schoolsetoftextbook: Yes
@@ -211,13 +211,13 @@ module.exports = router;
  *             type: object
  *             properties:
  *               - vocationalNSQF
- *               - sector1Id
+ *               - sector1
  *               - sector1year
- *               - sector2Id
+ *               - sector2
  *               - sector2year
- *               - sector3Id
+ *               - sector3
  *               - sector3year
- *               - sector4Id
+ *               - sector4
  *               - sector4year
  *               - vocCourseunder
  *               - schoolsetoftextbook
@@ -237,13 +237,13 @@ module.exports = router;
  *               - sepratrroomavai4
  *             example:
  *               vocationalNSQF: Level 3
- *               sector1Id: 6507e6b492dbd7a5da3a0003
+ *               sector1: 6507e6b492dbd7a5da3a0003
  *               sector1year: "2022"
- *               sector2Id: 6507e6b492dbd7a5da3a0003
+ *               sector2: 6507e6b492dbd7a5da3a0003
  *               sector2year: "2022"
- *               sector3Id: 6507e6b492dbd7a5da3a0003
+ *               sector3: 6507e6b492dbd7a5da3a0003
  *               sector3year: "2022"
- *               sector4Id: 6507e6b492dbd7a5da3a0003
+ *               sector4: 6507e6b492dbd7a5da3a0003
  *               sector4year: "2022"
  *               vocCourseunder: Government
  *               schoolsetoftextbook: Yes

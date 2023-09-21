@@ -11,7 +11,7 @@ const section1A30Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    secondary: {
+    Secondary: {
       type: String,
       trim: true,
     },
@@ -169,25 +169,25 @@ const section1A30Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    medium1Id: {
+    medium1: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'language',
       required: true,
       trim: true,
     },
-    medium2Id: {
+    medium2: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'language',
       required: true,
       trim: true,
     },
-    medium3Id: {
+    medium3: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'language',
       required: true,
       trim: true,
     },
-    medium4Id: {
+    medium4: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'language',
       required: true,

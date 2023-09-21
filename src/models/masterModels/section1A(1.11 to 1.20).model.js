@@ -15,21 +15,21 @@ const section1A20Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    schoolCategoryId: {
+    schoolcategory: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'schoolCategory',
       required: true,
       trim: true,
     },
-    lowestclassschool: {
+    htlclass: {
       type: String,
       trim: true,
     },
-    highestclassschool: {
+    htlclasshigher: {
       type: String,
       trim: true,
     },
-    schoolpreprimary: {
+    schoolcwsn: {
       type: String,
       trim: true,
     },
@@ -61,17 +61,17 @@ const section1A20Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    managementgroup: {
+    manggroup: {
       type: String,
       trim: true,
     },
-    ManagementcodeId: {
+    mangcode: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Managementcode',
       required: false,
       trim: true,
     },
-    managementcodeSchool: {
+    code101: {
       type: String,
       trim: true,
     },

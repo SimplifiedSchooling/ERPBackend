@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
-const managementCodeSchoolSchema = mongoose.Schema(
+const code101Schema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -25,9 +25,9 @@ const managementCodeSchoolSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-managementCodeSchoolSchema.plugin(toJSON);
-managementCodeSchoolSchema.plugin(paginate);
+code101Schema.plugin(toJSON);
+code101Schema.plugin(paginate);
 
-const Schoolmanagment = mongoose.model('Managementcode', managementCodeSchoolSchema);
+const Schoolmanagment = mongoose.model('Managementcode', code101Schema);
 
 module.exports = Schoolmanagment;
