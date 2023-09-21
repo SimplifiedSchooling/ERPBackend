@@ -34,7 +34,7 @@ const districtRoute = require('./masterRoutes/distict.route');
 const safetyAndSecurityRoute = require('./masterRoutes/safety.and.security.route');
 const languageRoute = require('./masterRoutes/language.route');
 const demolishedRoute = require('./demolished.route');
-const staffRoute = require('./staff.route');
+const staffRoute = require('./staff/staff.route');
 const typeresidentialschoolRouter = require('./masterRoutes/type_residential_school.route');
 const Boardresidentialschool = require('./masterRoutes/boarding_residential_school.route');
 const MinorityManageSchool = require('./masterRoutes/minority_manage_school.route');
@@ -48,7 +48,7 @@ const studentStatusRoute = require('./masterRoutes/student.status.route');
 const admitRoute = require('./masterRoutes/admitted.routes');
 const resultTypeRoute = require('./masterRoutes/results.route');
 const studentRoute = require('./student.route');
-const attendanceRoute = require('./attendance.route');
+const staffAttendanceRoute = require('./staff/staffAttendance.route');
 const saralRoute = require('./saral.info.route');
 const ictRoute = require('./masterRoutes/ICTGovSchool.route');
 const studentAdmissionRoute = require('./masterRoutes/student.admission.type.route');
@@ -60,6 +60,7 @@ const campusRoute = require('./campus.route');
 const mappingRoute = require('./mapping.route');
 const AppliedForPlacementRoute = require('./masterRoutes/applied_for_placement.route');
 const AppliedForApprenticeshipRoute = require('./masterRoutes/applied_for_apprenticeship.route');
+const UdiseblockRoute = require('./masterRoutes/udiseblock.route');
 const SessionRoute = require('./sessions.route');
 const sectionRoute = require('./section.route');
 const studentSessionRoute = require('./student.session.route');
@@ -74,7 +75,9 @@ const Section1B54Route = require('./masterRoutes/section1B(1.54 to 1.54.12).rout
 const Section1C57Route = require('./masterRoutes/section1C(1.55 to 1.57.8).route');
 const Section1D60Route = require('./masterRoutes/section1D(1.58.1 to 1.60.3).route');
 const Section1E62Route = require('./masterRoutes/section1E(1.62 to 1.62).route');
+const Section2A21Route = require('./masterRoutes/section2A(2.1 to 2.21).route');
 const Section2B27Route = require('./masterRoutes/section2B(2.22 to 1.27).route');
+const Section3ARoute = require('./masterRoutes/section3A(3.1 to 3.4).route');
 
 const router = express.Router();
 
@@ -288,6 +291,10 @@ const defaultRoutes = [
     route: studentStatusRoute,
   },
   {
+    path: '/udiseblock',
+    route: UdiseblockRoute,
+  },
+  {
     path: '/admit',
     route: admitRoute,
   },
@@ -300,8 +307,8 @@ const defaultRoutes = [
     route: studentRoute,
   },
   {
-    path: '/attendance',
-    route: attendanceRoute,
+    path: '/staffAttendance',
+    route: staffAttendanceRoute,
   },
   {
     path: '/section1A10',
@@ -376,8 +383,16 @@ const defaultRoutes = [
     route: Section1E62Route,
   },
   {
+    path: '/section2A21',
+    route: Section2A21Route,
+  },
+  {
     path: '/section2B27',
     route: Section2B27Route,
+  },
+  {
+    path: '/section3A',
+    route: Section3ARoute,
   },
 ];
 

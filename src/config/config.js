@@ -8,7 +8,19 @@ const envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
     PORT: Joi.number().default(3000),
-    MONGODB_URL: Joi.string().required().description('Mongo DB url'),
+    MONGODB_URL_DEV: Joi.string().optional().when('NODE_ENV', {
+      is: 'development',
+      then: Joi.optional(),
+    }),
+    MONGODB_URL_PROD: Joi.string().optional().when('NODE_ENV', {
+      is: 'production',
+      then: Joi.optional(),
+    }),
+    MONGODB_URL_TEST: Joi.string().when('NODE_ENV', {
+      is: 'test',
+      then: Joi.required(),
+    }),
+    // MONGODB_URL_PROD: Joi.string().required().description('Mongo DB url'),
     JWT_SECRET: Joi.string().required().description('JWT secret key'),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().default(30).description('minutes after which access tokens expire'),
     JWT_REFRESH_EXPIRATION_DAYS: Joi.number().default(30).description('days after which refresh tokens expire'),
@@ -34,9 +46,22 @@ if (error) {
 
 module.exports = {
   env: envVars.NODE_ENV,
-  port: envVars.PORT,
+  port: envVars.NODE_ENV === 'production' ? 3001 : 4001 || 3000,
+  // mongoose: {
+  // url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
   mongoose: {
-    url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
+    url: (() => {
+      switch (envVars.NODE_ENV) {
+        case 'development':
+          return envVars.MONGODB_URL_DEV || 'mongodb://127.0.0.1:27017/Lms_Simplified_Schooling_Dev';
+        case 'production':
+          return envVars.MONGODB_URL_PROD || 'mongodb://127.0.0.1:27017/Lms_Simplified_Schooling';
+        case 'test':
+          return `${envVars.MONGODB_URL_DEV}-test` || 'mongodb://127.0.0.1:27017/Lms_Simplified_Schooling-test';
+        default:
+          return envVars.MONGODB_URL_DEV; // Default to development URL
+      }
+    })(),
     options: {
       useCreateIndex: true,
       useNewUrlParser: true,

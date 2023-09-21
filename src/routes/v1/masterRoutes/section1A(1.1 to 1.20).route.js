@@ -43,10 +43,10 @@ module.exports = router;
  *               - hoschool
  *               - hosname
  *               - hosmobileno
- *               - schoolCategoryId
- *               - lowestclassschool
- *               - highestclassschool
- *               - schoolpreprimary
+ *               - schoolcategory
+ *               - htlclass
+ *               - htlclasshigher
+ *               - schoolcwsn
  *               - noclasses
  *               - arts
  *               - science
@@ -54,8 +54,8 @@ module.exports = router;
  *               - Vocational
  *               - Streams
  *               - typeschool
- *               - managementgroup
- *               - managementcodeSchool
+ *               - manggroup
+ *               - code101
  *               - admintype
  *               - affilationBoard
  *               - affilationNo
@@ -75,10 +75,10 @@ module.exports = router;
  *               hoschool: School Name
  *               hosname: School Owner Name
  *               hosmobileno: "0011223355"
- *               schoolCategoryId: 64d327a41128844220f0cce4
- *               lowestclassschool: Lowest Class
- *               highestclassschool: Highest Class
- *               schoolpreprimary: Pre-Primary Classes
+ *               schoolcategory: 64d327a41128844220f0cce4
+ *               htlclass: Lowest Class
+ *               htlclasshigher: Highest Class
+ *               schoolcwsn: Pre-Primary Classes
  *               noclasses: noclasses
  *               arts: arts
  *               science: science
@@ -86,9 +86,9 @@ module.exports = router;
  *               Vocational: Vocational
  *               Streams: Streams
  *               typeschool: Type of School
- *               managementgroup: Management Group
- *               ManagementcodeId: 64d327a41128844220f0cce4
- *               managementcodeSchool: Management Code School
+ *               manggroup: Management Group
+ *               mangcode: 64d327a41128844220f0cce4
+ *               code101: Management Code School
  *               admintype: Admin Type
  *               affilationBoard: Affiliation Board
  *               affilationNo: Affiliation No
@@ -226,10 +226,10 @@ module.exports = router;
  *               - hoschool
  *               - hosname
  *               - hosmobileno
- *               - schoolCategoryId
- *               - lowestclassschool
- *               - highestclassschool
- *               - schoolpreprimary
+ *               - schoolcategory
+ *               - htlclass
+ *               - htlclasshigher
+ *               - schoolcwsn
  *               - noclasses
  *               - arts
  *               - science
@@ -237,8 +237,8 @@ module.exports = router;
  *               - Vocational
  *               - Streams
  *               - typeschool
- *               - managementgroup
- *               - managementcodeSchool
+ *               - manggroup
+ *               - code101
  *               - admintype
  *               - affilationBoard
  *               - affilationNo
@@ -258,10 +258,10 @@ module.exports = router;
  *               hoschool: School Name
  *               hosname: School Owner Name
  *               hosmobileno: "0011223355"
- *               schoolCategoryId: 64d327a41128844220f0cce4
- *               lowestclassschool: Lowest Class
- *               highestclassschool: Highest Class
- *               schoolpreprimary: Pre-Primary Classes
+ *               schoolcategory: 64d327a41128844220f0cce4
+ *               htlclass: Lowest Class
+ *               htlclasshigher: Highest Class
+ *               schoolcwsn: Pre-Primary Classes
  *               noclasses: noclasses
  *               arts: arts
  *               science: science
@@ -269,9 +269,9 @@ module.exports = router;
  *               Vocational: Vocational
  *               Streams: Streams
  *               typeschool: Type of School
- *               managementgroup: Management Group
- *               ManagementcodeId: 64d327a41128844220f0cce4
- *               managementcodeSchool: Management Code School
+ *               manggroup: Management Group
+ *               mangcode: 64d327a41128844220f0cce4
+ *               code101: Management Code School
  *               admintype: Admin Type
  *               affilationBoard: Affiliation Board
  *               affilationNo: Affiliation No
