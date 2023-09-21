@@ -78,6 +78,7 @@ const Section1E62Route = require('./masterRoutes/section1E(1.62 to 1.62).route')
 const Section2A21Route = require('./masterRoutes/section2A(2.1 to 2.21).route');
 const Section2B27Route = require('./masterRoutes/section2B(2.22 to 1.27).route');
 const Section3ARoute = require('./masterRoutes/section3A(3.1 to 3.4).route');
+const LeaveRoute = require('./staff/leave.route');
 
 const router = express.Router();
 
@@ -393,6 +394,10 @@ const defaultRoutes = [
   {
     path: '/section3A',
     route: Section3ARoute,
+  },
+  {
+    path: '/leave',
+    route: LeaveRoute,
   },
 ];
 
