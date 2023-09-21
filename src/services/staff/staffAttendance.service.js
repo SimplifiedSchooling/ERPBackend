@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
-const { staffAttendance } = require('../models');
-const ApiError = require('../utils/ApiError');
+const { staffAttendance } = require('../../models');
+const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a staff atttendance

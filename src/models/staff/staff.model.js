@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const uuid = require('node-uuid/uuid');
-const { toJSON, paginate } = require('./plugins');
+const { toJSON, paginate } = require('../plugins');
 
 const staffSchema = mongoose.Schema(
   {

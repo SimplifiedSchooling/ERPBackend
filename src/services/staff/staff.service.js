@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
-const { Staff } = require('../models');
-const ApiError = require('../utils/ApiError');
+const { Staff } = require('../../models');
+const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a staff

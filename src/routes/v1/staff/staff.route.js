@@ -1,7 +1,7 @@
 const express = require('express');
-const validate = require('../../middlewares/validate');
-const { staffController } = require('../../controllers');
-const { staffValidation } = require('../../validations');
+const validate = require('../../../middlewares/validate');
+const { staffController } = require('../../../controllers');
+const { staffValidation } = require('../../../validations');
 
 const router = express.Router();
 
