@@ -48,7 +48,7 @@ const studentStatusRoute = require('./masterRoutes/student.status.route');
 const admitRoute = require('./masterRoutes/admitted.routes');
 const resultTypeRoute = require('./masterRoutes/results.route');
 const studentRoute = require('./student.route');
-const attendanceRoute = require('./attendance.route');
+const staffAttendanceRoute = require('./staffAttendance.route');
 const saralRoute = require('./saral.info.route');
 const ictRoute = require('./masterRoutes/ICTGovSchool.route');
 const studentAdmissionRoute = require('./masterRoutes/student.admission.type.route');
@@ -307,8 +307,8 @@ const defaultRoutes = [
     route: studentRoute,
   },
   {
-    path: '/attendance',
-    route: attendanceRoute,
+    path: '/staffAttendance',
+    route: staffAttendanceRoute,
   },
   {
     path: '/section1A10',

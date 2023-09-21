@@ -1,34 +1,34 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
 const attendanceValidation = require('../../validations/attendance.validation');
-const attendanceController = require('../../controllers/attendance.controller');
+const { staffAttendaceController } = require('../../controllers');
 
 const router = express.Router();
 router
   .route('/')
-  .post(validate(attendanceValidation.createAttendance), attendanceController.createAttendance)
-  .get(validate(attendanceValidation.getAllAttendance), attendanceController.getAttendance);
+  .post(validate(attendanceValidation.createAttendance), staffAttendaceController.createAttendance)
+  .get(validate(attendanceValidation.getAllAttendance), staffAttendaceController.getAttendance);
 
 router
   .route('/:attendanceId')
-  .get(validate(attendanceValidation.getAttendance), attendanceController.getSingleAttendance)
-  .patch(validate(attendanceValidation.updateAttendanceById), attendanceController.updateSingleAttendance)
-  .delete(validate(attendanceValidation.deleteAttendanceById), attendanceController.deleteSingleAttendance);
+  .get(validate(attendanceValidation.getAttendance), staffAttendaceController.getSingleAttendance)
+  .patch(validate(attendanceValidation.updateAttendanceById), staffAttendaceController.updateSingleAttendance)
+  .delete(validate(attendanceValidation.deleteAttendanceById), staffAttendaceController.deleteSingleAttendance);
 
 module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: Attendance
- *   description:   Chapters Management System
+ *   name: StaffAttendance
+ *   description:   StaffAttendance Management System
  */
 
 /**
  * @swagger
- * /attendance:
+ * /staffAttendance:
  *   post:
  *     summary: Create a new attendance
- *     tags: [Attendance]
+ *     tags: [StaffAttendance]
  *     requestBody:
  *       description: Attendance object to be created
  *       required: true
@@ -41,13 +41,13 @@ module.exports = router;
  *         description: Attendance created successfully
  *   get:
  *     summary: Get all attendances
- *     tags: [Attendance]
+ *     tags: [StaffAttendance]
  *     parameters:
  *       - in: query
- *         name: attendanceName
+ *         name: date
  *         schema:
- *           type: string
- *         description: attendance name
+ *           type: date
+ *         description: attendance date
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -96,10 +96,10 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /attendance/{attendanceId}:
+ * /staffAttendance/{attendanceId}:
  *   patch:
  *     summary: Update a single attendance by ID
- *     tags: [Attendance]
+ *     tags: [StaffAttendance]
  *     parameters:
  *       - in: path
  *         name: attendanceId
@@ -121,7 +121,7 @@ module.exports = router;
  *         description: Attendance not found
  *   delete:
  *     summary: Delete a single attendance by ID
- *     tags: [Attendance]
+ *     tags: [StaffAttendance]
  *     parameters:
  *       - in: path
  *         name: attendanceId
@@ -136,7 +136,7 @@ module.exports = router;
  *         description: Attendance not found
  *   get:
  *     summary: Get a single attendance by ID
- *     tags: [Attendance]
+ *     tags: [StaffAttendance]
  *     parameters:
  *       - in: path
  *         name: attendanceId
@@ -159,9 +159,9 @@ module.exports = router;
  *     AttendanceInput:
  *       type: object
  *       properties:
- *         student_session_id:
+ *         staffId:
  *           type: string
- *           description: ID of the student_session_id
+ *           description: ID of the staffId
  *         date:
  *           type: string
  *           description: date
@@ -172,9 +172,9 @@ module.exports = router;
  *           type: string
  *           description: remark
  *       example:
- *         student_session_id: 614a7e7d7f1d813bbf8e89a9
+ *         staffId: 614a7e7d7f1d813bbf8e89a9
  *         date: 2023-09-13
- *         attedance_type: holiday,present,absent,halfday,late
+ *         attedance_type: holiday
  *         remark: due to ill , bus got late
  */
 
@@ -185,9 +185,9 @@ module.exports = router;
  *     AttendanceUpdateInput:
  *       type: object
  *       properties:
- *         student_session_id:
+ *         staffId:
  *           type: string
- *           description: ID of the student_session_id
+ *           description: ID of the staffId
  *         date:
  *           type: string
  *           description: date
@@ -198,8 +198,8 @@ module.exports = router;
  *           type: string
  *           description: remark
  *       example:
- *         student_session_id: 614a7e7d7f1d813bbf8e89a9
+ *         staffId: 614a7e7d7f1d813bbf8e89a9
  *         date: 2023-09-13
- *         attedance_type:  holiday,present,absent,halfday,late
+ *         attedance_type:  holiday
  *         remark: due to ill , bus got late
  */
