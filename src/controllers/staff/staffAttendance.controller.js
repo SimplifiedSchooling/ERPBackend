@@ -1,8 +1,8 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
-const ApiError = require('../utils/ApiError');
-const catchAsync = require('../utils/catchAsync');
-const { staffAttendanceService } = require('../services');
+const pick = require('../../utils/pick');
+const ApiError = require('../../utils/ApiError');
+const catchAsync = require('../../utils/catchAsync');
+const { staffAttendanceService } = require('../../services');
 
 const createAttendance = catchAsync(async (req, res) => {
   const newAttendance = await staffAttendanceService.createAttendance(req.body);
