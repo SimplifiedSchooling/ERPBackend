@@ -81,6 +81,7 @@ const Section3ARoute = require('./masterRoutes/section3A(3.1 to 3.4).route');
 const complaintRoute = require('./staff/complaint.route');
 const LeaveRoute = require('./staff/leave.route');
 const StudentAttendanceRoute = require('./studentattendance.route');
+const loanRoute = require('./staff/applyloan.route');
 
 const router = express.Router();
 
@@ -408,6 +409,10 @@ const defaultRoutes = [
   {
     path: '/studentattendance',
     route: StudentAttendanceRoute,
+  },
+  {
+    path: '/applyloan',
+    route: loanRoute,
   },
 ];
 
