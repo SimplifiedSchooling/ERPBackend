@@ -68,8 +68,5 @@ module.exports.Section3AValidation = require('./masterValidations/section3A(3.1 
 module.exports.StudentSessionValidation = require('./student.session.validation');
 module.exports.SectionValidation = require('./section.validation');
 module.exports.sectorValidation = require('./masterValidations/sector.validation');
-<<<<<<< HEAD
 module.exports.complaintValidation = require('./staff/complaint.validation');
-=======
 module.exports.LeaveValidation = require('./staff/leave.validation');
->>>>>>> b162665ebc64f8ccdb155304ab1b1e7130235b3f
