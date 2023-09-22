@@ -1,9 +1,24 @@
 const express = require('express');
+const multer = require('multer');
 const validate = require('../../../middlewares/validate');
 const { staffController } = require('../../../controllers');
 const { staffValidation } = require('../../../validations');
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const uploads = multer({ storage });
+
+router
+  .route('/bulkupload')
+  .post(uploads.single('file'), validate(staffValidation.staffSchema), staffController.bulkUploadFile);
 
 router
   .route('/')
@@ -23,6 +38,29 @@ module.exports = router;
  * tags:
  *   name: Staff
  *   description: Staff management
+ */
+
+/**
+ * @swagger
+ * /staff/bulkupload:
+ *   post:
+ *     summary: Upload a CSV file for bulk staff upload
+ *     tags: [Staff]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Successfully added CSV file
+ *       404:
+ *         description: Missing file
  */
 
 /**
