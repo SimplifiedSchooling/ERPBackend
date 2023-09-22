@@ -81,3 +81,4 @@ module.exports.Section3ASchema = require('./masterModels/section3A(3.1 to 3.4).m
 module.exports.ICTGovSchool = require('./masterModels/ICTGovSchool.model');
 module.exports.typeOfICTSchool = require('./masterModels/typeofICT.model');
 module.exports.Sector = require('./masterModels/sector.model');
+module.exports.Complaint = require('./staff/complaint.model');
