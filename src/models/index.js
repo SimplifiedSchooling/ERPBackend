@@ -83,3 +83,4 @@ module.exports.ICTGovSchool = require('./masterModels/ICTGovSchool.model');
 module.exports.typeOfICTSchool = require('./masterModels/typeofICT.model');
 module.exports.Sector = require('./masterModels/sector.model');
 module.exports.StudentAttendanceSchema = require('./studentattendance.model');
+module.exports.Complaint = require('./staff/complaint.model');
