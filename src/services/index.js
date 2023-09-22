@@ -78,3 +78,4 @@ module.exports.Section3AService = require('./masterService/section3A(3.1 to 3.4)
 module.exports.LeaveService = require('./staff/leave.service');
 module.exports.typeOfICTSchool = require('./masterService/typeofICT.services');
 module.exports.sectorService = require('./masterService/sector.service');
+module.exports.complaintService = require('./staff/complaint.service');
