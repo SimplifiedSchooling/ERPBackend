@@ -73,3 +73,4 @@ module.exports.Section2B27Controller = require('./masterControllers/section2B(2.
 module.exports.Section3AController = require('./masterControllers/section3A(3.1 to 3.4).controller');
 module.exports.complaintController = require('./staff/complaint.controller');
 module.exports.LeaveController = require('./staff/leave.controller');
+module.exports.StudentAttendanceController = require('./studentattendance.controller');

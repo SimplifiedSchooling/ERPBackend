@@ -78,11 +78,9 @@ const Section1E62Route = require('./masterRoutes/section1E(1.62 to 1.62).route')
 const Section2A21Route = require('./masterRoutes/section2A(2.1 to 2.21).route');
 const Section2B27Route = require('./masterRoutes/section2B(2.22 to 1.27).route');
 const Section3ARoute = require('./masterRoutes/section3A(3.1 to 3.4).route');
-<<<<<<< HEAD
 const complaintRoute = require('./staff/complaint.route');
-=======
 const LeaveRoute = require('./staff/leave.route');
->>>>>>> b162665ebc64f8ccdb155304ab1b1e7130235b3f
+const StudentAttendanceRoute = require('./studentattendance.route');
 
 const router = express.Router();
 
@@ -400,13 +398,16 @@ const defaultRoutes = [
     route: Section3ARoute,
   },
   {
-<<<<<<< HEAD
     path: '/complaints',
     route: complaintRoute,
-=======
+  },
+  {
     path: '/leave',
     route: LeaveRoute,
->>>>>>> b162665ebc64f8ccdb155304ab1b1e7130235b3f
+  },
+  {
+    path: '/studentattendance',
+    route: StudentAttendanceRoute,
   },
 ];
 
