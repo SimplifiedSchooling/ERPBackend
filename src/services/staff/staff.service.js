@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Staff } = require('../../models');
+const { Staff, User } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**
@@ -8,7 +8,14 @@ const ApiError = require('../../utils/ApiError');
  * @returns {Promise<Staff>}
  */
 const createStaff = async (staffBody) => {
-  return Staff.create(staffBody);
+  const newStaff = Staff.create(staffBody);
+  await User.create({
+    username: staffBody.username,
+    password: staffBody.password,
+    campusId: staffBody.campusId,
+    staffId: newStaff._id, // Associate the staff user with the newly created staff object
+  });
+  return newStaff;
 };
 
 /**
