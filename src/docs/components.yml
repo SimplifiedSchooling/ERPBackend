@@ -125,6 +125,26 @@ components:
           type: string
       example:
         type: abc
+    Loan:
+      type: object
+      properties:
+        title:
+          type: string
+        amount:
+          type: number
+      example:
+        title: abc
+        amount: 2
+    Complaint:
+      type: object
+      properties:
+        subject:
+          type: string
+        description:
+          type: string
+      example:
+        subject: abc
+        description: Hii this is the description
     Sarals:
       type: object
       properties:

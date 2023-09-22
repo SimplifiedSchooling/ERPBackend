@@ -71,3 +71,4 @@ module.exports.sectorValidation = require('./masterValidations/sector.validation
 module.exports.complaintValidation = require('./staff/complaint.validation');
 module.exports.LeaveValidation = require('./staff/leave.validation');
 module.exports.StudentAttendanceValidation = require('./studentattendance.validation');
+module.exports.loanValidation = require('./staff/applyloan.validation');
