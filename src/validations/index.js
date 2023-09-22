@@ -69,3 +69,4 @@ module.exports.StudentSessionValidation = require('./student.session.validation'
 module.exports.SectionValidation = require('./section.validation');
 module.exports.sectorValidation = require('./masterValidations/sector.validation');
 module.exports.LeaveValidation = require('./staff/leave.validation');
+module.exports.StudentAttendanceValidation = require('./studentattendance.validation');
