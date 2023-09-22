@@ -1,8 +1,30 @@
 const httpStatus = require('http-status');
+const { join } = require('path');
+const csv = require('csvtojson');
 const pick = require('../../utils/pick');
 const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
 const { staffService } = require('../../services');
+
+const staticFolder = join(__dirname, '../../../');
+const uploadsFolder = join(staticFolder, 'uploads');
+
+const bulkUpload = catchAsync(async (req, res) => {
+  const payload = req.body;
+  const result = await staffService.bulkUpload(payload);
+  res.status(httpStatus.CREATED).send(result);
+});
+
+const bulkUploadFile = catchAsync(async (req, res) => {
+  if (req.file) {
+    const csvFilePath = join(uploadsFolder, req.file.filename);
+    const csvJsonArray = await csv().fromFile(csvFilePath);
+    const staff = await staffService.bulkUpload(null, csvJsonArray);
+    res.status(httpStatus.CREATED).send(staff);
+  } else {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
+  }
+});
 
 const createStaff = catchAsync(async (req, res) => {
   const staff = await staffService.createStaff(req.body);
@@ -40,4 +62,6 @@ module.exports = {
   getStaff,
   updateStaffById,
   deleteStaffById,
+  bulkUpload,
+  bulkUploadFile,
 };

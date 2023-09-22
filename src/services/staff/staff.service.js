@@ -71,10 +71,63 @@ const deleteStaffById = async (staffId) => {
   return staff;
 };
 
+const StaffBulkFilter = (options) => {
+  return {
+    filter: options.filter || (options.saral_id ? { saral_id: options.saral_id } : {}),
+    getFilter() {
+      return this.filter;
+    },
+  };
+};
+
+const getStaffBySaral = async (filter) => {
+  const staffFilter = StaffBulkFilter(filter).getFilter();
+  if (staffFilter) {
+    const record = await Staff.findOne(staffFilter).exec();
+    return record;
+  }
+  return { message: 'Missing query params !!!' };
+};
+const bulkUpload = async (staffsArray, csvFilePath = null) => {
+  let modifiedStaffsArray = staffsArray;
+  if (csvFilePath) {
+    modifiedStaffsArray = { staffs: csvFilePath };
+  }
+  if (!modifiedStaffsArray.staffs || !modifiedStaffsArray.staffs.length) return { error: true, message: 'missing array' };
+
+  const records = [];
+  const dups = [];
+  await Promise.all(
+    modifiedStaffsArray.staffs.map(async (staff) => {
+      const staffFound = await getStaffBySaral({ saral_id: staff.saral_id });
+      if (staffFound) {
+        dups.push(staff);
+      } else {
+        let record = new Staff(staff);
+        record = await record.save();
+        if (record) {
+          records.push(staff);
+        }
+      }
+    })
+  );
+
+  const duplicates = {
+    totalDuplicates: dups.length ? dups.length : 0,
+    data: dups.length ? dups : [],
+  };
+  const nonduplicates = {
+    totalNonDuplicates: records.length ? records.length : 0,
+    data: records.length ? records : [],
+  };
+  return { nonduplicates, duplicates };
+};
+
 module.exports = {
   createStaff,
   queryStaff,
   getStaffById,
   updateStaffById,
   deleteStaffById,
+  bulkUpload,
 };
