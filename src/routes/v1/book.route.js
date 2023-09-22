@@ -180,59 +180,6 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
- *   patch:
- *     summary: Update a book
- *     tags: [Book]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: bookId
- *         required: true
- *         schema:
- *           type: string
- *         description: bookId
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               boardId:
- *                 type: string
- *               mediumId:
- *                 type: string
- *               classId:
- *                 type: string
- *               subjectId:
- *                 type: string
- *               thumbnail:
- *                 type: string
- *                 format: binary
- *             required:
- *               - name
- *               - boardId
- *               - mediumId
- *               - classId
- *               - subjectId
- *               - thumbnail
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: '#/components/schemas/Book'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
  *   delete:
  *     summary: Delete a book
  *     tags: [Book]
@@ -324,6 +271,63 @@ module.exports = router;
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Book'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /books/{bookId}:
+ *   patch:
+ *     summary: Update a book
+ *     tags: [Book]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: bookId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: bookId
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
+ *               subjectId:
+ *                 type: string
+ *               thumbnail:
+ *                 type: string
+ *                 format: binary
+ *             required:
+ *               - name
+ *               - boardId
+ *               - mediumId
+ *               - classId
+ *               - subjectId
+ *               - thumbnail
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Book'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
