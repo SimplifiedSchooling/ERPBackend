@@ -64,10 +64,61 @@ const deleteSection1A20ById = async (Section1A20Id) => {
   return Section1A20;
 };
 
+
+const calculateSchoolDistribution = async () => {
+  try {
+    const pipeline = [
+      {
+        $group: {
+          _id: '$manggroup',
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          manggroup: '$_id',
+          count: 1,
+        },
+      },
+    ];
+
+    const result = await Section1A20Schema.aggregate(pipeline);
+
+    // Process the result to categorize the schools
+    const schoolDistribution = {
+      gov: 0,
+      private: 0,
+      aided: 0,
+      others: 0,
+    };
+
+    result.forEach((group) => {
+      const manggroup = group.manggroup.toLowerCase();
+      if (manggroup.includes('gov')) {
+        schoolDistribution.gov += group.count;
+      } else if (manggroup.includes('private')) {
+        schoolDistribution.private += group.count;
+      } else if (manggroup.includes('aided')) {
+        schoolDistribution.aided += group.count;
+      } else {
+        schoolDistribution.others += group.count;
+      }
+    });
+
+    return schoolDistribution;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
 module.exports = {
   createSection1A20,
   getAllSection1A20,
   getSection1A20ById,
   updateSection1A20ById,
   deleteSection1A20ById,
+  calculateSchoolDistribution
 };

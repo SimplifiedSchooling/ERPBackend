@@ -34,10 +34,16 @@ const deleteSection1A20 = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const calculateSchoolManagemnt = catchAsync(async (req, res) => {
+  const result = await Section1A20Service.calculateSchoolDistribution();
+  res.send(result);
+});
+
 module.exports = {
   createSection1A20,
   getAllSection1A20,
   getSection1A20ById,
   updateSection1A20,
   deleteSection1A20,
+  calculateSchoolManagemnt
 };
