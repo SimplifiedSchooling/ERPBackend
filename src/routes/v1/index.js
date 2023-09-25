@@ -82,6 +82,7 @@ const complaintRoute = require('./staff/complaint.route');
 const LeaveRoute = require('./staff/leave.route');
 const StudentAttendanceRoute = require('./studentattendance.route');
 const loanRoute = require('./staff/applyloan.route');
+const AssessmentItemRoute = require('./masterRoutes/assessmentItem.route');
 
 const router = express.Router();
 
@@ -177,6 +178,10 @@ const defaultRoutes = [
   {
     path: '/managCodeschool',
     route: managmentCodeSchoolRoute,
+  },
+  {
+    path: '/assessmentitem',
+    route: AssessmentItemRoute,
   },
   {
     path: '/managAdministrationType',
