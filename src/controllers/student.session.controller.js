@@ -24,6 +24,16 @@ const getSingleStudentSession = catchAsync(async (req, res) => {
   res.send(singleStudentSession);
 });
 
+const getStudentsByClassAndSection = async (req, res) => {
+  try {
+    const { classId, sectionId } = req.query;
+    const students = await studentSessionService.getStudentsByClassAndSection(classId, sectionId);
+    res.status(200).json({ students });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 const updateSingleStudentSession = catchAsync(async (req, res) => {
   const updatedStudentSession = await studentSessionService.updateStudentSessionById(req.params.studentSessionId, req.body);
   res.send(updatedStudentSession);
@@ -40,4 +50,5 @@ module.exports = {
   getSingleStudentSession,
   updateSingleStudentSession,
   deleteSingleStudentSession,
+  getStudentsByClassAndSection,
 };

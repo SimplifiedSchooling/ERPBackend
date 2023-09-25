@@ -4,6 +4,7 @@ const StudentSessionValidation = require('../../validations/student.session.vali
 const studentSessionController = require('../../controllers/student.session.controller');
 
 const router = express.Router();
+router.route('/studentsByClassAndSection').get(studentSessionController.getStudentsByClassAndSection);
 router
   .route('/')
   .post(validate(StudentSessionValidation.createStudentSession), studentSessionController.createStudentSession)
@@ -16,13 +17,44 @@ router
   .delete(validate(StudentSessionValidation.deleteStudentSessionById), studentSessionController.deleteSingleStudentSession);
 
 module.exports = router;
+
 /**
  * @swagger
  * tags:
  *   name: StudentSession
  *   description:   studentSession Management System
  */
-
+/**
+ * @swagger
+ * /studentsByClassAndSection:
+ *   get:
+ *     summary: Get students by class and section
+ *     tags: [StudentSession]
+ *     parameters:
+ *       - in: query
+ *         name: class_Id
+ *         schema:
+ *           type: string
+ *         description: The ID of the class to filter by.
+ *       - in: query
+ *         name: section_Id
+ *         schema:
+ *           type: string
+ *         description: The ID of the section to filter by.
+ *     responses:
+ *       '200':
+ *         description: A list of students matching the specified class and section.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student'  # Replace with the actual schema for a student
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
 /**
  * @swagger
  * /studentSession:
@@ -30,15 +62,42 @@ module.exports = router;
  *     summary: Create a new studentSession
  *     tags: [StudentSession]
  *     requestBody:
- *       description: StudentSession object to be created
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/StudentSessionInput'
+ *             type: object
+ *             required:
+ *               - sessionId
+ *               - studentId
+ *               - classId
+ *               - sectionId
+ *             properties:
+ *               sessionId:
+ *                 type: string
+ *               studentId:
+ *                 type: string
+ *               classId:
+ *                 type: string
+ *               sectionId:
+ *                 type: string
+ *             example:
+ *               sessionId: 650d6ee360838756a214b446
+ *               studentId: 650d6f1660838756a214b449
+ *               classId: 650d6e6660838756a214b43c
+ *               sectionId: 650d6dfa60838756a214b436
  *     responses:
- *       200:
- *         description: StudentSession created successfully
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/StudentSessionInput'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *
  *   get:
  *     summary: Get all studentSessions
  *     tags: [StudentSession]
