@@ -38,6 +38,7 @@ const createSection1A20 = {
     upperprimary: Joi.string().allow('').optional(),
     Secondary: Joi.string().allow('').optional(),
     higherSecondary: Joi.string().allow('').optional(),
+    schoolcode: Joi.string().allow('').optional(),
   }),
 };
 
