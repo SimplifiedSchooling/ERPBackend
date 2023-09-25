@@ -111,7 +111,7 @@ module.exports = router;
  *               - langtatgirls5
  *               - langtattrans5
  *               - prevocational
- *              - schoolcode
+ *               - schoolcode
  *             example:
  *               primaryclass: Primary Class Value
  *               upperprimary: Upper Primary Value

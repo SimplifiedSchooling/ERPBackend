@@ -71,7 +71,7 @@ module.exports = router;
  *               - upperprimary
  *               - Secondary
  *               - higherSecondary
- *              - schoolcode
+ *               - schoolcode
  *             example:
  *               hoschool: School Name
  *               hosname: School Owner Name
