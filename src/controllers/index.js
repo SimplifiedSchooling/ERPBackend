@@ -76,3 +76,5 @@ module.exports.LeaveController = require('./staff/leave.controller');
 module.exports.StudentAttendanceController = require('./studentattendance.controller');
 module.exports.loanController = require('./staff/applyloan.controller');
 module.exports.stateController = require('./masterControllers/state.controller');
+module.exports.sansthanController = require('./sansthan.controller');
+module.exports.AssessmentItemController = require('./masterControllers/assessmentItem.controller');

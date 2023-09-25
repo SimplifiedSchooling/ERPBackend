@@ -1,13 +1,28 @@
 const httpStatus = require('http-status');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
 const { Staff } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
+// Generate a random username
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 /**
  * Create a staff
  * @param {Object} staffBody
  * @returns {Promise<Staff>}
  */
 const createStaff = async (staffBody) => {
+  // const userName = await generateUsernameFromName(staffBody.name);
+  // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  // staffBody.userName = userName;
+  // staffBody.password = randomPassword;
   return Staff.create(staffBody);
 };
 

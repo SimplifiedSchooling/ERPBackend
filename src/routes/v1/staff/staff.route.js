@@ -82,6 +82,8 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type: string
+ *               campusId:
+ *                 type: string
  *               employee_id:
  *                 type: number
  *               designation:
@@ -288,6 +290,7 @@ module.exports = router;
  *             example:
  *               saral_id: "ABC123"
  *               scode: "S001"
+ *               campusId: 650d85819005aaa084dc2efb
  *               employee_id: 12345
  *               designation: "Teacher"
  *               qualification: "Master's Degree"
@@ -514,6 +517,8 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type: string
+ *               campusId:
+ *                 type: string
  *               employee_id:
  *                 type: number
  *               designation:
@@ -720,6 +725,7 @@ module.exports = router;
  *             example:
  *               saral_id: "ABC123"
  *               scode: "S001"
+ *               campusId: 650d85819005aaa084dc2efb
  *               employee_id: 12345
  *               designation: "Teacher"
  *               qualification: "Master's Degree"

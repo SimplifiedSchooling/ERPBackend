@@ -73,3 +73,5 @@ module.exports.LeaveValidation = require('./staff/leave.validation');
 module.exports.StudentAttendanceValidation = require('./studentattendance.validation');
 module.exports.loanValidation = require('./staff/applyloan.validation');
 module.exports.stateValidation = require('./masterValidations/state.validation');
+module.exports.sansthanValidation = require('./sansthan.validation');
+module.exports.AssessmentItem = require('./masterValidations/assessmentItem.validation');

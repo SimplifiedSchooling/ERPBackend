@@ -8,8 +8,8 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<User>}
  */
 const createUser = async (userBody) => {
-  if (await User.isEmailTaken(userBody.email)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  if (await User.isUserNameTaken(userBody.userName)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
   }
   return User.create(userBody);
 };
@@ -38,12 +38,12 @@ const getUserById = async (id) => {
 };
 
 /**
- * Get user by email
- * @param {string} email
+ * Get user by userName
+ * @param {string} userName
  * @returns {Promise<User>}
  */
-const getUserByEmail = async (email) => {
-  return User.findOne({ email });
+const getUserByUserName = async (userName) => {
+  return User.findOne({ userName });
 };
 
 /**
@@ -57,14 +57,30 @@ const updateUserById = async (userId, updateBody) => {
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
-  if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  if (updateBody.userName && (await User.isUserNameTaken(updateBody.userName, userId))) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
   }
   Object.assign(user, updateBody);
   await user.save();
   return user;
 };
 
+/**
+ * Update auto generated  password only for admin
+ * @param {ObjectId} userId
+ * @param {Object} updateBody
+ * @returns {Promise<User>}
+ */
+const updateUserPasswordById = async (userId, newPassword) => {
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  Object.assign(user, { password: newPassword });
+  await user.save();
+  return user;
+};
 /**
  * Delete user by id
  * @param {ObjectId} userId
@@ -83,7 +99,8 @@ module.exports = {
   createUser,
   queryUsers,
   getUserById,
-  getUserByEmail,
+  getUserByUserName,
   updateUserById,
   deleteUserById,
+  updateUserPasswordById,
 };

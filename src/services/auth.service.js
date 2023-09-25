@@ -1,22 +1,38 @@
 const httpStatus = require('http-status');
 const tokenService = require('./token.service');
 const userService = require('./user.service');
+const sansthanService = require('./sansthan.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
 
 /**
  * Login with username and password
- * @param {string} email
+ * @param {string} userName
+ * @param {string} userName
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginUserWithEmailAndPassword = async (email, password) => {
-  const user = await userService.getUserByEmail(email);
+const loginUserWithEmailAndPassword = async (userName, password) => {
+  const user = await userService.getUserByUserName(userName);
   if (!user || !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
   return user;
+};
+
+/**
+ * Login with userID and password
+ * @param {string} userID
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginSansthanWithUserIDAndPassword = async (userID, password) => {
+  const sansthan = await sansthanService.getSansthanByUserID(userID);
+  if (!sansthan || !(await sansthan.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userID or password');
+  }
+  return sansthan;
 };
 
 /**
@@ -92,6 +108,7 @@ const verifyEmail = async (verifyEmailToken) => {
 
 module.exports = {
   loginUserWithEmailAndPassword,
+  loginSansthanWithUserIDAndPassword,
   logout,
   refreshAuth,
   resetPassword,

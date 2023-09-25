@@ -4,6 +4,7 @@ const { objectId } = require('../custom.validation');
 const staffSchema = Joi.object().keys({
   saral_id: Joi.string().required(),
   scode: Joi.string(),
+  campusId: Joi.string().required(),
   employee_id: Joi.number().required(),
   designation: Joi.string().required(),
   qualification: Joi.string().required(),
@@ -136,6 +137,7 @@ const updateStaff = {
     .keys({
       saral_id: Joi.string(),
       scode: Joi.string(),
+      campusId: Joi.string(),
       employee_id: Joi.number(),
       designation: Joi.string(),
       qualification: Joi.string(),
