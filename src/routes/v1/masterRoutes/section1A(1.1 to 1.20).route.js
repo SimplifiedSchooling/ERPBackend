@@ -71,6 +71,7 @@ module.exports = router;
  *               - upperprimary
  *               - Secondary
  *               - higherSecondary
+ *               - scode
  *             example:
  *               hoschool: School Name
  *               hosname: School Owner Name
@@ -104,6 +105,7 @@ module.exports = router;
  *               upperprimary: upper Secondary Class
  *               Secondary: Secondary Class
  *               higherSecondary: Higher Secondary Class
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

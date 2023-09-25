@@ -9,6 +9,11 @@ const createSection2A21 = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(Section2A21);
 });
 
+const getTotalDrinkingWaterSchool = catchAsync(async (req, res) => {
+  const totalSchoolsWithDrinkingWater = await Section2A21Service.countSchoolsWithDrinkingWater();
+  res.status(200).send({ totalSchoolsWithDrinkingWater });
+});
+
 const getAllSection2A21 = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['name']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
@@ -40,4 +45,5 @@ module.exports = {
   getSection2A21ById,
   updateSection2A21,
   deleteSection2A21,
+  getTotalDrinkingWaterSchool,
 };

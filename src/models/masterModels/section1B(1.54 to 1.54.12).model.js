@@ -79,6 +79,9 @@ const section1B54Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    scode: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -89,7 +89,6 @@ module.exports = router;
  *               website: https://www.example.com
  *               profile_count: PROFILE_COUNT_VALUE
  *               scode: SCODE_VALUE
- *
  *     responses:
  *       "201":
  *         description: Created

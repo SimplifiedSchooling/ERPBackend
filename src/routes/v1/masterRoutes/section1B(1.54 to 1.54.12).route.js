@@ -59,6 +59,7 @@ module.exports = router;
  *               - complaintbox
  *               - providecopiesofsaftyguid
  *               - frequecyofsaftyaudit
+ *               - scode
  *             example:
  *               sdmpdev: Received
  *               structuralaudit: Completed
@@ -79,6 +80,7 @@ module.exports = router;
  *               complaintbox: Installed
  *               providecopiesofsaftyguid: Yes
  *               frequecyofsaftyaudit: Quarterly
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

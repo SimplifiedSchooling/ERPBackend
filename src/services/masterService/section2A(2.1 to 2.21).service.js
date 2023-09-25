@@ -64,10 +64,33 @@ const deleteSection2A21ById = async (Section2A21Id) => {
   return Section2A21;
 };
 
+const countSchoolsWithDrinkingWater = () =>
+  Section2A21Schema.aggregate([
+    {
+      $match: {
+        drinkingwater: 'Yes', // Match documents with drinkingwater: 'yes'
+      },
+    },
+    {
+      $count: 'totalSchools', // Count matching documents
+    },
+  ])
+    .then((result) => {
+      if (result.length === 0) {
+        return 0;
+      }
+      const totalSchoolsWithDrinkingWater = result[0].totalSchools;
+      return totalSchoolsWithDrinkingWater;
+    })
+    .catch((error) => {
+      throw error;
+    });
+
 module.exports = {
   createSection2A21,
   getAllSection2A21,
   getSection2A21ById,
   updateSection2A21ById,
   deleteSection2A21ById,
+  countSchoolsWithDrinkingWater,
 };

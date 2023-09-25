@@ -52,6 +52,7 @@ module.exports = router;
  *               - totalnoofteachingstaff
  *               - noofgusetteacher
  *               - nooftransgenderstaff
+ *               - scode
  *             example:
  *               nofoaccountant: "3"
  *               nofolibassitant: "2"
@@ -65,6 +66,7 @@ module.exports = router;
  *               totalnoofteachingstaff: "2"
  *               noofgusetteacher: "2"
  *               nooftransgenderstaff: "0"
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

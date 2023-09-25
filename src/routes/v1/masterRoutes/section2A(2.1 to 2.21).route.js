@@ -5,6 +5,8 @@ const Section2A21Validation = require('../../../validations/masterValidations/se
 
 const router = express.Router();
 
+router.route('/drinkingwater').get(Section2A21Controller.getTotalDrinkingWaterSchool);
+
 router
   .route('/')
   .post(validate(Section2A21Validation.createSection2A21), Section2A21Controller.createSection2A21)
@@ -191,6 +193,7 @@ module.exports = router;
  *               - biometrickit
  *               - essentialmedicineavai
  *               - firstaidavai
+ *               - scode
  *             example:
  *               statusofschoolbuilding: Good
  *               noofbuildingblocks: "3"
@@ -342,6 +345,7 @@ module.exports = router;
  *               biometrickit: Yes
  *               essentialmedicineavai: Yes
  *               firstaidavai: Yes
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

@@ -83,3 +83,5 @@ module.exports.complaintService = require('./staff/complaint.service');
 module.exports.loanService = require('./staff/applyloan.service');
 module.exports.sansthanService = require('./sansthan.service');
 module.exports.otpService = require('./otp.service');
+
+module.exports.AssessmentItem = require('./masterService/assessmentItem.service');
