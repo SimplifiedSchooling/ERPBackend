@@ -13,17 +13,19 @@ function generateUsernameFromName(name) {
   });
   return `${sanitizedName}${randomString}`;
 }
+
 /**
  * Create a staff
  * @param {Object} staffBody
  * @returns {Promise<Staff>}
  */
 const createStaff = async (staffBody) => {
-  // const userName = await generateUsernameFromName(staffBody.name);
-  // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
-  // staffBody.userName = userName;
-  // staffBody.password = randomPassword;
-  return Staff.create(staffBody);
+  const staffData = { ...staffBody };
+  const userName = generateUsernameFromName(staffData.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  staffData.userName = userName;
+  staffData.password = randomPassword;
+  return Staff.create(staffData);
 };
 
 /**

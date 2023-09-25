@@ -22,9 +22,8 @@ const staffSchema = Joi.object().keys({
   permanent_address: Joi.string().required(),
   note: Joi.string(),
   image: Joi.string(),
-  username: Joi.string().required(),
+  userName: Joi.string(),
   password: Joi.string()
-    .required()
     .min(8)
     .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])/)
     .error(new Error('Password must contain at least one letter and one number')),

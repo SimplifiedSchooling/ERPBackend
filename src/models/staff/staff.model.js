@@ -88,13 +88,11 @@ const staffSchema = mongoose.Schema(
     image: {
       type: String,
     },
-    username: {
+    userName: {
       type: String,
-      required: true,
     },
     password: {
       type: String,
-      required: true,
       trim: true,
       minlength: 8,
       validate(value) {
