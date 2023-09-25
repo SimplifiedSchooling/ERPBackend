@@ -4,10 +4,10 @@ const { toJSON, paginate } = require('./plugins');
 
 const studentSchema = new mongoose.Schema(
   {
-    // studentId: {
-    //   type: String,
-    //   default: uuid.v1,
-    // },
+    studentId: {
+      type: String,
+      default: uuid.v1,
+    },
     saral_id: {
       type: String,
       required: true,
