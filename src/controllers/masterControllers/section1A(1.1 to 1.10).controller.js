@@ -34,10 +34,16 @@ const deleteSection1A10 = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const countSchool = catchAsync(async (req, res) => {
+ const result =  await Section1A10Service.calculateSchoolCounts();
+  res.send(result);
+});
+
 module.exports = {
   createSection1A10,
   getAllSection1A10,
   getSection1A10ById,
   updateSection1A10,
   deleteSection1A10,
+  countSchool
 };
