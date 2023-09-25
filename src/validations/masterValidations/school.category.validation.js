@@ -11,7 +11,7 @@ const createSchoolCategory = {
 
 const getSchoolCategoryById = {
   params: Joi.object().keys({
-    SchoolCategoryId: Joi.string().custom(objectId),
+    SchoolCategoryTypeId: Joi.string().custom(objectId),
   }),
 };
 
@@ -23,7 +23,7 @@ const getAllSchoolCategory = {
 
 const updateSchoolCategoryId = {
   params: Joi.object().keys({
-    SchoolCategoryId: Joi.required().custom(objectId),
+    SchoolCategoryTypeId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -35,7 +35,7 @@ const updateSchoolCategoryId = {
 };
 const deleteSchoolCategoryById = {
   params: Joi.object().keys({
-    SchoolCategoryId: Joi.string().custom(objectId),
+    SchoolCategoryTypeId: Joi.string().custom(objectId),
   }),
 };
 

@@ -14,7 +14,7 @@ const getAllSchoolCategory = catchAsync(async (req, res) => {
 });
 
 const getSchoolCategoryById = catchAsync(async (req, res) => {
-  const singleSchoolCategoryType = await SchoolCategoryServices.getSchoolCategoryById(req.params.SchoolCategoryId);
+  const singleSchoolCategoryType = await SchoolCategoryServices.getSchoolCategoryById(req.params.SchoolCategoryTypeId);
   if (!singleSchoolCategoryType) {
     throw new ApiError(httpStatus.NOT_FOUND, 'SchoolCategoryType not found');
   }
@@ -22,12 +22,12 @@ const getSchoolCategoryById = catchAsync(async (req, res) => {
 });
 
 const updateSchoolCategoryTypeyId = catchAsync(async (req, res) => {
-  const updateLocationType = await SchoolCategoryServices.updateSchoolCategoryyId(req.params.SchoolCategoryId, req.body);
+  const updateLocationType = await SchoolCategoryServices.updateSchoolCategoryyId(req.params.SchoolCategoryTypeId, req.body);
   res.send(updateLocationType);
 });
 
 const deleteSchoolCategoryTypeById = catchAsync(async (req, res) => {
-  const deleteLocationType = await SchoolCategoryServices.deleteSchoolCategoryById(req.params.SchoolCategoryId);
+  const deleteLocationType = await SchoolCategoryServices.deleteSchoolCategoryById(req.params.SchoolCategoryTypeId);
   res.status(httpStatus.NO_CONTENT).send(deleteLocationType);
 });
 

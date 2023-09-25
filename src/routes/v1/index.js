@@ -211,7 +211,7 @@ const defaultRoutes = [
     route: inChargeTypeRoute,
   },
   {
-    path: '/schoolcategory',
+    path: '/schoolcategorytype',
     route: schoolcategoryRoute,
   },
   {
