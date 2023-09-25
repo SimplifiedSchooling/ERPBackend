@@ -191,6 +191,9 @@ const section1A40Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    scode: {
+      type: String,
+    },
   },
   {
     timestamps: true,

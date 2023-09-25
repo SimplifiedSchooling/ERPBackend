@@ -8,9 +8,7 @@ const section1E62 = mongoose.Schema(
       trim: true,
     },
     sector1: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'sector',
-      required: true,
+      type: String,
       trim: true,
     },
     sector1year: {
@@ -18,9 +16,7 @@ const section1E62 = mongoose.Schema(
       trim: true,
     },
     sector2: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'sector',
-      required: true,
+      type: String,
       trim: true,
     },
     sector2year: {
@@ -28,9 +24,7 @@ const section1E62 = mongoose.Schema(
       trim: true,
     },
     sector3: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'sector',
-      required: true,
+      type: String,
       trim: true,
     },
     sector3year: {
@@ -38,9 +32,7 @@ const section1E62 = mongoose.Schema(
       trim: true,
     },
     sector4: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'sector',
-      required: true,
+      type: String,
       trim: true,
     },
     sector4year: {
@@ -110,6 +102,9 @@ const section1E62 = mongoose.Schema(
     sepratrroomavai4: {
       type: String,
       trim: true,
+    },
+    scode: {
+      type: String,
     },
   },
   {

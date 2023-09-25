@@ -191,6 +191,7 @@ module.exports = router;
  *               - biometrickit
  *               - essentialmedicineavai
  *               - firstaidavai
+ *               - scode
  *             example:
  *               statusofschoolbuilding: Good
  *               noofbuildingblocks: "3"
@@ -342,6 +343,7 @@ module.exports = router;
  *               biometrickit: Yes
  *               essentialmedicineavai: Yes
  *               firstaidavai: Yes
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

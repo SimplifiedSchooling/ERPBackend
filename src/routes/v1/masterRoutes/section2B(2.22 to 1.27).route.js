@@ -86,6 +86,7 @@ module.exports = router;
  *               - ictlabfunct
  *               - model1
  *               - ictinst
+ *               - scode
  *             example:
  *               totalpcavi: "3"
  *               functpcavai: "32"
@@ -133,6 +134,7 @@ module.exports = router;
  *               ictlabfunct: Yes
  *               model1: HP Pavilion
  *               ictinst: XYZ Institute
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

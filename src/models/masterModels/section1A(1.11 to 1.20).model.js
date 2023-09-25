@@ -16,9 +16,7 @@ const section1A20Schema = mongoose.Schema(
       trim: true,
     },
     schoolcategory: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'schoolCategory',
-      required: true,
+      type: String,
       trim: true,
     },
     htlclass: {
@@ -66,9 +64,7 @@ const section1A20Schema = mongoose.Schema(
       trim: true,
     },
     mangcode: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Managementcode',
-      required: false,
+      type: String,
       trim: true,
     },
     code101: {
@@ -134,6 +130,9 @@ const section1A20Schema = mongoose.Schema(
     higherSecondary: {
       type: String,
       trim: true,
+    },
+    scode: {
+      type: String,
     },
   },
   {
