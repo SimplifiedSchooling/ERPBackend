@@ -16,9 +16,7 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     languageId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     cwsnschool: {
@@ -170,27 +168,19 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     medium1: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     medium2: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     medium3: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     medium4: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     othermedium: {
@@ -198,9 +188,7 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     languagetaught1: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     classtaught1: {
@@ -220,9 +208,7 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     languagetaught2: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     classtaught2: {
@@ -242,9 +228,7 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     languagetaught3: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     classtaught3: {
@@ -264,9 +248,7 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     languagetaught4: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     classtaught4: {
@@ -286,9 +268,7 @@ const section1A30Schema = mongoose.Schema(
       trim: true,
     },
     languagetaught5: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'language',
-      required: true,
+      type: String,
       trim: true,
     },
     classtaught5: {
