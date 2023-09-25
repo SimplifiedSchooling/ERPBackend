@@ -291,7 +291,7 @@ const section1A30Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    schoolcode: {
+    scode: {
       type: String,
     },
   },

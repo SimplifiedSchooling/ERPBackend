@@ -56,7 +56,7 @@ module.exports = router;
  *               - constEcoClub
  *               - teacherIdcard
  *               - SSSAcertiobtain
- *               - schoolcode
+ *               - scode
  *             example:
  *               middayMeal: Provided
  *               NoOfDayMidDayMeal: "5"
@@ -73,7 +73,7 @@ module.exports = router;
  *               constEcoClub: Active
  *               teacherIdcard: Issued
  *               SSSAcertiobtain: Not Available
- *               schoolcode: schoolcode
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

@@ -119,7 +119,7 @@ const section1D60 = mongoose.Schema(
       type: String,
       trim: true,
     },
-    schoolcode: {
+    scode: {
       type: String,
     },
   },
