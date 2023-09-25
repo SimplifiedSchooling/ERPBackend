@@ -64,7 +64,6 @@ const deleteSection1A20ById = async (Section1A20Id) => {
   return Section1A20;
 };
 
-
 module.exports = {
   createSection1A20,
   getAllSection1A20,
