@@ -43,14 +43,13 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - email
+ *               - userName
  *               - password
  *             properties:
  *               name:
  *                 type: string
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *                 description: must be unique
  *               password:
  *                 type: string
@@ -59,7 +58,7 @@ module.exports = router;
  *                 description: At least one number and one letter
  *             example:
  *               name: fake name
- *               email: fake@example.com
+ *               userName: fake@example.com
  *               password: password1
  *     responses:
  *       "201":
@@ -90,17 +89,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - email
+ *               - userName
  *               - password
  *             properties:
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *               password:
  *                 type: string
  *                 format: password
  *             example:
- *               email: fake@example.com
+ *               userName: fake@example.com
  *               password: password1
  *     responses:
  *       "200":
@@ -195,13 +193,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - email
+ *               - userName
  *             properties:
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *             example:
- *               email: fake@example.com
+ *               userName: fake@example.com
  *     responses:
  *       "204":
  *         description: No content

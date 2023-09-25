@@ -38,16 +38,6 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    campusId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'campus',
-      required: true,
-    },
-    staffId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Staffs',
-      required: true,
-    },
   },
   {
     timestamps: true,
