@@ -26,7 +26,7 @@ const getAllSchoolCategory = async () => {
 };
 
 /**
- * Get SchoolCategory by id
+ * Get SchoolCategoryTypeId by id
  * @param {ObjectId} id
  * @returns {Promise<SchoolCategory>}
  */
@@ -35,13 +35,13 @@ const getSchoolCategoryById = async (id) => {
 };
 
 /**
- * Update SchoolCategory by id
- * @param {ObjectId} SchoolCategoryId
+ * Update SchoolCategoryTypeId by id
+ * @param {ObjectId} SchoolCategoryTypeId
  * @param {Object} updateBody
  * @returns {Promise<SchoolCategory>}
  */
-const updateSchoolCategoryyId = async (SchoolCategoryId, updateBody) => {
-  const schoolCategory = await getSchoolCategoryById(SchoolCategoryId);
+const updateSchoolCategoryyId = async (SchoolCategoryTypeId, updateBody) => {
+  const schoolCategory = await getSchoolCategoryById(SchoolCategoryTypeId);
   if (!schoolCategory) {
     throw new ApiError(httpStatus.NOT_FOUND, 'SchoolCategory not found');
   }
@@ -51,12 +51,12 @@ const updateSchoolCategoryyId = async (SchoolCategoryId, updateBody) => {
 };
 
 /**
- * Delete SchoolCategory by id
- * @param {ObjectId} SchoolCategoryId
+ * Delete SchoolCategoryTypeId by id
+ * @param {ObjectId} SchoolCategoryTypeId
  * @returns {Promise<SchoolCategory>}
  */
-const deleteSchoolCategoryById = async (SchoolCategoryId) => {
-  const schoolCategory = await getSchoolCategoryById(SchoolCategoryId);
+const deleteSchoolCategoryById = async (SchoolCategoryTypeId) => {
+  const schoolCategory = await getSchoolCategoryById(SchoolCategoryTypeId);
   if (!schoolCategory) {
     throw new ApiError(httpStatus.NOT_FOUND, 'SchoolCategory not found');
   }

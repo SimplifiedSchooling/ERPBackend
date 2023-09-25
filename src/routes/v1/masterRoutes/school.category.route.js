@@ -10,7 +10,7 @@ router
   .get(validate(schoolCategoryValidation.getAllSchoolCategory), SchoolCategoryController.getAllSchoolCategory);
 
 router
-  .route('/:SchoolCategoryId')
+  .route('/:SchoolCategoryTypeId')
   .get(validate(schoolCategoryValidation.getSchoolCategoryById), SchoolCategoryController.getSchoolCategoryById)
   .patch(validate(schoolCategoryValidation.updateSchoolCategoryId), SchoolCategoryController.updateSchoolCategoryTypeyId)
   .delete(
@@ -28,7 +28,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /schoolcategory:
+ * /SchoolCategoryType:
  *   post:
  *     summary: Create a new SchoolCategoryType
  *     tags: [SchoolCategoryType]
@@ -49,10 +49,10 @@ module.exports = router;
  *       200:
  *         description: List of SchoolCategoryType retrieved successfully
 
- * /schoolcategory/{SchoolCategoryId}:
+ * /SchoolCategoryType/{SchoolCategoryTypeId}:
  *   parameters:
  *     - in: path
- *       name: SchoolCategoryId
+ *       name: SchoolCategoryTypeId
  *       required: true
  *       schema:
  *         type: string
