@@ -12,14 +12,12 @@ const section1A10Schema = mongoose.Schema(
       required: true,
     },
     districtname: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'district',
-      required: true,
+      type: String,
+      trim: true,
     },
     udiseblock: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'udiseblock',
-      required: true,
+      type: String,
+      trim: true,
     },
     typeofschool: {
       type: String,
