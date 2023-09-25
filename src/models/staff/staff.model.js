@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
-const uuid = require('node-uuid/uuid');
+const bcrypt = require('bcryptjs');
+// const uuid = require('node-uuid/uuid');
 const { toJSON, paginate } = require('../plugins');
 
 const staffSchema = mongoose.Schema(
   {
-    _id: {
-      type: String,
-      default: uuid.v1,
-    },
+    // _id: {
+    //   type: String,
+    //   default: uuid.v1,
+    // },
     saral_id: {
       type: String,
       required: true,
@@ -20,6 +21,12 @@ const staffSchema = mongoose.Schema(
       type: Number,
       required: true,
       unique: true,
+    },
+    campusId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'campus',
+      required: true,
+      trim: true,
     },
     designation: {
       type: String,
@@ -371,6 +378,34 @@ const staffSchema = mongoose.Schema(
 // add plugin that converts mongoose to json
 staffSchema.plugin(toJSON);
 staffSchema.plugin(paginate);
+/**
+ * Check if userName is taken
+ * @param {string} userName - The user's userName
+ * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
+ * @returns {Promise<boolean>}
+ */
+staffSchema.statics.isUserNameTaken = async function (userName, excludeUserId) {
+  const staff = await this.findOne({ userName, _id: { $ne: excludeUserId } });
+  return !!staff;
+};
+
+/**
+ * Check if password matches the staff password
+ * @param {string} password
+ * @returns {Promise<boolean>}
+ */
+staffSchema.methods.isPasswordMatch = async function (password) {
+  const staff = this;
+  return bcrypt.compare(password, staff.password);
+};
+
+staffSchema.pre('save', async function (next) {
+  const staff = this;
+  if (staff.isModified('password')) {
+    staff.password = await bcrypt.hash(staff.password, 8);
+  }
+  next();
+});
 
 staffSchema.index({ saral_id: 1 }, { unique: true });
 const Staffs = mongoose.model('Staffs', staffSchema);

@@ -85,4 +85,6 @@ module.exports.Sector = require('./masterModels/sector.model');
 module.exports.StudentAttendanceSchema = require('./studentattendance.model');
 module.exports.Complaint = require('./staff/complaint.model');
 module.exports.Loan = require('./staff/applyloan.model');
+module.exports.Sansthan = require('./sansthan.model');
+module.exports.Otp = require('./otp.model');
 module.exports.AssessmentItem = require('./masterModels/assessmentItem.model');
