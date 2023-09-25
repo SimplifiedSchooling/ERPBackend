@@ -111,7 +111,7 @@ module.exports = router;
  *               - langtatgirls5
  *               - langtattrans5
  *               - prevocational
- *               - schoolcode
+ *               - scode
  *             example:
  *               primaryclass: Primary Class Value
  *               upperprimary: Upper Primary Value
@@ -183,7 +183,7 @@ module.exports = router;
  *               langtatgirls5: Language Taught Girls 5 Value
  *               langtattrans5: Language Taught Trans 5 Value
  *               prevocational: prevocational
- *               schoolcode: schoolcode
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

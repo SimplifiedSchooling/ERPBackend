@@ -79,7 +79,7 @@ const section1B54Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    schoolcode: {
+    scode: {
       type: String,
     },
   },

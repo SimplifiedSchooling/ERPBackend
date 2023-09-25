@@ -18,7 +18,7 @@ const createSection1C57 = {
     constEcoClub: Joi.string().allow('').optional(),
     teacherIdcard: Joi.string().allow('').optional(),
     SSSAcertiobtain: Joi.string().allow('').optional(),
-    schoolcode: Joi.string().allow('').optional(),
+    scode: Joi.string().allow('').optional(),
   }),
 };
 

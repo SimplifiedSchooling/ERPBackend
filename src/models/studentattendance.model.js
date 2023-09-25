@@ -5,7 +5,7 @@ const StudentAttendanceSchema = mongoose.Schema(
   {
     StudentSessionId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'studentsession',
+      ref: 'StudentSession',
       required: true,
       trim: true,
     },

@@ -65,7 +65,7 @@ module.exports = router;
  *               - sepratrroomavai2
  *               - sepratrroomavai3
  *               - sepratrroomavai4
- *               - schoolcode
+ *               - scode
  *             example:
  *               vocationalNSQF: Level 3
  *               sector1: 6507e6b492dbd7a5da3a0003
@@ -92,7 +92,7 @@ module.exports = router;
  *               sepratrroomavai2: Yes
  *               sepratrroomavai3: No
  *               sepratrroomavai4: No
- *               schoolcode: schoolcode
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created
