@@ -84,6 +84,7 @@ module.exports = router;
  *               - nosecondaryschoolcomplex
  *               - nohigherseconadryschoolcomplex
  *               - totalschoolcomplex
+ *               - schoolcode
  *             example:
  *               specialtraining: Special Training Value
  *               CurrentAcademicYearNoofboys: "10"
@@ -129,6 +130,7 @@ module.exports = router;
  *               nosecondaryschoolcomplex: "3"
  *               nohigherseconadryschoolcomplex: "2"
  *               totalschoolcomplex: "3"
+ *               schoolcode: schoolcode
  *     responses:
  *       "201":
  *         description: Created

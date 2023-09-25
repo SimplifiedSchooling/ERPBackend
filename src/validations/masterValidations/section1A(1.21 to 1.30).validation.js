@@ -75,6 +75,7 @@ const createSection1A30 = {
     langtatgirls5: Joi.string().allow('').optional(),
     langtattrans5: Joi.string().allow('').optional(),
     prevocational: Joi.string().allow('').optional(),
+    schoolcode: Joi.string().allow('').optional(),
   }),
 };
 
