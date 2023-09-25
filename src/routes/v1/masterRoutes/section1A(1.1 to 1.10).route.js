@@ -64,7 +64,6 @@ module.exports = router;
  *               - website
  *               - profile_count
  *               - scode
- *               - schoolcode
  *             example:
  *               UDISEcode : UDISE_CODE_VALUE
  *               schoolname: SCHOOL_NAME_VALUE
@@ -90,7 +89,6 @@ module.exports = router;
  *               website: https://www.example.com
  *               profile_count: PROFILE_COUNT_VALUE
  *               scode: SCODE_VALUE
- *               schoolcode: schoolcode
  *     responses:
  *       "201":
  *         description: Created

@@ -39,7 +39,6 @@ const createSection1A10 = {
     website: Joi.string().uri().allow('').optional(),
     profile_count: Joi.string().allow('').optional(),
     scode: Joi.string().allow('').optional(),
-    schoolcode: Joi.string().allow('').optional(),
   }),
 };
 

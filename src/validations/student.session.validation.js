@@ -3,10 +3,10 @@ const { objectId } = require('./custom.validation');
 
 const createStudentSession = {
   body: Joi.object().keys({
-    session_Id: Joi.string().required(),
-    student_Id: Joi.string().required(),
-    class_Id: Joi.string().required(),
-    section_Id: Joi.string().required(),
+    sessionId: Joi.string().required(),
+    studentId: Joi.string().required(),
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
   }),
 };
 
@@ -31,10 +31,10 @@ const updateStudentSessionById = {
   }),
   body: Joi.object()
     .keys({
-      session_Id: Joi.string().required(),
-      student_Id: Joi.string().required(),
-      class_Id: Joi.string().required(),
-      section_Id: Joi.string().required(),
+      sessionId: Joi.string(),
+      studentId: Joi.string(),
+      classId: Joi.string(),
+      sectionId: Joi.string(),
     })
     .min(1),
 };

@@ -205,7 +205,7 @@ module.exports = router;
  *               - trainingsocial10
  *               - trainingsocial11
  *               - trainingsocial12
- *               - schoolcode
+ *               - scode
  *             example:
  *               EBSBActivity: Some EBSB Activity
  *               textbookreceivedpreprimary: Received textbooks for preprimary
@@ -360,7 +360,7 @@ module.exports = router;
  *               trainingsocial10: Training Social data
  *               trainingsocial11: Training Social data
  *               trainingsocial12: Training Social data
- *               schoolcode: schoolcode
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created

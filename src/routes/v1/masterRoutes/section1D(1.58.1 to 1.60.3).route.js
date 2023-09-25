@@ -68,7 +68,7 @@ module.exports = router;
  *               - ictItem
  *               - sportEqu
  *               - libraryBooks
- *               - schoolcode
+ *               - scode
  *             example:
  *               schoolgrantrecipt: Received
  *               schoolgrantexpen: Spent
@@ -98,7 +98,7 @@ module.exports = router;
  *               ictItem: Laptop
  *               sportEqu: "Sports Equipment"
  *               libraryBooks: Books and Magazine
- *               schoolcode: schoolcode
+ *               scode: SCODE_VALUE
  *     responses:
  *       "201":
  *         description: Created
