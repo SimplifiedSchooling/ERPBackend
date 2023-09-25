@@ -131,6 +131,9 @@ const section1A20Schema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    schoolcode: {
+      type: String,
+    },
   },
   {
     timestamps: true,

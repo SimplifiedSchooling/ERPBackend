@@ -155,6 +155,7 @@ const createSection2A21 = {
     biometrickit: Joi.string().allow('').optional(),
     essentialmedicineavai: Joi.string().allow('').optional(),
     firstaidavai: Joi.string().allow('').optional(),
+    schoolcode: Joi.string().allow('').optional(),
   }),
 };
 

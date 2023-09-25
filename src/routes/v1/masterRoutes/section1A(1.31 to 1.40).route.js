@@ -87,6 +87,7 @@ module.exports = router;
  *               - anganwaditrained3Boys
  *               - anganwaditrained3Girls
  *               - Balavatikastarted
+ *               - schoolcode
  *             example:
  *               primaryschdistance: Primary School Distance Value
  *               upperprimaryschdistance: Upper Primary School Distance Value
@@ -135,6 +136,7 @@ module.exports = router;
  *               anganwaditrained3Boys: Anganwadi Trained 3 Boys Value
  *               anganwaditrained3Girls: Anganwadi Trained 3 Girls Value
  *               Balavatikastarted: Balavatika Started Value
+ *               schoolcode: schoolcode
  *     responses:
  *       "201":
  *         description: Created
