@@ -66,6 +66,22 @@ const updateUserById = async (userId, updateBody) => {
 };
 
 /**
+ * Update auto generated  password only for admin
+ * @param {ObjectId} userId
+ * @param {Object} updateBody
+ * @returns {Promise<User>}
+ */
+const updateUserPasswordById = async (userId, newPassword) => {
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  Object.assign(user, { password: newPassword });
+  await user.save();
+  return user;
+};
+/**
  * Delete user by id
  * @param {ObjectId} userId
  * @returns {Promise<User>}
@@ -86,4 +102,5 @@ module.exports = {
   getUserByUserName,
   updateUserById,
   deleteUserById,
+  updateUserPasswordById,
 };
