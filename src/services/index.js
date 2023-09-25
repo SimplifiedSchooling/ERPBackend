@@ -81,6 +81,7 @@ module.exports.sectorService = require('./masterService/sector.service');
 module.exports.StudentAttendanceService = require('./studentattendance.service');
 module.exports.complaintService = require('./staff/complaint.service');
 module.exports.loanService = require('./staff/applyloan.service');
+module.exports.stateService = require('./masterService/state.service');
 module.exports.sansthanService = require('./sansthan.service');
 module.exports.otpService = require('./otp.service');
 
