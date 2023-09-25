@@ -35,7 +35,7 @@ const deleteSection1A10 = catchAsync(async (req, res) => {
 });
 
 const countSchool = catchAsync(async (req, res) => {
- const result =  await Section1A10Service.calculateSchoolCounts();
+  const result = await Section1A10Service.calculateSchoolCounts();
   res.send(result);
 });
 
@@ -45,5 +45,5 @@ module.exports = {
   getSection1A10ById,
   updateSection1A10,
   deleteSection1A10,
-  countSchool
+  countSchool,
 };

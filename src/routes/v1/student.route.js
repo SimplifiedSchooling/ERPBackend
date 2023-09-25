@@ -9,19 +9,13 @@ router
   .post(validate(StudentValidation.createStudent), StudentController.createStudent)
   .get(validate(StudentValidation.getAllStudents), StudentController.getStudents);
 
-
-router
-  .route('/totalStudent')
-  .get(StudentController.getTotalMaleStudents);
-
+router.route('/totalStudent').get(StudentController.getTotalMaleStudents);
 
 router
   .route('/:studentId')
   .get(StudentController.getStudent)
   .patch(validate(StudentValidation.updateStudentById), StudentController.updateStudent)
   .delete(validate(StudentValidation.deleteStudentById), StudentController.deleteStudent);
-
-
 
 module.exports = router;
 /**

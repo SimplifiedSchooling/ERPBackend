@@ -39,12 +39,11 @@ const calculateSchoolManagemnt = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-
 module.exports = {
   createSection1A20,
   getAllSection1A20,
   getSection1A20ById,
   updateSection1A20,
   deleteSection1A20,
-  calculateSchoolManagemnt
+  calculateSchoolManagemnt,
 };

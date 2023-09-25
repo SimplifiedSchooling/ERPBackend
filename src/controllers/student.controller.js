@@ -49,5 +49,5 @@ module.exports = {
   getStudent,
   updateStudent,
   deleteStudent,
-  getTotalMaleStudents
+  getTotalMaleStudents,
 };

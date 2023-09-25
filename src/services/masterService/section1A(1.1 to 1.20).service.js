@@ -64,7 +64,6 @@ const deleteSection1A20ById = async (Section1A20Id) => {
   return Section1A20;
 };
 
-
 const calculateSchoolDistribution = async () => {
   try {
     const pipeline = [
@@ -112,13 +111,11 @@ const calculateSchoolDistribution = async () => {
   }
 };
 
-
-
 module.exports = {
   createSection1A20,
   getAllSection1A20,
   getSection1A20ById,
   updateSection1A20ById,
   deleteSection1A20ById,
-  calculateSchoolDistribution
+  calculateSchoolDistribution,
 };

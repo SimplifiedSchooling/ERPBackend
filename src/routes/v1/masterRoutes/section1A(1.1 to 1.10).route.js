@@ -10,11 +10,8 @@ router
   .post(validate(Section1A10Validation.createSection1A10), Section1A10Controller.createSection1A10)
   .get(validate(Section1A10Validation.getAllSection1A10), Section1A10Controller.getAllSection1A10);
 
-  router
-  .route('/count')
-  .get(Section1A10Controller.countSchool);
+router.route('/count').get(Section1A10Controller.countSchool);
 
-  
 router
   .route('/:Section1A10Id')
   .get(validate(Section1A10Validation.getSection1A10), Section1A10Controller.getSection1A10ById)

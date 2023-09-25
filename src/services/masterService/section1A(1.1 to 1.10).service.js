@@ -179,29 +179,27 @@ const calculateSchoolCounts = async () => {
 
     // Calculate total number of blocks and total school counts
     let totalBlocks = 0;
- 
 
     const districtBlockCounts = {};
 
     result.forEach((item) => {
-      const district = item.district;
-      const blocks = item.blocks;
+      const { district } = item;
+      const { blocks } = item;
       let districtTotalBlocks = 0;
       let districtTotalSchools = 0;
 
       blocks.forEach((block) => {
         const blockName = block.block;
-        const schools = block.schools;
+        const { schools } = block;
 
         districtTotalBlocks += 1;
         totalBlocks += 1;
 
         schools.forEach((school) => {
-          const schoolType = school.schoolType;
+          const { schoolType } = school;
           const schoolCount = school.count;
 
           districtTotalSchools += schoolCount;
-         
         });
 
         if (!districtBlockCounts[district]) {
@@ -210,14 +208,13 @@ const calculateSchoolCounts = async () => {
 
         districtBlockCounts[district][blockName] = {
           totalBlocks: districtTotalBlocks,
-        
         };
       });
     });
 
     return {
       totalBlocks,
-   
+
       districtBlockCounts,
     };
   } catch (error) {
@@ -231,5 +228,5 @@ module.exports = {
   getsection1A10ById,
   updatesection1A10ById,
   deletesection1A10ById,
-  calculateSchoolCounts
+  calculateSchoolCounts,
 };
