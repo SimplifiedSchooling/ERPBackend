@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const tokenService = require('./token.service');
 const userService = require('./user.service');
 const sansthanService = require('./sansthan.service');
+const staffService = require('./staff/staff.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
@@ -16,7 +17,7 @@ const { tokenTypes } = require('../config/tokens');
 const loginUserWithEmailAndPassword = async (userName, password) => {
   const user = await userService.getUserByUserName(userName);
   if (!user || !(await user.isPasswordMatch(password))) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
   }
   return user;
 };
@@ -34,7 +35,19 @@ const loginSansthanWithUserIDAndPassword = async (userID, password) => {
   }
   return sansthan;
 };
-
+/**
+ * Login with userID and password
+ * @param {string} userID
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginStaff = async (userName, password) => {
+  const staff = await staffService.getStaffByUserName(userName);
+  if (!staff || !(await staff.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
+  }
+  return staff;
+};
 /**
  * Logout
  * @param {string} refreshToken
@@ -113,4 +126,5 @@ module.exports = {
   refreshAuth,
   resetPassword,
   verifyEmail,
+  loginStaff,
 };
