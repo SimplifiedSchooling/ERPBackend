@@ -89,3 +89,5 @@ module.exports.State = require('./masterModels/state.model');
 module.exports.Sansthan = require('./sansthan.model');
 module.exports.Otp = require('./otp.model');
 module.exports.AssessmentItem = require('./masterModels/assessmentItem.model');
+module.exports.Special = require('./masterModels/special.school.CWSN.model');
+module.exports.Typeofhostel = require('./masterModels/type.of.hostel.model');
