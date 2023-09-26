@@ -86,10 +86,20 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
+const calculateTotalMaleStudents = async () => {
+  try {
+    const totalMaleStudents = await Student.countDocuments({ gender: 'Male' });
+    return totalMaleStudents;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createStudent,
   getAllStudents,
   getStudentById,
   updateStudentById,
   deleteStudentById,
+  calculateTotalMaleStudents,
 };
