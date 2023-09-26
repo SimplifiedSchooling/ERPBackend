@@ -75,3 +75,5 @@ module.exports.loanValidation = require('./staff/applyloan.validation');
 module.exports.stateValidation = require('./masterValidations/state.validation');
 module.exports.sansthanValidation = require('./sansthan.validation');
 module.exports.AssessmentItem = require('./masterValidations/assessmentItem.validation');
+module.exports.specialValidation = require('./masterValidations/special.school.CWSN.validation');
+module.exports.typeofhostelValidation = require('./masterValidations/type.of.hostel.validation');
