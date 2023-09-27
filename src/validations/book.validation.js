@@ -3,11 +3,11 @@ const { objectId } = require('./custom.validation');
 
 const createBook = {
   body: Joi.object().keys({
-    name: Joi.string(),
-    classId: Joi.string(),
-    subjectId: Joi.string(),
-    mediumId: Joi.string(),
-    boardId: Joi.string(),
+    name: Joi.string().required(),
+    classId: Joi.string().custom(objectId).required(),
+    subjectId: Joi.string().custom(objectId).required(),
+    mediumId: Joi.string().custom(objectId).required(),
+    boardId: Joi.string().custom(objectId).required(),
     thumbnail: Joi.string(),
   }),
 };
