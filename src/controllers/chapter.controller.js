@@ -13,14 +13,10 @@ const createChapter = catchAsync(async (req, res) => {
 const getChapter = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['chapterName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  options.sortBy = 'order';
   const allChapter = await chapterService.getAllChapter(filter, options);
   res.send(allChapter);
 });
-
-const getChaptersByOrder = async (req, res) => {
-  const result = await chapterService.getAllChapterByOrder();
-  res.send(result);
-}
 
 const getByBookIdChapter = catchAsync(async (req, res) => {
   const result = await chapterService.getByBookIdChapter(req.params.bookId);
@@ -74,5 +70,4 @@ module.exports = {
   getChaptersByBookId,
   getChapterByFilter,
   getByBookIdChapter,
-  getChaptersByOrder
 };

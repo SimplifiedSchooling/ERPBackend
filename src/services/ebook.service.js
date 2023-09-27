@@ -44,7 +44,7 @@ const getEbookById = async (id) => {
  * @returns {Promise<Multimedia>}
  */
 const getEbookByFilter = async (boardId, mediumId, classId, subjectId, bookId) => {
-  return Ebook.find({ boardId, mediumId, classId, subjectId, bookId });
+  return Ebook.find({ boardId, mediumId, classId, subjectId, bookId }).sort('order');
 };
 
 /**

@@ -14,6 +14,7 @@ const createMultimedia = catchAsync(async (req, res) => {
 const getMultimedia = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['lessionName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  options.sortBy = 'order';
   const result = await multimediaService.queryMultimedia(filter, options);
   res.send(result);
 });
