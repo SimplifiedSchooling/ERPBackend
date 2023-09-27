@@ -3,7 +3,7 @@
 const httpStatus = require('http-status');
 const crypto = require('crypto');
 const randomstring = require('randomstring');
-const { Student, User } = require('../models');
+const { Student, Parent } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 // Generate a random username
@@ -23,16 +23,16 @@ function generateUsernameFromName(name) {
 const createStudent = async (studentData) => {
   const newStudent = await Student.create(studentData);
 
-  const userName = await generateUsernameFromName(newStudent.name);
+  const userName = await generateUsernameFromName(newStudent.middlename);
   const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
-  const studentUser = await User.create({
+  const parentUser = await Parent.create({
     userName,
     password: randomPassword,
-    campusId: newStudent.campusId,
-    name: newStudent.name,
-    staffId: newStudent.id,
+    name: newStudent.middlename,
+    lastname: newStudent.lastname,
+    studentId: newStudent.id,
   });
-  return { newStudent, studentUser };
+  return { newStudent, parentUser };
 };
 
 /**
@@ -56,6 +56,15 @@ const getAllStudents = async (filter, options) => {
  */
 const getStudentById = async (id) => {
   return Student.findById(id);
+};
+
+/**
+ * Get students by userName
+ * @param {ObjectId} userName
+ * @returns {Promise<Student>}
+ */
+const getStudentUserName = async (userName) => {
+  return Parent.findOne({ userName });
 };
 
 /**
@@ -104,4 +113,5 @@ module.exports = {
   updateStudentById,
   deleteStudentById,
   calculateTotalMaleStudents,
+  getStudentUserName,
 };
