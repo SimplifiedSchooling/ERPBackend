@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-useless-catch */
 const httpStatus = require('http-status');
 const crypto = require('crypto');
 const randomstring = require('randomstring');
