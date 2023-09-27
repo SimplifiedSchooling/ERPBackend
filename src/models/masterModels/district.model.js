@@ -9,10 +9,10 @@ const districtSchema = mongoose.Schema(
       trim: true,
     },
     stateId: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'state',
-        required: true,
-    }
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'state',
+      required: true,
+    },
   },
   {
     timestamps: true,

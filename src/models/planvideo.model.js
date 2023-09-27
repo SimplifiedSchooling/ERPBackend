@@ -80,7 +80,7 @@ const planvideoSchema = mongoose.Schema(
       trim: true,
       default: 'active',
     },
-    liveStreamingPath:{
+    liveStreamingPath: {
       type: String,
       trim: true,
     },
