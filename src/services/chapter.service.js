@@ -26,11 +26,6 @@ const getAllChapter = async (filter, options) => {
   return chapters;
 };
 
-const getAllChapterByOrder = async() =>{
-  const chapters = await Chapter.find().sort({ order: 1 });
-  return chapters;
-}
-
 /**
  * Get Chapter by id
  * @param {ObjectId} chapterId
@@ -108,7 +103,7 @@ const getChaptersByBookId = async (bookId) => {
  * @returns {Promise<Chapter>}
  */
 const getChaptersByFilter = async (boardId, mediumId, classId, subjectId, bookId) => {
-  return Chapter.find({ boardId, mediumId, classId, subjectId, bookId });
+  return Chapter.find({ boardId, mediumId, classId, subjectId, bookId }).sort('order');
 };
 
 /**
@@ -150,5 +145,4 @@ module.exports = {
   getChaptersByBookId,
   getChaptersByFilter,
   getByBookIdChapter,
-  getAllChapterByOrder,
 };

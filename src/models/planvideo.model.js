@@ -65,7 +65,7 @@ const planvideoSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    orderId: {
+    order: {
       type: String,
       required: true,
       trim: true,

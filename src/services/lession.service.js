@@ -55,7 +55,7 @@ const getLessionbychapterId = async (chapterId) => {
  */
 
 const getLessionByFilter = async (boardId, mediumId, classId, subjectId, bookId, chapterId) => {
-  return Lession.find({ boardId, mediumId, classId, subjectId, bookId, chapterId });
+  return Lession.find({ boardId, mediumId, classId, subjectId, bookId, chapterId }).sort('order');
 };
 
 /**
