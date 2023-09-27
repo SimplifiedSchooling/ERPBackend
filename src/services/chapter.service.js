@@ -26,6 +26,11 @@ const getAllChapter = async (filter, options) => {
   return chapters;
 };
 
+const getAllChapterByOrder = async() =>{
+  const chapters = await Chapter.find().sort({ order: 1 });
+  return chapters;
+}
+
 /**
  * Get Chapter by id
  * @param {ObjectId} chapterId
@@ -145,4 +150,5 @@ module.exports = {
   getChaptersByBookId,
   getChaptersByFilter,
   getByBookIdChapter,
+  getAllChapterByOrder,
 };

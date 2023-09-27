@@ -80,3 +80,5 @@ module.exports.sansthanController = require('./sansthan.controller');
 module.exports.AssessmentItemController = require('./masterControllers/assessmentItem.controller');
 module.exports.specialController = require('./masterControllers/special.school.CWSN.controller');
 module.exports.typeofhostelController = require('./masterControllers/type.of.hostel.controller');
+module.exports.schooltraningController = require('./masterControllers/school.special.training.controller');
+module.exports.staffDesignationController = require('./masterControllers/staff.designation.controller');

@@ -86,6 +86,8 @@ const stateRoute = require('./masterRoutes/state.route');
 const AssessmentItemRoute = require('./masterRoutes/assessmentItem.route');
 const specialRoute = require('./masterRoutes/special.school.CWSN.route');
 const hostelRoute = require('./masterRoutes/type.of.hostel.route');
+const specialTraningRoute = require('./masterRoutes/school.special.training.route');
+const staffDesignationRoute = require('./masterRoutes/staff.designation.route');
 
 const router = express.Router();
 
@@ -433,6 +435,14 @@ const defaultRoutes = [
   {
     path: '/typeofhostel',
     route: hostelRoute,
+  },
+  {
+    path: '/specialtraning',
+    route: specialTraningRoute,
+  },
+  {
+    path: '/staffdesignation',
+    route: staffDesignationRoute,
   },
 ];
 

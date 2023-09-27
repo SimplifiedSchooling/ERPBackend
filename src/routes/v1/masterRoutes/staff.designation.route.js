@@ -1,36 +1,37 @@
 const express = require('express');
+
 const validate = require('../../../middlewares/validate');
-const specialTraningValidation = require('../../../validations/masterValidations/school.special.training.validation');
-const schooltraningController = require('../../../controllers/masterControllers/school.special.training.controller');
+const staffDesignationValidation = require('../../../validations/masterValidations/staff.designation.validation');
+const staffDesignationController = require('../../../controllers/masterControllers/staff.designation.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(specialTraningValidation.createSchoolSpecialTraning), schooltraningController.createSchoolTraning)
-  .get(validate(specialTraningValidation.getAllSchoolSpecialTraning), schooltraningController.getAllSchoolTranings);
+  .post(validate(staffDesignationValidation.createDesignation), staffDesignationController.createStaffDesignation)
+  .get(validate(staffDesignationValidation.getAllDesignations), staffDesignationController.getAllStaffDesignation);
 
 router
-  .route('/:traningId')
-  .get(validate(specialTraningValidation.getSchoolSpecialTraningById), schooltraningController.getSchoolTraning)
-  .patch(validate(specialTraningValidation.updateSchoolSpecialTraningId), schooltraningController.updateSchoolTraning)
-  .delete(validate(specialTraningValidation.deleteSchoolSpecialTraningById), schooltraningController.deleteSchoolTraning);
+  .route('/:designationId')
+  .get(validate(staffDesignationValidation.getDesignation), staffDesignationController.getStaffDesignationById)
+  .patch(validate(staffDesignationValidation.updateDesignation), staffDesignationController.updateStaffDesignationById)
+  .delete(validate(staffDesignationValidation.deleteDesignation), staffDesignationController.deleteStaffDesignationById);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: SchoolSpecialTraning
- *   description: School Special Traning Management
+ *   name: StaffDesignation
+ *   description: Staff Designation
  */
 
 /**
  * @swagger
- * /specialtraning:
+ * /staffdesignation:
  *   post:
- *     summary: Create a School Special Traning
- *     tags: [SchoolSpecialTraning]
+ *     summary: Create a Staff Designation
+ *     tags: [StaffDesignation]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -40,12 +41,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - type
  *             properties:
  *               name:
  *                 type: string *
  *             example:
- *               name: School Teachers
+ *               name: "Class Teacher"
  *
  *     responses:
  *       "201":
@@ -53,30 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/SchoolSpecialTraning'
+ *                $ref: '#/components/schemas/StaffDesignation'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all School Special Traning
- *     tags: [SchoolSpecialTraning]
+ *     summary: Get all Staff Designation
+ *     tags: [StaffDesignation]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         type: build
+ *         type: board
  *         schema:
- *           name: string
- *         description: School Special Traning *
+ *           StaffDesignation: string
+ *         description: Staff Designation *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/SchoolSpecialTraning'
+ *                $ref: '#/components/schemas/StaffDesignation'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -85,15 +86,15 @@ module.exports = router;
 
 /**
  * @swagger
- * /specialtraning/{traningId}:
+ * /staffdesignation/{designationId}:
  *   get:
- *     summary: Get a School Special Traning
- *     tags: [SchoolSpecialTraning]
+ *     summary: Get a Staff Designation
+ *     tags: [StaffDesignation]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: traningId
+ *         name: designationId
  *         required: true
  *         schema:
  *           type: string
@@ -103,7 +104,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/SchoolSpecialTraning'
+ *                $ref: '#/components/schemas/StaffDesignation'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -112,13 +113,13 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a School Special Traning
- *     tags: [SchoolSpecialTraning]
+ *     summary: Update a StaffDesignation
+ *     tags: [StaffDesignation]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: traningId
+ *         name: designationId
  *         required: true
  *         schema:
  *           type: string
@@ -139,7 +140,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/SchoolSpecialTraning'
+ *                $ref: '#/components/schemas/StaffDesignation'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -148,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a School Special Traning
- *     tags: [SchoolSpecialTraning]
+ *     summary: Delete a Staff Designation
+ *     tags: [StaffDesignation]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: traningId
+ *         name: designationId
  *         required: true
  *         schema:
  *           type: string
- *         description: traningId
+ *         description: delete a Staff Designation
  *     responses:
  *       "200":
  *         description: No content

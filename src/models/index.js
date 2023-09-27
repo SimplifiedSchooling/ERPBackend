@@ -92,3 +92,4 @@ module.exports.AssessmentItem = require('./masterModels/assessmentItem.model');
 module.exports.Special = require('./masterModels/special.school.CWSN.model');
 module.exports.Typeofhostel = require('./masterModels/type.of.hostel.model');
 module.exports.Traning = require('./masterModels/school.special.training.model');
+module.exports.Designation = require('./masterModels/staff.designation.model');
