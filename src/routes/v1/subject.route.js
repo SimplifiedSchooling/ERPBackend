@@ -32,6 +32,11 @@ router
 router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClassId), subjectController.getSubjectByClassId);
 
 router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClass);
+
+router
+  .route('/filter/:boardId/:mediumId/:classId')
+  .get( subjectController.getUbjectByFilter);
+
 module.exports = router;
 
 /**
@@ -274,4 +279,47 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
+ */
+
+/**
+ * @swagger
+ * /books/filter/{boardId}/{mediumId}/{classId}:
+ *   get:
+ *     summary: Get a Book
+ *     tags: [Book]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: boardId
+ *         required: true
+ *         description: The ID of the board
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: mediumId
+ *         required: true
+ *         description: The ID of the medium
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         description: The ID of the class
+ *       - in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Book'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */

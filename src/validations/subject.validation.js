@@ -4,8 +4,10 @@ const { objectId } = require('./custom.validation');
 const createSubject = {
   body: Joi.object().keys({
     name: Joi.string().required(),
-    order: Joi.number().required(),
-    code: Joi.string(),
+    classId: Joi.string().custom(objectId).required(),
+    mediumId: Joi.string().custom(objectId).required(),
+    boardId: Joi.string().custom(objectId).required(),
+    code: Joi.string().required(),
     thumbnail: Joi.string(),
   }),
 };
@@ -37,7 +39,9 @@ const updateSubject = {
   body: Joi.object()
     .keys({
       name: Joi.string(),
-      order: Joi.number(),
+      classId: Joi.string().custom(objectId),
+      mediumId: Joi.string().custom(objectId),
+      boardId: Joi.string().custom(objectId),
       code: Joi.string(),
       thumbnail: Joi.string(),
     })
