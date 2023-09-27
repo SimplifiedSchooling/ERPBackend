@@ -50,5 +50,5 @@ module.exports = {
   getDistrictById,
   updateDistrictTypeyId,
   deleteDistrictTypeById,
-  getDistrictByStateId
+  getDistrictByStateId,
 };

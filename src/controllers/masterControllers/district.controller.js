@@ -21,7 +21,6 @@ const getAllDistrictByStateId = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-
 const getDistrictById = catchAsync(async (req, res) => {
   const singleDistrict = await districtServices.getDistrictById(req.params.DistrictId);
   if (!singleDistrict) {
@@ -46,5 +45,5 @@ module.exports = {
   getDistrictById,
   updateDistrictById,
   deleteistrictById,
-  getAllDistrictByStateId
+  getAllDistrictByStateId,
 };
