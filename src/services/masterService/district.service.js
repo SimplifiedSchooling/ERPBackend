@@ -35,6 +35,15 @@ const getDistrictById = async (id) => {
 };
 
 /**
+ * Get Distict by stateId
+ * @param {ObjectId} stateId
+ * @returns {Promise<District>}
+ */
+const getDistrictByStateId = async (stateId) => {
+  return District.find({ stateId });
+};
+
+/**
  * Update District by id
  * @param {ObjectId} DistrictId
  * @param {Object} updateBody
@@ -70,4 +79,5 @@ module.exports = {
   getDistrictById,
   updateDistrictyId,
   deleteDistrictById,
+  getDistrictByStateId,
 };

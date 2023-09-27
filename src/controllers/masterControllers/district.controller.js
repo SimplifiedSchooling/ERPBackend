@@ -13,6 +13,15 @@ const getAllDistrict = catchAsync(async (req, res) => {
   res.send(getAllDistricts);
 });
 
+const getAllDistrictByStateId = catchAsync(async (req, res) => {
+  const result = await districtServices.getDistrictByStateId(req.params.stateId);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'District not found by stateId');
+  }
+  res.send(result);
+});
+
+
 const getDistrictById = catchAsync(async (req, res) => {
   const singleDistrict = await districtServices.getDistrictById(req.params.DistrictId);
   if (!singleDistrict) {
@@ -37,4 +46,5 @@ module.exports = {
   getDistrictById,
   updateDistrictById,
   deleteistrictById,
+  getAllDistrictByStateId
 };

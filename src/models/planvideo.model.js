@@ -65,10 +65,24 @@ const planvideoSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    orderId: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    studioName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     status: {
       type: String,
       trim: true,
       default: 'active',
+    },
+    liveStreamingPath:{
+      type: String,
+      trim: true,
     },
   },
   {
