@@ -89,3 +89,4 @@ module.exports.State = require('./masterModels/state.model');
 module.exports.Sansthan = require('./sansthan.model');
 module.exports.Otp = require('./otp.model');
 module.exports.AssessmentItem = require('./masterModels/assessmentItem.model');
+module.exports.Parent = require('./parent.model');

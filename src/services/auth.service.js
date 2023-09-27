@@ -6,6 +6,7 @@ const staffService = require('./staff/staff.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
+const studentService = require('./student.service');
 
 /**
  * Login with username and password
@@ -47,6 +48,20 @@ const loginStaff = async (userName, password) => {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
   }
   return staff;
+};
+
+/**
+ * Login with userID and password
+ * @param {string} userID
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginStudentAndParent = async (userName, password) => {
+  const student = await studentService.getStudentUserName(userName);
+  if (!student || !(await student.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
+  }
+  return student;
 };
 /**
  * Logout
@@ -127,4 +142,5 @@ module.exports = {
   resetPassword,
   verifyEmail,
   loginStaff,
+  loginStudentAndParent,
 };
