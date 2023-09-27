@@ -42,6 +42,35 @@ const loginSansthan = catchAsync(async (req, res) => {
   const tokens = await tokenService.generateAuthTokens(sansthan, userTypes.SANSTHAN);
   res.send({ sansthan, tokens });
 });
+
+// Staff login
+const loginStaff = catchAsync(async (req, res) => {
+  const { userName, password } = req.body;
+  const userData = await authService.loginStaff(userName, password);
+  const tokens = await tokenService.generateAuthTokens(userData);
+  const user = {
+    name: userData.name,
+    lastName: userData.lastName,
+    role: userData.role,
+    userName: userData.userName,
+  };
+  res.send({ user, tokens });
+});
+
+// Student and Parent login
+const loginStudentAndParent = catchAsync(async (req, res) => {
+  const { userName, password } = req.body;
+  const userData = await authService.loginStudentAndParent(userName, password);
+  const tokens = await tokenService.generateAuthTokens(userData);
+  const user = {
+    name: userData.name,
+    lastName: userData.lastName,
+    role: userData.role,
+    userName: userData.userName,
+  };
+  res.send({ user, tokens });
+});
+
 const logout = catchAsync(async (req, res) => {
   await authService.logout(req.body.refreshToken);
   res.status(httpStatus.NO_CONTENT).send();
@@ -87,4 +116,6 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  loginStaff,
+  loginStudentAndParent,
 };
