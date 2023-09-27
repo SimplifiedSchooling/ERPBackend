@@ -3,10 +3,15 @@ const { toJSON } = require('../plugins');
 
 const districtSchema = mongoose.Schema(
   {
-    districtName: {
+    name: {
       type: String,
       required: true,
       trim: true,
+    },
+    stateId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'state',
+      required: true,
     },
   },
   {

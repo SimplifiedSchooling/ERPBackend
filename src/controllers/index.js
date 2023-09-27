@@ -78,3 +78,5 @@ module.exports.loanController = require('./staff/applyloan.controller');
 module.exports.stateController = require('./masterControllers/state.controller');
 module.exports.sansthanController = require('./sansthan.controller');
 module.exports.AssessmentItemController = require('./masterControllers/assessmentItem.controller');
+module.exports.specialController = require('./masterControllers/special.school.CWSN.controller');
+module.exports.typeofhostelController = require('./masterControllers/type.of.hostel.controller');
