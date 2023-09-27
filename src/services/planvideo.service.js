@@ -26,6 +26,20 @@ const getAllPlans = async (filter, options) => {
 };
 
 /**
+ * Query for TodayPlans
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getTodayPlans = async (filter, options) => {
+  const videos = await Planvideo.paginate(filter, options);
+  return videos;
+};
+
+/**
  * Get Planvideo by id
  * @param {ObjectId} planId
  * @returns {Promise<Planvideo>}
@@ -68,6 +82,7 @@ const deletePlanById = async (planId) => {
 module.exports = {
   createNewPlan,
   getAllPlans,
+  getTodayPlans,
   getPlanById,
   updatePlanById,
   deletePlanById,

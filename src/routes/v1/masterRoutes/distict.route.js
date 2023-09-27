@@ -15,11 +15,15 @@ router
   .patch(validate(districtValidation.updateDistrictTypeyId), districtController.updateDistrictById)
   .delete(validate(districtValidation.deleteDistrictTypeById), districtController.deleteistrictById);
 
+router
+  .route('/alldistrict/:stateId')
+  .get(validate(districtValidation.getDistrictByStateId), districtController.getAllDistrictByStateId)
+ 
 module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: district
+ *   name: District
  *   description:   district Management System
  */
 
@@ -35,7 +39,7 @@ module.exports = router;
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/districtInput'
+ *             $ref: '#/components/schemas/District'
  *     responses:
  *       200:
  *         description: district created successfully
@@ -61,7 +65,7 @@ module.exports = router;
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/districtUpdateInput'
+ *             $ref: '#/components/schemas/District'
  *     responses:
  *       200:
  *         description: Successful response
@@ -105,24 +109,59 @@ module.exports = router;
  * @swagger
  * components:
  *   schemas:
- *     districtInput:
+ *     District:
  *       type: object
  *       properties:
- *         districtName:
+ *         name:
  *           type: string
+ *         stateId:
+ *            type: string
  *       example:
- *         districtName: pune,nagpur
+ *         name: pune,nagpur
+ *         stateId: 6512b9025f0082f0511d7ab2
  */
 
 /**
  * @swagger
  * components:
  *   schemas:
- *    districtUpdateInput:
+ *    District:
  *       type: object
  *       properties:
- *         districtName:
+ *         name:
+ *           type: string
+ *         stateId:
  *           type: string
  *       example:
- *         districtName: pune,nagpur
+ *         name: pune,nagpur
+ *         stateId: 6512b9025f0082f0511d7ab2
+ */
+/**
+ * @swagger
+ * /district/alldistrict/{stateId}:
+ *   get:
+ *     summary: Get a District by State ID
+ *     tags: [District]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: stateId
+ *         required: true
+ *         description: The ID of the subject
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/District'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */

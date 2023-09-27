@@ -91,3 +91,4 @@ module.exports.Otp = require('./otp.model');
 module.exports.AssessmentItem = require('./masterModels/assessmentItem.model');
 module.exports.Special = require('./masterModels/special.school.CWSN.model');
 module.exports.Typeofhostel = require('./masterModels/type.of.hostel.model');
+module.exports.Traning = require('./masterModels/school.special.training.model');
