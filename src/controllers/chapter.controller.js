@@ -17,6 +17,11 @@ const getChapter = catchAsync(async (req, res) => {
   res.send(allChapter);
 });
 
+const getChaptersByOrder = async (req, res) => {
+  const result = await chapterService.getAllChapterByOrder();
+  res.send(result);
+}
+
 const getByBookIdChapter = catchAsync(async (req, res) => {
   const result = await chapterService.getByBookIdChapter(req.params.bookId);
   res.send(result);
@@ -69,4 +74,5 @@ module.exports = {
   getChaptersByBookId,
   getChapterByFilter,
   getByBookIdChapter,
+  getChaptersByOrder
 };

@@ -77,3 +77,5 @@ module.exports.sansthanValidation = require('./sansthan.validation');
 module.exports.AssessmentItem = require('./masterValidations/assessmentItem.validation');
 module.exports.specialValidation = require('./masterValidations/special.school.CWSN.validation');
 module.exports.typeofhostelValidation = require('./masterValidations/type.of.hostel.validation');
+module.exports.specialTraningValidation = require('./masterValidations/school.special.training.validation');
+module.exports.staffDesignationValidation = require('./masterValidations/staff.designation.validation');

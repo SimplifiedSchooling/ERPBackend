@@ -301,7 +301,35 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  */
-
+/**
+ * @swagger
+ * /lession/getallLession/{chapterId}:
+ *   get:
+ *     summary: Get a lesson
+ *     tags: [Lesson]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: chapterId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Lession'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ */
 /**
  * @swagger
  * /lession/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}/{chapterId}:
