@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('CREATE'), validate(userValidation.createUser), userController.createUser)
+  .post(validate(userValidation.createUser), userController.createUser)
   .get(auth(), validate(userValidation.getUsers), userController.getUsers);
 
 router
@@ -43,15 +43,16 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - email
+ *               - userName
  *               - password
  *               - role
+ *               - staffId
+ *               - campusId
  *             properties:
  *               name:
  *                 type: string
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *                 description: must be unique
  *               password:
  *                 type: string
@@ -60,12 +61,17 @@ module.exports = router;
  *                 description: At least one number and one letter
  *               role:
  *                  type: string
- *                  enum: [user, admin]
+ *               staffId:
+ *                  type: string
+ *               campusId:
+ *                  type: string
  *             example:
  *               name: fake name
- *               email: fake@example.com
+ *               userName: fakeusername
  *               password: password1
  *               role: user
+ *               staffId: 64b62cda79f4e038088daf15
+ *               campusId: 64b62cda79f4e038088daf15
  *     responses:
  *       "201":
  *         description: Created
@@ -198,19 +204,27 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *                 description: must be unique
  *               password:
  *                 type: string
  *                 format: password
  *                 minLength: 8
  *                 description: At least one number and one letter
+ *               role:
+ *                  type: string
+ *               staffId:
+ *                  type: string
+ *               campusId:
+ *                  type: string
  *             example:
  *               name: fake name
- *               email: fake@example.com
+ *               userName: fakeusername
  *               password: password1
+ *               role: user
+ *               staffId: 64b62cda79f4e038088daf15
+ *               campusId: 64b62cda79f4e038088daf15
  *     responses:
  *       "200":
  *         description: OK

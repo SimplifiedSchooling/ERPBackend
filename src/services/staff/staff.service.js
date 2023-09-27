@@ -1,6 +1,18 @@
 const httpStatus = require('http-status');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
 const { Staff } = require('../../models');
 const ApiError = require('../../utils/ApiError');
+
+// Generate a random username
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 
 /**
  * Create a staff
@@ -8,7 +20,12 @@ const ApiError = require('../../utils/ApiError');
  * @returns {Promise<Staff>}
  */
 const createStaff = async (staffBody) => {
-  return Staff.create(staffBody);
+  const staffData = { ...staffBody };
+  const userName = generateUsernameFromName(staffData.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  staffData.userName = userName;
+  staffData.password = randomPassword;
+  return Staff.create(staffData);
 };
 
 /**
@@ -34,6 +51,14 @@ const getStaffById = async (_id) => {
   return Staff.find({ _id });
 };
 
+/**
+ * Get Staff by id
+ * @param {ObjectId} userName
+ * @returns {Promise<Staff>}
+ */
+const getStaffByUserName = async (userName) => {
+  return Staff.find({ userName });
+};
 /**
  * Update Staff by id
  * @param {ObjectId} userId
@@ -123,4 +148,5 @@ module.exports = {
   updateStaffById,
   deleteStaffById,
   bulkUpload,
+  getStaffByUserName,
 };

@@ -34,10 +34,20 @@ const deleteStudent = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(deletedStudent);
 });
 
+const getTotalMaleStudents = async (req, res, next) => {
+  try {
+    const totalMaleStudents = await studentService.calculateTotalMaleStudents();
+    res.json({ totalMaleStudents });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createStudent,
   getStudents,
   getStudent,
   updateStudent,
   deleteStudent,
+  getTotalMaleStudents,
 };

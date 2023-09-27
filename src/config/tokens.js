@@ -5,6 +5,12 @@ const tokenTypes = {
   VERIFY_EMAIL: 'verifyEmail',
 };
 
+const userTypes = {
+  USER: 'user',
+  SANSTHAN: 'sansthan',
+};
+
 module.exports = {
   tokenTypes,
+  userTypes,
 };

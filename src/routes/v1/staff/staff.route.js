@@ -82,6 +82,8 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type: string
+ *               campusId:
+ *                 type: string
  *               employee_id:
  *                 type: number
  *               designation:
@@ -117,7 +119,7 @@ module.exports = router;
  *                 type: string
  *               image:
  *                 type: string
- *               username:
+ *               userName:
  *                 type: string
  *               password:
  *                 type: string
@@ -288,6 +290,7 @@ module.exports = router;
  *             example:
  *               saral_id: "ABC123"
  *               scode: "S001"
+ *               campusId: 650d85819005aaa084dc2efb
  *               employee_id: 12345
  *               designation: "Teacher"
  *               qualification: "Master's Degree"
@@ -305,7 +308,7 @@ module.exports = router;
  *               permanent_address: "456 Elm St, Town"
  *               note: "Additional notes"
  *               image: "image.jpg"
- *               username: "johndoe"
+ *               userName: "johndoe"
  *               password: "password1"
  *               gender: "Male"
  *               account_title: "Account Title"
@@ -411,7 +414,7 @@ module.exports = router;
  *       - in: query
  *         name: name
  *       - in: query
- *         name: username
+ *         name: userName
  *         schema:
  *           type: string
  *         description: staff name *
@@ -514,6 +517,8 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type: string
+ *               campusId:
+ *                 type: string
  *               employee_id:
  *                 type: number
  *               designation:
@@ -549,7 +554,7 @@ module.exports = router;
  *                 type: string
  *               image:
  *                 type: string
- *               username:
+ *               userName:
  *                 type: string
  *               password:
  *                 type: string
@@ -720,6 +725,7 @@ module.exports = router;
  *             example:
  *               saral_id: "ABC123"
  *               scode: "S001"
+ *               campusId: 650d85819005aaa084dc2efb
  *               employee_id: 12345
  *               designation: "Teacher"
  *               qualification: "Master's Degree"
@@ -737,7 +743,7 @@ module.exports = router;
  *               permanent_address: "456 Elm St, Town"
  *               note: "Additional notes"
  *               image: "image.jpg"
- *               username: "johndoe"
+ *               userName: "johndoe"
  *               password: "password1"
  *               gender: "Male"
  *               account_title: "Account Title"

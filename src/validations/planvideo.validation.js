@@ -14,6 +14,9 @@ const createNewPlan = {
     date: Joi.string().required(),
     time: Joi.string().required(),
     type: Joi.string().required(),
+    orderId: Joi.string().required(),
+    studioName: Joi.string().required(),
+    liveStreamingPath: Joi.string(),
   }),
 };
 
@@ -32,13 +35,36 @@ const getAllPlan = {
   }),
 };
 
+const getTodayPlan = {
+  query: Joi.object().keys({
+    title: Joi.string(),
+    sortBy: Joi.string(),
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+};
+
 const updatePlanById = {
   params: Joi.object().keys({
     planId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
-      type: Joi.string().required(),
+      status: Joi.string(),
+      name: Joi.string(),
+      date: Joi.string(),
+      time: Joi.string(),
+      type: Joi.string(),
+      boardId: Joi.string(),
+      mediumId: Joi.string(),
+      classId: Joi.string(),
+      subjectId: Joi.string(),
+      bookId: Joi.string(),
+      chapterId: Joi.string(),
+      lessonId: Joi.string(),
+      orderId: Joi.string(),
+      studioName: Joi.string(),
+      liveStreamingPath: Joi.string(),
     })
     .min(1),
 };
@@ -52,6 +78,7 @@ module.exports = {
   createNewPlan,
   getSinglePlan,
   getAllPlan,
+  getTodayPlan,
   updatePlanById,
   deletePlanById,
 };

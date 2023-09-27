@@ -1,14 +1,36 @@
 const httpStatus = require('http-status');
-const { Student } = require('../models');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
+const { Student, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
+// Generate a random username
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 /**
  * Create a Classes
  * @param {Object} studentData
  * @returns {Promise<Student>}
  */
 const createStudent = async (studentData) => {
-  return Student.create(studentData);
+  const newStudent = await Student.create(studentData);
+
+  const userName = await generateUsernameFromName(newStudent.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  const studentUser = await User.create({
+    userName,
+    password: randomPassword,
+    campusId: newStudent.campusId,
+    name: newStudent.name,
+    staffId: newStudent.id,
+  });
+  return { newStudent, studentUser };
 };
 
 /**
@@ -64,10 +86,20 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
+const calculateTotalMaleStudents = async () => {
+  try {
+    const totalMaleStudents = await Student.countDocuments({ gender: 'Male' });
+    return totalMaleStudents;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createStudent,
   getAllStudents,
   getStudentById,
   updateStudentById,
   deleteStudentById,
+  calculateTotalMaleStudents,
 };

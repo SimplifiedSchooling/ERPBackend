@@ -32,7 +32,7 @@ const createStaff = catchAsync(async (req, res) => {
 });
 
 const getAllStaff = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name', 'username']);
+  const filter = pick(req.query, ['name', 'userName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await staffService.queryStaff(filter, options);
   res.send(result);

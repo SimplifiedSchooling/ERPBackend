@@ -3,7 +3,8 @@ const { objectId } = require('../custom.validation');
 
 const createDistrict = {
   body: Joi.object().keys({
-    districtName: Joi.string().required(),
+    name: Joi.string().required(),
+    stateId: Joi.string().custom(objectId),
   }),
 };
 
@@ -13,9 +14,15 @@ const getDistrictById = {
   }),
 };
 
+const getDistrictByStateId = {
+  params: Joi.object().keys({
+    stateId: Joi.string().custom(objectId),
+  }),
+};
+
 const getAllDistrict = {
   query: Joi.object().keys({
-    districtName: Joi.string(),
+    name: Joi.string(),
   }),
 };
 
@@ -25,10 +32,12 @@ const updateDistrictTypeyId = {
   }),
   body: Joi.object()
     .keys({
-      districtName: Joi.string().required(),
+      name: Joi.string().required(),
+      stateId: Joi.string().custom(objectId),
     })
     .min(1),
 };
+
 const deleteDistrictTypeById = {
   params: Joi.object().keys({
     DistrictId: Joi.string().custom(objectId),
@@ -41,4 +50,5 @@ module.exports = {
   getDistrictById,
   updateDistrictTypeyId,
   deleteDistrictTypeById,
+  getDistrictByStateId
 };
