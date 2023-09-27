@@ -115,7 +115,7 @@ const getAllStaff = {
   query: Joi.object().keys({
     name: Joi.string(),
     employee_id: Joi.number(),
-    username: Joi.string(),
+    userName: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),

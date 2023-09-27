@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const authValidation = require('../../validations/auth.validation');
-const authController = require('../../controllers/auth.controller');
+const { authValidation } = require('../../validations');
+const { authController } = require('../../controllers');
 const auth = require('../../middlewares/auth');
 
 const router = express.Router();
@@ -10,6 +10,10 @@ router.post('/sansthan-register', validate(authValidation.sansthanRegister), aut
 router.post('/verify-number', validate(authValidation.verifyMobNumber), authController.verifyNumber);
 router.post('/verify-userId', validate(authValidation.checkUserIdExist), authController.checkUserIdExist);
 router.post('/sansthan-login', validate(authValidation.sansthanLogin), authController.loginSansthan);
+
+router.post('/staff-login', validate(authValidation.login), authController.loginStaff);
+
+router.post('/studentAndParent-login', validate(authValidation.login), authController.loginStudentAndParent);
 
 router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
@@ -470,4 +474,98 @@ module.exports = router;
  *             example:
  *               code: 401
  *               message: Verify userID failed
+ */
+
+/**
+ * @swagger
+ * /auth/staff-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *               userName:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *             example:
+ *               userName: johndoeURO7
+ *               password: 8eeb9f42a15ea3f20cac25afad4653d7
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
+
+/**
+ * @swagger
+ * /auth/studentAndParent-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *               userName:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *             example:
+ *               userName: doeLlBz
+ *               password: c18a4d8c6a6e36ca021eefd68025b142
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
  */

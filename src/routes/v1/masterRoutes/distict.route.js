@@ -17,8 +17,8 @@ router
 
 router
   .route('/alldistrict/:stateId')
-  .get(validate(districtValidation.getDistrictByStateId), districtController.getAllDistrictByStateId)
- 
+  .get(validate(districtValidation.getDistrictByStateId), districtController.getAllDistrictByStateId);
+
 module.exports = router;
 /**
  * @swagger

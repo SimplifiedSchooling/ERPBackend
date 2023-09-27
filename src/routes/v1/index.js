@@ -257,10 +257,6 @@ const defaultRoutes = [
     route: BoundaryWall,
   },
   {
-    path: '/boundarywall',
-    route: BoundaryWall,
-  },
-  {
     path: '/internetType',
     route: internetTypeRoute,
   },

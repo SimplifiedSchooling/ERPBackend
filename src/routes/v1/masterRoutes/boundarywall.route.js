@@ -21,16 +21,16 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: typeresidentialschool
- *   description: typeresidentialschool management
+ *   name: boundarywall
+ *   description: boundarywall management
  */
 
 /**
  * @swagger
- * /typeresidentialschool:
+ * /boundarywall:
  *   post:
- *     summary: Create a typeresidentialschool
- *     tags: [typeresidentialschool]
+ *     summary: Create a boundarywall
+ *     tags: [boundarywall]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -53,7 +53,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/boundarywall'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -61,7 +61,7 @@ module.exports = router;
  *
  *   get:
  *     summary: Get all Type Residential School
- *     tags: [typeresidentialschool]
+ *     tags: [boundarywall]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -99,7 +99,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/typeresidentialschool'
+ *                     $ref: '#/components/schemas/boundarywall'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -120,26 +120,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /typeresidentialschool/{ResidentialId}:
+ * /boundarywall/{boundarywallId}:
  *   get:
  *     summary: Get a Type Residential school
- *     tags: [typeresidentialschool]
+ *     tags: [boundarywall]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: boundarywallId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: boundarywallId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/boundarywall'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -149,16 +149,16 @@ module.exports = router;
  *
  *   patch:
  *     summary: Update a type residential school
- *     tags: [typeresidentialschool]
+ *     tags: [boundarywall]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: boundarywallId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: boundarywallId
  *     requestBody:
  *       required: true
  *       content:
@@ -176,7 +176,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/typeresidentialschool'
+ *                $ref: '#/components/schemas/boundarywall'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -186,16 +186,16 @@ module.exports = router;
  *
  *   delete:
  *     summary: Delete a type residential school
- *     tags: [typeresidentialschool]
+ *     tags: [boundarywall]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: ResidentialId
+ *         name: boundarywallId
  *         required: true
  *         schema:
  *           type: string
- *         description: ResidentialId
+ *         description: boundarywallId
  *     responses:
  *       "200":
  *         description: No content

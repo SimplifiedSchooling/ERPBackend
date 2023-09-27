@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const httpStatus = require('http-status');
 const crypto = require('crypto');
 const randomstring = require('randomstring');
@@ -57,7 +58,7 @@ const getStaffById = async (_id) => {
  * @returns {Promise<Staff>}
  */
 const getStaffByUserName = async (userName) => {
-  return Staff.find({ userName });
+  return Staff.findOne({ userName });
 };
 /**
  * Update Staff by id
@@ -74,6 +75,22 @@ const updateStaffById = async (StaffId, updateBody) => {
   await staff.save();
   return staff;
 };
+
+// /**
+//  * Update Staff by id
+//  * @param {ObjectId} userId
+//  * @param {Object} updateBody
+//  * @returns {Promise<Staff>}
+//  */
+// const updateStaffById = async (userName, updateBody) => {
+//   const staff = await getStaffById(userName);
+//   if (!staff) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Staff not found');
+//   }
+//   Object.assign(staff, updateBody);
+//   await staff.save();
+//   return staff;
+// };
 
 /**
  * Delete Staff by id
