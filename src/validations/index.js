@@ -79,3 +79,6 @@ module.exports.specialValidation = require('./masterValidations/special.school.C
 module.exports.typeofhostelValidation = require('./masterValidations/type.of.hostel.validation');
 module.exports.specialTraningValidation = require('./masterValidations/school.special.training.validation');
 module.exports.staffDesignationValidation = require('./masterValidations/staff.designation.validation');
+module.exports.staffDisabilityValidation = require('./masterValidations/staff.type.of.disability.validation');
+module.exports.QualificationValidation = require('./masterValidations/staff.professional.qualification.validation');
+module.exports.teacherValidation = require('./masterValidations/type.of.teacher.validation');

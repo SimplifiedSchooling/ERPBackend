@@ -1,37 +1,37 @@
 const express = require('express');
 
 const validate = require('../../../middlewares/validate');
-const staffDisabilityValidation = require('../../../validations/masterValidations/staff.type.of.disability.validation');
-const staffDisabilityController = require('../../../controllers/masterControllers/staff.type.of.disability.controller');
+const QualificationValidation = require('../../../validations/masterValidations/staff.professional.qualification.validation');
+const qualificationController = require('../../../controllers/masterControllers/staff.professional.qualification.controller');
 
 const router = express.Router();
-
+  
 router
   .route('/')
-  .post(validate(staffDisabilityValidation.createStaffDisability), staffDisabilityController.createTypeOfDisability)
-  .get(validate(staffDisabilityValidation.getAllStaffDisabilitys), staffDisabilityController.getAllTypeOfDisability);
+  .post(validate(QualificationValidation.createStaffQualification), qualificationController.createProfessionalQualification)
+  .get(validate(QualificationValidation.getAllStaffQualifications), qualificationController.getAllProfessionalQualification);
 
 router
-  .route('/:disabilityId')
-  .get(validate(staffDisabilityValidation.getStaffDisability), staffDisabilityController.getTypeOfDisabilityById)
-  .patch(validate(staffDisabilityValidation.updateStaffDisability), staffDisabilityController.updateTypeOfDisabilityById)
-  .delete(validate(staffDisabilityValidation.deleteStaffDisability), staffDisabilityController.deleteTypeOfDisabilityById);
+  .route('/:qualificationId')
+  .get(validate(QualificationValidation.getStaffQualification), qualificationController.getProfessionalQualificationById)
+  .patch(validate(QualificationValidation.updateStaffQualification), qualificationController.updateProfessionalQualificationById)
+  .delete(validate(QualificationValidation.deleteStaffQualification), qualificationController.deleteProfessionalQualificationById);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: StaffDisability
- *   description: Staff Type of Disability
+ *   name: StaffQualification
+ *   description: Staff Professional Qualification
  */
 
 /**
  * @swagger
- * /staffdisability:
+ * /staffqualification:
  *   post:
- *     summary: Create a Staff tType of Disability
- *     tags: [StaffDisability]
+ *     summary: Create a Staff Professional Qualification
+ *     tags: [StaffQualification]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -54,15 +54,15 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/StaffQualification'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Staff Disability
- *     tags: [StaffDisability]
+ *     summary: Get all Staff Professional Qualification
+ *     tags: [StaffQualification]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -70,14 +70,14 @@ module.exports = router;
  *         type: board
  *         schema:
  *           name: string
- *         description: Staff of Disability *
+ *         description: Staff Professional Qualification *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/StaffQualification'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -86,15 +86,15 @@ module.exports = router;
 
 /**
  * @swagger
- * /staffdisability/{disabilityId}:
+ * /staffqualification/{qualificationId}:
  *   get:
- *     summary: Get a Staff of Disability
- *     tags: [StaffDisability]
+ *     summary: Get a Staff Professional Qualification
+ *     tags: [StaffQualification]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: disabilityId
+ *         name: qualificationId
  *         required: true
  *         schema:
  *           type: string
@@ -104,7 +104,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/StaffQualification'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -113,13 +113,13 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Staff of Disability
- *     tags: [StaffDisability]
+ *     summary: Update a Staff Professional Qualification
+ *     tags: [StaffQualification]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: disabilityId
+ *         name: qualificationId
  *         required: true
  *         schema:
  *           type: string
@@ -140,7 +140,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/StaffQualification'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -149,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a Staff Disability
- *     tags: [StaffDisability]
+ *     summary: Delete a Staff Professional Qualification
+ *     tags: [StaffQualification]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: disabilityId
+ *         name: qualificationId
  *         required: true
  *         schema:
  *           type: string
- *         description: delete a Staff Disability
+ *         description: delete a Staff Professional Qualification
  *     responses:
  *       "200":
  *         description: No content

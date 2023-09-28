@@ -83,3 +83,5 @@ module.exports.typeofhostelController = require('./masterControllers/type.of.hos
 module.exports.schooltraningController = require('./masterControllers/school.special.training.controller');
 module.exports.staffDesignationController = require('./masterControllers/staff.designation.controller');
 module.exports.staffDisabilityController = require('./masterControllers/staff.type.of.disability.controller');
+module.exports.qualificationController = require('./masterControllers/staff.professional.qualification.controller');
+module.exports.teacherController = require('./masterControllers/type.of.teacher.controller');
