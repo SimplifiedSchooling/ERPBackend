@@ -12,6 +12,7 @@ const createEbook = catchAsync(async (req, res) => {
 const getEbook = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['path']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  options.sortBy = 'order';
   const result = await ebookService.queryEbook(filter, options);
   res.send(result);
 });

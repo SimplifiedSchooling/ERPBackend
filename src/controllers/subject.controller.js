@@ -13,6 +13,7 @@ const createSubject = catchAsync(async (req, res) => {
 const getAllSubject = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['board']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  options.sortBy = 'order';
   const result = await subjectService.querySubject(filter, options);
   res.send(result);
 });
