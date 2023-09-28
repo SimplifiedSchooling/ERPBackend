@@ -283,10 +283,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /books/filter/{boardId}/{mediumId}/{classId}:
+ * /subjects/filter/{boardId}/{mediumId}/{classId}:
  *   get:
  *     summary: Get a Book
- *     tags: [Book]
+ *     tags: [Subject]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -306,9 +306,6 @@ module.exports = router;
  *         name: classId
  *         required: true
  *         description: The ID of the class
- *       - in: path
- *         schema:
- *           type: string
  *     responses:
  *       "200":
  *         description: OK
