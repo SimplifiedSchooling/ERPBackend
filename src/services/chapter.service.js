@@ -103,7 +103,7 @@ const getChaptersByBookId = async (bookId) => {
  * @returns {Promise<Chapter>}
  */
 const getChaptersByFilter = async (boardId, mediumId, classId, subjectId, bookId) => {
-  return Chapter.find({ boardId, mediumId, classId, subjectId, bookId });
+  return Chapter.find({ boardId, mediumId, classId, subjectId, bookId }).sort('order');
 };
 
 /**

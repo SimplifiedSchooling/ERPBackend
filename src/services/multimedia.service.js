@@ -64,7 +64,7 @@ const getMultimediaByType = async (multimediaType) => {
  * @returns {Promise<Multimedia>}
  */
 const getMultimediaByFilter = async (boardId, mediumId, classId, subjectId, bookId, chapterId) => {
-  return Multimedia.find({ boardId, mediumId, classId, subjectId, bookId, chapterId });
+  return Multimedia.find({ boardId, mediumId, classId, subjectId, bookId, chapterId }).sort('order');
 };
 
 /**
