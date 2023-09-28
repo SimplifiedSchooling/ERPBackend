@@ -65,11 +65,6 @@ const quizeSchema = mongoose.Schema(
       ref: 'chapter',
       required: true,
     },
-    lessonId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'lesson',
-      required: true,
-    },
   },
   {
     timestamps: true,

@@ -18,7 +18,6 @@ const createQuize = {
     bookId: Joi.string(),
     subjectId: Joi.string(),
     chapterId: Joi.string(),
-    lessonId: Joi.string(),
   }),
 };
 
@@ -82,7 +81,6 @@ const updateQuize = {
       bookId: Joi.string(),
       subjectId: Joi.string(),
       chapterId: Joi.string(),
-      lessonId: Joi.string(),
     })
     .min(1),
 };

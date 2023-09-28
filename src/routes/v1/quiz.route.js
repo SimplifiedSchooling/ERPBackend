@@ -62,7 +62,6 @@ module.exports = router;
  *               - bookId
  *               - subjectId
  *               - chapterId
- *               - lessonId
  *             example:
  *               quizname: Which of the following colors are primary colors?
  *               options: ["Red", "Green", "Blue", "Yellow" ]
@@ -79,7 +78,6 @@ module.exports = router;
  *               bookId: 64d9d7143ac675796cdcd433
  *               subjectId: 64d9d4666205c371563fcadb
  *               chapterId: 64d327811128844220f0cce0
- *               lessonId: 64d9d83711b20e7b83affceb
  *     responses:
  *       "201":
  *         description: Created
@@ -214,7 +212,6 @@ module.exports = router;
  *               - bookId
  *               - subjectId
  *               - chapterId
- *               - lessonId
  *             example:
  *               quizname: Which of the following colors are primary colors?
  *               options: ["Red", "Green", "Blue", "Yellow" ]
@@ -231,7 +228,6 @@ module.exports = router;
  *               bookId: 64d9d7143ac675796cdcd433
  *               subjectId: 64d9d4666205c371563fcadb
  *               chapterId: 64d327811128844220f0cce0
- *               lessonId: 64d9d83711b20e7b83affceb
  *     responses:
  *       "200":
  *         description: OK
@@ -441,9 +437,6 @@ module.exports = router;
  *               chapterId:
  *                 type: string
  *                 example: "64d327811128844220f0cce0"
- *               lessonId:
- *                 type: string
- *                 example: "64d9d83711b20e7b83affceb"
  *     responses:
  *       201:
  *         description: Quiz uploaded successfully.
