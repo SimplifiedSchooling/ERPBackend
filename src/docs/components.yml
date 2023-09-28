@@ -779,13 +779,19 @@ components:
         code:
           type: string
           description: subject code
-        order:
+        boardId:
+          type: string
+        mediumId:
+          type: string
+        classId:
           type: string
         thumbnail:
           type: string  
       example:
         name: Example Subject
-        order: 2
+        boardId: 64ca45e050227f21d906d
+        mediumId: 64ca45e050227f21d906d
+        classId: 64ca45e050227f21d906d
         code: '123'
         thumbnail: sdfgjjhsdgjsf/sdghdgs
 

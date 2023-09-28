@@ -63,8 +63,12 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
  *               thumbnail:
  *                 type: string
  *                 format: binary
@@ -72,7 +76,9 @@ module.exports = router;
  *                 type: string
  *             required:
  *              - name
- *              - order
+ *              - boardId
+ *              - mediumId
+ *              - classId
  *              - code
  *              - thumbnail
  *     responses:
@@ -202,18 +208,17 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
  *               thumbnail:
  *                 type: string
  *                 format: binary
  *               code:
  *                 type: string
- *             required:
- *              - name
- *              - order
- *              - code
- *              - thumbnail
  *     responses:
  *       "200":
  *         description: OK
