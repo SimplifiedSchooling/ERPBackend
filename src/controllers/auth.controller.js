@@ -60,15 +60,23 @@ const loginStaff = catchAsync(async (req, res) => {
 // Student and Parent login
 const loginStudentAndParent = catchAsync(async (req, res) => {
   const { userName, password } = req.body;
-  const userData = await authService.loginStudentAndParent(userName, password);
-  const tokens = await tokenService.generateAuthTokens(userData);
-  const user = {
-    name: userData.name,
-    lastName: userData.lastName,
-    role: userData.role,
-    userName: userData.userName,
-  };
+  const user = await authService.loginStudentAndParent(userName, password);
+  const tokens = await tokenService.generateAuthTokens(user);
+  // const user = {
+  //   name: userData.name,
+  //   lastName: userData.lastName,
+  //   role: userData.role,
+  //   userName: userData.userName,
+  // };
   res.send({ user, tokens });
+});
+
+// School logins
+const loginSchool = catchAsync(async (req, res) => {
+  const { schoolName, password } = req.body;
+  const school = await authService.loginSchool(schoolName, password);
+  const tokens = await tokenService.generateAuthTokens(school);
+  res.send({ school, tokens });
 });
 
 const logout = catchAsync(async (req, res) => {
@@ -118,4 +126,5 @@ module.exports = {
   verifyEmail,
   loginStaff,
   loginStudentAndParent,
+  loginSchool,
 };

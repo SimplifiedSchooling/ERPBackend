@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const uuid = require('node-uuid');
+const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 
 const studentSchema = new mongoose.Schema(
@@ -16,19 +17,47 @@ const studentSchema = new mongoose.Schema(
     //   type: String,
     //   required: true,
     // },
+    role: {
+      type: String,
+      default: 'student',
+    },
+    userName: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 8,
+      validate(value) {
+        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+          throw new Error('Password must contain at least one letter and one number');
+        }
+      },
+      private: true, // used by the toJSON plugin
+    },
     campusId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Campus',
       required: true,
       trim: true,
     },
+    class: {
+      type: String,
+      required: true,
+    },
+    section: {
+      type: String,
+      required: true,
+    },
     // parent_id: String,
     // admission_no: String,
     // roll_no: String,
     // admission_date: String,
-    firstname: String,
-    middlename: String,
-    lastname: String,
+    // firstname: String,
+    // middlename: String,
+    // lastname: String,
     // rte: String,
     // image: String,
     // mobileno: String,
@@ -115,6 +144,36 @@ const studentSchema = new mongoose.Schema(
 // add plugin that converts mongoose to json
 studentSchema.plugin(toJSON);
 studentSchema.plugin(paginate);
-studentSchema.index({ saral_id: 1 }, { unique: true });
+
+/**
+ * Check if userName is taken
+ * @param {string} userName - The user's userName
+ * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
+ * @returns {Promise<boolean>}
+ */
+studentSchema.statics.isUserNameTaken = async function (userName, excludeUserId) {
+  const student = await this.findOne({ userName, _id: { $ne: excludeUserId } });
+  return !!student;
+};
+
+/**
+ * Check if password matches the user's password
+ * @param {string} password
+ * @returns {Promise<boolean>}
+ */
+studentSchema.methods.isPasswordMatch = async function (password) {
+  const student = this;
+  return bcrypt.compare(password, student.password);
+};
+
+studentSchema.pre('save', async function (next) {
+  const student = this;
+  if (student.isModified('password')) {
+    student.password = await bcrypt.hash(student.password, 8);
+  }
+  next();
+});
+
+// studentSchema.index({ saral_id: 1 }, { unique: true });
 const Students = mongoose.model('Students', studentSchema);
 module.exports = Students;

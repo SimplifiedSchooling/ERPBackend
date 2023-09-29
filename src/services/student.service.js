@@ -1,20 +1,20 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-useless-catch */
 const httpStatus = require('http-status');
-const crypto = require('crypto');
-const randomstring = require('randomstring');
-const { Student, Parent } = require('../models');
+// const crypto = require('crypto');
+// const randomstring = require('randomstring');
+const { Student } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 // Generate a random username
-function generateUsernameFromName(name) {
-  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
-  const randomString = randomstring.generate({
-    length: 4,
-    charset: 'alphanumeric',
-  });
-  return `${sanitizedName}${randomString}`;
-}
+// function generateUsernameFromName(name) {
+//   const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+//   const randomString = randomstring.generate({
+//     length: 4,
+//     charset: 'alphanumeric',
+//   });
+//   return `${sanitizedName}${randomString}`;
+// }
 /**
  * Create a Classes
  * @param {Object} studentData
@@ -23,16 +23,16 @@ function generateUsernameFromName(name) {
 const createStudent = async (studentData) => {
   const newStudent = await Student.create(studentData);
 
-  const userName = await generateUsernameFromName(newStudent.middlename);
-  const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
-  const parentUser = await Parent.create({
-    userName,
-    password: randomPassword,
-    name: newStudent.middlename,
-    lastname: newStudent.lastname,
-    studentId: newStudent.id,
-  });
-  return { newStudent, parentUser };
+  // const userName = await generateUsernameFromName(newStudent.middlename);
+  // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  // const parentUser = await Parent.create({
+  //   userName,
+  //   password: randomPassword,
+  //   name: newStudent.middlename,
+  //   lastname: newStudent.lastname,
+  //   studentId: newStudent.id,
+  // });
+  return newStudent;
 };
 
 /**
@@ -64,7 +64,7 @@ const getStudentById = async (id) => {
  * @returns {Promise<Student>}
  */
 const getStudentUserName = async (userName) => {
-  return Parent.findOne({ userName });
+  return Student.findOne({ userName });
 };
 
 /**
