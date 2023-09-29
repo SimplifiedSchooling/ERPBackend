@@ -23,12 +23,19 @@ const getAllSubject = {
 
 const getSubject = {
   params: Joi.object().keys({
-    subjectId: Joi.string(),
+    subjectId: Joi.string().custom(objectId).required(),
   }),
 };
 const getSubjectByClassId = {
   params: Joi.object().keys({
     classId: Joi.string().custom(objectId).required(),
+  }),
+};
+const getSubjectByFiltersId = {
+  params: Joi.object().keys({
+    classId: Joi.string().custom(objectId).required(),
+    mediumId: Joi.string().custom(objectId).required(),
+    boardId: Joi.string().custom(objectId).required(),
   }),
 };
 
@@ -61,4 +68,5 @@ module.exports = {
   deleteSubject,
   getAllSubject,
   getSubjectByClassId,
+  getSubjectByFiltersId,
 };
