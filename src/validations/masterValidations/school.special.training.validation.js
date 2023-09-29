@@ -7,13 +7,12 @@ const createSchoolSpecialTraning = {
   }),
 };
 
-
 const getAllSchoolSpecialTraning = {
-    query: Joi.object().keys({
-      name: Joi.string(),
-    }),
-  };
-  
+  query: Joi.object().keys({
+    name: Joi.string(),
+  }),
+};
+
 const getSchoolSpecialTraningById = {
   params: Joi.object().keys({
     traningId: Joi.string().custom(objectId),
