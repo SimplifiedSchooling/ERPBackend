@@ -46,8 +46,6 @@ module.exports = router;
  *                 type: string
  *               password:
  *                 type: string
- *               mid:
- *                 type: string
  *               contact_number:
  *                 type: string
  *               address:
@@ -58,7 +56,6 @@ module.exports = router;
  *               userName: fakeName
  *               name: fake school name
  *               password: password1
- *               mId: "5635578as764s9ad"
  *               contact_number: fake contact 765368723632
  *               address: fake address
  *               date: 2020-05-12T16:18:04.793Z
@@ -188,8 +185,6 @@ module.exports = router;
  *                 type: string
  *               password:
  *                 type: string
- *               mid:
- *                 type: string
  *               contact_number:
  *                 type: string
  *               address:
@@ -200,7 +195,6 @@ module.exports = router;
  *               userName: fakeName
  *               name: fake school name
  *               password: password1
- *               mId: "5635578as764s9ad"
  *               contact_number: fake contact 765368723632
  *               address: fake address
  *               date: 2020-05-12T16:18:04.793Z

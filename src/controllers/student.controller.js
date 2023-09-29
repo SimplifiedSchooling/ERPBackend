@@ -10,7 +10,7 @@ const createStudent = catchAsync(async (req, res) => {
 });
 
 const getStudents = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['userName']);
+  const filter = pick(req.query, ['name']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const allStudents = await studentService.getAllStudents(filter, options);
   res.send(allStudents);

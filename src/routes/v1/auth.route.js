@@ -13,7 +13,7 @@ router.post('/sansthan-login', validate(authValidation.sansthanLogin), authContr
 
 router.post('/staff-login', validate(authValidation.login), authController.loginStaff);
 
-router.post('/studentAndParent-login', validate(authValidation.login), authController.loginStudentAndParent);
+router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
 
 router.post('/school-login', validate(authValidation.schoolLogin), authController.loginSchool);
 
@@ -527,7 +527,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/studentAndParent-login:
+ * /auth/student-login:
  *   post:
  *     summary: Login
  *     tags: [Auth]
@@ -538,17 +538,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - userName
- *               - password
+ *               - mobNumber
  *             properties:
- *               userName:
- *                 type: string
- *               password:
- *                 type: string
- *                 format: password
+ *               mobNumber:
+ *                 type: number
  *             example:
- *               userName: doeLlBz
- *               password: c18a4d8c6a6e36ca021eefd68025b142
+ *               mobNumber: 9823525745
  *     responses:
  *       "200":
  *         description: OK

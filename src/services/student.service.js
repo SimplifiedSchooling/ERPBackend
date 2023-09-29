@@ -21,6 +21,9 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Student>}
  */
 const createStudent = async (studentData) => {
+  if (await Student.isUserNameTaken(studentData.mobNumber)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+  }
   const newStudent = await Student.create(studentData);
 
   // const userName = await generateUsernameFromName(newStudent.middlename);
@@ -63,8 +66,8 @@ const getStudentById = async (id) => {
  * @param {ObjectId} userName
  * @returns {Promise<Student>}
  */
-const getStudentUserName = async (userName) => {
-  return Student.findOne({ userName });
+const getStudentMobNumber = async (mobNumber) => {
+  return Student.findOne({ mobNumber });
 };
 
 /**
@@ -113,5 +116,5 @@ module.exports = {
   updateStudentById,
   deleteStudentById,
   calculateTotalMaleStudents,
-  getStudentUserName,
+  getStudentMobNumber,
 };
