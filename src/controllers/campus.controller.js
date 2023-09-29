@@ -10,7 +10,7 @@ const createCampus = catchAsync(async (req, res) => {
 });
 
 const queryCampus = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name']);
+  const filter = pick(req.query, ['schoolName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await campusService.queryCampus(filter, options);
   res.send(result);

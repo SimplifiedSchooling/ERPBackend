@@ -14,9 +14,9 @@ const createNewPlan = {
     date: Joi.string().required(),
     time: Joi.string().required(),
     type: Joi.string().required(),
-    orderId: Joi.string().required(),
+    order: Joi.number().required(),
     studioName: Joi.string().required(),
-    liveStreamingPath: Joi.string(),
+    liveStreamingPath: Joi.string().allow('', null),
   }),
 };
 
@@ -62,9 +62,9 @@ const updatePlanById = {
       bookId: Joi.string(),
       chapterId: Joi.string(),
       lessonId: Joi.string(),
-      orderId: Joi.string(),
+      order: Joi.number(),
       studioName: Joi.string(),
-      liveStreamingPath: Joi.string(),
+      liveStreamingPath: Joi.string().allow('', null),
     })
     .min(1),
 };

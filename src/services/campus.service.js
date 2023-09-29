@@ -35,6 +35,15 @@ const getCampusById = async (id) => {
 };
 
 /**
+ * Get Campus by schoolName
+ * @param {ObjectId} schoolName
+ * @returns {Promise<Campus>}
+ */
+const getCampusBySchoolName = async (schoolName) => {
+  return Campus.findOne({ schoolName });
+};
+
+/**
  * Update Campus by id
  * @param {ObjectId} campusId
  * @param {Object} updateBody
@@ -70,4 +79,5 @@ module.exports = {
   queryCampus,
   updateCampusById,
   deleteCampusById,
+  getCampusBySchoolName,
 };
