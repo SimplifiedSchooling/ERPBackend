@@ -3,8 +3,9 @@ const { objectId } = require('./custom.validation');
 
 const createCampus = {
   body: Joi.object().keys({
-    mId: Joi.string(),
     name: Joi.string(),
+    userName: Joi.string(),
+    password: Joi.string(),
     contact_number: Joi.string(),
     address: Joi.string(),
     date: Joi.date(),
@@ -32,8 +33,9 @@ const updateCampus = {
   }),
   body: Joi.object()
     .keys({
-      mId: Joi.string(),
       name: Joi.string(),
+      userName: Joi.string(),
+      password: Joi.string(),
       contact_number: Joi.string(),
       address: Joi.string(),
       date: Joi.date(),

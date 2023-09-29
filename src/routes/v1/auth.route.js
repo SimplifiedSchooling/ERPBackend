@@ -13,7 +13,9 @@ router.post('/sansthan-login', validate(authValidation.sansthanLogin), authContr
 
 router.post('/staff-login', validate(authValidation.login), authController.loginStaff);
 
-router.post('/studentAndParent-login', validate(authValidation.login), authController.loginStudentAndParent);
+router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
+
+router.post('/school-login', validate(authValidation.schoolLogin), authController.loginSchool);
 
 router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
@@ -525,7 +527,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auth/studentAndParent-login:
+ * /auth/student-login:
  *   post:
  *     summary: Login
  *     tags: [Auth]
@@ -536,17 +538,57 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - userName
+ *               - mobNumber
+ *             properties:
+ *               mobNumber:
+ *                 type: number
+ *             example:
+ *               mobNumber: 9823525745
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
+
+/**
+ * @swagger
+ * /auth/school-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - schoolName
  *               - password
  *             properties:
- *               userName:
+ *               schoolName:
  *                 type: string
  *               password:
  *                 type: string
  *                 format: password
  *             example:
- *               userName: doeLlBz
- *               password: c18a4d8c6a6e36ca021eefd68025b142
+ *               schoolName: abcd
+ *               password: password1
  *     responses:
  *       "200":
  *         description: OK
@@ -556,7 +598,7 @@ module.exports = router;
  *               type: object
  *               properties:
  *                 user:
- *                   $ref: '#/components/schemas/User'
+ *                   $ref: '#/components/schemas/campus'
  *                 tokens:
  *                   $ref: '#/components/schemas/AuthTokens'
  *       "401":

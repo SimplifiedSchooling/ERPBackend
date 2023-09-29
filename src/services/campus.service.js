@@ -8,6 +8,9 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Campus>}
  */
 const createCampus = async (campusBody) => {
+  if (await Campus.isUserNameTaken(campusBody.userName)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+  }
   return Campus.create(campusBody);
 };
 
@@ -32,6 +35,15 @@ const queryCampus = async (filter, options) => {
  */
 const getCampusById = async (id) => {
   return Campus.findById(id);
+};
+
+/**
+ * Get Campus by schoolName
+ * @param {ObjectId} schoolName
+ * @returns {Promise<Campus>}
+ */
+const getCampusBySchoolName = async (schoolName) => {
+  return Campus.findOne({ schoolName });
 };
 
 /**
@@ -70,4 +82,5 @@ module.exports = {
   queryCampus,
   updateCampusById,
   deleteCampusById,
+  getCampusBySchoolName,
 };

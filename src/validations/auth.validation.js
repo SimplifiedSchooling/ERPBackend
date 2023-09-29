@@ -30,6 +30,12 @@ const login = {
     password: Joi.string().required(),
   }),
 };
+// student login
+const studentLogin = {
+  body: Joi.object().keys({
+    mobNumber: Joi.number().required(),
+  }),
+};
 
 // Staff login
 const loginStaff = {
@@ -47,6 +53,13 @@ const sansthanLogin = {
   }),
 };
 
+// user login
+const schoolLogin = {
+  body: Joi.object().keys({
+    schoolName: Joi.string().required(),
+    password: Joi.string().required(),
+  }),
+};
 const logout = {
   body: Joi.object().keys({
     refreshToken: Joi.string().required(),
@@ -103,4 +116,6 @@ module.exports = {
   verifyEmail,
   verifyMobNumber,
   checkUserIdExist,
+  schoolLogin,
+  studentLogin,
 };
