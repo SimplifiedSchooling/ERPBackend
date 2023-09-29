@@ -57,11 +57,11 @@ const loginStaff = async (userName, password) => {
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginStudentAndParent = async (userName, password) => {
-  const student = await studentService.getStudentUserName(userName);
-  if (!student || !(await student.isPasswordMatch(password))) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
-  }
+const loginStudentAndParent = async (mobNumber) => {
+  const student = await studentService.getStudentMobNumber(mobNumber);
+  // if (!student || !(await student.isPasswordMatch(password))) {
+  //   throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
+  // }
   return student;
 };
 

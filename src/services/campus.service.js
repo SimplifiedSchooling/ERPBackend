@@ -8,6 +8,9 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Campus>}
  */
 const createCampus = async (campusBody) => {
+  if (await Campus.isUserNameTaken(campusBody.userName)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+  }
   return Campus.create(campusBody);
 };
 

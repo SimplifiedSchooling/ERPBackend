@@ -1,13 +1,16 @@
 const Joi = require('joi');
-const { password } = require('./custom.validation');
+// const { password } = require('./custom.validation');
 
 const createStudent = {
   body: Joi.object().keys({
     // saral_id: Joi.string().required(),
     // scode: Joi.string().required(),
     campusId: Joi.string().required(),
-    userName: Joi.string().required(),
-    password: Joi.string().required().custom(password),
+    name: Joi.string().required(),
+    mobNumber: Joi.number().required(),
+    age: Joi.number().required(),
+    email: Joi.string().required(),
+    department: Joi.string().required(),
     class: Joi.string().required(),
     section: Joi.string().required(),
     // admission_no: Joi.string(),
@@ -104,7 +107,7 @@ const getStudent = {
 
 const getAllStudents = {
   query: Joi.object().keys({
-    userName: Joi.string(),
+    name: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -121,8 +124,11 @@ const updateStudentById = {
       // scode: Joi.string().required(),
       // parent_id: Joi.string(),
       campusId: Joi.string().required(),
-      userName: Joi.string().required(),
-      password: Joi.string().required().custom(password),
+      name: Joi.string().required(),
+      mobNumber: Joi.number().required(),
+      age: Joi.number().required(),
+      email: Joi.string().required(),
+      department: Joi.string().required(),
       class: Joi.string().required(),
       section: Joi.string().required(),
       // admission_no: Joi.string(),

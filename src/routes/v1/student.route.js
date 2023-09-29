@@ -110,12 +110,17 @@ module.exports = router;
  *     StudentInput:
  *       type: object
  *       properties:
- *         userName:
+ *         name:
  *           type: string
  *           description: userName  for the student
- *         password:
+ *         mobNumber:
+ *           type: number
+ *         age:
+ *           type: number
+ *         email:
  *           type: string
- *           description: Password must contain at least one letter and one number
+ *         department:
+ *           type: string
  *         campusId:
  *           type: string
  *         class:
@@ -123,8 +128,11 @@ module.exports = router;
  *         section:
  *           type: string
  *       example:
- *         userName: "ABC12345"
- *         password: "password1"
+ *         name: "ABC12345"
+ *         mobNumber: 9823525745
+ *         email: "fake@gmail.com"
+ *         age: 12
+ *         department: "demo"
  *         campusId: "614a7e7d7f1d813bbf8e89b7"
  *         class: "Class 10"
  *         section: "A"
@@ -137,12 +145,17 @@ module.exports = router;
  *     StudentUpdateInput:
  *       type: object
  *       properties:
- *         userName:
+ *         name:
  *           type: string
  *           description: userName  for the student
- *         password:
+ *         mobNumber:
+ *           type: number
+ *         age:
+ *           type: number
+ *         email:
  *           type: string
- *           description: Password must contain at least one letter and one number
+ *         department:
+ *           type: string
  *         campusId:
  *           type: string
  *         class:
@@ -150,8 +163,11 @@ module.exports = router;
  *         section:
  *           type: string
  *       example:
- *         userName: "ABC12345"
- *         password: "password1"
+ *         name: "ABC12345"
+ *         mobNumber: 9823525745
+ *         email: "fake@gmail.com"
+ *         age: 12
+ *         department: "demo"
  *         campusId: "614a7e7d7f1d813bbf8e89b7"
  *         class: "Class 10"
  *         section: "A"
