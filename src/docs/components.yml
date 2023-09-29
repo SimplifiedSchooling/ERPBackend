@@ -150,7 +150,56 @@ components:
       example:
         subject: abc
         description: Hii this is the description
-    Sarals:
+    SchoolSpecialTraning:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: abc
+    Specialschool:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: abc
+    StaffDesignation:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: abc
+    StaffQualification:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: abc
+    StaffDisability:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: abc
+    Typeofhostel:
+      type: object
+      properties:
+        hostelType:
+          type: string
+      example:
+        hostelType: All types
+    Teachertype:
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: abc
+    SaralInformation1:
       type: object
       properties:
         scode:
@@ -233,6 +282,52 @@ components:
           type: number
         idmifund:
           type: number
+      example:
+        scode: mh00001
+        anganwadicenteradj: fake anganwadicenter
+        noofanganwadinear: 1
+        noofsevika: 2
+        agewiseboy: 3
+        agewisegirl: 10
+        recognizbalwadi: 12
+        recognitiondate: 2023
+        noofteacher: 5
+        eodeputyvisit: 3
+        eovisit: 4
+        dodeputyvisit: 5
+        ddvisits: 6
+        dvisitno: 5
+        zmdvisits: 3
+        mdminspno: 6
+        internalaudit: 8
+        externalaudit: 9
+        localauditb: 7
+        auditorauditbgen: 9
+        boarddisplay: 2
+        socialaudit: test
+        grantssa: yes
+        spillapril: 2
+        expenditurers: 4
+        sdevelopgrant: no
+        smaintenancegrant: yes
+        tlmgrant: no
+        fundscwsn: no
+        grantcontingency: no
+        contingengrantob: 3
+        modelschool1: 4
+        sbpgadoptscheme: 5
+        hostelallowance: 6
+        publiccontribut: 7
+        attendallowance: 2
+        examfeerefund: 2
+        csr: 4
+        shetkiallowance: 5
+        idmifund: 5
+    SaralInformation2:
+      type: object
+      properties:
+        scode:
+          type: string
         maintenancegrant:
           type: string
         buildingrant:
@@ -289,6 +384,39 @@ components:
           type: string
         evidencetobacco:
           type: string
+      example:
+        scode: mh00001       
+        maintenancegrant: Yes
+        buildingrant: No
+        pariposhan: No
+        buildingrent: 5
+        othergrant: Yes
+        childenroll: 8
+        nostuadmissionquota: 0
+        nobookfiction: 9
+        nobooknonfiction: 4
+        magazine: Yes
+        jsmagazine: 2
+        rbook: Test
+        tobaccoinside: Test
+        smokingarea: Yes
+        infotobacco: No
+        cotpa: No
+        tobaccoinsideper: No
+        signage: No
+        controltobacco: No
+        intiativetobacco: No
+        statenodaloff: No
+        antitobacco: No
+        controltobaccocommite: Yes
+        meetreport: Yes
+        tobaccofreeschool: Yes
+        tobaccoyard: Yes
+        tfet: Yes
+        evidencetobacco: Yes             
+    SaralInformation3:
+      type: object
+      properties:
         totallaptop:
           type: number
         totalprinter:
@@ -379,6 +507,58 @@ components:
           type: string
         curriculumdetails:
           type: string
+      example:
+        scode: mh00001
+        totallaptop: 3
+        totalprinter: 4
+        totalprinterfun: 1
+        laptopteacpurp: Yes
+        complearnpurp: No
+        computeradminpurp: No
+        schoolnetwork: No
+        bandwidth: No
+        serviceprovider: No
+        campusplan: Yes
+        englishkit: Yes
+        geographickit: Yes
+        braillebooks: Yes
+        largeprint: Yes
+        noofutensils: 3
+        balwadicenter: 4
+        statusofutensils: No
+        utensilsfrom: No
+        noofplates: 8
+        noofspoons: 8
+        noofglass: 8
+        weighingmachine: No
+        heightmeastool: No
+        yearofprocurement: 8
+        badminton: No
+        basketball: Test
+        carrom: Test
+        yoga: Test
+        football: Test
+        meterrun: Test
+        allequipments: 4
+        seatingarrang: Test
+        seatingarrangava: Test
+        seatingarrangereq: Yes
+        transportprovider: Yes
+        vehicaltype: Yes
+        contractorowner: Yes
+        rtoregistration: Yes
+        drivername: Yes
+        driverlicenseno: Yes
+        driveraadharno: Yes
+        helpername: Yes
+        teacherresearch: 5
+        teacherarticlepublish: Test1
+        curriculumdetails: Test1
+    SaralInformation4:
+      type: object
+      properties:
+        scode:
+          type: string
         typeofactivity:
           type: string
         ptaexecutive:
@@ -433,128 +613,8 @@ components:
           type: string
         committedetailmdmc:
           type: string
-        progress_count:
-          type: string
-        progress_count1:
-          type: string
-        progress_count2:
-          type: string
-        progress_count3:
-          type: string
       example:
         scode: mh00001
-        anganwadicenteradj: fake anganwadicenter
-        noofanganwadinear: 1
-        noofsevika: 2
-        agewiseboy: 3
-        agewisegirl: 10
-        recognizbalwadi: 12
-        recognitiondate: 2023
-        noofteacher: 5
-        eodeputyvisit: 3
-        eovisit: 4
-        dodeputyvisit: 5
-        ddvisits: 6
-        dvisitno: 5
-        zmdvisits: 3
-        mdminspno: 6
-        internalaudit: 8
-        externalaudit: 9
-        localauditb: 7
-        auditorauditbgen: 9
-        boarddisplay: 2
-        socialaudit: test
-        grantssa: yes
-        spillapril: 2
-        expenditurers: 4
-        sdevelopgrant: no
-        smaintenancegrant: yes
-        tlmgrant: no
-        fundscwsn: no
-        grantcontingency: no
-        contingengrantob: 3
-        modelschool1: 4
-        sbpgadoptscheme: 5
-        hostelallowance: 6
-        publiccontribut: 7
-        attendallowance: 2
-        examfeerefund: 2
-        csr: 4
-        shetkiallowance: 5
-        idmifund: 5
-        maintenancegrant: Yes
-        buildingrant: No
-        pariposhan: No
-        buildingrent: 5
-        othergrant: Yes
-        childenroll: 8
-        nostuadmissionquota: 0
-        nobookfiction: 9
-        nobooknonfiction: 4
-        magazine: Yes
-        jsmagazine: 2
-        rbook: Test
-        tobaccoinside: Test
-        smokingarea: Yes
-        infotobacco: No
-        cotpa: No
-        tobaccoinsideper: No
-        signage: No
-        controltobacco: No
-        intiativetobacco: No
-        statenodaloff: No
-        antitobacco: No
-        controltobaccocommite: Yes
-        meetreport: Yes
-        tobaccofreeschool: Yes
-        tobaccoyard: Yes
-        tfet: Yes
-        evidencetobacco: Yes
-        totallaptop: 3
-        totalprinter: 4
-        totalprinterfun: 1
-        laptopteacpurp: Yes
-        complearnpurp: No
-        computeradminpurp: No
-        schoolnetwork: No
-        bandwidth: No
-        serviceprovider: No
-        campusplan: Yes
-        englishkit: Yes
-        geographickit: Yes
-        braillebooks: Yes
-        largeprint: Yes
-        noofutensils: 3
-        balwadicenter: 4
-        statusofutensils: No
-        utensilsfrom: No
-        noofplates: 8
-        noofspoons: 8
-        noofglass: 8
-        weighingmachine: No
-        heightmeastool: No
-        yearofprocurement: 8
-        badminton: No
-        basketball: Test
-        carrom: Test
-        yoga: Test
-        football: Test
-        meterrun: Test
-        allequipments: 4
-        seatingarrang: Test
-        seatingarrangava: Test
-        seatingarrangereq: Yes
-        transportprovider: Yes
-        vehicaltype: Yes
-        contractorowner: Yes
-        rtoregistration: Yes
-        drivername: Yes
-        driverlicenseno: Yes
-        driveraadharno: Yes
-        helpername: Yes
-        teacherresearch: 5
-        teacherarticlepublish: Test1
-        curriculumdetails: Test1
         typeofactivity: Test1
         ptaexecutive: Test1
         dateofapproval: Test1
@@ -582,10 +642,6 @@ components:
         committedetailsc: Yes
         committeeconstitutemdmc: Yes
         committedetailmdmc: Yes
-        progress_count: Yes
-        progress_count1: Yes
-        progress_count2: Yes
-        progress_count3: Yes
     Sector:
       type: object
       properties:

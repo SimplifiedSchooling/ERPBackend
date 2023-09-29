@@ -1,43 +1,37 @@
 const express = require('express');
 
 const validate = require('../../../middlewares/validate');
-const QualificationValidation = require('../../../validations/masterValidations/staff.professional.qualification.validation');
-const qualificationController = require('../../../controllers/masterControllers/staff.professional.qualification.controller');
+const tranningValidation = require('../../../validations/masterValidations/staff.training.validation');
+const tranningController = require('../../../controllers/masterControllers/staff.training.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(QualificationValidation.createStaffQualification), qualificationController.createProfessionalQualification)
-  .get(validate(QualificationValidation.getAllStaffQualifications), qualificationController.getAllProfessionalQualification);
+  .post(validate(tranningValidation.createTranning), tranningController.createStaffTranning)
+  .get(validate(tranningValidation.getAllTrannings), tranningController.getAllStaffTranning);
 
 router
-  .route('/:qualificationId')
-  .get(validate(QualificationValidation.getStaffQualification), qualificationController.getProfessionalQualificationById)
-  .patch(
-    validate(QualificationValidation.updateStaffQualification),
-    qualificationController.updateProfessionalQualificationById
-  )
-  .delete(
-    validate(QualificationValidation.deleteStaffQualification),
-    qualificationController.deleteProfessionalQualificationById
-  );
+  .route('/:traningId')
+  .get(validate(tranningValidation.getTranning), tranningController.getStaffTranningById)
+  .patch(validate(tranningValidation.updateTranning), tranningController.updateStaffTranningById)
+  .delete(validate(tranningValidation.deleteTranning), tranningController.deleteStaffTranningById);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: StaffQualification
- *   description: Staff Professional Qualification
+ *   name: StaffTranning
+ *   description: Staff Tranning
  */
 
 /**
  * @swagger
- * /staffqualification:
+ * /stafftranning:
  *   post:
- *     summary: Create a Staff Professional Qualification
- *     tags: [StaffQualification]
+ *     summary: Create a Staff Tranning
+ *     tags: [StaffTranning]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -60,15 +54,15 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffQualification'
+ *                $ref: '#/components/schemas/StaffTranning'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Staff Professional Qualification
- *     tags: [StaffQualification]
+ *     summary: Get all Staff Tranning
+ *     tags: [StaffTranning]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -76,14 +70,14 @@ module.exports = router;
  *         type: board
  *         schema:
  *           name: string
- *         description: Staff Professional Qualification *
+ *         description: Staff Tranning *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffQualification'
+ *                $ref: '#/components/schemas/StaffTranning'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -92,15 +86,15 @@ module.exports = router;
 
 /**
  * @swagger
- * /staffqualification/{qualificationId}:
+ * /stafftranning/{traningId}:
  *   get:
- *     summary: Get a Staff Professional Qualification
- *     tags: [StaffQualification]
+ *     summary: Get a Staff Tranning
+ *     tags: [StaffTranning]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: qualificationId
+ *         name: traningId
  *         required: true
  *         schema:
  *           type: string
@@ -110,7 +104,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffQualification'
+ *                $ref: '#/components/schemas/StaffTranning'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -119,13 +113,13 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Staff Professional Qualification
- *     tags: [StaffQualification]
+ *     summary: Update a Staff Tranning
+ *     tags: [StaffTranning]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: qualificationId
+ *         name: traningId
  *         required: true
  *         schema:
  *           type: string
@@ -146,7 +140,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffQualification'
+ *                $ref: '#/components/schemas/StaffTranning'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -155,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a Staff Professional Qualification
- *     tags: [StaffQualification]
+ *     summary: Delete a Staff Tranning
+ *     tags: [StaffTranning]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: qualificationId
+ *         name: traningId
  *         required: true
  *         schema:
  *           type: string
- *         description: delete a Staff Professional Qualification
+ *         description: delete a Staff Tranning
  *     responses:
  *       "200":
  *         description: No content

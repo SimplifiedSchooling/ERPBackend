@@ -1,27 +1,27 @@
 const Joi = require('joi');
 const { objectId } = require('../custom.validation');
 
-const createSchoolSpecialTraning = {
+const createTranning = {
   body: Joi.object().keys({
     name: Joi.string().required(),
   }),
 };
 
-const getAllSchoolSpecialTraning = {
+const getAllTrannings = {
   query: Joi.object().keys({
     name: Joi.string(),
   }),
 };
 
-const getSchoolSpecialTraningById = {
+const getTranning = {
   params: Joi.object().keys({
     traningId: Joi.string().custom(objectId),
   }),
 };
 
-const updateSchoolSpecialTraningId = {
+const updateTranning = {
   params: Joi.object().keys({
-    traningId: Joi.required().custom(objectId),
+    traningId: Joi.string().custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -29,16 +29,17 @@ const updateSchoolSpecialTraningId = {
     })
     .min(1),
 };
-const deleteSchoolSpecialTraningById = {
+
+const deleteTranning = {
   params: Joi.object().keys({
     traningId: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createSchoolSpecialTraning,
-  getAllSchoolSpecialTraning,
-  getSchoolSpecialTraningById,
-  updateSchoolSpecialTraningId,
-  deleteSchoolSpecialTraningById,
+  createTranning,
+  getAllTrannings,
+  getTranning,
+  updateTranning,
+  deleteTranning,
 };

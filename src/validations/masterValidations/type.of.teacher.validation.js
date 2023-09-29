@@ -14,10 +14,10 @@ const getAllTeacherType = {
 };
 
 const getTeacherTypeById = {
-    params: Joi.object().keys({
-        teacherId: Joi.string().custom(objectId),
-    }),
-  };
+  params: Joi.object().keys({
+    teacherId: Joi.string().custom(objectId),
+  }),
+};
 
 const updateTeacherTypeId = {
   params: Joi.object().keys({
@@ -25,7 +25,7 @@ const updateTeacherTypeId = {
   }),
   body: Joi.object()
     .keys({
-        teacherType: Joi.string().required(),
+      teacherType: Joi.string().required(),
     })
     .min(1),
 };
