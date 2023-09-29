@@ -1,37 +1,37 @@
 const express = require('express');
 
 const validate = require('../../../middlewares/validate');
-const staffDisabilityValidation = require('../../../validations/masterValidations/staff.type.of.disability.validation');
-const staffDisabilityController = require('../../../controllers/masterControllers/staff.type.of.disability.controller');
+const teacherValidation = require('../../../validations/masterValidations/type.of.teacher.validation');
+const teacherController = require('../../../controllers/masterControllers/type.of.teacher.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(staffDisabilityValidation.createStaffDisability), staffDisabilityController.createTypeOfDisability)
-  .get(validate(staffDisabilityValidation.getAllStaffDisabilitys), staffDisabilityController.getAllTypeOfDisability);
+  .post(validate(teacherValidation.createTeacherType), teacherController.createTypeOfTeacher)
+  .get(validate(teacherValidation.getAllTeacherType), teacherController.getAllTypeOfTeacher);
 
 router
-  .route('/:disabilityId')
-  .get(validate(staffDisabilityValidation.getStaffDisability), staffDisabilityController.getTypeOfDisabilityById)
-  .patch(validate(staffDisabilityValidation.updateStaffDisability), staffDisabilityController.updateTypeOfDisabilityById)
-  .delete(validate(staffDisabilityValidation.deleteStaffDisability), staffDisabilityController.deleteTypeOfDisabilityById);
+  .route('/:teacherId')
+  .get(validate(teacherValidation.getTeacherTypeById), teacherController.getTypeOfTeacher)
+  .patch(validate(teacherValidation.updateTeacherTypeId), teacherController.updateTypeOfTeacher)
+  .delete(validate(teacherValidation.deleteTeacherTypeById), teacherController.deleteTypeOfTeacher);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: StaffDisability
- *   description: Staff Type of Disability
+ *   name: Teachertype
+ *   description: Type of Teacher
  */
 
 /**
  * @swagger
- * /staffdisability:
+ * /teachertype:
  *   post:
- *     summary: Create a Staff tType of Disability
- *     tags: [StaffDisability]
+ *     summary: Create a Type of Teacher
+ *     tags: [Teachertype]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -41,12 +41,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - type
+ *               - teacherType
  *             properties:
- *               name:
+ *               teacherType:
  *                 type: string *
  *             example:
- *               name: "Not Applicable"
+ *               teacherType: Head Teacher
  *
  *     responses:
  *       "201":
@@ -54,30 +54,30 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/Teachertype'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Staff Disability
- *     tags: [StaffDisability]
+ *     summary: Get all type of Teacher
+ *     tags: [Teachertype]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         type: board
+ *         type: build
  *         schema:
- *           name: string
- *         description: Staff of Disability *
+ *           teacherType: string
+ *         description: Teacher type *
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/Teachertype'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -86,15 +86,15 @@ module.exports = router;
 
 /**
  * @swagger
- * /staffdisability/{disabilityId}:
+ * /teachertype/{teacherId}:
  *   get:
- *     summary: Get a Staff of Disability
- *     tags: [StaffDisability]
+ *     summary: Get a Type of Teacher
+ *     tags: [Teachertype]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: disabilityId
+ *         name: teacherId
  *         required: true
  *         schema:
  *           type: string
@@ -104,7 +104,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/Teachertype'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -113,13 +113,13 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Staff of Disability
- *     tags: [StaffDisability]
+ *     summary: Update a Type of Teacher
+ *     tags: [Teachertype]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: disabilityId
+ *         name: teacherId
  *         required: true
  *         schema:
  *           type: string
@@ -130,17 +130,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               teacherType:
  *                 type: string
  *             example:
- *               name: fake name*
+ *               teacherType: fake name*
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StaffDisability'
+ *                $ref: '#/components/schemas/Teachertype'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -149,17 +149,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a Staff Disability
- *     tags: [StaffDisability]
+ *     summary: Delete a Type of Teacher
+ *     tags: [Teachertype]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: disabilityId
+ *         name: teacherId
  *         required: true
  *         schema:
  *           type: string
- *         description: delete a Staff Disability
+ *         description: teacher
  *     responses:
  *       "200":
  *         description: No content

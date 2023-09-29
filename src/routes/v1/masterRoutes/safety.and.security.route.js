@@ -25,7 +25,7 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: safetyAndSecurity
+ *   name: SafetyAndSecurity
  *   description:   safetyAndSecurity Management System
  */
 
