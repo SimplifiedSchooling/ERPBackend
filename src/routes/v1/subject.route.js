@@ -35,7 +35,7 @@ router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClas
 
 router
   .route('/filter/:boardId/:mediumId/:classId')
-  .get( subjectController.getUbjectByFilter);
+  .get(validate(subjectValidation.getSubjectByFiltersId), subjectController.getUbjectByFilter);
 
 module.exports = router;
 
