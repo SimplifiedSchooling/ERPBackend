@@ -33,13 +33,10 @@ router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClass
 
 router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClass);
 
-<<<<<<< HEAD
 router.route('/filter/:boardId/:mediumId/:classId').get(subjectController.getUbjectByFilter);
-=======
 router
   .route('/filter/:boardId/:mediumId/:classId')
   .get(validate(subjectValidation.getSubjectByFiltersId), subjectController.getUbjectByFilter);
->>>>>>> 2fd9f5cf1ef3d40cc647222d2ad8b44c089286b6
 
 module.exports = router;
 
