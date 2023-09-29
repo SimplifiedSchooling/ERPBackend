@@ -192,8 +192,6 @@ const saralInformation3Schema = mongoose.Schema(
 saralInformation3Schema.plugin(toJSON);
 saralInformation3Schema.plugin(paginate);
 
-saralInformation3Schema.index({ scode: 1 }, { unique: true });
-const SaralInformation3 = mongoose.model('SaralInformation3', saralInformation3Schema);
-SaralInformation3.createIndexes();
 
+const SaralInformation3 = mongoose.model('SaralInformation3', saralInformation3Schema);
 module.exports = SaralInformation3;

@@ -41,7 +41,6 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - scode
  *               - anganwadicenteradj
  *               - noofanganwadinear
  *               - noofsevika
