@@ -40,7 +40,9 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               schoolName:
+ *               userName:
+ *                 type: string
+ *               name:
  *                 type: string
  *               password:
  *                 type: string
@@ -53,7 +55,8 @@ module.exports = router;
  *               date:
  *                 type: date
  *             example:
- *               schoolName: fakeName
+ *               userName: fakeName
+ *               name: fake school name
  *               password: password1
  *               mId: "5635578as764s9ad"
  *               contact_number: fake contact 765368723632
@@ -179,7 +182,9 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               schoolName:
+ *               userName:
+ *                 type: string
+ *               name:
  *                 type: string
  *               password:
  *                 type: string
@@ -192,7 +197,8 @@ module.exports = router;
  *               date:
  *                 type: date
  *             example:
- *               schoolName: fakeName
+ *               userName: fakeName
+ *               name: fake school name
  *               password: password1
  *               mId: "5635578as764s9ad"
  *               contact_number: fake contact 765368723632

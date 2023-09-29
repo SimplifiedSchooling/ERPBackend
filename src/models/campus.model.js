@@ -4,10 +4,14 @@ const { toJSON, paginate } = require('./plugins');
 
 const campusSchema = mongoose.Schema(
   {
-    mId: {
+    // mId: {
+    //   type: String,
+    // },
+    name: {
       type: String,
+      required: true,
     },
-    schoolName: {
+    userName: {
       type: String,
       required: true,
     },
@@ -23,9 +27,6 @@ const campusSchema = mongoose.Schema(
       },
       private: true, // used by the toJSON plugin
     },
-    // name: {
-    //   type: String,
-    // },
     contact_number: {
       type: String,
     },
