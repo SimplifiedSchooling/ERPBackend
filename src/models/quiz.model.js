@@ -3,7 +3,10 @@ const { toJSON, paginate } = require('./plugins');
 
 const quizeSchema = mongoose.Schema(
   {
-    quizname: {
+    question: {
+      type: String,
+    },
+    quizName: {
       type: String,
     },
     files: {
@@ -65,6 +68,10 @@ const quizeSchema = mongoose.Schema(
       ref: 'chapter',
       required: true,
     },
+    // questionId: {
+    //   type: String,
+    //   required: true,
+    // },
     // lessonId: {
     //   type: mongoose.SchemaTypes.ObjectId,
     //   ref: 'lesson',

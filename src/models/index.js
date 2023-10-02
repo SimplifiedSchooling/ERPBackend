@@ -95,6 +95,7 @@ module.exports.Typeofhostel = require('./masterModels/type.of.hostel.model');
 module.exports.Traning = require('./masterModels/school.special.training.model');
 module.exports.Designation = require('./masterModels/staff.designation.model');
 module.exports.Disability = require('./masterModels/staff.type.of.disability.model');
+module.exports.QuizSubmit = require('./quizsubmit.model');
 module.exports.Qualification = require('./masterModels/staff.professional.qualification.model');
 module.exports.Teacher = require('./masterModels/type.of.teacher.model');
 module.exports.Tranningstaff = require('./masterModels/staff.training.model');
