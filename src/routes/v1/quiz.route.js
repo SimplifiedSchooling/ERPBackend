@@ -58,7 +58,8 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - quizname
+ *               - quizName
+ *               - question
  *               - options
  *               - correctOptions
  *               - explain
@@ -74,7 +75,8 @@ module.exports = router;
  *               - subjectId
  *               - chapterId
  *             example:
- *               quizname: Which of the following colors are primary colors?
+ *               question: Which of the following colors are primary colors?
+ *               quizName: unit test
  *               options: ["Red", "Green", "Blue", "Yellow" ]
  *               correctOptions: ["0", "2" ]
  *               explain: Explanation for the correct option
@@ -208,7 +210,8 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - quizname
+ *               - quizName
+ *               - question
  *               - options
  *               - correctOptions
  *               - explain
@@ -224,7 +227,8 @@ module.exports = router;
  *               - subjectId
  *               - chapterId
  *             example:
- *               quizname: Which of the following colors are primary colors?
+ *               question: Which of the following colors are primary colors?
+ *               quizName: unit test
  *               options: ["Red", "Green", "Blue", "Yellow" ]
  *               correctOptions: ["0", "2" ]
  *               explain: Explanation for the correct option

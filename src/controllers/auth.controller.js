@@ -59,8 +59,8 @@ const loginStaff = catchAsync(async (req, res) => {
 
 // Student and Parent login
 const loginStudentAndParent = catchAsync(async (req, res) => {
-  const { userName, password } = req.body;
-  const user = await authService.loginStudentAndParent(userName, password);
+  // const { userName, password } = req.body;
+  const user = await authService.loginStudentAndParent(req.mobNumber);
   const tokens = await tokenService.generateAuthTokens(user);
   // const user = {
   //   name: userData.name,

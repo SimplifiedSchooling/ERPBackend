@@ -3,7 +3,8 @@ const { objectId } = require('./custom.validation');
 
 const createQuize = {
   body: Joi.object().keys({
-    quizname: Joi.string(),
+    quizName: Joi.string(),
+    question: Joi.string(),
     options: Joi.array().items(Joi.string()),
     correctOptions: Joi.array().items(Joi.string()),
     explain: Joi.string(),
@@ -18,6 +19,7 @@ const createQuize = {
     bookId: Joi.string(),
     subjectId: Joi.string(),
     chapterId: Joi.string(),
+    // questionId: Joi.string(),
     // lessonId: Joi.string(),
   }),
 };
@@ -67,7 +69,8 @@ const updateQuize = {
   }),
   body: Joi.object()
     .keys({
-      quizname: Joi.string(),
+      quizName: Joi.string(),
+      question: Joi.string(),
       options: Joi.array().items(Joi.string()),
       correctOptions: Joi.array().items(Joi.string()),
       explain: Joi.string(),
@@ -82,6 +85,7 @@ const updateQuize = {
       bookId: Joi.string(),
       subjectId: Joi.string(),
       chapterId: Joi.string(),
+      // questionId: Joi.string(),
       // lessonId: Joi.string(),
     })
     .min(1),

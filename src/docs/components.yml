@@ -1281,6 +1281,20 @@ components:
         contact_number: fake contact 765368723632
         address: fake address
         date: 2020-05-12T16:18:04.793Z
+    
+    QuizSubmit:
+      type: object
+      properties:
+        userId:
+          type: string
+        questionId:
+          type: string
+        selectedOptions:
+          type: [number]   
+      example:
+        userId: fake name
+        questionId: 'sdvbjh2376r37862'
+        selectedOptions: [0,2]
 
     Token:
       type: object

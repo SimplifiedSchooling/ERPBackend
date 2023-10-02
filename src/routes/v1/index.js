@@ -88,6 +88,7 @@ const specialRoute = require('./masterRoutes/special.school.CWSN.route');
 const hostelRoute = require('./masterRoutes/type.of.hostel.route');
 const specialTraningRoute = require('./masterRoutes/school.special.training.route');
 const staffDesignationRoute = require('./masterRoutes/staff.designation.route');
+const quizSubmitRoute = require('./quizSubmit.route');
 
 const router = express.Router();
 
@@ -439,6 +440,10 @@ const defaultRoutes = [
   {
     path: '/staffdesignation',
     route: staffDesignationRoute,
+  },
+  {
+    path: '/quizSubmit',
+    route: quizSubmitRoute,
   },
 ];
 
