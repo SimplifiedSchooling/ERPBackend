@@ -55,7 +55,7 @@ module.exports = router;
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *         description: Sort by query in the form of field:desc/asc (ex. order:asc)
  *       - in: query
  *         name: limit
  *         schema:

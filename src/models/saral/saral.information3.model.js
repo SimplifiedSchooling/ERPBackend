@@ -192,6 +192,5 @@ const saralInformation3Schema = mongoose.Schema(
 saralInformation3Schema.plugin(toJSON);
 saralInformation3Schema.plugin(paginate);
 
-
 const SaralInformation3 = mongoose.model('SaralInformation3', saralInformation3Schema);
 module.exports = SaralInformation3;

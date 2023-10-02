@@ -84,6 +84,7 @@ const StudentAttendanceRoute = require('./studentattendance.route');
 const loanRoute = require('./staff/applyloan.route');
 const stateRoute = require('./masterRoutes/state.route');
 const AssessmentItemRoute = require('./masterRoutes/assessmentItem.route');
+const homePageGraphDataRoute = require('./graphRoutes/homepagegraph.route');
 const specialRoute = require('./masterRoutes/special.school.CWSN.route');
 const hostelRoute = require('./masterRoutes/type.of.hostel.route');
 const specialTraningRoute = require('./masterRoutes/school.special.training.route');
@@ -143,6 +144,10 @@ const defaultRoutes = [
   {
     path: '/subjects',
     route: subjectRoute,
+  },
+  {
+    path: '/homepagegraphdata',
+    route: homePageGraphDataRoute,
   },
   {
     path: '/books',
