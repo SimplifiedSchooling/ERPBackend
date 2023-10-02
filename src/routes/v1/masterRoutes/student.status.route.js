@@ -19,7 +19,7 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: studentStatus
+ *   name: StudentStatus
  *   description:   studentStatus Management System
  */
 

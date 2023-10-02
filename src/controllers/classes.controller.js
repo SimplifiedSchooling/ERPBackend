@@ -41,5 +41,4 @@ module.exports = {
   getSingleClass,
   updateSingleClass,
   deleteSingleClass,
-  // getAllClassByMediumId,
 };

@@ -3,9 +3,27 @@ const { toJSON, paginate } = require('./plugins');
 
 const StudentAttendanceSchema = mongoose.Schema(
   {
-    StudentSessionId: {
+    // StudentSessionId: {
+    //   type: mongoose.SchemaTypes.ObjectId,
+    //   ref: 'StudentSession',
+    //   required: true,
+    //   trim: true,
+    // },
+    classId: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'StudentSession',
+      ref: 'Classes',
+      required: true,
+      trim: true,
+    },
+    sectionId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Section',
+      required: true,
+      trim: true,
+    },
+    studentId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Students',
       required: true,
       trim: true,
     },

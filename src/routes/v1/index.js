@@ -84,11 +84,20 @@ const StudentAttendanceRoute = require('./studentattendance.route');
 const loanRoute = require('./staff/applyloan.route');
 const stateRoute = require('./masterRoutes/state.route');
 const AssessmentItemRoute = require('./masterRoutes/assessmentItem.route');
+const homePageGraphDataRoute = require('./graphRoutes/homepagegraph.route');
 const specialRoute = require('./masterRoutes/special.school.CWSN.route');
 const hostelRoute = require('./masterRoutes/type.of.hostel.route');
 const specialTraningRoute = require('./masterRoutes/school.special.training.route');
 const staffDesignationRoute = require('./masterRoutes/staff.designation.route');
 const quizSubmitRoute = require('./quizSubmit.route');
+const staffDisabilityRoute = require('./masterRoutes/staff.type.of.disability.route');
+const staffQualificationRoute = require('./masterRoutes/staff.professional.qualification.route');
+const teacherTypeRoute = require('./masterRoutes/type.of.teacher.route');
+const traningRoute = require('./masterRoutes/staff.training.route');
+const saralInformation1Route = require('./saral/saral.information1.route');
+const saralInformation2Route = require('./saral/saral.information2.route');
+const saralInformation3Route = require('./saral/saral.information3.route');
+const saralInformation4Route = require('./saral/saral.information4.route');
 
 const router = express.Router();
 
@@ -136,6 +145,10 @@ const defaultRoutes = [
   {
     path: '/subjects',
     route: subjectRoute,
+  },
+  {
+    path: '/homepagegraphdata',
+    route: homePageGraphDataRoute,
   },
   {
     path: '/books',
@@ -444,6 +457,38 @@ const defaultRoutes = [
   {
     path: '/quizSubmit',
     route: quizSubmitRoute,
+  },
+  {
+    path: '/staffdisability',
+    route: staffDisabilityRoute,
+  },
+  {
+    path: '/staffqualification',
+    route: staffQualificationRoute,
+  },
+  {
+    path: '/teachertype',
+    route: teacherTypeRoute,
+  },
+  {
+    path: '/stafftranning',
+    route: traningRoute,
+  },
+  {
+    path: '/saralInformation1',
+    route: saralInformation1Route,
+  },
+  {
+    path: '/saralInformation2',
+    route: saralInformation2Route,
+  },
+  {
+    path: '/saralInformation3',
+    route: saralInformation3Route,
+  },
+  {
+    path: '/saralInformation4',
+    route: saralInformation4Route,
   },
 ];
 
