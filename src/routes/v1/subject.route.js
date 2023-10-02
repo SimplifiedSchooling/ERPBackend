@@ -32,6 +32,12 @@ router
 router.route('/class/:classId').get(validate(subjectValidation.getSubjectByClassId), subjectController.getSubjectByClassId);
 
 router.route('/mobile/getsubjectofclass').get(subjectController.getSubjectOfClass);
+
+router.route('/filter/:boardId/:mediumId/:classId').get(subjectController.getUbjectByFilter);
+router
+  .route('/filter/:boardId/:mediumId/:classId')
+  .get(validate(subjectValidation.getSubjectByFiltersId), subjectController.getUbjectByFilter);
+
 module.exports = router;
 
 /**
@@ -58,8 +64,12 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
  *               thumbnail:
  *                 type: string
  *                 format: binary
@@ -67,7 +77,9 @@ module.exports = router;
  *                 type: string
  *             required:
  *              - name
- *              - order
+ *              - boardId
+ *              - mediumId
+ *              - classId
  *              - code
  *              - thumbnail
  *     responses:
@@ -197,18 +209,17 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               order:
- *                 type: number
+ *               boardId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               classId:
+ *                 type: string
  *               thumbnail:
  *                 type: string
  *                 format: binary
  *               code:
  *                 type: string
- *             required:
- *              - name
- *              - order
- *              - code
- *              - thumbnail
  *     responses:
  *       "200":
  *         description: OK
@@ -274,4 +285,44 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *
+ */
+
+/**
+ * @swagger
+ * /subjects/filter/{boardId}/{mediumId}/{classId}:
+ *   get:
+ *     summary: Get a Book
+ *     tags: [Subject]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: boardId
+ *         required: true
+ *         description: The ID of the board
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: mediumId
+ *         required: true
+ *         description: The ID of the medium
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         description: The ID of the class
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Book'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */

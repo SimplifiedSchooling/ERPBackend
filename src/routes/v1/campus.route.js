@@ -40,9 +40,11 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               userName:
+ *                 type: string
  *               name:
  *                 type: string
- *               mid:
+ *               password:
  *                 type: string
  *               contact_number:
  *                 type: string
@@ -51,8 +53,9 @@ module.exports = router;
  *               date:
  *                 type: date
  *             example:
- *               name: fake name
- *               mId: "5635578as764s9ad"
+ *               userName: fakeName
+ *               name: fake school name
+ *               password: password1
  *               contact_number: fake contact 765368723632
  *               address: fake address
  *               date: 2020-05-12T16:18:04.793Z
@@ -176,9 +179,11 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               userName:
+ *                 type: string
  *               name:
  *                 type: string
- *               mid:
+ *               password:
  *                 type: string
  *               contact_number:
  *                 type: string
@@ -187,8 +192,9 @@ module.exports = router;
  *               date:
  *                 type: date
  *             example:
- *               name: fake name
- *               mId: "5635578as764s9ad"
+ *               userName: fakeName
+ *               name: fake school name
+ *               password: password1
  *               contact_number: fake contact 765368723632
  *               address: fake address
  *               date: 2020-05-12T16:18:04.793Z

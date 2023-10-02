@@ -10,7 +10,7 @@ const createStudent = catchAsync(async (req, res) => {
 });
 
 const getStudents = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['studentName']);
+  const filter = pick(req.query, ['name']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const allStudents = await studentService.getAllStudents(filter, options);
   res.send(allStudents);
@@ -34,10 +34,20 @@ const deleteStudent = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(deletedStudent);
 });
 
+const getTotalMaleStudents = async (req, res, next) => {
+  try {
+    const totalMaleStudents = await studentService.calculateTotalMaleStudents();
+    res.json({ totalMaleStudents });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createStudent,
   getStudents,
   getStudent,
   updateStudent,
   deleteStudent,
+  getTotalMaleStudents,
 };

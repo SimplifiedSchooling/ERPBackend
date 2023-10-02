@@ -50,6 +50,18 @@ const getSubjectOfClass = async () => {
 };
 
 /**
+ * Get book by filter
+ * @param {ObjectId} boardId
+ * @param {ObjectId} mediumId
+ * @param {ObjectId} classId
+ * @returns {Promise<Book>}
+ */
+
+const getSubjectByFilter = async (boardId, mediumId, classId) => {
+  return Subject.find({ boardId, mediumId, classId });
+};
+
+/**
  * Update subject by id
  * @param {ObjectId} subjectId
  * @param {Object} updateBody
@@ -87,4 +99,5 @@ module.exports = {
   deleteSubjectById,
   getSubjectByClassId,
   getSubjectOfClass,
+  getSubjectByFilter,
 };

@@ -1,10 +1,21 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const authValidation = require('../../validations/auth.validation');
-const authController = require('../../controllers/auth.controller');
+const { authValidation } = require('../../validations');
+const { authController } = require('../../controllers');
 const auth = require('../../middlewares/auth');
 
 const router = express.Router();
+
+router.post('/sansthan-register', validate(authValidation.sansthanRegister), authController.sansthanRegister);
+router.post('/verify-number', validate(authValidation.verifyMobNumber), authController.verifyNumber);
+router.post('/verify-userId', validate(authValidation.checkUserIdExist), authController.checkUserIdExist);
+router.post('/sansthan-login', validate(authValidation.sansthanLogin), authController.loginSansthan);
+
+router.post('/staff-login', validate(authValidation.login), authController.loginStaff);
+
+router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
+
+router.post('/school-login', validate(authValidation.schoolLogin), authController.loginSchool);
 
 router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
@@ -38,14 +49,13 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - email
+ *               - userName
  *               - password
  *             properties:
  *               name:
  *                 type: string
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *                 description: must be unique
  *               password:
  *                 type: string
@@ -54,7 +64,7 @@ module.exports = router;
  *                 description: At least one number and one letter
  *             example:
  *               name: fake name
- *               email: fake@example.com
+ *               userName: fake@example.com
  *               password: password1
  *     responses:
  *       "201":
@@ -85,17 +95,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - email
+ *               - userName
  *               - password
  *             properties:
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *               password:
  *                 type: string
  *                 format: password
  *             example:
- *               email: fake@example.com
+ *               userName: fake@example.com
  *               password: password1
  *     responses:
  *       "200":
@@ -190,13 +199,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - email
+ *               - userName
  *             properties:
- *               email:
+ *               userName:
  *                 type: string
- *                 format: email
  *             example:
- *               email: fake@example.com
+ *               userName: fake@example.com
  *     responses:
  *       "204":
  *         description: No content
@@ -288,4 +296,318 @@ module.exports = router;
  *             example:
  *               code: 401
  *               message: verify email failed
+ */
+
+/**
+ * @swagger
+ * /auth/sansthan-register:
+ *   post:
+ *     summary: Register as sansthan
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - sansthanName
+ *               - userID
+ *               - password
+ *               - mobNumber
+ *               - registrationDist
+ *               - state
+ *               - otp
+ *             properties:
+ *               sansthanName:
+ *                 type: string
+ *               userID:
+ *                 type: string
+ *                 format: email
+ *                 description: must be unique
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 minLength: 8
+ *                 description: At least one number and one letter
+ *               mobNumber:
+ *                 type: number
+ *               state:
+ *                 type: string
+ *               registrationDist:
+ *                 type: string
+ *               otp:
+ *                 type: number
+ *             example:
+ *               sansthanName: fake name
+ *               userID: 13435y6
+ *               mobNumber: 9823354657
+ *               registrationDist: fake district
+ *               state: maharashta
+ *               otp: 786879
+ *               password: password1
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 sansthan:
+ *                   $ref: '#/components/schemas/Sansthan'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateEmail'
+ */
+/**
+ * @swagger
+ * /auth/sansthan-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userID
+ *               - password
+ *             properties:
+ *               userID:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *             example:
+ *               userID: fake UserID
+ *               password: password1
+ *     responses:
+ *       "200":
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 sansthanName:
+ *                   type: string
+ *                 registrationDist:
+ *                   type: string
+ *                 state:
+ *                   type: string
+ *                 userID:
+ *                   type: string
+ *                 mobNumber:
+ *                   type: number
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
+/**
+ * @swagger
+ * /auth/verify-userId:
+ *   post:
+ *     summary: Verify userId number
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userID
+ *             properties:
+ *               userID:
+ *                 type: string
+ *             example:
+ *               userID: "12356594679"
+ *     responses:
+ *       "204":
+ *         description: No content
+ *       "401":
+ *         description: Verify userID failed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Verify userID failed
+ */
+/**
+ * @swagger
+ * /auth/verify-number:
+ *   post:
+ *     summary: Verify user number
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - mobNumber
+ *             properties:
+ *               mobNumber:
+ *                 type: string
+ *             example:
+ *               mobNumber: "44563767"
+ *     responses:
+ *       "204":
+ *         description: No content
+ *       "401":
+ *         description: Verify mobalie number failed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Verify userID failed
+ */
+
+/**
+ * @swagger
+ * /auth/staff-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *               userName:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *             example:
+ *               userName: johndoeURO7
+ *               password: 8eeb9f42a15ea3f20cac25afad4653d7
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
+
+/**
+ * @swagger
+ * /auth/student-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - mobNumber
+ *             properties:
+ *               mobNumber:
+ *                 type: number
+ *             example:
+ *               mobNumber: 9823525745
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
+
+/**
+ * @swagger
+ * /auth/school-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - schoolName
+ *               - password
+ *             properties:
+ *               schoolName:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *             example:
+ *               schoolName: abcd
+ *               password: password1
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/campus'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
  */

@@ -4,6 +4,7 @@ const { objectId } = require('../custom.validation');
 const staffSchema = Joi.object().keys({
   saral_id: Joi.string().required(),
   scode: Joi.string(),
+  campusId: Joi.string().required(),
   employee_id: Joi.number().required(),
   designation: Joi.string().required(),
   qualification: Joi.string().required(),
@@ -21,9 +22,8 @@ const staffSchema = Joi.object().keys({
   permanent_address: Joi.string().required(),
   note: Joi.string(),
   image: Joi.string(),
-  username: Joi.string().required(),
+  userName: Joi.string(),
   password: Joi.string()
-    .required()
     .min(8)
     .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])/)
     .error(new Error('Password must contain at least one letter and one number')),
@@ -115,7 +115,7 @@ const getAllStaff = {
   query: Joi.object().keys({
     name: Joi.string(),
     employee_id: Joi.number(),
-    username: Joi.string(),
+    userName: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -136,6 +136,7 @@ const updateStaff = {
     .keys({
       saral_id: Joi.string(),
       scode: Joi.string(),
+      campusId: Joi.string(),
       employee_id: Joi.number(),
       designation: Joi.string(),
       qualification: Joi.string(),

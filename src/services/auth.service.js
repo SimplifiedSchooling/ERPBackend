@@ -1,22 +1,82 @@
 const httpStatus = require('http-status');
 const tokenService = require('./token.service');
 const userService = require('./user.service');
+const sansthanService = require('./sansthan.service');
+const staffService = require('./staff/staff.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
+const studentService = require('./student.service');
+const campusService = require('./campus.service');
 
 /**
  * Login with username and password
- * @param {string} email
+ * @param {string} userName
+ * @param {string} userName
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginUserWithEmailAndPassword = async (email, password) => {
-  const user = await userService.getUserByEmail(email);
+const loginUserWithEmailAndPassword = async (userName, password) => {
+  const user = await userService.getUserByUserName(userName);
   if (!user || !(await user.isPasswordMatch(password))) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
   }
   return user;
+};
+
+/**
+ * Login with userID and password
+ * @param {string} userID
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginSansthanWithUserIDAndPassword = async (userID, password) => {
+  const sansthan = await sansthanService.getSansthanByUserID(userID);
+  if (!sansthan || !(await sansthan.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userID or password');
+  }
+  return sansthan;
+};
+/**
+ * Login with userID and password
+ * @param {string} userID
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginStaff = async (userName, password) => {
+  const staff = await staffService.getStaffByUserName(userName);
+  if (!staff || !(await staff.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
+  }
+  return staff;
+};
+
+/**
+ * Login with userID and password
+ * @param {string} userID
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginStudentAndParent = async (mobNumber) => {
+  const student = await studentService.getStudentMobNumber(mobNumber);
+  // if (!student || !(await student.isPasswordMatch(password))) {
+  //   throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
+  // }
+  return student;
+};
+
+/**
+ * Login with schoolName and password
+ * @param {string} schoolName
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginSchool = async (schoolName, password) => {
+  const school = await campusService.getCampusBySchoolName(schoolName);
+  if (!school || !(await school.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect school Name or password');
+  }
+  return school;
 };
 
 /**
@@ -92,8 +152,12 @@ const verifyEmail = async (verifyEmailToken) => {
 
 module.exports = {
   loginUserWithEmailAndPassword,
+  loginSansthanWithUserIDAndPassword,
   logout,
   refreshAuth,
   resetPassword,
   verifyEmail,
+  loginStaff,
+  loginStudentAndParent,
+  loginSchool,
 };

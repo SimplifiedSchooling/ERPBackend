@@ -1,14 +1,41 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-useless-catch */
 const httpStatus = require('http-status');
+// const crypto = require('crypto');
+// const randomstring = require('randomstring');
 const { Student } = require('../models');
 const ApiError = require('../utils/ApiError');
 
+// Generate a random username
+// function generateUsernameFromName(name) {
+//   const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+//   const randomString = randomstring.generate({
+//     length: 4,
+//     charset: 'alphanumeric',
+//   });
+//   return `${sanitizedName}${randomString}`;
+// }
 /**
  * Create a Classes
  * @param {Object} studentData
  * @returns {Promise<Student>}
  */
 const createStudent = async (studentData) => {
-  return Student.create(studentData);
+  if (await Student.isUserNameTaken(studentData.mobNumber)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+  }
+  const newStudent = await Student.create(studentData);
+
+  // const userName = await generateUsernameFromName(newStudent.middlename);
+  // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  // const parentUser = await Parent.create({
+  //   userName,
+  //   password: randomPassword,
+  //   name: newStudent.middlename,
+  //   lastname: newStudent.lastname,
+  //   studentId: newStudent.id,
+  // });
+  return newStudent;
 };
 
 /**
@@ -32,6 +59,15 @@ const getAllStudents = async (filter, options) => {
  */
 const getStudentById = async (id) => {
   return Student.findById(id);
+};
+
+/**
+ * Get students by userName
+ * @param {ObjectId} userName
+ * @returns {Promise<Student>}
+ */
+const getStudentMobNumber = async (mobNumber) => {
+  return Student.findOne({ mobNumber });
 };
 
 /**
@@ -64,10 +100,21 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
+const calculateTotalMaleStudents = async () => {
+  try {
+    const totalMaleStudents = await Student.countDocuments({ gender: 'Male' });
+    return totalMaleStudents;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createStudent,
   getAllStudents,
   getStudentById,
   updateStudentById,
   deleteStudentById,
+  calculateTotalMaleStudents,
+  getStudentMobNumber,
 };

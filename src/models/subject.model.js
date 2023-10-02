@@ -11,9 +11,23 @@ const subjectSchema = mongoose.Schema(
     code: {
       type: String,
     },
-    order: {
-      type: Number,
+    boardId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Board',
       required: true,
+      trim: true,
+    },
+    mediumId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Medium',
+      required: true,
+      trim: true,
+    },
+    classId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Classes',
+      required: true,
+      trim: true,
     },
     thumbnail: {
       type: String,

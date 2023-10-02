@@ -1,18 +1,82 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService } = require('../services');
+const { userTypes } = require('../config/tokens');
+const { authService, userService, tokenService, emailService, otpService, sansthanService } = require('../services');
 
+// User register
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
   res.status(httpStatus.CREATED).send({ user, tokens });
 });
+// Sansthan register
+const sansthanRegister = catchAsync(async (req, res) => {
+  const sansthan = await sansthanService.createSansthan(req.body);
+  res.status(httpStatus.CREATED).send({ sansthan });
+});
 
+// TO check userId exist in sansthan
+const checkUserIdExist = catchAsync(async (req, res) => {
+  await sansthanService.checkUserIdExist(req.body.userID);
+  res.send('UserID not exist');
+});
+// Verify  phone number
+const verifyNumber = catchAsync(async (req, res) => {
+  const otp = await otpService.generateOTP();
+  await otpService.sendSMSToVerifyNo(req.body.mobNumber, otp);
+  res.status(httpStatus.CREATED).send();
+});
+
+// User login
 const login = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await authService.loginUserWithEmailAndPassword(email, password);
+  const { userName, password } = req.body;
+  const user = await authService.loginUserWithEmailAndPassword(userName, password);
   const tokens = await tokenService.generateAuthTokens(user);
   res.send({ user, tokens });
+});
+
+// Login for Sansthans
+const loginSansthan = catchAsync(async (req, res) => {
+  const { userID, password } = req.body;
+  const sansthan = await authService.loginSansthanWithUserIDAndPassword(userID, password);
+  const tokens = await tokenService.generateAuthTokens(sansthan, userTypes.SANSTHAN);
+  res.send({ sansthan, tokens });
+});
+
+// Staff login
+const loginStaff = catchAsync(async (req, res) => {
+  const { userName, password } = req.body;
+  const userData = await authService.loginStaff(userName, password);
+  const tokens = await tokenService.generateAuthTokens(userData);
+  const user = {
+    name: userData.name,
+    lastName: userData.lastName,
+    role: userData.role,
+    userName: userData.userName,
+  };
+  res.send({ user, tokens });
+});
+
+// Student and Parent login
+const loginStudentAndParent = catchAsync(async (req, res) => {
+  const { userName, password } = req.body;
+  const user = await authService.loginStudentAndParent(userName, password);
+  const tokens = await tokenService.generateAuthTokens(user);
+  // const user = {
+  //   name: userData.name,
+  //   lastName: userData.lastName,
+  //   role: userData.role,
+  //   userName: userData.userName,
+  // };
+  res.send({ user, tokens });
+});
+
+// School logins
+const loginSchool = catchAsync(async (req, res) => {
+  const { schoolName, password } = req.body;
+  const school = await authService.loginSchool(schoolName, password);
+  const tokens = await tokenService.generateAuthTokens(school);
+  res.send({ school, tokens });
 });
 
 const logout = catchAsync(async (req, res) => {
@@ -49,11 +113,18 @@ const verifyEmail = catchAsync(async (req, res) => {
 
 module.exports = {
   register,
+  sansthanRegister,
+  checkUserIdExist,
+  verifyNumber,
   login,
+  loginSansthan,
   logout,
   refreshTokens,
   forgotPassword,
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  loginStaff,
+  loginStudentAndParent,
+  loginSchool,
 };

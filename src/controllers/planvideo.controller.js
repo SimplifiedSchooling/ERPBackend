@@ -12,6 +12,7 @@ const createNewPlan = catchAsync(async (req, res) => {
 const getAllPlans = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['name', 'board', 'class', 'subject', 'book', 'chapter', 'videoid']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  options.sortBy = 'order';
   const result = await planvideoService.getAllPlans(filter, options);
   res.send(result);
 });
@@ -22,6 +23,13 @@ const getSinglePlan = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Plan not found');
   }
   res.send(user);
+});
+
+const getTodayPlans = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['name', 'board', 'class', 'subject', 'book', 'chapter', 'videoid']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await planvideoService.getTodayPlans(filter, options);
+  res.send(result);
 });
 
 const updatePlan = catchAsync(async (req, res) => {
@@ -37,6 +45,7 @@ const deletePlan = catchAsync(async (req, res) => {
 module.exports = {
   createNewPlan,
   getAllPlans,
+  getTodayPlans,
   getSinglePlan,
   updatePlan,
   deletePlan,

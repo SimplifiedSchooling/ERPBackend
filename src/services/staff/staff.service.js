@@ -1,6 +1,19 @@
+/* eslint-disable import/no-unresolved */
 const httpStatus = require('http-status');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
 const { Staff } = require('../../models');
 const ApiError = require('../../utils/ApiError');
+
+// Generate a random username
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 
 /**
  * Create a staff
@@ -8,7 +21,12 @@ const ApiError = require('../../utils/ApiError');
  * @returns {Promise<Staff>}
  */
 const createStaff = async (staffBody) => {
-  return Staff.create(staffBody);
+  const staffData = { ...staffBody };
+  const userName = generateUsernameFromName(staffData.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
+  staffData.userName = userName;
+  staffData.password = randomPassword;
+  return Staff.create(staffData);
 };
 
 /**
@@ -35,6 +53,14 @@ const getStaffById = async (_id) => {
 };
 
 /**
+ * Get Staff by id
+ * @param {ObjectId} userName
+ * @returns {Promise<Staff>}
+ */
+const getStaffByUserName = async (userName) => {
+  return Staff.findOne({ userName });
+};
+/**
  * Update Staff by id
  * @param {ObjectId} userId
  * @param {Object} updateBody
@@ -49,6 +75,22 @@ const updateStaffById = async (StaffId, updateBody) => {
   await staff.save();
   return staff;
 };
+
+// /**
+//  * Update Staff by id
+//  * @param {ObjectId} userId
+//  * @param {Object} updateBody
+//  * @returns {Promise<Staff>}
+//  */
+// const updateStaffById = async (userName, updateBody) => {
+//   const staff = await getStaffById(userName);
+//   if (!staff) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Staff not found');
+//   }
+//   Object.assign(staff, updateBody);
+//   await staff.save();
+//   return staff;
+// };
 
 /**
  * Delete Staff by id
@@ -123,4 +165,5 @@ module.exports = {
   updateStaffById,
   deleteStaffById,
   bulkUpload,
+  getStaffByUserName,
 };

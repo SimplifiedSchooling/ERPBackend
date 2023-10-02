@@ -10,6 +10,8 @@ router
   .post(validate(planValidation.createNewPlan), planvideoController.createNewPlan)
   .get(validate(planValidation.getAllPlan), planvideoController.getAllPlans);
 
+router.route('/todayplan').get(validate(planValidation.getTodayPlan), planvideoController.getTodayPlans);
+
 router
   .route('/:planId')
   .get(validate(planValidation.getSinglePlan), planvideoController.getSinglePlan)
@@ -48,6 +50,8 @@ module.exports = router;
  *               - bookId
  *               - chapterId
  *               - lessonId
+ *               - orderId
+ *               - studioName
  *             properties:
  *               name:
  *                 type: string
@@ -71,6 +75,12 @@ module.exports = router;
  *                 type: string
  *               type:
  *                 type: string
+ *               orderId :
+ *                 type: string
+ *               studioName :
+ *                 type: string
+ *               liveStreamingPath:
+ *                 type: string
  *             example:
  *               name: Today Plan title
  *               date: 2023-07-25
@@ -83,6 +93,9 @@ module.exports = router;
  *               chapterId: 64bf7a68c0797a1734b71faa
  *               mediumId: 64bf7a68c0797a1734b71faa
  *               lessonId: 64bf7a68c0797a1734b71faa
+ *               orderId: Order No 1
+ *               studioName: Studio 1
+ *               liveStreamingPath: Live Stream
  *     responses:
  *       201:
  *         description: Plan video successfully created
@@ -98,8 +111,8 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all users
- *     description: Only admins can retrieve all users.
+ *     summary: Get all videos
+ *     description: Only admins can retrieve all video.
  *     tags: [Today Lesson]
  *     parameters:
  *       - in: query
@@ -118,7 +131,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of users
+ *         description: Maximum number of video
  *       - in: query
  *         name: page
  *         schema:
@@ -227,8 +240,47 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
+ *               date:
+ *                 type: string
+ *               time:
+ *                 type: string
+ *               boardId:
+ *                 type: string
+ *               classId:
+ *                 type: string
+ *               subjectId:
+ *                 type: string
+ *               bookId:
+ *                 type: string
+ *               chapterId:
+ *                 type: string
+ *               lessonId:
+ *                 type: string
+ *               mediumId:
+ *                 type: string
+ *               type:
+ *                 type: string
+ *               orderId :
+ *                 type: string
+ *               studioName :
+ *                 type: string
+ *               liveStreamingPath:
+ *                 type: string
  *             example:
- *               name: fake name*
+ *               name: Today Plan title
+ *               date: 2023-07-25
+ *               time: 10:00
+ *               type: video
+ *               boardId: 64bf7a68c0797a1734b71faa
+ *               classId: 64bf7a68c0797a1734b71faa
+ *               subjectId: 64bf7a68c0797a1734b71faa
+ *               bookId:  64bf7a68c0797a1734b71faa
+ *               chapterId: 64bf7a68c0797a1734b71faa
+ *               mediumId: 64bf7a68c0797a1734b71faa
+ *               lessonId: 64bf7a68c0797a1734b71faa
+ *               orderId: Order No 1
+ *               studioName: Studio 1
+ *               liveStreamingPath: Live Stream
  *     responses:
  *       200:
  *         description: Plan video successfully updated
@@ -272,6 +324,27 @@ module.exports = router;
 
 /**
  * @swagger
+ * /planvideos/todayplan:
+ *   get:
+ *     summary: Get all today plan videos
+ *     tags: [PlanVideo]
+ *     responses:
+ *       200:
+ *         description: List of  videos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/PlanVideo'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
+ *       500:
+ *         $ref: '#/components/responses/InternalServer'
+ */
+
+/**
+ * @swagger
  * components:
  *   schemas:
  *     PlanVideo:
@@ -299,6 +372,10 @@ module.exports = router;
  *           type: string
  *         lessonId:
  *           type: string
+ *         orderId:
+ *           type: string
+ *         studioName:
+ *           type: string
  *         status:
  *           type: string
  *           default: active
@@ -314,6 +391,8 @@ module.exports = router;
  *         - bookId
  *         - chapterId
  *         - lessonId
+ *         - orderId
+ *         - studioName
  */
 
 /**
