@@ -89,6 +89,7 @@ const specialRoute = require('./masterRoutes/special.school.CWSN.route');
 const hostelRoute = require('./masterRoutes/type.of.hostel.route');
 const specialTraningRoute = require('./masterRoutes/school.special.training.route');
 const staffDesignationRoute = require('./masterRoutes/staff.designation.route');
+const quizSubmitRoute = require('./quizSubmit.route');
 const staffDisabilityRoute = require('./masterRoutes/staff.type.of.disability.route');
 const staffQualificationRoute = require('./masterRoutes/staff.professional.qualification.route');
 const teacherTypeRoute = require('./masterRoutes/type.of.teacher.route');
@@ -452,6 +453,10 @@ const defaultRoutes = [
   {
     path: '/staffdesignation',
     route: staffDesignationRoute,
+  },
+  {
+    path: '/quizSubmit',
+    route: quizSubmitRoute,
   },
   {
     path: '/staffdisability',
