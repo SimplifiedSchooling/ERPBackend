@@ -95,9 +95,10 @@ const getAttendanceData = async (classId, sectionId, date) => {
     },
     {
       $project: {
-        _id: 0,
+        _id: 1,
         studentId: 1,
         attendancetype: 1,
+        remark: 1,
         'studentInfo._id': 1,
         'studentInfo.saral_id': 1,
         'studentInfo.scode': 1,
@@ -189,8 +190,10 @@ const getAttendanceData = async (classId, sectionId, date) => {
     },
   ]);
   return attendanceData.map((item) => ({
+    attendanceObjectId: item._id,
     studentId: item.studentId,
     attendanceType: item.attendancetype,
+    remark: item.remark,
     studentInfo: item.studentInfo,
   }));
 };
