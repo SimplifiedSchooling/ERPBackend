@@ -82,3 +82,4 @@ module.exports.StudentAttendanceService = require('./studentattendance.service')
 module.exports.complaintService = require('./staff/complaint.service');
 module.exports.loanService = require('./staff/applyloan.service');
 module.exports.AssessmentItem = require('./masterService/assessmentItem.service');
+module.exports.HomePageGraphService = require('./graphService/homepagegraph.service');

@@ -83,6 +83,7 @@ const LeaveRoute = require('./staff/leave.route');
 const StudentAttendanceRoute = require('./studentattendance.route');
 const loanRoute = require('./staff/applyloan.route');
 const AssessmentItemRoute = require('./masterRoutes/assessmentItem.route');
+const homePageGraphDataRoute = require('./graphRoutes/homepagegraph.route');
 
 const router = express.Router();
 
@@ -130,6 +131,10 @@ const defaultRoutes = [
   {
     path: '/subjects',
     route: subjectRoute,
+  },
+  {
+    path: '/homepagegraphdata',
+    route: homePageGraphDataRoute,
   },
   {
     path: '/books',

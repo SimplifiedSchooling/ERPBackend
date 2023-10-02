@@ -4,7 +4,9 @@ const StudentAttendanceValidation = require('../../validations/studentattendance
 const StudentAttendanceController = require('../../controllers/studentattendance.controller');
 
 const router = express.Router();
-
+router
+  .route('/getAttendanceByClassAndsectionAndDate')
+  .get(validate(StudentAttendanceValidation.attendanceData), StudentAttendanceController.getAttendanceByclassSectionDate);
 router
   .route('/')
   .post(validate(StudentAttendanceValidation.createStudentAttendance), StudentAttendanceController.createStudentAttendance)
@@ -27,6 +29,42 @@ module.exports = router;
  *   name: StudentAttendance
  *   description: StudentAttendance
  */
+/**
+ * @swagger
+ * /StudentAttendance/getAttendanceByClassAndsectionAndDate:
+ *   get:
+ *     summary:  A list of students attendence matching the specified class, section and date
+ *     tags: [StudentAttendance]
+ *     parameters:
+ *       - in: query
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: The ID of the class to filter by.
+ *       - in: query
+ *         name: sectionId
+ *         schema:
+ *           type: string
+ *         description: The ID of the section to filter by.
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The date to filter by.
+ *     responses:
+ *       '200':
+ *         description: A list of students attendence matching the specified class, section and date
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student'  # Replace with the actual schema for a student
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
 
 /**
  * @swagger
@@ -43,12 +81,16 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - StudentSessionId
+ *               - classId
+ *               - sectionId
+ *               - studentId
  *               - date
  *               - attendancetype
  *               - remark
  *             example:
- *               StudentSessionId: 650c141a483c21d899148b29
+ *               classId: 650c141a483c21d899148b29
+ *               sectionId: 650c141a483c21d899148b29
+ *               studentId: 650c141a483c21d899148b29
  *               date: 2023-09-15
  *               attendancetype: present  // 'present', 'absent', 'halfday', 'holiday'
  *               remark: Attended class
@@ -71,10 +113,10 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: Residential
+ *         name: date
  *         schema:
  *           type: string
- *         description: Residential name
+ *         description: date
  *       - in: query
  *         name: sortBy
  *         schema:

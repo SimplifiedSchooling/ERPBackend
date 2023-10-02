@@ -9,6 +9,12 @@ const createClasses = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(newClass);
 });
 
+// const getClasses = catchAsync(async (req, res) => {
+//   const filter = pick(req.query, ['className']);
+//   const options = pick(req.query, ['sortBy', 'limit', 'page']);
+//   const allClasses = await classesService.getAllClasses(filter, options);
+//   res.send(allClasses);
+// });
 const getClasses = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['className']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);

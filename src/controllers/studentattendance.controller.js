@@ -24,6 +24,12 @@ const getStudentAttendanceById = catchAsync(async (req, res) => {
   res.send(StudentAttendance);
 });
 
+const getAttendanceByclassSectionDate = catchAsync(async (req, res) => {
+  const { classId, sectionId, date } = await req.query;
+  const data = await StudentAttendanceService.getAttendanceData(classId, sectionId, date);
+
+  res.status(200).json({ data });
+});
 const updateStudentAttendance = catchAsync(async (req, res) => {
   const StudentAttendance = await StudentAttendanceService.updateStudentAttendanceById(
     req.params.StudentAttendanceId,
@@ -43,4 +49,5 @@ module.exports = {
   getStudentAttendanceById,
   updateStudentAttendance,
   deleteStudentAttendance,
+  getAttendanceByclassSectionDate,
 };
