@@ -101,16 +101,15 @@ const createStudent = {
 
 const studentSchema = Joi.object().keys({
   campusId: Joi.string(),
-    name: Joi.string(),
-    mobNumber: Joi.number(),
-    age: Joi.number(),
-    email: Joi.string(),
-    department: Joi.string(),
-    class: Joi.string(),
-    section: Joi.string(),
-    lastname: Joi.string(),
+  name: Joi.string(),
+  mobNumber: Joi.number(),
+  age: Joi.number(),
+  email: Joi.string(),
+  department: Joi.string(),
+  class: Joi.string(),
+  section: Joi.string(),
+  lastname: Joi.string(),
 });
-
 
 const getStudent = {
   params: Joi.object().keys({

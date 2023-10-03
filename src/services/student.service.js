@@ -125,8 +125,8 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
   if (csvFilePath) {
     modifiedStudentsArray = { students: csvFilePath };
   }
-  if (!modifiedStudentsArray.students || !modifiedStudentsArray.students.length) 
-  return { error: true, message: 'missing array' };
+  if (!modifiedStudentsArray.students || !modifiedStudentsArray.students.length)
+    return { error: true, message: 'missing array' };
 
   const records = [];
   const dups = [];
@@ -157,7 +157,6 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
   return { nonduplicates, duplicates };
 };
 
-
 module.exports = {
   createStudent,
   getAllStudents,
@@ -165,5 +164,5 @@ module.exports = {
   updateStudentById,
   deleteStudentById,
   getStudentMobNumber,
-  bulkUpload
+  bulkUpload,
 };

@@ -18,8 +18,7 @@ const uploads = multer({ storage });
 
 router
   .route('/bulkupload')
-  .post(uploads.single('file'),validate(StudentValidation.studentSchema), StudentController.bulkUploadFile);
-
+  .post(uploads.single('file'), validate(StudentValidation.studentSchema), StudentController.bulkUploadFile);
 
 router
   .route('/')
