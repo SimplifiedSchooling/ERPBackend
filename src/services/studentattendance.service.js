@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
+// const moment = require('moment');
 const StudentAttendanceSchema = require('../models/studentattendance.model');
 const ApiError = require('../utils/ApiError');
 /**
@@ -123,6 +124,38 @@ const getAttendanceData = async (classId, sectionId, date) => {
   }));
 };
 
+// /**
+//  * Get studentsAttendence by class, section, date
+//  * @param {string} userId - The ID of the class to filter by.
+//  * @param {string} campusId - The ID of the section to filter by.
+//  * @param {string} date - The date to filter by.
+//  * @returns {Promise<StudentAttendanceSchema>} - An array of StudentAttendanceSchema objects.
+//  * @throws {Error} - If there is an error while querying the database.
+//  */
+
+// const getStatusForDateAndUser = (date) => {
+//   if (moment(date).isSame(moment(), 'day')) {
+//     return 'Pending';
+//   }
+//   return 'unknown';
+// };
+
+// const getWeekStatus = (campusId, userId) => {
+//   const currentDate = moment();
+//   const startOfWeek = currentDate.clone().startOf('isoWeek');
+//   const weekStatus = [];
+//   for (let i = 0; i < 6; i++) {
+//     const currentDate = startOfWeek.clone().add(i, 'days');
+//     const status = getStatusForDateAndUser(currentDate, userId, campusId);
+//     weekStatus.push({
+//       day: currentDate.format('dddd'), // Full day name (e.g., Monday)
+//       date: currentDate.format('YYYY-MM-DD'), // Date in 'YYYY-MM-DD' format
+//       status,
+//     });
+//   }
+//   return weekStatus;
+// };
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -130,4 +163,5 @@ module.exports = {
   updateStudentAttendanceById,
   deleteStudentAttendanceById,
   getAttendanceData,
+  // getWeekStatus,
 };

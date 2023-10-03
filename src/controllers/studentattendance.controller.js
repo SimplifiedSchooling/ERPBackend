@@ -43,6 +43,12 @@ const deleteStudentAttendance = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+// const getWeekStatus = catchAsync(async (req, res) => {
+//   const { campusId, userId } = req.query;
+//   const weekStatus = StudentAttendanceService.getWeekStatus(campusId, userId);
+//   res.json({ result: weekStatus });
+// });
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -50,4 +56,5 @@ module.exports = {
   updateStudentAttendance,
   deleteStudentAttendance,
   getAttendanceByclassSectionDate,
+  // getWeekStatus,
 };
