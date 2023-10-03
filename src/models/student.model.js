@@ -25,6 +25,9 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    userName: {
+      type: String,
+    },
     mobNumber: {
       type: Number,
       unique: true,
