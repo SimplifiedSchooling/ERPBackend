@@ -127,6 +127,8 @@ module.exports = router;
  *           type: string
  *         section:
  *           type: string
+ *         lastname:
+ *           type: string
  *       example:
  *         name: "ABC12345"
  *         mobNumber: 9823525745
@@ -136,6 +138,7 @@ module.exports = router;
  *         campusId: "614a7e7d7f1d813bbf8e89b7"
  *         class: "Class 10"
  *         section: "A"
+ *         lastname: asff
  */
 
 /**

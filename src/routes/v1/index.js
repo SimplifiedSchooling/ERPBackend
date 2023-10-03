@@ -84,10 +84,12 @@ const StudentAttendanceRoute = require('./studentattendance.route');
 const loanRoute = require('./staff/applyloan.route');
 const stateRoute = require('./masterRoutes/state.route');
 const AssessmentItemRoute = require('./masterRoutes/assessmentItem.route');
+const homePageGraphDataRoute = require('./graphRoutes/homepagegraph.route');
 const specialRoute = require('./masterRoutes/special.school.CWSN.route');
 const hostelRoute = require('./masterRoutes/type.of.hostel.route');
 const specialTraningRoute = require('./masterRoutes/school.special.training.route');
 const staffDesignationRoute = require('./masterRoutes/staff.designation.route');
+const quizSubmitRoute = require('./quizSubmit.route');
 const staffDisabilityRoute = require('./masterRoutes/staff.type.of.disability.route');
 const staffQualificationRoute = require('./masterRoutes/staff.professional.qualification.route');
 const teacherTypeRoute = require('./masterRoutes/type.of.teacher.route');
@@ -143,6 +145,10 @@ const defaultRoutes = [
   {
     path: '/subjects',
     route: subjectRoute,
+  },
+  {
+    path: '/homepagegraphdata',
+    route: homePageGraphDataRoute,
   },
   {
     path: '/books',
@@ -447,6 +453,10 @@ const defaultRoutes = [
   {
     path: '/staffdesignation',
     route: staffDesignationRoute,
+  },
+  {
+    path: '/quizSubmit',
+    route: quizSubmitRoute,
   },
   {
     path: '/staffdisability',

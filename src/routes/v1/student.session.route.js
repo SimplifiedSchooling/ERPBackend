@@ -4,7 +4,12 @@ const StudentSessionValidation = require('../../validations/student.session.vali
 const studentSessionController = require('../../controllers/student.session.controller');
 
 const router = express.Router();
-router.route('/studentsByClassAndSection').get(studentSessionController.getStudentsByClassAndSection);
+router
+  .route('/studentsByClassAndSection')
+  .get(
+    validate(StudentSessionValidation.getAllStudentByclassAndsection),
+    studentSessionController.getStudentsByClassAndSection
+  );
 router
   .route('/')
   .post(validate(StudentSessionValidation.createStudentSession), studentSessionController.createStudentSession)
@@ -24,20 +29,21 @@ module.exports = router;
  *   name: StudentSession
  *   description:   studentSession Management System
  */
+
 /**
  * @swagger
- * /studentsByClassAndSection:
+ * /studentSession/studentsByClassAndSection:
  *   get:
  *     summary: Get students by class and section
  *     tags: [StudentSession]
  *     parameters:
  *       - in: query
- *         name: class_Id
+ *         name: classId
  *         schema:
  *           type: string
  *         description: The ID of the class to filter by.
  *       - in: query
- *         name: section_Id
+ *         name: sectionId
  *         schema:
  *           type: string
  *         description: The ID of the section to filter by.
@@ -55,6 +61,7 @@ module.exports = router;
  *       '500':
  *         description: Internal server error. An error occurred while processing the request.
  */
+
 /**
  * @swagger
  * /studentSession:

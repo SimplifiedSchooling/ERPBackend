@@ -31,7 +31,7 @@ const studentSchema = new mongoose.Schema(
       required: true,
     },
     age: {
-      type: Number,
+      type: String,
     },
     email: {
       type: String,
@@ -73,7 +73,7 @@ const studentSchema = new mongoose.Schema(
     // admission_date: String,
     // firstname: String,
     // middlename: String,
-    // lastname: String,
+    lastname: String,
     // rte: String,
     // image: String,
     // mobileno: String,

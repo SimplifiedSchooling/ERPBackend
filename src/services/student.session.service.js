@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
-const { StudentSession, Student } = require('../models');
+const mongoose = require('mongoose');
+const { StudentSession } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -38,18 +39,51 @@ const getStudentSessionById = async (studentSessionId) => {
  * Get students by class and section
  * @param {string} classId - The ID of the class to filter by.
  * @param {string} sectionId - The ID of the section to filter by.
- * @returns {Promise<Student>} - An array of student objects.
+ * @returns {Promise<StudentSession>} - An array of StudentSession objects.
  * @throws {Error} - If there is an error while querying the database.
  */
 
 const getStudentsByClassAndSection = async (classId, sectionId) => {
-  const studentSessionDocs = await StudentSession.find({
-    classId,
-    sectionId,
-  }).select('studentId');
-  const studentIds = studentSessionDocs.map((doc) => doc.studentId);
-  const students = await Student.find({ _id: { $in: studentIds } });
-  return students;
+  const attendanceData = await StudentSession.aggregate([
+    {
+      $match: {
+        classId: mongoose.Types.ObjectId(classId),
+        sectionId: mongoose.Types.ObjectId(sectionId),
+      },
+    },
+    {
+      $lookup: {
+        from: 'students',
+        localField: 'studentId',
+        foreignField: '_id',
+        as: 'studentInfo',
+      },
+    },
+    {
+      $unwind: '$studentInfo',
+    },
+    {
+      $project: {
+        _id: 1,
+        'studentInfo._id': 1,
+        'studentInfo.role': 1,
+        'studentInfo.name': 1,
+        'studentInfo.mobNumber': 1,
+        'studentInfo.age': 1,
+        'studentInfo.email': 1,
+        'studentInfo.admission_date': 1,
+        'studentInfo.department': 1,
+        'studentInfo.campusId': 1,
+        'studentInfo.lastname': 1,
+        'studentInfo.class': 1,
+        'studentInfo.section': 1,
+      },
+    },
+  ]);
+  return attendanceData.map((item) => ({
+    studentId: item.studentId,
+    studentInfo: item.studentInfo,
+  }));
 };
 
 /**
