@@ -4,9 +4,9 @@ const { toJSON, paginate } = require('./plugins');
 
 const campusSchema = mongoose.Schema(
   {
-    // mId: {
-    //   type: String,
-    // },
+    UDISEcode: {
+      type: String,
+    },
     name: {
       type: String,
       required: true,
