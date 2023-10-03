@@ -91,6 +91,7 @@ module.exports.hostelService = require('./masterService/type.of.hostel.service')
 module.exports.traningService = require('./masterService/school.special.training.service');
 module.exports.staffDesignationService = require('./masterService/staff.designation.service');
 module.exports.staffDisabilityService = require('./masterService/staff.type.of.disability.service');
+module.exports.quizSubmitService = require('./quizSubmit.service');
 module.exports.staffQualificationService = require('./masterService/staff.professional.qualification.service');
 module.exports.teacherService = require('./masterService/type.of.teacher.service');
 module.exports.stafftranningService = require('./masterService/staff.training.service');

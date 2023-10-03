@@ -2,29 +2,32 @@
 /* eslint-disable no-useless-catch */
 const httpStatus = require('http-status');
 // const crypto = require('crypto');
-// const randomstring = require('randomstring');
+const randomstring = require('randomstring');
 const { Student } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 // Generate a random username
-// function generateUsernameFromName(name) {
-//   const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
-//   const randomString = randomstring.generate({
-//     length: 4,
-//     charset: 'alphanumeric',
-//   });
-//   return `${sanitizedName}${randomString}`;
-// }
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 /**
  * Create a Classes
  * @param {Object} studentData
  * @returns {Promise<Student>}
  */
 const createStudent = async (studentData) => {
+  const data = studentData;
   if (await Student.isUserNameTaken(studentData.mobNumber)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Mobile Number already taken');
   }
-  const newStudent = await Student.create(studentData);
+  const userName = await generateUsernameFromName(data.name);
+  data.userName = userName;
+  return Student.create(data);
 
   // const userName = await generateUsernameFromName(newStudent.middlename);
   // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
@@ -35,7 +38,6 @@ const createStudent = async (studentData) => {
   //   lastname: newStudent.lastname,
   //   studentId: newStudent.id,
   // });
-  return newStudent;
 };
 
 /**

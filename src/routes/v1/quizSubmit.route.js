@@ -1,91 +1,87 @@
 const express = require('express');
-const validate = require('../../middlewares/validate');
-const { campusController } = require('../../controllers');
-const { campusValidation } = require('../../validations');
+// const validate = require('../../middlewares/validate');
+const { quizSubmitController } = require('../../controllers');
+// const boardValidation = require('../../validations/board.validation');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .post(validate(campusValidation.createCampus), campusController.createCampus)
-  .get(validate(campusValidation.queryCampus), campusController.queryCampus);
+router.route('/').post(quizSubmitController.submitQuiz);
+//   .get(validate(boardValidation.queryBoard), boardController.queryBoard);
 
-router
-  .route('/:campusId')
-  .get(validate(campusValidation.getCampusById), campusController.getCampusById)
-  .patch(validate(campusValidation.updateCampus), campusController.updateCampus)
-  .delete(validate(campusValidation.deleteCampusById), campusController.deleteCampus);
+router.route('/:userId').get(quizSubmitController.resultQuiz);
+//   .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
+//   .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Campus
- *   description: Campus management
+ *   name: QuizSubmit
+ *   description: QuizSubmit management
  */
 
 /**
  * @swagger
- * /campus:
+ * /quizSubmit:
  *   post:
- *     summary: Create a campus
- *     tags: [Campus]
- *     security:
- *       - bearerAuth: []
+ *     summary: Submit quiz answers and calculate marks
+ *     tags: [QuizSubmit]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - userId
+ *               - questionId
+ *               - selectedOptions
  *             properties:
- *               UDISEcode:
+ *               userId:
  *                 type: string
- *               userName:
+ *                 description: The user's ID.
+ *               questionId:
  *                 type: string
- *               name:
- *                 type: string
- *               password:
- *                 type: string
- *               contact_number:
- *                 type: string
- *               address:
- *                 type: string
- *               date:
- *                 type: date
+ *                 description: The ID of the quiz question.
+ *               selectedOptions:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: An array of user's answers.
  *             example:
- *               UDISEcode: MH0001
- *               userName: fakeName
- *               name: fake school name
- *               password: password1
- *               contact_number: fake contact 765368723632
- *               address: fake address
- *               date: 2020-05-12T16:18:04.793Z
- *
+ *               userId: 651179865c2c23a2615b4259
+ *               questionId: 651a60b39e3e884e212805d7
+ *               selectedOptions: [0, 2]
  *     responses:
  *       "201":
- *         description: Created
+ *         description: Answers submitted successfully
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Campus'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *
+ *                $ref: '#/components/schemas/QuizSubmit'
+ *       "500":
+ *         description: An error occurred while submitting answers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *               example:
+ *                 error: An error occurred while submitting answers
  *   get:
- *     summary: Get query campus
- *     tags: [Campus]
+ *     summary: Get query boards
+ *     tags: [asfg]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: name
+ *         name: board
  *         schema:
  *           type: string
- *         description: campus name *
+ *         description: Board name *
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -96,7 +92,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of campus
+ *         description: Maximum number of users
  *       - in: query
  *         name: page
  *         schema:
@@ -115,7 +111,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Campus'
+ *                     $ref: '#/components/schemas/Board'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -136,26 +132,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /campus/{campusId}:
+ * /quizSubmit/{userId}:
  *   get:
- *     summary: Get a campus
- *     tags: [Campus]
+ *     summary: Get a result
+ *     tags: [QuizSubmit]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: campusId
+ *         name: userId
  *         required: true
  *         schema:
  *           type: string
- *         description: campusId
+ *         description: userId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Campus'
+ *                $ref: '#/components/schemas/QuizSubmit'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -164,17 +160,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a campus
- *     tags: [Campus]
+ *     summary: Update a board
+ *     tags: [asfg]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: campusId
+ *         name: boardId
  *         required: true
  *         schema:
  *           type: string
- *         description: campusId
+ *         description: boardId
  *     requestBody:
  *       required: true
  *       content:
@@ -182,35 +178,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               UDISEcode:
- *                 type: string
- *               userName:
- *                 type: string
  *               name:
  *                 type: string
- *               password:
- *                 type: string
- *               contact_number:
- *                 type: string
- *               address:
- *                 type: string
- *               date:
- *                 type: date
  *             example:
- *               UDISEcode: MH00001
- *               userName: fakeName
- *               name: fake school name
- *               password: password1
- *               contact_number: fake contact 765368723632
- *               address: fake address
- *               date: 2020-05-12T16:18:04.793Z
+ *               name: fake name*
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Campus'
+ *                $ref: '#/components/schemas/Board'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -219,17 +197,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a campus
- *     tags: [Campus]
+ *     summary: Delete a board
+ *     tags: [asfg]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: campusId
+ *         name: boardId
  *         required: true
  *         schema:
  *           type: string
- *         description: campusId
+ *         description: boardId
  *     responses:
  *       "200":
  *         description: No content
