@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const uuid = require('node-uuid/uuid');
 const { toJSON, paginate } = require('./plugins');
 
 const campusSchema = mongoose.Schema(
   {
-    UDISEcode: {
+    scode: {
       type: String,
+      default: uuid.v1,
     },
     name: {
       type: String,

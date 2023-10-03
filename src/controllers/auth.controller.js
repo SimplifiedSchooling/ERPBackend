@@ -68,6 +68,7 @@ const loginStudentAndParent = catchAsync(async (req, res) => {
   //   role: userData.role,
   //   userName: userData.userName,
   // };
+  // console.log(req.mobNumber, user)
   res.send({ user, tokens });
 });
 
