@@ -32,7 +32,7 @@ router
   .patch(validate(quizeValidation.updateQuize), quizeController.updateQuizeById)
   .delete(validate(quizeValidation.deleteQuize), quizeController.deleteQuizeById);
 
-router.route('/:quizeId/submit').post(validate(quizeValidation.submitQuize), quizeController.QuizeByIdSubmit);
+// router.route('/:quizeId/submit').post(validate(quizeValidation.submitQuize), quizeController.QuizeByIdSubmit);
 
 router.post('/upload_files', upload.single('files'), quizeController.uploadFiles);
 
@@ -281,44 +281,44 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  */
 
-/**
- *  @swagger
- *  /quizes/{quizeId}/submit:
- *   post:
- *     summary: Submit a quiz answer
- *     tags: [Quiz]
- *     parameters:
- *       - in: path
- *         name: quizeId
- *         required: true
- *         description: ID of the quiz to submit an answer for
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - userAnswers
- *             properties:
- *               userAnswers:
- *                 type: array
- *                 items:
- *                   type: number
- *             example:
- *               answer: ["0", "2"]
- *     responses:
- *       "200":
- *         description: Quiz answer submitted successfully
- *       "400":
- *         $ref: '#/components/responses/BadRequest'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- */
+// /**
+//  *  @swagger
+//  *  /quizes/{quizeId}/submit:
+//  *   post:
+//  *     summary: Submit a quiz answer
+//  *     tags: [Quiz]
+//  *     parameters:
+//  *       - in: path
+//  *         name: quizeId
+//  *         required: true
+//  *         description: ID of the quiz to submit an answer for
+//  *         schema:
+//  *           type: string
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             type: object
+//  *             required:
+//  *               - userAnswers
+//  *             properties:
+//  *               userAnswers:
+//  *                 type: array
+//  *                 items:
+//  *                   type: number
+//  *             example:
+//  *               answer: ["0", "2"]
+//  *     responses:
+//  *       "200":
+//  *         description: Quiz answer submitted successfully
+//  *       "400":
+//  *         $ref: '#/components/responses/BadRequest'
+//  *       "401":
+//  *         $ref: '#/components/responses/Unauthorized'
+//  *       "403":
+//  *         $ref: '#/components/responses/Forbidden'
+//  */
 
 /**
  * @swagger

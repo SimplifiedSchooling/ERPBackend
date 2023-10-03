@@ -88,3 +88,4 @@ module.exports.saralInformation1Validation = require('./saral/saral.information1
 module.exports.saralInformation2Validation = require('./saral/saral.information2.validation');
 module.exports.saralInformation3Validation = require('./saral/saral.information3.validation');
 module.exports.saralInformation4Validation = require('./saral/saral.information4.validation');
+module.exports.classTeacherValidation = require('./classteacherassign.validation');
