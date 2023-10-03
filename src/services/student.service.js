@@ -102,59 +102,60 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
-// const studentBulkFilter = (options) => {
-//   return {
-//     filter: options.filter || (options.saral_id ? { saral_id: options.saral_id } : {}),
-//     getFilter() {
-//       return this.filter;
-//     },
-//   };
-// };
+const studentBulkFilter = (options) => {
+  return {
+    filter: options.filter || (options.name ? { name: options.name } : {}),
+    getFilter() {
+      return this.filter;
+    },
+  };
+};
 
-// const getStudentBySaral = async (filter) => {
-//   const studentFilter = studentBulkFilter(filter).getFilter();
-//   if (studentFilter) {
-//     const record = await Student.findOne(studentFilter).exec();
-//     return record;
-//   }
-//   return { message: 'Missing query params !!!' };
-// };
-// const bulkUpload = async (studentArray, csvFilePath = null) => {
-//   let modifiedStaffsArray = studentArray;
-//   if (csvFilePath) {
-//     modifiedStaffsArray = { students: csvFilePath };
-//   }
-//   if (!modifiedStaffsArray.students || !modifiedStaffsArray.students.length) 
-//   return { error: true, message: 'missing array' };
+const getStudentBySaral = async (filter) => {
+  const studentFilter = studentBulkFilter(filter).getFilter();
+  if (studentFilter) {
+    const record = await Student.findOne(studentFilter).exec();
+    return record;
+  }
+  return { message: 'Missing query params !!!' };
+};
 
-//   const records = [];
-//   const dups = [];
+const bulkUpload = async (studentArray, csvFilePath = null) => {
+  let modifiedStudentsArray = studentArray;
+  if (csvFilePath) {
+    modifiedStudentsArray = { students: csvFilePath };
+  }
+  if (!modifiedStudentsArray.students || !modifiedStudentsArray.students.length) 
+  return { error: true, message: 'missing array' };
 
-//   await Promise.all(
-//     modifiedStaffsArray.students.map(async (student) => {
-//       const studentFound = await getStudentBySaral({ saral_id: student.saral_id });
-//       if (studentFound) {
-//         dups.push(student);
-//       } else {
-//         let record = new Student(student);
-//         record = await record.save();
-//         if (record) {
-//           records.push(student);
-//         }
-//       }
-//     })
-//   );
+  const records = [];
+  const dups = [];
 
-//   const duplicates = {
-//     totalDuplicates: dups.length ? dups.length : 0,
-//     data: dups.length ? dups : [],
-//   };
-//   const nonduplicates = {
-//     totalNonDuplicates: records.length ? records.length : 0,
-//     data: records.length ? records : [],
-//   };
-//   return { nonduplicates, duplicates };
-// };
+  await Promise.all(
+    modifiedStudentsArray.students.map(async (student) => {
+      const studentFound = await getStudentBySaral({ name: student.name });
+      if (studentFound) {
+        dups.push(student);
+      } else {
+        let record = new Student(student);
+        record = await record.save();
+        if (record) {
+          records.push(student);
+        }
+      }
+    })
+  );
+
+  const duplicates = {
+    totalDuplicates: dups.length ? dups.length : 0,
+    data: dups.length ? dups : [],
+  };
+  const nonduplicates = {
+    totalNonDuplicates: records.length ? records.length : 0,
+    data: records.length ? records : [],
+  };
+  return { nonduplicates, duplicates };
+};
 
 
 module.exports = {
@@ -164,5 +165,5 @@ module.exports = {
   updateStudentById,
   deleteStudentById,
   getStudentMobNumber,
-  //bulkUpload
+  bulkUpload
 };
