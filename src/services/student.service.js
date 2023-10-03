@@ -23,11 +23,11 @@ function generateUsernameFromName(name) {
 const createStudent = async (studentData) => {
   const data = studentData;
   if (await Student.isUserNameTaken(studentData.mobNumber)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Mobile Number already taken');
   }
-  const userName = await generateUsernameFromName(data.middlename);
+  const userName = await generateUsernameFromName(data.name);
   data.userName = userName;
-  return Student.create(studentData);
+  return Student.create(data);
 
   // const userName = await generateUsernameFromName(newStudent.middlename);
   // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
