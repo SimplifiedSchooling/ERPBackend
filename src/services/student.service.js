@@ -102,14 +102,60 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
-const calculateTotalMaleStudents = async () => {
-  try {
-    const totalMaleStudents = await Student.countDocuments({ gender: 'Male' });
-    return totalMaleStudents;
-  } catch (error) {
-    throw error;
-  }
-};
+// const studentBulkFilter = (options) => {
+//   return {
+//     filter: options.filter || (options.saral_id ? { saral_id: options.saral_id } : {}),
+//     getFilter() {
+//       return this.filter;
+//     },
+//   };
+// };
+
+// const getStudentBySaral = async (filter) => {
+//   const studentFilter = studentBulkFilter(filter).getFilter();
+//   if (studentFilter) {
+//     const record = await Student.findOne(studentFilter).exec();
+//     return record;
+//   }
+//   return { message: 'Missing query params !!!' };
+// };
+// const bulkUpload = async (studentArray, csvFilePath = null) => {
+//   let modifiedStaffsArray = studentArray;
+//   if (csvFilePath) {
+//     modifiedStaffsArray = { students: csvFilePath };
+//   }
+//   if (!modifiedStaffsArray.students || !modifiedStaffsArray.students.length) 
+//   return { error: true, message: 'missing array' };
+
+//   const records = [];
+//   const dups = [];
+
+//   await Promise.all(
+//     modifiedStaffsArray.students.map(async (student) => {
+//       const studentFound = await getStudentBySaral({ saral_id: student.saral_id });
+//       if (studentFound) {
+//         dups.push(student);
+//       } else {
+//         let record = new Student(student);
+//         record = await record.save();
+//         if (record) {
+//           records.push(student);
+//         }
+//       }
+//     })
+//   );
+
+//   const duplicates = {
+//     totalDuplicates: dups.length ? dups.length : 0,
+//     data: dups.length ? dups : [],
+//   };
+//   const nonduplicates = {
+//     totalNonDuplicates: records.length ? records.length : 0,
+//     data: records.length ? records : [],
+//   };
+//   return { nonduplicates, duplicates };
+// };
+
 
 module.exports = {
   createStudent,
@@ -117,6 +163,6 @@ module.exports = {
   getStudentById,
   updateStudentById,
   deleteStudentById,
-  calculateTotalMaleStudents,
   getStudentMobNumber,
+  //bulkUpload
 };

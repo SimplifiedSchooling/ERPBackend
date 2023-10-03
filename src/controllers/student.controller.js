@@ -1,8 +1,30 @@
 const httpStatus = require('http-status');
 const pick = require('../utils/pick');
+// const { join } = require('path');
+// const csv = require('csvtojson');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const studentService = require('../services/student.service');
+
+// const staticFolder = join(__dirname, '../../');
+// const uploadsFolder = join(staticFolder, 'uploads');
+
+// const bulkUpload = catchAsync(async (req, res) => {
+//   const payload = req.body;
+//   const result = await studentService.bulkUpload(payload);
+//   res.status(httpStatus.CREATED).send(result);
+// });
+
+// const bulkUploadFile = catchAsync(async (req, res) => {
+//   if (req.file) {
+//     const csvFilePath = join(uploadsFolder, req.file.filename);
+//     const csvJsonArray = await csv().fromFile(csvFilePath);
+//     const staff = await studentService.bulkUpload(null, csvJsonArray);
+//     res.status(httpStatus.CREATED).send(staff);
+//   } else {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
+//   }
+// });
 
 const createStudent = catchAsync(async (req, res) => {
   const newStudent = await studentService.createStudent(req.body);
@@ -34,20 +56,12 @@ const deleteStudent = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(deletedStudent);
 });
 
-const getTotalMaleStudents = async (req, res, next) => {
-  try {
-    const totalMaleStudents = await studentService.calculateTotalMaleStudents();
-    res.json({ totalMaleStudents });
-  } catch (error) {
-    next(error);
-  }
-};
-
 module.exports = {
   createStudent,
   getStudents,
   getStudent,
   updateStudent,
   deleteStudent,
-  getTotalMaleStudents,
+  // bulkUpload,
+  // bulkUploadFile,
 };
