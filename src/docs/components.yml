@@ -679,6 +679,22 @@ components:
         classId: 614a7e7d7f1d813bbf8e89b7  
         subjectId: 614a7e7d7f1d813bbf8e89a9 
         thumbnail: afllnEGAS/AGSJAGSNL
+    Classteacher:
+      type: object
+      properties:
+        sectionId:
+          type: string
+          description: ID of the sectionId
+        classId:
+          type: string
+          description: ID of the classId
+        teacherId:
+          type: string
+          description: ID of the teacherId
+      example: 
+        sectionId: 614a7e7d7f1d813bbf8e89a9 
+        classId: 614a7e7d7f1d813bbf8e89b7  
+        teacherId: 614a7e7d7f1d813bbf8e89a9 
     Medium:
       type: object
       properties:

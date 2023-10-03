@@ -1,41 +1,37 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const StudentAttendanceValidation = require('../../validations/studentattendance.validation');
-const StudentAttendanceController = require('../../controllers/studentattendance.controller');
+const ClassteacherValidation = require('../../validations/classteacherassign.validation');
+const ClassteacherController = require('../../controllers/classteacherassign.controller');
 
 const router = express.Router();
-// router.route('/getWeekStatus').get(StudentAttendanceController.getWeekStatus);
 router
   .route('/getAttendanceByClassAndsectionAndDate')
-  .get(validate(StudentAttendanceValidation.attendanceData), StudentAttendanceController.getAttendanceByclassSectionDate);
+  .get(validate(ClassteacherValidation.attendanceData), ClassteacherController.getByBookIdClassteacher);
 router
   .route('/')
-  .post(validate(StudentAttendanceValidation.createStudentAttendance), StudentAttendanceController.createStudentAttendance)
-  .get(validate(StudentAttendanceValidation.getAllStudentAttendance), StudentAttendanceController.getAllStudentAttendance);
+  .post(validate(ClassteacherValidation.createClassTeacher), ClassteacherController.createClassteacher)
+  .get(validate(ClassteacherValidation.getAllClassTeacher), ClassteacherController.getClassteacher);
 
 router
-  .route('/:StudentAttendanceId')
-  .get(validate(StudentAttendanceValidation.getStudentAttendance), StudentAttendanceController.getStudentAttendanceById)
-  .patch(validate(StudentAttendanceValidation.updateStudentAttendance), StudentAttendanceController.updateStudentAttendance)
-  .delete(
-    validate(StudentAttendanceValidation.deleteStudentAttendance),
-    StudentAttendanceController.deleteStudentAttendance
-  );
+  .route('/:classteacherId')
+  .get(validate(ClassteacherValidation.getClassTeacher), ClassteacherController.getSingleClassteacher)
+  .patch(validate(ClassteacherValidation.updateClassTeacherById), ClassteacherController.updateSingleClassTeacher)
+  .delete(validate(ClassteacherValidation.deleteClassTeacherById), ClassteacherController.deleteSingleClassteacher);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: StudentAttendance
- *   description: StudentAttendance
+ *   name: Classteacher
+ *   description: Classteacher
  */
 /**
  * @swagger
- * /StudentAttendance/getAttendanceByClassAndsectionAndDate:
+ * /classteacher/getAttendanceByClassAndsectionAndDate:
  *   get:
  *     summary:  A list of students attendence matching the specified class, section and date
- *     tags: [StudentAttendance]
+ *     tags: [Classteacher]
  *     parameters:
  *       - in: query
  *         name: classId
@@ -69,10 +65,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /StudentAttendance:
+ * /classteacher:
  *   post:
- *     summary: Create a StudentAttendance
- *     tags: [StudentAttendance]
+ *     summary: Create a Classteacher
+ *     tags: [Classteacher]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -84,40 +80,32 @@ module.exports = router;
  *             properties:
  *               - classId
  *               - sectionId
- *               - studentId
- *               - date
- *               - attendancetype
- *               - remark
+ *               - teacherId
  *             example:
  *               classId: 650c141a483c21d899148b29
  *               sectionId: 650c141a483c21d899148b29
- *               studentId: 650c141a483c21d899148b29
- *               date: 2023-09-15
- *               attendancetype: present  // 'present', 'absent', 'halfday', 'holiday'
- *               remark: Attended class
+ *               teacherId: 650c141a483c21d899148b29
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StudentAttendance'
+ *                $ref: '#/components/schemas/Classteacher'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all StudentAttendance
- *     tags: [StudentAttendance]
+ *     summary: Get all Classteacher
+ *     tags: [Classteacher]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: date
  *         schema:
  *           type: string
- *         description: date
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -128,7 +116,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of users
+ *         description: Maximum number of Classteacher
  *       - in: query
  *         name: page
  *         schema:
@@ -147,7 +135,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/StudentAttendance'
+ *                     $ref: '#/components/schemas/Classteacher'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -168,26 +156,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /StudentAttendance/{StudentAttendanceId}:
+ * /classteacher/{classteacherId}:
  *   get:
- *     summary: Get a StudentAttendance
- *     tags: [StudentAttendance]
+ *     summary: Get a Classteacher
+ *     tags: [Classteacher]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: StudentAttendanceId
+ *         name: classteacherId
  *         required: true
  *         schema:
  *           type: string
- *         description: StudentAttendanceId
+ *         description: classteacherId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StudentAttendance'
+ *                $ref: '#/components/schemas/Classteacher'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -196,17 +184,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a StudentAttendance
- *     tags: [StudentAttendance]
+ *     summary: Update a Classteacher
+ *     tags: [Classteacher]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: StudentAttendanceId
+ *         name: classteacherId
  *         required: true
  *         schema:
  *           type: string
- *         description: StudentAttendanceId
+ *         description: classteacherId
  *     requestBody:
  *       required: true
  *       content:
@@ -214,22 +202,20 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - StudentSessionId
- *               - date
- *               - attendancetype
- *               - remark
+ *               - classId
+ *               - teacherId
+ *               - sectionId
  *             example:
- *               StudentSessionId: 650c141a483c21d899148b29
- *               date: 2023-09-15
- *               attendancetype: present
- *               remark: Attended class
+ *               classId: 650c141a483c21d899148b29
+ *               teacherId: 650c141a483c21d899148b29
+ *               sectionId: 650c141a483c21d899148b29
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/StudentAttendance'
+ *                $ref: '#/components/schemas/Classteacher'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -238,17 +224,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a type StudentAttendance
- *     tags: [StudentAttendance]
+ *     summary: Delete a type Classteacher
+ *     tags: [Classteacher]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: StudentAttendanceId
+ *         name: classteacherId
  *         required: true
  *         schema:
  *           type: string
- *         description: StudentAttendanceId
+ *         description: classteacherId
  *     responses:
  *       "200":
  *         description: No content

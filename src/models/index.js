@@ -103,3 +103,4 @@ module.exports.SaralInformation1 = require('./saral/saral.information1.model');
 module.exports.SaralInformation2 = require('./saral/saral.information2.model');
 module.exports.SaralInformation3 = require('./saral/saral.information3.model');
 module.exports.SaralInformation4 = require('./saral/saral.information4.model');
+module.exports.ClassTeacher = require('./classteacherassign.model');
