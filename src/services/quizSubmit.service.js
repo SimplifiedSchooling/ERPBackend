@@ -8,7 +8,8 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Role>}
  */
 const submitQuiz = async (reqBody) => {
-  return QuizSubmit.create(reqBody);
+  const submitedQuiz = await QuizSubmit.create(reqBody);
+  return submitedQuiz;
 };
 
 /**
