@@ -1,17 +1,17 @@
 const httpStatus = require('http-status');
-const { User } = require('../models');
+const { DepartmentUser } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
  * Create a user
  * @param {Object} userBody
- * @returns {Promise<User>}
+ * @returns {Promise<DepartmentUser>}
  */
-const createUser = async (userBody) => {
-  if (await User.isUserNameTaken(userBody.userName)) {
+const createDepUser = async (userBody) => {
+  if (await userBody.isUserNameTaken(userBody.userName)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
   }
-  return User.create(userBody);
+  return DepartmentUser.create(userBody);
 };
 
 /**
@@ -23,49 +23,49 @@ const createUser = async (userBody) => {
  * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryUsers = async (filter, options) => {
-  const users = await User.paginate(filter, options);
+const queryDepUsers = async (filter, options) => {
+  const users = await DepartmentUser.paginate(filter, options);
   return users;
 };
 
 /**
  * Get user by id
  * @param {ObjectId} id
- * @returns {Promise<User>}
+ * @returns {Promise<DepartmentUser>}
  */
-const getUserById = async (id) => {
-  return User.findById(id);
+const getDepUserById = async (id) => {
+  return DepartmentUser.findById(id);
 };
 
 /**
  * Get user by userName
  * @param {string} userName
- * @returns {Promise<User>}
+ * @returns {Promise<DepartmentUser>}
  */
-const getUserByUserName = async (userName) => {
-  return User.findOne({ userName });
+const getDepUserByUserName = async (userName) => {
+  return DepartmentUser.findOne({ userName });
 };
 /**
  * Get user by userName
  * @param {string} userName
  * @param {string} mobNumber
- * @returns {Promise<User>}
+ * @returns {Promise<DepartmentUser>}
  */
-const getUserByUserNameAndMob = async (userName, mobNumber) => {
-  return User.findOne({ userName, mobNumber });
+const getDepUserByUserNameAndMob = async (userName, mobNumber) => {
+  return DepartmentUser.findOne({ userName, mobNumber });
 };
 /**
  * Update user by id
  * @param {ObjectId} userId
  * @param {Object} updateBody
- * @returns {Promise<User>}
+ * @returns {Promise<DepartmentUser>}
  */
-const updateUserById = async (userId, updateBody) => {
-  const user = await getUserById(userId);
+const updateDepUserById = async (userId, updateBody) => {
+  const user = await getDepUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
-  if (updateBody.userName && (await User.isUserNameTaken(updateBody.userName, userId))) {
+  if (updateBody.userName && (await DepartmentUser.isUserNameTaken(updateBody.userName, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
   }
   Object.assign(user, updateBody);
@@ -77,10 +77,10 @@ const updateUserById = async (userId, updateBody) => {
  * Update auto generated  password only for admin
  * @param {ObjectId} userId
  * @param {Object} updateBody
- * @returns {Promise<User>}
+ * @returns {Promise<DepartmentUser>}
  */
-const updateUserPasswordById = async (userId, newPassword) => {
-  const user = await getUserById(userId);
+const updateDepUserPasswordById = async (userId, newPassword) => {
+  const user = await getDepUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
@@ -94,8 +94,8 @@ const updateUserPasswordById = async (userId, newPassword) => {
  * @param {ObjectId} userId
  * @returns {Promise<User>}
  */
-const deleteUserById = async (userId) => {
-  const user = await getUserById(userId);
+const deleteDepUserById = async (userId) => {
+  const user = await getDepUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
@@ -104,12 +104,12 @@ const deleteUserById = async (userId) => {
 };
 
 module.exports = {
-  createUser,
-  queryUsers,
-  getUserById,
-  getUserByUserName,
-  updateUserById,
-  deleteUserById,
-  updateUserPasswordById,
-  getUserByUserNameAndMob,
+  createDepUser,
+  queryDepUsers,
+  getDepUserById,
+  getDepUserByUserName,
+  updateDepUserById,
+  deleteDepUserById,
+  updateDepUserPasswordById,
+  getDepUserByUserNameAndMob,
 };

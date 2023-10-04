@@ -6,7 +6,7 @@ const staffService = require('./staff/staff.service');
 const Token = require('../models/token.model');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
-const studentService = require('./student.service');
+// const studentService = require('./student.service');
 const campusService = require('./campus.service');
 
 /**
@@ -57,12 +57,12 @@ const loginStaff = async (userName, password) => {
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginStudentAndParent = async (mobNumber) => {
-  const student = await studentService.getStudentMobNumber(mobNumber);
-  // if (!student || !(await student.isPasswordMatch(password))) {
-  //   throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
-  // }
-  return student;
+const getUserByUserNameAndMob = async (userName, mobNumber) => {
+  const user = await userService.getUserByUserNameAndMob(userName, mobNumber);
+  if (!user) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or mobile number');
+  }
+  return user;
 };
 
 /**
@@ -132,6 +132,24 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
 };
 
 /**
+ * Reset password for school type of user
+ * @param {string} resetPasswordToken
+ * @param {string} newPassword
+ * @returns {Promise}
+ */
+const setPassword = async (userId, newPassword) => {
+  try {
+    const user = await userService.getUserById(userId);
+    if (!user) {
+      throw new Error();
+    }
+    await userService.updateUserById(user.id, { password: newPassword });
+  } catch (error) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
+  }
+};
+
+/**
  * Verify email
  * @param {string} verifyEmailToken
  * @returns {Promise}
@@ -158,6 +176,7 @@ module.exports = {
   resetPassword,
   verifyEmail,
   loginStaff,
-  loginStudentAndParent,
+  getUserByUserNameAndMob,
   loginSchool,
+  setPassword,
 };

@@ -1,36 +1,38 @@
 const express = require('express');
+const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
-const { campusController } = require('../../controllers');
-const { campusValidation } = require('../../validations');
+const userValidation = require('../../validations/user.validation');
+const userController = require('../../controllers/user.controller');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(campusValidation.createCampus), campusController.createCampus)
-  .get(validate(campusValidation.queryCampus), campusController.queryCampus);
+  .post(validate(userValidation.createUser), userController.createUser)
+  .get(auth(), validate(userValidation.getUsers), userController.getUsers);
 
 router
-  .route('/:campusId')
-  .get(validate(campusValidation.getCampusById), campusController.getCampusById)
-  .patch(validate(campusValidation.updateCampus), campusController.updateCampus)
-  .delete(validate(campusValidation.deleteCampusById), campusController.deleteCampus);
+  .route('/:userId')
+  .get(auth(), validate(userValidation.getUser), userController.getUser)
+  .patch(auth(), validate(userValidation.updateUser), userController.updateUser)
+  .delete(auth(), validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Campus
- *   description: Campus management
+ *   name: Users
+ *   description: User management and retrieval
  */
 
 /**
  * @swagger
- * /campus:
+ * /users:
  *   post:
- *     summary: Create a campus
- *     tags: [Campus]
+ *     summary: Create a user
+ *     description: Only admins can create other users.
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -39,39 +41,55 @@ module.exports = router;
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - name
+ *               - userName
+ *               - password
+ *               - role
+ *               - staffId
+ *               - campusId
  *             properties:
- *               UDISEcode:
- *                 type: string
  *               name:
  *                 type: string
- *               mobNumber:
- *                 type: number
- *               address:
+ *               userName:
  *                 type: string
- *               date:
- *                 type: date
+ *                 description: must be unique
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 minLength: 8
+ *                 description: At least one number and one letter
+ *               role:
+ *                  type: string
+ *               staffId:
+ *                  type: string
+ *               campusId:
+ *                  type: string
  *             example:
- *               UDISEcode: MH0001
- *               name: fake school name
- *               mobNumber: 765368723632
- *               address: fake address
- *               date: 2020-05-12T16:18:04.793Z
- *
+ *               name: fake name
+ *               userName: fakeusername
+ *               password: password1
+ *               role: user
+ *               staffId: 64b62cda79f4e038088daf15
+ *               campusId: 64b62cda79f4e038088daf15
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Campus'
+ *                $ref: '#/components/schemas/User'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get query campus
- *     tags: [Campus]
+ *     summary: Get all users
+ *     description: Only admins can retrieve all users.
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -79,18 +97,24 @@ module.exports = router;
  *         name: name
  *         schema:
  *           type: string
- *         description: campus name *
+ *         description: User name
+ *       - in: query
+ *         name: role
+ *         schema:
+ *           type: string
+ *         description: User role
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of campus
+ *         description: Maximum number of users
  *       - in: query
  *         name: page
  *         schema:
@@ -109,7 +133,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Campus'
+ *                     $ref: '#/components/schemas/User'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -130,26 +154,27 @@ module.exports = router;
 
 /**
  * @swagger
- * /campus/{campusId}:
+ * /users/{id}:
  *   get:
- *     summary: Get a campus
- *     tags: [Campus]
+ *     summary: Get a user
+ *     description: Logged in users can fetch only their own user information. Only admins can fetch other users.
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: campusId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: campusId
+ *         description: User id
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Campus'
+ *                $ref: '#/components/schemas/User'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -158,17 +183,18 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a campus
- *     tags: [Campus]
+ *     summary: Update a user
+ *     description: Logged in users can only update their own information. Only admins can update other users.
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: campusId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: campusId
+ *         description: User id
  *     requestBody:
  *       required: true
  *       content:
@@ -176,29 +202,38 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               UDISEcode:
- *                 type: string
  *               name:
  *                 type: string
- *               mobNumber:
- *                 type: number
- *               address:
+ *               userName:
  *                 type: string
- *               date:
- *                 type: date
+ *                 description: must be unique
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 minLength: 8
+ *                 description: At least one number and one letter
+ *               role:
+ *                  type: string
+ *               staffId:
+ *                  type: string
+ *               campusId:
+ *                  type: string
  *             example:
- *               UDISEcode: MH00001
- *               name: fake school name
- *               mobNumber: 765368723632
- *               address: fake address
- *               date: 2020-05-12T16:18:04.793Z
+ *               name: fake name
+ *               userName: fakeusername
+ *               password: password1
+ *               role: user
+ *               staffId: 64b62cda79f4e038088daf15
+ *               campusId: 64b62cda79f4e038088daf15
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Campus'
+ *                $ref: '#/components/schemas/User'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -207,17 +242,18 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a campus
- *     tags: [Campus]
+ *     summary: Delete a user
+ *     description: Logged in users can delete only themselves. Only admins can delete other users.
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: campusId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: campusId
+ *         description: User id
  *     responses:
  *       "200":
  *         description: No content

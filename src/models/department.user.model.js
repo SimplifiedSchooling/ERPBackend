@@ -2,18 +2,17 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 
-const userSchema = mongoose.Schema(
+const deparmentUserSchema = mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
     },
-    userId: {
+    department: {
       type: String,
-      required: true,
     },
-    scode: {
+    designation: {
       type: String,
     },
     mobNumber: {
@@ -48,8 +47,8 @@ const userSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-userSchema.plugin(toJSON);
-userSchema.plugin(paginate);
+deparmentUserSchema.plugin(toJSON);
+deparmentUserSchema.plugin(paginate);
 
 /**
  * Check if userName is taken
@@ -57,7 +56,7 @@ userSchema.plugin(paginate);
  * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
  * @returns {Promise<boolean>}
  */
-userSchema.statics.isUserNameTaken = async function (userName, excludeUserId) {
+deparmentUserSchema.statics.isUserNameTaken = async function (userName, excludeUserId) {
   const user = await this.findOne({ userName, _id: { $ne: excludeUserId } });
   return !!user;
 };
@@ -67,12 +66,12 @@ userSchema.statics.isUserNameTaken = async function (userName, excludeUserId) {
  * @param {string} password
  * @returns {Promise<boolean>}
  */
-userSchema.methods.isPasswordMatch = async function (password) {
+deparmentUserSchema.methods.isPasswordMatch = async function (password) {
   const user = this;
   return bcrypt.compare(password, user.password);
 };
 
-userSchema.pre('save', async function (next) {
+deparmentUserSchema.pre('save', async function (next) {
   const user = this;
   if (user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, 8);
@@ -81,8 +80,8 @@ userSchema.pre('save', async function (next) {
 });
 
 /**
- * @typedef User
+ * @typedef departmentUser
  */
-const User = mongoose.model('User', userSchema);
+const departmentUser = mongoose.model('departmentUser', deparmentUserSchema);
 
-module.exports = User;
+module.exports = departmentUser;
