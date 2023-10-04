@@ -1,16 +1,29 @@
 const httpStatus = require('http-status');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
 const { DepartmentUser } = require('../models');
 const ApiError = require('../utils/ApiError');
 
+// Generate a random username
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 /**
  * Create a user
  * @param {Object} userBody
  * @returns {Promise<DepartmentUser>}
  */
 const createDepUser = async (userBody) => {
-  if (await userBody.isUserNameTaken(userBody.userName)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
-  }
+  const userData = userBody;
+  const userName = await generateUsernameFromName(userData.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex');
+  userData.userName = userName;
+  userData.password = randomPassword;
   return DepartmentUser.create(userBody);
 };
 

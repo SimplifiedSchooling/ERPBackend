@@ -8,6 +8,7 @@ const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
 // const studentService = require('./student.service');
 const campusService = require('./campus.service');
+const { departmentUserService } = require('./department.user.service');
 
 /**
  * Login with username and password
@@ -36,6 +37,20 @@ const loginSansthanWithUserIDAndPassword = async (userID, password) => {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userID or password');
   }
   return sansthan;
+};
+
+/**
+ * Login with userName and password
+ * @param {string} userName
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const loginDepUserWithUserNameAndPassword = async (userName, password) => {
+  const depuser = await departmentUserService.getDepUserByUserName(userName);
+  if (!depuser || !(await depuser.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or password');
+  }
+  return depuser;
 };
 /**
  * Login with userID and password
@@ -179,4 +194,5 @@ module.exports = {
   getUserByUserNameAndMob,
   loginSchool,
   setPassword,
+  loginDepUserWithUserNameAndPassword,
 };

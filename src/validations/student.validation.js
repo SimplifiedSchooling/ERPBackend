@@ -127,12 +127,12 @@ const updateStudentById = {
   }),
   body: Joi.object()
     .keys({
-      saral_id: Joi.string().required(),
-      scode: Joi.string().required(),
-      mobNumber: Joi.number().required(),
-      age: Joi.number().required(),
-      email: Joi.string().required(),
-      department: Joi.string().required(),
+      saral_id: Joi.string(),
+      scode: Joi.string(),
+      mobNumber: Joi.number(),
+      age: Joi.number(),
+      email: Joi.string(),
+      department: Joi.string(),
       admission_no: Joi.string(),
       roll_no: Joi.string(),
       orphan: Joi.string(),

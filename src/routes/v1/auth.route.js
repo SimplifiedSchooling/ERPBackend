@@ -15,7 +15,9 @@ router.post('/sansthan-login', validate(authValidation.sansthanLogin), authContr
 
 // router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
 
-// router.post('/school-login', validate(authValidation.schoolLogin), authController.loginSchool);
+// router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
+
+router.post('/department-login', validate(authValidation.login), authController.loginDepUser);
 
 router.post('/first-verifyNo-login', validate(authValidation.resetPassVerifyNo), authController.resetPassFirtsTime);
 router.post('/set-password', validate(authValidation.setPassword), authController.setPassword);
@@ -132,6 +134,52 @@ module.exports = router;
  *               message: Invalid email or password
  */
 
+/**
+ * @swagger
+ * /auth/department-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *               userName:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *             example:
+ *               userName: fake@example.com
+ *               password: password1
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
 /**
  * @swagger
  * /auth/first-verifyNo-login:
