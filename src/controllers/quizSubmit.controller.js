@@ -4,8 +4,8 @@ const catchAsync = require('../utils/catchAsync');
 const { quizSubmitService } = require('../services');
 
 const submitQuiz = catchAsync(async (req, res) => {
-  const answer = quizSubmitService.submitQuiz(req.body);
-  res.status(httpStatus.CREATED).send(answer);
+  await quizSubmitService.submitQuiz(req.body);
+  res.status(httpStatus.CREATED).send('Quiz submited succesfully');
 });
 
 const resultQuiz = catchAsync(async (req, res) => {

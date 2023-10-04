@@ -82,6 +82,8 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type: string
+ *               role:
+ *                 type: string
  *               campusId:
  *                 type: string
  *               employee_id:
@@ -98,7 +100,7 @@ module.exports = router;
  *                 type: string
  *               father_name:
  *                 type: string
- *               contact_no:
+ *               mobNumber:
  *                 type: string
  *               emergency_contact_no:
  *                 type: string
@@ -118,10 +120,6 @@ module.exports = router;
  *               note:
  *                 type: string
  *               image:
- *                 type: string
- *               userName:
- *                 type: string
- *               password:
  *                 type: string
  *               gender:
  *                 type: string
@@ -290,6 +288,7 @@ module.exports = router;
  *             example:
  *               saral_id: "ABC123"
  *               scode: "S001"
+ *               role: "teacher"
  *               campusId: 650d85819005aaa084dc2efb
  *               employee_id: 12345
  *               designation: "Teacher"
@@ -298,7 +297,7 @@ module.exports = router;
  *               name: "John Doe"
  *               middlename: "M"
  *               father_name: "Doe Sr."
- *               contact_no: "1234567890"
+ *               mobNumber: "1234567890"
  *               emergency_contact_no: "9876543210"
  *               dob: "1990-01-01"
  *               marital_status: "Single"
@@ -308,8 +307,6 @@ module.exports = router;
  *               permanent_address: "456 Elm St, Town"
  *               note: "Additional notes"
  *               image: "image.jpg"
- *               userName: "johndoe"
- *               password: "password1"
  *               gender: "Male"
  *               account_title: "Account Title"
  *               bank_account_no: 9876543210
@@ -517,6 +514,8 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type: string
+ *               role:
+ *                 type: string
  *               campusId:
  *                 type: string
  *               employee_id:
@@ -533,7 +532,7 @@ module.exports = router;
  *                 type: string
  *               father_name:
  *                 type: string
- *               contact_no:
+ *               mobNumber:
  *                 type: string
  *               emergency_contact_no:
  *                 type: string
@@ -553,10 +552,6 @@ module.exports = router;
  *               note:
  *                 type: string
  *               image:
- *                 type: string
- *               userName:
- *                 type: string
- *               password:
  *                 type: string
  *               gender:
  *                 type: string
@@ -725,6 +720,7 @@ module.exports = router;
  *             example:
  *               saral_id: "ABC123"
  *               scode: "S001"
+ *               role: "teacher"
  *               campusId: 650d85819005aaa084dc2efb
  *               employee_id: 12345
  *               designation: "Teacher"
@@ -733,7 +729,7 @@ module.exports = router;
  *               name: "John Doe"
  *               middlename: "M"
  *               father_name: "Doe Sr."
- *               contact_no: "1234567890"
+ *               mobNumber: "1234567890"
  *               emergency_contact_no: "9876543210"
  *               dob: "1990-01-01"
  *               marital_status: "Single"
@@ -743,8 +739,6 @@ module.exports = router;
  *               permanent_address: "456 Elm St, Town"
  *               note: "Additional notes"
  *               image: "image.jpg"
- *               userName: "johndoe"
- *               password: "password1"
  *               gender: "Male"
  *               account_title: "Account Title"
  *               bank_account_no: 9876543210

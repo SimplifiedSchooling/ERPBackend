@@ -44,32 +44,25 @@ const loginSansthan = catchAsync(async (req, res) => {
 });
 
 // Staff login
-const loginStaff = catchAsync(async (req, res) => {
-  const { userName, password } = req.body;
-  const userData = await authService.loginStaff(userName, password);
-  const tokens = await tokenService.generateAuthTokens(userData);
-  const user = {
-    name: userData.name,
-    lastName: userData.lastName,
-    role: userData.role,
-    userName: userData.userName,
-  };
-  res.send({ user, tokens });
-});
+// const loginStaff = catchAsync(async (req, res) => {
+//   const { userName, password } = req.body;
+//   const userData = await authService.loginStaff(userName, password);
+//   const tokens = await tokenService.generateAuthTokens(userData);
+//   const user = {
+//     name: userData.name,
+//     lastName: userData.lastName,
+//     role: userData.role,
+//     userName: userData.userName,
+//   };
+//   res.send({ user, tokens });
+// });
 
 // Student and Parent login
-const loginStudentAndParent = catchAsync(async (req, res) => {
-  // const { userName, password } = req.body;
-  const user = await authService.loginStudentAndParent(req.mobNumber);
-  const tokens = await tokenService.generateAuthTokens(user);
-  // const user = {
-  //   name: userData.name,
-  //   lastName: userData.lastName,
-  //   role: userData.role,
-  //   userName: userData.userName,
-  // };
-  // console.log(req.mobNumber, user)
-  res.send({ user, tokens });
+const resetPassFirtsTime = catchAsync(async (req, res) => {
+  const { userName, mobNumber } = req.body;
+  const user = await authService.getUserByUserNameAndMob(userName, mobNumber);
+  // const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user });
 });
 
 // School logins
@@ -89,15 +82,26 @@ const refreshTokens = catchAsync(async (req, res) => {
   const tokens = await authService.refreshAuth(req.body.refreshToken);
   res.send({ ...tokens });
 });
-
+//  not in use
 const forgotPassword = catchAsync(async (req, res) => {
-  const resetPasswordToken = await tokenService.generateResetPasswordToken(req.body.email);
+  const resetPasswordToken = await tokenService.generateResetPasswordToken(req.body.userName);
   await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+// const setPassword = catchAsync(async (req, res) => {
+//   const resetPasswordToken = await tokenService.generateResetPasswordToken(req.body.userName);
+// // await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
+//   res.status(httpStatus.NO_CONTENT).send();
+// });
+
 const resetPassword = catchAsync(async (req, res) => {
   await authService.resetPassword(req.query.token, req.body.password);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
+const setPassword = catchAsync(async (req, res) => {
+  await authService.setPassword(req.body.userId, req.body.password);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
@@ -125,7 +129,9 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
-  loginStaff,
-  loginStudentAndParent,
+  // loginStaff,
+  // loginStudentAndParent,
   loginSchool,
+  resetPassFirtsTime,
+  setPassword,
 };

@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-useless-catch */
 const httpStatus = require('http-status');
-// const crypto = require('crypto');
+const crypto = require('crypto');
 const randomstring = require('randomstring');
-const { Student } = require('../models');
+const { Student, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 // Generate a random username
@@ -21,23 +21,31 @@ function generateUsernameFromName(name) {
  * @returns {Promise<Student>}
  */
 const createStudent = async (studentData) => {
-  const data = studentData;
-  if (await Student.isUserNameTaken(studentData.mobNumber)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Mobile Number already taken');
-  }
-  const userName = await generateUsernameFromName(data.name);
-  data.userName = userName;
-  return Student.create(data);
+  const userName = await generateUsernameFromName(studentData.middlename);
+  const newStudent = await Student.create(studentData);
+  const randomPassword = crypto.randomBytes(16).toString('hex');
+  const parentUser = await User.create({
+    name: newStudent.middlename,
+    userId: newStudent.id,
+    scode: newStudent.scode,
+    mobNumber: newStudent.mobNumber,
+    userName,
+    password: randomPassword,
+    role: 'parent',
+  });
 
-  // const userName = await generateUsernameFromName(newStudent.middlename);
-  // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
-  // const parentUser = await Parent.create({
-  //   userName,
-  //   password: randomPassword,
-  //   name: newStudent.middlename,
-  //   lastname: newStudent.lastname,
-  //   studentId: newStudent.id,
-  // });
+  const username = await generateUsernameFromName(studentData.firstname);
+  const randomPass = crypto.randomBytes(16).toString('hex');
+  const studentUser = await User.create({
+    name: newStudent.firstname,
+    userId: newStudent.id,
+    scode: newStudent.scode,
+    mobNumber: newStudent.mobNumber,
+    userName: username,
+    password: randomPass,
+    role: 'student',
+  });
+  return { parentUser, newStudent, studentUser };
 };
 
 /**
@@ -69,7 +77,8 @@ const getStudentById = async (id) => {
  * @returns {Promise<Student>}
  */
 const getStudentMobNumber = async (mobNumber) => {
-  return Student.findOne({ mobNumber });
+  const student = await Student.findOne({ mobNumber });
+  return student;
 };
 
 /**
