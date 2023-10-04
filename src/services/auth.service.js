@@ -8,7 +8,7 @@ const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
 // const studentService = require('./student.service');
 const campusService = require('./campus.service');
-const { departmentUserService } = require('./department.user.service');
+const departmentUserService = require('./department.user.service');
 
 /**
  * Login with username and password
@@ -165,6 +165,24 @@ const setPassword = async (userId, newPassword) => {
 };
 
 /**
+ * Reset password for department type of user
+ * @param {string} userId
+ * @param {string} newPassword
+ * @returns {Promise}
+ */
+const setPasswordForDepartment = async (userId, newPassword) => {
+  try {
+    const user = await departmentUserService.getDepUserById(userId);
+    if (!user) {
+      throw new Error();
+    }
+    await departmentUserService.updateDepUserPasswordById(user.id, { password: newPassword });
+  } catch (error) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
+  }
+};
+
+/**
  * Verify email
  * @param {string} verifyEmailToken
  * @returns {Promise}
@@ -195,4 +213,5 @@ module.exports = {
   loginSchool,
   setPassword,
   loginDepUserWithUserNameAndPassword,
+  setPasswordForDepartment,
 };
