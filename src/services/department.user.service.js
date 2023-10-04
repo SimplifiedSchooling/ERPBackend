@@ -64,8 +64,12 @@ const getDepUserByUserName = async (userName) => {
  * @param {string} mobNumber
  * @returns {Promise<DepartmentUser>}
  */
-const getDepUserByUserNameAndMob = async (userName, mobNumber) => {
-  return DepartmentUser.findOne({ userName, mobNumber });
+const getDepByUserNameAndMob = async (userName, mobNumber) => {
+  const department = DepartmentUser.findOne({ userName, mobNumber });
+  if (!department) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect userName or mobile number');
+  }
+  return department;
 };
 /**
  * Update user by id
@@ -124,5 +128,5 @@ module.exports = {
   updateDepUserById,
   deleteDepUserById,
   updateDepUserPasswordById,
-  getDepUserByUserNameAndMob,
+  getDepByUserNameAndMob,
 };

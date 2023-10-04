@@ -60,7 +60,7 @@ const loginSansthan = catchAsync(async (req, res) => {
 // Login for Department
 const loginDepUser = catchAsync(async (req, res) => {
   const { userName, password } = req.body;
-  const depUser = await authService.loginSansthanWithUserIDAndPassword(userName, password);
+  const depUser = await authService.loginDepUserWithUserNameAndPassword(userName, password);
   const tokens = await tokenService.generateAuthTokens(depUser, userTypes.DEPARTMENT);
   res.send({ depUser, tokens });
 });
@@ -79,7 +79,7 @@ const loginDepUser = catchAsync(async (req, res) => {
 //   res.send({ user, tokens });
 // });
 
-// Student and Parent login
+// Student and Parent staff school login
 const resetPassFirtsTime = catchAsync(async (req, res) => {
   const { userName, mobNumber } = req.body;
   const user = await authService.getUserByUserNameAndMob(userName, mobNumber);
@@ -87,13 +87,21 @@ const resetPassFirtsTime = catchAsync(async (req, res) => {
   res.send({ user });
 });
 
-// School logins
-const loginSchool = catchAsync(async (req, res) => {
-  const { schoolName, password } = req.body;
-  const school = await authService.loginSchool(schoolName, password);
-  const tokens = await tokenService.generateAuthTokens(school);
-  res.send({ school, tokens });
+// Department first resepassword login
+const resetPassFirtsTimeForDeparrtment = catchAsync(async (req, res) => {
+  const { userName, mobNumber } = req.body;
+  const department = await departmentUserService.getDepByUserNameAndMob(userName, mobNumber);
+  // const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ department });
 });
+
+// // School logins
+// const loginSchool = catchAsync(async (req, res) => {
+//   const { schoolName, password } = req.body;
+//   const school = await authService.loginSchool(schoolName, password);
+//   const tokens = await tokenService.generateAuthTokens(school);
+//   res.send({ school, tokens });
+// });
 
 const logout = catchAsync(async (req, res) => {
   await authService.logout(req.body.refreshToken);
@@ -122,8 +130,15 @@ const resetPassword = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+// Set password for school users
 const setPassword = catchAsync(async (req, res) => {
   await authService.setPassword(req.body.userId, req.body.password);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
+// Set password for department users
+const setPasswordForDepartment = catchAsync(async (req, res) => {
+  await departmentUserService.updateDepUserPasswordById(req.body.userId, req.body.password);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
@@ -153,9 +168,11 @@ module.exports = {
   verifyEmail,
   // loginStaff,
   // loginStudentAndParent,
-  loginSchool,
+  // loginSchool,
   resetPassFirtsTime,
   setPassword,
   createDepUser,
   loginDepUser,
+  resetPassFirtsTimeForDeparrtment,
+  setPasswordForDepartment,
 };
