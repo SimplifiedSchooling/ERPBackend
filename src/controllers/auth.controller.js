@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { userTypes } = require('../config/tokens');
-const { authService, userService, tokenService, emailService, otpService, sansthanService } = require('../services');
+const { authService, userService, tokenService, emailService, otpService, sansthanService, departmentUserService } = require('../services');
 
 // User register
 const register = catchAsync(async (req, res) => {
@@ -13,6 +13,12 @@ const register = catchAsync(async (req, res) => {
 const sansthanRegister = catchAsync(async (req, res) => {
   const sansthan = await sansthanService.createSansthan(req.body);
   res.status(httpStatus.CREATED).send({ sansthan });
+});
+
+// Department register
+const createDepUser = catchAsync(async (req, res) => {
+  const depUser = await departmentUserService.createDepUser(req.body);
+  res.status(httpStatus.CREATED).send(depUser);
 });
 
 // TO check userId exist in sansthan
@@ -134,4 +140,5 @@ module.exports = {
   loginSchool,
   resetPassFirtsTime,
   setPassword,
+  createDepUser,
 };
