@@ -189,6 +189,7 @@ const section2B27 = mongoose.Schema(
     },
     scode: {
       type: String,
+      required: true,
     },
   },
   {

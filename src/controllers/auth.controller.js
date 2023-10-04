@@ -1,7 +1,15 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { userTypes } = require('../config/tokens');
-const { authService, userService, tokenService, emailService, otpService, sansthanService, departmentUserService } = require('../services');
+const {
+  authService,
+  userService,
+  tokenService,
+  emailService,
+  otpService,
+  sansthanService,
+  departmentUserService,
+} = require('../services');
 
 // User register
 const register = catchAsync(async (req, res) => {
