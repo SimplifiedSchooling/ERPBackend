@@ -121,6 +121,7 @@ const section1D60 = mongoose.Schema(
     },
     scode: {
       type: String,
+      required: true,
     },
   },
   {

@@ -670,6 +670,7 @@ const section1A53Schema = mongoose.Schema(
     },
     scode: {
       type: String,
+      required: true,
     },
   },
   {
