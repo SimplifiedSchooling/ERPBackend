@@ -57,6 +57,14 @@ const loginSansthan = catchAsync(async (req, res) => {
   res.send({ sansthan, tokens });
 });
 
+// Login for Department
+const loginDepUser = catchAsync(async (req, res) => {
+  const { userName, password } = req.body;
+  const depUser = await authService.loginSansthanWithUserIDAndPassword(userName, password);
+  const tokens = await tokenService.generateAuthTokens(depUser, userTypes.DEPARTMENT);
+  res.send({ depUser, tokens });
+});
+
 // Staff login
 // const loginStaff = catchAsync(async (req, res) => {
 //   const { userName, password } = req.body;
@@ -149,4 +157,5 @@ module.exports = {
   resetPassFirtsTime,
   setPassword,
   createDepUser,
+  loginDepUser,
 };

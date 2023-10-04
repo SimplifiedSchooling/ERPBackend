@@ -23,6 +23,7 @@ const sansthanRegister = {
     otp: Joi.number().required(),
   }),
 };
+
 // user login
 const login = {
   body: Joi.object().keys({
