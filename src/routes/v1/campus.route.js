@@ -42,24 +42,18 @@ module.exports = router;
  *             properties:
  *               UDISEcode:
  *                 type: string
- *               userName:
- *                 type: string
  *               name:
  *                 type: string
- *               password:
- *                 type: string
- *               contact_number:
- *                 type: string
+ *               mobNumber:
+ *                 type: number
  *               address:
  *                 type: string
  *               date:
  *                 type: date
  *             example:
  *               UDISEcode: MH0001
- *               userName: fakeName
  *               name: fake school name
- *               password: password1
- *               contact_number: fake contact 765368723632
+ *               mobNumber: 765368723632
  *               address: fake address
  *               date: 2020-05-12T16:18:04.793Z
  *
@@ -184,24 +178,18 @@ module.exports = router;
  *             properties:
  *               UDISEcode:
  *                 type: string
- *               userName:
- *                 type: string
  *               name:
  *                 type: string
- *               password:
- *                 type: string
- *               contact_number:
- *                 type: string
+ *               mobNumber:
+ *                 type: number
  *               address:
  *                 type: string
  *               date:
  *                 type: date
  *             example:
  *               UDISEcode: MH00001
- *               userName: fakeName
  *               name: fake school name
- *               password: password1
- *               contact_number: fake contact 765368723632
+ *               mobNumber: 765368723632
  *               address: fake address
  *               date: 2020-05-12T16:18:04.793Z
  *     responses:

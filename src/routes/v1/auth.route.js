@@ -11,11 +11,14 @@ router.post('/verify-number', validate(authValidation.verifyMobNumber), authCont
 router.post('/verify-userId', validate(authValidation.checkUserIdExist), authController.checkUserIdExist);
 router.post('/sansthan-login', validate(authValidation.sansthanLogin), authController.loginSansthan);
 
-router.post('/staff-login', validate(authValidation.login), authController.loginStaff);
+// router.post('/staff-login', validate(authValidation.login), authController.loginStaff);
 
-router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
+// router.post('/student-login', validate(authValidation.studentLogin), authController.loginStudentAndParent);
 
-router.post('/school-login', validate(authValidation.schoolLogin), authController.loginSchool);
+// router.post('/school-login', validate(authValidation.schoolLogin), authController.loginSchool);
+
+router.post('/first-verifyNo-login', validate(authValidation.resetPassVerifyNo), authController.resetPassFirtsTime);
+router.post('/set-password', validate(authValidation.setPassword), authController.setPassword);
 
 router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
@@ -127,6 +130,79 @@ module.exports = router;
  *             example:
  *               code: 401
  *               message: Invalid email or password
+ */
+
+/**
+ * @swagger
+ * /auth/first-verifyNo-login:
+ *   post:
+ *     summary: Login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *               - mobNumber
+ *             properties:
+ *               userName:
+ *                 type: string
+ *               mobNumber:
+ *                 type: number
+ *             example:
+ *               userName: fake@example.com
+ *               mobNumber: 9823525745
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *       "401":
+ *         description: Invalid user Name or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid user Name or password
+ */
+/**
+ * @swagger
+ * /auth/set-password:
+ *   post:
+ *     summary: Set password
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - password
+ *               - userId
+ *             properties:
+ *               password:
+ *                 type: string
+ *               userId:
+ *                 type: string
+ *             example:
+ *               password: fake@example.com
+ *               userId: 64d9d7143ac675796cdcd433
+ *     responses:
+ *       "204":
+ *         description: No content
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */
 
 /**

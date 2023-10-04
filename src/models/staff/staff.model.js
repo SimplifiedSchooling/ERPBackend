@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-// const uuid = require('node-uuid/uuid');
+const uuid = require('node-uuid/uuid');
 const { toJSON, paginate } = require('../plugins');
 
 const staffSchema = mongoose.Schema(
   {
-    // _id: {
-    //   type: String,
-    //   default: uuid.v1,
-    // },
+    StaffId: {
+      type: String,
+      default: uuid.v1,
+    },
     saral_id: {
       type: String,
       required: true,
@@ -16,6 +16,7 @@ const staffSchema = mongoose.Schema(
     },
     scode: {
       type: String,
+      required: true,
     },
     employee_id: {
       type: Number,
@@ -27,6 +28,10 @@ const staffSchema = mongoose.Schema(
       ref: 'campus',
       required: true,
       trim: true,
+    },
+    role: {
+      type: String,
+      required: true,
     },
     designation: {
       type: String,
@@ -52,8 +57,8 @@ const staffSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    contact_no: {
-      type: String,
+    mobNumber: {
+      type: Number,
       required: true,
     },
     emergency_contact_no: {
@@ -88,20 +93,20 @@ const staffSchema = mongoose.Schema(
     image: {
       type: String,
     },
-    userName: {
-      type: String,
-    },
-    password: {
-      type: String,
-      trim: true,
-      minlength: 8,
-      validate(value) {
-        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-          throw new Error('Password must contain at least one letter and one number');
-        }
-      },
-      private: true, // used by the toJSON plugin
-    },
+    // userName: {
+    //   type: String,
+    // },
+    // password: {
+    //   type: String,
+    //   trim: true,
+    //   minlength: 8,
+    //   validate(value) {
+    //     if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+    //       throw new Error('Password must contain at least one letter and one number');
+    //     }
+    //   },
+    //   private: true, // used by the toJSON plugin
+    // },
     gender: {
       type: String,
       required: true,

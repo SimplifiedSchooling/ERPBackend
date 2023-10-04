@@ -5,9 +5,7 @@ const createCampus = {
   body: Joi.object().keys({
     UDISEcode: Joi.string(),
     name: Joi.string(),
-    userName: Joi.string(),
-    password: Joi.string(),
-    contact_number: Joi.string(),
+    mobNumber: Joi.number(),
     address: Joi.string(),
     date: Joi.date(),
   }),
@@ -36,9 +34,7 @@ const updateCampus = {
     .keys({
       UDISEcode: Joi.string(),
       name: Joi.string(),
-      userName: Joi.string(),
-      password: Joi.string(),
-      contact_number: Joi.string(),
+      mobNumber: Joi.number(),
       address: Joi.string(),
       date: Joi.date(),
     })

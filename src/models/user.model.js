@@ -9,6 +9,17 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
+    scode: {
+      type: String,
+    },
+    mobNumber: {
+      type: Number,
+      required: true,
+    },
     userName: {
       type: String,
       required: true,
@@ -26,17 +37,9 @@ const userSchema = mongoose.Schema(
       },
       private: true, // used by the toJSON plugin
     },
-    status: {
-      type: String,
-      trim: true,
-    },
     role: {
       type: String,
       default: 'user',
-    },
-    isEmailVerified: {
-      type: Boolean,
-      default: false,
     },
   },
   {

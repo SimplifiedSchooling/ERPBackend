@@ -45,7 +45,15 @@ const getUserById = async (id) => {
 const getUserByUserName = async (userName) => {
   return User.findOne({ userName });
 };
-
+/**
+ * Get user by userName
+ * @param {string} userName
+ * @param {string} mobNumber
+ * @returns {Promise<User>}
+ */
+const getUserByUserNameAndMob = async (userName, mobNumber) => {
+  return User.findOne({ userName, mobNumber });
+};
 /**
  * Update user by id
  * @param {ObjectId} userId
@@ -103,4 +111,5 @@ module.exports = {
   updateUserById,
   deleteUserById,
   updateUserPasswordById,
+  getUserByUserNameAndMob,
 };

@@ -2,7 +2,7 @@
 const httpStatus = require('http-status');
 const crypto = require('crypto');
 const randomstring = require('randomstring');
-const { Staff } = require('../../models');
+const { Staff, User } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 // Generate a random username
@@ -21,12 +21,20 @@ function generateUsernameFromName(name) {
  * @returns {Promise<Staff>}
  */
 const createStaff = async (staffBody) => {
-  const staffData = { ...staffBody };
-  const userName = generateUsernameFromName(staffData.name);
-  const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
-  staffData.userName = userName;
-  staffData.password = randomPassword;
-  return Staff.create(staffData);
+  // const staffData = { ...staffBody };
+  const staff = await Staff.create(staffBody);
+  const userName = generateUsernameFromName(staffBody.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex');
+  const staffUser = await User.create({
+    name: staff.name,
+    userId: staff.id,
+    scode: staff.scode,
+    mobNumber: staff.mobNumber,
+    userName,
+    password: randomPassword,
+    role: staff.role,
+  });
+  return { staffUser, staff };
 };
 
 /**
