@@ -102,13 +102,59 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
-const calculateTotalMaleStudents = async () => {
-  try {
-    const totalMaleStudents = await Student.countDocuments({ gender: 'Male' });
-    return totalMaleStudents;
-  } catch (error) {
-    throw error;
+const studentBulkFilter = (options) => {
+  return {
+    filter: options.filter || (options.name ? { name: options.name } : {}),
+    getFilter() {
+      return this.filter;
+    },
+  };
+};
+
+const getStudentBySaral = async (filter) => {
+  const studentFilter = studentBulkFilter(filter).getFilter();
+  if (studentFilter) {
+    const record = await Student.findOne(studentFilter).exec();
+    return record;
   }
+  return { message: 'Missing query params !!!' };
+};
+
+const bulkUpload = async (studentArray, csvFilePath = null) => {
+  let modifiedStudentsArray = studentArray;
+  if (csvFilePath) {
+    modifiedStudentsArray = { students: csvFilePath };
+  }
+  if (!modifiedStudentsArray.students || !modifiedStudentsArray.students.length)
+    return { error: true, message: 'missing array' };
+
+  const records = [];
+  const dups = [];
+
+  await Promise.all(
+    modifiedStudentsArray.students.map(async (student) => {
+      const studentFound = await getStudentBySaral({ name: student.name });
+      if (studentFound) {
+        dups.push(student);
+      } else {
+        let record = new Student(student);
+        record = await record.save();
+        if (record) {
+          records.push(student);
+        }
+      }
+    })
+  );
+
+  const duplicates = {
+    totalDuplicates: dups.length ? dups.length : 0,
+    data: dups.length ? dups : [],
+  };
+  const nonduplicates = {
+    totalNonDuplicates: records.length ? records.length : 0,
+    data: records.length ? records : [],
+  };
+  return { nonduplicates, duplicates };
 };
 
 module.exports = {
@@ -117,6 +163,6 @@ module.exports = {
   getStudentById,
   updateStudentById,
   deleteStudentById,
-  calculateTotalMaleStudents,
   getStudentMobNumber,
+  bulkUpload,
 };

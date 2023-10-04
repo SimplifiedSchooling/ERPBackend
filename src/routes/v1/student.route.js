@@ -1,15 +1,29 @@
 const express = require('express');
+const multer = require('multer');
 const validate = require('../../middlewares/validate');
 const StudentValidation = require('../../validations/student.validation');
 const StudentController = require('../../controllers/student.controller');
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const uploads = multer({ storage });
+
+router
+  .route('/bulkupload')
+  .post(uploads.single('file'), validate(StudentValidation.studentSchema), StudentController.bulkUploadFile);
+
 router
   .route('/')
   .post(validate(StudentValidation.createStudent), StudentController.createStudent)
   .get(validate(StudentValidation.getAllStudents), StudentController.getStudents);
-
-router.route('/totalStudent').get(StudentController.getTotalMaleStudents);
 
 router
   .route('/:studentId')
@@ -23,6 +37,29 @@ module.exports = router;
  * tags:
  *   name: Students
  *   description:   Students Management System
+ */
+
+/**
+ * @swagger
+ * /student/bulkupload:
+ *   post:
+ *     summary: Upload a CSV file for bulk student upload
+ *     tags: [Students]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Successfully added CSV file
+ *       404:
+ *         description: Missing file
  */
 
 /**
