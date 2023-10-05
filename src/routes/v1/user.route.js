@@ -1,5 +1,5 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
+// const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
 const userController = require('../../controllers/user.controller');
@@ -13,9 +13,9 @@ router
 
 router
   .route('/:userId')
-  .get(auth(), validate(userValidation.getUser), userController.getUser)
-  .patch(auth(), validate(userValidation.updateUser), userController.updateUser)
-  .delete(auth(), validate(userValidation.deleteUser), userController.deleteUser);
+  .get(validate(userValidation.getUser), userController.getUser)
+  .patch(validate(userValidation.updateUser), userController.updateUser)
+  .delete(validate(userValidation.deleteUser), userController.deleteUser);
 
 module.exports = router;
 
@@ -46,8 +46,9 @@ module.exports = router;
  *               - userName
  *               - password
  *               - role
- *               - staffId
- *               - campusId
+ *               - userId
+ *               - scode
+ *               - mobNumber
  *             properties:
  *               name:
  *                 type: string
@@ -61,17 +62,20 @@ module.exports = router;
  *                 description: At least one number and one letter
  *               role:
  *                  type: string
- *               staffId:
+ *               userId:
  *                  type: string
- *               campusId:
+ *               scode:
  *                  type: string
+ *               mobNumber:
+ *                 type: number
  *             example:
  *               name: fake name
  *               userName: fakeusername
  *               password: password1
  *               role: user
- *               staffId: 64b62cda79f4e038088daf15
- *               campusId: 64b62cda79f4e038088daf15
+ *               userId: 64b62cda79f4e038088daf15
+ *               scode: 64b62cda79f4e038088daf15
+ *               mobNumber: 9823525745
  *     responses:
  *       "201":
  *         description: Created
@@ -207,24 +211,21 @@ module.exports = router;
  *               userName:
  *                 type: string
  *                 description: must be unique
- *               password:
- *                 type: string
- *                 format: password
- *                 minLength: 8
- *                 description: At least one number and one letter
  *               role:
  *                  type: string
- *               staffId:
+ *               userId:
  *                  type: string
- *               campusId:
+ *               scode:
  *                  type: string
+ *               mobNumber:
+ *                 type: number
  *             example:
  *               name: fake name
  *               userName: fakeusername
- *               password: password1
  *               role: user
- *               staffId: 64b62cda79f4e038088daf15
- *               campusId: 64b62cda79f4e038088daf15
+ *               userId: 64b62cda79f4e038088daf15
+ *               scode: 64b62cda79f4e038088daf15
+ *               mobNumber: 9823525745
  *     responses:
  *       "200":
  *         description: OK
