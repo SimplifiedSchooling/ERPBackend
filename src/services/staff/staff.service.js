@@ -56,8 +56,8 @@ const queryStaff = async (filter, options) => {
  * @param {ObjectId} _id
  * @returns {Promise<Staff>}
  */
-const getStaffById = async (_id) => {
-  return Staff.find({ _id });
+const getStaffById = async (id) => {
+  return Staff.findById(id);
 };
 
 /**
