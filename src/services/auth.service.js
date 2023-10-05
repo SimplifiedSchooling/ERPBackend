@@ -13,7 +13,6 @@ const departmentUserService = require('./department.user.service');
 /**
  * Login with username and password
  * @param {string} userName
- * @param {string} userName
  * @param {string} password
  * @returns {Promise<User>}
  */
