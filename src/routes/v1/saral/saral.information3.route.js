@@ -124,11 +124,11 @@ module.exports = router;
  *               contractorowner: string
  *               rtoregistration: string
  *               drivername: string
- *               driverlicenseno: string
- *               driveraadharno: string
+ *               driverlicenseno: number
+ *               driveraadharno: number
  *               helpername: string
  *               teacherresearch: number
- *               teacherarticlepublish: string
+ *               teacherarticlepublish: number
  *               curriculumdetails: string
  *             example:
  *               scode: mh00001
@@ -170,11 +170,11 @@ module.exports = router;
  *               contractorowner: Yes
  *               rtoregistration: Yes
  *               drivername: Yes
- *               driverlicenseno: Yes
- *               driveraadharno: Yes
+ *               driverlicenseno: 2
+ *               driveraadharno: 5
  *               helpername: Yes
  *               teacherresearch: 5
- *               teacherarticlepublish: Test1
+ *               teacherarticlepublish: 6
  *               curriculumdetails: Test1
  *     responses:
  *       "201":
@@ -328,11 +328,11 @@ module.exports = router;
  *               contractorowner: string
  *               rtoregistration: string
  *               drivername: string
- *               driverlicenseno: string
- *               driveraadharno: string
+ *               driverlicenseno: number
+ *               driveraadharno: number
  *               helpername: string
  *               teacherresearch: number
- *               teacherarticlepublish: string
+ *               teacherarticlepublish: number
  *               curriculumdetails: string
  *             example:
  *               totallaptop: 3
@@ -373,11 +373,11 @@ module.exports = router;
  *               contractorowner: Yes
  *               rtoregistration: Yes
  *               drivername: Yes
- *               driverlicenseno: Yes
- *               driveraadharno: Yes
+ *               driverlicenseno: 5
+ *               driveraadharno: 8
  *               helpername: Yes
  *               teacherresearch: 5
- *               teacherarticlepublish: Test1
+ *               teacherarticlepublish: 7
  *               curriculumdetails: Test1
  *     responses:
  *       "200":
