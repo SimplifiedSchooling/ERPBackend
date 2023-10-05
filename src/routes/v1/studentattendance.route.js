@@ -85,14 +85,14 @@ module.exports = router;
  * @swagger
  * /StudentAttendance/getTodaysAttendanceforSchool:
  *   get:
- *     summary:  A list of students todays attendence list for school matching the specified campusID and date
+ *     summary:  A list of students todays attendence list for school matching the specified scode and date
  *     tags: [StudentAttendance]
  *     parameters:
  *       - in: query
- *         name: campusId
+ *         name: scode
  *         schema:
  *           type: string
- *         description: The ID of the campusId to filter by.
+ *         description: The scode to filter by.
  *       - in: query
  *         name: date
  *         schema:
@@ -100,7 +100,7 @@ module.exports = router;
  *         description: The date to filter by.
  *     responses:
  *       '200':
- *         description:  A list of students todays attendence list for school matching the specified campusID and date
+ *         description:  A list of students todays attendence list for school matching the specified scode and date
  *         content:
  *           application/json:
  *             example:
@@ -155,23 +155,13 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - classId
- *               - sectionId
  *               - studentId
  *               - date
- *               - attendancetype
- *               - remark
- *               - attedanceTakenBy
- *               - campusId
+ *               - time
  *             example:
- *               classId: 650c141a483c21d899148b29
- *               sectionId: 650c141a483c21d899148b29
  *               studentId: 650c141a483c21d899148b29
- *               attedanceTakenBy: 650c141a483c21d899148b29
- *               campusId: 650c141a483c21d899148b29
  *               date: 2023-09-15
- *               attendancetype: present  // 'present', 'absent', 'halfday', 'holiday'
- *               remark: Attended class
+ *               time: 10:30am
  *     responses:
  *       "201":
  *         description: Created

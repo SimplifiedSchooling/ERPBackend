@@ -60,7 +60,7 @@ const updateClassTeacherById = {
       sectionId: Joi.string(),
       teacherId: Joi.string(),
     })
-    .min(4),
+    .min(1),
 };
 const deleteClassTeacherById = {
   params: Joi.object().keys({

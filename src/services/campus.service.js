@@ -1,17 +1,39 @@
 const httpStatus = require('http-status');
-const { Campus } = require('../models');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
+const { Campus, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
+// Generate a random username
+function generateUsernameFromName(name) {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+}
 /**
  * Create a Campus
  * @param {Object} campusBody
  * @returns {Promise<Campus>}
  */
 const createCampus = async (campusBody) => {
-  if (await Campus.isUserNameTaken(campusBody.userName)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
-  }
-  return Campus.create(campusBody);
+  // if (await Campus.isUserNameTaken(campusBody.userName)) {
+  //   throw new ApiError(httpStatus.BAD_REQUEST, 'User Name already taken');
+  // }
+  const campus = await Campus.create(campusBody);
+  const userName = await generateUsernameFromName(campusBody.name);
+  const randomPassword = await crypto.randomBytes(16).toString('hex');
+  const schoolUser = await User.create({
+    name: campus.name,
+    userId: campus.id,
+    mobNumber: campus.mobNumber,
+    userName,
+    password: randomPassword,
+    role: 'school',
+  });
+  return { schoolUser, campus };
 };
 
 /**

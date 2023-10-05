@@ -65,6 +65,7 @@ const section1C57 = mongoose.Schema(
     },
     scode: {
       type: String,
+      required: true,
     },
   },
   {

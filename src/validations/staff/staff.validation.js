@@ -3,7 +3,8 @@ const { objectId } = require('../custom.validation');
 
 const staffSchema = Joi.object().keys({
   saral_id: Joi.string().required(),
-  scode: Joi.string(),
+  scode: Joi.string().required(),
+  role: Joi.string().required(),
   campusId: Joi.string().required(),
   employee_id: Joi.number().required(),
   designation: Joi.string().required(),
@@ -12,7 +13,7 @@ const staffSchema = Joi.object().keys({
   name: Joi.string().required(),
   middlename: Joi.string().required(),
   father_name: Joi.string().required(),
-  contact_no: Joi.string().required(),
+  mobNumber: Joi.number().required(),
   emergency_contact_no: Joi.string(),
   dob: Joi.date().required(),
   marital_status: Joi.string(),
@@ -22,11 +23,11 @@ const staffSchema = Joi.object().keys({
   permanent_address: Joi.string().required(),
   note: Joi.string(),
   image: Joi.string(),
-  userName: Joi.string(),
-  password: Joi.string()
-    .min(8)
-    .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])/)
-    .error(new Error('Password must contain at least one letter and one number')),
+  // userName: Joi.string(),
+  // password: Joi.string()
+  //   .min(8)
+  //   .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])/)
+  //   .error(new Error('Password must contain at least one letter and one number')),
   gender: Joi.string().required(),
   account_title: Joi.string(),
   bank_account_no: Joi.number().required(),
@@ -136,6 +137,7 @@ const updateStaff = {
     .keys({
       saral_id: Joi.string(),
       scode: Joi.string(),
+      role: Joi.string(),
       campusId: Joi.string(),
       employee_id: Joi.number(),
       designation: Joi.string(),
@@ -144,7 +146,7 @@ const updateStaff = {
       name: Joi.string(),
       middlename: Joi.string(),
       father_name: Joi.string(),
-      contact_no: Joi.string(),
+      mobNumber: Joi.number(),
       emergency_contact_no: Joi.string(),
       dob: Joi.date(),
       marital_status: Joi.string(),

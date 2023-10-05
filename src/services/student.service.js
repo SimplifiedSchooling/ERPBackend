@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-useless-catch */
 const httpStatus = require('http-status');
-// const crypto = require('crypto');
+const crypto = require('crypto');
 const randomstring = require('randomstring');
-const { Student } = require('../models');
+const { Student, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 // Generate a random username
@@ -21,23 +21,31 @@ function generateUsernameFromName(name) {
  * @returns {Promise<Student>}
  */
 const createStudent = async (studentData) => {
-  const data = studentData;
-  if (await Student.isUserNameTaken(studentData.mobNumber)) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Mobile Number already taken');
-  }
-  const userName = await generateUsernameFromName(data.name);
-  data.userName = userName;
-  return Student.create(data);
+  const userName = await generateUsernameFromName(studentData.middlename);
+  const newStudent = await Student.create(studentData);
+  const randomPassword = crypto.randomBytes(16).toString('hex');
+  const parentUser = await User.create({
+    name: newStudent.middlename,
+    userId: newStudent.id,
+    scode: newStudent.scode,
+    mobNumber: newStudent.mobNumber,
+    userName,
+    password: randomPassword,
+    role: 'parent',
+  });
 
-  // const userName = await generateUsernameFromName(newStudent.middlename);
-  // const randomPassword = crypto.randomBytes(16).toString('hex'); // Generate a random password
-  // const parentUser = await Parent.create({
-  //   userName,
-  //   password: randomPassword,
-  //   name: newStudent.middlename,
-  //   lastname: newStudent.lastname,
-  //   studentId: newStudent.id,
-  // });
+  const username = await generateUsernameFromName(studentData.firstname);
+  const randomPass = crypto.randomBytes(16).toString('hex');
+  const studentUser = await User.create({
+    name: newStudent.firstname,
+    userId: newStudent.id,
+    scode: newStudent.scode,
+    mobNumber: newStudent.mobNumber,
+    userName: username,
+    password: randomPass,
+    role: 'student',
+  });
+  return { parentUser, newStudent, studentUser };
 };
 
 /**
@@ -69,7 +77,8 @@ const getStudentById = async (id) => {
  * @returns {Promise<Student>}
  */
 const getStudentMobNumber = async (mobNumber) => {
-  return Student.findOne({ mobNumber });
+  const student = await Student.findOne({ mobNumber });
+  return student;
 };
 
 /**
@@ -102,13 +111,59 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
-const calculateTotalMaleStudents = async () => {
-  try {
-    const totalMaleStudents = await Student.countDocuments({ gender: 'Male' });
-    return totalMaleStudents;
-  } catch (error) {
-    throw error;
+const studentBulkFilter = (options) => {
+  return {
+    filter: options.filter || (options.name ? { name: options.name } : {}),
+    getFilter() {
+      return this.filter;
+    },
+  };
+};
+
+const getStudentBySaral = async (filter) => {
+  const studentFilter = studentBulkFilter(filter).getFilter();
+  if (studentFilter) {
+    const record = await Student.findOne(studentFilter).exec();
+    return record;
   }
+  return { message: 'Missing query params !!!' };
+};
+
+const bulkUpload = async (studentArray, csvFilePath = null) => {
+  let modifiedStudentsArray = studentArray;
+  if (csvFilePath) {
+    modifiedStudentsArray = { students: csvFilePath };
+  }
+  if (!modifiedStudentsArray.students || !modifiedStudentsArray.students.length)
+    return { error: true, message: 'missing array' };
+
+  const records = [];
+  const dups = [];
+
+  await Promise.all(
+    modifiedStudentsArray.students.map(async (student) => {
+      const studentFound = await getStudentBySaral({ name: student.name });
+      if (studentFound) {
+        dups.push(student);
+      } else {
+        let record = new Student(student);
+        record = await record.save();
+        if (record) {
+          records.push(student);
+        }
+      }
+    })
+  );
+
+  const duplicates = {
+    totalDuplicates: dups.length ? dups.length : 0,
+    data: dups.length ? dups : [],
+  };
+  const nonduplicates = {
+    totalNonDuplicates: records.length ? records.length : 0,
+    data: records.length ? records : [],
+  };
+  return { nonduplicates, duplicates };
 };
 
 module.exports = {
@@ -117,6 +172,6 @@ module.exports = {
   getStudentById,
   updateStudentById,
   deleteStudentById,
-  calculateTotalMaleStudents,
   getStudentMobNumber,
+  bulkUpload,
 };

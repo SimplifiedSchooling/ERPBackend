@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
 const moment = require('moment');
-const { Student, StudentAttendanceSchema, Classes } = require('../models');
+const { Student, StudentAttendanceSchema } = require('../models');
 const ApiError = require('../utils/ApiError');
 /**
  * Create a StudentAttendanceSchema
@@ -81,25 +81,25 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
 
 /**
  * Get total, present, and absent students based on campusId and date.
- * @param {string} campusId - The ID of the campus.
+ * @param {string} scode - The scode property.
  * @param {string} date - The date in 'YYYY-MM-DD' format.
  * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
  */
-const getStudentAttendanceSummary = async (campusId, date) => {
-  const totalStudentsCount = await Student.countDocuments({ campusId });
+const getStudentAttendanceSummary = async (scode, date) => {
+  const totalStudentsCount = await Student.countDocuments({ scode });
   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
-    campusId,
+    scode,
     attendancetype: 'present',
     date,
   });
   const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
-    campusId,
+    scode,
     attendancetype: 'absent',
     date,
   });
 
   const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
-    campusId,
+    scode,
     attendancetype: 'halfday',
     date,
   });
@@ -174,6 +174,89 @@ const getAttendanceData = async (classId, sectionId, date) => {
         'studentInfo.class': 1,
         'studentInfo.section': 1,
         'studentInfo.gender': 1,
+        'studentInfo.studentId': 1,
+        'studentInfo.saral_id': 1,
+        'studentInfo.scode': 1,
+        'studentInfo.userName': 1,
+        'studentInfo.parent_id': 1,
+        'studentInfo.admission_no': 1,
+        'studentInfo.roll_no': 1,
+        'studentInfo.firstname': 1,
+        'studentInfo.middlename': 1,
+        'studentInfo.rte': 1,
+        'studentInfo.image': 1,
+        'studentInfo.state': 1,
+        'studentInfo.city': 1,
+        'studentInfo.pincode': 1,
+        'studentInfo.religion': 1,
+        'studentInfo.cast': 1,
+        'studentInfo.dob': 1,
+        'studentInfo.current_address': 1,
+        'studentInfo.permanent_address': 1,
+        'studentInfo.category_id': 1,
+        'studentInfo.route_id': 1,
+        'studentInfo.school_house_id': 1,
+        'studentInfo.blood_group': 1,
+        'studentInfo.vehroute_id': 1,
+        'studentInfo.hostel_room_id': 1,
+        'studentInfo.adhar_no': 1,
+        'studentInfo.nameadhar_no': 1,
+        'studentInfo.samagra_id': 1,
+        'studentInfo.aadhar_back': 1,
+        'studentInfo.bank_account_no': 1,
+        'studentInfo.bank_name': 1,
+        'studentInfo.ifsc_code': 1,
+        'studentInfo.guardian_is': 1,
+        'studentInfo.father_name': 1,
+        'studentInfo.father_phone': 1,
+        'studentInfo.father_occupation': 1,
+        'studentInfo.mother_name': 1,
+        'studentInfo.mother_phone': 1,
+        'studentInfo.mother_occupation': 1,
+        'studentInfo.guardian_name': 1,
+        'studentInfo.guardian_relation': 1,
+        'studentInfo.guardian_phone': 1,
+        'studentInfo.guardian_occupation': 1,
+        'studentInfo.guardian_address': 1,
+        'studentInfo.guardian_email': 1,
+        'studentInfo.father_pic': 1,
+        'studentInfo.mother_pic': 1,
+        'studentInfo.guardian_pic': 1,
+        'studentInfo.is_active': 1,
+        'studentInfo.previous_school': 1,
+        'studentInfo.height': 1,
+        'studentInfo.weight': 1,
+        'studentInfo.student_health_check1': 1,
+        'studentInfo.student_health_check2': 1,
+        'studentInfo.disability': 1,
+        'studentInfo.certifi_disability_avai': 1,
+        'studentInfo.disability1': 1,
+        'studentInfo.disability_type': 1,
+        'studentInfo.percentage': 1,
+        'studentInfo.certifi_number': 1,
+        'studentInfo.certifi_date': 1,
+        'studentInfo.certifi_auth': 1,
+        'studentInfo.certificate_up': 1,
+        'studentInfo.orphan': 1,
+        'studentInfo.orphanname': 1,
+        'studentInfo.bpl': 1,
+        'studentInfo.bplyear': 1,
+        'studentInfo.bplnumber': 1,
+        'studentInfo.stdincome': 1,
+        'studentInfo.initialadmistand': 1,
+        'studentInfo.admissiontype': 1,
+        'studentInfo.mothertongue': 1,
+        'studentInfo.hivparent': 1,
+        'studentInfo.childinfected': 1,
+        'studentInfo.studtype': 1,
+        'studentInfo.mirc_code': 1,
+        'studentInfo.measurement_date': 1,
+        'studentInfo.dis_reason': 1,
+        'studentInfo.note': 1,
+        'studentInfo.dis_note': 1,
+        'studentInfo.app_key': 1,
+        'studentInfo.parent_app_key': 1,
+        'studentInfo.disable_at': 1,
       },
     },
   ]);
@@ -291,5 +374,5 @@ module.exports = {
   getAttendanceData,
   getWeekReport,
   getStudentAttendanceSummary,
-  //getClasswiseStudentAttendanceList,
+  // getClasswiseStudentAttendanceList,
 };

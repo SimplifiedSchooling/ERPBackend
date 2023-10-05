@@ -8,6 +8,7 @@ const tokenTypes = {
 const userTypes = {
   USER: 'user',
   SANSTHAN: 'sansthan',
+  DEPARTMENT: 'department',
 };
 
 module.exports = {

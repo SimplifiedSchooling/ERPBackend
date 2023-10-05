@@ -3,15 +3,15 @@ const { objectId } = require('./custom.validation');
 
 const createStudentAttendance = {
   body: Joi.object().keys({
-    // StudentSessionId: Joi.string(),
-    classId: Joi.string().required(),
-    attedanceTakenBy: Joi.string().required(),
-    sectionId: Joi.string().required(),
+    // // StudentSessionId: Joi.string(),
+    // classId: Joi.string().required(),
+    // attedanceTakenBy: Joi.string().required(),
+    // sectionId: Joi.string().required(),
     studentId: Joi.string().required(),
-    campusId: Joi.string().required(),
+    time: Joi.string().required(),
     date: Joi.string().required(),
-    attendancetype: Joi.string().valid('present', 'absent', 'halfday', 'holiday').required(),
-    remark: Joi.string().allow('').required(),
+    // attendancetype: Joi.string().valid('present', 'absent', 'halfday', 'holiday').required(),
+    // remark: Joi.string().allow('').required(),
   }),
 };
 
@@ -33,7 +33,7 @@ const attendanceData = {
 };
 const todaysAttendanceForSchool = {
   query: Joi.object().keys({
-    campusId: Joi.string().required(),
+    scode: Joi.string().required(),
     date: Joi.string().required(),
   }),
 };
