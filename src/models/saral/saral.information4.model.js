@@ -7,7 +7,7 @@ const saralInformation4Schema = mongoose.Schema(
       type: String,
     },
     typeofactivity: {
-      type: String,
+      type: Number,
       trim: true,
     },
     ptaexecutive: {
