@@ -1,19 +1,17 @@
 const Joi = require('joi');
-const { password, objectId } = require('./custom.validation');
+const { objectId } = require('./custom.validation');
 
-const createUser = {
+const createDepUser = {
   body: Joi.object().keys({
-    userName: Joi.string().required(),
-    password: Joi.string().required().custom(password),
     name: Joi.string().required(),
-    scode: Joi.string(),
-    role: Joi.string().required(),
     mobNumber: Joi.number().required(),
-    userId: Joi.string().required(),
+    role: Joi.string().required(),
+    designation: Joi.string(),
+    department: Joi.string(),
   }),
 };
 
-const getUsers = {
+const getDepUsers = {
   query: Joi.object().keys({
     name: Joi.string(),
     role: Joi.string(),
@@ -23,39 +21,37 @@ const getUsers = {
   }),
 };
 
-const getUser = {
+const getDepUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
   }),
 };
 
-const updateUser = {
+const updateDepUser = {
   params: Joi.object().keys({
     userId: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
-      userName: Joi.string(),
-      password: Joi.string().custom(password),
-      name: Joi.string(),
-      scode: Joi.string(),
-      role: Joi.string(),
-      mobNumber: Joi.number(),
-      userId: Joi.string(),
+      name: Joi.string().required(),
+      mobNumber: Joi.number().required(),
+      role: Joi.string().required(),
+      designation: Joi.string(),
+      department: Joi.string(),
     })
     .min(1),
 };
 
-const deleteUser = {
+const deleteDepUser = {
   params: Joi.object().keys({
     userId: Joi.string().custom(objectId),
   }),
 };
 
 module.exports = {
-  createUser,
-  getUsers,
-  getUser,
-  updateUser,
-  deleteUser,
+  createDepUser,
+  getDepUsers,
+  getDepUser,
+  updateDepUser,
+  deleteDepUser,
 };

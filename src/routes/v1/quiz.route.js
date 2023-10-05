@@ -59,7 +59,6 @@ module.exports = router;
  *             type: object
  *             required:
  *               - quizName
- *               - question
  *               - options
  *               - correctOptions
  *               - explain
@@ -75,10 +74,9 @@ module.exports = router;
  *               - subjectId
  *               - chapterId
  *             example:
- *               question: Which of the following colors are primary colors?
- *               quizName: unit test
+ *               quizName: Which of the following colors are primary colors?
  *               options: ["Red", "Green", "Blue", "Yellow" ]
- *               correctOptions: ["0", "2" ]
+ *               correctOptions: [0, 2 ]
  *               explain: Explanation for the correct option
  *               hint: Hint for solving the quiz
  *               types: easy
@@ -211,7 +209,6 @@ module.exports = router;
  *             type: object
  *             properties:
  *               - quizName
- *               - question
  *               - options
  *               - correctOptions
  *               - explain
@@ -227,10 +224,9 @@ module.exports = router;
  *               - subjectId
  *               - chapterId
  *             example:
- *               question: Which of the following colors are primary colors?
- *               quizName: unit test
+ *               quizName: Which of the following colors are primary colors?
  *               options: ["Red", "Green", "Blue", "Yellow" ]
- *               correctOptions: ["0", "2" ]
+ *               correctOptions: [0, 2]
  *               explain: Explanation for the correct option
  *               hint: Hint for solving the quiz
  *               types: easy
@@ -412,8 +408,8 @@ module.exports = router;
 //  *               correctOptions:
 //  *                 type: array
 //  *                 items:
-//  *                   type: string
-//  *                 example: ["2"]
+//  *                   type: number
+//  *                 example: [2]
 //  *               explain:
 //  *                 type: string
 //  *                 example: "Explanation for the correct option"
@@ -500,8 +496,8 @@ module.exports = router;
  *               correctOptions:
  *                 type: array
  *                 items:
- *                   type: string
- *                 example: ["2"]
+ *                   type: number
+ *                 example: [2]
  *               explain:
  *                 type: string
  *                 example: "Explanation for the correct option"

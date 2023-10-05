@@ -23,11 +23,19 @@ const sansthanRegister = {
     otp: Joi.number().required(),
   }),
 };
+
 // user login
 const login = {
   body: Joi.object().keys({
     userName: Joi.string().required(),
     password: Joi.string().required(),
+  }),
+};
+// user loginfirst time and verify mobile number
+const resetPassVerifyNo = {
+  body: Joi.object().keys({
+    userName: Joi.string().required(),
+    mobNumber: Joi.number().required(),
   }),
 };
 // student login
@@ -74,7 +82,14 @@ const refreshTokens = {
 
 const forgotPassword = {
   body: Joi.object().keys({
-    userName: Joi.string().email().required(),
+    userName: Joi.string().required(),
+  }),
+};
+
+const setPassword = {
+  body: Joi.object().keys({
+    password: Joi.string().required(),
+    userId: Joi.string().required(),
   }),
 };
 
@@ -118,4 +133,6 @@ module.exports = {
   checkUserIdExist,
   schoolLogin,
   studentLogin,
+  resetPassVerifyNo,
+  setPassword,
 };

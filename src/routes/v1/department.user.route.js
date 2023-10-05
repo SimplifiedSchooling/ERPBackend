@@ -1,38 +1,37 @@
 const express = require('express');
-// const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+const { depUserValidation } = require('../../validations');
+const { departmentUserController } = require('../../controllers');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(userValidation.createUser), userController.createUser)
-  .get(validate(userValidation.getUsers), userController.getUsers);
+  .post(validate(depUserValidation.createDepUser), departmentUserController.createDepUser)
+  .get(validate(depUserValidation.getDepUsers), departmentUserController.getDepUsers);
 
 router
   .route('/:userId')
-  .get(validate(userValidation.getUser), userController.getUser)
-  .patch(validate(userValidation.updateUser), userController.updateUser)
-  .delete(validate(userValidation.deleteUser), userController.deleteUser);
+  .get(validate(depUserValidation.getDepUser), departmentUserController.getDepUserById)
+  .patch(validate(depUserValidation.updateDepUser), departmentUserController.updateDepUser)
+  .delete(validate(depUserValidation.deleteDepUser), departmentUserController.deleteDepUser);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Users
- *   description: User management and retrieval
+ *   name: Department
+ *   description: Department User management and retrieval
  */
 
 /**
  * @swagger
- * /users:
+ * /department:
  *   post:
- *     summary: Create a user
+ *     summary: Create a Department
  *     description: Only admins can create other users.
- *     tags: [Users]
+ *     tags: [Department]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -43,39 +42,25 @@ module.exports = router;
  *             type: object
  *             required:
  *               - name
- *               - userName
- *               - password
  *               - role
- *               - userId
- *               - scode
  *               - mobNumber
  *             properties:
  *               name:
  *                 type: string
- *               userName:
- *                 type: string
- *                 description: must be unique
- *               password:
- *                 type: string
- *                 format: password
- *                 minLength: 8
- *                 description: At least one number and one letter
  *               role:
  *                  type: string
- *               userId:
+ *               department:
  *                  type: string
- *               scode:
+ *               designation:
  *                  type: string
  *               mobNumber:
- *                 type: number
+ *                  type: number
  *             example:
  *               name: fake name
- *               userName: fakeusername
- *               password: password1
- *               role: user
- *               userId: 64b62cda79f4e038088daf15
- *               scode: 64b62cda79f4e038088daf15
- *               mobNumber: 9823525745
+ *               role: block
+ *               department: account
+ *               designation:  pune
+ *               mobNumber: 5685785675
  *     responses:
  *       "201":
  *         description: Created
@@ -83,17 +68,15 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/User'
- *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all users
+ *     summary: Get all Department
  *     description: Only admins can retrieve all users.
- *     tags: [Users]
+ *     tags: [Department]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -158,11 +141,11 @@ module.exports = router;
 
 /**
  * @swagger
- * /users/{id}:
+ * /department/{id}:
  *   get:
- *     summary: Get a user
+ *     summary: Get a Department
  *     description: Logged in users can fetch only their own user information. Only admins can fetch other users.
- *     tags: [Users]
+ *     tags: [Department]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -187,9 +170,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a user
+ *     summary: Update a Department
  *     description: Logged in users can only update their own information. Only admins can update other users.
- *     tags: [Users]
+ *     tags: [Department]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -208,24 +191,20 @@ module.exports = router;
  *             properties:
  *               name:
  *                 type: string
- *               userName:
- *                 type: string
- *                 description: must be unique
  *               role:
  *                  type: string
- *               userId:
+ *               department:
  *                  type: string
- *               scode:
+ *               designation:
  *                  type: string
  *               mobNumber:
- *                 type: number
+ *                  type: number
  *             example:
  *               name: fake name
- *               userName: fakeusername
- *               role: user
- *               userId: 64b62cda79f4e038088daf15
- *               scode: 64b62cda79f4e038088daf15
- *               mobNumber: 9823525745
+ *               role: block
+ *               department: account
+ *               designation:  pune
+ *               mobNumber: 5685785675
  *     responses:
  *       "200":
  *         description: OK
@@ -233,8 +212,6 @@ module.exports = router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/schemas/User'
- *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -243,9 +220,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a user
+ *     summary: Delete a Department
  *     description: Logged in users can delete only themselves. Only admins can delete other users.
- *     tags: [Users]
+ *     tags: [Department]
  *     security:
  *       - bearerAuth: []
  *     parameters:

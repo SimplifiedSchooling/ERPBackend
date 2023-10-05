@@ -133,6 +133,7 @@ const section1A20Schema = mongoose.Schema(
     },
     scode: {
       type: String,
+      required: true,
     },
   },
   {

@@ -13,23 +13,23 @@ const campusSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    userName: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      trim: true,
-      minlength: 8,
-      validate(value) {
-        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-          throw new Error('Password must contain at least one letter and one number');
-        }
-      },
-      private: true, // used by the toJSON plugin
-    },
-    contact_number: {
+    // userName: {
+    //   type: String,
+    //   required: true,
+    // },
+    // password: {
+    //   type: String,
+    //   required: true,
+    //   trim: true,
+    //   minlength: 8,
+    //   validate(value) {
+    //     if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+    //       throw new Error('Password must contain at least one letter and one number');
+    //     }
+    //   },
+    //   private: true, // used by the toJSON plugin
+    // },
+    mobNumber: {
       type: String,
     },
     address: {
