@@ -139,7 +139,7 @@ const saralInformation3Schema = mongoose.Schema(
       trim: true,
     },
     transportprovider: {
-      type: String,
+      type: Number,
       trim: true,
     },
     vehicaltype: {

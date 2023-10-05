@@ -119,7 +119,7 @@ module.exports = router;
  *               seatingarrang: string
  *               seatingarrangava: string
  *               seatingarrangereq: string
- *               transportprovider: string
+ *               transportprovider: number
  *               vehicaltype: string
  *               contractorowner: string
  *               rtoregistration: string
@@ -165,7 +165,7 @@ module.exports = router;
  *               seatingarrang: Test
  *               seatingarrangava: Test
  *               seatingarrangereq: Yes
- *               transportprovider: Yes
+ *               transportprovider: 1
  *               vehicaltype: Yes
  *               contractorowner: Yes
  *               rtoregistration: Yes
@@ -323,7 +323,7 @@ module.exports = router;
  *               seatingarrang: string
  *               seatingarrangava: string
  *               seatingarrangereq: string
- *               transportprovider: string
+ *               transportprovider: number
  *               vehicaltype: string
  *               contractorowner: string
  *               rtoregistration: string
@@ -368,7 +368,7 @@ module.exports = router;
  *               seatingarrang: Test
  *               seatingarrangava: Test
  *               seatingarrangereq: Yes
- *               transportprovider: Yes
+ *               transportprovider: 1
  *               vehicaltype: Yes
  *               contractorowner: Yes
  *               rtoregistration: Yes
