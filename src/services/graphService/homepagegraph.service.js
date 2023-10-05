@@ -197,11 +197,11 @@ const countSchoolsData = async () => {
     return schoolsDataAggregate.length > 0
       ? schoolsDataAggregate[0]
       : {
-          totalSchoolsWithDrinkingWater: 0,
-          totalSchoolsWithElectricalConnection: 0,
-          totalSchoolsWithLibrary: 0,
-          totalSchools: 0,
-        };
+        totalSchoolsWithDrinkingWater: 0,
+        totalSchoolsWithElectricalConnection: 0,
+        totalSchoolsWithLibrary: 0,
+        totalSchools: 0,
+      };
   };
 
   const [schoolsWithBoysToiletCount, schoolsWithGirlsToiletCount] = await getSchoolsWithToilets();
@@ -323,6 +323,140 @@ const countSchoolsData = async () => {
 //   ]);
 // };
 
+//**********************************************************************/
+
+const Section1A20Schema = require('../../models/masterModels/section1A(1.11 to 1.20).model');
+
+const calculateSchoolDistribution = async () => {
+  const pipeline = [
+    {
+      $group: {
+        _id: '$manggroup',
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        manggroup: '$_id',
+        count: 1,
+      },
+    },
+  ];
+
+  const result = await Section1A20Schema.aggregate(pipeline);
+
+  // Process the result to categorize the schools
+  const schoolDistribution = {
+    gov: 0,
+    private: 0,
+    aided: 0,
+    others: 0,
+  };
+
+  result.forEach((group) => {
+    const manggroup = group.manggroup.toLowerCase();
+    if (manggroup.includes('gov')) {
+      schoolDistribution.gov += group.count;
+    } else if (manggroup.includes('private')) {
+      schoolDistribution.private += group.count;
+    } else if (manggroup.includes('aided')) {
+      schoolDistribution.aided += group.count;
+    } else {
+      schoolDistribution.others += group.count;
+    }
+  });
+
+  return schoolDistribution;
+};
+
+
+const calculateTypeSchoolDistribution = async () => {
+ const pipeline = [
+    {
+      $group: {
+        _id: '$typeschool',
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        typeschool: '$_id',
+        count: 1,
+      },
+    },
+  ];
+
+  const result = await Section1A20Schema.aggregate(pipeline);
+
+  // Process the result to categorize the schools
+  const schoolDistribution = {
+    girls: 0,
+    boys: 0,
+    coaided: 0,
+   };
+
+  result.forEach((group) => {
+    const typeschool = group.typeschool.toLowerCase();
+    if (typeschool.includes('girls')) {
+      schoolDistribution.girls += group.count;
+    } else if (typeschool.includes('boys')) {
+      schoolDistribution.boys += group.count;
+    } else if (typeschool.includes('coaided')) {
+      schoolDistribution.coaided += group.count;
+    }
+  });
+
+  return schoolDistribution;
+};
+
+const calculateSchoolsByCategory = async () => {
+    // Use aggregation to group and count schools by the 'schoolcategory' field
+    const schoolCategoryStats = await Section1A20Schema.aggregate([
+      {
+        $group: {
+          _id: {
+            schoolcategory: '$schoolcategory',
+            typeschool: '$typeschool',
+          },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    return schoolCategoryStats;
+};
+
+const calculateSchoolCounts = async (districtName) => {
+  try {
+    // Count schools by block
+    const blockCounts = await Section1A10Schema.aggregate([
+      {
+        $match: { districtname: districtName },
+      },
+      {
+        $group: {
+          _id: '$udiseblock',
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    // Count total schools in the district
+    const totalSchoolCount = await Section1A10Schema.countDocuments({ districtname: districtName });
+
+    return { blockCounts, totalSchoolCount };
+  } catch (error) {
+    throw new Error('Failed to calculate school counts.');
+  }
+};
+
+
 module.exports = {
   countSchoolsData,
+  calculateSchoolDistribution,
+  calculateTypeSchoolDistribution,
+  calculateSchoolsByCategory,
+  calculateSchoolCounts
 };

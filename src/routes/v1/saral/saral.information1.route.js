@@ -95,7 +95,7 @@ module.exports = router;
  *               recognizbalwadi:
  *                 type: number
  *               recognitiondate:
- *                 type: number
+ *                 type: date
  *               noofteacher:
  *                 type: number
  *               eodeputyvisit:
@@ -141,7 +141,7 @@ module.exports = router;
  *               agewiseboy: 3
  *               agewisegirl: 10
  *               recognizbalwadi: 12
- *               recognitiondate: 2023
+ *               recognitiondate: 2023-03-11
  *               noofteacher: 5
  *               eodeputyvisit: 3
  *               eovisit: 4
@@ -302,7 +302,7 @@ module.exports = router;
  *               recognizbalwadi:
  *                 type: number
  *               recognitiondate:
- *                 type: number
+ *                 type: date
  *               noofteacher:
  *                 type: number
  *               eodeputyvisit:
@@ -347,7 +347,7 @@ module.exports = router;
  *               agewiseboy: 3
  *               agewisegirl: 10
  *               recognizbalwadi: 12
- *               recognitiondate: 2023
+ *               recognitiondate: 2023-03-11
  *               noofteacher: 5
  *               eodeputyvisit: 3
  *               eovisit: 4

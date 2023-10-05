@@ -35,7 +35,7 @@ const saralInformation1Schema = mongoose.Schema(
       trim: true,
     },
     recognitiondate: {
-      type: String,
+      type: Date,
       trim: true,
     },
     noofteacher: {
