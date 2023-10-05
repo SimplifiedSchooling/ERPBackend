@@ -43,11 +43,23 @@ const deleteStudentAttendance = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-// const getWeekStatus = catchAsync(async (req, res) => {
-//   const { campusId, userId } = req.query;
-//   const weekStatus = StudentAttendanceService.getWeekStatus(campusId, userId);
-//   res.json({ result: weekStatus });
-// });
+const getWeekStatus = catchAsync(async (req, res) => {
+  const { userId } = req.query;
+  const weekStatus = await StudentAttendanceService.getWeekReport(userId);
+  res.send(weekStatus);
+});
+
+const todaysAttendanceForSchool = catchAsync(async (req, res) => {
+  const { scode, date } = req.query;
+  const todayAttendance = await StudentAttendanceService.getStudentAttendanceSummary(scode, date);
+  res.send(todayAttendance);
+});
+
+const getClasswiseAttendanceStudentList = catchAsync(async (req, res) => {
+  const { campusId, date } = req.query;
+  const classwiseAttendanceStudentList = await StudentAttendanceService.getClasswiseStudentAttendanceList(campusId, date);
+  res.send(classwiseAttendanceStudentList);
+});
 
 module.exports = {
   createStudentAttendance,
@@ -56,5 +68,7 @@ module.exports = {
   updateStudentAttendance,
   deleteStudentAttendance,
   getAttendanceByclassSectionDate,
-  // getWeekStatus,
+  getWeekStatus,
+  todaysAttendanceForSchool,
+  getClasswiseAttendanceStudentList,
 };
