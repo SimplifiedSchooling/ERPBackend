@@ -25,13 +25,12 @@ const getSingleStudentSession = catchAsync(async (req, res) => {
 });
 
 const getStudentsByClassAndSection = async (req, res) => {
-  try {
-    const { classId, sectionId } = req.query;
-    const data = await studentSessionService.getStudentsByClassAndSection(classId, sectionId);
-    res.status(200).json({ data });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+  const { classId, sectionId } = req.query;
+  const data = await studentSessionService.getStudentsByClassAndSection(classId, sectionId);
+  if (!data) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Internal Server Error');
   }
+  res.status(200).json({ data });
 };
 
 const updateSingleStudentSession = catchAsync(async (req, res) => {
