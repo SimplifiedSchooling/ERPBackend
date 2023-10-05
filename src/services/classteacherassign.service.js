@@ -1,5 +1,7 @@
 const httpStatus = require('http-status');
 const { ClassTeacher } = require('../models');
+const { getStudentsByClassAndSection } = require('./student.session.service');
+const { getAttendanceData } = require('./studentattendance.service');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -34,12 +36,36 @@ const getClassTeacherById = async (classTeacherId) => {
 };
 
 /**
- * Get ClassTeacher by classTeacherId
- * @param {ObjectId} mediumId
- * @returns {Promise<ClassTeacher>}
+ * Get students for the logged-in teacher
+ * @param {string} teacherId - The ID of the logged-in teacher.
+ * @returns {Promise<ClassTeacher>} - An array of student data.
+ * @throws {Error} - If there is an error while querying the database.
  */
-const getClassTeacherByMediumId = async (mediumId) => {
-  return ClassTeacher.find({ mediumId });
+const getStudentsForTeacher = async (teacherId) => {
+  const teacherData = await ClassTeacher.findOne({ teacherId });
+  if (!teacherData) {
+    throw new Error('Teacher not found');
+  }
+  const { classId, sectionId } = teacherData;
+  const students = await getStudentsByClassAndSection(classId, sectionId);
+  return students;
+};
+
+/**
+ * Get students for the logged-in teacher
+ * @param {string} teacherId - The ID of the logged-in teacher.
+ * @param {string} date - The date for filter
+ * @returns {Promise<ClassTeacher>} - An array of student data.
+ * @throws {Error} - If there is an error while querying the database.
+ */
+const getAttendanceListForTeacher = async (teacherId, date) => {
+  const teacherData = await ClassTeacher.findOne({ teacherId });
+  if (!teacherData) {
+    throw new Error('Teacher not found');
+  }
+  const { classId, sectionId } = teacherData;
+  const studentattendanceList = await getAttendanceData(classId, sectionId, date);
+  return studentattendanceList;
 };
 
 /**
@@ -78,5 +104,6 @@ module.exports = {
   getClassTeacherById,
   updateClassTeacherById,
   deleteClassTeacherById,
-  getClassTeacherByMediumId,
+  getStudentsForTeacher,
+  getAttendanceListForTeacher,
 };

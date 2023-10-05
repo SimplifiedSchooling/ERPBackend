@@ -81,7 +81,7 @@ const getStudentsByClassAndSection = async (classId, sectionId) => {
     },
   ]);
   return attendanceData.map((item) => ({
-    studentId: item.studentId,
+    studentSessionId: item._id,
     studentInfo: item.studentInfo,
   }));
 };

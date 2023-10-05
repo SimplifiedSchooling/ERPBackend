@@ -4,12 +4,14 @@ const { objectId } = require('./custom.validation');
 const createStudentAttendance = {
   body: Joi.object().keys({
     // StudentSessionId: Joi.string(),
-    classId: Joi.string(),
-    sectionId: Joi.string(),
-    studentId: Joi.string(),
-    date: Joi.string(),
-    attendancetype: Joi.string().valid('present', 'absent', 'halfday', 'holiday'),
-    remark: Joi.string().allow(''),
+    classId: Joi.string().required(),
+    attedanceTakenBy: Joi.string().required(),
+    sectionId: Joi.string().required(),
+    studentId: Joi.string().required(),
+    campusId: Joi.string().required(),
+    date: Joi.string().required(),
+    attendancetype: Joi.string().valid('present', 'absent', 'halfday', 'holiday').required(),
+    remark: Joi.string().allow('').required(),
   }),
 };
 
@@ -29,6 +31,17 @@ const attendanceData = {
     date: Joi.string().required(),
   }),
 };
+const todaysAttendanceForSchool = {
+  query: Joi.object().keys({
+    campusId: Joi.string().required(),
+    date: Joi.string().required(),
+  }),
+};
+const getWeekStatus = {
+  query: Joi.object().keys({
+    userId: Joi.string().required(),
+  }),
+};
 
 const getStudentAttendance = {
   params: Joi.object().keys({
@@ -42,10 +55,6 @@ const updateStudentAttendance = {
   }),
   body: Joi.object()
     .keys({
-      classId: Joi.string(),
-      sectionId: Joi.string(),
-      studentId: Joi.string(),
-      date: Joi.date(),
       attendancetype: Joi.string().valid('present', 'absent', 'halfday', 'holiday'),
       remark: Joi.string().allow(''),
     })
@@ -65,4 +74,6 @@ module.exports = {
   updateStudentAttendance,
   deleteStudentAttendance,
   attendanceData,
+  getWeekStatus,
+  todaysAttendanceForSchool,
 };

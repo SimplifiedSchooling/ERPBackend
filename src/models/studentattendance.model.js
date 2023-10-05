@@ -41,6 +41,18 @@ const StudentAttendanceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    campusId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Campus',
+      required: true,
+      trim: true,
+    },
+    attedanceTakenBy: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Staffs',
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

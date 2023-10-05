@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
-// const moment = require('moment');
-const StudentAttendanceSchema = require('../models/studentattendance.model');
+const moment = require('moment');
+const { Student, StudentAttendanceSchema, Classes } = require('../models');
 const ApiError = require('../utils/ApiError');
 /**
  * Create a StudentAttendanceSchema
@@ -51,6 +51,66 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
   return typeStudentAttendance;
 };
 
+// /**
+//  * Get total, present, and absent students based on campusId.
+//  * @param {string} campusId - The ID of the campus.
+//  * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
+//  */
+// const getStudentAttendanceSummary = async (campusId) => {
+//   const totalStudentsCount = await Student.countDocuments({ campusId });
+//   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     campusId,
+//     attendancetype: 'present',
+//   });
+//   const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     campusId,
+//     attendancetype: 'absent',
+//   });
+
+//   const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     campusId,
+//     attendancetype: 'halfday',
+//   });
+//   return {
+//     totalStudents: totalStudentsCount,
+//     presentStudents: presentStudentsCount,
+//     absentStudents: absentStudentsCount,
+//     halfdayStudents: halfdayStudentsCount,
+//   };
+// };
+
+/**
+ * Get total, present, and absent students based on campusId and date.
+ * @param {string} campusId - The ID of the campus.
+ * @param {string} date - The date in 'YYYY-MM-DD' format.
+ * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
+ */
+const getStudentAttendanceSummary = async (campusId, date) => {
+  const totalStudentsCount = await Student.countDocuments({ campusId });
+  const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+    campusId,
+    attendancetype: 'present',
+    date,
+  });
+  const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
+    campusId,
+    attendancetype: 'absent',
+    date,
+  });
+
+  const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
+    campusId,
+    attendancetype: 'halfday',
+    date,
+  });
+
+  return {
+    totalStudents: totalStudentsCount,
+    presentStudents: presentStudentsCount,
+    absentStudents: absentStudentsCount,
+    halfdayStudents: halfdayStudentsCount,
+  };
+};
 /**
  * Delete StudentAttendanceSchema by id
  * @param {ObjectId} StudentAttendanceId
@@ -99,6 +159,7 @@ const getAttendanceData = async (classId, sectionId, date) => {
         _id: 1,
         studentId: 1,
         attendancetype: 1,
+        attedanceTakenBy: 1,
         remark: 1,
         'studentInfo._id': 1,
         'studentInfo.role': 1,
@@ -112,11 +173,13 @@ const getAttendanceData = async (classId, sectionId, date) => {
         'studentInfo.lastname': 1,
         'studentInfo.class': 1,
         'studentInfo.section': 1,
+        'studentInfo.gender': 1,
       },
     },
   ]);
   return attendanceData.map((item) => ({
     attendanceObjectId: item._id,
+    attedanceTakenBy: item.attedanceTakenBy,
     studentId: item.studentId,
     attendanceType: item.attendancetype,
     remark: item.remark,
@@ -124,36 +187,99 @@ const getAttendanceData = async (classId, sectionId, date) => {
   }));
 };
 
+/**
+ * Get the week report for a user.
+ * @param {string} userId - The ID of the user.
+ * @returns {Promise<StudentAttendanceSchema>} - An array containing the week report.
+ */
+const getWeekReport = async (userId) => {
+  const attedanceTakenBy = userId;
+  const startOfWeek = moment().startOf('isoWeek');
+  const daysOfWeek = Array.from({ length: 6 }, (_, i) => startOfWeek.clone().add(i, 'days'));
+
+  const attendancePromises = daysOfWeek.map(async (day) => {
+    const formattedDate = day.format('YYYY-MM-DD');
+    const dayAttendance = await StudentAttendanceSchema.findOne({ attedanceTakenBy, date: formattedDate });
+    return { day, dayAttendance };
+  });
+  const dayAttendances = await Promise.all(attendancePromises);
+  const weekReport = daysOfWeek.map((day, index) => {
+    const isToday = day.isSame(moment(), 'day');
+    let status = 'Pending';
+    if (isToday) {
+      status = 'Done';
+    } else if (dayAttendances[index].dayAttendance) {
+      status = 'Done';
+    }
+    return {
+      day: day.format('dddd'),
+      date: day.format('YYYY-MM-DD'),
+      status,
+    };
+  });
+
+  return weekReport;
+};
+
 // /**
-//  * Get studentsAttendence by class, section, date
-//  * @param {string} userId - The ID of the class to filter by.
-//  * @param {string} campusId - The ID of the section to filter by.
-//  * @param {string} date - The date to filter by.
-//  * @returns {Promise<StudentAttendanceSchema>} - An array of StudentAttendanceSchema objects.
-//  * @throws {Error} - If there is an error while querying the database.
+//  * Get classwise student list with present and absent counts based on gender.
+//  * @param {string} campusId - The ID of the campus.
+//  * @param {string} date - The date in 'YYYY-MM-DD' format.
+//  * @returns {Promise<Object[]>} - Array of objects containing class name, present male/female, and absent male/female counts.
 //  */
+// const getClasswiseStudentAttendanceList = async (campusId, date) => {
+//   const classList2 = await StudentAttendanceSchema.find({ campusId });
+//   const classId = classList2.classId;
 
-// const getStatusForDateAndUser = (date) => {
-//   if (moment(date).isSame(moment(), 'day')) {
-//     return 'Pending';
-//   }
-//   return 'unknown';
-// };
+//   const classList = await Classes.find({ classId });
+//   console.log(classList);
 
-// const getWeekStatus = (campusId, userId) => {
-//   const currentDate = moment();
-//   const startOfWeek = currentDate.clone().startOf('isoWeek');
-//   const weekStatus = [];
-//   for (let i = 0; i < 6; i++) {
-//     const currentDate = startOfWeek.clone().add(i, 'days');
-//     const status = getStatusForDateAndUser(currentDate, userId, campusId);
-//     weekStatus.push({
-//       day: currentDate.format('dddd'), // Full day name (e.g., Monday)
-//       date: currentDate.format('YYYY-MM-DD'), // Date in 'YYYY-MM-DD' format
-//       status,
+//   const result = [];
+//   for (const classInfo of classList) {
+//     const classId = classInfo._id;
+//     const { className } = classInfo;
+
+//     const presentMaleCount = await StudentAttendanceSchema.countDocuments({
+//       classId,
+//       attendancetype: 'present',
+//       date,
+//       'studentId.gender': 'Male',
+//     });
+//     const presentFemaleCount = await StudentAttendanceSchema.countDocuments({
+//       classId,
+//       attendancetype: 'present',
+//       date,
+//       'studentId.gender': 'Female',
+//     });
+
+//     const absentMaleCount = await StudentAttendanceSchema.countDocuments({
+//       classId,
+//       attendancetype: 'absent',
+//       date,
+//       'studentId.gender': 'Male',
+//     });
+
+//     const absentFemaleCount = await StudentAttendanceSchema.countDocuments({
+//       classId,
+//       attendancetype: 'absent',
+//       date,
+//       'studentId.gender': 'Female',
+//     });
+
+//     result.push({
+//       className,
+//       present: {
+//         male: presentMaleCount,
+//         female: presentFemaleCount,
+//       },
+//       absent: {
+//         male: absentMaleCount,
+//         female: absentFemaleCount,
+//       },
 //     });
 //   }
-//   return weekStatus;
+
+//   return result;
 // };
 
 module.exports = {
@@ -163,5 +289,7 @@ module.exports = {
   updateStudentAttendanceById,
   deleteStudentAttendanceById,
   getAttendanceData,
-  // getWeekStatus,
+  getWeekReport,
+  getStudentAttendanceSummary,
+  //getClasswiseStudentAttendanceList,
 };

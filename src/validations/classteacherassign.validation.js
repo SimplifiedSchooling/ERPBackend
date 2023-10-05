@@ -14,6 +14,20 @@ const getClassTeacher = {
     classteacherId: Joi.string().custom(objectId).required(),
   }),
 };
+
+const getAllStudentByclassTeacherId = {
+  query: Joi.object().keys({
+    teacherId: Joi.string().required(),
+  }),
+};
+
+const getAttendenceList = {
+  query: Joi.object().keys({
+    teacherId: Joi.string().required(),
+    date: Joi.string().required(),
+  }),
+};
+
 const getClassTeachersByBookId = {
   params: Joi.object().keys({
     bookId: Joi.string().custom(objectId).required(),
@@ -62,4 +76,6 @@ module.exports = {
   deleteClassTeacherById,
   getClassTeachersByBookId,
   getClassTeachersByFilter,
+  getAllStudentByclassTeacherId,
+  getAttendenceList,
 };

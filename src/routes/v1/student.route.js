@@ -129,6 +129,8 @@ module.exports = router;
  *           type: string
  *         lastname:
  *           type: string
+ *         gender:
+ *           type: string
  *       example:
  *         name: "ABC12345"
  *         mobNumber: 9823525745
@@ -139,6 +141,7 @@ module.exports = router;
  *         class: "Class 10"
  *         section: "A"
  *         lastname: asff
+ *         gender: Male,Female,Other
  */
 
 /**

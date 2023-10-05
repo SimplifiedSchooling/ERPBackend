@@ -38,6 +38,24 @@ const getClassteacherByFilter = catchAsync(async (req, res) => {
   res.send(chapter);
 });
 
+const getStudentsForTeacher = catchAsync(async (req, res) => {
+  const { teacherId } = req.query;
+  const students = await classTeacherServices.getStudentsForTeacher(teacherId);
+  if (!students || students.length === 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Students not found for the teacher');
+  }
+  res.json(students);
+});
+
+const getAttendanceListForTeacher = catchAsync(async (req, res) => {
+  const { teacherId, date } = req.query;
+  const studentattendanceList = await classTeacherServices.getAttendanceListForTeacher(teacherId, date);
+  if (!studentattendanceList || studentattendanceList.length === 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Students Attendance list  not found for the teacher');
+  }
+  res.json(studentattendanceList);
+});
+
 const getClassteachersByBookId = catchAsync(async (req, res) => {
   const AllClassteacher = await classTeacherServices.getClassteachersByBookId(req.params.bookId);
   if (!AllClassteacher) {
@@ -65,4 +83,6 @@ module.exports = {
   getClassteachersByBookId,
   getClassteacherByFilter,
   getByBookIdClassteacher,
+  getStudentsForTeacher,
+  getAttendanceListForTeacher,
 };

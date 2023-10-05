@@ -84,7 +84,7 @@ const studentSchema = new mongoose.Schema(
     // religion: String,
     // cast: String,
     // dob: String,
-    // gender: String,
+    gender: String,
     // current_address: String,
     // permanent_address: String,
     // category_id: String,

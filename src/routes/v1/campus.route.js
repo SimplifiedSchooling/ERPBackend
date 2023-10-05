@@ -40,6 +40,8 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               UDISEcode:
+ *                 type: string
  *               userName:
  *                 type: string
  *               name:
@@ -53,6 +55,7 @@ module.exports = router;
  *               date:
  *                 type: date
  *             example:
+ *               UDISEcode: MH0001
  *               userName: fakeName
  *               name: fake school name
  *               password: password1
@@ -179,6 +182,8 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               UDISEcode:
+ *                 type: string
  *               userName:
  *                 type: string
  *               name:
@@ -192,6 +197,7 @@ module.exports = router;
  *               date:
  *                 type: date
  *             example:
+ *               UDISEcode: MH00001
  *               userName: fakeName
  *               name: fake school name
  *               password: password1

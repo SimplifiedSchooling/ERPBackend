@@ -4,7 +4,21 @@ const StudentAttendanceValidation = require('../../validations/studentattendance
 const StudentAttendanceController = require('../../controllers/studentattendance.controller');
 
 const router = express.Router();
-// router.route('/getWeekStatus').get(StudentAttendanceController.getWeekStatus);
+router
+  .route('/classwiseStudentAttendanceList')
+  .get(
+    validate(StudentAttendanceValidation.todaysAttendanceForSchool),
+    StudentAttendanceController.getClasswiseAttendanceStudentList
+  );
+router
+  .route('/getTodaysAttendanceforSchool')
+  .get(
+    validate(StudentAttendanceValidation.todaysAttendanceForSchool),
+    StudentAttendanceController.todaysAttendanceForSchool
+  );
+router
+  .route('/getWeekStatus')
+  .get(validate(StudentAttendanceValidation.getWeekStatus), StudentAttendanceController.getWeekStatus);
 router
   .route('/getAttendanceByClassAndsectionAndDate')
   .get(validate(StudentAttendanceValidation.attendanceData), StudentAttendanceController.getAttendanceByclassSectionDate);
@@ -69,6 +83,65 @@ module.exports = router;
 
 /**
  * @swagger
+ * /StudentAttendance/getTodaysAttendanceforSchool:
+ *   get:
+ *     summary:  A list of students todays attendence list for school matching the specified campusID and date
+ *     tags: [StudentAttendance]
+ *     parameters:
+ *       - in: query
+ *         name: campusId
+ *         schema:
+ *           type: string
+ *         description: The ID of the campusId to filter by.
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The date to filter by.
+ *     responses:
+ *       '200':
+ *         description:  A list of students todays attendence list for school matching the specified campusID and date
+ *         content:
+ *           application/json:
+ *             example:
+ *               totalStudents: 100
+ *               presentStudents: 50
+ *               absentStudents: 30
+ *               halfdayStudents: 20
+ *       '400':
+ *         description: Attendance summary not found.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
+
+/**
+ * @swagger
+ * /StudentAttendance/getWeekStatus:
+ *   get:
+ *     summary:  A list of students attendence matching the specified class, section and date
+ *     tags: [StudentAttendance]
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         description: The ID of the userId to filter by.
+ *     responses:
+ *       '200':
+ *         description: A list of students attendence matching the specified class, section and date
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student'  # Replace with the actual schema for a student
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
+/**
+ * @swagger
  * /StudentAttendance:
  *   post:
  *     summary: Create a StudentAttendance
@@ -88,10 +161,14 @@ module.exports = router;
  *               - date
  *               - attendancetype
  *               - remark
+ *               - attedanceTakenBy
+ *               - campusId
  *             example:
  *               classId: 650c141a483c21d899148b29
  *               sectionId: 650c141a483c21d899148b29
  *               studentId: 650c141a483c21d899148b29
+ *               attedanceTakenBy: 650c141a483c21d899148b29
+ *               campusId: 650c141a483c21d899148b29
  *               date: 2023-09-15
  *               attendancetype: present  // 'present', 'absent', 'halfday', 'holiday'
  *               remark: Attended class
@@ -214,13 +291,9 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - StudentSessionId
- *               - date
  *               - attendancetype
  *               - remark
  *             example:
- *               StudentSessionId: 650c141a483c21d899148b29
- *               date: 2023-09-15
  *               attendancetype: present
  *               remark: Attended class
  *     responses:
