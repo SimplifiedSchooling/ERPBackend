@@ -197,11 +197,11 @@ const countSchoolsData = async () => {
     return schoolsDataAggregate.length > 0
       ? schoolsDataAggregate[0]
       : {
-        totalSchoolsWithDrinkingWater: 0,
-        totalSchoolsWithElectricalConnection: 0,
-        totalSchoolsWithLibrary: 0,
-        totalSchools: 0,
-      };
+          totalSchoolsWithDrinkingWater: 0,
+          totalSchoolsWithElectricalConnection: 0,
+          totalSchoolsWithLibrary: 0,
+          totalSchools: 0,
+        };
   };
 
   const [schoolsWithBoysToiletCount, schoolsWithGirlsToiletCount] = await getSchoolsWithToilets();
@@ -323,7 +323,7 @@ const countSchoolsData = async () => {
 //   ]);
 // };
 
-//**********************************************************************/
+//* *********************************************************************/
 
 const Section1A20Schema = require('../../models/masterModels/section1A(1.11 to 1.20).model');
 
@@ -370,9 +370,8 @@ const calculateSchoolDistribution = async () => {
   return schoolDistribution;
 };
 
-
 const calculateTypeSchoolDistribution = async () => {
- const pipeline = [
+  const pipeline = [
     {
       $group: {
         _id: '$typeschool',
@@ -395,7 +394,7 @@ const calculateTypeSchoolDistribution = async () => {
     girls: 0,
     boys: 0,
     coaided: 0,
-   };
+  };
 
   result.forEach((group) => {
     const typeschool = group.typeschool.toLowerCase();
@@ -412,20 +411,20 @@ const calculateTypeSchoolDistribution = async () => {
 };
 
 const calculateSchoolsByCategory = async () => {
-    // Use aggregation to group and count schools by the 'schoolcategory' field
-    const schoolCategoryStats = await Section1A20Schema.aggregate([
-      {
-        $group: {
-          _id: {
-            schoolcategory: '$schoolcategory',
-            typeschool: '$typeschool',
-          },
-          count: { $sum: 1 },
+  // Use aggregation to group and count schools by the 'schoolcategory' field
+  const schoolCategoryStats = await Section1A20Schema.aggregate([
+    {
+      $group: {
+        _id: {
+          schoolcategory: '$schoolcategory',
+          typeschool: '$typeschool',
         },
+        count: { $sum: 1 },
       },
-    ]);
+    },
+  ]);
 
-    return schoolCategoryStats;
+  return schoolCategoryStats;
 };
 
 const calculateSchoolCounts = async (districtName) => {
@@ -452,11 +451,10 @@ const calculateSchoolCounts = async (districtName) => {
   }
 };
 
-
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
   calculateTypeSchoolDistribution,
   calculateSchoolsByCategory,
-  calculateSchoolCounts
+  calculateSchoolCounts,
 };

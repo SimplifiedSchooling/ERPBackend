@@ -5,8 +5,11 @@ const ClassteacherController = require('../../controllers/classteacherassign.con
 
 const router = express.Router();
 router
-  .route('/getAttendanceByClassAndsectionAndDate')
-  .get(validate(ClassteacherValidation.attendanceData), ClassteacherController.getByBookIdClassteacher);
+  .route('/getstudentslist')
+  .get(validate(ClassteacherValidation.getAllStudentByclassTeacherId), ClassteacherController.getStudentsForTeacher);
+router
+  .route('/getattendencelist')
+  .get(validate(ClassteacherValidation.getAttendenceList), ClassteacherController.getAttendanceListForTeacher);
 router
   .route('/')
   .post(validate(ClassteacherValidation.createClassTeacher), ClassteacherController.createClassteacher)
@@ -26,23 +29,19 @@ module.exports = router;
  *   name: Classteacher
  *   description: Classteacher
  */
+
 /**
  * @swagger
- * /classteacher/getAttendanceByClassAndsectionAndDate:
+ * /classteacher/getstudentslist:
  *   get:
- *     summary:  A list of students attendence matching the specified class, section and date
+ *     summary:  A list of students attendence matching the specified classteacher
  *     tags: [Classteacher]
  *     parameters:
  *       - in: query
- *         name: classId
+ *         name: teacherId
  *         schema:
  *           type: string
- *         description: The ID of the class to filter by.
- *       - in: query
- *         name: sectionId
- *         schema:
- *           type: string
- *         description: The ID of the section to filter by.
+ *         description: The ID of the teacher to filter by.
  *       - in: query
  *         name: date
  *         schema:
@@ -50,7 +49,38 @@ module.exports = router;
  *         description: The date to filter by.
  *     responses:
  *       '200':
- *         description: A list of students attendence matching the specified class, section and date
+ *         description: A list of students attendence matching the specified classteacher
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student'  # Replace with the actual schema for a student
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
+/**
+ * @swagger
+ * /classteacher/getattendencelist:
+ *   get:
+ *     summary:  A list of students attendence matching the specified classteacher
+ *     tags: [Classteacher]
+ *     parameters:
+ *       - in: query
+ *         name: teacherId
+ *         schema:
+ *           type: string
+ *         description: The ID of the teacher to filter by.
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The date to filter by.
+ *     responses:
+ *       '200':
+ *         description: A list of students attendence list matching the specified classteacher
  *         content:
  *           application/json:
  *             schema:

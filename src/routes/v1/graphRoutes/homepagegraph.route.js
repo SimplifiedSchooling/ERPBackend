@@ -11,5 +11,4 @@ router.route('/schooltype').get(HomePageGraphController.getSchoolTypeData);
 router.route('/calculate-schools-by-category').get(HomePageGraphController.calculateSchoolsByCategory);
 router.route('/calculate-school-counts/:districtName').get(HomePageGraphController.calculateSchoolCounts);
 
-
 module.exports = router;
