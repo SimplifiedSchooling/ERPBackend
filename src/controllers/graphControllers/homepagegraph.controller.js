@@ -2,8 +2,6 @@
 // const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
 const HomePageGraphService = require('../../services/graphService/homepagegraph.service');
- 
-
 
 const getHomePageGraphData = catchAsync(async (req, res) => {
   const homePageGraphData = await HomePageGraphService.countSchoolsData();
@@ -12,13 +10,13 @@ const getHomePageGraphData = catchAsync(async (req, res) => {
 
 const getSchoolDataManagementWise = catchAsync(async (req, res) => {
   const result = await HomePageGraphService.calculateSchoolDistribution();
-  res.status(200).send({result});
+  res.status(200).send({ result });
 });
 
 const getSchoolTypeData = catchAsync(async (req, res) => {
   const schoolType = await HomePageGraphService.calculateTypeSchoolDistribution();
-  res.status(200).send({schoolType});
-})
+  res.status(200).send({ schoolType });
+});
 
 const calculateSchoolsByCategory = catchAsync(async (req, res) => {
   const schoolCategoryStats = await HomePageGraphService.calculateSchoolsByCategory();
@@ -36,5 +34,5 @@ module.exports = {
   getSchoolDataManagementWise,
   getSchoolTypeData,
   calculateSchoolsByCategory,
-  calculateSchoolCounts
+  calculateSchoolCounts,
 };
