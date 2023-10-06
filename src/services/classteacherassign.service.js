@@ -115,5 +115,5 @@ module.exports = {
   deleteClassTeacherById,
   getStudentsForTeacher,
   getAttendanceListForTeacher,
-  getClassByTecherId
+  getClassByTecherId,
 };

@@ -84,5 +84,5 @@ module.exports = {
   getClassTeachersByFilter,
   getAllStudentByclassTeacherId,
   getAttendenceList,
-  getClassTeachersByTeacherId
+  getClassTeachersByTeacherId,
 };

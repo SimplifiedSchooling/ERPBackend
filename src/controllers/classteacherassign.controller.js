@@ -72,7 +72,6 @@ const getClassteachersByTeacherId = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-
 const updateSingleClassTeacher = catchAsync(async (req, res) => {
   const updateddClass = await classTeacherServices.updateClassTeacherById(req.params.classteacherId, req.body);
   res.send(updateddClass);
@@ -94,5 +93,5 @@ module.exports = {
   getByBookIdClassteacher,
   getStudentsForTeacher,
   getAttendanceListForTeacher,
-  getClassteachersByTeacherId
+  getClassteachersByTeacherId,
 };

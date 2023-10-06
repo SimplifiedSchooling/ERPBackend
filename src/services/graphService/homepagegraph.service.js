@@ -452,7 +452,6 @@ const calculateSchoolCounts = async (districtName) => {
   }
 };
 
-
 const calculateStaffCounts = async () => {
   const pipeline = [
     {
@@ -461,12 +460,12 @@ const calculateStaffCounts = async () => {
         total: { $sum: 1 },
         male: {
           $sum: {
-            $cond: [{ $eq: ["$gender", "male"] }, 1, 0],
+            $cond: [{ $eq: ['$gender', 'male'] }, 1, 0],
           },
         },
         female: {
           $sum: {
-            $cond: [{ $eq: ["$gender", "female"] }, 1, 0],
+            $cond: [{ $eq: ['$gender', 'female'] }, 1, 0],
           },
         },
       },
@@ -485,12 +484,11 @@ const calculateStaffCounts = async () => {
   return result[0]; // Return the first (and only) result since we group by null.
 };
 
-
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
   calculateTypeSchoolDistribution,
   calculateSchoolsByCategory,
   calculateSchoolCounts,
-  calculateStaffCounts
+  calculateStaffCounts,
 };

@@ -10,7 +10,7 @@ router
 
 router
   .route('/getclassbyteacherId/:teacherId')
-  .get(validate(ClassteacherValidation.getClassTeachersByTeacherId),ClassteacherController.getClassteachersByTeacherId);
+  .get(validate(ClassteacherValidation.getClassTeachersByTeacherId), ClassteacherController.getClassteachersByTeacherId);
 
 router
   .route('/getattendencelist')

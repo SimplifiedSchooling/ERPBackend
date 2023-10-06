@@ -53,10 +53,9 @@ const { toJSON, paginate } = require('./plugins');
 const StudentAttendanceSchema = mongoose.Schema(
   {
     studentId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Students',
+      type: Number,
       required: true,
-      trim: true,
+      unique: true,
     },
     date: {
       type: String,
