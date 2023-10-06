@@ -36,6 +36,15 @@ const getClassTeacherById = async (classTeacherId) => {
 };
 
 /**
+ * Get Class teacher by teacherId by id
+ * @param {ObjectId} teacherId
+ * @returns {Promise<ClassTeacher>}
+ */
+const getClassByTecherId = async (teacherId) => {
+  return ClassTeacher.find({ teacherId });
+};
+
+/**
  * Get students for the logged-in teacher
  * @param {string} teacherId - The ID of the logged-in teacher.
  * @returns {Promise<ClassTeacher>} - An array of student data.
@@ -106,4 +115,5 @@ module.exports = {
   deleteClassTeacherById,
   getStudentsForTeacher,
   getAttendanceListForTeacher,
+  getClassByTecherId,
 };

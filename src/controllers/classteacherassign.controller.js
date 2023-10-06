@@ -64,6 +64,14 @@ const getClassteachersByBookId = catchAsync(async (req, res) => {
   res.send(AllClassteacher);
 });
 
+const getClassteachersByTeacherId = catchAsync(async (req, res) => {
+  const result = await classTeacherServices.getClassByTecherId(req.params.teacherId);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Get a class by TecherId');
+  }
+  res.send(result);
+});
+
 const updateSingleClassTeacher = catchAsync(async (req, res) => {
   const updateddClass = await classTeacherServices.updateClassTeacherById(req.params.classteacherId, req.body);
   res.send(updateddClass);
@@ -85,4 +93,5 @@ module.exports = {
   getByBookIdClassteacher,
   getStudentsForTeacher,
   getAttendanceListForTeacher,
+  getClassteachersByTeacherId,
 };

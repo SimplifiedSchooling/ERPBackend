@@ -29,10 +29,16 @@ const calculateSchoolCounts = catchAsync(async (req, res) => {
   res.status(200).send(schoolCounts);
 });
 
+const calculateStaff = catchAsync(async (req, res) => {
+  const result = await HomePageGraphService.calculateStaffCounts();
+  res.status(200).send(result);
+});
+
 module.exports = {
   getHomePageGraphData,
   getSchoolDataManagementWise,
   getSchoolTypeData,
   calculateSchoolsByCategory,
   calculateSchoolCounts,
+  calculateStaff,
 };
