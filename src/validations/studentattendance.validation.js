@@ -7,7 +7,7 @@ const createStudentAttendance = {
     // classId: Joi.string().required(),
     // attedanceTakenBy: Joi.string().required(),
     // sectionId: Joi.string().required(),
-    studentId: Joi.string().required(),
+    studentId: Joi.number().required().min(10000000).max(99999999),
     time: Joi.string().required(),
     date: Joi.string().required(),
     // attendancetype: Joi.string().valid('present', 'absent', 'halfday', 'holiday').required(),
