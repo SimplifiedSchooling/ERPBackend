@@ -159,7 +159,7 @@ module.exports = router;
  *               - date
  *               - time
  *             example:
- *               studentId: 650c141a483c21d899148b29
+ *               studentId: 74351449
  *               date: 2023-09-15
  *               time: 10:30am
  *     responses:
