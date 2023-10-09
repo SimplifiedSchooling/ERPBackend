@@ -147,7 +147,11 @@ module.exports = router;
  *     StudentInput:
  *       type: object
  *       properties:
- *         studentId:
+ *         sessionId:
+ *           type: string
+ *         classId:
+ *           type: string
+ *         sectionId:
  *           type: string
  *         role:
  *           type: string
@@ -418,6 +422,9 @@ module.exports = router;
  *           type: string
  *           description: Date of last update
  *       example:
+ *         sectionId: 651cf2fc2c054218ddd660c5
+ *         classId: 651cf2fc2c054218ddd660c5
+ *         sessionId: 651cf2fc2c054218ddd660c5
  *         saral_id: "ABC12345"
  *         scode: "XYZ456"
  *         age: 23
