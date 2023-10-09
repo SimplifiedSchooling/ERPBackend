@@ -364,6 +364,37 @@ const getWeekReport = async (userId) => {
 
 //   return result;
 // };
+// /**
+//  * Get the number of students in the school.
+//  * @param {string} scode - The school code.
+//  * @returns {Promise<Student>} - The total number of students in the school.
+//  */
+// const getTotalStudentsCount = async (scode) => {
+
+//   return totalStudentsCount;
+// };
+
+/**
+ * Get the number of students present on a specific date.
+ * @param {string} scode - The school code.
+ * @param {string} date - The date in 'YYYY-MM-DD' format.
+ * @returns {Promise<StudentAttendanceSchema>} - The number of students present on the specified date.
+ */
+const getPresentStudentsCount = async (scode, date) => {
+  const totalStudentsCount = await Student.countDocuments({ scode });
+  const studentIds = await Student.find({ scode }, '_id');
+  const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+    studentId: { $in: studentIds },
+    date,
+  });
+  const absentStudentsCount = totalStudentsCount - presentStudentsCount;
+  const data = {
+    totalStudentsCount,
+    presentStudentsCount,
+    absentStudentsCount,
+  };
+  return data;
+};
 
 module.exports = {
   createStudentAttendance,
@@ -374,5 +405,6 @@ module.exports = {
   getAttendanceData,
   getWeekReport,
   getStudentAttendanceSummary,
+  getPresentStudentsCount,
   // getClasswiseStudentAttendanceList,
 };
