@@ -1,8 +1,5 @@
-// const httpStatus = require('http-status');
-// const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
 const HomePageGraphService = require('../../services/graphService/homepagegraph.service');
-const Section1A10Schema = require('../../models/masterModels/section1A(1.1 to 1.10).model');
 
 const getHomePageGraphData = catchAsync(async (req, res) => {
   const homePageGraphData = await HomePageGraphService.countSchoolsData();
@@ -33,8 +30,6 @@ const calculateStudent = catchAsync(async (req, res) => {
   const result = await HomePageGraphService.calculateStudentCounts();
   res.status(200).send(result);
 });
-
-
 
 module.exports = {
   getHomePageGraphData,
