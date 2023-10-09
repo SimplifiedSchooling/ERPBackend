@@ -327,6 +327,7 @@ const countSchoolsData = async () => {
 
 const Section1A20Schema = require('../../models/masterModels/section1A(1.11 to 1.20).model');
 const Staffs = require('../../models/staff/staff.model');
+const Students = require('../../models/student.model');
 
 const calculateSchoolDistribution = async () => {
   const pipeline = [
@@ -485,6 +486,39 @@ const calculateStaffCounts = async () => {
   return result[0]; // Return the first (and only) result since we group by null.
 };
 
+const calculateStudentCounts = async () => {
+  const pipeline = [
+    {
+      $group: {
+        _id: null,
+        total: { $sum: 1 },
+        boys: {
+          $sum: {
+            $cond: [{ $eq: ["$gender", "boys"] }, 1, 0],
+          },
+        },
+        girls: {
+          $sum: {
+            $cond: [{ $eq: ["$gender", "girls"] }, 1, 0],
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        total: 1,
+        boys: 1,
+        girls: 1,
+      },
+    },
+  ];
+
+  const result = await Students.aggregate(pipeline);
+  return result[0]; // Return the first (and only) result since we group by null.
+};
+
+
 
 module.exports = {
   countSchoolsData,
@@ -492,5 +526,6 @@ module.exports = {
   calculateTypeSchoolDistribution,
   calculateSchoolsByCategory,
   calculateSchoolCounts,
-  calculateStaffCounts
+  calculateStaffCounts,
+  calculateStudentCounts
 };
