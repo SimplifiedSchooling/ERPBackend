@@ -34,7 +34,7 @@ const calculateStaff = catchAsync(async (req, res) => {
   res.status(200).send(result);
 });
 
-const calculateStudent = catchAsync(async(req,res) =>{
+const calculateStudent = catchAsync(async (req, res) => {
   const result = await HomePageGraphService.calculateStudentCounts();
   res.status(200).send(result);
 });
@@ -46,5 +46,5 @@ module.exports = {
   calculateSchoolsByCategory,
   calculateSchoolCounts,
   calculateStaff,
-  calculateStudent
+  calculateStudent,
 };
