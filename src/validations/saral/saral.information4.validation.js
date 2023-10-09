@@ -4,7 +4,7 @@ const { objectId } = require('../custom.validation');
 const createSaralInfo4 = {
   body: Joi.object().keys({
     scode: Joi.string(),
-    typeofactivity: Joi.string(),
+    typeofactivity: Joi.number(),
     ptaexecutive: Joi.string(),
     dateofapproval: Joi.string(),
     feestructapprove: Joi.string(),
@@ -55,7 +55,7 @@ const updateSaralInfo4ById = {
   }),
   body: Joi.object()
     .keys({
-      typeofactivity: Joi.string(),
+      typeofactivity: Joi.number(),
       ptaexecutive: Joi.string(),
       dateofapproval: Joi.string(),
       feestructapprove: Joi.string(),

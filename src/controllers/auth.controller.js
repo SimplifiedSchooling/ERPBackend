@@ -132,8 +132,8 @@ const resetPassword = catchAsync(async (req, res) => {
 
 // Set password for school users
 const setPassword = catchAsync(async (req, res) => {
-  await authService.setPassword(req.body.userId, req.body.password);
-  res.status(httpStatus.NO_CONTENT).send();
+  const user = await authService.setPassword(req.body.userId, req.body.password);
+  res.send(user);
 });
 
 // Set password for department users

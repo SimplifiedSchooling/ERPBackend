@@ -119,16 +119,16 @@ module.exports = router;
  *               seatingarrang: string
  *               seatingarrangava: string
  *               seatingarrangereq: string
- *               transportprovider: string
+ *               transportprovider: number
  *               vehicaltype: string
  *               contractorowner: string
  *               rtoregistration: string
  *               drivername: string
- *               driverlicenseno: string
- *               driveraadharno: string
+ *               driverlicenseno: number
+ *               driveraadharno: number
  *               helpername: string
  *               teacherresearch: number
- *               teacherarticlepublish: string
+ *               teacherarticlepublish: number
  *               curriculumdetails: string
  *             example:
  *               scode: mh00001
@@ -165,16 +165,16 @@ module.exports = router;
  *               seatingarrang: Test
  *               seatingarrangava: Test
  *               seatingarrangereq: Yes
- *               transportprovider: Yes
+ *               transportprovider: 1
  *               vehicaltype: Yes
  *               contractorowner: Yes
  *               rtoregistration: Yes
  *               drivername: Yes
- *               driverlicenseno: Yes
- *               driveraadharno: Yes
+ *               driverlicenseno: 2
+ *               driveraadharno: 5
  *               helpername: Yes
  *               teacherresearch: 5
- *               teacherarticlepublish: Test1
+ *               teacherarticlepublish: 6
  *               curriculumdetails: Test1
  *     responses:
  *       "201":
@@ -323,16 +323,16 @@ module.exports = router;
  *               seatingarrang: string
  *               seatingarrangava: string
  *               seatingarrangereq: string
- *               transportprovider: string
+ *               transportprovider: number
  *               vehicaltype: string
  *               contractorowner: string
  *               rtoregistration: string
  *               drivername: string
- *               driverlicenseno: string
- *               driveraadharno: string
+ *               driverlicenseno: number
+ *               driveraadharno: number
  *               helpername: string
  *               teacherresearch: number
- *               teacherarticlepublish: string
+ *               teacherarticlepublish: number
  *               curriculumdetails: string
  *             example:
  *               totallaptop: 3
@@ -368,16 +368,16 @@ module.exports = router;
  *               seatingarrang: Test
  *               seatingarrangava: Test
  *               seatingarrangereq: Yes
- *               transportprovider: Yes
+ *               transportprovider: 1
  *               vehicaltype: Yes
  *               contractorowner: Yes
  *               rtoregistration: Yes
  *               drivername: Yes
- *               driverlicenseno: Yes
- *               driveraadharno: Yes
+ *               driverlicenseno: 5
+ *               driveraadharno: 8
  *               helpername: Yes
  *               teacherresearch: 5
- *               teacherarticlepublish: Test1
+ *               teacherarticlepublish: 7
  *               curriculumdetails: Test1
  *     responses:
  *       "200":

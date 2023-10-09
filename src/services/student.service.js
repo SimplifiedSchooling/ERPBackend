@@ -6,23 +6,35 @@ const randomstring = require('randomstring');
 const { Student, User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
-// Generate a random username
-function generateUsernameFromName(name) {
+const generateUsernameFromName = (name) => {
   const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
   const randomString = randomstring.generate({
     length: 4,
     charset: 'alphanumeric',
   });
   return `${sanitizedName}${randomString}`;
-}
+};
+
+const generate8DigitNumericID = () => {
+  const min = 10000000; // Smallest 8-digit number
+  const max = 99999999; // Largest 8-digit number
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 /**
- * Create a Classes
+ * Create a Student
  * @param {Object} studentData
- * @returns {Promise<Student>}
+ * @returns {Promise<Object>}
  */
 const createStudent = async (studentData) => {
-  const userName = await generateUsernameFromName(studentData.middlename);
-  const newStudent = await Student.create(studentData);
+  const userName = generateUsernameFromName(studentData.middlename);
+  const studentId = generate8DigitNumericID();
+
+  const newStudent = await Student.create({
+    ...studentData,
+    studentId, // Assign the generated studentId
+  });
+
   const randomPassword = crypto.randomBytes(16).toString('hex');
   const parentUser = await User.create({
     name: newStudent.middlename,
@@ -34,10 +46,10 @@ const createStudent = async (studentData) => {
     role: 'parent',
   });
 
-  const username = await generateUsernameFromName(studentData.firstname);
+  const username = generateUsernameFromName(studentData.firstname);
   const randomPass = crypto.randomBytes(16).toString('hex');
   const studentUser = await User.create({
-    name: newStudent.firstname,
+    name: `${newStudent.firstname} ${newStudent.lastname}`,
     userId: newStudent.id,
     scode: newStudent.scode,
     mobNumber: newStudent.mobNumber,
@@ -45,6 +57,7 @@ const createStudent = async (studentData) => {
     password: randomPass,
     role: 'student',
   });
+
   return { parentUser, newStudent, studentUser };
 };
 
@@ -150,6 +163,30 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
         record = await record.save();
         if (record) {
           records.push(student);
+          // Create the student user
+          const username = await generateUsernameFromName(student.firstname);
+          const randomPass = crypto.randomBytes(16).toString('hex');
+          await User.create({
+            name: `${student.firstname} ${student.lastname}`,
+            userId: record.id,
+            scode: student.scode,
+            mobNumber: student.mobNumber,
+            userName: username,
+            password: randomPass,
+            role: 'student',
+          });
+
+          const userName = await generateUsernameFromName(student.middlename);
+          const randomPassword = crypto.randomBytes(16).toString('hex');
+          await User.create({
+            name: student.middlename,
+            userId: record.id,
+            scode: student.scode,
+            mobNumber: student.mobNumber,
+            userName,
+            password: randomPassword,
+            role: 'parent',
+          });
         }
       }
     })

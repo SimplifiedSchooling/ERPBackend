@@ -7,6 +7,11 @@ const router = express.Router();
 router
   .route('/getstudentslist')
   .get(validate(ClassteacherValidation.getAllStudentByclassTeacherId), ClassteacherController.getStudentsForTeacher);
+
+router
+  .route('/getclassbyteacherId/:teacherId')
+  .get(validate(ClassteacherValidation.getClassTeachersByTeacherId), ClassteacherController.getClassteachersByTeacherId);
+
 router
   .route('/getattendencelist')
   .get(validate(ClassteacherValidation.getAttendenceList), ClassteacherController.getAttendanceListForTeacher);
@@ -92,7 +97,6 @@ module.exports = router;
  *       '500':
  *         description: Internal server error. An error occurred while processing the request.
  */
-
 /**
  * @swagger
  * /classteacher:
@@ -268,6 +272,35 @@ module.exports = router;
  *     responses:
  *       "200":
  *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+/**
+ * @swagger
+ * /classteacher/getclassbyteacherId/{teacherId}:
+ *   get:
+ *     summary: Get a Classteacher
+ *     tags: [Classteacher]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: teacherId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: teacherId
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Classteacher'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

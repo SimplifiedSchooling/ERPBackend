@@ -157,7 +157,8 @@ const setPassword = async (userId, newPassword) => {
     if (!user) {
       throw new Error();
     }
-    await userService.updateUserById(user.id, { password: newPassword });
+    const updateUser = await userService.updateUserById(user.id, { password: newPassword });
+    return updateUser;
   } catch (error) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
   }

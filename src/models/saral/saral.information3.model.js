@@ -139,7 +139,7 @@ const saralInformation3Schema = mongoose.Schema(
       trim: true,
     },
     transportprovider: {
-      type: String,
+      type: Number,
       trim: true,
     },
     vehicaltype: {
@@ -159,11 +159,11 @@ const saralInformation3Schema = mongoose.Schema(
       trim: true,
     },
     driverlicenseno: {
-      type: String,
+      type: Number,
       trim: true,
     },
     driveraadharno: {
-      type: String,
+      type: Number,
       trim: true,
     },
     helpername: {
@@ -175,7 +175,7 @@ const saralInformation3Schema = mongoose.Schema(
       trim: true,
     },
     teacherarticlepublish: {
-      type: String,
+      type: Number,
       trim: true,
     },
     curriculumdetails: {

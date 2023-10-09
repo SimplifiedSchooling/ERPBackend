@@ -69,7 +69,7 @@ module.exports = router;
  *               - committeeconstitutemdmc
  *               - committedetailmdmc
  *             properties:
- *               typeofactivity: string
+ *               typeofactivity: number
  *               ptaexecutive: string
  *               dateofapproval: string
  *               feestructapprove: string
@@ -98,7 +98,7 @@ module.exports = router;
  *               committedetailmdmc: string
  *             example:
  *               scode: mh00001
- *               typeofactivity: Test1
+ *               typeofactivity: 1
  *               ptaexecutive: Test1
  *               dateofapproval: Test1
  *               feestructapprove: Test1
@@ -239,7 +239,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               typeofactivity: string
+ *               typeofactivity: number
  *               ptaexecutive: string
  *               dateofapproval: string
  *               feestructapprove: string
@@ -267,7 +267,7 @@ module.exports = router;
  *               committeeconstitutemdmc: string
  *               committedetailmdmc: string
  *             example:
- *               typeofactivity: Test1
+ *               typeofactivity: 1
  *               ptaexecutive: Test1
  *               dateofapproval: Test1
  *               feestructapprove: Test1

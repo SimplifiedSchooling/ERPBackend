@@ -10,6 +10,6 @@ router.route('/managementwise').get(HomePageGraphController.getSchoolDataManagem
 router.route('/schooltype').get(HomePageGraphController.getSchoolTypeData);
 router.route('/calculate-schools-by-category').get(HomePageGraphController.calculateSchoolsByCategory);
 router.route('/calculate-school-counts/:districtName').get(HomePageGraphController.calculateSchoolCounts);
-
+router.route('/staff').get(HomePageGraphController.calculateStaff);
 
 module.exports = router;
