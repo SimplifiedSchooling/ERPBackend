@@ -29,11 +29,10 @@ const calculateSchoolCounts = catchAsync(async (req, res) => {
   res.status(200).send(schoolCounts);
 });
 
-
-const calculateStaff = catchAsync(async(req,res) =>{
+const calculateStaff = catchAsync(async (req, res) => {
   const result = await HomePageGraphService.calculateStaffCounts();
   res.status(200).send(result);
-})
+});
 
 const calculateStudent = catchAsync(async(req,res) =>{
   const result = await HomePageGraphService.calculateStudentCounts();
