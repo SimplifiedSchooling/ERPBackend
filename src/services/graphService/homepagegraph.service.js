@@ -435,12 +435,12 @@ const calculateStaffCounts = async () => {
       $group: {
         _id: null,
         totalstaff: { $sum: 1 },
-        male: {
+        totalmale: {
           $sum: {
             $cond: [{ $eq: ['$gender', 'male'] }, 1, 0],
           },
         },
-        female: {
+        totalfemale: {
           $sum: {
             $cond: [{ $eq: ['$gender', 'female'] }, 1, 0],
           },
@@ -451,8 +451,8 @@ const calculateStaffCounts = async () => {
       $project: {
         _id: 0,
         totalstaff: 1,
-        male: 1,
-        female: 1,
+        totalmale: 1,
+        totalfemale: 1,
       },
     },
   ];
