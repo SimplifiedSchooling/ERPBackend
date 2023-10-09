@@ -9,7 +9,6 @@ router.route('/homepagegraphdata').get(HomePageGraphController.getHomePageGraphD
 router.route('/managementwise').get(HomePageGraphController.getSchoolDataManagementWise);
 router.route('/schooltype').get(HomePageGraphController.getSchoolTypeData);
 router.route('/calculate-schools-by-category').get(HomePageGraphController.calculateSchoolsByCategory);
-router.route('/calculate-school-counts/:districtName').get(HomePageGraphController.calculateSchoolCounts);
 router.route('/staff').get(HomePageGraphController.calculateStaff);
 router.route('/student').get(HomePageGraphController.calculateStudent);
 

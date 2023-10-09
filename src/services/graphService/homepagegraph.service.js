@@ -430,36 +430,13 @@ const calculateSchoolsByCategory = async () => {
   return schoolCategoryStats;
 };
 
-const calculateSchoolCounts = async (districtName) => {
-  try {
-    // Count schools by block
-    const blockCounts = await Section1A10Schema.aggregate([
-      {
-        $match: { districtname: districtName },
-      },
-      {
-        $group: {
-          _id: '$udiseblock',
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-
-    // Count total schools in the district
-    const totalSchoolCount = await Section1A10Schema.countDocuments({ districtname: districtName });
-
-    return { blockCounts, totalSchoolCount };
-  } catch (error) {
-    throw new Error('Failed to calculate school counts.');
-  }
-};
 
 const calculateStaffCounts = async () => {
   const pipeline = [
     {
       $group: {
         _id: null,
-        total: { $sum: 1 },
+        totalstaff: { $sum: 1 },
         male: {
           $sum: {
             $cond: [{ $eq: ['$gender', 'male'] }, 1, 0],
@@ -475,7 +452,7 @@ const calculateStaffCounts = async () => {
     {
       $project: {
         _id: 0,
-        total: 1,
+        totalstaff: 1,
         male: 1,
         female: 1,
       },
@@ -491,7 +468,7 @@ const calculateStudentCounts = async () => {
     {
       $group: {
         _id: null,
-        total: { $sum: 1 },
+        totalstudents: { $sum: 1 },
         boys: {
           $sum: {
             $cond: [{ $eq: ['$gender', 'boys'] }, 1, 0],
@@ -507,7 +484,7 @@ const calculateStudentCounts = async () => {
     {
       $project: {
         _id: 0,
-        total: 1,
+        totalstudents: 1,
         boys: 1,
         girls: 1,
       },
@@ -518,12 +495,12 @@ const calculateStudentCounts = async () => {
   return result[0]; // Return the first (and only) result since we group by null.
 };
 
+
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
   calculateTypeSchoolDistribution,
   calculateSchoolsByCategory,
-  calculateSchoolCounts,
   calculateStaffCounts,
   calculateStudentCounts,
 };
