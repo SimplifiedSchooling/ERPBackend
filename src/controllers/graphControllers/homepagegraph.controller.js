@@ -31,6 +31,11 @@ const calculateStudent = catchAsync(async (req, res) => {
   res.status(200).send(result);
 });
 
+const getSchoolStatistics = async (req, res) => {
+    const result = await HomePageGraphService.calculateSchoolStatistics();
+    res.json(result);
+};
+
 module.exports = {
   getHomePageGraphData,
   getSchoolDataManagementWise,
@@ -38,4 +43,5 @@ module.exports = {
   calculateSchoolsByCategory,
   calculateStaff,
   calculateStudent,
+  getSchoolStatistics
 };

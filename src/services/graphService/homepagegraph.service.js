@@ -493,6 +493,51 @@ const calculateStudentCounts = async () => {
   return result[0]; // Return the first (and only) result since we group by null.
 };
 
+const calculateSchoolStatistics = async () => {
+  const pipeline = [
+    {
+      $project: {
+        _id: 0,
+        schoolType: '$typeschool',
+        schoolCategory: {
+          $cond: {
+            if: { $in: ['$schoolcategory', ['Primary', 'Upper Primary']] },
+            then: 'Elementary',
+            else: {
+              $cond: {
+                if: { $in: ['$schoolcategory', ['Secondary', 'Higher Secondary']] },
+                then: 'Secondary',
+                else: '$schoolcategory',
+              },
+            },
+          },
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          schoolType: '$schoolType',
+          schoolCategory: '$schoolCategory',
+        },
+        totalCount: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        schoolType: '$_id.schoolType',
+        schoolCategory: '$_id.schoolCategory',
+        totalCount: 1,
+      },
+    },
+  ];
+
+  const result = await Section1A20Schema.aggregate(pipeline);
+
+  return result;
+};
+
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
@@ -500,4 +545,5 @@ module.exports = {
   calculateSchoolsByCategory,
   calculateStaffCounts,
   calculateStudentCounts,
+  calculateSchoolStatistics
 };
