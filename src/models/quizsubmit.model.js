@@ -8,11 +8,7 @@ const quizSubmitSchema = mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    // quizId: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'Quiz', // Reference to your quiz model
-    //   required: true,
-    // },
+
     questionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'quize',

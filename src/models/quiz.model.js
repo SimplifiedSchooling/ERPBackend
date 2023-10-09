@@ -3,9 +3,6 @@ const { toJSON, paginate } = require('./plugins');
 
 const quizeSchema = mongoose.Schema(
   {
-    // question: {
-    //   type: String,
-    // },
     quizName: {
       type: String,
     },
@@ -67,24 +64,11 @@ const quizeSchema = mongoose.Schema(
       ref: 'chapter',
       required: true,
     },
-    // questionId: {
-    //   type: String,
-    //   required: true,
-    // },
-    // lessonId: {
-    //   type: mongoose.SchemaTypes.ObjectId,
-    //   ref: 'lesson',
-    //   required: true,
-    // },
   },
   {
     timestamps: true,
   }
 );
-
-// function arrayLimit(val) {
-//   return val.length === 4;
-// }
 
 // add plugin that converts mongoose to json
 quizeSchema.plugin(toJSON);
