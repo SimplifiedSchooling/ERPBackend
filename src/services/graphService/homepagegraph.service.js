@@ -327,6 +327,7 @@ const countSchoolsData = async () => {
 
 const Section1A20Schema = require('../../models/masterModels/section1A(1.11 to 1.20).model');
 const Staffs = require('../../models/staff/staff.model');
+const Students = require('../../models/student.model');
 
 const calculateSchoolDistribution = async () => {
   const pipeline = [
@@ -428,42 +429,18 @@ const calculateSchoolsByCategory = async () => {
   return schoolCategoryStats;
 };
 
-const calculateSchoolCounts = async (districtName) => {
-  try {
-    // Count schools by block
-    const blockCounts = await Section1A10Schema.aggregate([
-      {
-        $match: { districtname: districtName },
-      },
-      {
-        $group: {
-          _id: '$udiseblock',
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-
-    // Count total schools in the district
-    const totalSchoolCount = await Section1A10Schema.countDocuments({ districtname: districtName });
-
-    return { blockCounts, totalSchoolCount };
-  } catch (error) {
-    throw new Error('Failed to calculate school counts.');
-  }
-};
-
 const calculateStaffCounts = async () => {
   const pipeline = [
     {
       $group: {
         _id: null,
-        total: { $sum: 1 },
-        male: {
+        totalstaff: { $sum: 1 },
+        totalmale: {
           $sum: {
             $cond: [{ $eq: ['$gender', 'male'] }, 1, 0],
           },
         },
-        female: {
+        totalfemale: {
           $sum: {
             $cond: [{ $eq: ['$gender', 'female'] }, 1, 0],
           },
@@ -473,9 +450,9 @@ const calculateStaffCounts = async () => {
     {
       $project: {
         _id: 0,
-        total: 1,
-        male: 1,
-        female: 1,
+        totalstaff: 1,
+        totalmale: 1,
+        totalfemale: 1,
       },
     },
   ];
@@ -484,11 +461,43 @@ const calculateStaffCounts = async () => {
   return result[0]; // Return the first (and only) result since we group by null.
 };
 
+const calculateStudentCounts = async () => {
+  const pipeline = [
+    {
+      $group: {
+        _id: null,
+        totalstudents: { $sum: 1 },
+        boys: {
+          $sum: {
+            $cond: [{ $eq: ['$gender', 'boys'] }, 1, 0],
+          },
+        },
+        girls: {
+          $sum: {
+            $cond: [{ $eq: ['$gender', 'girls'] }, 1, 0],
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        totalstudents: 1,
+        boys: 1,
+        girls: 1,
+      },
+    },
+  ];
+
+  const result = await Students.aggregate(pipeline);
+  return result[0]; // Return the first (and only) result since we group by null.
+};
+
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
   calculateTypeSchoolDistribution,
   calculateSchoolsByCategory,
-  calculateSchoolCounts,
   calculateStaffCounts,
+  calculateStudentCounts,
 };
