@@ -32,10 +32,9 @@ const calculateStudent = catchAsync(async (req, res) => {
 });
 
 const getSchoolStatistics = async (req, res) => {
-    const result = await HomePageGraphService.calculateSchoolStatistics();
-    res.json(result);
+  const result = await HomePageGraphService.calculateSchoolStatistics();
+  res.json(result);
 };
-
 
 const getSchoollevelOfEducation = async (req, res) => {
   const result = await HomePageGraphService.calculateSchoolsByLevelOfEducation();
@@ -56,5 +55,5 @@ module.exports = {
   calculateStudent,
   getSchoolStatistics,
   getSchoollevelOfEducation,
-  gettotalSchoollevelOfEducation
+  gettotalSchoollevelOfEducation,
 };
