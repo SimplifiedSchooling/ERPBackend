@@ -634,7 +634,6 @@ const calculateTotalLevelOfEducation = async () => {
   return result[0];
 };
 
-
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
@@ -644,5 +643,5 @@ module.exports = {
   calculateStudentCounts,
   calculateSchoolStatistics,
   calculateSchoolsByLevelOfEducation,
-  calculateTotalLevelOfEducation
+  calculateTotalLevelOfEducation,
 };
