@@ -31,6 +31,22 @@ const calculateStudent = catchAsync(async (req, res) => {
   res.status(200).send(result);
 });
 
+const getSchoolStatistics = async (req, res) => {
+    const result = await HomePageGraphService.calculateSchoolStatistics();
+    res.json(result);
+};
+
+
+const getSchoollevelOfEducation = async (req, res) => {
+  const result = await HomePageGraphService.calculateSchoolsByLevelOfEducation();
+  res.json(result);
+};
+
+const gettotalSchoollevelOfEducation = async (req, res) => {
+  const result = await HomePageGraphService.calculateTotalLevelOfEducation();
+  res.json(result);
+};
+
 module.exports = {
   getHomePageGraphData,
   getSchoolDataManagementWise,
@@ -38,4 +54,7 @@ module.exports = {
   calculateSchoolsByCategory,
   calculateStaff,
   calculateStudent,
+  getSchoolStatistics,
+  getSchoollevelOfEducation,
+  gettotalSchoollevelOfEducation
 };
