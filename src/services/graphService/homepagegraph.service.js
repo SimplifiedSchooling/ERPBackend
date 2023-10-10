@@ -538,6 +538,103 @@ const calculateSchoolStatistics = async () => {
   return result;
 };
 
+const calculateSchoolsByLevelOfEducation = async () => {
+  const pipeline = [
+    {
+      $project: {
+        _id: 0,
+        levelOfEducation: {
+          $cond: {
+            if: { $in: ['$schoolcategory', ['Primary', 'Upper Primary']] },
+            then: 'Elementary',
+            else: {
+              $cond: {
+                if: { $in: ['$schoolcategory', ['Secondary']] },
+                then: 'Secondary',
+                else: {
+                  $cond: {
+                    if: { $in: ['$schoolcategory', ['Higher Secondary']] },
+                    then: 'Higher Secondary',
+                    else: 'Other',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    {
+      $group: {
+        _id: '$levelOfEducation',
+        totalCount: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        levelOfEducation: '$_id',
+        totalCount: 1,
+      },
+    },
+  ];
+
+  const result = await Section1A20Schema.aggregate(pipeline);
+
+  return result;
+};
+
+const calculateTotalLevelOfEducation = async () => {
+  const pipeline = [
+    {
+      $group: {
+        _id: null,
+        elementary: {
+          $sum: {
+            $cond: {
+              if: { $in: ['$schoolcategory', ['Primary', 'Upper Primary']] },
+              then: 1,
+              else: 0,
+            },
+          },
+        },
+        secondary: {
+          $sum: {
+            $cond: {
+              if: { $in: ['$schoolcategory', ['Secondary']] },
+              then: 1,
+              else: 0,
+            },
+          },
+        },
+        higherSecondary: {
+          $sum: {
+            $cond: {
+              if: { $in: ['$schoolcategory', ['Higher Secondary']] },
+              then: 1,
+              else: 0,
+            },
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        totalschool: { $add: ['$elementary', '$secondary', '$higherSecondary'] },
+        elementary: 1,
+        secondary: 1,
+        higherSecondary: 1,
+      },
+    },
+  ];
+
+  const result = await Section1A20Schema.aggregate(pipeline);
+
+  return result[0];
+};
+
+
 module.exports = {
   countSchoolsData,
   calculateSchoolDistribution,
@@ -545,5 +642,7 @@ module.exports = {
   calculateSchoolsByCategory,
   calculateStaffCounts,
   calculateStudentCounts,
-  calculateSchoolStatistics
+  calculateSchoolStatistics,
+  calculateSchoolsByLevelOfEducation,
+  calculateTotalLevelOfEducation
 };
