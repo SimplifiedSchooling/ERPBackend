@@ -93,7 +93,7 @@ module.exports = router;
  *               complearnpurp: string
  *               computeradminpurp: string
  *               schoolnetwork: string
- *               bandwidth: string
+ *               bandwidth: number
  *               serviceprovider: string
  *               campusplan: string
  *               englishkit: string
@@ -139,7 +139,7 @@ module.exports = router;
  *               complearnpurp: No
  *               computeradminpurp: No
  *               schoolnetwork: No
- *               bandwidth: No
+ *               bandwidth: 12
  *               serviceprovider: No
  *               campusplan: Yes
  *               englishkit: Yes
@@ -297,7 +297,7 @@ module.exports = router;
  *               complearnpurp: string
  *               computeradminpurp: string
  *               schoolnetwork: string
- *               bandwidth: string
+ *               bandwidth: number
  *               serviceprovider: string
  *               campusplan: string
  *               englishkit: string
@@ -342,7 +342,7 @@ module.exports = router;
  *               complearnpurp: No
  *               computeradminpurp: No
  *               schoolnetwork: No
- *               bandwidth: No
+ *               bandwidth: 12
  *               serviceprovider: No
  *               campusplan: Yes
  *               englishkit: Yes
