@@ -85,6 +85,7 @@ module.exports = router;
  *               - studentId
  *               - classId
  *               - sectionId
+ *               - scode
  *             properties:
  *               sessionId:
  *                 type: string
@@ -94,11 +95,14 @@ module.exports = router;
  *                 type: string
  *               sectionId:
  *                 type: string
+ *               scode:
+ *                 type:string
  *             example:
  *               sessionId: 650d6ee360838756a214b446
  *               studentId: 650d6f1660838756a214b449
  *               classId: 650d6e6660838756a214b43c
  *               sectionId: 650d6dfa60838756a214b436
+ *               scode: 5896c340-6828-11ee-a348-e9de56c6f44e
  *     responses:
  *       "201":
  *         description: Created
@@ -278,11 +282,15 @@ module.exports = router;
  *         section_Id:
  *           type: string
  *           description: ID of the section_Id
+ *         scode:
+ *           type: string
+ *           description: ID of the scode
  *       example:
  *         session_Id: 614a7e7d7f1d813bbf8e89a9
  *         student_Id: 614a7e7d7f1d813bbf8e89a9
  *         class_Id: 614a7e7d7f1d813bbf8e89a9
  *         section_Id: 614a7e7d7f1d813bbf8e89a9
+ *         scode: 5896c340-6828-11ee-a348-e9de56c6f44e
  */
 
 /**
@@ -304,11 +312,15 @@ module.exports = router;
  *         section_Id:
  *           type: string
  *           description: ID of the section_Id
+ *         scode:
+ *           type: string
+ *           description: ID of the scode
  *       example:
  *         session_Id: 614a7e7d7f1d813bbf8e89a9
  *         student_Id: 614a7e7d7f1d813bbf8e89a9
  *         class_Id: 614a7e7d7f1d813bbf8e89a9
  *         section_Id: 614a7e7d7f1d813bbf8e89a9
+ *         scode: 5896c340-6828-11ee-a348-e9de56c6f44e
  */
 
 // /**
