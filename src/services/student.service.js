@@ -3,7 +3,7 @@
 const httpStatus = require('http-status');
 const crypto = require('crypto');
 const randomstring = require('randomstring');
-const { Student, User } = require('../models');
+const { Student, User, StudentSession } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const generateUsernameFromName = (name) => {
@@ -58,7 +58,14 @@ const createStudent = async (studentData) => {
     role: 'student',
   });
 
-  return { parentUser, newStudent, studentUser };
+  const studentSession = await StudentSession.create({
+    sessionId: newStudent.sessionId,
+    studentId,
+    classId: newStudent.classId,
+    sectionId: newStudent.sectionId,
+  });
+
+  return { parentUser, newStudent, studentUser, studentSession };
 };
 
 /**

@@ -10,10 +10,8 @@ const studentSessionSchema = mongoose.Schema(
       trim: true,
     },
     studentId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Students',
+      type: Number,
       required: true,
-      trim: true,
     },
     classId: {
       type: mongoose.SchemaTypes.ObjectId,
