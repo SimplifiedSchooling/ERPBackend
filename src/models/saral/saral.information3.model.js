@@ -35,7 +35,7 @@ const saralInformation3Schema = mongoose.Schema(
       trim: true,
     },
     bandwidth: {
-      type: String,
+      type: Number,
       trim: true,
     },
     serviceprovider: {

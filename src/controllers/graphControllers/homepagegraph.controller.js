@@ -1,5 +1,3 @@
-// const httpStatus = require('http-status');
-// const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
 const HomePageGraphService = require('../../services/graphService/homepagegraph.service');
 
@@ -23,22 +21,39 @@ const calculateSchoolsByCategory = catchAsync(async (req, res) => {
   res.status(200).send(schoolCategoryStats);
 });
 
-const calculateSchoolCounts = catchAsync(async (req, res) => {
-  const { districtName } = req.params;
-  const schoolCounts = await HomePageGraphService.calculateSchoolCounts(districtName);
-  res.status(200).send(schoolCounts);
-});
-
 const calculateStaff = catchAsync(async (req, res) => {
   const result = await HomePageGraphService.calculateStaffCounts();
   res.status(200).send(result);
 });
+
+const calculateStudent = catchAsync(async (req, res) => {
+  const result = await HomePageGraphService.calculateStudentCounts();
+  res.status(200).send(result);
+});
+
+const getSchoolStatistics = async (req, res) => {
+  const result = await HomePageGraphService.calculateSchoolStatistics();
+  res.json(result);
+};
+
+const getSchoollevelOfEducation = async (req, res) => {
+  const result = await HomePageGraphService.calculateSchoolsByLevelOfEducation();
+  res.json(result);
+};
+
+const gettotalSchoollevelOfEducation = async (req, res) => {
+  const result = await HomePageGraphService.calculateTotalLevelOfEducation();
+  res.json(result);
+};
 
 module.exports = {
   getHomePageGraphData,
   getSchoolDataManagementWise,
   getSchoolTypeData,
   calculateSchoolsByCategory,
-  calculateSchoolCounts,
   calculateStaff,
+  calculateStudent,
+  getSchoolStatistics,
+  getSchoollevelOfEducation,
+  gettotalSchoollevelOfEducation,
 };
