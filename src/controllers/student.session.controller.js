@@ -24,6 +24,15 @@ const getSingleStudentSession = catchAsync(async (req, res) => {
   res.send(singleStudentSession);
 });
 
+const getStudentByScodeAndClassId = catchAsync(async (req, res) => {
+  const { scode, classId } = req.params;
+  const Student = await studentSessionService.getStudentByScodeAndClassId(scode, classId);
+  if (!Student) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Student not found');
+  }
+  res.send(Student);
+});
+
 const getStudentsByClassAndSection = async (req, res) => {
   const { classId, sectionId } = req.query;
   const data = await studentSessionService.getStudentsByClassAndSection(classId, sectionId);
@@ -50,4 +59,5 @@ module.exports = {
   updateSingleStudentSession,
   deleteSingleStudentSession,
   getStudentsByClassAndSection,
+  getStudentByScodeAndClassId,
 };

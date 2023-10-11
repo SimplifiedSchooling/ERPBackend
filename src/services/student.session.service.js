@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
-const { StudentSession } = require('../models');
+const { StudentSession, Student } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -170,6 +170,20 @@ const getStudentsByClassAndSection = async (classId, sectionId) => {
   }));
 };
 
+const getStudentByScodeAndClassId = async (scode, classId) => {
+  // Find the class based on classId in the studentSession model
+  const classData = await StudentSession.findOne({ classId });
+  if (!classData) {
+    return new ApiError(httpStatus.NOT_FOUND, 'Class not found');
+  }
+  // Now that you have the class data, you can find students with the given scode
+  const students = await Student.find({ scode, studentId: { $in: classData.studentId } });
+  if (students.length === 0) {
+    return new ApiError(httpStatus.NOT_FOUND, 'Students not found for the given scode and classId');
+  }
+  return students;
+};
+
 /**
  * Update StudentSession by id
  * @param {ObjectId} studentSessionId
@@ -207,4 +221,5 @@ module.exports = {
   updateStudentSessionById,
   deleteStudentSessionById,
   getStudentsByClassAndSection,
+  getStudentByScodeAndClassId,
 };

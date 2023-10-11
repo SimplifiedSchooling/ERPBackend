@@ -4,15 +4,22 @@ const { objectId } = require('./custom.validation');
 const createStudentSession = {
   body: Joi.object().keys({
     sessionId: Joi.string().required(),
-    studentId: Joi.string().required(),
+    studentId: Joi.number().required(),
     classId: Joi.string().required(),
     sectionId: Joi.string().required(),
+    scode: Joi.string().required(),
   }),
 };
 
 const getStudentSession = {
   params: Joi.object().keys({
     studentSessionId: Joi.string().custom(objectId).required(),
+  }),
+};
+const getAllStudentByclassIdAndScode = {
+  query: Joi.object().keys({
+    classId: Joi.string().required(),
+    scode: Joi.string().required(),
   }),
 };
 
@@ -39,9 +46,10 @@ const updateStudentSessionById = {
   body: Joi.object()
     .keys({
       sessionId: Joi.string(),
-      studentId: Joi.string(),
+      studentId: Joi.number(),
       classId: Joi.string(),
       sectionId: Joi.string(),
+      scode: Joi.string(),
     })
     .min(1),
 };
@@ -58,4 +66,5 @@ module.exports = {
   updateStudentSessionById,
   deleteStudentSessionById,
   getAllStudentByclassAndsection,
+  getAllStudentByclassIdAndScode,
 };

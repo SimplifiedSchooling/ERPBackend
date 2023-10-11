@@ -150,10 +150,8 @@ const getStudentAttendanceSummary = async (scode, date) => {
       (attendance) => attendance.attendancetype === 'present'
     ).length;
 
-    const absentStudentsCount = allStudentsAttendance.filter(
-      (attendance) => attendance.attendancetype === 'absent'
-    ).length;
-    
+    const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.attendancetype === 'absent').length;
+
     return {
       totalStudents: totalStudentsCount,
       presentStudents: presentStudentsCount,
