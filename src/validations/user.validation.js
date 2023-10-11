@@ -28,6 +28,12 @@ const getUser = {
     userId: Joi.string().custom(objectId),
   }),
 };
+const getStudentUserByRoleAndScode = {
+  params: Joi.object().keys({
+    role: Joi.string().required(),
+    scode: Joi.string().required(),
+  }),
+};
 
 const updateUser = {
   params: Joi.object().keys({
@@ -58,4 +64,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  getStudentUserByRoleAndScode,
 };
