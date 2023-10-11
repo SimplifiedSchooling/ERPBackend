@@ -24,6 +24,10 @@ const studentSessionSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    scode: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
