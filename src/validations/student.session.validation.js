@@ -17,7 +17,7 @@ const getStudentSession = {
   }),
 };
 const getAllStudentByclassIdAndScode = {
-  query: Joi.object().keys({
+  params: Joi.object().keys({
     classId: Joi.string().required(),
     scode: Joi.string().required(),
   }),

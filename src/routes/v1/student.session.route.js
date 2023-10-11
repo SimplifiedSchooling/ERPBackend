@@ -21,10 +21,12 @@ router
   .patch(validate(StudentSessionValidation.updateStudentSessionById), studentSessionController.updateSingleStudentSession)
   .delete(validate(StudentSessionValidation.deleteStudentSessionById), studentSessionController.deleteSingleStudentSession);
 
-router.route('/students/byscodeandclassId/:scode/:classId').get(
-  // validate(StudentSessionValidation.getAllStudentByclassIdAndScode),
-  studentSessionController.getStudentByScodeAndClassId
-);
+router
+  .route('/students/byscodeandclassId/:scode/:classId')
+  .get(
+    validate(StudentSessionValidation.getAllStudentByclassIdAndScode),
+    studentSessionController.getStudentByScodeAndClassId
+  );
 module.exports = router;
 
 /**
