@@ -21,6 +21,10 @@ router
   .patch(validate(StudentSessionValidation.updateStudentSessionById), studentSessionController.updateSingleStudentSession)
   .delete(validate(StudentSessionValidation.deleteStudentSessionById), studentSessionController.deleteSingleStudentSession);
 
+router.route('/students/byscodeandclassId/:scode/:classId').get(
+  // validate(StudentSessionValidation.getAllStudentByclassIdAndScode),
+  studentSessionController.getStudentByScodeAndClassId
+);
 module.exports = router;
 
 /**
@@ -220,6 +224,41 @@ module.exports = router;
 
 /**
  * @swagger
+ * /studentSession/students/byscodeandclassId/{scode}/{classId}:
+ *   get:
+ *     summary: Get a class
+ *     tags: [StudentSession]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: scode
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *               schema:
+ *                $ref: '#/components/schemas/StudentSessionUpdateInput'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ */
+
+/**
+ * @swagger
  * components:
  *   schemas:
  *     StudentSessionInput:
@@ -269,3 +308,30 @@ module.exports = router;
  *         class_Id: 614a7e7d7f1d813bbf8e89a9
  *         section_Id: 614a7e7d7f1d813bbf8e89a9
  */
+
+// /**
+//  * @swagger
+//  * /studentSession/studentsByscodeandclassId/{scode}/{classId}:
+//  *   get:
+//  *     summary: Get a single studentSession by ID
+//  *     tags: [StudentSession]
+//  *     parameters:
+//  *       - in: path
+//  *         name: scode
+//  *         required: true
+//  *         schema:
+//  *           type: string
+//  *         description: scode
+//  *       - in: path
+//  *         name: classId
+//  *         required: true
+//  *         schema:
+//  *           type: string
+//  *         description: clasId
+//  *     responses:
+//  *       200:
+//  *         description: Successful response
+//  *       404:
+//  *         description: StudentSession not found
+//  *
+//  */

@@ -38,23 +38,6 @@ const studentSchema = new mongoose.Schema(
     department: {
       type: String,
     },
-    sessionId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'sessions',
-      required: true,
-      trim: true,
-    },
-    classId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Classes',
-      trim: true,
-    },
-    sectionId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Section',
-      required: true,
-      trim: true,
-    },
     parent_id: String,
     admission_no: String,
     roll_no: String,
