@@ -51,7 +51,7 @@ const getWeekStatus = catchAsync(async (req, res) => {
 
 const todaysAttendanceForSchool = catchAsync(async (req, res) => {
   const { scode, date } = req.query;
-  const todayAttendance = await StudentAttendanceService.getStudentAttendanceSummary(scode, date);
+  const todayAttendance = await StudentAttendanceService.getPresentStudentsCount(scode, date);
   res.send(todayAttendance);
 });
 
@@ -60,6 +60,12 @@ const getClasswiseAttendanceStudentList = catchAsync(async (req, res) => {
   const classwiseAttendanceStudentList = await StudentAttendanceService.getClasswiseStudentAttendanceList(campusId, date);
   res.send(classwiseAttendanceStudentList);
 });
+
+// const attendenceOfSchool = catchAsync(async (req, res) => {
+//   const { scode, date } = req.query;
+//   const todayAttendance = await StudentAttendanceService.getStudentAttendanceSummary(scode, date);
+//   res.send(todayAttendance);
+// });
 
 module.exports = {
   createStudentAttendance,

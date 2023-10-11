@@ -55,7 +55,7 @@ const getStudentsByClassAndSection = async (classId, sectionId) => {
       $lookup: {
         from: 'students',
         localField: 'studentId',
-        foreignField: '_id',
+        foreignField: 'studentId',
         as: 'studentInfo',
       },
     },

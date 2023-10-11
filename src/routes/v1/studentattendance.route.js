@@ -107,7 +107,6 @@ module.exports = router;
  *               totalStudents: 100
  *               presentStudents: 50
  *               absentStudents: 30
- *               halfdayStudents: 20
  *       '400':
  *         description: Attendance summary not found.
  *       '500':
@@ -155,13 +154,22 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               - studentId
- *               - date
- *               - time
- *             example:
- *               studentId: 74351449
- *               date: 2023-09-15
- *               time: 10:30am
+ *               studentId:
+ *                 type: number
+ *                 example: 74351449
+ *               date:
+ *                 type: string
+ *                 example: "2023-09-15"
+ *               time:
+ *                 type: string
+ *                 example: "10:30am"
+ *               AttendenceStatus:
+ *                 type: string
+ *                 enum: ["present", "absent", "late"]
+ *                 example: "present"
+ *               remark:
+ *                 type: string
+ *                 example: "10:30am"
  *     responses:
  *       "201":
  *         description: Created

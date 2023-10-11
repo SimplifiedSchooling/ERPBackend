@@ -50,6 +50,34 @@ const { toJSON, paginate } = require('./plugins');
 //     timestamps: true,
 //   }
 // );
+
+// const StudentAttendanceSchema = mongoose.Schema(
+//   {
+//     studentId: {
+//       type: Number,
+//       required: true,
+//       unique: true,
+//     },
+//     date: {
+//       type: String,
+//       required: true,
+//     },
+//     time: {
+//       type: String,
+//       required: true,
+//     },
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
+// // add plugin that converts mongoose to json
+// StudentAttendanceSchema.plugin(toJSON);
+// StudentAttendanceSchema.plugin(paginate);
+
+// const StudentAttendance = mongoose.model('StudentAttendance', StudentAttendanceSchema);
+
+// module.exports = StudentAttendance;
 const StudentAttendanceSchema = mongoose.Schema(
   {
     studentId: {
@@ -65,11 +93,20 @@ const StudentAttendanceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    AttendenceStatus: {
+      type: String,
+      enum: ['present', 'absent', 'late'],
+      default: 'present',
+    },
+    remark: {
+      type: String,
+    },
   },
   {
     timestamps: true,
   }
 );
+
 // add plugin that converts mongoose to json
 StudentAttendanceSchema.plugin(toJSON);
 StudentAttendanceSchema.plugin(paginate);

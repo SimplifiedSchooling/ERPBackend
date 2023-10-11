@@ -54,6 +54,16 @@ const getUserByUserName = async (userName) => {
 const getUserByUserNameAndMob = async (userName, mobNumber) => {
   return User.findOne({ userName, mobNumber });
 };
+
+/**
+ * Get student user by role and scode by perticular shcool
+ * @param {string} role
+ * @param {string} scode
+ * @returns {Promise<User>}
+ */
+const getUserByRoleAndScode = async (role, scode) => {
+  return User.find({ role, scode });
+};
 /**
  * Update user by id
  * @param {ObjectId} userId
@@ -112,4 +122,5 @@ module.exports = {
   deleteUserById,
   updateUserPasswordById,
   getUserByUserNameAndMob,
+  getUserByRoleAndScode,
 };
