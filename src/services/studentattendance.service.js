@@ -8,10 +8,29 @@ const ApiError = require('../utils/ApiError');
  * @param {Object} StudentAttendanceSchemaBody
  * @returns {Promise<StudentAttendanceSchema>}
  */
-const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
-  return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
-};
+// const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+//   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
+// };
 
+const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+  let { AttendenceStatus } = StudentAttendanceSchemaBody;
+  if (!AttendenceStatus) {
+    const match = StudentAttendanceSchemaBody.time.match(/(\d{1,2}:\d{2}:\d{2})(am|pm)?/i);
+    const extractedTime = match ? match[1] : '';
+
+    const attendanceTime = new Date(`${StudentAttendanceSchemaBody.date}T${extractedTime}`);
+    const lateCutoffTime = new Date(`${StudentAttendanceSchemaBody.date}T11:00:00`);
+    AttendenceStatus = attendanceTime > lateCutoffTime ? 'absent' : 'present';
+    const remark = AttendenceStatus === 'absent' ? 'Came late to class' : '';
+    const updatedAttendanceData = {
+      ...StudentAttendanceSchemaBody,
+      AttendenceStatus,
+      remark,
+    };
+    return StudentAttendanceSchema.create(updatedAttendanceData);
+  }
+  return StudentAttendanceSchema.create({ ...StudentAttendanceSchemaBody });
+};
 /**
  * Query for StudentAttendance
  * @param {Object} filter - Mongo filter
@@ -85,31 +104,66 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
  * @param {string} date - The date in 'YYYY-MM-DD' format.
  * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
  */
+// const getStudentAttendanceSummary = async (scode, date) => {
+//   const totalStudentsCount = await Student.countDocuments({ scode });
+//   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     scode,
+//     attendancetype: 'present',
+//     date,
+//   });
+//   const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     scode,
+//     attendancetype: 'absent',
+//     date,
+//   });
+
+//   const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     scode,
+//     attendancetype: 'halfday',
+//     date,
+//   });
+
+//   return {
+//     totalStudents: totalStudentsCount,
+//     presentStudents: presentStudentsCount,
+//     absentStudents: absentStudentsCount,
+//     halfdayStudents: halfdayStudentsCount,
+//   };
+// };
 const getStudentAttendanceSummary = async (scode, date) => {
-  const totalStudentsCount = await Student.countDocuments({ scode });
-  const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
-    scode,
-    attendancetype: 'present',
-    date,
-  });
-  const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
-    scode,
-    attendancetype: 'absent',
-    date,
-  });
+  try {
+    // Get total students count
+    const totalStudentsCount = await Student.countDocuments({ scode });
 
-  const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
-    scode,
-    attendancetype: 'halfday',
-    date,
-  });
+    // Get all studentIds matching the scode
+    const studentIds = await Student.find({ scode }, 'studentId').lean();
+    const studentIdValues = studentIds.map((student) => student.studentId);
 
-  return {
-    totalStudents: totalStudentsCount,
-    presentStudents: presentStudentsCount,
-    absentStudents: absentStudentsCount,
-    halfdayStudents: halfdayStudentsCount,
-  };
+    // Get attendance counts for all students on the given date
+    const allStudentsAttendance = await StudentAttendanceSchema.find({
+      studentId: { $in: studentIdValues },
+      date,
+    }).lean();
+
+    // Calculate counts for each attendance type
+    const presentStudentsCount = allStudentsAttendance.filter(
+      (attendance) => attendance.attendancetype === 'present'
+    ).length;
+
+    const absentStudentsCount = allStudentsAttendance.filter(
+      (attendance) => attendance.attendancetype === 'absent'
+    ).length;
+    
+    return {
+      totalStudents: totalStudentsCount,
+      presentStudents: presentStudentsCount,
+      absentStudents: absentStudentsCount,
+    };
+  } catch (error) {
+    // Handle errors here
+    console.error('Error in getStudentAttendanceSummary:', error);
+    throw error; // Re-throw the error or handle it as appropriate
+  }
 };
 /**
  * Delete StudentAttendanceSchema by id
@@ -147,7 +201,7 @@ const getAttendanceData = async (classId, sectionId, date) => {
       $lookup: {
         from: 'students',
         localField: 'studentId',
-        foreignField: '_id',
+        foreignField: 'studentId',
         as: 'studentInfo',
       },
     },
@@ -365,6 +419,58 @@ const getWeekReport = async (userId) => {
 //   return result;
 // };
 
+// /**
+//  * Get the number of students in the school.
+//  * @param {string} scode - The school code.
+//  * @returns {Promise<Student>} - The total number of students in the school.
+//  */
+// const getTotalStudentsCount = async (scode) => {
+
+//   return totalStudentsCount;
+// };
+
+// /**
+//  * Get the number of students present on a specific date.
+//  * @param {string} scode - The school code.
+//  * @param {string} date - The date in 'YYYY-MM-DD' format.
+//  * @returns {Promise<StudentAttendanceSchema>} - The number of students present on the specified date.
+//  */
+// const getPresentStudentsCount = async (scode, date) => {
+//   const totalStudentsCount = await Student.countDocuments({ scode });
+//   console.log(totalStudentsCount);
+//   const studentIds = await Student.find({ scode }, 'studentId');
+//   console.log(studentIds);
+//   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     studentId: { $in: studentIds },
+//     date,
+//   });
+//   const absentStudentsCount = totalStudentsCount - presentStudentsCount;
+//   const data = {
+//     totalStudentsCount,
+//     presentStudentsCount,
+//     absentStudentsCount,
+//   };
+//   return data;
+// };
+
+const getPresentStudentsCount = async (scode, date) => {
+  const totalStudentsCount = await Student.countDocuments({ scode });
+  const studentIds = await Student.find({ scode }, 'studentId').lean();
+  const studentIdValues = studentIds.map((student) => student.studentId);
+  const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+    studentId: { $in: studentIdValues }, // Use the extracted values here
+    date,
+  });
+  const absentStudentsCount = totalStudentsCount - presentStudentsCount;
+  const data = {
+    totalStudentsCount,
+    presentStudentsCount,
+    absentStudentsCount,
+  };
+
+  return data;
+};
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -374,5 +480,6 @@ module.exports = {
   getAttendanceData,
   getWeekReport,
   getStudentAttendanceSummary,
+  getPresentStudentsCount,
   // getClasswiseStudentAttendanceList,
 };
