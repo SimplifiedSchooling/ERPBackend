@@ -147,13 +147,13 @@ const getStudentAttendanceSummary = async (scode, date) => {
 
     // Calculate counts for each attendance type
     const presentStudentsCount = allStudentsAttendance.filter(
-      (attendance) => attendance.attendancetype === 'present'
+      (attendance) => attendance.AttendenceStatus === 'present'
     ).length;
 
     const absentStudentsCount = allStudentsAttendance.filter(
-      (attendance) => attendance.attendancetype === 'absent'
+      (attendance) => attendance.AttendenceStatus === 'absent'
     ).length;
-    
+
     return {
       totalStudents: totalStudentsCount,
       presentStudents: presentStudentsCount,
@@ -161,7 +161,6 @@ const getStudentAttendanceSummary = async (scode, date) => {
     };
   } catch (error) {
     // Handle errors here
-    console.error('Error in getStudentAttendanceSummary:', error);
     throw error; // Re-throw the error or handle it as appropriate
   }
 };

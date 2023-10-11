@@ -101,6 +101,10 @@ const StudentAttendanceSchema = mongoose.Schema(
     remark: {
       type: String,
     },
+    scode: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

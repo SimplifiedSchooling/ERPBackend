@@ -170,6 +170,9 @@ module.exports = router;
  *               remark:
  *                 type: string
  *                 example: "10:30am"
+ *               scode:
+ *                 type: string
+ *                 example: 222e6ae0-61e0-11ee-8482-6f09799e735c
  *     responses:
  *       "201":
  *         description: Created
