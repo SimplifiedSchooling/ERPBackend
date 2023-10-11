@@ -8,6 +8,9 @@ const ApiError = require('../utils/ApiError');
  * @param {Object} StudentAttendanceSchemaBody
  * @returns {Promise<StudentAttendanceSchema>}
  */
+// const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+//   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
+// };
 
 const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
   let { AttendenceStatus } = StudentAttendanceSchemaBody;
@@ -67,14 +70,26 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
   return typeStudentAttendance;
 };
 
-/**
- * Get total, present, and absent students based on campusId and date.
- * @param {string} scode - The scode property.
- * @param {string} date - The date in 'YYYY-MM-DD' format.
- * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
- */
+// /**
+//  * Get total, present, and absent students based on campusId.
+//  * @param {string} campusId - The ID of the campus.
+//  * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
+//  */
+// const getStudentAttendanceSummary = async (campusId) => {
+//   const totalStudentsCount = await Student.countDocuments({ campusId });
+//   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     campusId,
+//     attendancetype: 'present',
+//   });
+//   const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     campusId,
+//     attendancetype: 'absent',
+//   });
 
-<<<<<<< HEAD
+//   const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     campusId,
+//     attendancetype: 'halfday',
+//   });
 //   return {
 //     totalStudents: totalStudentsCount,
 //     presentStudents: presentStudentsCount,
@@ -83,69 +98,65 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
 //   };
 // };
 
-
+/**
+ * Get total, present, and absent students based on campusId and date.
+ * @param {string} scode - The scode property.
+ * @param {string} date - The date in 'YYYY-MM-DD' format.
+ * @returns {Promise<StudentAttendanceSchema>} - Object containing total, present, and absent students.
+ */
 // const getStudentAttendanceSummary = async (scode, date) => {
-//   try {
-//     // Get total students count
-//     const totalStudentsCount = await Student.countDocuments({ scode });
+//   const totalStudentsCount = await Student.countDocuments({ scode });
+//   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     scode,
+//     attendancetype: 'present',
+//     date,
+//   });
+//   const absentStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     scode,
+//     attendancetype: 'absent',
+//     date,
+//   });
 
-//     // Get all studentIds matching the scode
-//     const studentIds = await Student.find({ scode }, 'studentId').lean();
-//     const studentIdValues = studentIds.map((student) => student.studentId);
+//   const halfdayStudentsCount = await StudentAttendanceSchema.countDocuments({
+//     scode,
+//     attendancetype: 'halfday',
+//     date,
+//   });
 
-//     // Get attendance counts for all students on the given date
-//     const allStudentsAttendance = await StudentAttendanceSchema.find({
-//       studentId: { $in: studentIdValues },
-//       date,
-//     }).lean();
-
-//     // Calculate counts for each attendance type
-//     const presentStudentsCount = allStudentsAttendance.filter(
-//       (attendance) => attendance.AttendenceStatus === 'present'
-//     ).length;
-
-// <<<<<<< HEAD
-//     const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.attendancetype === 'absent').length;
-
-// =======
-//     const absentStudentsCount = allStudentsAttendance.filter(
-//       (attendance) => attendance.AttendenceStatus === 'absent'
-//     ).length;
-   
-// >>>>>>> b74701617802fb7e9119b3a96ad491d61bcf442e
-//     return {
-//       totalStudents: totalStudentsCount,
-//       presentStudents: presentStudentsCount,
-//       absentStudents: absentStudentsCount,
-//     };
-//   } catch (error) {
-//     // Handle errors here
-//     throw error; // Re-throw the error or handle it as appropriate
-//   }
+//   return {
+//     totalStudents: totalStudentsCount,
+//     presentStudents: presentStudentsCount,
+//     absentStudents: absentStudentsCount,
+//     halfdayStudents: halfdayStudentsCount,
+//   };
 // };
-=======
 const getStudentAttendanceSummary = async (scode, date) => {
+  // Get total students count
   const totalStudentsCount = await Student.countDocuments({ scode });
+
+  // Get all studentIds matching the scode
   const studentIds = await Student.find({ scode }, 'studentId').lean();
   const studentIdValues = studentIds.map((student) => student.studentId);
 
+  // Get attendance counts for all students on the given date
   const allStudentsAttendance = await StudentAttendanceSchema.find({
     studentId: { $in: studentIdValues },
     date,
   }).lean();
 
+  // Calculate counts for each attendance type
   const presentStudentsCount = allStudentsAttendance.filter(
     (attendance) => attendance.AttendenceStatus === 'present'
   ).length;
 
   const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.AttendenceStatus === 'absent').length;
+
   return {
     totalStudents: totalStudentsCount,
     presentStudents: presentStudentsCount,
     absentStudents: absentStudentsCount,
   };
 };
->>>>>>> c8afb0328bc61c4b1853c27c461bad5da3836174
 /**
  * Delete StudentAttendanceSchema by id
  * @param {ObjectId} StudentAttendanceId
@@ -460,7 +471,7 @@ module.exports = {
   deleteStudentAttendanceById,
   getAttendanceData,
   getWeekReport,
- // getStudentAttendanceSummary,
+  getStudentAttendanceSummary,
   getPresentStudentsCount,
   // getClasswiseStudentAttendanceList,
 };
