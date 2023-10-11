@@ -102,7 +102,7 @@ module.exports = router;
  *               largeprint: string
  *               noofutensils: number
  *               statusofutensils: string
- *               utensilsfrom: string
+ *               utensilsfrom: number
  *               noofplates: number
  *               noofspoons: number
  *               noofglass: number
@@ -148,7 +148,7 @@ module.exports = router;
  *               largeprint: Yes
  *               noofutensils: 3
  *               statusofutensils: No
- *               utensilsfrom: No
+ *               utensilsfrom: 1
  *               noofplates: 8
  *               noofspoons: 8
  *               noofglass: 8
@@ -306,7 +306,7 @@ module.exports = router;
  *               largeprint: string
  *               noofutensils: number
  *               statusofutensils: string
- *               utensilsfrom: string
+ *               utensilsfrom: number
  *               noofplates: number
  *               noofspoons: number
  *               noofglass: number
@@ -351,7 +351,7 @@ module.exports = router;
  *               largeprint: Yes
  *               noofutensils: 3
  *               statusofutensils: No
- *               utensilsfrom: No
+ *               utensilsfrom: 3
  *               noofplates: 8
  *               noofspoons: 8
  *               noofglass: 8

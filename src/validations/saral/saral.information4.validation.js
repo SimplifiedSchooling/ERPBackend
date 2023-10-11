@@ -4,15 +4,12 @@ const { objectId } = require('../custom.validation');
 const createSaralInfo4 = {
   body: Joi.object().keys({
     scode: Joi.string(),
-    typeofactivity: Joi.number(),
-    ptaexecutive: Joi.string(),
-    dateofapproval: Joi.string(),
+    typeofactivity: Joi.string(),
     feestructapprove: Joi.string(),
     feerevisionpendstatelev: Joi.string(),
     committeesmc: Joi.string(),
     smcacademicyear: Joi.number(),
     smccommitteplan: Joi.string(),
-    committedetail1: Joi.string(),
     committeeconstitute: Joi.string(),
     smcsmdccommitte: Joi.string(),
     smdcpreviousyear: Joi.number(),
@@ -55,15 +52,12 @@ const updateSaralInfo4ById = {
   }),
   body: Joi.object()
     .keys({
-      typeofactivity: Joi.number(),
-      ptaexecutive: Joi.string(),
-      dateofapproval: Joi.string(),
+      typeofactivity: Joi.string(),
       feestructapprove: Joi.string(),
       feerevisionpendstatelev: Joi.string(),
       committeesmc: Joi.string(),
       smcacademicyear: Joi.number(),
       smccommitteplan: Joi.string(),
-      committedetail1: Joi.string(),
       committeeconstitute: Joi.string(),
       smcsmdccommitte: Joi.string(),
       smdcpreviousyear: Joi.number(),
