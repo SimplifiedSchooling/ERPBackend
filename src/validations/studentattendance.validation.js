@@ -5,6 +5,7 @@ const createStudentAttendance = {
   body: Joi.object().keys({
     studentId: Joi.number().required().min(10000000).max(99999999),
     date: Joi.string().required(),
+    scode: Joi.string().required(),
     time: Joi.string().required(),
     AttendenceStatus: Joi.string().valid('present', 'absent', 'late').allow(''),
     remark: Joi.string().allow(''),
