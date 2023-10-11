@@ -4,14 +4,17 @@ const { toJSON, paginate } = require('./plugins');
 const quizSubmitSchema = mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      type: Number,
       required: true,
     },
-
     questionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'quize',
+      required: true,
+    },
+    subjectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'subject',
       required: true,
     },
     selectedOptions: [Number],

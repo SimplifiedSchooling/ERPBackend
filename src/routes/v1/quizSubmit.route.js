@@ -1,14 +1,14 @@
 const express = require('express');
-// const validate = require('../../middlewares/validate');
+const validate = require('../../middlewares/validate');
 const { quizSubmitController } = require('../../controllers');
-// const boardValidation = require('../../validations/board.validation');
+const { quizSubmitValidation } = require('../../validations');
 
 const router = express.Router();
 
-router.route('/').post(quizSubmitController.submitQuiz);
+router.route('/').post(validate(quizSubmitValidation.quizSubmit), quizSubmitController.submitQuiz);
 //   .get(validate(boardValidation.queryBoard), boardController.queryBoard);
 
-router.route('/:userId').get(quizSubmitController.resultQuiz);
+router.route('/:userId/:subjectId').get(validate(quizSubmitValidation.getQuizResultByuser), quizSubmitController.resultQuiz);
 //   .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
 //   .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
 
@@ -37,10 +37,14 @@ module.exports = router;
  *               - userId
  *               - questionId
  *               - selectedOptions
+ *               - subjectId
  *             properties:
  *               userId:
+ *                 type: number
+ *                 description: studentId.
+ *               subjectId:
  *                 type: string
- *                 description: The user's ID.
+ *                 description: subjectId.
  *               questionId:
  *                 type: string
  *                 description: The ID of the quiz question.
@@ -52,6 +56,7 @@ module.exports = router;
  *             example:
  *               userId: 651179865c2c23a2615b4259
  *               questionId: 651a60b39e3e884e212805d7
+ *               subjectId: 651a60b39e3e884e212805d7
  *               selectedOptions: [0, 2]
  *     responses:
  *       "201":
@@ -132,7 +137,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /quizSubmit/{userId}:
+ * /quizSubmit/{userId}/{subjectId}:
  *   get:
  *     summary: Get a result
  *     tags: [QuizSubmit]
@@ -145,6 +150,12 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: userId
+ *       - in: path
+ *         name: subjectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: subjectId
  *     responses:
  *       "200":
  *         description: OK

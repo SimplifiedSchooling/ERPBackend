@@ -17,9 +17,9 @@ const submitQuiz = async (reqBody) => {
  * @param {string} userId - User ID.
  * @returns {Promise<number>} - Total marks.
  */
-const resultQuiz = async (userId) => {
+const resultQuiz = async (userId, subjectId) => {
   // eslint-disable-next-line
-  const submissions = await QuizSubmit.find({ userId });
+  const submissions = await QuizSubmit.find({ userId ,subjectId});
   if (!submissions || submissions.length === 0) {
     throw new ApiError(httpStatus.NOT_FOUND, 'No quiz submissions found for the user');
   }
