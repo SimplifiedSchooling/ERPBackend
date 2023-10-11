@@ -130,45 +130,47 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
 //     halfdayStudents: halfdayStudentsCount,
 //   };
 // };
-const getStudentAttendanceSummary = async (scode, date) => {
-  try {
-    // Get total students count
-    const totalStudentsCount = await Student.countDocuments({ scode });
 
-    // Get all studentIds matching the scode
-    const studentIds = await Student.find({ scode }, 'studentId').lean();
-    const studentIdValues = studentIds.map((student) => student.studentId);
 
-    // Get attendance counts for all students on the given date
-    const allStudentsAttendance = await StudentAttendanceSchema.find({
-      studentId: { $in: studentIdValues },
-      date,
-    }).lean();
+// const getStudentAttendanceSummary = async (scode, date) => {
+//   try {
+//     // Get total students count
+//     const totalStudentsCount = await Student.countDocuments({ scode });
 
-    // Calculate counts for each attendance type
-    const presentStudentsCount = allStudentsAttendance.filter(
-      (attendance) => attendance.AttendenceStatus === 'present'
-    ).length;
+//     // Get all studentIds matching the scode
+//     const studentIds = await Student.find({ scode }, 'studentId').lean();
+//     const studentIdValues = studentIds.map((student) => student.studentId);
 
-<<<<<<< HEAD
-    const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.attendancetype === 'absent').length;
+//     // Get attendance counts for all students on the given date
+//     const allStudentsAttendance = await StudentAttendanceSchema.find({
+//       studentId: { $in: studentIdValues },
+//       date,
+//     }).lean();
 
-=======
-    const absentStudentsCount = allStudentsAttendance.filter(
-      (attendance) => attendance.AttendenceStatus === 'absent'
-    ).length;
+//     // Calculate counts for each attendance type
+//     const presentStudentsCount = allStudentsAttendance.filter(
+//       (attendance) => attendance.AttendenceStatus === 'present'
+//     ).length;
+
+// <<<<<<< HEAD
+//     const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.attendancetype === 'absent').length;
+
+// =======
+//     const absentStudentsCount = allStudentsAttendance.filter(
+//       (attendance) => attendance.AttendenceStatus === 'absent'
+//     ).length;
    
->>>>>>> b74701617802fb7e9119b3a96ad491d61bcf442e
-    return {
-      totalStudents: totalStudentsCount,
-      presentStudents: presentStudentsCount,
-      absentStudents: absentStudentsCount,
-    };
-  } catch (error) {
-    // Handle errors here
-    throw error; // Re-throw the error or handle it as appropriate
-  }
-};
+// >>>>>>> b74701617802fb7e9119b3a96ad491d61bcf442e
+//     return {
+//       totalStudents: totalStudentsCount,
+//       presentStudents: presentStudentsCount,
+//       absentStudents: absentStudentsCount,
+//     };
+//   } catch (error) {
+//     // Handle errors here
+//     throw error; // Re-throw the error or handle it as appropriate
+//   }
+// };
 /**
  * Delete StudentAttendanceSchema by id
  * @param {ObjectId} StudentAttendanceId
@@ -483,7 +485,7 @@ module.exports = {
   deleteStudentAttendanceById,
   getAttendanceData,
   getWeekReport,
-  getStudentAttendanceSummary,
+ // getStudentAttendanceSummary,
   getPresentStudentsCount,
   // getClasswiseStudentAttendanceList,
 };
