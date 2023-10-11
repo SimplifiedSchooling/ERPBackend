@@ -29,7 +29,7 @@ const saralInformation4Schema = mongoose.Schema(
     smccommitteplan: {
       type: String,
       trim: true,
-    },  
+    },
     committeeconstitute: {
       type: String,
       trim: true,
