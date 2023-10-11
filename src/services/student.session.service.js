@@ -172,7 +172,7 @@ const getStudentsByClassAndSection = async (classId, sectionId) => {
 
 const getStudentByScodeAndClassId = async (scode, classId) => {
   // Find the class based on classId in the studentSession model
-  const classData = await StudentSession.findOne({ classId });
+  const classData = await StudentSession.findOne({ classId, scode });
   if (!classData) {
     return new ApiError(httpStatus.NOT_FOUND, 'Class not found');
   }
