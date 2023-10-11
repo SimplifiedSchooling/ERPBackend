@@ -71,7 +71,7 @@ const saralInformation3Schema = mongoose.Schema(
       trim: true,
     },
     utensilsfrom: {
-      type: String,
+      type: Number,
       trim: true,
     },
     noofplates: {
