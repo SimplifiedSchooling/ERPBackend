@@ -28,7 +28,7 @@ const generate8DigitNumericID = () => {
  */
 const createStudent = async (studentData) => {
   const userName = generateUsernameFromName(studentData.middlename);
-  const studentId = generate8DigitNumericID();
+  const studentId = await generate8DigitNumericID();
 
   const newStudent = await Student.create({
     ...studentData,
@@ -63,6 +63,7 @@ const createStudent = async (studentData) => {
     studentId,
     classId: newStudent.classId,
     sectionId: newStudent.sectionId,
+    scode: newStudent.scode,
   });
 
   return { parentUser, newStudent, studentUser, studentSession };

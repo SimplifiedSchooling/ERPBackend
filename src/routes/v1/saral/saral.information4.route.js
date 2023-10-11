@@ -42,14 +42,11 @@ module.exports = router;
  *             type: object
  *             required:
  *               - typeofactivity
- *               - ptaexecutiv
- *               - dateofapproval
  *               - feestructapprove
  *               - feerevisionpendstatelev
  *               - committeesmc
  *               - smcacademicyear
  *               - smccommitteplan
- *               - committedetail1
  *               - committeeconstitute
  *               - smcsmdccommitte
  *               - smdcpreviousyear
@@ -69,15 +66,13 @@ module.exports = router;
  *               - committeeconstitutemdmc
  *               - committedetailmdmc
  *             properties:
- *               typeofactivity: number
- *               ptaexecutive: string
- *               dateofapproval: string
+ *               scode: string
+ *               typeofactivity: string
  *               feestructapprove: string
  *               feerevisionpendstatelev: string
  *               committeesmc: string
  *               smcacademicyear: number
  *               smccommitteplan: string
- *               committedetail1: string
  *               committeeconstitute: string
  *               smcsmdccommitte: string
  *               smdcpreviousyear: number
@@ -98,15 +93,12 @@ module.exports = router;
  *               committedetailmdmc: string
  *             example:
  *               scode: mh00001
- *               typeofactivity: 1
- *               ptaexecutive: Test1
- *               dateofapproval: Test1
+ *               typeofactivity: test
  *               feestructapprove: Test1
  *               feerevisionpendstatelev: Test1
  *               committeesmc: Test1
  *               smcacademicyear: 5
  *               smccommitteplan: Yes
- *               committedetail1: Yes
  *               committeeconstitute: Yes
  *               smcsmdccommitte: Yes
  *               smdcpreviousyear: 7
@@ -239,15 +231,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               typeofactivity: number
- *               ptaexecutive: string
- *               dateofapproval: string
+ *               typeofactivity: string
  *               feestructapprove: string
  *               feerevisionpendstatelev: string
  *               committeesmc: string
  *               smcacademicyear: number
  *               smccommitteplan: string
- *               committedetail1: string
  *               committeeconstitute: string
  *               smcsmdccommitte: string
  *               smdcpreviousyear: number
@@ -267,15 +256,12 @@ module.exports = router;
  *               committeeconstitutemdmc: string
  *               committedetailmdmc: string
  *             example:
- *               typeofactivity: 1
- *               ptaexecutive: Test1
- *               dateofapproval: Test1
+ *               typeofactivity: test
  *               feestructapprove: Test1
  *               feerevisionpendstatelev: Test1
  *               committeesmc: Test1
  *               smcacademicyear: 5
  *               smccommitteplan: Yes
- *               committedetail1: Yes
  *               committeeconstitute: Yes
  *               smcsmdccommitte: Yes
  *               smdcpreviousyear: 7

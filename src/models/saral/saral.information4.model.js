@@ -7,14 +7,6 @@ const saralInformation4Schema = mongoose.Schema(
       type: String,
     },
     typeofactivity: {
-      type: Number,
-      trim: true,
-    },
-    ptaexecutive: {
-      type: String,
-      trim: true,
-    },
-    dateofapproval: {
       type: String,
       trim: true,
     },
@@ -35,10 +27,6 @@ const saralInformation4Schema = mongoose.Schema(
       trim: true,
     },
     smccommitteplan: {
-      type: String,
-      trim: true,
-    },
-    committedetail1: {
       type: String,
       trim: true,
     },

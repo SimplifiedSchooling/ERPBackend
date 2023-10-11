@@ -24,6 +24,15 @@ const getUser = catchAsync(async (req, res) => {
   res.send(user);
 });
 
+const getStudentUserByRoleAndScode = catchAsync(async (req, res) => {
+  const { role, scode } = req.params;
+  const user = await userService.getUserByRoleAndScode(role, scode);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  res.send(user);
+});
+
 const updateUser = catchAsync(async (req, res) => {
   const user = await userService.updateUserById(req.params.userId, req.body);
   res.send(user);
@@ -40,4 +49,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  getStudentUserByRoleAndScode,
 };
