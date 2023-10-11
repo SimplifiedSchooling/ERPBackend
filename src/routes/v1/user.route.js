@@ -17,6 +17,10 @@ router
   .patch(validate(userValidation.updateUser), userController.updateUser)
   .delete(validate(userValidation.deleteUser), userController.deleteUser);
 
+router
+  .route('/getuserByschool/:role/:scode')
+  .get(validate(userValidation.getStudentUserByRoleAndScode), userController.getStudentUserByRoleAndScode);
+
 module.exports = router;
 
 /**
@@ -258,6 +262,43 @@ module.exports = router;
  *     responses:
  *       "200":
  *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /users/getuserByschool/{role}/{scode}:
+ *   get:
+ *     summary: Get a user
+ *     description: Logged in users can fetch only their own user information. Only admins can fetch other users.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: role
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User role
+ *       - in: path
+ *         name: scode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: scode
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/User'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
