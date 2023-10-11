@@ -90,3 +90,4 @@ module.exports.saralInformation3Validation = require('./saral/saral.information3
 module.exports.saralInformation4Validation = require('./saral/saral.information4.validation');
 module.exports.classTeacherValidation = require('./classteacherassign.validation');
 module.exports.depUserValidation = require('./department.user.validation');
+module.exports.quizSubmitValidation = require('./quizSubmit.validation');

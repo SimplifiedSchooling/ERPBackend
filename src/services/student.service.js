@@ -59,13 +59,12 @@ const createStudent = async (studentData) => {
   });
 
   const studentSession = await StudentSession.create({
-    sessionId: newStudent.sessionId,
+    sessionId: studentData.sessionId,
     studentId,
-    classId: newStudent.classId,
-    sectionId: newStudent.sectionId,
+    classId: studentData.classId,
+    sectionId: studentData.sectionId,
     scode: newStudent.scode,
   });
-
   return { parentUser, newStudent, studentUser, studentSession };
 };
 

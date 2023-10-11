@@ -9,7 +9,8 @@ const submitQuiz = catchAsync(async (req, res) => {
 });
 
 const resultQuiz = catchAsync(async (req, res) => {
-  const quiz = await quizSubmitService.resultQuiz(req.params.userId);
+  const { userId, subjectId } = req.params;
+  const quiz = await quizSubmitService.resultQuiz(userId, subjectId);
   if (!quiz) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Quiz not found');
   }

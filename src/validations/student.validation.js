@@ -4,9 +4,9 @@ const Joi = require('joi');
 const createStudent = {
   body: Joi.object().keys({
     saral_id: Joi.string().required(),
-    sectionId: Joi.string().required(),
-    classId: Joi.string().required(),
-    sessionId: Joi.string().required(),
+    sectionId: Joi.string(),
+    classId: Joi.string(),
+    sessionId: Joi.string(),
     scode: Joi.string().required(),
     role: Joi.string().required(),
     mobNumber: Joi.number().required(),
