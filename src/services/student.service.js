@@ -92,12 +92,22 @@ const getStudentById = async (id) => {
 };
 
 /**
- * Get students by userName
- * @param {ObjectId} userName
+ * Get students by mobNumber
+ * @param {ObjectId} mobNumber
  * @returns {Promise<Student>}
  */
 const getStudentMobNumber = async (mobNumber) => {
   const student = await Student.findOne({ mobNumber });
+  return student;
+};
+
+/**
+ * Get students by scode
+ * @param {ObjectId} scode
+ * @returns {Promise<Student>}
+ */
+const getStudentScode = async (scode) => {
+  const student = await Student.find({ scode });
   return student;
 };
 
@@ -218,4 +228,5 @@ module.exports = {
   deleteStudentById,
   getStudentMobNumber,
   bulkUpload,
+  getStudentScode,
 };

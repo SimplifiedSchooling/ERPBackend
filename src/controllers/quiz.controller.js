@@ -36,6 +36,14 @@ const getQuizeById = catchAsync(async (req, res) => {
   res.send(quize);
 });
 
+const getQuizByClassIdAndDayWise = catchAsync(async (req, res) => {
+  const quize = await quizeService.getQuizByclassIdAndDayWise(req.params.classId);
+  if (!quize) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Quize not found');
+  }
+  res.send(quize);
+});
+
 const QuizeByIdSubmit = catchAsync(async (req, res) => {
   const quiz = await quizeService.CheckoutAnswer(req.params.quizeId, req.body.answer);
   if (!quiz) {
@@ -63,4 +71,5 @@ module.exports = {
   deleteQuizeById,
   getAllNotSelected,
   uploadFiles,
+  getQuizByClassIdAndDayWise,
 };

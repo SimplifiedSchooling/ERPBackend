@@ -53,6 +53,11 @@ const getQuize = {
     quizeId: Joi.string().custom(objectId),
   }),
 };
+const getQuizDayWise = {
+  params: Joi.object().keys({
+    classId: Joi.string(),
+  }),
+};
 
 const submitQuize = {
   params: Joi.object().keys({
@@ -106,4 +111,5 @@ module.exports = {
   deleteQuize,
   NotSelectQuize,
   uploadFiles,
+  getQuizDayWise,
 };
