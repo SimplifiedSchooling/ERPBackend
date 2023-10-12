@@ -95,7 +95,8 @@ const getQuizByclassIdAndDayWise = async (classId) => {
   // Find subjects for the given class
   const subjects = await Subject.find({ classId });
   if (subjects.length === 0) {
-    return [];
+    throw new ApiError(httpStatus.NOT_FOUND, 'subject not found');
+    // return [];
   }
 
   // Select a subject for the current day (using the day as an index, starting from 0)
@@ -103,6 +104,9 @@ const getQuizByclassIdAndDayWise = async (classId) => {
   const selectedSubject = subjects[selectedSubjectIndex];
 
   const quizQuestions = await Quize.find({ subjectId: selectedSubject._id, classId });
+  if (!quizQuestions) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'quiz not found');
+  }
   const shuffledQuestions = quizQuestions.sort(() => Math.random() - 0.5); // Shuffle the questions
   return shuffledQuestions.slice(0, 10); // Return the first 10 questions
 };
