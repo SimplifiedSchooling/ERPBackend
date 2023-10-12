@@ -17,9 +17,13 @@ router
 
 router
   .route('/:studentSessionId')
-  .get(validate(StudentSessionValidation.getStudentSession), studentSessionController.getStudentSession)
+  .get(validate(StudentSessionValidation.getStudentSession), studentSessionController.updateSingleStudentSession)
   .patch(validate(StudentSessionValidation.updateStudentSessionById), studentSessionController.updateSingleStudentSession)
   .delete(validate(StudentSessionValidation.deleteStudentSessionById), studentSessionController.deleteSingleStudentSession);
+
+router
+  .route('/getstudent/bystudentid/:studentId')
+  .get(validate(StudentSessionValidation.getStudentByStudentId), studentSessionController.getStudentByStudentId);
 
 router
   .route('/students/byscodeandclassId/:scode/:classId')
@@ -228,6 +232,35 @@ module.exports = router;
  *
  */
 
+/**
+ * @swagger
+ * /studentSession/getstudent/bystudentid/{studentId}:
+ *   get:
+ *     summary: Get a class
+ *     tags: [StudentSession]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: studentId
+ *         required: true
+ *         schema:
+ *           type: number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *               schema:
+ *                $ref: '#/components/schemas/StudentSessionUpdateInput'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ */
 /**
  * @swagger
  * /studentSession/students/byscodeandclassId/{scode}/{classId}:
