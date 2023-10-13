@@ -46,6 +46,10 @@ const updateSingleStudentSession = catchAsync(async (req, res) => {
   const updatedStudentSession = await studentSessionService.updateStudentSessionById(req.params.studentSessionId, req.body);
   res.send(updatedStudentSession);
 });
+const getStudentByStudentId = catchAsync(async (req, res) => {
+  const Student = await studentSessionService.getStudentyId(req.params.studentId);
+  res.send(Student);
+});
 
 const deleteSingleStudentSession = catchAsync(async (req, res) => {
   const deletedStudentSession = await studentSessionService.deleteStudentSessionById(req.params.studentSessionId);
@@ -60,4 +64,5 @@ module.exports = {
   deleteSingleStudentSession,
   getStudentsByClassAndSection,
   getStudentByScodeAndClassId,
+  getStudentByStudentId,
 };

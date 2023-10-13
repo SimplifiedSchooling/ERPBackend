@@ -46,6 +46,14 @@ const getStudent = catchAsync(async (req, res) => {
   res.send(singleStudent);
 });
 
+const getStudentByScode = catchAsync(async (req, res) => {
+  const student = await studentService.getStudentScode(req.params.scode);
+  if (!student) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Student not found');
+  }
+  res.send(student);
+});
+
 const updateStudent = catchAsync(async (req, res) => {
   const updatedStudent = await studentService.updateStudentById(req.params.studentId, req.body);
   res.send(updatedStudent);
@@ -64,4 +72,5 @@ module.exports = {
   deleteStudent,
   bulkUpload,
   bulkUploadFile,
+  getStudentByScode,
 };

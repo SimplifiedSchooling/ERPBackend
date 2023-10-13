@@ -115,6 +115,12 @@ const getStudent = {
   }),
 };
 
+const getStudentByScode = {
+  params: Joi.object().keys({
+    scode: Joi.string(),
+  }),
+};
+
 const getAllStudents = {
   query: Joi.object().keys({
     name: Joi.string(),
@@ -235,4 +241,5 @@ module.exports = {
   getAllStudents,
   updateStudentById,
   deleteStudentById,
+  getStudentByScode,
 };

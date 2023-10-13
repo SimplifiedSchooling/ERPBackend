@@ -36,6 +36,14 @@ const getStudentSessionById = async (studentSessionId) => {
 };
 
 /**
+ * Get Student by id
+ * @param {ObjectId} studentId
+ * @returns {Promise<StudentSession>}
+ */
+const getStudentyId = async (studentId) => {
+  return StudentSession.findOne({ studentId });
+};
+/**
  * Get students by class and section
  * @param {string} classId - The ID of the class to filter by.
  * @param {string} sectionId - The ID of the section to filter by.
@@ -222,4 +230,5 @@ module.exports = {
   deleteStudentSessionById,
   getStudentsByClassAndSection,
   getStudentByScodeAndClassId,
+  getStudentyId,
 };

@@ -16,6 +16,12 @@ const getStudentSession = {
     studentSessionId: Joi.string().custom(objectId).required(),
   }),
 };
+
+const getStudentByStudentId = {
+  params: Joi.object().keys({
+    studentId: Joi.number().required(),
+  }),
+};
 const getAllStudentByclassIdAndScode = {
   params: Joi.object().keys({
     classId: Joi.string().required(),
@@ -67,4 +73,5 @@ module.exports = {
   deleteStudentSessionById,
   getAllStudentByclassAndsection,
   getAllStudentByclassIdAndScode,
+  getStudentByStudentId,
 };
