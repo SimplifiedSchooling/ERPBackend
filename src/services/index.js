@@ -101,3 +101,6 @@ module.exports.saralInformation3Service = require('./saral/saral.information3.se
 module.exports.saralInformation4Service = require('./saral/saral.information4.service');
 module.exports.classTeacherServices = require('./classteacherassign.service');
 module.exports.departmentUserService = require('./department.user.service');
+module.exports.appointedService = require('./masterService/appointed.level.service');
+module.exports.studentleftService = require('./student.left.reason.service');
+module.exports.grievanceService = require('./grievance.redressal.service');

@@ -91,3 +91,6 @@ module.exports.saralInformation4Validation = require('./saral/saral.information4
 module.exports.classTeacherValidation = require('./classteacherassign.validation');
 module.exports.depUserValidation = require('./department.user.validation');
 module.exports.quizSubmitValidation = require('./quizSubmit.validation');
+module.exports.appointedValidation = require('./masterValidations/appointed.level.validation');
+module.exports.studentleftValidation = require('./student.left.reason.validation');
+module.exports.grievanceValidation = require('./grievance.redressal.validation');

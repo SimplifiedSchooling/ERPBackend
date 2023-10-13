@@ -100,6 +100,9 @@ const saralInformation3Route = require('./saral/saral.information3.route');
 const saralInformation4Route = require('./saral/saral.information4.route');
 const ClassTeacherAssignRoute = require('./classteacherassign.route');
 const departmentRoute = require('./department.user.route');
+const appointedRoute = require('./masterRoutes/appointed.level.route');
+const studentLeftReasonRoute = require('./student.left.reason.route');
+const grievanceRedressalRoute = require('./grievance.redressal.route');
 
 const router = express.Router();
 
@@ -500,6 +503,18 @@ const defaultRoutes = [
     path: '/department',
     route: departmentRoute,
   },
+  {
+    path: '/appointed',
+    route: appointedRoute,
+  },
+  {
+    path: '/studentleft',
+    route: studentLeftReasonRoute,
+  },
+  {
+    path: '/grievanceredressal',
+    route: grievanceRedressalRoute,
+  }
 ];
 
 const devRoutes = [

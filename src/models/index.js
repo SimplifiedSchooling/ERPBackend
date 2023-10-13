@@ -105,3 +105,6 @@ module.exports.SaralInformation3 = require('./saral/saral.information3.model');
 module.exports.SaralInformation4 = require('./saral/saral.information4.model');
 module.exports.ClassTeacher = require('./classteacherassign.model');
 module.exports.DepartmentUser = require('./department.user.model');
+module.exports.Appointed = require('./masterModels/appointed.level.model');
+module.exports.Studentleft = require('./student.left.reason.model');
+module.exports.GrievanceRedressal = require('./grievance.redressal.model');
