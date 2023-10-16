@@ -64,7 +64,6 @@ const deleteQuizeById = catchAsync(async (req, res) => {
 
 module.exports = {
   createQuize,
-  // getRandomQuize,
   getAllQuize,
   getQuizeById,
   QuizeByIdSubmit,

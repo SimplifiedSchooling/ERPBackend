@@ -1,31 +1,81 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const quizSubmitSchema = mongoose.Schema(
+const quizSubmissionSchema = mongoose.Schema(
   {
-    userId: {
-      type: Number,
+    studentId: {
+      type: String,
       required: true,
     },
-    questionId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'quize',
+    scode: {
+      type: String,
+      required: true,
+    },
+    classId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Classes',
       required: true,
     },
     subjectId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'subject',
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Subject',
       required: true,
     },
-    selectedOptions: [Number],
+    answers: [
+      {
+        questionId: {
+          type: mongoose.SchemaTypes.ObjectId,
+          ref: 'quize', // Reference to the quiz question
+          required: true,
+        },
+        selectedOptions: [Number], // An array of indices (0 to 3) of selected options
+      },
+    ],
+    score: {
+      type: Number,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-// add plugin that converts mongoose to json
-quizSubmitSchema.plugin(toJSON);
-quizSubmitSchema.plugin(paginate);
+// Add plugins for toJSON and pagination if needed
+quizSubmissionSchema.plugin(toJSON);
+quizSubmissionSchema.plugin(paginate);
 
-const QuizSubmmit = mongoose.model('QuizSubmit', quizSubmitSchema);
+const QuizSubmit = mongoose.model('QuizSubmit', quizSubmissionSchema);
 
-module.exports = QuizSubmmit;
+module.exports = QuizSubmit;
+
+// const mongoose = require('mongoose');
+// const { toJSON, paginate } = require('./plugins');
+
+// const quizSubmitSchema = mongoose.Schema(
+//   {
+//     userId: {
+//       type: Number,
+//       required: true,
+//     },
+//     questionId: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: 'quize',
+//       required: true,
+//     },
+//     subjectId: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: 'subject',
+//       required: true,
+//     },
+//     selectedOptions: [Number],
+//   },
+//   { timestamps: true }
+// );
+
+// // add plugin that converts mongoose to json
+// quizSubmitSchema.plugin(toJSON);
+// quizSubmitSchema.plugin(paginate);
+
+// const QuizSubmmit = mongoose.model('QuizSubmit', quizSubmitSchema);
+
+// module.exports = QuizSubmmit;
