@@ -108,7 +108,7 @@ const getQuizByclassIdAndDayWise = async (classId) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'quiz not found');
   }
   const shuffledQuestions = quizQuestions.sort(() => Math.random() - 0.5); // Shuffle the questions
-  return shuffledQuestions.slice(0, 10); // Return the first 10 questions
+  return shuffledQuestions.slice(0, 15); // Return the first 10 questions
 };
 
 /**

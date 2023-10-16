@@ -461,7 +461,7 @@ const defaultRoutes = [
     route: staffDesignationRoute,
   },
   {
-    path: '/quizSubmit',
+    path: '/quiz-submissions',
     route: quizSubmitRoute,
   },
   {
