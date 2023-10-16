@@ -15,14 +15,14 @@ const uploadFiles = catchAsync(async (req, res) => {
 });
 
 const getAllQuize = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['quizname']);
+  const filter = pick(req.query, ['quizName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await quizeService.queryQuize(filter, options);
   res.send(result);
 });
 
 const getAllNotSelected = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['quizname']);
+  const filter = pick(req.query, ['quizName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await quizeService.QuizeNotSelected(filter, options);
   res.send(result);
@@ -64,6 +64,7 @@ const deleteQuizeById = catchAsync(async (req, res) => {
 
 module.exports = {
   createQuize,
+  // getRandomQuize,
   getAllQuize,
   getQuizeById,
   QuizeByIdSubmit,

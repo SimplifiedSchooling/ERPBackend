@@ -26,7 +26,7 @@ const createQuize = {
 
 const getQuizes = {
   query: Joi.object().keys({
-    name: Joi.string(),
+    quizName: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
