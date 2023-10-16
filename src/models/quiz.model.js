@@ -5,6 +5,7 @@ const quizeSchema = mongoose.Schema(
   {
     quizName: {
       type: String,
+      index: true,
     },
     files: {
       type: String,
