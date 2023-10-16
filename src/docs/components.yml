@@ -994,31 +994,25 @@ components:
     Demolished: 
       type: object
       properties:
-        reference_no: 
-          type: number
-        to_title: 
-          type: string  
-        address:
+        asset: 
           type: string
-        note: 
+        totalAsset: 
+          type: number  
+        totalDestroyed:
           type: string
-        from_title:
+        reason: 
           type: string
         date:
           type: number
         imagePath:
-          type: string          
-        type:
           type: string
       example:
-        reference_no: 65
-        to_title: gdffg
-        address: pune, kharadi
-        note: asasfhaskausbv
-        from_title: afhgasfkh
+        asset: 65
+        totalAsset: gdffg
+        totalDestroyed: pune, kharadi
+        reason: asasfhaskausb
         date: 01-01-1970 00:00:00
-        imagePath: sgdd/sgdgds/sdg
-        type: demolished         
+        imagePath: sgdd/sgdgds/sdg        
 
     Staff:
       type: object

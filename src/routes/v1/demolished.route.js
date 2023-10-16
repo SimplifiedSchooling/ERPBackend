@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('CREATE'), validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
+  .post(auth('CREATE'),validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
   .get(auth('GET'), validate(demolishedValidation.getAllDemolished), demolishedController.getAllDemolished);
 
 router
@@ -41,38 +41,32 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - reference_no
- *               - to_title
- *               - address
- *               - note
- *               - from_title
+ *               - asset
+ *               - totalAsset
+ *               - totalDestroyed
+ *               - reason
  *               - date
+ *               - imagePath
  *             properties:
- *               reference_no:
+ *               asset:
+ *                 type: string
+ *               totalAsset:
  *                 type: number
- *               to_title:
+ *               totalDestroyed:
  *                 type: string
- *               address:
- *                 type: string
- *               note:
- *                 type: string
- *               from_title:
+ *               reason:
  *                 type: string
  *               date:
- *                 type: number
+ *                 type: date
  *               imagePath:
  *                 type: string
- *               type:
- *                 type: string
  *             example:
- *               reference_no: 65
- *               to_title: gdffg
- *               address: pune, kharadi
- *               note: asasfhaskausbv
- *               from_title: afhgasfkh
+ *               asset: example
+ *               totalAsset: 2
+ *               totalDestroyed: test
+ *               reason: abcde
  *               date: 01-01-1970 00:00:00
  *               imagePath: sgdd/sgdgds/sdg
- *               type: demolished
  *
  *     responses:
  *       "201":
@@ -93,15 +87,15 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: to_title
+ *         name: asset
  *         schema:
  *           type: string
- *         description: to_title
+ *         description: asset
  *       - in: query
- *         name: reference_no
+ *         name: asset
  *         schema:
  *           type: number
- *         description: reference_no
+ *         description: asset
  *       - in: query
  *         name: sortBy
  *         schema:
