@@ -98,6 +98,7 @@ const updateSection1A20 = {
       upperprimary: Joi.string().allow('').optional(),
       Secondary: Joi.string().allow('').optional(),
       higherSecondary: Joi.string().allow('').optional(),
+      scode: Joi.string().allow('').optional(),
     })
     .min(1),
 };
