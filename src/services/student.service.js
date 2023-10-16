@@ -38,7 +38,7 @@ const createStudent = async (studentData) => {
   const randomPassword = crypto.randomBytes(16).toString('hex');
   const parentUser = await User.create({
     name: newStudent.middlename,
-    userId: newStudent.id,
+    userId: studentId,
     scode: newStudent.scode,
     mobNumber: newStudent.mobNumber,
     userName,
@@ -50,7 +50,7 @@ const createStudent = async (studentData) => {
   const randomPass = crypto.randomBytes(16).toString('hex');
   const studentUser = await User.create({
     name: `${newStudent.firstname} ${newStudent.lastname}`,
-    userId: newStudent.id,
+    userId: studentId,
     scode: newStudent.scode,
     mobNumber: newStudent.mobNumber,
     userName: username,
@@ -173,6 +173,11 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
   await Promise.all(
     modifiedStudentsArray.students.map(async (student) => {
       const studentFound = await getStudentBySaral({ name: student.name });
+      const generate8DigitNum = () => {
+        const min = 10000000; // Smallest 8-digit number
+        const max = 99999999; // Largest 8-digit number
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
       if (studentFound) {
         dups.push(student);
       } else {
@@ -181,11 +186,13 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
         if (record) {
           records.push(student);
           // Create the student user
+
+          const studentId = await generate8DigitNum();
           const username = await generateUsernameFromName(student.firstname);
           const randomPass = crypto.randomBytes(16).toString('hex');
           await User.create({
             name: `${student.firstname} ${student.lastname}`,
-            userId: record.id,
+            userId: studentId,
             scode: student.scode,
             mobNumber: student.mobNumber,
             userName: username,
@@ -197,7 +204,7 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
           const randomPassword = crypto.randomBytes(16).toString('hex');
           await User.create({
             name: student.middlename,
-            userId: record.id,
+            userId: studentId,
             scode: student.scode,
             mobNumber: student.mobNumber,
             userName,
