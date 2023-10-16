@@ -15,10 +15,13 @@ const assectSchema = mongoose.Schema(
       type: Date,
       trim: true,
     },
-    quantity: {
-      type: Number,
-      trim: true,
+    quantity:{
+        type: Number,
+        trim: true,
     },
+    imagePath:{
+      type: String,
+    }
   },
   {
     timestamps: true,

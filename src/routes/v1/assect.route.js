@@ -1,13 +1,26 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const assectController = require('../../controllers/assect.controller');
 const assectValidaton = require('../../validations/assect.validation');
+
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(validate(assectValidaton.createAssect), assectController.createAssect)
+  .post(upload.single('imagePath'),validate(assectValidaton.createAssect), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
@@ -22,7 +35,7 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: Assect
- *   description: Assect management
+ *   description: Assect management and retrieval
  */
 
 /**
@@ -30,23 +43,22 @@ module.exports = router;
  * /assect:
  *   post:
  *     summary: Create a Assect
+ *     description: Create other Assect.
  *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - assectName
- *               - invoiceNo
- *               - invoiceDate,
- *               - quantity
  *             properties:
  *               assectName:
- *                 type: string *
+ *                 type: string
+ *               imagePath:
+ *                 type: string
+ *                 format: binary
  *               invoiceNo:
  *                 type: number
  *               invoiceDate:
@@ -55,24 +67,34 @@ module.exports = router;
  *                 type: number
  *             example:
  *               assectName: Test
- *               invoiceNo: 1234
- *               invoiceDate: 2023/03/12
- *               quantity: 12
- *
+ *               imagePath: imagelink/icon1
+ *               invoiceNo: 123
+ *               invoiceDate: 1/01/2023
+ *               quantity: 2
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Assect'
+ *               $ref: '#/components/schemas/Assect'
  *       "401":
- *         $ref: '#/components/responses/Unauthorized'
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Unauthorized'
  *       "403":
- *         $ref: '#/components/responses/Forbidden'
+ *         description: Forbidden
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Forbidden'
+ *
  *
  *   get:
- *     summary: Get query Assect
+ *     summary: Get all Assect
+ *     description: all Assect.
  *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
@@ -81,11 +103,11 @@ module.exports = router;
  *         name: assectName
  *         schema:
  *           type: string
- *         description: Assect name *
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
  *       - in: query
  *         name: limit
  *         schema:
@@ -129,7 +151,6 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  */
-
 /**
  * @swagger
  * /assect/{assectId}:
@@ -144,7 +165,6 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: assectId
  *     responses:
  *       "200":
  *         description: OK
@@ -170,27 +190,30 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: assectId
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
  *               assectName:
- *                 type: string *
+ *                 type: string
+ *               imagePath:
+ *                 type: string
+ *                 format: binary
  *               invoiceNo:
  *                 type: number
  *               invoiceDate:
  *                 type: date
  *               quantity:
- *                 type: number
+ *                 type: nunber
  *             example:
- *               assectName: Test1234
- *               invoiceNo: 9876
- *               invoiceDate: 2023/03/16
- *               quantity: 01
+ *               assectName: English
+ *               imagePath: imagelink/icon1
+ *               invoiceNo: 1
+ *               invoiceDate: 2/10/2023
+ *               quantity: 2
  *     responses:
  *       "200":
  *         description: OK
