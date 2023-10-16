@@ -66,6 +66,7 @@ const updateSection1B54 = {
       complaintbox: Joi.string().allow('').optional(),
       providecopiesofsaftyguid: Joi.string().allow('').optional(),
       frequecyofsaftyaudit: Joi.string().allow('').optional(),
+      scode: Joi.string().allow('').optional(),
     })
     .min(1),
 };

@@ -86,6 +86,7 @@ const updateSection1D60 = {
       ictItem: Joi.string().allow('').optional(),
       sportEqu: Joi.string().allow('').optional(),
       libraryBooks: Joi.string().allow('').optional(),
+      scode: Joi.string().allow('').optional(),
     })
     .min(1),
 };

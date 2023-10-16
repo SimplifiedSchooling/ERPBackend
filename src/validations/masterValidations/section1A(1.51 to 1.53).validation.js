@@ -358,6 +358,7 @@ const updateSection1A53 = {
       trainingsocial10: Joi.string().allow('').optional(),
       trainingsocial11: Joi.string().allow('').optional(),
       trainingsocial12: Joi.string().allow('').optional(),
+      scode: Joi.string().allow('').optional(),
     })
     .min(1),
 };
