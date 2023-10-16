@@ -35,30 +35,30 @@ const demolishedSchema = mongoose.Schema(
   //   },
   // },
   {
-    asset:{
+    asset: {
       type: String,
       trim: true,
     },
-    totalAsset:{
+    totalAsset: {
       type: Number,
       trim: true,
     },
-    totalDestroyed:{
+    totalDestroyed: {
       type: String,
       trim: true,
     },
-    reason:{
+    reason: {
       type: String,
       trim: true,
     },
-    date:{
+    date: {
       type: Date,
       trim: true,
     },
-    imagePath:{
+    imagePath: {
       type: String,
       trim: true,
-    }
+    },
   },
   {
     timestamps: true,

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { toJSON,paginate } = require('./plugins');
+const { toJSON, paginate } = require('./plugins');
 
 const studentLeftReasionSchema = mongoose.Schema(
   {

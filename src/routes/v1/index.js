@@ -519,7 +519,7 @@ const defaultRoutes = [
   {
     path: '/assect',
     route: assectRoute,
-  }
+  },
 ];
 
 const devRoutes = [

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('CREATE'),validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
+  .post(auth('CREATE'), validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
   .get(auth('GET'), validate(demolishedValidation.getAllDemolished), demolishedController.getAllDemolished);
 
 router
