@@ -96,24 +96,9 @@ const CheckoutAnswer = async (correctOptions, answer) => {
   throw new ApiError(httpStatus.NOT_FOUND, 'Incorrect answer.');
 };
 
-/* eslint-disable no-plusplus */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-console */
-/* eslint-disable no-undef */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-await-in-loop */
-const shuffleArray = (array) => {
-  // Implement a Fisher-Yates shuffle algorithm for a more reliable shuffling.
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-};
-
-const getQuizByclassIdAndDayWise = async (classId, maxQuestionsPerSubject = 15) => {
+const getQuizByclassIdAndDayWise = async (classId) => {
   // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
   const today = new Date().getDay();
-  console.log(today);
 
   // Find subjects for the given class
   const subjects = await Subject.find({ classId });
@@ -122,36 +107,38 @@ const getQuizByclassIdAndDayWise = async (classId, maxQuestionsPerSubject = 15) 
     throw new Error('No subjects found for the given class');
   }
 
-  // Calculate the maximum number of questions per subject
-  const maxQuestionsPerSub = Math.floor(maxQuestionsPerSubject / subjects.length);
+  const selectedSubjectIndex = today % subjects.length;
+  const selectedSubject = subjects[selectedSubjectIndex];
 
-  // Initialize an array to hold questions
-  const quizQuestions = [];
-  for (const subject of subjects) {
-    const questionsForSubject = await Quize.find({ subjectId: subject._id, classId });
-
-    if (questionsForSubject && questionsForSubject.length > 0) {
-      // Shuffle the questions for this subject
-      shuffleArray(questionsForSubject);
-
-      // Select questions up to the maximum allowed per subject
-      quizQuestions.push(...questionsForSubject.slice(0, maxQuestionsPerSub));
-    }
+  const quizQuestions = await Quize.find({ subjectId: selectedSubject._id, classId });
+  if (!quizQuestions) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'quiz not found');
   }
-
-  // Shuffle all selected questions
-  shuffleArray(quizQuestions);
-
-  // Return the first 15 questions or fewer if there aren't enough available
-  return quizQuestions.slice(0, 15);
+  const shuffledQuestions = quizQuestions.sort(() => Math.random() - 0.5); // Shuffle the questions
+  return shuffledQuestions.slice(0, 15); // Return the first 10 questions
 };
 
-/* eslint-enable no-plusplus */
-/* eslint-enable no-param-reassign */
-/* eslint-enable no-console */
-/* eslint-enable no-undef */
-/* eslint-enable no-restricted-syntax */
-/* eslint-enable no-await-in-loop */
+//   // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+//   const today = new Date().getDay();
+//   console.log(today);
+//   // Find subjects for the given class
+//   const subjects = await Subject.find({ classId });
+//   if (subjects.length === 0) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'subject not found');
+//     // return [];
+//   }
+//   // Select a subject for the current day (using the day as an index, starting from 0)
+//   const selectedSubjectIndex = today % subjects.length;
+//   const selectedSubject = subjects[selectedSubjectIndex];
+
+//   const quizQuestions = await Quize.find({ subjectId: selectedSubject._id, classId });
+//   if (!quizQuestions) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'quiz not found');
+//   }
+//   const shuffledQuestions = quizQuestions.sort(() => Math.random() - 0.5); // Shuffle the questions
+//   return shuffledQuestions.slice(0, 15); // Return the first 10 questions
+// };
+
 /**
  * Update quize by id
  * @param {ObjectId} quizeId
