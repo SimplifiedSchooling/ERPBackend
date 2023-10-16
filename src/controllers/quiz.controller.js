@@ -15,14 +15,14 @@ const uploadFiles = catchAsync(async (req, res) => {
 });
 
 const getAllQuize = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['quizname']);
+  const filter = pick(req.query, ['quizName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await quizeService.queryQuize(filter, options);
   res.send(result);
 });
 
 const getAllNotSelected = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['quizname']);
+  const filter = pick(req.query, ['quizName']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await quizeService.QuizeNotSelected(filter, options);
   res.send(result);
@@ -30,6 +30,13 @@ const getAllNotSelected = catchAsync(async (req, res) => {
 
 const getQuizeById = catchAsync(async (req, res) => {
   const quize = await quizeService.getQuizeById(req.params.quizeId);
+  if (!quize) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Quize not found');
+  }
+  res.send(quize);
+});
+const getQuizeByQuizName = catchAsync(async (req, res) => {
+  const quize = await quizeService.getQuizeByQestion(req.params.quizName);
   if (!quize) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Quize not found');
   }
@@ -72,4 +79,5 @@ module.exports = {
   getAllNotSelected,
   uploadFiles,
   getQuizByClassIdAndDayWise,
+  getQuizeByQuizName,
 };

@@ -5,10 +5,14 @@ const { quizSubmitValidation } = require('../../validations');
 
 const router = express.Router();
 
-router.route('/').post(validate(quizSubmitValidation.quizSubmit), quizSubmitController.submitQuiz);
-//   .get(validate(boardValidation.queryBoard), boardController.queryBoard);
+router
+  .route('/')
+  .post(validate(quizSubmitValidation.quizSubmit), quizSubmitController.submitQuiz)
+  .get(validate(quizSubmitValidation.getQuizSubmit), quizSubmitController.getAllQuizSubmit);
 
-router.route('/:userId/:subjectId').get(validate(quizSubmitValidation.getQuizResultByuser), quizSubmitController.resultQuiz);
+router
+  .route('/student/:studentId/')
+  .get(validate(quizSubmitValidation.getQuizResultByuser), quizSubmitController.getQuizSubmitById);
 //   .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
 //   .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
 
@@ -17,16 +21,18 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: QuizSubmit
- *   description: QuizSubmit management
+ *   name: QuizSubmission
+ *   description: Quiz submission management
  */
 
 /**
  * @swagger
- * /quizSubmit:
+ * /quiz-submissions:
  *   post:
- *     summary: Submit quiz answers and calculate marks
- *     tags: [QuizSubmit]
+ *     summary: Submit a quiz
+ *     tags: [QuizSubmission]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -34,101 +40,73 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - userId
- *               - questionId
- *               - selectedOptions
+ *               - studentId
+ *               - scode
+ *               - classId
  *               - subjectId
+ *               - answers
  *             properties:
- *               userId:
- *                 type: number
- *                 description: studentId.
+ *               studentId:
+ *                 type: string
+ *                 description: The ID of the student submitting the quiz.
+ *               scode:
+ *                 type: string
+ *                 description: The scode.
+ *               classId:
+ *                 type: string
+ *                 description: The class ID.
  *               subjectId:
  *                 type: string
- *                 description: subjectId.
- *               questionId:
- *                 type: string
- *                 description: The ID of the quiz question.
- *               selectedOptions:
+ *                 description: The class ID.
+ *               score:
+ *                 type: number
+ *               answers:
  *                 type: array
  *                 items:
- *                   type: string
- *                 description: An array of user's answers.
+ *                   type: object
+ *                   properties:
+ *                     questionId:
+ *                       type: string
+ *                       description: The ID of the quiz question.
+ *                     selectedOptions:
+ *                       type: array
+ *                       items:
+ *                         type: integer
+ *                       description: An array of indices (0 to 3) of selected options.
  *             example:
- *               userId: 651179865c2c23a2615b4259
- *               questionId: 651a60b39e3e884e212805d7
- *               subjectId: 651a60b39e3e884e212805d7
- *               selectedOptions: [0, 2]
+ *               studentId: 614a7e7d7f1d813bbf8e89b7
+ *               scode: ABC123
+ *               classId: 614a7e7d7f1d813bbf8e89b7
+ *               score: 15
+ *               subjectId: 614a7e7d7f1d813bbf8e89b7
+ *               answers:
+ *                 - questionId: 614a7e7d7f1d813bbf8e89b7
+ *                   selectedOptions: [1, 2]
+ *
  *     responses:
  *       "201":
- *         description: Answers submitted successfully
+ *         description: Quiz submitted successfully
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/QuizSubmit'
- *       "500":
- *         description: An error occurred while submitting answers
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *               example:
- *                 error: An error occurred while submitting answers
+ *               $ref: '#/components/schemas/QuizSubmission'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+
  *   get:
- *     summary: Get query boards
- *     tags: [asfg]
+ *     summary: Get quiz submissions
+ *     tags: [QuizSubmission]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: board
- *         schema:
- *           type: string
- *         description: Board name *
- *       - in: query
- *         name: sortBy
- *         schema:
- *           type: string
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           minimum: 1
- *         default: 10
- *         description: Maximum number of users
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           minimum: 1
- *           default: 1
- *         description: Page number
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 results:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Board'
- *                 page:
- *                   type: integer
- *                   example: 1
- *                 limit:
- *                   type: integer
- *                   example: 10
- *                 totalPages:
- *                   type: integer
- *                   example: 1
- *                 totalResults:
- *                   type: integer
- *                   example: 1
+ *               $ref: '#/components/schemas/QuizSubmission'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -137,91 +115,29 @@ module.exports = router;
 
 /**
  * @swagger
- * /quizSubmit/{userId}/{subjectId}:
+ * /quiz-submissions/student/{studentId}:
  *   get:
- *     summary: Get a result
- *     tags: [QuizSubmit]
+ *     summary: Get quiz submissions by student ID
+ *     tags: [QuizSubmission]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: userId
+ *         name: studentId
  *         required: true
+ *         description: ID of the student
  *         schema:
  *           type: string
- *         description: userId
- *       - in: path
- *         name: subjectId
- *         required: true
- *         schema:
- *           type: string
- *         description: subjectId
+ *         example: 123456123456789012
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/QuizSubmit'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
- *   patch:
- *     summary: Update a board
- *     tags: [asfg]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: boardId
- *         required: true
- *         schema:
- *           type: string
- *         description: boardId
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *             example:
- *               name: fake name*
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: '#/components/schemas/Board'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
- *   delete:
- *     summary: Delete a board
- *     tags: [asfg]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: boardId
- *         required: true
- *         schema:
- *           type: string
- *         description: boardId
- *     responses:
- *       "200":
- *         description: No content
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/QuizSubmission'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

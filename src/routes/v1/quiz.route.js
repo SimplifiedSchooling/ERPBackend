@@ -23,6 +23,7 @@ router
   .post(validate(quizeValidation.createQuize), quizeController.createQuize)
   .get(validate(quizeValidation.getQuizes), quizeController.getAllQuize);
 
+router.route('/checkexist/:quizName').get(validate(quizeValidation.getQuizeByQuizName), quizeController.getQuizeByQuizName);
 router.route('/NotSelect').get(validate(quizeValidation.NotSelectQuize), quizeController.getAllNotSelected);
 
 router
@@ -279,7 +280,34 @@ module.exports = router;
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  */
-
+/**
+ * @swagger
+ * /quizes/checkexist/{quizName}:
+ *   get:
+ *     summary: Get a Quize
+ *     tags: [Quiz]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: quizName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Quize
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
 // /**
 //  *  @swagger
 //  *  /quizes/{quizeId}/submit:

@@ -3,14 +3,12 @@ const { objectId } = require('./custom.validation');
 
 const createDemolished = {
   body: Joi.object().keys({
-    reference_no: Joi.number().required(),
-    to_title: Joi.string().required(),
-    address: Joi.string().required(),
-    from_title: Joi.string().required(),
+    asset: Joi.string().required(),
+    totalAsset: Joi.number().required(),
+    totalDestroyed: Joi.string().required(),
+    reason: Joi.string().required(),
     date: Joi.date().required(),
     imagePath: Joi.string(),
-    note: Joi.string(),
-    type: Joi.string(),
   }),
 };
 
@@ -35,14 +33,12 @@ const updateDemolishedById = {
   }),
   body: Joi.object()
     .keys({
-      reference_no: Joi.number(),
-      to_title: Joi.string(),
-      address: Joi.string(),
-      from_title: Joi.string(),
-      date: Joi.date(),
+      asset: Joi.string().required(),
+      totalAsset: Joi.number().required(),
+      totalDestroyed: Joi.string().required(),
+      reason: Joi.string().required(),
+      date: Joi.date().required(),
       imagePath: Joi.string(),
-      type: Joi.string(),
-      note: Joi.string(),
     })
     .min(1),
 };
