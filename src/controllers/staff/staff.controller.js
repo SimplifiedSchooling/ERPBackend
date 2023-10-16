@@ -39,7 +39,8 @@ const getAllStaff = catchAsync(async (req, res) => {
 });
 
 const getStaff = catchAsync(async (req, res) => {
-  const staff = await staffService.getStaffById(req.params.satffId);
+  const staff = await staffService.getStaffById(req.params.staffId);
+  console.log(req.params.satffId)
   if (!staff) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Staff not found');
   }
