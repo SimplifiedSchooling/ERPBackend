@@ -96,3 +96,5 @@ module.exports.departmentUserController = require('./department.user.controller'
 module.exports.appointedController = require('./masterControllers/appointed.level.controller');
 module.exports.studentleftController = require('./student.left.reason.controller');
 module.exports.grievanceController = require('./grievance.redressal.controller');
+module.exports.hostelController = require('./hostel.controller');
+module.exports.assectController = require('./assect.controller');

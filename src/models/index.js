@@ -108,3 +108,5 @@ module.exports.DepartmentUser = require('./department.user.model');
 module.exports.Appointed = require('./masterModels/appointed.level.model');
 module.exports.Studentleft = require('./student.left.reason.model');
 module.exports.GrievanceRedressal = require('./grievance.redressal.model');
+module.exports.Hostel = require('./hostel.model');
+module.exports.Assect = require('./assect.model');

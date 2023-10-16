@@ -94,3 +94,5 @@ module.exports.quizSubmitValidation = require('./quizSubmit.validation');
 module.exports.appointedValidation = require('./masterValidations/appointed.level.validation');
 module.exports.studentleftValidation = require('./student.left.reason.validation');
 module.exports.grievanceValidation = require('./grievance.redressal.validation');
+module.exports.hostelValidation = require('./hostel.validation');
+module.exports.assectValidaton = require('./assect.validation');
