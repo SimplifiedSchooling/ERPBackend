@@ -36,7 +36,6 @@ const getQuizeById = catchAsync(async (req, res) => {
   res.send(quize);
 });
 const getQuizeByQuizName = catchAsync(async (req, res) => {
-  console.log(req.params.quizName)
   const quize = await quizeService.getQuizeByQestion(req.params.quizName);
   if (!quize) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Quize not found');
