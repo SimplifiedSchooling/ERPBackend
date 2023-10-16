@@ -8,7 +8,7 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<GrievanceRedressal>}
  */
 const createGrievanceRedressal = async (reqBody) => {
-    return GrievanceRedressal.create(reqBody);
+  return GrievanceRedressal.create(reqBody);
 };
 
 /**
@@ -21,8 +21,8 @@ const createGrievanceRedressal = async (reqBody) => {
  * @returns {Promise<QueryResult>}
  */
 const getAllGrievanceRedressal = async (filter, options) => {
-    const studentLeft = await GrievanceRedressal.paginate(filter, options);
-    return studentLeft;
+  const studentLeft = await GrievanceRedressal.paginate(filter, options);
+  return studentLeft;
 };
 
 /**
@@ -31,7 +31,7 @@ const getAllGrievanceRedressal = async (filter, options) => {
  * @returns {Promise<GrievanceRedressal>}
  */
 const getGrievanceRedressalById = async (id) => {
-    return GrievanceRedressal.findById(id);
+  return GrievanceRedressal.findById(id);
 };
 
 /**
@@ -41,13 +41,13 @@ const getGrievanceRedressalById = async (id) => {
  * @returns {Promise<GrievanceRedressal>}
  */
 const updateGrievanceRedressalById = async (grievanceRedressalId, updateBody) => {
-    const grievanceRedressal = await getGrievanceRedressalById(grievanceRedressalId);
-    if (!grievanceRedressal) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Grievance Redressal not found');
-    }
-    Object.assign(grievanceRedressal, updateBody);
-    await grievanceRedressal.save();
-    return grievanceRedressal;
+  const grievanceRedressal = await getGrievanceRedressalById(grievanceRedressalId);
+  if (!grievanceRedressal) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Grievance Redressal not found');
+  }
+  Object.assign(grievanceRedressal, updateBody);
+  await grievanceRedressal.save();
+  return grievanceRedressal;
 };
 
 /**
@@ -56,18 +56,18 @@ const updateGrievanceRedressalById = async (grievanceRedressalId, updateBody) =>
  * @returns {Promise<GrievanceRedressal>}
  */
 const deleteGrievanceRedressalById = async (grievanceRedressalId) => {
-    const grievanceRedressal = await getGrievanceRedressalById(grievanceRedressalId);
-    if (!grievanceRedressal) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Grievance Redressal not found');
-    }
-    await grievanceRedressal.remove();
-    return grievanceRedressal;
+  const grievanceRedressal = await getGrievanceRedressalById(grievanceRedressalId);
+  if (!grievanceRedressal) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Grievance Redressal not found');
+  }
+  await grievanceRedressal.remove();
+  return grievanceRedressal;
 };
 
 module.exports = {
-    createGrievanceRedressal,
-    getAllGrievanceRedressal,
-    getGrievanceRedressalById,
-    updateGrievanceRedressalById,
-    deleteGrievanceRedressalById,
+  createGrievanceRedressal,
+  getAllGrievanceRedressal,
+  getGrievanceRedressalById,
+  updateGrievanceRedressalById,
+  deleteGrievanceRedressalById,
 };

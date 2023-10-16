@@ -35,6 +35,13 @@ const getQuizeById = catchAsync(async (req, res) => {
   }
   res.send(quize);
 });
+const getQuizeByQuizName = catchAsync(async (req, res) => {
+  const quize = await quizeService.getQuizeByQestion(req.params.quizName);
+  if (!quize) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Quize not found');
+  }
+  res.send(quize);
+});
 
 const getQuizByClassIdAndDayWise = catchAsync(async (req, res) => {
   const quize = await quizeService.getQuizByclassIdAndDayWise(req.params.classId);
@@ -72,4 +79,5 @@ module.exports = {
   getAllNotSelected,
   uploadFiles,
   getQuizByClassIdAndDayWise,
+  getQuizeByQuizName,
 };

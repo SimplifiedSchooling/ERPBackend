@@ -8,7 +8,7 @@ const ApiError = require('../../utils/ApiError');
  * @returns {Promise<Appointed>}
  */
 const createAppointedLevel = async (reqBody) => {
-    return Appointed.create(reqBody);
+  return Appointed.create(reqBody);
 };
 
 /**
@@ -21,8 +21,8 @@ const createAppointedLevel = async (reqBody) => {
  * @returns {Promise<QueryResult>}
  */
 const getAllAppointedLevel = async () => {
-    const appointed = await Appointed.find();
-    return appointed;
+  const appointed = await Appointed.find();
+  return appointed;
 };
 
 /**
@@ -31,7 +31,7 @@ const getAllAppointedLevel = async () => {
  * @returns {Promise<Appointed>}
  */
 const getAppointedLevelById = async (id) => {
-    return Appointed.findById(id);
+  return Appointed.findById(id);
 };
 
 /**
@@ -41,13 +41,13 @@ const getAppointedLevelById = async (id) => {
  * @returns {Promise<Appointed>}
  */
 const updateAppointedLevelById = async (appointedId, updateBody) => {
-    const appointed = await getAppointedLevelById(appointedId);
-    if (!appointed) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Appointed For Level not found');
-    }
-    Object.assign(appointed, updateBody);
-    await appointed.save();
-    return appointed;
+  const appointed = await getAppointedLevelById(appointedId);
+  if (!appointed) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Appointed For Level not found');
+  }
+  Object.assign(appointed, updateBody);
+  await appointed.save();
+  return appointed;
 };
 
 /**
@@ -56,18 +56,18 @@ const updateAppointedLevelById = async (appointedId, updateBody) => {
  * @returns {Promise<AppliedForPlacement>}
  */
 const deleteAppointedLevelById = async (appointedId) => {
-    const appointed = await getAppointedLevelById(appointedId);
-    if (!appointed) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'Appointed For Level not found');
-    }
-    await appointed.remove();
-    return appointed;
+  const appointed = await getAppointedLevelById(appointedId);
+  if (!appointed) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Appointed For Level not found');
+  }
+  await appointed.remove();
+  return appointed;
 };
 
 module.exports = {
-    createAppointedLevel,
-    getAllAppointedLevel,
-    getAppointedLevelById,
-    updateAppointedLevelById,
-    deleteAppointedLevelById,
+  createAppointedLevel,
+  getAllAppointedLevel,
+  getAppointedLevelById,
+  updateAppointedLevelById,
+  deleteAppointedLevelById,
 };
