@@ -1,37 +1,36 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const auth = require('../../middlewares/auth');
-const { demolishedController } = require('../../controllers');
-const { demolishedValidation } = require('../../validations');
+const grievanceController = require('../../controllers/grievance.redressal.controller');
+const grievanceValidation = require('../../validations/grievance.redressal.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(auth('CREATE'),validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
-  .get(auth('GET'), validate(demolishedValidation.getAllDemolished), demolishedController.getAllDemolished);
+  .post(validate(grievanceValidation.createGrievanceRedressal), grievanceController.createGrievance)
+  .get(validate(grievanceValidation.queryGrievanceRedressal), grievanceController.getAllGrievances);
 
 router
-  .route('/:demolishedId')
-  .get(auth('GET'), validate(demolishedValidation.getDemolishedById), demolishedController.getDemolishedById)
-  .patch(auth('UPDATE'), validate(demolishedValidation.updateDemolishedById), demolishedController.updateDemolishedById)
-  .delete(auth('DELETE'), validate(demolishedValidation.deleteDemolishedById), demolishedController.deleteDemolishedById);
+  .route('/:grievanceRedressalId')
+  .get(validate(grievanceValidation.getGrievanceRedressal), grievanceController.getGrievance)
+  .patch(validate(grievanceValidation.updateGrievanceRedressal), grievanceController.updateGrievance)
+  .delete(validate(grievanceValidation.deleteGrievanceRedressal), grievanceController.deleteGrievance);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Demolished
- *   description: Demolished management
+ *   name: GrievanceRedressal
+ *   description: Grievance Redressal
  */
 
 /**
  * @swagger
- * /demolished:
+ * /grievanceredressal:
  *   post:
- *     summary: Create a Demolished
- *     tags: [Demolished]
+ *     summary: Create a Grievance Redressal
+ *     tags: [GrievanceRedressal]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -41,32 +40,24 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - asset
- *               - totalAsset
- *               - totalDestroyed
- *               - reason
+ *               - complainType
+ *               - complainBy
+ *               - phone
  *               - date
- *               - imagePath
  *             properties:
- *               asset:
+ *               complainType:
+ *                 type: string *
+ *               complainBy:
  *                 type: string
- *               totalAsset:
+ *               phone:
  *                 type: number
- *               totalDestroyed:
- *                 type: string
- *               reason:
- *                 type: string
  *               date:
  *                 type: date
- *               imagePath:
- *                 type: string
  *             example:
- *               asset: example
- *               totalAsset: 2
- *               totalDestroyed: test
- *               reason: abcde
- *               date: 01-01-1970 00:00:00
- *               imagePath: sgdd/sgdgds/sdg
+ *               complainType: Fees
+ *               complainBy: Teacher
+ *               phone: 9632123456
+ *               date: 2023/10/11
  *
  *     responses:
  *       "201":
@@ -74,28 +65,23 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *                $ref: '#/components/schemas/GrievanceRedressal'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Demolished
- *     tags: [Demolished]
+ *     summary: Get query Grievance Redressal
+ *     tags: [GrievanceRedressal]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: asset
+ *         name: Grievance Redressal
  *         schema:
  *           type: string
- *         description: asset
- *       - in: query
- *         name: asset
- *         schema:
- *           type: number
- *         description: asset
+ *         description: Grievance Redressal *
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -106,7 +92,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of
+ *         description: Maximum number of Grievance Redressal
  *       - in: query
  *         name: page
  *         schema:
@@ -125,7 +111,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Demolished'
+ *                     $ref: '#/components/schemas/GrievanceRedressal'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -146,26 +132,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /demolished/{demolishedId}:
+ * /grievanceredressal/{grievanceRedressalId}:
  *   get:
- *     summary: Get a Demolished
- *     tags: [Demolished]
+ *     summary: Get a Grievance Redressal
+ *     tags: [GrievanceRedressal]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: demolishedId
+ *         name: grievanceRedressalId
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
+ *         description: grievanceRedressalId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *                $ref: '#/components/schemas/GrievanceRedressal'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -174,17 +160,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a demolished
- *     tags: [Demolished]
+ *     summary: Update a Grievance Redressal
+ *     tags: [GrievanceRedressal]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: demolishedId
+ *         name: grievanceRedressalId
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
+ *         description: grievanceRedressalId
  *     requestBody:
  *       required: true
  *       content:
@@ -192,38 +178,26 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               reference_no:
+ *               complainType:
+ *                 type: string *
+ *               complainBy:
+ *                 type: string
+ *               phone:
  *                 type: number
- *               to_title:
- *                 type: string
- *               address:
- *                 type: string
- *               note:
- *                 type: string
- *               from_title:
- *                 type: string
  *               date:
- *                 type: number
- *               imagePath:
- *                 type: string
- *               type:
- *                 type: string
+ *                 type: date
  *             example:
- *               reference_no: 65
- *               to_title: gdffg
- *               address: pune, kharadi
- *               note: asasfhaskausbv
- *               from_title: afhgasfkh
- *               date: 01-01-1970 00:00:00
- *               imagePath: sgdd/sgdgds/sdg
- *               type: demolished
+ *               complainType: Admission
+ *               complainBy: Head Teacher
+ *               phone: 9688889900
+ *               date: 2023/11/17
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *                $ref: '#/components/schemas/GrievanceRedressal'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -232,17 +206,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a demolished
- *     tags: [Demolished]
+ *     summary: Delete a Grievance Redressal
+ *     tags: [GrievanceRedressal]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: demolishedId
+ *         name: grievanceRedressalId
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
+ *         description: grievanceRedressalId
  *     responses:
  *       "200":
  *         description: No content

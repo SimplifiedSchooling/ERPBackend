@@ -1,37 +1,36 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const auth = require('../../middlewares/auth');
-const { demolishedController } = require('../../controllers');
-const { demolishedValidation } = require('../../validations');
+const assectController = require('../../controllers/assect.controller');
+const assectValidaton = require('../../validations/assect.validation');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(auth('CREATE'),validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
-  .get(auth('GET'), validate(demolishedValidation.getAllDemolished), demolishedController.getAllDemolished);
+  .post(validate(assectValidaton.createAssect), assectController.createAssect)
+  .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
-  .route('/:demolishedId')
-  .get(auth('GET'), validate(demolishedValidation.getDemolishedById), demolishedController.getDemolishedById)
-  .patch(auth('UPDATE'), validate(demolishedValidation.updateDemolishedById), demolishedController.updateDemolishedById)
-  .delete(auth('DELETE'), validate(demolishedValidation.deleteDemolishedById), demolishedController.deleteDemolishedById);
+  .route('/:assectId')
+  .get(validate(assectValidaton.getAssect), assectController.getAssect)
+  .patch(validate(assectValidaton.updateAssect), assectController.updateAssect)
+  .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
 module.exports = router;
 
 /**
  * @swagger
  * tags:
- *   name: Demolished
- *   description: Demolished management
+ *   name: Assect
+ *   description: Assect management
  */
 
 /**
  * @swagger
- * /demolished:
+ * /assect:
  *   post:
- *     summary: Create a Demolished
- *     tags: [Demolished]
+ *     summary: Create a Assect
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -41,32 +40,24 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - asset
- *               - totalAsset
- *               - totalDestroyed
- *               - reason
- *               - date
- *               - imagePath
+ *               - assectName
+ *               - invoiceNo
+ *               - invoiceDate,
+ *               - quantity
  *             properties:
- *               asset:
- *                 type: string
- *               totalAsset:
+ *               assectName:
+ *                 type: string *
+ *               invoiceNo:
  *                 type: number
- *               totalDestroyed:
- *                 type: string
- *               reason:
- *                 type: string
- *               date:
+ *               invoiceDate:
  *                 type: date
- *               imagePath:
- *                 type: string
+ *               quantity:
+ *                 type: number
  *             example:
- *               asset: example
- *               totalAsset: 2
- *               totalDestroyed: test
- *               reason: abcde
- *               date: 01-01-1970 00:00:00
- *               imagePath: sgdd/sgdgds/sdg
+ *               assectName: Test
+ *               invoiceNo: 1234
+ *               invoiceDate: 2023/03/12
+ *               quantity: 12
  *
  *     responses:
  *       "201":
@@ -74,28 +65,23 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *                $ref: '#/components/schemas/Assect'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Demolished
- *     tags: [Demolished]
+ *     summary: Get query Assect
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: asset
+ *         name: assectName
  *         schema:
  *           type: string
- *         description: asset
- *       - in: query
- *         name: asset
- *         schema:
- *           type: number
- *         description: asset
+ *         description: Assect name *
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -106,7 +92,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of
+ *         description: Maximum number of Assect
  *       - in: query
  *         name: page
  *         schema:
@@ -125,7 +111,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Demolished'
+ *                     $ref: '#/components/schemas/Assect'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -146,26 +132,26 @@ module.exports = router;
 
 /**
  * @swagger
- * /demolished/{demolishedId}:
+ * /assect/{assectId}:
  *   get:
- *     summary: Get a Demolished
- *     tags: [Demolished]
+ *     summary: Get a Assect
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: demolishedId
+ *         name: assectId
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
+ *         description: assectId
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *                $ref: '#/components/schemas/Assect'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -174,17 +160,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a demolished
- *     tags: [Demolished]
+ *     summary: Update a Assect
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: demolishedId
+ *         name: assectId
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
+ *         description: assectId
  *     requestBody:
  *       required: true
  *       content:
@@ -192,38 +178,26 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               reference_no:
+ *               assectName:
+ *                 type: string *
+ *               invoiceNo:
  *                 type: number
- *               to_title:
- *                 type: string
- *               address:
- *                 type: string
- *               note:
- *                 type: string
- *               from_title:
- *                 type: string
- *               date:
+ *               invoiceDate:
+ *                 type: date
+ *               quantity:
  *                 type: number
- *               imagePath:
- *                 type: string
- *               type:
- *                 type: string
  *             example:
- *               reference_no: 65
- *               to_title: gdffg
- *               address: pune, kharadi
- *               note: asasfhaskausbv
- *               from_title: afhgasfkh
- *               date: 01-01-1970 00:00:00
- *               imagePath: sgdd/sgdgds/sdg
- *               type: demolished
+ *               assectName: Test1234
+ *               invoiceNo: 9876
+ *               invoiceDate: 2023/03/16
+ *               quantity: 01
  *     responses:
  *       "200":
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *                $ref: '#/components/schemas/Assect'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -232,17 +206,17 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a demolished
- *     tags: [Demolished]
+ *     summary: Delete a Assect
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: demolishedId
+ *         name: assectId
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
+ *         description: assectId
  *     responses:
  *       "200":
  *         description: No content
