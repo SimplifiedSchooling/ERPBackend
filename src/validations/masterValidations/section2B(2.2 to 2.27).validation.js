@@ -120,6 +120,7 @@ const updateSection2B27 = {
       ictlabfunct: Joi.string().allow('').optional(),
       model1: Joi.string().allow('').optional(),
       ictinst: Joi.string().allow('').optional(),
+      scode: Joi.string().allow('').optional(),
     })
     .min(1),
 };

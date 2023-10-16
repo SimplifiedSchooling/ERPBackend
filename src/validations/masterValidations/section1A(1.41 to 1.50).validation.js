@@ -116,6 +116,7 @@ const updateSection1A50 = {
       nosecondaryschoolcomplex: Joi.string().allow('').optional(),
       nohigherseconadryschoolcomplex: Joi.string().allow('').optional(),
       totalschoolcomplex: Joi.string().allow('').optional(),
+      scode: Joi.string().allow('').optional(),
     })
     .min(1),
 };
