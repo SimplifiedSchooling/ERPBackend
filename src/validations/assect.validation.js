@@ -7,6 +7,7 @@ const createAssect = {
         invoiceNo: Joi.number(),
         invoiceDate: Joi.date(),
         quantity: Joi.number(),
+        imagePath: Joi.string(),
     }),
 };
 
@@ -35,6 +36,7 @@ const updateAssect = {
             invoiceNo: Joi.number(),
             invoiceDate: Joi.date(),
             quantity: Joi.number(),
+            imagePath: Joi.string(),
         })
         .min(1),
 };

@@ -18,6 +18,9 @@ const assectSchema = mongoose.Schema(
     quantity:{
         type: Number,
         trim: true,
+    },
+    imagePath:{
+      type: String,
     }
   },
   {
