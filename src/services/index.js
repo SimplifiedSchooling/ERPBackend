@@ -106,3 +106,4 @@ module.exports.studentleftService = require('./student.left.reason.service');
 module.exports.grievanceService = require('./grievance.redressal.service');
 module.exports.hostelService = require('./hostel.service');
 module.exports.assectService = require('./assect.service');
+module.exports.attendanceVerifyService = require('./attendance.verify.service');
