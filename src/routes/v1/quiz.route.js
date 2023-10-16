@@ -23,6 +23,7 @@ router
   .post(validate(quizeValidation.createQuize), quizeController.createQuize)
   .get(validate(quizeValidation.getQuizes), quizeController.getAllQuize);
 
+router.route('/checkexist').get(validate(quizeValidation.getQuizeByQuizName), quizeController.getQuizeByQuizName);
 router.route('/NotSelect').get(validate(quizeValidation.NotSelectQuize), quizeController.getAllNotSelected);
 
 router

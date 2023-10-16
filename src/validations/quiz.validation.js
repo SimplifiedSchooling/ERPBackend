@@ -39,6 +39,11 @@ const uploadFiles = {
   }),
 };
 
+const getQuizeByQuizName = {
+  params: Joi.object().keys({
+    quizName: Joi.string().required(),
+  }),
+};
 const NotSelectQuize = {
   query: Joi.object().keys({
     name: Joi.string(),
@@ -112,4 +117,5 @@ module.exports = {
   NotSelectQuize,
   uploadFiles,
   getQuizDayWise,
+  getQuizeByQuizName,
 };

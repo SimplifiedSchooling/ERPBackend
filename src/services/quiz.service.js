@@ -43,6 +43,14 @@ const getQuizeById = async (id) => {
 };
 
 /**
+ * Get quize by quizName
+ * @param {ObjectId} quizName
+ * @returns {Promise<Quize>}
+ */
+const getQuizeByQestion = async (quizName) => {
+  return Quize.findOne({ quizName });
+};
+/**
  * Query for board
  * @param {Object} filter - Mongo filter
  * @param {Object} options - Query options
@@ -152,4 +160,5 @@ module.exports = {
   uploadQuiz,
   CheckoutAnswer,
   getQuizByclassIdAndDayWise,
+  getQuizeByQestion,
 };
