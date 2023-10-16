@@ -7,18 +7,18 @@ const assectSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    invoiceNo:{
-        type: Number,
-        trim: true,
+    invoiceNo: {
+      type: Number,
+      trim: true,
     },
-    invoiceDate:{
-        type: Date,
-        trim: true,
+    invoiceDate: {
+      type: Date,
+      trim: true,
     },
-    quantity:{
-        type: Number,
-        trim: true,
-    }
+    quantity: {
+      type: Number,
+      trim: true,
+    },
   },
   {
     timestamps: true,

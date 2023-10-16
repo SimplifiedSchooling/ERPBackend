@@ -31,10 +31,10 @@ const updateHostel = {
   }),
   body: Joi.object()
     .keys({
-        hostelName: Joi.string().required(),
-        type: Joi.string().required(),
-        address: Joi.string().required(),
-        intake: Joi.number().required(),
+      hostelName: Joi.string().required(),
+      type: Joi.string().required(),
+      address: Joi.string().required(),
+      intake: Joi.number().required(),
     })
     .min(1),
 };
