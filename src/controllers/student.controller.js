@@ -39,6 +39,7 @@ const getStudents = catchAsync(async (req, res) => {
 });
 
 const getStudent = catchAsync(async (req, res) => {
+  console.log(req.params.studentId)
   const singleStudent = await studentService.getStudentById(req.params.studentId);
   if (!singleStudent) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Student not found');
