@@ -3,7 +3,7 @@ const { QuizSubmit } = require('../models');
 /**
  * Create a role
  * @param {Object} reqBody
- * @returns {Promise<Role>}
+ * @returns {Promise<QuizSubmit>}
  */
 const submitQuiz = async (reqBody) => {
   const submitedQuiz = await QuizSubmit.create(reqBody);
@@ -27,12 +27,27 @@ const querySubmit = async (filter, options) => {
 /**
  * Get role by id
  * @param {ObjectId} id
- * @returns {Promise<Role>}
+ * @returns {Promise<QuizSubmit>}
  */
 const getQuizSubmitById = async (studentId) => {
   return QuizSubmit.findOne({ studentId });
 };
 
+/**
+ * Get for shcool and teacher
+ * @returns {Promise<QuizSubmit>}
+ */
+const getByRelation = async (scode, classId, subjectId, userId, createdAt) => {
+  const filter = {};
+
+  if (scode) filter.scode = scode;
+  if (userId) filter.userId = userId;
+  if (subjectId) filter.subjectId = subjectId;
+  if (classId) filter.classId = classId;
+  if (createdAt) filter.createdAt = { $gte: new Date(createdAt) };
+
+  return QuizSubmit.find(filter);
+};
 // /**
 //  * Get the total marks of a user's quiz submissions.
 //  * @param {string} userId - User ID.
@@ -79,4 +94,5 @@ module.exports = {
   // resultQuiz,
   querySubmit,
   getQuizSubmitById,
+  getByRelation,
 };

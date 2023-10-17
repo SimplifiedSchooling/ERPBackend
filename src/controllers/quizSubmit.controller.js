@@ -23,6 +23,15 @@ const getQuizSubmitById = catchAsync(async (req, res) => {
   }
   res.send(result);
 });
+
+const getQuizByQuery = catchAsync(async (req, res) => {
+  const { scode, classId, subjectId, userId, createdAt } = req.query;
+  const result = await quizSubmitService.getByRelation(scode, classId, subjectId, userId, createdAt);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Quiz Submition not found');
+  }
+  res.send(result);
+});
 // const resultQuiz = catchAsync(async (req, res) => {
 //   const { userId, subjectId } = req.params;
 //   const quiz = await quizSubmitService.resultQuiz(userId, subjectId);
@@ -36,4 +45,5 @@ module.exports = {
   submitQuiz,
   getAllQuizSubmit,
   getQuizSubmitById,
+  getQuizByQuery,
 };
