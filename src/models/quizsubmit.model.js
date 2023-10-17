@@ -4,7 +4,7 @@ const { toJSON, paginate } = require('./plugins');
 const quizSubmissionSchema = mongoose.Schema(
   {
     studentId: {
-      type: String,
+      type: Number,
       required: true,
     },
     scode: {

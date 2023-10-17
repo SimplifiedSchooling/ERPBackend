@@ -15,6 +15,7 @@ router
   .get(validate(quizSubmitValidation.getQuizResultByuser), quizSubmitController.getQuizSubmitById);
 //   .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
 //   .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
+router.route('/student/report').get(validate(quizSubmitValidation.getQuizReport), quizSubmitController.getQuizByQuery);
 
 module.exports = router;
 
@@ -144,4 +145,43 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /quiz-submissions/student/report:
+ *   get:
+ *     summary: Retrieve quiz submissions by various parameters
+ *     tags: [QuizSubmission]
+ *     parameters:
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The student code
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         description: The user ID
+ *       - in: query
+ *         name: subjectId
+ *         schema:
+ *           type: string
+ *         description: The subject ID
+ *       - in: query
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: The class ID
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The created_at date (e.g., 2023-10-05)
+ *     responses:
+ *       '200':
+ *         description: A list of quiz submissions
+ *       '500':
+ *         description: Internal Server Error
  */
