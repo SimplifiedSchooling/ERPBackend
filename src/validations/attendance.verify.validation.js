@@ -4,7 +4,7 @@ const createAVerify = {
   body: Joi.object().keys({
     file: Joi.string(),
     studentId1: Joi.string(),
-    studenntId2: Joi.string(),
+    studentId2: Joi.string(),
     studentId3: Joi.string(),
     campusId: Joi.string(),
     inchargeId: Joi.string(),
@@ -35,7 +35,7 @@ const updateAverify = {
     .keys({
       file: Joi.string(),
       studentId1: Joi.string(),
-      studenntId2: Joi.string(),
+      studentId2: Joi.string(),
       studentId3: Joi.string(),
       campusId: Joi.string(),
       inchargeId: Joi.string(),

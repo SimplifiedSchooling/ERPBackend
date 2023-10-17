@@ -1333,9 +1333,10 @@ components:
       properties:
         file:
           type: string
+          format: binary
         studentId1:
           type: string
-        studenntId2:
+        studentId2:
           type: string
         studentId3:
           type: string
@@ -1346,9 +1347,8 @@ components:
         backCount:
           type: string
       example:
-        file: "attendance-verification.jpg"
         studentId1: "12345"
-        studenntId2: "13453"
+        studentId2: "13453"
         studentId3: "65238"
         campusId: "Campus123"
         inchargeId: "Incharge456"

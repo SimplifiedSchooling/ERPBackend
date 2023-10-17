@@ -9,7 +9,7 @@ const attendanceVerifySchema = mongoose.Schema(
     studentId1: {
       type: String,
     },
-    studenntId2: {
+    studentId2: {
       type: String,
       trim: true,
     },

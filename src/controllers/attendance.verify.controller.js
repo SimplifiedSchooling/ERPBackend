@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { attendanceVerifyService } = require('../services');
 
 const createAttendanceVerify = catchAsync(async (req, res) => {
+  req.body.file = req.file.path;
   const attendanceVerify = await attendanceVerifyService.createAttendanceVerify(req.body);
   res.status(httpStatus.CREATED).send(attendanceVerify);
 });
