@@ -21,6 +21,7 @@ const router = express.Router();
 router
   .route('/')
   .post(validate(assectValidaton.createAssect), assectController.createAssect)
+  .post(upload.single('imagePath'), validate(assectValidaton.createAssect), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router

@@ -36,10 +36,8 @@ const parentSchema = mongoose.Schema(
       default: 'parent',
     },
     studentId: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Student',
+      type: Number,
       required: true,
-      trim: true,
     },
   },
   {

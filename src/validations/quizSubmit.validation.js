@@ -21,14 +21,23 @@ const getQuizSubmit = {
     page: Joi.number().integer(),
   }),
 };
+const getQuizReport = {
+  query: Joi.object().keys({
+    scode: Joi.string(),
+    classId: Joi.string(),
+    subjectId: Joi.number(),
+    userId: Joi.number(),
+    date: Joi.date(),
+  }),
+};
 const getQuizResultByuser = {
   params: Joi.object().keys({
     studentId: Joi.string().required(),
   }),
 };
-
 module.exports = {
   quizSubmit,
   getQuizResultByuser,
   getQuizSubmit,
+  getQuizReport,
 };
