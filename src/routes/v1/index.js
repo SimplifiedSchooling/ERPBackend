@@ -105,6 +105,7 @@ const studentLeftReasonRoute = require('./student.left.reason.route');
 const grievanceRedressalRoute = require('./grievance.redressal.route');
 const assectRoute = require('./assect.route');
 const hostel = require('./hostel.route');
+const attendanceVerifyRoute = require('./attendance.verify.route');
 
 const router = express.Router();
 
@@ -524,6 +525,10 @@ const defaultRoutes = [
   {
     path: '/hostel',
     route: hostel,
+  },
+  {
+    path: '/attendance-verify',
+    route: attendanceVerifyRoute,
   },
 ];
 
