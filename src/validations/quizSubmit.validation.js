@@ -7,6 +7,8 @@ const answerSchema = Joi.object({
 
 const quizSubmit = Joi.object({
   studentId: Joi.string().required(),
+  subjectId: Joi.string().required(),
+  date: Joi.string().required(),
   scode: Joi.string().required(),
   classId: Joi.string().required(),
   answers: Joi.array().items(answerSchema).required(),
@@ -25,8 +27,8 @@ const getQuizReport = {
   query: Joi.object().keys({
     scode: Joi.string(),
     classId: Joi.string(),
-    subjectId: Joi.number(),
-    userId: Joi.number(),
+    subjectId: Joi.string(),
+    studentId: Joi.number(),
     date: Joi.date(),
   }),
 };

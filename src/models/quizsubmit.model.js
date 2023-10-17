@@ -34,6 +34,9 @@ const quizSubmissionSchema = mongoose.Schema(
     score: {
       type: Number,
     },
+    date: {
+      type: String,
+    },
   },
   {
     timestamps: true,
