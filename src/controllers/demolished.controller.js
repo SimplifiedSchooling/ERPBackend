@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { demolishedService } = require('../services');
 
 const createDemolished = catchAsync(async (req, res) => {
+  req.body.imagePath = await req.file.path;
   const demolished = await demolishedService.createDemolished(req.body);
   res.status(httpStatus.CREATED).send(demolished);
 });

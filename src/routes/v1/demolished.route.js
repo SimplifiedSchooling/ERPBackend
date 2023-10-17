@@ -1,13 +1,27 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const auth = require('../../middlewares/auth');
 const { demolishedController } = require('../../controllers');
 const { demolishedValidation } = require('../../validations');
 
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 const router = express.Router();
 
 router
   .route('/')
+  .post(auth('CREATE'),upload.single('imagePath'),validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
   .post(auth('CREATE'), validate(demolishedValidation.createDemolished), demolishedController.createDemolished)
   .get(auth('GET'), validate(demolishedValidation.getAllDemolished), demolishedController.getAllDemolished);
 
@@ -23,7 +37,7 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: Demolished
- *   description: Demolished management
+ *   description: Demolished management and retrieval
  */
 
 /**
@@ -31,25 +45,22 @@ module.exports = router;
  * /demolished:
  *   post:
  *     summary: Create a Demolished
+ *     description: Create other Demolished.
  *     tags: [Demolished]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - asset
- *               - totalAsset
- *               - totalDestroyed
- *               - reason
- *               - date
- *               - imagePath
  *             properties:
  *               asset:
  *                 type: string
+ *               imagePath:
+ *                 type: string
+ *                 format: binary
  *               totalAsset:
  *                 type: number
  *               totalDestroyed:
@@ -57,56 +68,58 @@ module.exports = router;
  *               reason:
  *                 type: string
  *               date:
- *                 type: date
- *               imagePath:
  *                 type: string
  *             example:
- *               asset: example
- *               totalAsset: 2
- *               totalDestroyed: test
- *               reason: abcde
- *               date: 01-01-1970 00:00:00
- *               imagePath: sgdd/sgdgds/sdg
- *
+ *               asset: Test
+ *               imagePath: imagelink/icon1
+ *               totalAsset: 12
+ *               totalDestroyed: test123
+ *               reason: 2
+ *               date: 2/01/2023
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Demolished'
+ *               $ref: '#/components/schemas/Demolished'
  *       "401":
- *         $ref: '#/components/responses/Unauthorized'
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Unauthorized'
  *       "403":
- *         $ref: '#/components/responses/Forbidden'
+ *         description: Forbidden
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Forbidden'
+ *
  *
  *   get:
  *     summary: Get all Demolished
+ *     description: all Demolished.
  *     tags: [Demolished]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: asset
+ *         name: name
  *         schema:
  *           type: string
- *         description: asset
- *       - in: query
- *         name: asset
- *         schema:
- *           type: number
- *         description: asset
  *       - in: query
  *         name: sortBy
  *         schema:
  *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of
+ *         description: Maximum number of Demolished
  *       - in: query
  *         name: page
  *         schema:
@@ -143,7 +156,6 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  */
-
 /**
  * @swagger
  * /demolished/{demolishedId}:
@@ -158,7 +170,6 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
  *     responses:
  *       "200":
  *         description: OK
@@ -174,7 +185,7 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a demolished
+ *     summary: Update a Demolished
  *     tags: [Demolished]
  *     security:
  *       - bearerAuth: []
@@ -184,39 +195,33 @@ module.exports = router;
  *         required: true
  *         schema:
  *           type: string
- *         description: demolishedId
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               reference_no:
- *                 type: number
- *               to_title:
+ *               asset:
  *                 type: string
- *               address:
- *                 type: string
- *               note:
- *                 type: string
- *               from_title:
- *                 type: string
- *               date:
- *                 type: number
  *               imagePath:
  *                 type: string
- *               type:
+ *                 format: binary
+ *               totalAsset:
+ *                 type: number
+ *               totalDestroyed:
+ *                 type: string
+ *               reason:
+ *                 type: string
+ *               date:
  *                 type: string
  *             example:
- *               reference_no: 65
- *               to_title: gdffg
- *               address: pune, kharadi
- *               note: asasfhaskausbv
- *               from_title: afhgasfkh
- *               date: 01-01-1970 00:00:00
- *               imagePath: sgdd/sgdgds/sdg
- *               type: demolished
+ *               asset: English
+ *               imagePath: imagelink/icon1
+ *               totalAsset: 1
+ *               totalDestroyed: abc
+ *               reason: test123
+ *               date: 1/10/2023
  *     responses:
  *       "200":
  *         description: OK
@@ -232,7 +237,7 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a demolished
+ *     summary: Delete a Demolished
  *     tags: [Demolished]
  *     security:
  *       - bearerAuth: []
