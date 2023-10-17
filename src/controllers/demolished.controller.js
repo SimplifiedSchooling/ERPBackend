@@ -11,7 +11,7 @@ const createDemolished = catchAsync(async (req, res) => {
 });
 
 const getAllDemolished = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['to_title', 'reference_no']);
+  const filter = pick(req.query, ['asset']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await demolishedService.queryDemolished(filter, options);
   res.send(result);
