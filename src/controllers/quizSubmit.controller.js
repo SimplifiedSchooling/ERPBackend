@@ -26,7 +26,6 @@ const getQuizSubmitById = catchAsync(async (req, res) => {
 
 const getQuizByQuery = catchAsync(async (req, res) => {
   const { scode, classId, subjectId, studentId, date } = req.query;
-  console.log(req.query)
   const result = await quizSubmitService.getByRelation(scode, classId, subjectId, studentId, date);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Quiz Submition not found');

@@ -34,17 +34,16 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: Assect
- *   description: Assect management and retrieval
+ *   name: Asset
+ *   description: Asset management and retrieval
  */
 
 /**
  * @swagger
- * /assect:
+ * /assets:
  *   post:
- *     summary: Create a Assect
- *     description: Create other Assect.
- *     tags: [Assect]
+ *     summary: Create an assect
+ *     tags: [Asset]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -53,141 +52,168 @@ module.exports = router;
  *         multipart/form-data:
  *           schema:
  *             type: object
+ *             required:
+ *               - assectName
+ *               - count
+ *               - total
  *             properties:
  *               assectName:
  *                 type: string
- *               imagePath:
- *                 type: string
- *                 format: binary
- *               invoiceNo:
+ *                 description: The name of the assect
+ *               count:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     invoiceNo:
+ *                       type: number
+ *                       description: Invoice number
+ *                     invoiceDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Invoice date (e.g., "2023-10-17")
+ *                     quantity:
+ *                       type: number
+ *                       description: Quantity
+ *                     imagePath:
+ *                       type: string
+ *                       format: binary
+ *                       description: Image file
+ *               total:
  *                 type: number
- *               invoiceDate:
- *                 type: date
- *               quantity:
- *                 type: number
+ *                 description: Total value of the assect
  *             example:
- *               assectName: Test
- *               imagePath: imagelink/icon1
- *               invoiceNo: 123
- *               invoiceDate: 1/01/2023
- *               quantity: 2
+ *               assectName: Computer
+ *               count: [
+ *                 {
+ *                   invoiceNo: 12345,
+ *                   invoiceDate: "2023-10-17",
+ *                   quantity: 5,
+ *                   imagePath: (binary data of the image file)
+ *                 }
+ *               ]
+ *               total: 5000
+ *
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Assect'
- *       "401":
- *         description: Unauthorized
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         description: Forbidden
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/responses/Forbidden'
- *
- *
- *   get:
- *     summary: Get all Assect
- *     description: all Assect.
- *     tags: [Assect]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: assectName
- *         schema:
- *           type: string
- *       - in: query
- *         name: sortBy
- *         schema:
- *           type: string
- *         description: sort by query in the form of field:desc/asc (ex. name:asc)
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           minimum: 1
- *         default: 10
- *         description: Maximum number of Assect
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           minimum: 1
- *           default: 1
- *         description: Page number
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 results:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Assect'
- *                 page:
- *                   type: integer
- *                   example: 1
- *                 limit:
- *                   type: integer
- *                   example: 10
- *                 totalPages:
- *                   type: integer
- *                   example: 1
- *                 totalResults:
- *                   type: integer
- *                   example: 1
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- */
-/**
- * @swagger
- * /assect/{assectId}:
- *   get:
- *     summary: Get a Assect
- *     tags: [Assect]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: assectId
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
  *                $ref: '#/components/schemas/Assect'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
- *   patch:
- *     summary: Update a Assect
- *     tags: [Assect]
- *     security:
- *       - bearerAuth: []
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Asset:
+ *       type: object
+ *       properties:
+ *         assectName:
+ *           type: string
+ *         count:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               invoiceNo:
+ *                 type: number
+ *               invoiceDate:
+ *                 type: string
+ *                 format: date
+ *               quantity:
+ *                 type: number
+ *               imagePath:
+ *                 type: string
+ *                 format: binary
+ *         total:
+ *           type: number
+ */
+
+// /**
+//  * @swagger
+//  * /assets:
+//  *   post:
+//  *     summary: Create a new asset
+//  *     tags:
+//  *       - Asset
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         multipart/form-data:
+//  *           schema:
+//  *             $ref: '#/components/schemas/Asset'
+//  *     consumes:
+//  *       - multipart/form-data
+//  *     responses:
+//  *       201:
+//  *         description: New asset created successfully
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               $ref: '#/components/schemas/Asset'
+//  */
+
+/**
+ * @swagger
+ * /assets:
+ *   get:
+ *     summary: Get a list of assets
+ *     tags:
+ *       - Asset
+ *     responses:
+ *       200:
+ *         description: A list of assets
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Asset'
+ */
+
+/**
+ * @swagger
+ * /assets/{assetId}:
+ *   get:
+ *     summary: Get an asset by ID
+ *     tags:
+ *       - Asset
  *     parameters:
  *       - in: path
- *         name: assectId
+ *         name: assetId
  *         required: true
+ *         description: ID of the asset to retrieve
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: The asset
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Asset'
+ *       404:
+ *         description: Asset not found
+ */
+
+/**
+ * @swagger
+ * /assets/{assetId}:
+ *   patch:
+ *     summary: Update an asset by ID
+ *     tags:
+ *       - Asset
+ *     parameters:
+ *       - in: path
+ *         name: assetId
+ *         required: true
+ *         description: ID of the asset to update
  *         schema:
  *           type: string
  *     requestBody:
@@ -195,58 +221,37 @@ module.exports = router;
  *       content:
  *         multipart/form-data:
  *           schema:
- *             type: object
- *             properties:
- *               assectName:
- *                 type: string
- *               imagePath:
- *                 type: string
- *                 format: binary
- *               invoiceNo:
- *                 type: number
- *               invoiceDate:
- *                 type: date
- *               quantity:
- *                 type: nunber
- *             example:
- *               assectName: English
- *               imagePath: imagelink/icon1
- *               invoiceNo: 1
- *               invoiceDate: 2/10/2023
- *               quantity: 2
+ *             $ref: '#/components/schemas/Asset'
+ *     consumes:
+ *       - multipart/form-data
  *     responses:
- *       "200":
- *         description: OK
+ *       200:
+ *         description: Asset updated successfully
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Assect'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
+ *               $ref: '#/components/schemas/Asset'
+ *       404:
+ *         description: Asset not found
+ */
+
+/**
+ * @swagger
+ * /assets/{assetId}:
  *   delete:
- *     summary: Delete a Assect
- *     tags: [Assect]
- *     security:
- *       - bearerAuth: []
+ *     summary: Delete an asset by ID
+ *     tags:
+ *       - Asset
  *     parameters:
  *       - in: path
- *         name: assectId
+ *         name: assetId
  *         required: true
+ *         description: ID of the asset to delete
  *         schema:
  *           type: string
- *         description: assectId
  *     responses:
- *       "200":
- *         description: No content
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
+ *       204:
+ *         description: Asset deleted successfully
+ *       404:
+ *         description: Asset not found
  */

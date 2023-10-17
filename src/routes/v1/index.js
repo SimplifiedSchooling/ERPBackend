@@ -104,6 +104,7 @@ const appointedRoute = require('./masterRoutes/appointed.level.route');
 const studentLeftReasonRoute = require('./student.left.reason.route');
 const grievanceRedressalRoute = require('./grievance.redressal.route');
 const assectRoute = require('./assect.route');
+const hostel = require('./hostel.route');
 
 const router = express.Router();
 
@@ -517,8 +518,12 @@ const defaultRoutes = [
     route: grievanceRedressalRoute,
   },
   {
-    path: '/assect',
+    path: '/assets',
     route: assectRoute,
+  },
+  {
+    path: '/hostel',
+    route: hostel,
   },
 ];
 
