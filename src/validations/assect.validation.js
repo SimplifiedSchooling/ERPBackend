@@ -2,13 +2,13 @@ const Joi = require('joi');
 const { objectId } = require('./custom.validation');
 
 const createAssect = {
-    body: Joi.object().keys({
-        assectName: Joi.string(),
-        invoiceNo: Joi.number(),
-        invoiceDate: Joi.date(),
-        quantity: Joi.number(),
-        imagePath: Joi.string(),
-    }),
+  body: Joi.object().keys({
+    assectName: Joi.string(),
+    invoiceNo: Joi.number(),
+    invoiceDate: Joi.date(),
+    quantity: Joi.number(),
+    imagePath: Joi.string(),
+  }),
   body: Joi.object().keys({
     assectName: Joi.string(),
     invoiceNo: Joi.number(),
@@ -33,18 +33,18 @@ const getAssect = {
 };
 
 const updateAssect = {
-    params: Joi.object().keys({
-        assectId: Joi.required().custom(objectId),
-    }),
-    body: Joi.object()
-        .keys({
-            assectName: Joi.string(),
-            invoiceNo: Joi.number(),
-            invoiceDate: Joi.date(),
-            quantity: Joi.number(),
-            imagePath: Joi.string(),
-        })
-        .min(1),
+  params: Joi.object().keys({
+    assectId: Joi.required().custom(objectId),
+  }),
+  body: Joi.object()
+    .keys({
+      assectName: Joi.string(),
+      invoiceNo: Joi.number(),
+      invoiceDate: Joi.date(),
+      quantity: Joi.number(),
+      imagePath: Joi.string(),
+    })
+    .min(1),
   params: Joi.object().keys({
     assectId: Joi.required().custom(objectId),
   }),
