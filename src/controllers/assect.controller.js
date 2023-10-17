@@ -5,7 +5,6 @@ const catchAsync = require('../utils/catchAsync');
 const { assectService } = require('../services');
 
 const createAssect = catchAsync(async (req, res) => {
-  req.body.imagePath = await req.file.path;
   const data = await assectService.createAssect(req.body);
   res.status(httpStatus.CREATED).send(data);
 });

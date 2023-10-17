@@ -3,17 +3,17 @@ const { objectId } = require('./custom.validation');
 
 const createAssect = {
   body: Joi.object().keys({
-    assectName: Joi.string(),
-    invoiceNo: Joi.number(),
-    invoiceDate: Joi.date(),
-    quantity: Joi.number(),
-    imagePath: Joi.string(),
-  }),
-  body: Joi.object().keys({
-    assectName: Joi.string(),
-    invoiceNo: Joi.number(),
-    invoiceDate: Joi.date(),
-    quantity: Joi.number(),
+    assectName: Joi.string().required(),
+    count: Joi.array().items(
+      Joi.object({
+        invoiceNo: Joi.number().required(),
+        invoiceDate: Joi.date().required(),
+        quantity: Joi.number().required(),
+        imagePath: Joi.string(),
+      })
+    ).required(),
+    total: Joi.number(),
+    
   }),
 };
 
@@ -39,23 +39,19 @@ const updateAssect = {
   body: Joi.object()
     .keys({
       assectName: Joi.string(),
-      invoiceNo: Joi.number(),
-      invoiceDate: Joi.date(),
-      quantity: Joi.number(),
-      imagePath: Joi.string(),
+      count: [{
+        invoiceNo: Joi.number(),
+        invoiceDate: Joi.date(),
+        quantity: Joi.number(),
+        imagePath: Joi.string(),
+      }],
+      total: Joi.number(),
+      
     })
     .min(1),
   params: Joi.object().keys({
     assectId: Joi.required().custom(objectId),
   }),
-  body: Joi.object()
-    .keys({
-      assectName: Joi.string(),
-      invoiceNo: Joi.number(),
-      invoiceDate: Joi.date(),
-      quantity: Joi.number(),
-    })
-    .min(1),
 };
 
 const deleteAssect = {
