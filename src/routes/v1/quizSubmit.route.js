@@ -15,7 +15,7 @@ router
   .get(validate(quizSubmitValidation.getQuizResultByuser), quizSubmitController.getQuizSubmitById);
 //   .patch(validate(boardValidation.updateBoard), boardController.updateBoard)
 //   .delete(validate(boardValidation.deleteBoard), boardController.deleteBoard);
-router.route('/student/report').get(validate(quizSubmitValidation.getQuizReport), quizSubmitController.getQuizByQuery);
+router.route('/report').get(validate(quizSubmitValidation.getQuizReport), quizSubmitController.getQuizByQuery);
 
 module.exports = router;
 
@@ -61,6 +61,8 @@ module.exports = router;
  *                 description: The class ID.
  *               score:
  *                 type: number
+ *               date:
+ *                 type: string
  *               answers:
  *                 type: array
  *                 items:
@@ -79,6 +81,7 @@ module.exports = router;
  *               scode: ABC123
  *               classId: 614a7e7d7f1d813bbf8e89b7
  *               score: 15
+ *               date:  2023-10-17
  *               subjectId: 614a7e7d7f1d813bbf8e89b7
  *               answers:
  *                 - questionId: 614a7e7d7f1d813bbf8e89b7
@@ -149,7 +152,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /quiz-submissions/student/report:
+ * /quiz-submissions/report:
  *   get:
  *     summary: Retrieve quiz submissions by various parameters
  *     tags: [QuizSubmission]
@@ -158,12 +161,12 @@ module.exports = router;
  *         name: scode
  *         schema:
  *           type: string
- *         description: The student code
+ *         description: The scode
  *       - in: query
- *         name: userId
+ *         name: studentId
  *         schema:
- *           type: string
- *         description: The user ID
+ *           type: number
+ *         description: The studentId
  *       - in: query
  *         name: subjectId
  *         schema:
@@ -178,7 +181,7 @@ module.exports = router;
  *         name: date
  *         schema:
  *           type: string
- *         description: The created_at date (e.g., 2023-10-05)
+ *         description: The date (e.g., 2023-10-05)
  *     responses:
  *       '200':
  *         description: A list of quiz submissions

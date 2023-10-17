@@ -40,6 +40,75 @@ module.exports = router;
 
 /**
  * @swagger
+ * /assets:
+ *   post:
+ *     summary: Create an assect
+ *     tags: [Asset]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - assectName
+ *               - count
+ *               - total
+ *             properties:
+ *               assectName:
+ *                 type: string
+ *                 description: The name of the assect
+ *               count:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     invoiceNo:
+ *                       type: number
+ *                       description: Invoice number
+ *                     invoiceDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Invoice date (e.g., "2023-10-17")
+ *                     quantity:
+ *                       type: number
+ *                       description: Quantity
+ *                     imagePath:
+ *                       type: string
+ *                       format: binary
+ *                       description: Image file
+ *               total:
+ *                 type: number
+ *                 description: Total value of the assect
+ *             example:
+ *               assectName: Computer
+ *               count: [
+ *                 {
+ *                   invoiceNo: 12345,
+ *                   invoiceDate: "2023-10-17",
+ *                   quantity: 5,
+ *                   imagePath: (binary data of the image file)
+ *                 }
+ *               ]
+ *               total: 5000
+ *
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Assect'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
  * components:
  *   schemas:
  *     Asset:
@@ -66,29 +135,29 @@ module.exports = router;
  *           type: number
  */
 
-/**
- * @swagger
- * /assets:
- *   post:
- *     summary: Create a new asset
- *     tags:
- *       - Asset
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             $ref: '#/components/schemas/Asset'
- *     consumes:
- *       - multipart/form-data
- *     responses:
- *       201:
- *         description: New asset created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Asset'
- */
+// /**
+//  * @swagger
+//  * /assets:
+//  *   post:
+//  *     summary: Create a new asset
+//  *     tags:
+//  *       - Asset
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         multipart/form-data:
+//  *           schema:
+//  *             $ref: '#/components/schemas/Asset'
+//  *     consumes:
+//  *       - multipart/form-data
+//  *     responses:
+//  *       201:
+//  *         description: New asset created successfully
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               $ref: '#/components/schemas/Asset'
+//  */
 
 /**
  * @swagger
@@ -186,6 +255,3 @@ module.exports = router;
  *       404:
  *         description: Asset not found
  */
-
-
-
