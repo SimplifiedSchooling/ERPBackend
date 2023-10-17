@@ -20,7 +20,6 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(validate(assectValidaton.createAssect), assectController.createAssect)
   .post(upload.single('imagePath'), validate(assectValidaton.createAssect), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
@@ -77,7 +76,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             $ref: '#/components/schemas/Asset'
  *     consumes:

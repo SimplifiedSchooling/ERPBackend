@@ -3,15 +3,15 @@ const { objectId } = require('./custom.validation');
 
 const createAssect = {
   body: Joi.object().keys({
-    assectName: Joi.string().required(),
+    assectName: Joi.string(),
     count: Joi.array().items(
       Joi.object({
-        invoiceNo: Joi.number().required(),
-        invoiceDate: Joi.date().required(),
-        quantity: Joi.number().required(),
+        invoiceNo: Joi.number(),
+        invoiceDate: Joi.date(),
+        quantity: Joi.number(),
         imagePath: Joi.string(),
       })
-    ).required(),
+    ),
     total: Joi.number(),
     
   }),
