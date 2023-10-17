@@ -96,3 +96,4 @@ module.exports.studentleftValidation = require('./student.left.reason.validation
 module.exports.grievanceValidation = require('./grievance.redressal.validation');
 module.exports.hostelValidation = require('./hostel.validation');
 module.exports.assectValidaton = require('./assect.validation');
+module.exports.attendanceVerifyvalidation = require('./attendance.verify.validation');
