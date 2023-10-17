@@ -9,7 +9,7 @@ const chaterController = require('../../controllers/chapter.controller');
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination: 'uploads/',
+  destination: 'http://143.244.136.201/uploads/',
   filename: (req, file, callback) => {
     const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
     callback(null, uniqueFileName);

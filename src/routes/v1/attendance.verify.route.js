@@ -1,13 +1,29 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const { attendanceVerifyController } = require('../../controllers');
 const { attendanceVerifyvalidation } = require('../../validations');
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
 router
   .route('/')
-  .post(validate(attendanceVerifyvalidation.createAVerify), attendanceVerifyController.createAttendanceVerify)
+  .post(
+    upload.single('file'),
+    validate(attendanceVerifyvalidation.createAVerify),
+    attendanceVerifyController.createAttendanceVerify
+  )
   .get(validate(attendanceVerifyvalidation.queryAVerify), attendanceVerifyController.queryAttendanceVerify);
 
 router
@@ -36,21 +52,43 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/AttendanceVerify'
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *               studentId1:
+ *                 type: string
+ *                 description: ID of student 1
+ *               studentId2:
+ *                 type: string
+ *                 description: ID of student 2
+ *               studentId3:
+ *                 type: string
+ *                 description: ID of student 3
+ *               campusId:
+ *                 type: string
+ *                 description: Campus ID
+ *               inchargeId:
+ *                 type: string
+ *                 description: Incharge ID
+ *               backCount:
+ *                 type: string
+ *                 description: Back Count
  *     responses:
  *       "201":
  *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/AttendanceVerify'
+ *               $ref: '#/components/schemas/'
  *       "400":
  *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
-
+ *
  *   get:
  *     summary: Get all attendance verification records
  *     tags: [AttendanceVerify]
