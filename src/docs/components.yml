@@ -1327,6 +1327,32 @@ components:
         remotesession: "Remote Session"
         avgict: "Average ICT"
         lang_id: "Language ID"                                                                                          
+
+    AttendanceVerify:
+      type: object
+      properties:
+        file:
+          type: string
+        studentId1:
+          type: string
+        studenntId2:
+          type: string
+        studentId3:
+          type: string
+        campusId:
+          type: string
+        inchargeId:
+          type: string
+        backCount:
+          type: string
+      example:
+        file: "attendance-verification.jpg"
+        studentId1: "12345"
+        studenntId2: "13453"
+        studentId3: "65238"
+        campusId: "Campus123"
+        inchargeId: "Incharge456"
+        backCount: "23"
       
     Campus:
       type: object
