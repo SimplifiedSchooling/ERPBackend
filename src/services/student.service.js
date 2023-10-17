@@ -87,8 +87,8 @@ const getAllStudents = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<Student>}
  */
-const getStudentById = async (id) => {
-  return Student.findById(id);
+const getStudentById = async (studentId) => {
+  return Student.findOne({ studentId });
 };
 
 /**

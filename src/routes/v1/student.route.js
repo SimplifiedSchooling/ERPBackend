@@ -97,7 +97,7 @@ module.exports = router;
  *         name: studentId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
  *         description: ID of the Student
  *     requestBody:
  *       content:
@@ -119,7 +119,7 @@ module.exports = router;
  *         name: studentId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
  *         description: ID of the Student
  *     responses:
  *       204:
@@ -134,7 +134,7 @@ module.exports = router;
  *         name: studentId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
  *         description: ID of the Student
  *     responses:
  *       200:
