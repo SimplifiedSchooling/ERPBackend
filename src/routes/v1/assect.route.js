@@ -20,7 +20,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(upload.array('count[0][imagePath]'), validate(assectValidaton.createAssect), assectController.createAssect)
+  .post(upload.array('imagePath'), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
@@ -40,152 +40,259 @@ module.exports = router;
 
 /**
  * @swagger
- * components:
- *   schemas:
- *     Asset:
- *       type: object
- *       properties:
- *         assectName:
- *           type: string
- *         count:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               invoiceNo:
- *                 type: number
- *               invoiceDate:
- *                 type: string
- *                 format: date
- *               quantity:
- *                 type: number
- *               imagePath:
- *                 type: string
- *                 format: binary
- *         total:
- *           type: number
- */
-
-/**
- * @swagger
  * /assets:
  *   post:
- *     summary: Create a new asset
- *     tags:
- *       - Asset
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Asset'
- *     consumes:
- *       - multipart/form-data
- *     responses:
- *       201:
- *         description: New asset created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Asset'
- */
-
-/**
- * @swagger
- * /assets:
- *   get:
- *     summary: Get a list of assets
- *     tags:
- *       - Asset
- *     responses:
- *       200:
- *         description: A list of assets
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Asset'
- */
-
-/**
- * @swagger
- * /assets/{assetId}:
- *   get:
- *     summary: Get an asset by ID
- *     tags:
- *       - Asset
- *     parameters:
- *       - in: path
- *         name: assetId
- *         required: true
- *         description: ID of the asset to retrieve
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: The asset
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Asset'
- *       404:
- *         description: Asset not found
- */
-
-/**
- * @swagger
- * /assets/{assetId}:
- *   patch:
- *     summary: Update an asset by ID
- *     tags:
- *       - Asset
- *     parameters:
- *       - in: path
- *         name: assetId
- *         required: true
- *         description: ID of the asset to update
- *         schema:
- *           type: string
+ *     summary: Create an asset
+ *     tags: [Asset]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Asset'
- *     consumes:
- *       - multipart/form-data
+ *             type: object
+ *             required:
+ *               - assectName
+ *               - count
+ *               - total
+ *             properties:
+ *               assectName:
+ *                 type: string
+ *                 description: The name of the asset
+ *               count:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     invoiceNo:
+ *                       type: number
+ *                       description: Invoice number
+ *                     invoiceDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Invoice date (e.g., "2023-10-10")
+ *                     quantity:
+ *                       type: number
+ *                       description: Quantity
+ *                     imagePath:
+ *                       type: string
+ *                       format: binary
+ *                       description: Image file
+ *                 example:
+ *                   - invoiceNo: 12345
+ *                     invoiceDate: "2023-10-10"
+ *                     quantity: 5
+ *                     imagePath: (binary data of the image file)
+ *               total:
+ *                 type: number
+ *                 description: Total value of the asset
+ *             example:
+ *               assectName: Computer
+ *               count: [
+ *                 {
+ *                   invoiceNo: 12345,
+ *                   invoiceDate: "2023-10-10",
+ *                   quantity: 5,
+ *                   imagePath: (binary data of the image file)
+ *                 }
+ *               ]
+ *               total: 5000
+ *
  *     responses:
- *       200:
- *         description: Asset updated successfully
+ *       "201":
+ *         description: Created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Asset'
- *       404:
- *         description: Asset not found
+ *                $ref: '#/components/schemas/Asset'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ * 
+ * 
+ * 
+ * 
+ *   get:
+ *     summary: Get query Asset
+ *     tags: [Asset]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: asset
+ *         schema:
+ *           type: string
+ *         description: Asset name *
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of Asset
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Asset'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
  */
 
 /**
  * @swagger
  * /assets/{assetId}:
- *   delete:
- *     summary: Delete an asset by ID
- *     tags:
- *       - Asset
+ *   get:
+ *     summary: Get a Asset
+ *     tags: [Asset]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: assetId
  *         required: true
- *         description: ID of the asset to delete
  *         schema:
  *           type: string
+ *         description: assetId
  *     responses:
- *       204:
- *         description: Asset deleted successfully
- *       404:
- *         description: Asset not found
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Asset'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ *   patch:
+ *     summary: Update a Asset
+ *     tags: [Asset]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: assetId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: assetId
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - assectName
+ *               - count
+ *               - total
+ *             properties:
+ *               assectName:
+ *                 type: string
+ *                 description: The name of the assect
+ *               count:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     invoiceNo:
+ *                       type: number
+ *                       description: Invoice number
+ *                     invoiceDate:
+ *                       type: string
+ *                       format: date
+ *                       description: Invoice date (e.g., "2023-10-17")
+ *                     quantity:
+ *                       type: number
+ *                       description: Quantity
+ *                     imagePath:
+ *                       type: string
+ *                       format: binary
+ *                       description: Image file
+ *               total:
+ *                 type: number
+ *                 description: Total value of the assect
+ *             example:
+ *               assectName: Computer
+ *               count: [
+ *                 {
+ *                   invoiceNo: 12345,
+ *                   invoiceDate: "2023-10-17",
+ *                   quantity: 5,
+ *                   imagePath: (binary data of the image file)
+ *                 }
+ *               ]
+ *               total: 5000
+ *
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Asset'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *
+ *   delete:
+ *     summary: Delete a Asset
+ *     tags: [Asset]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: assetId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: assetId
+ *     responses:
+ *       "200":
+ *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */
-
-
-

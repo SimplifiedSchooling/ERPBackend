@@ -522,9 +522,9 @@ const defaultRoutes = [
     route: assectRoute,
   },
   {
-    path:'/hostel',
+    path: '/hostel',
     route: hostel,
-  }
+  },
 ];
 
 const devRoutes = [

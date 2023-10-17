@@ -1,31 +1,31 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const countSchema = new mongoose.Schema({
-  invoiceNo: {
-    type: Number,
-    trim: true,
-  },
-  invoiceDate: {
-    type: Date,
-    trim: true,
-  },
-  quantity: {
-    type: Number,
-    trim: true,
-  },
-  imagePath: {
-    type: String,
-  },
-}, { _id: false }); // Set _id option to false
-
 const assectSchema = mongoose.Schema(
   {
     assectName: {
       type: String,
       trim: true,
     },
-    count: [countSchema],
+    count: [
+      {
+        invoiceNo: {
+          type: Number,
+          trim: true,
+        },
+        invoiceDate: {
+          type: Date,
+          trim: true,
+        },
+        quantity: {
+          type: Number,
+          trim: true,
+        },
+        imagePath: {
+          type: String,
+        },
+      },
+    ],
     total: {
       type: Number,
       trim: true,

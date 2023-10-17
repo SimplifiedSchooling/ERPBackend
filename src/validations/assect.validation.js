@@ -13,7 +13,6 @@ const createAssect = {
       })
     ),
     total: Joi.number(),
-    
   }),
 };
 
@@ -39,14 +38,15 @@ const updateAssect = {
   body: Joi.object()
     .keys({
       assectName: Joi.string(),
-      count: [{
-        invoiceNo: Joi.number(),
-        invoiceDate: Joi.date(),
-        quantity: Joi.number(),
-        imagePath: Joi.string(),
-      }],
+      count: [
+        {
+          invoiceNo: Joi.number(),
+          invoiceDate: Joi.date(),
+          quantity: Joi.number(),
+          imagePath: Joi.string(),
+        },
+      ],
       total: Joi.number(),
-      
     })
     .min(1),
   params: Joi.object().keys({

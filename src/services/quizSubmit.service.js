@@ -37,16 +37,9 @@ const getQuizSubmitById = async (studentId) => {
  * Get for shcool and teacher
  * @returns {Promise<QuizSubmit>}
  */
-const getByRelation = async (scode, classId, subjectId, userId, createdAt) => {
-  const filter = {};
-
-  if (scode) filter.scode = scode;
-  if (userId) filter.userId = userId;
-  if (subjectId) filter.subjectId = subjectId;
-  if (classId) filter.classId = classId;
-  if (createdAt) filter.createdAt = { $gte: new Date(createdAt) };
-
-  return QuizSubmit.find(filter);
+const getByRelation = async (scode, classId, subjectId, studentId, dateT) => {
+  const date = dateT.toISOString().split('T')[0];
+  return QuizSubmit.find({ scode, classId, subjectId, studentId, date });
 };
 // /**
 //  * Get the total marks of a user's quiz submissions.
