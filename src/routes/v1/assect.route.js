@@ -20,13 +20,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(validate(assectValidaton.createAssect), assectController.createAssect)
+  .post(upload.single('imagePath'),validate(assectValidaton.createAssect), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
   .route('/:assectId')
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
-  .patch(validate(assectValidaton.updateAssect), assectController.updateAssect)
+  .patch(upload.single('imagePath'),validate(assectValidaton.updateAssect), assectController.updateAssect)
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
 module.exports = router;
@@ -48,7 +48,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             required:
@@ -75,6 +75,7 @@ module.exports = router;
  *                 type: string
  *               imagePath:
  *                 type: string
+ *                 format: binary
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
@@ -210,7 +211,7 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -226,6 +227,7 @@ module.exports = router;
  *                 type: string
  *               imagePath:
  *                 type: string
+ *                 format: binary
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
