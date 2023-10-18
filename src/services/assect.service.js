@@ -8,9 +8,7 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Assect>}
  */
 const createAssect = async (assectData) => {
-  const assect = new Assect(assectData);
-  assect.totalasset -= assect.quantity; // Subtract quantity from totalasset
-  return assect.save();
+  return Assect.create(assectData);
 };
 
 /**
@@ -42,12 +40,36 @@ const getAssectById = async (id) => {
  * @param {Object} updateBody
  * @returns {Promise<Assect>}
  */
+// const updateAssectById = async (assectId, updateBody) => {
+//   const assect = await getAssectById(assectId);
+//   if (!assect) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
+//   }
+//   Object.assign(assect, updateBody);
+//   await assect.save();
+//   return assect;
+// };
+
 const updateAssectById = async (assectId, updateBody) => {
   const assect = await getAssectById(assectId);
   if (!assect) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
   }
+
+  // Calculate the updated quantity based on totalasset and totaldestroyed
+  const newTotalAsset = updateBody.totalasset || assect.totalasset;
+  const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
+
+  const newQuantity = assect.quantity + (newTotalAsset - assect.totalasset) - (newTotalDestroyed - assect.totaldestroyed);
+
+  // Update the asset fields
+  assect.totalasset = newTotalAsset;
+  assect.totaldestroyed = newTotalDestroyed;
+  assect.quantity = newQuantity;
+
+  // Update other fields as needed
   Object.assign(assect, updateBody);
+
   await assect.save();
   return assect;
 };
