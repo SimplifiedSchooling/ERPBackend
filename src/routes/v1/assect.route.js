@@ -20,13 +20,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(upload.single('imagePath'), validate(assectValidaton.createAssect), assectController.createAssect)
+  .post(upload.single('imagePath'),validate(assectValidaton.createAssect), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
   .route('/:assectId')
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
-  .patch(upload.single('imagePath'), validate(assectValidaton.updateAssect), assectController.updateAssect)
+  .patch(upload.single('imagePath'),validate(assectValidaton.updateAssect), assectController.updateAssect)
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
 module.exports = router;
@@ -75,45 +75,26 @@ module.exports = router;
  *                 type: string
  *               imagePath:
  *                 type: string
- *                 description: The name of the asset
- *               count:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     invoiceNo:
- *                       type: number
- *                       description: Invoice number
- *                     invoiceDate:
- *                       type: string
- *                       format: date
- *                       description: Invoice date (e.g., "2023-10-10")
- *                     quantity:
- *                       type: number
- *                       description: Quantity
- *                     imagePath:
- *                       type: string
- *                       format: binary
- *                       description: Image file
- *                 example:
- *                   - invoiceNo: 12345
- *                     invoiceDate: "2023-10-10"
- *                     quantity: 5
- *                     imagePath: (binary data of the image file)
- *               total:
+ *                 format: binary
+ *               totalasset:
  *                 type: number
- *                 description: Total value of the asset
+ *               totaldestroyed:
+ *                 type: number
+ *               expiredate:
+ *                 type: date
+ *               reason:
+ *                 type: string
  *             example:
- *               assectName: Computer
- *               count: [
- *                 {
- *                   invoiceNo: 12345,
- *                   invoiceDate: "2023-10-10",
- *                   quantity: 5,
- *                   imagePath: (binary data of the image file)
- *                 }
- *               ]
- *               total: 5000
+ *               assectName: test123
+ *               invoiceNo: 123
+ *               invoiceDate: 10/12/2023
+ *               quantity: 2
+ *               description: This is the asset
+ *               imagePath: jpg/pdf/google.com
+ *               totalasset: 4
+ *               totaldestroyed: 3
+ *               expiredate: 12/10/2022
+ *               reason: Remove the asset
  *
  *     responses:
  *       "201":
@@ -121,7 +102,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas'
+ *                $ref: '#/components/schemas/Asset'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -234,38 +215,13 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               assectName:
- *                 type: string *
- *               invoiceNo:
- *                 type: number
- *               invoiceDate:
- *                 type: date
- *               quantity:
- *                 type: number
- *               description:
- *                 type: string
- *               imagePath:
- *                 type: string
- *                 format: binary
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
  *                 type: number
- *               expiredate:
- *                 type: date
- *               reason:
- *                 type: string
  *             example:
- *               assectName: Fake assectName
- *               invoiceNo: 1234
- *               invoiceDate: 10/12/2022
- *               quantity: 4
- *               description: This is the asset Description
- *               imagePath: jpg/pdf/google.com
  *               totalasset: 10
  *               totaldestroyed: 7
- *               expiredate: 12/10/2021
- *               reason: Remove the asset from the list
  *     responses:
  *       "200":
  *         description: OK
