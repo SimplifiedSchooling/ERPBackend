@@ -4,11 +4,13 @@ const ApiError = require('../utils/ApiError');
 
 /**
  * Create a Assect
- * @param {Object} reqBody
+ * @param {Object} assectData
  * @returns {Promise<Assect>}
  */
-const createAssect = async (reqBody) => {
-  return Assect.create(reqBody);
+const createAssect = async (assectData) => {
+  const assect = new Assect(assectData);
+  assect.totalasset -= assect.quantity; // Subtract quantity from totalasset
+  return assect.save();
 };
 
 /**
