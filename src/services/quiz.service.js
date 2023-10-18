@@ -100,7 +100,6 @@ const getQuizByclassIdAndDayWise = async (classId) => {
   // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
   const today = new Date().getDay();
 
-  // Find subjects for the given class
   const subjects = await Subject.find({ classId });
 
   if (subjects.length === 0) {
