@@ -40,7 +40,7 @@ const uploadFiles = {
 };
 
 const getQuizeByQuizName = {
-  params: Joi.object().keys({
+  body: Joi.object().keys({
     quizName: Joi.string().required(),
   }),
 };

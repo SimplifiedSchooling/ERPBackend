@@ -23,7 +23,7 @@ router
   .post(validate(quizeValidation.createQuize), quizeController.createQuize)
   .get(validate(quizeValidation.getQuizes), quizeController.getAllQuize);
 
-router.route('/checkexist/:quizName').get(validate(quizeValidation.getQuizeByQuizName), quizeController.getQuizeByQuizName);
+router.route('/checkexist').post(validate(quizeValidation.getQuizeByQuizName), quizeController.getQuizeByQuizName);
 router.route('/NotSelect').get(validate(quizeValidation.NotSelectQuize), quizeController.getAllNotSelected);
 
 router
@@ -282,32 +282,27 @@ module.exports = router;
  */
 /**
  * @swagger
- * /quizes/checkexist/{quizName}:
- *   get:
- *     summary: Get a Quize
+ * /quizes/checkexist:
+ *   post:
+ *     summary: Check if a quiz with the given name exists
  *     tags: [Quiz]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: quizName
- *         required: true
- *         schema:
- *           type: string
- *         description: Quize
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               quizName:
+ *                 type: string
+ *                 description: The name of the quiz to check
  *     responses:
  *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
+ *         description: A quiz with the given name exists
  *       "404":
- *         $ref: '#/components/responses/NotFound'
+ *         description: No quiz with the given name found
  */
+
 // /**
 //  *  @swagger
 //  *  /quizes/{quizeId}/submit:

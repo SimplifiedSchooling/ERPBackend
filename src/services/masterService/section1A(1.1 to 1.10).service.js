@@ -12,6 +12,16 @@ const createsection1A10 = async (Section1A10SchemaBody) => {
 };
 
 /**
+ * Get school by scode
+ * @param {ObjectId} scode
+ * @returns {Promise<School>}
+ */
+const getSchoolScode = async (scode) => {
+  const school = await Section1A10Schema.find({ scode });
+  return school;
+};
+
+/**
  * Query for section1A10
  * @param {Object} filter - Mongo filter
  * @param {Object} options - Query options
@@ -70,4 +80,5 @@ module.exports = {
   getsection1A10ById,
   updatesection1A10ById,
   deletesection1A10ById,
+  getSchoolScode,
 };
