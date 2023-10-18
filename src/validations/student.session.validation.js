@@ -31,6 +31,7 @@ const getAllStudentByclassIdAndScode = {
 
 const getAllStudentByclassAndsection = {
   query: Joi.object().keys({
+    scode: Joi.string().required(),
     classId: Joi.string().required(),
     sectionId: Joi.string().required(),
   }),
