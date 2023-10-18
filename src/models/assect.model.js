@@ -7,27 +7,39 @@ const assectSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    count: [
-      {
-        invoiceNo: {
-          type: Number,
-          trim: true,
-        },
-        invoiceDate: {
-          type: Date,
-          trim: true,
-        },
-        quantity: {
-          type: Number,
-          trim: true,
-        },
-        imagePath: {
-          type: String,
-        },
-      },
-    ],
-    total: {
+    invoiceNo: {
       type: Number,
+      trim: true,
+    },
+    invoiceDate: {
+      type: Date,
+      trim: true,
+    },
+    quantity: {
+      type: Number,
+      trim: true,
+    },
+    description: {
+      type: String,
+      trim: true,
+    },
+    imagePath: {
+      type: String,
+    },
+    totalasset: {
+      type: Number,
+      trim: true,
+    },
+    totaldestroyed: {
+      type: Number,
+      trim: true,
+    },
+    expiredate: {
+      type: Date,
+      trim: true,
+    },
+    reason: {
+      type: String,
       trim: true,
     },
   },
