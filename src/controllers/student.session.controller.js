@@ -34,8 +34,8 @@ const getStudentByScodeAndClassId = catchAsync(async (req, res) => {
 });
 
 const getStudentsByClassAndSection = async (req, res) => {
-  const { classId, sectionId } = req.query;
-  const data = await studentSessionService.getStudentsByClassAndSection(classId, sectionId);
+  const { scode, classId, sectionId } = req.query;
+  const data = await studentSessionService.getStudentsByClassAndSection(scode, classId, sectionId);
   if (!data) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Internal Server Error');
   }

@@ -37,7 +37,6 @@ module.exports = router;
  *   name: Asset
  *   description: Asset management and retrieval
  */
-
 /**
  * @swagger
  * /assets:
@@ -77,27 +76,10 @@ module.exports = router;
  *                       description: Quantity
  *                     imagePath:
  *                       type: string
- *                       format: binary
- *                       description: Image file
- *                 example:
- *                   - invoiceNo: 12345
- *                     invoiceDate: "2023-10-10"
- *                     quantity: 5
- *                     imagePath: (binary data of the image file)
+ *                       description: 'Image file (Select File). Use the "Select File" button to upload an image.'
  *               total:
  *                 type: number
  *                 description: Total value of the asset
- *             example:
- *               assectName: Computer
- *               count: [
- *                 {
- *                   invoiceNo: 12345,
- *                   invoiceDate: "2023-10-10",
- *                   quantity: 5,
- *                   imagePath: (binary data of the image file)
- *                 }
- *               ]
- *               total: 5000
  *
  *     responses:
  *       "201":
@@ -105,7 +87,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Asset'
+ *                $ref: '#/components/schemas'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

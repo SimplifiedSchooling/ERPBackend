@@ -51,10 +51,11 @@ const getStudentyId = async (studentId) => {
  * @throws {Error} - If there is an error while querying the database.
  */
 
-const getStudentsByClassAndSection = async (classId, sectionId) => {
+const getStudentsByClassAndSection = async (scode, classId, sectionId) => {
   const attendanceData = await StudentSession.aggregate([
     {
       $match: {
+        scode,
         classId: mongoose.Types.ObjectId(classId),
         sectionId: mongoose.Types.ObjectId(sectionId),
       },
