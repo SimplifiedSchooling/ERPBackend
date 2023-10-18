@@ -215,38 +215,13 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               assectName:
- *                 type: string *
- *               invoiceNo:
- *                 type: number
- *               invoiceDate:
- *                 type: date
- *               quantity:
- *                 type: number
- *               description:
- *                 type: string
- *               imagePath:
- *                 type: string
- *                 format: binary
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
  *                 type: number
- *               expiredate:
- *                 type: date
- *               reason:
- *                 type: string
  *             example:
- *               assectName: Fake assectName
- *               invoiceNo: 1234
- *               invoiceDate: 10/12/2022
- *               quantity: 4
- *               description: This is the asset Description
- *               imagePath: jpg/pdf/google.com
  *               totalasset: 10
  *               totaldestroyed: 7
- *               expiredate: 12/10/2021
- *               reason: Remove the asset from the list
  *     responses:
  *       "200":
  *         description: OK
