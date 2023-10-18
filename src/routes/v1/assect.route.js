@@ -51,22 +51,11 @@ module.exports = router;
  *         multipart/form-data:
  *           schema:
  *             type: object
- *             required:
- *               - assectName
- *               - invoiceNo
- *               - invoiceDate
- *               - quantity
- *               - description
- *               - imagePath
- *               - totalasset
- *               - totaldestroyed
- *               - expiredate
- *               - reason
  *             properties:
  *               assectName:
  *                 type: string *
  *               invoiceNo:
- *                 type: number
+ *                 type: string
  *               invoiceDate:
  *                 type: date
  *               quantity:
@@ -86,7 +75,7 @@ module.exports = router;
  *                 type: string
  *             example:
  *               assectName: test123
- *               invoiceNo: 123
+ *               invoiceNo: tes12345
  *               invoiceDate: 10/12/2023
  *               quantity: 2
  *               description: This is the asset

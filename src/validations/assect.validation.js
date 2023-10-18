@@ -4,7 +4,7 @@ const { objectId } = require('./custom.validation');
 const createAssect = {
   body: Joi.object().keys({
     assectName: Joi.string(),
-    invoiceNo: Joi.number(),
+    invoiceNo: Joi.string(),
     invoiceDate: Joi.date(),
     quantity: Joi.number(),
     description: Joi.string(),
