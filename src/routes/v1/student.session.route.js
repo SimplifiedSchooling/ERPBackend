@@ -44,9 +44,14 @@ module.exports = router;
  * @swagger
  * /studentSession/studentsByClassAndSection:
  *   get:
- *     summary: Get students by class and section
+ *     summary: Get students by scode class and section
  *     tags: [StudentSession]
  *     parameters:
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The ID of the scode to filter by.
  *       - in: query
  *         name: classId
  *         schema:
