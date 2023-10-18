@@ -9,6 +9,9 @@ router
   .route('/')
   .post(validate(Section1A10Validation.createSection1A10), Section1A10Controller.createSection1A10)
   .get(validate(Section1A10Validation.getAllSection1A10), Section1A10Controller.getAllSection1A10);
+router
+  .route('/getSchoolByScode/:scode')
+  .get(validate(Section1A10Validation.getSchoolByScode), Section1A10Controller.getSchoolByScode);
 
 router
   .route('/:Section1A10Id')
@@ -158,6 +161,26 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
+ * /section1A10/getSchoolByScode/{scode}:
+ *   get:
+ *     summary: Get a  School by scode
+ *     tags: [section1A10]
+ *     parameters:
+ *       - in: path
+ *         name: scode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: scode of the School
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       404:
+ *         description: School not found
  */
 
 /**

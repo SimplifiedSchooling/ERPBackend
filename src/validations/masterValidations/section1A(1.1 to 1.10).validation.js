@@ -51,6 +51,12 @@ const getAllSection1A10 = {
   }),
 };
 
+const getSchoolByScode = {
+  params: Joi.object().keys({
+    scode: Joi.string(),
+  }),
+};
+
 const getSection1A10 = {
   params: Joi.object().keys({
     Section1A10Id: Joi.string().custom(objectId),
@@ -115,4 +121,5 @@ module.exports = {
   getSection1A10,
   updateSection1A10,
   deleteSection1A10,
+  getSchoolByScode,
 };

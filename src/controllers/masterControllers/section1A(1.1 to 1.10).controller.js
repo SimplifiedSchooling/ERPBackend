@@ -29,6 +29,14 @@ const updateSection1A10 = catchAsync(async (req, res) => {
   res.send(Section1A10);
 });
 
+const getSchoolByScode = catchAsync(async (req, res) => {
+  const school = await Section1A10Service.getSchoolScode(req.params.scode);
+  if (!school) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'School not found');
+  }
+  res.send(school);
+});
+
 const deleteSection1A10 = catchAsync(async (req, res) => {
   await Section1A10Service.deletesection1A10ById(req.params.Section1A10Id);
   res.status(httpStatus.NO_CONTENT).send();
@@ -40,4 +48,5 @@ module.exports = {
   getSection1A10ById,
   updateSection1A10,
   deleteSection1A10,
+  getSchoolByScode,
 };
