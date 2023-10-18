@@ -20,7 +20,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(upload.array('imagePath'), assectController.createAssect)
+  .post(validate(assectValidaton.createAssect), assectController.createAssect)
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
@@ -37,67 +37,63 @@ module.exports = router;
  *   name: Asset
  *   description: Asset management and retrieval
  */
-
 /**
  * @swagger
  * /assets:
  *   post:
- *     summary: Create an asset
+ *     summary: Create a Asset
  *     tags: [Asset]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             required:
  *               - assectName
- *               - count
- *               - total
+ *               - invoiceNo
+ *               - invoiceDate
+ *               - quantity
+ *               - description
+ *               - imagePath
+ *               - totalasset
+ *               - totaldestroyed
+ *               - expiredate
+ *               - reason
  *             properties:
  *               assectName:
- *                 type: string
- *                 description: The name of the asset
- *               count:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     invoiceNo:
- *                       type: number
- *                       description: Invoice number
- *                     invoiceDate:
- *                       type: string
- *                       format: date
- *                       description: Invoice date (e.g., "2023-10-10")
- *                     quantity:
- *                       type: number
- *                       description: Quantity
- *                     imagePath:
- *                       type: string
- *                       format: binary
- *                       description: Image file
- *                 example:
- *                   - invoiceNo: 12345
- *                     invoiceDate: "2023-10-10"
- *                     quantity: 5
- *                     imagePath: (binary data of the image file)
- *               total:
+ *                 type: string *
+ *               invoiceNo:
  *                 type: number
- *                 description: Total value of the asset
+ *               invoiceDate:
+ *                 type: date
+ *               quantity:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               imagePath:
+ *                 type: string
+ *               totalasset:
+ *                 type: number
+ *               totaldestroyed:
+ *                 type: number
+ *               expiredate:
+ *                 type: date
+ *               reason:
+ *                 type: string
  *             example:
- *               assectName: Computer
- *               count: [
- *                 {
- *                   invoiceNo: 12345,
- *                   invoiceDate: "2023-10-10",
- *                   quantity: 5,
- *                   imagePath: (binary data of the image file)
- *                 }
- *               ]
- *               total: 5000
+ *               assectName: test123
+ *               invoiceNo: 123
+ *               invoiceDate: 10/12/2023
+ *               quantity: 2
+ *               description: This is the asset
+ *               imagePath: jpg/pdf/google.com
+ *               totalasset: 4
+ *               totaldestroyed: 3
+ *               expiredate: 12/10/2022
+ *               reason: Remove the asset
  *
  *     responses:
  *       "201":
@@ -111,9 +107,6 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- *
- *
- *
  *   get:
  *     summary: Get query Asset
  *     tags: [Asset]
@@ -121,7 +114,7 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: asset
+ *         name: Asset
  *         schema:
  *           type: string
  *         description: Asset name *
@@ -135,7 +128,7 @@ module.exports = router;
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of Asset
+ *         description: Maximum number of users
  *       - in: query
  *         name: page
  *         schema:
@@ -175,7 +168,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /assets/{assetId}:
+ * /assets/{assectId}:
  *   get:
  *     summary: Get a Asset
  *     tags: [Asset]
@@ -183,11 +176,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: assetId
+ *         name: assectId
  *         required: true
  *         schema:
  *           type: string
- *         description: assetId
+ *         description: assectId
  *     responses:
  *       "200":
  *         description: OK
@@ -209,62 +202,52 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: assetId
+ *         name: assectId
  *         required: true
  *         schema:
  *           type: string
- *         description: assetId
+ *         description: assectId
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - assectName
- *               - count
- *               - total
  *             properties:
  *               assectName:
- *                 type: string
- *                 description: The name of the assect
- *               count:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     invoiceNo:
- *                       type: number
- *                       description: Invoice number
- *                     invoiceDate:
- *                       type: string
- *                       format: date
- *                       description: Invoice date (e.g., "2023-10-17")
- *                     quantity:
- *                       type: number
- *                       description: Quantity
- *                     imagePath:
- *                       type: string
- *                       format: binary
- *                       description: Image file
- *               total:
+ *                 type: string *
+ *               invoiceNo:
  *                 type: number
- *                 description: Total value of the assect
+ *               invoiceDate:
+ *                 type: date
+ *               quantity:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               imagePath:
+ *                 type: string
+ *               totalasset:
+ *                 type: number
+ *               totaldestroyed:
+ *                 type: number
+ *               expiredate:
+ *                 type: date
+ *               reason:
+ *                 type: string
  *             example:
- *               assectName: Computer
- *               count: [
- *                 {
- *                   invoiceNo: 12345,
- *                   invoiceDate: "2023-10-17",
- *                   quantity: 5,
- *                   imagePath: (binary data of the image file)
- *                 }
- *               ]
- *               total: 5000
- *
+ *               assectName: Fake assectName
+ *               invoiceNo: 1234
+ *               invoiceDate: 10/12/2022
+ *               quantity: 4
+ *               description: This is the asset Description
+ *               imagePath: jpg/pdf/google.com
+ *               totalasset: 10
+ *               totaldestroyed: 7
+ *               expiredate: 12/10/2021
+ *               reason: Remove the asset from the list
  *     responses:
- *       "201":
- *         description: Created
+ *       "200":
+ *         description: OK
  *         content:
  *           application/json:
  *             schema:
@@ -273,6 +256,8 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
  *     summary: Delete a Asset
@@ -281,11 +266,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: assetId
+ *         name: assectId
  *         required: true
  *         schema:
  *           type: string
- *         description: assetId
+ *         description: assectId
  *     responses:
  *       "200":
  *         description: No content
