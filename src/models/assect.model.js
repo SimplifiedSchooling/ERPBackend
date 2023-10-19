@@ -8,7 +8,7 @@ const assectSchema = mongoose.Schema(
       trim: true,
     },
     invoiceNo: {
-      type: Number,
+      type: String,
       trim: true,
     },
     invoiceDate: {
