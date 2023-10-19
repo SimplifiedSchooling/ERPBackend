@@ -36,14 +36,15 @@ const updateAssect = {
     assectId: Joi.required().custom(objectId),
   }),
   body: Joi.object().keys({
-    // assectName: Joi.string(),
+    assectName: Joi.string(),
     // invoiceNo: Joi.number(),
     // invoiceDate: Joi.date(),
-    // description: Joi.string(),
+    description: Joi.string(),
     totalasset: Joi.number().optional(),
     totaldestroyed: Joi.number().optional(),
-    // expiredate: Joi.date(),
-    // reason: Joi.string(),
+    expiredate: Joi.date(),
+    reason: Joi.string(),
+    imagePath: Joi.string(),
   }),
 };
 

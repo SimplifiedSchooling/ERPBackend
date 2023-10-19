@@ -204,13 +204,29 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               assectName:
+ *                 type: string *
+ *               description:
+ *                 type: string
+ *               imagePath:
+ *                 type: string
+ *                 format: binary
+ *               expiredate:
+ *                 type: date
+ *               reason:
+ *                 type: string
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
  *                 type: number
  *             example:
+ *               assectName: test123
  *               totalasset: 10
  *               totaldestroyed: 7
+ *               description: This is the asset
+ *               imagePath: jpg/pdf/google.com
+ *               expiredate: 12/10/2022
+ *               reason: Remove the asset
  *     responses:
  *       "200":
  *         description: OK
