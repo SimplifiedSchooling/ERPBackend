@@ -144,6 +144,7 @@ module.exports = router;
  *       '500':
  *         description: Internal server error. An error occurred while processing the request.
  */
+
 /**
  * @swagger
  * /StudentAttendance:
@@ -159,6 +160,12 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               classId:
+ *                 type: string
+ *                 example: 6516761d9cee04ae5df9fb6f
+ *               sectionId:
+ *                 type: string
+ *                 example: 650d6dfa60838756a214b436
  *               date:
  *                 type: string
  *                 example: "2023-09-15"
