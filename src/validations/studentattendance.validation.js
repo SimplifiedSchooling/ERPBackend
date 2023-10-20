@@ -10,6 +10,8 @@ const attendanceEntrySchema = Joi.object({
 const studentAttendanceSchema = Joi.object({
   entries: Joi.array().items(attendanceEntrySchema).required(),
   date: Joi.string().required(),
+  classId: Joi.string().required(),
+  sectionId: Joi.string().required(),
   time: Joi.string().required(),
   scode: Joi.string().required(),
 });
