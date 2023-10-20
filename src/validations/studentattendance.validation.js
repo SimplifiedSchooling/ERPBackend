@@ -1,17 +1,18 @@
 const Joi = require('joi');
 const { objectId } = require('./custom.validation');
 
-const createStudentAttendance = {
-  body: Joi.object().keys({
-    studentId: Joi.number().required().min(10000000).max(99999999),
-    date: Joi.string().required(),
-    scode: Joi.string().required(),
-    time: Joi.string().required(),
-    AttendenceStatus: Joi.string().valid('present', 'absent', 'late').allow(''),
-    remark: Joi.string().allow(''),
-  }),
-};
+const attendanceEntrySchema = Joi.object({
+  studentId: Joi.number().required(),
+  attendanceStatus: Joi.string().valid('present', 'absent', 'late').default('present'),
+  remark: Joi.string().optional(),
+});
 
+const studentAttendanceSchema = Joi.object({
+  entries: Joi.array().items(attendanceEntrySchema).required(),
+  date: Joi.string().required(),
+  time: Joi.string().required(),
+  scode: Joi.string().required(),
+});
 const getAllStudentAttendance = {
   query: Joi.object().keys({
     date: Joi.string(),
@@ -26,6 +27,7 @@ const attendanceData = {
     classId: Joi.string().required(),
     sectionId: Joi.string().required(),
     date: Joi.string().required(),
+    scode: Joi.string().required(),
   }),
 };
 const todaysAttendanceForSchool = {
@@ -65,7 +67,7 @@ const deleteStudentAttendance = {
 };
 
 module.exports = {
-  createStudentAttendance,
+  studentAttendanceSchema,
   getAllStudentAttendance,
   getStudentAttendance,
   updateStudentAttendance,
