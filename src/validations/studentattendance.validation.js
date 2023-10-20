@@ -26,6 +26,7 @@ const attendanceData = {
     classId: Joi.string().required(),
     sectionId: Joi.string().required(),
     date: Joi.string().required(),
+    scode: Joi.string().required(),
   }),
 };
 const todaysAttendanceForSchool = {
