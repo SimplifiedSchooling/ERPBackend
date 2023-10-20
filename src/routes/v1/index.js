@@ -100,6 +100,12 @@ const saralInformation3Route = require('./saral/saral.information3.route');
 const saralInformation4Route = require('./saral/saral.information4.route');
 const ClassTeacherAssignRoute = require('./classteacherassign.route');
 const departmentRoute = require('./department.user.route');
+const appointedRoute = require('./masterRoutes/appointed.level.route');
+const studentLeftReasonRoute = require('./student.left.reason.route');
+const grievanceRedressalRoute = require('./grievance.redressal.route');
+const assectRoute = require('./assect.route');
+const hostel = require('./hostel.route');
+const attendanceVerifyRoute = require('./attendance.verify.route');
 
 const router = express.Router();
 
@@ -461,7 +467,7 @@ const defaultRoutes = [
     route: staffDesignationRoute,
   },
   {
-    path: '/quizSubmit',
+    path: '/quiz-submissions',
     route: quizSubmitRoute,
   },
   {
@@ -499,6 +505,30 @@ const defaultRoutes = [
   {
     path: '/department',
     route: departmentRoute,
+  },
+  {
+    path: '/appointed',
+    route: appointedRoute,
+  },
+  {
+    path: '/studentleft',
+    route: studentLeftReasonRoute,
+  },
+  {
+    path: '/grievanceredressal',
+    route: grievanceRedressalRoute,
+  },
+  {
+    path: '/assets',
+    route: assectRoute,
+  },
+  {
+    path: '/hostel',
+    route: hostel,
+  },
+  {
+    path: '/attendance-verify',
+    route: attendanceVerifyRoute,
   },
 ];
 

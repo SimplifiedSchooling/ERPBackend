@@ -23,11 +23,11 @@ router
   .post(validate(quizeValidation.createQuize), quizeController.createQuize)
   .get(validate(quizeValidation.getQuizes), quizeController.getAllQuize);
 
+router.route('/checkexist').post(validate(quizeValidation.getQuizeByQuizName), quizeController.getQuizeByQuizName);
 router.route('/NotSelect').get(validate(quizeValidation.NotSelectQuize), quizeController.getAllNotSelected);
 
 router
   .route('/:quizeId')
-
   .get(validate(quizeValidation.getQuize), quizeController.getQuizeById)
   .patch(validate(quizeValidation.updateQuize), quizeController.updateQuizeById)
   .delete(validate(quizeValidation.deleteQuize), quizeController.deleteQuizeById);
@@ -35,6 +35,10 @@ router
 // router.route('/:quizeId/submit').post(validate(quizeValidation.submitQuize), quizeController.QuizeByIdSubmit);
 
 router.post('/upload_files', upload.single('files'), quizeController.uploadFiles);
+
+router
+  .route('/getquizByDayWise/:classId')
+  .get(validate(quizeValidation.getQuizDayWise), quizeController.getQuizByClassIdAndDayWise);
 
 module.exports = router;
 
@@ -275,6 +279,28 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+/**
+ * @swagger
+ * /quizes/checkexist:
+ *   post:
+ *     summary: Check if a quiz with the given name exists
+ *     tags: [Quiz]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               quizName:
+ *                 type: string
+ *                 description: The name of the quiz to check
+ *     responses:
+ *       "200":
+ *         description: A quiz with the given name exists
+ *       "404":
+ *         description: No quiz with the given name found
  */
 
 // /**
@@ -549,4 +575,32 @@ module.exports = router;
  *                   example: "Successfully uploaded quiz."
  *       400:
  *         description: Bad request. Check your request data.
+ */
+/**
+ * @swagger
+ * /quizes/getquizByDayWise/{classId}:
+ *   get:
+ *     summary: Get a Quize
+ *     tags: [Quiz]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: classId
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */

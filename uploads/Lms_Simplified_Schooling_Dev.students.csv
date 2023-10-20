@@ -1,4 +1,0 @@
-_id,role,name,mobNumber,email,age,department,campusId,class,section,lastname,userName
-651bac121ed3a875df9ee8f1,student,ABC12345,9823525747,fake1@gmail.com,12,demo1,614a7e7d7f1d813bbf8e89b7,Class 10,A,ABC,Akita
-651bac121ed3a875df9ee8f6,staff,ABC12344,9823525748,fake2@gmail.com,23,demo2,614a7e7d7f1d813bbf8e89b3,Class 11,B,XYZ,Monisha
-651bac121ed3a875df9ee8f3,admin,ABC12346,9823525749,fake4@gmail.com,33,demo3,614a7e7d7f1d813bbf8e89b5,Class 12,C,ABC!@#,Rahule

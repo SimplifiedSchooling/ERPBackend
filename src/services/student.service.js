@@ -38,7 +38,7 @@ const createStudent = async (studentData) => {
   const randomPassword = crypto.randomBytes(16).toString('hex');
   const parentUser = await User.create({
     name: newStudent.middlename,
-    userId: newStudent.id,
+    userId: studentId,
     scode: newStudent.scode,
     mobNumber: newStudent.mobNumber,
     userName,
@@ -50,7 +50,7 @@ const createStudent = async (studentData) => {
   const randomPass = crypto.randomBytes(16).toString('hex');
   const studentUser = await User.create({
     name: `${newStudent.firstname} ${newStudent.lastname}`,
-    userId: newStudent.id,
+    userId: studentId,
     scode: newStudent.scode,
     mobNumber: newStudent.mobNumber,
     userName: username,
@@ -59,13 +59,12 @@ const createStudent = async (studentData) => {
   });
 
   const studentSession = await StudentSession.create({
-    sessionId: newStudent.sessionId,
+    sessionId: studentData.sessionId,
     studentId,
-    classId: newStudent.classId,
-    sectionId: newStudent.sectionId,
+    classId: studentData.classId,
+    sectionId: studentData.sectionId,
     scode: newStudent.scode,
   });
-
   return { parentUser, newStudent, studentUser, studentSession };
 };
 
@@ -88,17 +87,27 @@ const getAllStudents = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<Student>}
  */
-const getStudentById = async (id) => {
-  return Student.findById(id);
+const getStudentById = async (studentId) => {
+  return Student.findOne({ studentId });
 };
 
 /**
- * Get students by userName
- * @param {ObjectId} userName
+ * Get students by mobNumber
+ * @param {ObjectId} mobNumber
  * @returns {Promise<Student>}
  */
 const getStudentMobNumber = async (mobNumber) => {
   const student = await Student.findOne({ mobNumber });
+  return student;
+};
+
+/**
+ * Get students by scode
+ * @param {ObjectId} scode
+ * @returns {Promise<Student>}
+ */
+const getStudentScode = async (scode) => {
+  const student = await Student.find({ scode });
   return student;
 };
 
@@ -164,6 +173,11 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
   await Promise.all(
     modifiedStudentsArray.students.map(async (student) => {
       const studentFound = await getStudentBySaral({ name: student.name });
+      const generate8DigitNum = () => {
+        const min = 10000000; // Smallest 8-digit number
+        const max = 99999999; // Largest 8-digit number
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
       if (studentFound) {
         dups.push(student);
       } else {
@@ -172,11 +186,13 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
         if (record) {
           records.push(student);
           // Create the student user
+
+          const studentId = await generate8DigitNum();
           const username = await generateUsernameFromName(student.firstname);
           const randomPass = crypto.randomBytes(16).toString('hex');
           await User.create({
             name: `${student.firstname} ${student.lastname}`,
-            userId: record.id,
+            userId: studentId,
             scode: student.scode,
             mobNumber: student.mobNumber,
             userName: username,
@@ -188,7 +204,7 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
           const randomPassword = crypto.randomBytes(16).toString('hex');
           await User.create({
             name: student.middlename,
-            userId: record.id,
+            userId: studentId,
             scode: student.scode,
             mobNumber: student.mobNumber,
             userName,
@@ -219,4 +235,5 @@ module.exports = {
   deleteStudentById,
   getStudentMobNumber,
   bulkUpload,
+  getStudentScode,
 };

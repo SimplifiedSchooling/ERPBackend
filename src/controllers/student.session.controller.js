@@ -34,8 +34,8 @@ const getStudentByScodeAndClassId = catchAsync(async (req, res) => {
 });
 
 const getStudentsByClassAndSection = async (req, res) => {
-  const { classId, sectionId } = req.query;
-  const data = await studentSessionService.getStudentsByClassAndSection(classId, sectionId);
+  const { scode, classId, sectionId } = req.query;
+  const data = await studentSessionService.getStudentsByClassAndSection(scode, classId, sectionId);
   if (!data) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Internal Server Error');
   }
@@ -45,6 +45,10 @@ const getStudentsByClassAndSection = async (req, res) => {
 const updateSingleStudentSession = catchAsync(async (req, res) => {
   const updatedStudentSession = await studentSessionService.updateStudentSessionById(req.params.studentSessionId, req.body);
   res.send(updatedStudentSession);
+});
+const getStudentByStudentId = catchAsync(async (req, res) => {
+  const Student = await studentSessionService.getStudentyId(req.params.studentId);
+  res.send(Student);
 });
 
 const deleteSingleStudentSession = catchAsync(async (req, res) => {
@@ -60,4 +64,5 @@ module.exports = {
   deleteSingleStudentSession,
   getStudentsByClassAndSection,
   getStudentByScodeAndClassId,
+  getStudentByStudentId,
 };

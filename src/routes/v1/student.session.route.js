@@ -17,14 +17,20 @@ router
 
 router
   .route('/:studentSessionId')
-  .get(validate(StudentSessionValidation.getStudentSession), studentSessionController.getStudentSession)
+  .get(validate(StudentSessionValidation.getStudentSession), studentSessionController.updateSingleStudentSession)
   .patch(validate(StudentSessionValidation.updateStudentSessionById), studentSessionController.updateSingleStudentSession)
   .delete(validate(StudentSessionValidation.deleteStudentSessionById), studentSessionController.deleteSingleStudentSession);
 
-router.route('/students/byscodeandclassId/:scode/:classId').get(
-  // validate(StudentSessionValidation.getAllStudentByclassIdAndScode),
-  studentSessionController.getStudentByScodeAndClassId
-);
+router
+  .route('/getstudent/bystudentid/:studentId')
+  .get(validate(StudentSessionValidation.getStudentByStudentId), studentSessionController.getStudentByStudentId);
+
+router
+  .route('/students/byscodeandclassId/:scode/:classId')
+  .get(
+    validate(StudentSessionValidation.getAllStudentByclassIdAndScode),
+    studentSessionController.getStudentByScodeAndClassId
+  );
 module.exports = router;
 
 /**
@@ -38,9 +44,14 @@ module.exports = router;
  * @swagger
  * /studentSession/studentsByClassAndSection:
  *   get:
- *     summary: Get students by class and section
+ *     summary: Get students by scode class and section
  *     tags: [StudentSession]
  *     parameters:
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The ID of the scode to filter by.
  *       - in: query
  *         name: classId
  *         schema:
@@ -83,6 +94,7 @@ module.exports = router;
  *               - studentId
  *               - classId
  *               - sectionId
+ *               - scode
  *             properties:
  *               sessionId:
  *                 type: string
@@ -92,11 +104,14 @@ module.exports = router;
  *                 type: string
  *               sectionId:
  *                 type: string
+ *               scode:
+ *                 type:string
  *             example:
  *               sessionId: 650d6ee360838756a214b446
  *               studentId: 650d6f1660838756a214b449
  *               classId: 650d6e6660838756a214b43c
  *               sectionId: 650d6dfa60838756a214b436
+ *               scode: 5896c340-6828-11ee-a348-e9de56c6f44e
  *     responses:
  *       "201":
  *         description: Created
@@ -224,6 +239,35 @@ module.exports = router;
 
 /**
  * @swagger
+ * /studentSession/getstudent/bystudentid/{studentId}:
+ *   get:
+ *     summary: Get a class
+ *     tags: [StudentSession]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: studentId
+ *         required: true
+ *         schema:
+ *           type: number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *               schema:
+ *                $ref: '#/components/schemas/StudentSessionUpdateInput'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ *
+ */
+/**
+ * @swagger
  * /studentSession/students/byscodeandclassId/{scode}/{classId}:
  *   get:
  *     summary: Get a class
@@ -276,11 +320,15 @@ module.exports = router;
  *         section_Id:
  *           type: string
  *           description: ID of the section_Id
+ *         scode:
+ *           type: string
+ *           description: ID of the scode
  *       example:
  *         session_Id: 614a7e7d7f1d813bbf8e89a9
  *         student_Id: 614a7e7d7f1d813bbf8e89a9
  *         class_Id: 614a7e7d7f1d813bbf8e89a9
  *         section_Id: 614a7e7d7f1d813bbf8e89a9
+ *         scode: 5896c340-6828-11ee-a348-e9de56c6f44e
  */
 
 /**
@@ -302,11 +350,15 @@ module.exports = router;
  *         section_Id:
  *           type: string
  *           description: ID of the section_Id
+ *         scode:
+ *           type: string
+ *           description: ID of the scode
  *       example:
  *         session_Id: 614a7e7d7f1d813bbf8e89a9
  *         student_Id: 614a7e7d7f1d813bbf8e89a9
  *         class_Id: 614a7e7d7f1d813bbf8e89a9
  *         section_Id: 614a7e7d7f1d813bbf8e89a9
+ *         scode: 5896c340-6828-11ee-a348-e9de56c6f44e
  */
 
 // /**

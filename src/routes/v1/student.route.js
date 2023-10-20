@@ -31,6 +31,9 @@ router
   .patch(validate(StudentValidation.updateStudentById), StudentController.updateStudent)
   .delete(validate(StudentValidation.deleteStudentById), StudentController.deleteStudent);
 
+router
+  .route('/getStudentByscode/:scode')
+  .get(validate(StudentValidation.getStudentByScode), StudentController.getStudentByScode);
 module.exports = router;
 /**
  * @swagger
@@ -94,7 +97,7 @@ module.exports = router;
  *         name: studentId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
  *         description: ID of the Student
  *     requestBody:
  *       content:
@@ -116,7 +119,7 @@ module.exports = router;
  *         name: studentId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
  *         description: ID of the Student
  *     responses:
  *       204:
@@ -131,7 +134,7 @@ module.exports = router;
  *         name: studentId
  *         required: true
  *         schema:
- *           type: string
+ *           type: number
  *         description: ID of the Student
  *     responses:
  *       200:
@@ -140,6 +143,25 @@ module.exports = router;
  *         description: Student not found
  */
 
+/**
+ * @swagger
+ * /student/getStudentByscode/{scode}:
+ *   get:
+ *     summary: Get a  Student by scode
+ *     tags: [Students]
+ *     parameters:
+ *       - in: path
+ *         name: scode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: scode of the Student
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       404:
+ *         description: Student not found
+ */
 /**
  * @swagger
  * components:

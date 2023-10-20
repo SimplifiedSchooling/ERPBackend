@@ -994,31 +994,25 @@ components:
     Demolished: 
       type: object
       properties:
-        reference_no: 
-          type: number
-        to_title: 
-          type: string  
-        address:
+        asset: 
           type: string
-        note: 
+        totalAsset: 
+          type: number  
+        totalDestroyed:
           type: string
-        from_title:
+        reason: 
           type: string
         date:
           type: number
         imagePath:
-          type: string          
-        type:
           type: string
       example:
-        reference_no: 65
-        to_title: gdffg
-        address: pune, kharadi
-        note: asasfhaskausbv
-        from_title: afhgasfkh
+        asset: 65
+        totalAsset: gdffg
+        totalDestroyed: pune, kharadi
+        reason: asasfhaskausb
         date: 01-01-1970 00:00:00
-        imagePath: sgdd/sgdgds/sdg
-        type: demolished         
+        imagePath: sgdd/sgdgds/sdg        
 
     Staff:
       type: object
@@ -1333,6 +1327,32 @@ components:
         remotesession: "Remote Session"
         avgict: "Average ICT"
         lang_id: "Language ID"                                                                                          
+
+    AttendanceVerify:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        studentId1:
+          type: string
+        studentId2:
+          type: string
+        studentId3:
+          type: string
+        campusId:
+          type: string
+        inchargeId:
+          type: string
+        backCount:
+          type: string
+      example:
+        studentId1: "12345"
+        studentId2: "13453"
+        studentId3: "65238"
+        campusId: "Campus123"
+        inchargeId: "Incharge456"
+        backCount: "23"
       
     Campus:
       type: object

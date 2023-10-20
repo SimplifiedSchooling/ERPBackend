@@ -5,12 +5,13 @@ const catchAsync = require('../utils/catchAsync');
 const { demolishedService } = require('../services');
 
 const createDemolished = catchAsync(async (req, res) => {
+  req.body.imagePath = await req.file.path;
   const demolished = await demolishedService.createDemolished(req.body);
   res.status(httpStatus.CREATED).send(demolished);
 });
 
 const getAllDemolished = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['to_title', 'reference_no']);
+  const filter = pick(req.query, ['asset']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await demolishedService.queryDemolished(filter, options);
   res.send(result);

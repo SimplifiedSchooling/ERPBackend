@@ -26,7 +26,7 @@ const createQuize = {
 
 const getQuizes = {
   query: Joi.object().keys({
-    name: Joi.string(),
+    quizName: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -39,6 +39,11 @@ const uploadFiles = {
   }),
 };
 
+const getQuizeByQuizName = {
+  body: Joi.object().keys({
+    quizName: Joi.string().required(),
+  }),
+};
 const NotSelectQuize = {
   query: Joi.object().keys({
     name: Joi.string(),
@@ -51,6 +56,11 @@ const NotSelectQuize = {
 const getQuize = {
   params: Joi.object().keys({
     quizeId: Joi.string().custom(objectId),
+  }),
+};
+const getQuizDayWise = {
+  params: Joi.object().keys({
+    classId: Joi.string(),
   }),
 };
 
@@ -106,4 +116,6 @@ module.exports = {
   deleteQuize,
   NotSelectQuize,
   uploadFiles,
+  getQuizDayWise,
+  getQuizeByQuizName,
 };

@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Quize } = require('../models');
+const { Quize, Subject } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -42,6 +42,14 @@ const getQuizeById = async (id) => {
   return Quize.findById(id);
 };
 
+/**
+ * Get quize by quizName
+ * @param {ObjectId} quizName
+ * @returns {Promise<Quize>}
+ */
+const getQuizeByQestion = async (quizName) => {
+  return Quize.findOne({ quizName });
+};
 /**
  * Query for board
  * @param {Object} filter - Mongo filter
@@ -88,6 +96,48 @@ const CheckoutAnswer = async (correctOptions, answer) => {
   throw new ApiError(httpStatus.NOT_FOUND, 'Incorrect answer.');
 };
 
+const getQuizByclassIdAndDayWise = async (classId) => {
+  // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  const today = new Date().getDay();
+
+  const subjects = await Subject.find({ classId });
+
+  if (subjects.length === 0) {
+    throw new Error('No subjects found for the given class');
+  }
+
+  const selectedSubjectIndex = today % subjects.length;
+  const selectedSubject = subjects[selectedSubjectIndex];
+
+  const quizQuestions = await Quize.find({ subjectId: selectedSubject._id, classId });
+  if (!quizQuestions) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'quiz not found');
+  }
+  const shuffledQuestions = quizQuestions.sort(() => Math.random() - 0.5); // Shuffle the questions
+  return shuffledQuestions.slice(0, 15); // Return the first 10 questions
+};
+
+//   // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+//   const today = new Date().getDay();
+//   console.log(today);
+//   // Find subjects for the given class
+//   const subjects = await Subject.find({ classId });
+//   if (subjects.length === 0) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'subject not found');
+//     // return [];
+//   }
+//   // Select a subject for the current day (using the day as an index, starting from 0)
+//   const selectedSubjectIndex = today % subjects.length;
+//   const selectedSubject = subjects[selectedSubjectIndex];
+
+//   const quizQuestions = await Quize.find({ subjectId: selectedSubject._id, classId });
+//   if (!quizQuestions) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'quiz not found');
+//   }
+//   const shuffledQuestions = quizQuestions.sort(() => Math.random() - 0.5); // Shuffle the questions
+//   return shuffledQuestions.slice(0, 15); // Return the first 10 questions
+// };
+
 /**
  * Update quize by id
  * @param {ObjectId} quizeId
@@ -128,4 +178,6 @@ module.exports = {
   QuizeNotSelected,
   uploadQuiz,
   CheckoutAnswer,
+  getQuizByclassIdAndDayWise,
+  getQuizeByQestion,
 };

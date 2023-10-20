@@ -36,6 +36,14 @@ const getStudentSessionById = async (studentSessionId) => {
 };
 
 /**
+ * Get Student by id
+ * @param {ObjectId} studentId
+ * @returns {Promise<StudentSession>}
+ */
+const getStudentyId = async (studentId) => {
+  return StudentSession.findOne({ studentId });
+};
+/**
  * Get students by class and section
  * @param {string} classId - The ID of the class to filter by.
  * @param {string} sectionId - The ID of the section to filter by.
@@ -43,10 +51,11 @@ const getStudentSessionById = async (studentSessionId) => {
  * @throws {Error} - If there is an error while querying the database.
  */
 
-const getStudentsByClassAndSection = async (classId, sectionId) => {
+const getStudentsByClassAndSection = async (scode, classId, sectionId) => {
   const attendanceData = await StudentSession.aggregate([
     {
       $match: {
+        scode,
         classId: mongoose.Types.ObjectId(classId),
         sectionId: mongoose.Types.ObjectId(sectionId),
       },
@@ -172,7 +181,7 @@ const getStudentsByClassAndSection = async (classId, sectionId) => {
 
 const getStudentByScodeAndClassId = async (scode, classId) => {
   // Find the class based on classId in the studentSession model
-  const classData = await StudentSession.findOne({ classId });
+  const classData = await StudentSession.findOne({ classId, scode });
   if (!classData) {
     return new ApiError(httpStatus.NOT_FOUND, 'Class not found');
   }
@@ -222,4 +231,5 @@ module.exports = {
   deleteStudentSessionById,
   getStudentsByClassAndSection,
   getStudentByScodeAndClassId,
+  getStudentyId,
 };
