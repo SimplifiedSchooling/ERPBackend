@@ -24,7 +24,7 @@ router
   .get(validate(StudentAttendanceValidation.attendanceData), StudentAttendanceController.getAttendanceByclassSectionDate);
 router
   .route('/')
-  .post(validate(StudentAttendanceValidation.createStudentAttendance), StudentAttendanceController.createStudentAttendance)
+  .post(validate(StudentAttendanceValidation.studentAttendanceSchema), StudentAttendanceController.createStudentAttendance)
   .get(validate(StudentAttendanceValidation.getAllStudentAttendance), StudentAttendanceController.getAllStudentAttendance);
 
 router
@@ -66,6 +66,11 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: The date to filter by.
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The scode to filter by.
  *     responses:
  *       '200':
  *         description: A list of students attendence matching the specified class, section and date
@@ -139,6 +144,7 @@ module.exports = router;
  *       '500':
  *         description: Internal server error. An error occurred while processing the request.
  */
+
 /**
  * @swagger
  * /StudentAttendance:
@@ -154,25 +160,36 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               studentId:
- *                 type: number
- *                 example: 74351449
+ *               classId:
+ *                 type: string
+ *                 example: 6516761d9cee04ae5df9fb6f
+ *               sectionId:
+ *                 type: string
+ *                 example: 650d6dfa60838756a214b436
  *               date:
  *                 type: string
  *                 example: "2023-09-15"
  *               time:
  *                 type: string
  *                 example: "10:30am"
- *               AttendenceStatus:
- *                 type: string
- *                 enum: ["present", "absent", "late"]
- *                 example: "present"
- *               remark:
- *                 type: string
- *                 example: "10:30am"
  *               scode:
  *                 type: string
  *                 example: 222e6ae0-61e0-11ee-8482-6f09799e735c
+ *               entries:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     AttendenceStatus:
+ *                       type: string
+ *                       enum: ["present", "absent", "late"]
+ *                       example: "present"
+ *                     remark:
+ *                       type: string
+ *                       example: "present in class"
+ *                     studentId:
+ *                       type: number
+ *                       example: 74351449
  *     responses:
  *       "201":
  *         description: Created

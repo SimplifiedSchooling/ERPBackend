@@ -51,7 +51,15 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               scode:
+ *               assectName:
+ *                 type: string *
+ *               invoiceNo:
+ *                 type: number
+ *               invoiceDate:
+ *                 type: date
+ *               quantity:
+ *                 type: number
+ *               description:
  *                 type: string
  *               assectName:
  *                 type: string
@@ -92,31 +100,22 @@ module.exports = router;
  *                 type: number
  *               totaldestroyed:
  *                 type: number
- *               distroy:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     expiredate:
- *                       type: string
- *                       format: date
- *                     quantity:
- *                       type: number
- *                     reason:
- *                       type: string
- *                 example:
- *                   [
- *                     {
- *                       expiredate: "2023-08-01",
- *                       quantity: 2,
- *                       reason: "Expired"
- *                     },
- *                     {
- *                       expiredate: "2023-08-15",
- *                       quantity: 1,
- *                       reason: "Damaged"
- *                     }
- *                   ]
+ *               expiredate:
+ *                 type: date
+ *               reason:
+ *                 type: string
+ *             example:
+ *               assectName: test123
+ *               invoiceNo: 123
+ *               invoiceDate: 10/12/2023
+ *               quantity: 2
+ *               description: This is the asset
+ *               imagePath: jpg/pdf/google.com
+ *               totalasset: 4
+ *               totaldestroyed: 3
+ *               expiredate: 12/10/2022
+ *               reason: Remove the asset
+ *
  *     responses:
  *       '201':
  *         description: Assect created
@@ -237,13 +236,29 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               assectName:
+ *                 type: string *
+ *               description:
+ *                 type: string
+ *               imagePath:
+ *                 type: string
+ *                 format: binary
+ *               expiredate:
+ *                 type: date
+ *               reason:
+ *                 type: string
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
  *                 type: number
  *             example:
+ *               assectName: test123
  *               totalasset: 10
  *               totaldestroyed: 7
+ *               description: This is the asset
+ *               imagePath: jpg/pdf/google.com
+ *               expiredate: 12/10/2022
+ *               reason: Remove the asset
  *     responses:
  *       "200":
  *         description: OK

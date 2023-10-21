@@ -25,8 +25,8 @@ const getStudentAttendanceById = catchAsync(async (req, res) => {
 });
 
 const getAttendanceByclassSectionDate = catchAsync(async (req, res) => {
-  const { classId, sectionId, date } = await req.query;
-  const data = await StudentAttendanceService.getAttendanceData(classId, sectionId, date);
+  const { classId, sectionId, date, scode } = await req.query;
+  const data = await StudentAttendanceService.getAttendanceData(classId, sectionId, date, scode);
 
   res.status(200).json({ data });
 });
