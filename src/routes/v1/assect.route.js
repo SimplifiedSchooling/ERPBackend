@@ -51,15 +51,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               assectName:
- *                 type: string *
- *               invoiceNo:
- *                 type: number
- *               invoiceDate:
- *                 type: date
- *               quantity:
- *                 type: number
- *               description:
+ *               scode:
  *                 type: string
  *               assectName:
  *                 type: string
@@ -100,22 +92,31 @@ module.exports = router;
  *                 type: number
  *               totaldestroyed:
  *                 type: number
- *               expiredate:
- *                 type: date
- *               reason:
- *                 type: string
- *             example:
- *               assectName: test123
- *               invoiceNo: 123
- *               invoiceDate: 10/12/2023
- *               quantity: 2
- *               description: This is the asset
- *               imagePath: jpg/pdf/google.com
- *               totalasset: 4
- *               totaldestroyed: 3
- *               expiredate: 12/10/2022
- *               reason: Remove the asset
- *
+ *               distroy:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     expiredate:
+ *                       type: string
+ *                       format: date
+ *                     quantity:
+ *                       type: number
+ *                     reason:
+ *                       type: string
+ *                 example:
+ *                   [
+ *                     {
+ *                       expiredate: "2023-08-01",
+ *                       quantity: 2,
+ *                       reason: "Expired"
+ *                     },
+ *                     {
+ *                       expiredate: "2023-08-15",
+ *                       quantity: 1,
+ *                       reason: "Damaged"
+ *                     }
+ *                   ]
  *     responses:
  *       '201':
  *         description: Assect created
