@@ -1,32 +1,40 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
+// const multer = require('multer');
+// const path = require('path');
+// const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
-const assectController = require('../../controllers/assect.controller');
-const assectValidaton = require('../../validations/assect.validation');
+const { assectController } = require('../../controllers');
+const { assectValidaton } = require('../../validations');
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: 'uploads/',
+//   filename: (req, file, callback) => {
+//     const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+//     callback(null, uniqueFileName);
+//   },
+// });
 
-const upload = multer({ storage });
-
+// const upload = multer({ storage });
+// upload.single('imagePath'),
 const router = express.Router();
 
 router
   .route('/')
+<<<<<<< HEAD
   .post(upload.single('imagePath'), validate(assectValidaton.createAssect), assectController.createAssect)
+=======
+  .post(validate(assectValidaton.createAssetSchema), assectController.createAssect)
+>>>>>>> origin/main
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
   .route('/:assectId')
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
+<<<<<<< HEAD
   .patch(upload.single('imagePath'), validate(assectValidaton.updateAssect), assectController.updateAssect)
+=======
+  .patch(validate(assectValidaton.updateAssect), assectController.updateAssect)
+>>>>>>> origin/main
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
 module.exports = router;
@@ -35,125 +43,158 @@ module.exports = router;
  * @swagger
  * tags:
  *   name: Asset
- *   description: Asset management and retrieval
+ *   description: API for Asset management
  */
+
 /**
  * @swagger
  * /assets:
  *   post:
- *     summary: Create a Asset
+ *     summary: Create an Assect
  *     tags: [Asset]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
- *         multipart/form-data:
+ *         application/json:
  *           schema:
  *             type: object
  *             properties:
+ *               scode:
+ *                 type: string
  *               assectName:
- *                 type: string *
- *               invoiceNo:
  *                 type: string
- *               invoiceDate:
- *                 type: date
- *               quantity:
- *                 type: number
- *               description:
- *                 type: string
- *               imagePath:
- *                 type: string
- *                 format: binary
+ *               count:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     invoiceNo:
+ *                       type: number
+ *                     invoiceDate:
+ *                       type: string
+ *                       format: date
+ *                     quantity:
+ *                       type: number
+ *                     description:
+ *                       type: string
+ *                     imagePath:
+ *                       type: string
+ *                 example:
+ *                   [
+ *                     {
+ *                       invoiceNo: 12345,
+ *                       invoiceDate: "2023-07-01",
+ *                       quantity: 5,
+ *                       description: "Description 1",
+ *                       imagePath: "path/to/image1.jpg"
+ *                     },
+ *                     {
+ *                       invoiceNo: 67890,
+ *                       invoiceDate: "2023-07-15",
+ *                       quantity: 3,
+ *                       description: "Description 2",
+ *                       imagePath: "path/to/image2.jpg"
+ *                     }
+ *                   ]
  *               totalasset:
  *                 type: number
  *               totaldestroyed:
  *                 type: number
- *               expiredate:
- *                 type: date
- *               reason:
- *                 type: string
- *             example:
- *               assectName: test123
- *               invoiceNo: tes12345
- *               invoiceDate: 10/12/2023
- *               quantity: 2
- *               description: This is the asset
- *               imagePath: jpg/pdf/google.com
- *               totalasset: 4
- *               totaldestroyed: 3
- *               expiredate: 12/10/2022
- *               reason: Remove the asset
- *
+ *               distroy:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     expiredate:
+ *                       type: string
+ *                       format: date
+ *                     quantity:
+ *                       type: number
+ *                     reason:
+ *                       type: string
+ *                 example:
+ *                   [
+ *                     {
+ *                       expiredate: "2023-08-01",
+ *                       quantity: 2,
+ *                       reason: "Expired"
+ *                     },
+ *                     {
+ *                       expiredate: "2023-08-15",
+ *                       quantity: 1,
+ *                       reason: "Damaged"
+ *                     }
+ *                   ]
  *     responses:
- *       "201":
- *         description: Created
+ *       '201':
+ *         description: Assect created
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/Asset'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *
+ *               $ref: '#/components/schemas/Assect'
+ *       '400':
+ *         description: Bad request
+ *       '500':
+ *         description: Internal server error
+
  *   get:
- *     summary: Get query Asset
+ *     summary: Get Assects
  *     tags: [Asset]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: Asset
+ *         name: scode
  *         schema:
  *           type: string
- *         description: Asset name *
+ *         description: Assect code
  *       - in: query
- *         name: sortBy
+ *         name: assectName
  *         schema:
  *           type: string
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           minimum: 1
- *         default: 10
- *         description: Maximum number of users
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           minimum: 1
- *           default: 1
- *         description: Page number
+ *         description: Assect name
  *     responses:
- *       "200":
+ *       '200':
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 results:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Asset'
- *                 page:
- *                   type: integer
- *                   example: 1
- *                 limit:
- *                   type: integer
- *                   example: 10
- *                 totalPages:
- *                   type: integer
- *                   example: 1
- *                 totalResults:
- *                   type: integer
- *                   example: 1
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Assect'
+ *       '400':
+ *         description: Bad request
+ *       '500':
+ *         description: Internal server error
+
+ * /assets/{id}:
+ *   patch:
+ *     summary: Update an Assect by ID
+ *     tags: [Asset]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Assect ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Assect'
+ *     responses:
+ *       '200':
+ *         description: Assect updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Assect'
+ *       '400':
+ *         description: Bad request
+ *       '404':
+ *         description: Assect not found
+ *       '500':
+ *         description: Internal server error
  */
 
 /**
@@ -161,7 +202,7 @@ module.exports = router;
  * /assets/{assectId}:
  *   get:
  *     summary: Get a Asset
- *     tags: [Asset]
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -187,7 +228,7 @@ module.exports = router;
  *
  *   patch:
  *     summary: Update a Asset
- *     tags: [Asset]
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -243,7 +284,7 @@ module.exports = router;
  *
  *   delete:
  *     summary: Delete a Asset
- *     tags: [Asset]
+ *     tags: [Assect]
  *     security:
  *       - bearerAuth: []
  *     parameters:

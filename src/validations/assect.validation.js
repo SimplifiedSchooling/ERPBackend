@@ -1,63 +1,46 @@
 const Joi = require('joi');
-const { objectId } = require('./custom.validation');
 
-const createAssect = {
-  body: Joi.object().keys({
-    assectName: Joi.string(),
-    invoiceNo: Joi.string(),
-    invoiceDate: Joi.date(),
-    quantity: Joi.number(),
-    description: Joi.string(),
-    imagePath: Joi.string(),
-    totalasset: Joi.number(),
-    totaldestroyed: Joi.number(),
-    expiredate: Joi.date(),
-    reason: Joi.string(),
-  }),
-};
+// Joi schema for the count array
+const countSchema = Joi.array().items(
+  Joi.object({
+    invoiceNo: Joi.number().required(),
+    invoiceDate: Joi.date().required(),
+    quantity: Joi.number().required(),
+    description: Joi.string().required(),
+    imagePath: Joi.string().required(),
+  })
+);
 
-const queryAssect = {
-  query: Joi.object().keys({
-    assectName: Joi.string(),
-    sortBy: Joi.string(),
-    limit: Joi.number().integer(),
-    page: Joi.number().integer(),
-  }),
-};
+// Joi schema for the distroy array
+const distroySchema = Joi.array().items(
+  Joi.object({
+    expiredate: Joi.date().required(),
+    quantity: Joi.number().required(),
+    reason: Joi.string().required(),
+  })
+);
 
-const getAssect = {
-  params: Joi.object().keys({
-    assectId: Joi.string().custom(objectId),
-  }),
-};
+// Joi schema for the Assect model
+const assectSchema = Joi.object({
+  scode: Joi.string(),
+  assectName: Joi.string(),
+  count: countSchema,
+  totalasset: Joi.number(),
+  totaldestroyed: Joi.number(),
+  distroy: distroySchema,
+});
 
-const updateAssect = {
-  params: Joi.object().keys({
-    assectId: Joi.required().custom(objectId),
-  }),
-  body: Joi.object().keys({
-    assectName: Joi.string(),
-    // invoiceNo: Joi.number(),
-    // invoiceDate: Joi.date(),
-    description: Joi.string(),
-    totalasset: Joi.number().optional(),
-    totaldestroyed: Joi.number().optional(),
-    expiredate: Joi.date(),
-    reason: Joi.string(),
-    imagePath: Joi.string(),
-  }),
-};
+// Joi schema for POST (create) requests
+const createAssetSchema = Joi.object({
+  scode: assectSchema.required(),
+});
 
-const deleteAssect = {
-  params: Joi.object().keys({
-    assectId: Joi.string().custom(objectId),
-  }),
-};
+// Joi schema for PUT (update) requests
+const updateAssectSchema = Joi.object({
+  scode: assectSchema,
+});
 
 module.exports = {
-  createAssect,
-  queryAssect,
-  getAssect,
-  updateAssect,
-  deleteAssect,
+  createAssetSchema,
+  updateAssectSchema,
 };

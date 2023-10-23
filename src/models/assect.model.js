@@ -3,45 +3,50 @@ const { toJSON, paginate } = require('./plugins');
 
 const assectSchema = mongoose.Schema(
   {
+    scode: {
+      type: String,
+    },
     assectName: {
       type: String,
-      trim: true,
     },
-    invoiceNo: {
-      type: String,
-      trim: true,
-    },
-    invoiceDate: {
-      type: Date,
-      trim: true,
-    },
-    quantity: {
-      type: Number,
-      trim: true,
-    },
-    description: {
-      type: String,
-      trim: true,
-    },
-    imagePath: {
-      type: String,
-    },
+    count: [
+      {
+        invoiceNo: {
+          type: Number,
+        },
+        invoiceDate: {
+          type: Date,
+        },
+        quantity: {
+          type: Number,
+        },
+        description: {
+          type: String,
+        },
+        imagePath: {
+          type: String,
+        },
+      },
+    ],
     totalasset: {
       type: Number,
-      trim: true,
     },
     totaldestroyed: {
       type: Number,
-      trim: true,
     },
-    expiredate: {
-      type: Date,
-      trim: true,
-    },
-    reason: {
-      type: String,
-      trim: true,
-    },
+    distroy: [
+      {
+        expiredate: {
+          type: Date,
+        },
+        quantity: {
+          type: Number,
+        },
+        reason: {
+          type: String,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -50,53 +50,59 @@ const getAssectById = async (id) => {
 //   return assect;
 // };
 
-const updateAssectById = async (assectId, updateBody) => {
-  // const assect = await getAssectById(assectId);
-  // if (!assect) {
-  //   throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
-  // }
+// const updateAssectById = async (assectId, updateBody) => {
+//   // const assect = await getAssectById(assectId);
+//   // if (!assect) {
+//   //   throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
+//   // }
 
-  // // Calculate the updated quantity based on totalasset and totaldestroyed
-  // const newTotalAsset = updateBody.totalasset || assect.totalasset;
-  // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
+//   // // Calculate the updated quantity based on totalasset and totaldestroyed
+//   // const newTotalAsset = updateBody.totalasset || assect.totalasset;
+//   // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
 
-  // const newQuantity = assect.quantity + (newTotalAsset - assect.totalasset) - (newTotalDestroyed - assect.totaldestroyed);
+//   // const newQuantity = assect.quantity + (newTotalAsset - assect.totalasset) - (newTotalDestroyed - assect.totaldestroyed);
 
-  // // Update the asset fields
-  // assect.totalasset = newTotalAsset;
-  // assect.totaldestroyed = newTotalDestroyed;
-  // assect.quantity = newQuantity;
+//   // // Update the asset fields
+//   // assect.totalasset = newTotalAsset;
+//   // assect.totaldestroyed = newTotalDestroyed;
+//   // assect.quantity = newQuantity;
 
-  // // Update other fields as needed
-  // Object.assign(assect, updateBody);
+//   // // Update other fields as needed
+//   // Object.assign(assect, updateBody);
 
-  // await assect.save();
-  // return assect;
-  const assect = await getAssectById(assectId);
-  if (!assect) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
-  }
+//   // await assect.save();
+//   // return assect;
+//   const assect = await getAssectById(assectId);
+//   if (!assect) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
+//   }
 
-  // Calculate the changes in totalasset and totaldestroyed
-  const newTotalAsset = updateBody.totalasset || assect.totalasset;
-  const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
+//   // Calculate the changes in totalasset and totaldestroyed
+//   // const newTotalAsset = updateBody.totalasset || assect.totalasset;
+//   // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
 
-  const assetChange = newTotalAsset - assect.totalasset;
-  const destroyedChange = newTotalDestroyed - assect.totaldestroyed;
+//   // const assetChange = newTotalAsset - assect.totalasset;
+//   // const destroyedChange = newTotalDestroyed - assect.totaldestroyed;
 
-  // Remove the existing quantity
-  const newQuantity = 0; // To reset the quantity, set it to 0
+//   // // Remove the existing quantity
+//   // const newQuantity = 0; // To reset the quantity, set it to 0
 
-  // Update the asset fields
-  assect.totalasset = newTotalAsset;
-  assect.totaldestroyed = newTotalDestroyed;
+//   // // Update the asset fields
+//   // assect.totalasset = newTotalAsset;
+//   // assect.totaldestroyed = newTotalDestroyed;
 
+<<<<<<< HEAD
   // Update the quantity value
   assect.quantity = newTotalAsset - newTotalDestroyed;
+=======
+//   // // Update the quantity value
+//   // assect.quantity = newTotalAsset - newTotalDestroyed;
+>>>>>>> origin/main
 
-  // Update other fields as needed
-  Object.assign(assect, updateBody);
+//   // // Update other fields as needed
+//   // Object.assign(assect, updateBody);
 
+<<<<<<< HEAD
   // Adjust the quantity based on changes in totalasset and totaldestroyed
   // assect.quantity += assetChange - destroyedChange;
 
@@ -104,6 +110,15 @@ const updateAssectById = async (assectId, updateBody) => {
   await assect.save();
   return assect;
 };
+=======
+//   // Adjust the quantity based on changes in totalasset and totaldestroyed
+//   // assect.quantity += assetChange - destroyedChange;
+
+//   // Save the asset
+//   await assect.save();
+//   return assect;
+// };
+>>>>>>> origin/main
 
 /**
  * Delete Assect by id
@@ -123,6 +138,6 @@ module.exports = {
   createAssect,
   queryAssect,
   getAssectById,
-  updateAssectById,
+  // updateAssectById,
   deleteAssectById,
 };
