@@ -107,3 +107,4 @@ module.exports.grievanceService = require('./grievance.redressal.service');
 module.exports.hostelService = require('./hostel.service');
 module.exports.assectService = require('./assect.service');
 module.exports.attendanceVerifyService = require('./attendance.verify.service');
+module.exports.assetMasterService = require('./masterService/assetMaster.service');

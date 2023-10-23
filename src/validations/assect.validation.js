@@ -24,6 +24,7 @@ const distroySchema = Joi.array().items(
 const assectSchema = Joi.object({
   scode: Joi.string(),
   assectName: Joi.string(),
+  assetId: Joi.string(),
   count: countSchema,
   totalasset: Joi.number(),
   totaldestroyed: Joi.number(),
@@ -32,12 +33,12 @@ const assectSchema = Joi.object({
 
 // Joi schema for POST (create) requests
 const createAssetSchema = Joi.object({
-  scode: assectSchema.required(),
+  body: assectSchema.required(),
 });
 
 // Joi schema for PUT (update) requests
 const updateAssectSchema = Joi.object({
-  scode: assectSchema,
+  body: assectSchema,
 });
 
 module.exports = {

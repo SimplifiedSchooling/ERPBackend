@@ -18,7 +18,7 @@ const queryAssect = catchAsync(async (req, res) => {
 });
 
 const getAssect = catchAsync(async (req, res) => {
-  const result = await assectService.getAssectById(req.params.assectId);
+  const result = await assectService.getAssectById(req.params.id);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Hostel not found');
   }
@@ -26,12 +26,13 @@ const getAssect = catchAsync(async (req, res) => {
 });
 
 const updateAssect = catchAsync(async (req, res) => {
-  const result = await assectService.updateAssectById(req.params.assectId, req.body);
+  const { assectId, scode } = req.query;
+  const result = await assectService.updateAssectById(assectId, scode, req.body);
   res.send(result);
 });
 
 const deleteAssect = catchAsync(async (req, res) => {
-  await assectService.deleteAssectById(req.params.assectId);
+  await assectService.deleteAssectById(req.params.id);
   res.status(httpStatus.NO_CONTENT).send();
 });
 

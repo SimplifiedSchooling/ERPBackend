@@ -907,6 +907,49 @@ components:
         subjectId: 64ca45e050227f21d906d
         bookId: 64ca45e050227f21d906d
         chapterId: 64ca45e050227f21d906d83c
+        
+    Asset:
+      type: object
+      properties:
+        scode:
+          type: string
+        assectName:
+          type: string
+        count:
+          type: array
+          items:
+            type: object
+            properties:
+              invoiceNo:
+                type: number
+              invoiceDate:
+                type: string
+                format: date
+              quantity:
+                type: number
+              description:
+                type: string
+              imagePath:
+                type: string
+        totalasset:
+          type: number
+        totaldestroyed:
+          type: number
+        distroy:
+          type: array
+          items:
+            type: object
+            properties:
+              expiredate:
+                type: string
+                format: date
+              quantity:
+                type: number
+              reason:
+                type: string
+      required:
+        - scode
+      timestamps: true
 
     Ebook: 
       type: object
@@ -1387,6 +1430,7 @@ components:
         userId: fake name
         questionId: 'sdvbjh2376r37862'
         selectedOptions: [0,2]
+    
 
     Token:
       type: object

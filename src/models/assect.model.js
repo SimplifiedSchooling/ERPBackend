@@ -6,6 +6,10 @@ const assectSchema = mongoose.Schema(
     scode: {
       type: String,
     },
+    assetId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'AssetMaster',
+    },
     assectName: {
       type: String,
     },
