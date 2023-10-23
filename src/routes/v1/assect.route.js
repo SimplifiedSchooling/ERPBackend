@@ -28,7 +28,7 @@ router
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
-  .route('/:assectId')
+  .route('/:id')
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
 <<<<<<< HEAD
   .patch(upload.single('imagePath'), validate(assectValidaton.updateAssect), assectController.updateAssect)
@@ -60,6 +60,8 @@ module.exports = router;
  *             type: object
  *             properties:
  *               scode:
+ *                 type: string
+ *               assetId:
  *                 type: string
  *               assectName:
  *                 type: string
@@ -131,7 +133,7 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Assect'
+ *               $ref: '#/components/schemas/Asset'
  *       '400':
  *         description: Bad request
  *       '500':
@@ -159,36 +161,44 @@ module.exports = router;
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Assect'
+ *                 $ref: '#/components/schemas/Asset'
  *       '400':
  *         description: Bad request
  *       '500':
  *         description: Internal server error
+ */
 
- * /assets/{id}:
+/**
+ * @swagger
+ * /assets/update:
  *   patch:
  *     summary: Update an Assect by ID
  *     tags: [Asset]
- *     parameters:
+ *     query:
  *       - in: path
- *         name: id
+ *         name: scode
  *         required: true
  *         schema:
  *           type: string
- *         description: Assect ID
+ *       - in: path
+ *         name: assetId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Asset ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Assect'
+ *             $ref: '#/components/schemas/Asset'
  *     responses:
  *       '200':
  *         description: Assect updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Assect'
+ *               $ref: '#/components/schemas/Asset'
  *       '400':
  *         description: Bad request
  *       '404':
@@ -199,75 +209,18 @@ module.exports = router;
 
 /**
  * @swagger
- * /assets/{assectId}:
+ * /assets/{id}:
  *   get:
  *     summary: Get a Asset
- *     tags: [Assect]
+ *     tags: [Asset]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: assectId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: assectId
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *                $ref: '#/components/schemas/Asset'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *
- *   patch:
- *     summary: Update a Asset
- *     tags: [Assect]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: assectId
- *         required: true
- *         schema:
- *           type: string
- *         description: assectId
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               assectName:
- *                 type: string *
- *               description:
- *                 type: string
- *               imagePath:
- *                 type: string
- *                 format: binary
- *               expiredate:
- *                 type: date
- *               reason:
- *                 type: string
- *               totalasset:
- *                 type: number
- *               totaldestroyed:
- *                 type: number
- *             example:
- *               assectName: test123
- *               totalasset: 10
- *               totaldestroyed: 7
- *               description: This is the asset
- *               imagePath: jpg/pdf/google.com
- *               expiredate: 12/10/2022
- *               reason: Remove the asset
  *     responses:
  *       "200":
  *         description: OK
@@ -284,16 +237,16 @@ module.exports = router;
  *
  *   delete:
  *     summary: Delete a Asset
- *     tags: [Assect]
+ *     tags: [Asset]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: assectId
+ *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: assectId
+ *         description: id
  *     responses:
  *       "200":
  *         description: No content
