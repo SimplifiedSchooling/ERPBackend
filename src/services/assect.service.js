@@ -35,6 +35,15 @@ const getAssectById = async (id) => {
 };
 
 /**
+ * Get Assect by id
+ * @param {ObjectId} assetId
+ * @param {ObjectId} scode
+ * @returns {Promise<Assect>}
+ */
+const getAssectByAssetIdAndScode = async (scode, assetId) => {
+  return Assect.findOne({ scode, assetId });
+};
+/**
  * Update Assect by id
  * @param {ObjectId} assectId
  * @param {Object} updateBody
@@ -50,60 +59,49 @@ const getAssectById = async (id) => {
 //   return assect;
 // };
 
-// const updateAssectById = async (assectId, updateBody) => {
-//   // const assect = await getAssectById(assectId);
-//   // if (!assect) {
-//   //   throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
-//   // }
+const updateAssectById = async (assectId, scode, updateBody) => {
+  const assect = await getAssectByAssetIdAndScode(assectId, scode);
+  if (!assect) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Asset not found');
+  }
 
-//   // // Calculate the updated quantity based on totalasset and totaldestroyed
-//   // const newTotalAsset = updateBody.totalasset || assect.totalasset;
-//   // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
+  // Update other fields as needed
+  Object.assign(assect, updateBody);
 
-//   // const newQuantity = assect.quantity + (newTotalAsset - assect.totalasset) - (newTotalDestroyed - assect.totaldestroyed);
+  await assect.save();
+  return assect;
+  // const assect = await getAssectById(assectId);
+  // if (!assect) {
+  //   throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
+  // }
 
-//   // // Update the asset fields
-//   // assect.totalasset = newTotalAsset;
-//   // assect.totaldestroyed = newTotalDestroyed;
-//   // assect.quantity = newQuantity;
+  // Calculate the changes in totalasset and totaldestroyed
+  // const newTotalAsset = updateBody.totalasset || assect.totalasset;
+  // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
 
-//   // // Update other fields as needed
-//   // Object.assign(assect, updateBody);
+  // const assetChange = newTotalAsset - assect.totalasset;
+  // const destroyedChange = newTotalDestroyed - assect.totaldestroyed;
 
-//   // await assect.save();
-//   // return assect;
-//   const assect = await getAssectById(assectId);
-//   if (!assect) {
-//     throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
-//   }
+  // // Remove the existing quantity
+  // const newQuantity = 0; // To reset the quantity, set it to 0
 
-//   // Calculate the changes in totalasset and totaldestroyed
-//   // const newTotalAsset = updateBody.totalasset || assect.totalasset;
-//   // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
+  // // Update the asset fields
+  // assect.totalasset = newTotalAsset;
+  // assect.totaldestroyed = newTotalDestroyed;
 
-//   // const assetChange = newTotalAsset - assect.totalasset;
-//   // const destroyedChange = newTotalDestroyed - assect.totaldestroyed;
+  // // Update the quantity value
+  // assect.quantity = newTotalAsset - newTotalDestroyed;
 
-//   // // Remove the existing quantity
-//   // const newQuantity = 0; // To reset the quantity, set it to 0
+  // // Update other fields as needed
+  // Object.assign(assect, updateBody);
 
-//   // // Update the asset fields
-//   // assect.totalasset = newTotalAsset;
-//   // assect.totaldestroyed = newTotalDestroyed;
+  // Adjust the quantity based on changes in totalasset and totaldestroyed
+  // assect.quantity += assetChange - destroyedChange;
 
-//   // // Update the quantity value
-//   // assect.quantity = newTotalAsset - newTotalDestroyed;
-
-//   // // Update other fields as needed
-//   // Object.assign(assect, updateBody);
-
-//   // Adjust the quantity based on changes in totalasset and totaldestroyed
-//   // assect.quantity += assetChange - destroyedChange;
-
-//   // Save the asset
-//   await assect.save();
-//   return assect;
-// };
+  // Save the asset
+  // await assect.save();
+  // return assect;
+};
 
 /**
  * Delete Assect by id
@@ -113,7 +111,7 @@ const getAssectById = async (id) => {
 const deleteAssectById = async (assectId) => {
   const assect = await getAssectById(assectId);
   if (!assect) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Asset not found');
   }
   await assect.remove();
   return assect;
@@ -123,6 +121,6 @@ module.exports = {
   createAssect,
   queryAssect,
   getAssectById,
-  // updateAssectById,
+  updateAssectById,
   deleteAssectById,
 };

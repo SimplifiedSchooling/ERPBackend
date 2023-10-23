@@ -111,3 +111,4 @@ module.exports.GrievanceRedressal = require('./grievance.redressal.model');
 module.exports.Hostel = require('./hostel.model');
 module.exports.Assect = require('./assect.model');
 module.exports.AttendanceVerify = require('./attendance.verification.model');
+module.exports.AssetMaster = require('./masterModels/assetMaster.model');
