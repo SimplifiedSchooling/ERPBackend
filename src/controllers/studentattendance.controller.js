@@ -26,7 +26,7 @@ const getStudentAttendanceById = catchAsync(async (req, res) => {
 
 const getAttendanceByclassSectionDate = catchAsync(async (req, res) => {
   const { classId, sectionId, date, scode } = await req.query;
-  const data = await StudentAttendanceService.getAttendanceData(classId, sectionId, date, scode);
+  const data = await StudentAttendanceService.getAttendanceStats(classId, sectionId, date, scode);
 
   res.status(200).json({ data });
 });
@@ -67,6 +67,19 @@ const getClasswiseAttendanceStudentList = catchAsync(async (req, res) => {
 //   res.send(todayAttendance);
 // });
 
+// const getAttendanceStatsController = async (req, res, next) => {
+//   try {
+
+//     const { classId, sectionId, date } = req.query;
+
+//     const stats = await StudentAttendanceService.getAttendanceStats(classId, sectionId, date);
+
+//     return res.json(stats);
+//   } catch (error) {
+//     return res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// };
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -77,4 +90,5 @@ module.exports = {
   getWeekStatus,
   todaysAttendanceForSchool,
   getClasswiseAttendanceStudentList,
+  // getAttendanceStatsController,
 };

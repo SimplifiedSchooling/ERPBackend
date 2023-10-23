@@ -1,36 +1,37 @@
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
 const moment = require('moment');
-const { Student, StudentAttendanceSchema } = require('../models');
+const { Student, StudentAttendanceSchema, StudentSession } = require('../models');
 const ApiError = require('../utils/ApiError');
 /**
  * Create a StudentAttendanceSchema
  * @param {Object} StudentAttendanceSchemaBody
  * @returns {Promise<StudentAttendanceSchema>}
  */
+const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+  return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
+};
+
 // const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
-//   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
+//   let { AttendenceStatus } = StudentAttendanceSchemaBody;
+//   if (!AttendenceStatus) {
+//     const match = StudentAttendanceSchemaBody.time.match(/(\d{1,2}:\d{2}:\d{2})(am|pm)?/i);
+//     const extractedTime = match ? match[1] : '';
+
+//     const attendanceTime = new Date(`${StudentAttendanceSchemaBody.date}T${extractedTime}`);
+//     const lateCutoffTime = new Date(`${StudentAttendanceSchemaBody.date}T11:00:00`);
+//     AttendenceStatus = attendanceTime > lateCutoffTime ? 'absent' : 'present';
+//     const remark = AttendenceStatus === 'absent' ? 'Came late to class' : '';
+//     const updatedAttendanceData = {
+//       ...StudentAttendanceSchemaBody,
+//       AttendenceStatus,
+//       remark,
+//     };
+//     return StudentAttendanceSchema.create(updatedAttendanceData);
+//   }
+//   return StudentAttendanceSchema.create({ ...StudentAttendanceSchemaBody });
 // };
 
-const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
-  let { AttendenceStatus } = StudentAttendanceSchemaBody;
-  if (!AttendenceStatus) {
-    const match = StudentAttendanceSchemaBody.time.match(/(\d{1,2}:\d{2}:\d{2})(am|pm)?/i);
-    const extractedTime = match ? match[1] : '';
-
-    const attendanceTime = new Date(`${StudentAttendanceSchemaBody.date}T${extractedTime}`);
-    const lateCutoffTime = new Date(`${StudentAttendanceSchemaBody.date}T11:00:00`);
-    AttendenceStatus = attendanceTime > lateCutoffTime ? 'absent' : 'present';
-    const remark = AttendenceStatus === 'absent' ? 'Came late to class' : '';
-    const updatedAttendanceData = {
-      ...StudentAttendanceSchemaBody,
-      AttendenceStatus,
-      remark,
-    };
-    return StudentAttendanceSchema.create(updatedAttendanceData);
-  }
-  return StudentAttendanceSchema.create({ ...StudentAttendanceSchemaBody });
-};
 /**
  * Query for StudentAttendance
  * @param {Object} filter - Mongo filter
@@ -181,12 +182,161 @@ const deleteStudentAttendanceById = async (StudentAttendanceId) => {
  * @throws {Error} - If there is an error while querying the database.
  */
 
-// const getAttendanceData = async (classId, sectionId, date) => {
+const getAttendanceData = async (classId, sectionId, date) => {
+  const attendanceData = await StudentAttendanceSchema.aggregate([
+    {
+      $match: {
+        classId: mongoose.Types.ObjectId(classId),
+        sectionId: mongoose.Types.ObjectId(sectionId),
+        date,
+      },
+    },
+    {
+      $lookup: {
+        from: 'students',
+        localField: 'studentId',
+        foreignField: 'studentId',
+        as: 'studentInfo',
+      },
+    },
+    {
+      $unwind: '$studentInfo',
+    },
+    {
+      $project: {
+        _id: 1,
+        entries: 1,
+        date: 1,
+        time: 1,
+        scode: 1,
+        classId: 1,
+        sectionId: 1,
+        // attendancetype: 1,
+        // attedanceTakenBy: 1,
+        // remark: 1,
+        studentId: '$entries.studentId',
+        'studentInfo._id': 1,
+        'studentInfo.role': 1,
+        'studentInfo.name': 1,
+        'studentInfo.mobNumber': 1,
+        'studentInfo.age': 1,
+        'studentInfo.email': 1,
+        'studentInfo.admission_date': 1,
+        'studentInfo.department': 1,
+        'studentInfo.campusId': 1,
+        'studentInfo.lastname': 1,
+        'studentInfo.class': 1,
+        'studentInfo.section': 1,
+        'studentInfo.gender': 1,
+        'studentInfo.studentId': 1,
+        'studentInfo.saral_id': 1,
+        'studentInfo.scode': 1,
+        'studentInfo.userName': 1,
+        'studentInfo.parent_id': 1,
+        'studentInfo.admission_no': 1,
+        'studentInfo.roll_no': 1,
+        'studentInfo.firstname': 1,
+        'studentInfo.middlename': 1,
+        'studentInfo.rte': 1,
+        'studentInfo.image': 1,
+        'studentInfo.state': 1,
+        'studentInfo.city': 1,
+        'studentInfo.pincode': 1,
+        'studentInfo.religion': 1,
+        'studentInfo.cast': 1,
+        'studentInfo.dob': 1,
+        'studentInfo.current_address': 1,
+        'studentInfo.permanent_address': 1,
+        'studentInfo.category_id': 1,
+        'studentInfo.route_id': 1,
+        'studentInfo.school_house_id': 1,
+        'studentInfo.blood_group': 1,
+        'studentInfo.vehroute_id': 1,
+        'studentInfo.hostel_room_id': 1,
+        'studentInfo.adhar_no': 1,
+        'studentInfo.nameadhar_no': 1,
+        'studentInfo.samagra_id': 1,
+        'studentInfo.aadhar_back': 1,
+        'studentInfo.bank_account_no': 1,
+        'studentInfo.bank_name': 1,
+        'studentInfo.ifsc_code': 1,
+        'studentInfo.guardian_is': 1,
+        'studentInfo.father_name': 1,
+        'studentInfo.father_phone': 1,
+        'studentInfo.father_occupation': 1,
+        'studentInfo.mother_name': 1,
+        'studentInfo.mother_phone': 1,
+        'studentInfo.mother_occupation': 1,
+        'studentInfo.guardian_name': 1,
+        'studentInfo.guardian_relation': 1,
+        'studentInfo.guardian_phone': 1,
+        'studentInfo.guardian_occupation': 1,
+        'studentInfo.guardian_address': 1,
+        'studentInfo.guardian_email': 1,
+        'studentInfo.father_pic': 1,
+        'studentInfo.mother_pic': 1,
+        'studentInfo.guardian_pic': 1,
+        'studentInfo.is_active': 1,
+        'studentInfo.previous_school': 1,
+        'studentInfo.height': 1,
+        'studentInfo.weight': 1,
+        'studentInfo.student_health_check1': 1,
+        'studentInfo.student_health_check2': 1,
+        'studentInfo.disability': 1,
+        'studentInfo.certifi_disability_avai': 1,
+        'studentInfo.disability1': 1,
+        'studentInfo.disability_type': 1,
+        'studentInfo.percentage': 1,
+        'studentInfo.certifi_number': 1,
+        'studentInfo.certifi_date': 1,
+        'studentInfo.certifi_auth': 1,
+        'studentInfo.certificate_up': 1,
+        'studentInfo.orphan': 1,
+        'studentInfo.orphanname': 1,
+        'studentInfo.bpl': 1,
+        'studentInfo.bplyear': 1,
+        'studentInfo.bplnumber': 1,
+        'studentInfo.stdincome': 1,
+        'studentInfo.initialadmistand': 1,
+        'studentInfo.admissiontype': 1,
+        'studentInfo.mothertongue': 1,
+        'studentInfo.hivparent': 1,
+        'studentInfo.childinfected': 1,
+        'studentInfo.studtype': 1,
+        'studentInfo.mirc_code': 1,
+        'studentInfo.measurement_date': 1,
+        'studentInfo.dis_reason': 1,
+        'studentInfo.note': 1,
+        'studentInfo.dis_note': 1,
+        'studentInfo.app_key': 1,
+        'studentInfo.parent_app_key': 1,
+        'studentInfo.disable_at': 1,
+      },
+    },
+  ]);
+  return attendanceData.map((item) => ({
+    // attendanceObjectId: item._id,
+    // attedanceTakenBy: item.attedanceTakenBy,
+    // studentId: item.studentId,
+    // attendanceType: item.attendancetype,
+    // remark: item.remark,
+    // studentInfo: item.studentInfo,
+    attendanceObjectId: item._id,
+    date: item.date,
+    time: item.time,
+    scode: item.scode,
+    classId: item.classId,
+    sectionId: item.sectionId,
+    entries: item.entries,
+    studentInfo: item.studentInfo,
+  }));
+};
+
+// const getAttendanceData = async (scode, classId, sectionId, date) => {
 //   const attendanceData = await StudentAttendanceSchema.aggregate([
 //     {
 //       $match: {
-//         classId: mongoose.Types.ObjectId(classId),
-//         sectionId: mongoose.Types.ObjectId(sectionId),
+//         scode,
 //         date,
 //       },
 //     },
@@ -202,11 +352,27 @@ const deleteStudentAttendanceById = async (StudentAttendanceId) => {
 //       $unwind: '$studentInfo',
 //     },
 //     {
+//       $lookup: {
+//         from: 'studentsessions',
+//         localField: 'studentId',
+//         foreignField: 'studentId',
+//         as: 'sessionInfo',
+//       },
+//     },
+//     {
+//       $unwind: '$sessionInfo',
+//     },
+//     {
+//       $match: {
+//         'sessionInfo.classId': mongoose.Types.ObjectId(classId),
+//         'sessionInfo.sectionId': mongoose.Types.ObjectId(sectionId),
+//       },
+//     },
+//     {
 //       $project: {
 //         _id: 1,
 //         studentId: 1,
-//         attendancetype: 1,
-//         attedanceTakenBy: 1,
+//         AttendenceStatus: 1,
 //         remark: 1,
 //         'studentInfo._id': 1,
 //         'studentInfo.role': 1,
@@ -309,161 +475,12 @@ const deleteStudentAttendanceById = async (StudentAttendanceId) => {
 //   ]);
 //   return attendanceData.map((item) => ({
 //     attendanceObjectId: item._id,
-//     attedanceTakenBy: item.attedanceTakenBy,
-//     studentId: item.studentId,
-//     attendanceType: item.attendancetype,
+//     attendancetype: item.AttendenceStatus,
 //     remark: item.remark,
 //     studentInfo: item.studentInfo,
 //   }));
 // };
-const getAttendanceData = async (scode, classId, sectionId, date) => {
-  const attendanceData = await StudentAttendanceSchema.aggregate([
-    {
-      $match: {
-        scode,
-        date,
-      },
-    },
-    {
-      $lookup: {
-        from: 'students',
-        localField: 'studentId',
-        foreignField: 'studentId',
-        as: 'studentInfo',
-      },
-    },
-    {
-      $unwind: '$studentInfo',
-    },
-    {
-      $lookup: {
-        from: 'studentsessions',
-        localField: 'studentId',
-        foreignField: 'studentId',
-        as: 'sessionInfo',
-      },
-    },
-    {
-      $unwind: '$sessionInfo',
-    },
-    {
-      $match: {
-        'sessionInfo.classId': mongoose.Types.ObjectId(classId),
-        'sessionInfo.sectionId': mongoose.Types.ObjectId(sectionId),
-      },
-    },
-    {
-      $project: {
-        _id: 1,
-        studentId: 1,
-        AttendenceStatus: 1,
-        remark: 1,
-        'studentInfo._id': 1,
-        'studentInfo.role': 1,
-        'studentInfo.name': 1,
-        'studentInfo.mobNumber': 1,
-        'studentInfo.age': 1,
-        'studentInfo.email': 1,
-        'studentInfo.admission_date': 1,
-        'studentInfo.department': 1,
-        'studentInfo.campusId': 1,
-        'studentInfo.lastname': 1,
-        'studentInfo.class': 1,
-        'studentInfo.section': 1,
-        'studentInfo.gender': 1,
-        'studentInfo.studentId': 1,
-        'studentInfo.saral_id': 1,
-        'studentInfo.scode': 1,
-        'studentInfo.userName': 1,
-        'studentInfo.parent_id': 1,
-        'studentInfo.admission_no': 1,
-        'studentInfo.roll_no': 1,
-        'studentInfo.firstname': 1,
-        'studentInfo.middlename': 1,
-        'studentInfo.rte': 1,
-        'studentInfo.image': 1,
-        'studentInfo.state': 1,
-        'studentInfo.city': 1,
-        'studentInfo.pincode': 1,
-        'studentInfo.religion': 1,
-        'studentInfo.cast': 1,
-        'studentInfo.dob': 1,
-        'studentInfo.current_address': 1,
-        'studentInfo.permanent_address': 1,
-        'studentInfo.category_id': 1,
-        'studentInfo.route_id': 1,
-        'studentInfo.school_house_id': 1,
-        'studentInfo.blood_group': 1,
-        'studentInfo.vehroute_id': 1,
-        'studentInfo.hostel_room_id': 1,
-        'studentInfo.adhar_no': 1,
-        'studentInfo.nameadhar_no': 1,
-        'studentInfo.samagra_id': 1,
-        'studentInfo.aadhar_back': 1,
-        'studentInfo.bank_account_no': 1,
-        'studentInfo.bank_name': 1,
-        'studentInfo.ifsc_code': 1,
-        'studentInfo.guardian_is': 1,
-        'studentInfo.father_name': 1,
-        'studentInfo.father_phone': 1,
-        'studentInfo.father_occupation': 1,
-        'studentInfo.mother_name': 1,
-        'studentInfo.mother_phone': 1,
-        'studentInfo.mother_occupation': 1,
-        'studentInfo.guardian_name': 1,
-        'studentInfo.guardian_relation': 1,
-        'studentInfo.guardian_phone': 1,
-        'studentInfo.guardian_occupation': 1,
-        'studentInfo.guardian_address': 1,
-        'studentInfo.guardian_email': 1,
-        'studentInfo.father_pic': 1,
-        'studentInfo.mother_pic': 1,
-        'studentInfo.guardian_pic': 1,
-        'studentInfo.is_active': 1,
-        'studentInfo.previous_school': 1,
-        'studentInfo.height': 1,
-        'studentInfo.weight': 1,
-        'studentInfo.student_health_check1': 1,
-        'studentInfo.student_health_check2': 1,
-        'studentInfo.disability': 1,
-        'studentInfo.certifi_disability_avai': 1,
-        'studentInfo.disability1': 1,
-        'studentInfo.disability_type': 1,
-        'studentInfo.percentage': 1,
-        'studentInfo.certifi_number': 1,
-        'studentInfo.certifi_date': 1,
-        'studentInfo.certifi_auth': 1,
-        'studentInfo.certificate_up': 1,
-        'studentInfo.orphan': 1,
-        'studentInfo.orphanname': 1,
-        'studentInfo.bpl': 1,
-        'studentInfo.bplyear': 1,
-        'studentInfo.bplnumber': 1,
-        'studentInfo.stdincome': 1,
-        'studentInfo.initialadmistand': 1,
-        'studentInfo.admissiontype': 1,
-        'studentInfo.mothertongue': 1,
-        'studentInfo.hivparent': 1,
-        'studentInfo.childinfected': 1,
-        'studentInfo.studtype': 1,
-        'studentInfo.mirc_code': 1,
-        'studentInfo.measurement_date': 1,
-        'studentInfo.dis_reason': 1,
-        'studentInfo.note': 1,
-        'studentInfo.dis_note': 1,
-        'studentInfo.app_key': 1,
-        'studentInfo.parent_app_key': 1,
-        'studentInfo.disable_at': 1,
-      },
-    },
-  ]);
-  return attendanceData.map((item) => ({
-    attendanceObjectId: item._id,
-    attendancetype: item.AttendenceStatus,
-    remark: item.remark,
-    studentInfo: item.studentInfo,
-  }));
-};
+
 /**
  * Get the week report for a user.
  * @param {string} userId - The ID of the user.
@@ -598,7 +615,7 @@ const getPresentStudentsCount = async (scode, date) => {
   const studentIds = await Student.find({ scode }, 'studentId').lean();
   const studentIdValues = studentIds.map((student) => student.studentId);
   const presentStudentsCount = await StudentAttendanceSchema.countDocuments({
-    studentId: { $in: studentIdValues }, // Use the extracted values here
+    studentId: { $in: studentIdValues },
     date,
   });
   const absentStudentsCount = totalStudentsCount - presentStudentsCount;
@@ -611,6 +628,31 @@ const getPresentStudentsCount = async (scode, date) => {
   return data;
 };
 
+const getAttendanceStats = async (classId, sectionId, date, scode) => {
+  const totalStudents = await StudentSession.countDocuments({ classId, sectionId });
+  const result = await StudentAttendanceSchema.findOne({
+    classId,
+    sectionId,
+    scode,
+    date,
+  });
+  if (!result) {
+    return { error: 'Attendance not found' };
+  }
+  let presentCount = 0;
+  let absentCount = 0;
+  result.entries.forEach((entry) => {
+    if (entry.attendanceStatus === 'present') {
+      /* eslint-disable-next-line no-plusplus */
+      presentCount++;
+    } else if (entry.attendanceStatus === 'absent') {
+      /* eslint-disable-next-line no-plusplus */
+      absentCount++;
+    }
+  });
+  return { totalStudents, presentCount, absentCount };
+};
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -621,5 +663,6 @@ module.exports = {
   getWeekReport,
   getStudentAttendanceSummary,
   getPresentStudentsCount,
+  getAttendanceStats,
   // getClasswiseStudentAttendanceList,
 };
