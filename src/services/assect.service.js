@@ -70,33 +70,34 @@ const updateAssectById = async (assectId, scode, updateBody) => {
 
   await assect.save();
   return assect;
-  // const assect = await getAssectById(assectId);
-  // if (!assect) {
-  //   throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
-  // }
+};
+// const assect = await getAssectById(assectId);
+// if (!assect) {
+//   throw new ApiError(httpStatus.NOT_FOUND, 'Assect not found');
+// }
 
-  // Calculate the changes in totalasset and totaldestroyed
-  // const newTotalAsset = updateBody.totalasset || assect.totalasset;
-  // const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
+// Calculate the changes in totalasset and totaldestroyed
+// const newTotalAsset = updateBody.totalasset || assect.totalasset;
+// const newTotalDestroyed = updateBody.totaldestroyed || assect.totaldestroyed;
 
-  // const assetChange = newTotalAsset - assect.totalasset;
-  // const destroyedChange = newTotalDestroyed - assect.totaldestroyed;
+// const assetChange = newTotalAsset - assect.totalasset;
+// const destroyedChange = newTotalDestroyed - assect.totaldestroyed;
 
-  // // Remove the existing quantity
-  // const newQuantity = 0; // To reset the quantity, set it to 0
+// // Remove the existing quantity
+// const newQuantity = 0; // To reset the quantity, set it to 0
 
-  // // Update the asset fields
-  // assect.totalasset = newTotalAsset;
-  // assect.totaldestroyed = newTotalDestroyed;
+// // Update the asset fields
+// assect.totalasset = newTotalAsset;
+// assect.totaldestroyed = newTotalDestroyed;
 
-  // // Update the quantity value
-  // assect.quantity = newTotalAsset - newTotalDestroyed;
+// // Update the quantity value
+// assect.quantity = newTotalAsset - newTotalDestroyed;
 
-  // // Update other fields as needed
-  // Object.assign(assect, updateBody);
+// // Update other fields as needed
+// Object.assign(assect, updateBody);
 
-  // Adjust the quantity based on changes in totalasset and totaldestroyed
-  // assect.quantity += assetChange - destroyedChange;
+// Adjust the quantity based on changes in totalasset and totaldestroyed
+// assect.quantity += assetChange - destroyedChange;
 
 //   // // Update the quantity value
 //   // assect.quantity = newTotalAsset - newTotalDestroyed;
