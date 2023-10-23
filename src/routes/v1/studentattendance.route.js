@@ -52,6 +52,11 @@ module.exports = router;
  *     tags: [StudentAttendance]
  *     parameters:
  *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The ID of the scode to filter by.
+ *       - in: query
  *         name: classId
  *         schema:
  *           type: string
@@ -66,11 +71,6 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: The date to filter by.
- *       - in: query
- *         name: scode
- *         schema:
- *           type: string
- *         description: The scode to filter by.
  *     responses:
  *       '200':
  *         description: A list of students attendence matching the specified class, section and date

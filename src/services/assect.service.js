@@ -98,10 +98,19 @@ const updateAssectById = async (assectId, scode, updateBody) => {
   // Adjust the quantity based on changes in totalasset and totaldestroyed
   // assect.quantity += assetChange - destroyedChange;
 
-  // Save the asset
-  // await assect.save();
-  // return assect;
-};
+//   // // Update the quantity value
+//   // assect.quantity = newTotalAsset - newTotalDestroyed;
+
+//   // // Update other fields as needed
+//   // Object.assign(assect, updateBody);
+
+//   // Adjust the quantity based on changes in totalasset and totaldestroyed
+//   // assect.quantity += assetChange - destroyedChange;
+
+//   // Save the asset
+//   await assect.save();
+//   return assect;
+// };
 
 /**
  * Delete Assect by id

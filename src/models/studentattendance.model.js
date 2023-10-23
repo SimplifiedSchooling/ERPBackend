@@ -127,7 +127,6 @@ const StudentAttendanceSchema = mongoose.Schema(
         studentId: {
           type: Number,
           required: true,
-          unique: true,
         },
         attendanceStatus: {
           type: String,
