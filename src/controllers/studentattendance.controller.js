@@ -44,8 +44,8 @@ const deleteStudentAttendance = catchAsync(async (req, res) => {
 });
 
 const getWeekStatus = catchAsync(async (req, res) => {
-  const { userId } = req.query;
-  const weekStatus = await StudentAttendanceService.getWeekReport(userId);
+  // const { userId } = req.query;
+  const weekStatus = await StudentAttendanceService.getWeekReport();
   res.send(weekStatus);
 });
 
