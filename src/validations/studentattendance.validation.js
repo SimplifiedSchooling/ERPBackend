@@ -38,11 +38,6 @@ const todaysAttendanceForSchool = {
     date: Joi.string().required(),
   }),
 };
-const getWeekStatus = {
-  query: Joi.object().keys({
-    userId: Joi.string().required(),
-  }),
-};
 
 const getStudentAttendance = {
   params: Joi.object().keys({
@@ -75,6 +70,5 @@ module.exports = {
   updateStudentAttendance,
   deleteStudentAttendance,
   attendanceData,
-  getWeekStatus,
   todaysAttendanceForSchool,
 };

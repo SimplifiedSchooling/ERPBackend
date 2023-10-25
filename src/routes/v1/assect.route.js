@@ -20,21 +20,13 @@ const router = express.Router();
 
 router
   .route('/')
-<<<<<<< HEAD
-  .post(upload.single('imagePath'), validate(assectValidaton.createAssect), assectController.createAssect)
-=======
   .post(validate(assectValidaton.createAssetSchema), assectController.createAssect)
->>>>>>> origin/main
   .get(validate(assectValidaton.queryAssect), assectController.queryAssect);
 
 router
   .route('/:id')
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
-<<<<<<< HEAD
-  .patch(upload.single('imagePath'), validate(assectValidaton.updateAssect), assectController.updateAssect)
-=======
   .patch(validate(assectValidaton.updateAssect), assectController.updateAssect)
->>>>>>> origin/main
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
 module.exports = router;
