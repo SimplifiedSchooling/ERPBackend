@@ -26,9 +26,9 @@ router
 router
   .route('/:id')
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
-  .patch(validate(assectValidaton.updateAssect), assectController.updateAssect)
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
+router.route('/update').patch(validate(assectValidaton.updateAssectSchema), assectController.updateAssect);
 module.exports = router;
 
 /**
@@ -160,13 +160,53 @@ module.exports = router;
  *         description: Internal server error
  */
 
+// /**
+//  * @swagger
+//  * /assets/update:
+//  *   patch:
+//  *     summary: Update an Assect by ID and scode
+//  *     tags: [Asset]
+//  *     parameters:
+//  *     query:
+//  *       - in: path
+//  *         name: scode
+//  *         required: true
+//  *         schema:
+//  *           type: string
+//  *       - in: path
+//  *         name: assetId
+//  *         required: true
+//  *         schema:
+//  *           type: string
+//  *         description: Asset ID
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             $ref: '#/components/schemas/Asset'
+//  *     responses:
+//  *       '200':
+//  *         description: Assect updated
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               $ref: '#/components/schemas/Asset'
+//  *       '400':
+//  *         description: Bad request
+//  *       '404':
+//  *         description: Assect not found
+//  *       '500':
+//  *         description: Internal server error
+//  */
+
 /**
  * @swagger
  * /assets/update:
  *   patch:
- *     summary: Update an Assect by ID
+ *     summary: Update an Asset by ID and scode
  *     tags: [Asset]
- *     query:
+ *     parameters:
  *       - in: path
  *         name: scode
  *         required: true
@@ -186,7 +226,7 @@ module.exports = router;
  *             $ref: '#/components/schemas/Asset'
  *     responses:
  *       '200':
- *         description: Assect updated
+ *         description: Asset updated
  *         content:
  *           application/json:
  *             schema:
@@ -194,11 +234,10 @@ module.exports = router;
  *       '400':
  *         description: Bad request
  *       '404':
- *         description: Assect not found
+ *         description: Asset not found
  *       '500':
  *         description: Internal server error
  */
-
 /**
  * @swagger
  * /assets/{id}:

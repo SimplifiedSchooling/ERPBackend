@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { AttendanceVerify } = require('../models');
+const { AttendanceVerify, Student } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -64,10 +64,35 @@ const deleteAttendanceVerifyById = async (Id) => {
   return attendanceVerify;
 };
 
+/**
+ * Get Attendance Details
+ * @param {string} classId - Class ID
+ * @param {string} sectionId - Section ID
+ * @param {string} date - Attendance date
+ * @returns {Promise<AttendanceVerify>} - Attendance details and associated students
+ */
+const getAttendanceDetails = async (classId, sectionId, date) => {
+  const attendanceData = await AttendanceVerify.findOne({ classId, sectionId, date });
+
+  if (!attendanceData) {
+    return { error: 'Attendance data not found' };
+  }
+  const studentIds = [attendanceData.studentId1, attendanceData.studentId2, attendanceData.studentId3];
+  const students = await Student.find({ studentId: { $in: studentIds } });
+
+  const result = {
+    attendanceData,
+    students,
+  };
+
+  return result;
+};
+
 module.exports = {
   createAttendanceVerify,
   queryAttendanceVerify,
   getAttendanceVerifyById,
   updateAttendanceerifyById,
   deleteAttendanceVerifyById,
+  getAttendanceDetails,
 };

@@ -35,10 +35,21 @@ const deleteAttendanceVerify = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const getAttendanceDetailsController = async (req, res) => {
+  const { classId, sectionId, date } = req.query;
+  const result = await attendanceVerifyService.getAttendanceDetails(classId, sectionId, date);
+
+  if (result.error) {
+    return res.status(404).json({ error: result.error });
+  }
+
+  res.json(result);
+};
 module.exports = {
   createAttendanceVerify,
   queryAttendanceVerify,
   getAttendanceVerify,
   UpdateAttendanceVerify,
   deleteAttendanceVerify,
+  getAttendanceDetailsController,
 };
