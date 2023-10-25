@@ -28,6 +28,21 @@ const attendanceVerifySchema = mongoose.Schema(
     backCount: {
       type: String,
     },
+    date: {
+      type: String,
+    },
+    classId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Classes',
+      required: true,
+      trim: true,
+    },
+    sectionId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Section',
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

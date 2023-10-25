@@ -32,6 +32,8 @@ router
   .patch(validate(attendanceVerifyvalidation.updateAverify), attendanceVerifyController.UpdateAttendanceVerify)
   .delete(validate(attendanceVerifyvalidation.deleteAverify), attendanceVerifyController.deleteAttendanceVerify);
 
+router.route('/verified-attendance').get(attendanceVerifyController.getAttendanceDetailsController);
+
 module.exports = router;
 
 /**
@@ -39,6 +41,40 @@ module.exports = router;
  * tags:
  *   name: AttendanceVerify
  *   description: Attendance verification management
+ */
+
+/**
+ * @swagger
+ * /attendance-verify/verified-attendance:
+ *   get:
+ *     summary: Get attendance details by class, section, and date
+ *     tags: [AttendanceVerify]
+ *     parameters:
+ *       - in: query
+ *         name: classId
+ *         required: true
+ *         description: ID of the class
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: sectionId
+ *         required: true
+ *         description: ID of the section
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: date
+ *         required: true
+ *         description: Attendance date
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response with attendance details
+ *       404:
+ *         description: Attendance data not found
+ *       500:
+ *         description: Internal Server Error
  */
 
 /**
@@ -74,9 +110,18 @@ module.exports = router;
  *               inchargeId:
  *                 type: string
  *                 description: Incharge ID
+ *               classId:
+ *                 type: string
+ *                 description: class ID
+ *               sectionId:
+ *                 type: string
+ *                 description: section ID
  *               backCount:
  *                 type: string
  *                 description: Back Count
+ *               date:
+ *                 type: string
+ *                 description: date
  *     responses:
  *       "201":
  *         description: Created

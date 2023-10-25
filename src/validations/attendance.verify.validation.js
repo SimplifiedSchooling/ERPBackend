@@ -7,8 +7,11 @@ const createAVerify = {
     studentId2: Joi.string(),
     studentId3: Joi.string(),
     campusId: Joi.string(),
+    classId: Joi.string(),
+    sectionId: Joi.string(),
     inchargeId: Joi.string(),
     backCount: Joi.string(),
+    date: Joi.string(),
   }),
 };
 

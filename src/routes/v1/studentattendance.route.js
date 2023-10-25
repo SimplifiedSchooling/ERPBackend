@@ -5,22 +5,20 @@ const StudentAttendanceController = require('../../controllers/studentattendance
 
 const router = express.Router();
 router
-  .route('/classwiseStudentAttendanceList')
+  .route('/classwise-student-attendancelist')
   .get(
     validate(StudentAttendanceValidation.todaysAttendanceForSchool),
     StudentAttendanceController.getClasswiseAttendanceStudentList
   );
 router
-  .route('/getTodaysAttendanceforSchool')
+  .route('/get-todays-attendancecount-school')
   .get(
     validate(StudentAttendanceValidation.todaysAttendanceForSchool),
     StudentAttendanceController.todaysAttendanceForSchool
   );
+router.route('/get-weekstatus').get(StudentAttendanceController.getWeekStatus);
 router
-  .route('/getWeekStatus')
-  .get(validate(StudentAttendanceValidation.getWeekStatus), StudentAttendanceController.getWeekStatus);
-router
-  .route('/getAttendanceByClassAndsectionAndDate')
+  .route('/getattendancecounts-classid-sectionid-scode-date')
   .get(validate(StudentAttendanceValidation.attendanceData), StudentAttendanceController.getAttendanceByclassSectionDate);
 router
   .route('/')
@@ -46,9 +44,9 @@ module.exports = router;
  */
 /**
  * @swagger
- * /StudentAttendance/getAttendanceByClassAndsectionAndDate:
+ * /StudentAttendance/getattendancecounts-classid-sectionid-scode-date:
  *   get:
- *     summary:  A list of students attendence matching the specified class, section and date
+ *     summary:  A list of students attendence matching the specified class, section , scode and date
  *     tags: [StudentAttendance]
  *     parameters:
  *       - in: query
@@ -88,7 +86,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /StudentAttendance/getTodaysAttendanceforSchool:
+ * /StudentAttendance/get-todays-attendancecount-school:
  *   get:
  *     summary:  A list of students todays attendence list for school matching the specified scode and date
  *     tags: [StudentAttendance]
@@ -120,16 +118,11 @@ module.exports = router;
 
 /**
  * @swagger
- * /StudentAttendance/getWeekStatus:
+ * /StudentAttendance/get-weekstatus:
  *   get:
- *     summary:  A list of students attendence matching the specified class, section and date
+ *     summary:  get week status of attendance
  *     tags: [StudentAttendance]
  *     parameters:
- *       - in: query
- *         name: userId
- *         schema:
- *           type: string
- *         description: The ID of the userId to filter by.
  *     responses:
  *       '200':
  *         description: A list of students attendence matching the specified class, section and date
@@ -168,7 +161,7 @@ module.exports = router;
  *                 example: 650d6dfa60838756a214b436
  *               date:
  *                 type: string
- *                 example: "2023-09-15"
+ *                 example: "2023-10-25"
  *               time:
  *                 type: string
  *                 example: "10:30am"
@@ -180,7 +173,7 @@ module.exports = router;
  *                 items:
  *                   type: object
  *                   properties:
- *                     AttendenceStatus:
+ *                     attendanceStatus:
  *                       type: string
  *                       enum: ["present", "absent", "late"]
  *                       example: "present"

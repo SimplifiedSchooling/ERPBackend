@@ -131,33 +131,72 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
 //     halfdayStudents: halfdayStudentsCount,
 //   };
 // };
+
 const getStudentAttendanceSummary = async (scode, date) => {
-  // Get total students count
-  const totalStudentsCount = await Student.countDocuments({ scode });
+  // // Get total students count
+  // const totalStudentsCount = await Student.countDocuments({ scode });
 
-  // Get all studentIds matching the scode
-  const studentIds = await Student.find({ scode }, 'studentId').lean();
-  const studentIdValues = studentIds.map((student) => student.studentId);
+  // // Get all studentIds matching the scode
+  // const studentIds = await Student.find({ scode }, 'studentId').lean();
+  // const studentIdValues = studentIds.map((student) => student.studentId);
 
-  // Get attendance counts for all students on the given date
-  const allStudentsAttendance = await StudentAttendanceSchema.find({
-    studentId: { $in: studentIdValues },
-    date,
-  }).lean();
+  // // Get attendance counts for all students on the given date
+  // const allStudentsAttendance = await StudentAttendanceSchema.find({
+  //   studentId: { $in: studentIdValues },
+  //   date,
+  // }).lean();
 
-  // Calculate counts for each attendance type
-  const presentStudentsCount = allStudentsAttendance.filter(
-    (attendance) => attendance.AttendenceStatus === 'present'
-  ).length;
+  // // Calculate counts for each attendance type
+  // const presentStudentsCount = allStudentsAttendance.filter(
+  //   (attendance) => attendance.AttendenceStatus === 'present'
+  // ).length;
 
-  const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.AttendenceStatus === 'absent').length;
+  // const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.AttendenceStatus === 'absent').length;
 
-  return {
-    totalStudents: totalStudentsCount,
-    presentStudents: presentStudentsCount,
-    absentStudents: absentStudentsCount,
-  };
+  // return {
+  //   totalStudents: totalStudentsCount,
+  //   presentStudents: presentStudentsCount,
+  //   absentStudents: absentStudentsCount,
+  // };
+  try {
+    const totalStudentsCount = await Student.countDocuments({ scode });
+    const studentIds = await Student.find({ scode }, 'studentId').lean();
+    const studentIdValues = studentIds.map((student) => student.studentId);
+
+    const attendanceData = await StudentAttendanceSchema.find({
+      'entries.studentId': { $in: studentIdValues },
+      date,
+    });
+
+    let presentStudentsCount = 0;
+    attendanceData.forEach((entry) => {
+      const presentEntry = entry.entries.find((e) => e.attendanceStatus === 'present');
+      if (presentEntry) {
+        /* eslint-disable-next-line no-plusplus */
+        presentStudentsCount++;
+      }
+    });
+
+    let absentStudentsCount = 0;
+    attendanceData.forEach((entry) => {
+      const absentStudent = entry.entries.find((e) => e.attendanceStatus === 'absent');
+      if (absentStudent) {
+        /* eslint-disable-next-line no-plusplus */
+        absentStudentsCount++;
+      }
+    });
+    const data = {
+      totalStudentsCount,
+      presentStudentsCount,
+      absentStudentsCount,
+    };
+
+    return data;
+  } catch (error) {
+    return { error: 'Internal Server Error' };
+  }
 };
+
 /**
  * Delete StudentAttendanceSchema by id
  * @param {ObjectId} StudentAttendanceId
@@ -486,14 +525,12 @@ const getAttendanceData = async (classId, sectionId, date) => {
  * @param {string} userId - The ID of the user.
  * @returns {Promise<StudentAttendanceSchema>} - An array containing the week report.
  */
-const getWeekReport = async (userId) => {
-  const attedanceTakenBy = userId;
+const getWeekReport = async () => {
   const startOfWeek = moment().startOf('isoWeek');
   const daysOfWeek = Array.from({ length: 6 }, (_, i) => startOfWeek.clone().add(i, 'days'));
-
   const attendancePromises = daysOfWeek.map(async (day) => {
     const formattedDate = day.format('YYYY-MM-DD');
-    const dayAttendance = await StudentAttendanceSchema.findOne({ attedanceTakenBy, date: formattedDate });
+    const dayAttendance = await StudentAttendanceSchema.findOne({ date: formattedDate });
     return { day, dayAttendance };
   });
   const dayAttendances = await Promise.all(attendancePromises);
@@ -641,6 +678,7 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
   }
   let presentCount = 0;
   let absentCount = 0;
+
   result.entries.forEach((entry) => {
     if (entry.attendanceStatus === 'present') {
       /* eslint-disable-next-line no-plusplus */
@@ -650,7 +688,61 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
       absentCount++;
     }
   });
-  return { totalStudents, presentCount, absentCount };
+  const absentStudentIds = result.entries
+    .filter((entry) => entry.attendanceStatus === 'absent')
+    .map((entry) => entry.studentId);
+
+  const absentStudents = await Student.find({ studentId: { $in: absentStudentIds } });
+  let totalMaleCount = 0;
+  let totalFemaleCount = 0;
+  let totalMalePresent = 0;
+  let totalFemalePresent = 0;
+  let totalMaleAbsent = 0;
+  let totalFemaleAbsent = 0;
+
+  const studentIds = result.entries.map((entry) => entry.studentId);
+
+  const students = await Student.find({ studentId: { $in: studentIds } });
+
+  result.entries.forEach((entry) => {
+    const student = students.find((data) => data.studentId === entry.studentId);
+    if (student) {
+      if (student.gender === 'Male') {
+        /* eslint-disable-next-line no-plusplus */
+        totalMaleCount++;
+        if (entry.attendanceStatus === 'present') {
+          /* eslint-disable-next-line no-plusplus */
+          totalMalePresent++;
+        } else if (entry.attendanceStatus === 'absent') {
+          /* eslint-disable-next-line no-plusplus */
+          totalMaleAbsent++;
+        }
+      } else if (student.gender === 'Female') {
+        /* eslint-disable-next-line no-plusplus */
+        totalFemaleCount++;
+        if (entry.attendanceStatus === 'present') {
+          /* eslint-disable-next-line no-plusplus */
+          totalFemalePresent++;
+        } else if (entry.attendanceStatus === 'absent') {
+          /* eslint-disable-next-line no-plusplus */
+          totalFemaleAbsent++;
+        }
+      }
+    }
+  });
+
+  return {
+    totalStudents,
+    presentCount,
+    absentCount,
+    totalMaleCount,
+    totalFemaleCount,
+    totalMalePresent,
+    totalFemalePresent,
+    totalMaleAbsent,
+    totalFemaleAbsent,
+    absentStudents,
+  };
 };
 
 module.exports = {

@@ -38,6 +38,10 @@ const createAssetSchema = Joi.object({
 
 // Joi schema for PUT (update) requests
 const updateAssectSchema = Joi.object({
+  params: Joi.object().keys({
+    assectId: Joi.required(),
+    scode: Joi.required(),
+  }),
   body: assectSchema,
 });
 
