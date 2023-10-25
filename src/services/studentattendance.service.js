@@ -676,6 +676,18 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
   if (!result) {
     return { error: 'Attendance not found' };
   }
+  let presentCount = 0;
+  let absentCount = 0;
+
+  result.entries.forEach((entry) => {
+    if (entry.attendanceStatus === 'present') {
+      /* eslint-disable-next-line no-plusplus */
+      presentCount++;
+    } else if (entry.attendanceStatus === 'absent') {
+      /* eslint-disable-next-line no-plusplus */
+      absentCount++;
+    }
+  });
   const absentStudentIds = result.entries
     .filter((entry) => entry.attendanceStatus === 'absent')
     .map((entry) => entry.studentId);
@@ -721,6 +733,8 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
 
   return {
     totalStudents,
+    presentCount,
+    absentCount,
     totalMaleCount,
     totalFemaleCount,
     totalMalePresent,
