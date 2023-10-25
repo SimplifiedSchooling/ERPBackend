@@ -69,7 +69,7 @@ const deleteAttendanceVerifyById = async (Id) => {
  * @param {string} classId - Class ID
  * @param {string} sectionId - Section ID
  * @param {string} date - Attendance date
- * @returns {Promise<AttendanceVerify>} - Attendance details and associated students
+ * @returns {Promise<AttendanceVerify>} ts
  */
 const getAttendanceDetails = async (classId, sectionId, date) => {
   const attendanceData = await AttendanceVerify.findOne({ classId, sectionId, date });
