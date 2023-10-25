@@ -44,8 +44,9 @@ const getAssectByAssetIdAndScode = async (scode, assetId) => {
   return Assect.findOne({ scode, assetId });
 };
 /**
- * Update Assect by id
+ * Update Assect by assectId and scode
  * @param {ObjectId} assectId
+ * @param {ObjectId} scode
  * @param {Object} updateBody
  * @returns {Promise<Assect>}
  */
