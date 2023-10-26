@@ -106,6 +106,7 @@ const grievanceRedressalRoute = require('./grievance.redressal.route');
 const assectRoute = require('./assect.route');
 const hostel = require('./hostel.route');
 const attendanceVerifyRoute = require('./attendance.verify.route');
+const assectMasterRoute = require('./masterRoutes/assetMaster.route');
 
 const router = express.Router();
 
@@ -521,6 +522,10 @@ const defaultRoutes = [
   {
     path: '/assets',
     route: assectRoute,
+  },
+  {
+    path: '/assetMaster',
+    route: assectMasterRoute,
   },
   {
     path: '/hostel',
