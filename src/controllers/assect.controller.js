@@ -26,8 +26,8 @@ const getAssect = catchAsync(async (req, res) => {
 });
 
 const updateAssect = catchAsync(async (req, res) => {
-  const { assectId, scode } = req.query;
-  const result = await assectService.updateAssectById(assectId, scode, req.body);
+  const { assetId, scode } = req.query;
+  const result = await assectService.updateAssectById(assetId, scode, req.body);
   res.send(result);
 });
 
