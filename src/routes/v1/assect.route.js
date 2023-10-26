@@ -28,7 +28,7 @@ router
   .get(validate(assectValidaton.getAssect), assectController.getAssect)
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
-router.route('/update').patch(validate(assectValidaton.updateAssectSchema), assectController.updateAssect);
+router.route('/update/asset').patch(validate(assectValidaton.updateAssectSchema), assectController.updateAssect);
 module.exports = router;
 
 /**
@@ -202,17 +202,17 @@ module.exports = router;
 
 /**
  * @swagger
- * /assets/update:
+ * /assets/update/asset:
  *   patch:
  *     summary: Update an Asset by ID and scode
  *     tags: [Asset]
  *     parameters:
- *       - in: path
+ *       - in: query
  *         name: scode
  *         required: true
  *         schema:
  *           type: string
- *       - in: path
+ *       - in: query
  *         name: assetId
  *         required: true
  *         schema:
