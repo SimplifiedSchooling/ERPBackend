@@ -40,8 +40,8 @@ const getAssectById = async (id) => {
  * @param {ObjectId} scode
  * @returns {Promise<Assect>}
  */
-const getAssectByAssetIdAndScode = async (scode, assetId) => {
-  return Assect.findOne({ scode, assetId });
+const getAssectByAssetIdAndScode = async (assetId, scode) => {
+  return Assect.findOne({ assetId, scode });
 };
 /**
  * Update Assect by assectId and scode
