@@ -32,7 +32,9 @@ router
   .patch(validate(attendanceVerifyvalidation.updateAverify), attendanceVerifyController.UpdateAttendanceVerify)
   .delete(validate(attendanceVerifyvalidation.deleteAverify), attendanceVerifyController.deleteAttendanceVerify);
 
-router.route('/verified-attendance').get(attendanceVerifyController.getAttendanceDetailsController);
+router
+  .route('/verified/attendance')
+  .get(validate(attendanceVerifyvalidation.verifyValidations), attendanceVerifyController.getAttendanceDetailsController);
 
 module.exports = router;
 
@@ -45,7 +47,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /attendance-verify/verified-attendance:
+ * /attendance-verify/verified/attendance:
  *   get:
  *     summary: Get attendance details by class, section, and date
  *     tags: [AttendanceVerify]
