@@ -52,6 +52,13 @@ const deleteAverify = {
     Id: Joi.string(),
   }),
 };
+const verifyValidations = {
+  query: Joi.object().keys({
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
+    date: Joi.string().required(),
+  }),
+};
 
 module.exports = {
   createAVerify,
@@ -59,4 +66,5 @@ module.exports = {
   getAVerify,
   updateAverify,
   deleteAverify,
+  verifyValidations,
 };
