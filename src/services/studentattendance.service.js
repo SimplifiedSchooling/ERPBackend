@@ -133,68 +133,37 @@ const updateStudentAttendanceById = async (StudentAttendanceId, updateBody) => {
 // };
 
 const getStudentAttendanceSummary = async (scode, date) => {
-  // // Get total students count
-  // const totalStudentsCount = await Student.countDocuments({ scode });
+  const totalStudentsCount = await Student.countDocuments({ scode });
+  const studentIds = await Student.find({ scode }, 'studentId').lean();
+  const studentIdValues = studentIds.map((student) => student.studentId);
 
-  // // Get all studentIds matching the scode
-  // const studentIds = await Student.find({ scode }, 'studentId').lean();
-  // const studentIdValues = studentIds.map((student) => student.studentId);
+  const attendanceData = await StudentAttendanceSchema.find({
+    'entries.studentId': { $in: studentIdValues },
+    date,
+  });
 
-  // // Get attendance counts for all students on the given date
-  // const allStudentsAttendance = await StudentAttendanceSchema.find({
-  //   studentId: { $in: studentIdValues },
-  //   date,
-  // }).lean();
+  let presentStudentsCount = 0;
+  let absentStudentsCount = 0;
 
-  // // Calculate counts for each attendance type
-  // const presentStudentsCount = allStudentsAttendance.filter(
-  //   (attendance) => attendance.AttendenceStatus === 'present'
-  // ).length;
-
-  // const absentStudentsCount = allStudentsAttendance.filter((attendance) => attendance.AttendenceStatus === 'absent').length;
-
-  // return {
-  //   totalStudents: totalStudentsCount,
-  //   presentStudents: presentStudentsCount,
-  //   absentStudents: absentStudentsCount,
-  // };
-  try {
-    const totalStudentsCount = await Student.countDocuments({ scode });
-    const studentIds = await Student.find({ scode }, 'studentId').lean();
-    const studentIdValues = studentIds.map((student) => student.studentId);
-
-    const attendanceData = await StudentAttendanceSchema.find({
-      'entries.studentId': { $in: studentIdValues },
-      date,
-    });
-
-    let presentStudentsCount = 0;
-    attendanceData.forEach((entry) => {
-      const presentEntry = entry.entries.find((e) => e.attendanceStatus === 'present');
-      if (presentEntry) {
+  attendanceData.forEach((entry) => {
+    entry.entries.forEach((e) => {
+      if (e.attendanceStatus === 'present') {
         /* eslint-disable-next-line no-plusplus */
         presentStudentsCount++;
-      }
-    });
-
-    let absentStudentsCount = 0;
-    attendanceData.forEach((entry) => {
-      const absentStudent = entry.entries.find((e) => e.attendanceStatus === 'absent');
-      if (absentStudent) {
+      } else if (e.attendanceStatus === 'absent') {
         /* eslint-disable-next-line no-plusplus */
         absentStudentsCount++;
       }
     });
-    const data = {
-      totalStudentsCount,
-      presentStudentsCount,
-      absentStudentsCount,
-    };
+  });
 
-    return data;
-  } catch (error) {
-    return { error: 'Internal Server Error' };
-  }
+  const data = {
+    totalStudentsCount,
+    presentStudentsCount,
+    absentStudentsCount,
+  };
+
+  return data;
 };
 
 /**
