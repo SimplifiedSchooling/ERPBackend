@@ -40,8 +40,8 @@ const getAssectById = async (id) => {
  * @param {ObjectId} scode
  * @returns {Promise<Assect>}
  */
-const getAssectByAssetIdAndScode = async (scode, assetId) => {
-  return Assect.findOne({ scode, assetId });
+const getAssectByAssetIdAndScode = async (assetId, scode) => {
+  return Assect.findOne({ assetId, scode });
 };
 /**
  * Update Assect by assectId and scode
@@ -60,8 +60,9 @@ const getAssectByAssetIdAndScode = async (scode, assetId) => {
 //   return assect;
 // };
 
-const updateAssectById = async (assectId, scode, updateBody) => {
-  const assect = await getAssectByAssetIdAndScode(assectId, scode);
+const updateAssectById = async (assetId, scode, updateBody) => {
+  const assect = await getAssectByAssetIdAndScode(assetId, scode);
+
   if (!assect) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Asset not found');
   }
