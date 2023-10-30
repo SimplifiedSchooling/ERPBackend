@@ -100,3 +100,4 @@ module.exports.hostelController = require('./hostel.controller');
 module.exports.assectController = require('./assect.controller');
 module.exports.attendanceVerifyController = require('./attendance.verify.controller');
 module.exports.assetMasterController = require('./masterControllers/assetMaster.controller');
+module.exports.parentController = require('./parent.controller');

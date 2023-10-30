@@ -108,3 +108,4 @@ module.exports.hostelService = require('./hostel.service');
 module.exports.assectService = require('./assect.service');
 module.exports.attendanceVerifyService = require('./attendance.verify.service');
 module.exports.assetMasterService = require('./masterService/assetMaster.service');
+module.exports.parentService = require('./parent.service');

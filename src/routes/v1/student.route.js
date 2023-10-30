@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const uploads = multer({ storage });
 
 router
-  .route('/bulkupload')
+  .route('/bulkupload/:sessionId/:classId/:sectionId')
   .post(uploads.single('file'), validate(StudentValidation.studentSchema), StudentController.bulkUploadFile);
 
 router
@@ -44,10 +44,29 @@ module.exports = router;
 
 /**
  * @swagger
- * /student/bulkupload:
+ * /student/bulkupload/{sessionId}/{classId}/{sectionId}:
  *   post:
- *     summary: Upload a CSV file for bulk student upload
+ *     summary: Upload a CSV file for bulk student upload with session, class, and section
  *     tags: [Students]
+ *     parameters:
+ *       - in: path
+ *         name: sessionId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Session ID
+ *       - in: path
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Class ID
+ *       - in: path
+ *         name: sectionId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Section ID
  *     requestBody:
  *       required: true
  *       content:
@@ -60,7 +79,7 @@ module.exports = router;
  *                 format: binary
  *     responses:
  *       201:
- *         description: Successfully added CSV file
+ *         description: Successfully added CSV file with session, class, and section
  *       404:
  *         description: Missing file
  */
