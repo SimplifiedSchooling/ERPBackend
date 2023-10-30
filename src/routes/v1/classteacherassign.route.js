@@ -26,6 +26,10 @@ router
   .patch(validate(ClassteacherValidation.updateClassTeacherById), ClassteacherController.updateSingleClassTeacher)
   .delete(validate(ClassteacherValidation.deleteClassTeacherById), ClassteacherController.deleteSingleClassteacher);
 
+router
+  .route('/count/totalCounts')
+  .get(validate(ClassteacherValidation.getTotalCounts), ClassteacherController.getTotalCountsController);
+
 module.exports = router;
 
 /**
@@ -33,6 +37,32 @@ module.exports = router;
  * tags:
  *   name: Classteacher
  *   description: Classteacher
+ */
+
+/**
+ * @swagger
+ * /classteacher/count/totalCounts:
+ *   get:
+ *     summary: Get total counts for students.
+ *     tags: [Classteacher]
+ *     parameters:
+ *       - in: query
+ *         name: classId
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: sectionId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful operation
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
  */
 
 /**
