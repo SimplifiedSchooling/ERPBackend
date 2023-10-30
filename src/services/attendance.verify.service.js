@@ -72,22 +72,6 @@ const deleteAttendanceVerifyById = async (Id) => {
  * @param {string} date - Attendance date
  * @returns {Promise<AttendanceVerify>} ts
  */
-// const getAttendanceDetails = async (classId, sectionId, date) => {
-//   const attendanceData = await AttendanceVerify.findOne({ classId, sectionId, date });
-
-//   if (!attendanceData) {
-//     return { error: 'Attendance data not found' };
-//   }
-//   const studentIds = [attendanceData.studentId1, attendanceData.studentId2, attendanceData.studentId3];
-//   const students = await Student.find({ studentId: { $in: studentIds } });
-
-//   const result = {
-//     attendanceData,
-//     students,
-//   };
-
-//   return result;
-// };
 /**
  * Get Attendance Details
  * @param {string} classId - Class ID (as a string or ObjectId)

@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { ClassTeacher } = require('../models');
+const { ClassTeacher, Student, StudentSession } = require('../models');
 const { getStudentsByClassAndSection } = require('./student.session.service');
 const { getAttendanceData } = require('./studentattendance.service');
 const ApiError = require('../utils/ApiError');
@@ -106,6 +106,24 @@ const deleteClassTeacherById = async (classTeacherId) => {
   await singleClassTeacher.remove();
   return singleClassTeacher;
 };
+/**
+ * Get total counts for students based on classId and sectionId.
+ * @param {string} classId- The ID of the class.
+ * @param {string} sectionId- The ID of the section.
+ */
+const getTotalCounts = async (classId, sectionId) => {
+  const studentSessions = await StudentSession.find({ classId, sectionId });
+  const studentIds = studentSessions.map((session) => session.studentId);
+  const students = await Student.find({ studentId: { $in: studentIds } });
+  const totalStudentCount = students.length;
+  const totalMaleStudentCount = students.filter((student) => student.gender === 'Male').length;
+  const totalFemaleStudentCount = students.filter((student) => student.gender === 'Female').length;
+  return {
+    totalStudentCount,
+    totalMaleStudentCount,
+    totalFemaleStudentCount,
+  };
+};
 
 module.exports = {
   createClassTeacher,
@@ -116,4 +134,5 @@ module.exports = {
   getStudentsForTeacher,
   getAttendanceListForTeacher,
   getClassByTecherId,
+  getTotalCounts,
 };

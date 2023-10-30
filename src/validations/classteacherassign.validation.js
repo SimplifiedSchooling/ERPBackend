@@ -28,6 +28,13 @@ const getAttendenceList = {
   }),
 };
 
+const getTotalCounts = {
+  query: Joi.object().keys({
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
+  }),
+};
+
 const getClassTeachersByBookId = {
   params: Joi.object().keys({
     bookId: Joi.string().custom(objectId).required(),
@@ -85,4 +92,5 @@ module.exports = {
   getAllStudentByclassTeacherId,
   getAttendenceList,
   getClassTeachersByTeacherId,
+  getTotalCounts,
 };
