@@ -16,10 +16,11 @@ const bulkUpload = catchAsync(async (req, res) => {
 });
 
 const bulkUploadFile = catchAsync(async (req, res) => {
+  const { sessionId, classId, sectionId } = req.params;
   if (req.file) {
     const csvFilePath = join(uploadsFolder, req.file.filename);
     const csvJsonArray = await csv().fromFile(csvFilePath);
-    const staff = await studentService.bulkUpload(null, csvJsonArray);
+    const staff = await studentService.bulkUpload(null, csvJsonArray, sessionId, classId, sectionId);
     res.status(httpStatus.CREATED).send(staff);
   } else {
     throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');

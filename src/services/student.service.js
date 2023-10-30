@@ -3,7 +3,7 @@
 const httpStatus = require('http-status');
 const crypto = require('crypto');
 const randomstring = require('randomstring');
-const { Student, User, StudentSession } = require('../models');
+const { Student, User, StudentSession, Parent } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const generateUsernameFromName = (name) => {
@@ -29,22 +29,24 @@ const generate8DigitNumericID = () => {
 const createStudent = async (studentData) => {
   const userName = generateUsernameFromName(studentData.middlename);
   const studentId = await generate8DigitNumericID();
-
+  const checkParent = await Parent.find({ name: studentData.middlename, mobNumber: studentData.mobNumber });
   const newStudent = await Student.create({
     ...studentData,
     studentId, // Assign the generated studentId
   });
-
+  let parentUser;
   const randomPassword = crypto.randomBytes(16).toString('hex');
-  const parentUser = await User.create({
-    name: newStudent.middlename,
-    userId: studentId,
-    scode: newStudent.scode,
-    mobNumber: newStudent.mobNumber,
-    userName,
-    password: randomPassword,
-    role: 'parent',
-  });
+  if (!checkParent) {
+    parentUser = await User.create({
+      name: newStudent.middlename,
+      userId: studentId,
+      scode: newStudent.scode,
+      mobNumber: newStudent.mobNumber,
+      userName,
+      password: randomPassword,
+      role: 'parent',
+    });
+  }
 
   const username = generateUsernameFromName(studentData.firstname);
   const randomPass = crypto.randomBytes(16).toString('hex');
@@ -141,9 +143,105 @@ const deleteStudentById = async (studentId) => {
   return student;
 };
 
+// const studentBulkFilter = (options) => {
+//   return {
+//     filter: options.filter || (options.saral_id ? { saral_id: options.saral_id } : {}),
+//     getFilter() {
+//       return this.filter;
+//     },
+//   };
+// };
+
+// const getStudentBySaral = async (filter) => {
+//   const studentFilter = studentBulkFilter(filter).getFilter();
+//   if (studentFilter) {
+//     const record = await Student.findOne(studentFilter).exec();
+//     return record;
+//   }
+//   return { message: 'Missing query params !!!' };
+// };
+
+// const bulkUpload = async (studentArray, csvFilePath = null) => {
+//   let modifiedStudentsArray = studentArray;
+//   if (csvFilePath) {
+//     modifiedStudentsArray = { students: csvFilePath };
+//   }
+//   if (!modifiedStudentsArray.students || !modifiedStudentsArray.students.length)
+//     return { error: true, message: 'missing array' };
+
+//   const records = [];
+//   const dups = [];
+
+//   await Promise.all(
+//     modifiedStudentsArray.students.map(async (student) => {
+//       const studentFound = await getStudentBySaral({ saral_id: student.saral_id });
+//       const generate8DigitNum = () => {
+//         const min = 10000000; // Smallest 8-digit number
+//         const max = 99999999; // Largest 8-digit number
+//         return Math.floor(Math.random() * (max - min + 1)) + min;
+//       };
+//       if (studentFound) {
+//         dups.push(student);
+//       } else {
+//         let record = new Student(student);
+//         record = await record.save();
+//         if (record) {
+//           records.push(student);
+//           // Create the student user
+
+//           const studentId = await generate8DigitNum();
+//           const username = await generateUsernameFromName(student.firstname);
+//           const randomPass = crypto.randomBytes(16).toString('hex');
+//           await User.create({
+//             name: `${student.firstname} ${student.lastname}`,
+//             userId: studentId,
+//             scode: student.scode,
+//             mobNumber: student.mobNumber,
+//             userName: username,
+//             password: randomPass,
+//             role: 'student',
+//           });
+
+//           const userName = await generateUsernameFromName(student.middlename);
+//           const randomPassword = crypto.randomBytes(16).toString('hex');
+//           await User.create({
+//             name: student.middlename,
+//             userId: studentId,
+//             scode: student.scode,
+//             mobNumber: student.mobNumber,
+//             userName,
+//             password: randomPassword,
+//             role: 'parent',
+//           });
+//         }
+//       }
+//     })
+//   );
+
+//   const duplicates = {
+//     totalDuplicates: dups.length ? dups.length : 0,
+//     data: dups.length ? dups : [],
+//   };
+//   const nonduplicates = {
+//     totalNonDuplicates: records.length ? records.length : 0,
+//     data: records.length ? records : [],
+//   };
+//   return { nonduplicates, duplicates };
+// };
+
+const createStudentSession = async (sessionId, classId, sectionId, studentId, scode) => {
+  await StudentSession.create({
+    sessionId,
+    studentId,
+    classId,
+    sectionId,
+    scode,
+  });
+};
+
 const studentBulkFilter = (options) => {
   return {
-    filter: options.filter || (options.name ? { name: options.name } : {}),
+    filter: options.filter || (options.saral_id ? { saral_id: options.saral_id } : {}),
     getFilter() {
       return this.filter;
     },
@@ -159,7 +257,7 @@ const getStudentBySaral = async (filter) => {
   return { message: 'Missing query params !!!' };
 };
 
-const bulkUpload = async (studentArray, csvFilePath = null) => {
+const bulkUpload = async (studentArray, csvFilePath = null, sessionId, classId, sectionId) => {
   let modifiedStudentsArray = studentArray;
   if (csvFilePath) {
     modifiedStudentsArray = { students: csvFilePath };
@@ -172,12 +270,13 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
 
   await Promise.all(
     modifiedStudentsArray.students.map(async (student) => {
-      const studentFound = await getStudentBySaral({ name: student.name });
+      const studentFound = await getStudentBySaral({ saral_id: student.saral_id });
       const generate8DigitNum = () => {
         const min = 10000000; // Smallest 8-digit number
         const max = 99999999; // Largest 8-digit number
         return Math.floor(Math.random() * (max - min + 1)) + min;
       };
+
       if (studentFound) {
         dups.push(student);
       } else {
@@ -186,7 +285,6 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
         if (record) {
           records.push(student);
           // Create the student user
-
           const studentId = await generate8DigitNum();
           const username = await generateUsernameFromName(student.firstname);
           const randomPass = crypto.randomBytes(16).toString('hex');
@@ -211,6 +309,9 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
             password: randomPassword,
             role: 'parent',
           });
+
+          // Create the student session
+          await createStudentSession(sessionId, classId, sectionId, studentId, student.scode);
         }
       }
     })
@@ -226,6 +327,8 @@ const bulkUpload = async (studentArray, csvFilePath = null) => {
   };
   return { nonduplicates, duplicates };
 };
+
+// Existing helper functions...
 
 module.exports = {
   createStudent,
