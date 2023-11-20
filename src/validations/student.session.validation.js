@@ -59,15 +59,10 @@ const updateStudentSessionById = {
   params: Joi.object().keys({
     studentSessionId: Joi.required().custom(objectId).required(),
   }),
-  body: Joi.object()
-    .keys({
-      sessionId: Joi.string(),
-      studentId: Joi.number(),
-      classId: Joi.string(),
-      sectionId: Joi.string(),
-      scode: Joi.string(),
-    })
-    .min(1),
+  body: Joi.object().keys({
+    classId: Joi.string(),
+    sectionId: Joi.string(),
+  }),
 };
 const deleteStudentSessionById = {
   params: Joi.object().keys({
