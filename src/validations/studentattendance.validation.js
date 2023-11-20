@@ -15,6 +15,7 @@ const studentAttendanceSchema = Joi.object({
   time: Joi.string().required(),
   scode: Joi.string().required(),
 });
+
 const getAllStudentAttendance = {
   query: Joi.object().keys({
     date: Joi.string(),

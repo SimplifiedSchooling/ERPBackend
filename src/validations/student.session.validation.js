@@ -34,6 +34,7 @@ const getAllStudentByclassAndsection = {
     scode: Joi.string().required(),
     classId: Joi.string().required(),
     sectionId: Joi.string().required(),
+    date: Joi.string().required(),
   }),
 };
 
