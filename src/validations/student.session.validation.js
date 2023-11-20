@@ -38,6 +38,14 @@ const getAllStudentByclassAndsection = {
   }),
 };
 
+const getAllStudentListByclassAndsection = {
+  query: Joi.object().keys({
+    scode: Joi.string().required(),
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
+  }),
+};
+
 const getAllStudentSession = {
   query: Joi.object().keys({
     attedance_type: Joi.string(),
@@ -76,4 +84,5 @@ module.exports = {
   getAllStudentByclassAndsection,
   getAllStudentByclassIdAndScode,
   getStudentByStudentId,
+  getAllStudentListByclassAndsection,
 };
