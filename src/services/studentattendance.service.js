@@ -491,15 +491,19 @@ const getAttendanceData = async (classId, sectionId, date) => {
 
 /**
  * Get the week report for a user.
- * @param {string} userId - The ID of the user.
+ * @param {string} scode - The ID of the scode.
+ * @param {string} classId - The ID of the classId.
+ * @param {string} sectionId - The ID of the sectionId.
+ * @param {string} date - The date.
  * @returns {Promise<StudentAttendanceSchema>} - An array containing the week report.
  */
-const getWeekReport = async () => {
-  const startOfWeek = moment().startOf('isoWeek');
+const getWeekReport = async (scode, classId, sectionId, date) => {
+  // const dayAttendance = await StudentAttendanceSchema.findOne({ date, scode, classId, sectionId });
+  const startOfWeek = moment(date).startOf('isoWeek');
   const daysOfWeek = Array.from({ length: 6 }, (_, i) => startOfWeek.clone().add(i, 'days'));
   const attendancePromises = daysOfWeek.map(async (day) => {
     const formattedDate = day.format('YYYY-MM-DD');
-    const dayAttendance = await StudentAttendanceSchema.findOne({ date: formattedDate });
+    const dayAttendance = await StudentAttendanceSchema.findOne({ date: formattedDate, scode, classId, sectionId });
     return { day, dayAttendance };
   });
   const dayAttendances = await Promise.all(attendancePromises);
@@ -517,10 +521,33 @@ const getWeekReport = async () => {
       status,
     };
   });
-
   return weekReport;
 };
+// const getWeekReport = async (scode, classId, sectionId, date) => {
+//   const startOfWeek = moment(date).startOf('isoWeek');
+//   const daysOfWeek = Array.from({ length: 6 }, (_, i) => startOfWeek.clone().add(i, 'days'));
+//   console.log(daysOfWeek);
+//   const attendancePromises = daysOfWeek.map(async (day) => {
+//     const formattedDate = day.format('YYYY-MM-DD');
+//     const dayAttendance = await StudentAttendanceSchema.findOne({ date: formattedDate, scode, classId, sectionId });
+//     return { day, dayAttendance };
+//   });
 
+//   const dayAttendances = await Promise.all(attendancePromises);
+//   console.log(dayAttendances);
+//   const weekReport = dayAttendances.map(({ day, dayAttendance }) => {
+//     const isToday = moment(date).isSame(day, 'day');
+//     const status = dayAttendance ? 'Done' : isToday ? 'Done' : 'Pending';
+
+//     return {
+//       day: day.format('dddd'),
+//       date: day.format('YYYY-MM-DD'),
+//       status,
+//     };
+//   });
+
+//   return weekReport;
+// };
 // /**
 //  * Get classwise student list with present and absent counts based on gender.
 //  * @param {string} campusId - The ID of the campus.

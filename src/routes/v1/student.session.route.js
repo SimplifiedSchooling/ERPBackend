@@ -5,7 +5,7 @@ const studentSessionController = require('../../controllers/student.session.cont
 
 const router = express.Router();
 router
-  .route('/studentsByClassAndSection')
+  .route('/studentsbyclassandsection')
   .get(
     validate(StudentSessionValidation.getAllStudentByclassAndsection),
     studentSessionController.getStudentsByClassAndSection
@@ -42,9 +42,9 @@ module.exports = router;
 
 /**
  * @swagger
- * /studentSession/studentsByClassAndSection:
+ * /studentSession/studentsbyclassandsection:
  *   get:
- *     summary: Get students by scode class and section
+ *     summary: Get students by scode, class and section
  *     tags: [StudentSession]
  *     parameters:
  *       - in: query
@@ -62,6 +62,11 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: The ID of the section to filter by.
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The attendance date to filter by.
  *     responses:
  *       '200':
  *         description: A list of students matching the specified class and section.
