@@ -385,27 +385,15 @@ module.exports = router;
  *     StudentSessionUpdateInput:
  *       type: object
  *       properties:
- *         session_Id:
- *           type: string
- *           description: ID of the session_Id
- *         student_Id:
- *           type: string
- *           description: ID of the student_Id
- *         class_Id:
+ *         classId:
  *           type: string
  *           description: ID of the class_Id
- *         section_Id:
+ *         sectionId:
  *           type: string
  *           description: ID of the section_Id
- *         scode:
- *           type: string
- *           description: ID of the scode
  *       example:
- *         session_Id: 614a7e7d7f1d813bbf8e89a9
- *         student_Id: 614a7e7d7f1d813bbf8e89a9
- *         class_Id: 614a7e7d7f1d813bbf8e89a9
- *         section_Id: 614a7e7d7f1d813bbf8e89a9
- *         scode: 5896c340-6828-11ee-a348-e9de56c6f44e
+ *         classId: 614a7e7d7f1d813bbf8e89a9
+ *         sectionId: 614a7e7d7f1d813bbf8e89a9
  */
 
 // /**

@@ -565,6 +565,10 @@ module.exports = router;
  *       properties:
  *         studentId:
  *           type: string
+ *         classId:
+ *           type: string
+ *         sectionId:
+ *           type: string
  *         role:
  *           type: string
  *         department:
