@@ -10,6 +10,13 @@ router
     validate(StudentSessionValidation.getAllStudentByclassAndsection),
     studentSessionController.getStudentsByClassAndSection
   );
+
+router
+  .route('/studentslistbyclassandsection')
+  .get(
+    validate(StudentSessionValidation.getAllStudentListByclassAndsection),
+    studentSessionController.getStudentsListByClassAndSection
+  );
 router
   .route('/')
   .post(validate(StudentSessionValidation.createStudentSession), studentSessionController.createStudentSession)
@@ -44,7 +51,7 @@ module.exports = router;
  * @swagger
  * /studentSession/studentsbyclassandsection:
  *   get:
- *     summary: Get students by scode, class and section
+ *     summary: Get students by scode, class and section or check attendance for matching date
  *     tags: [StudentSession]
  *     parameters:
  *       - in: query
@@ -81,7 +88,42 @@ module.exports = router;
  *       '500':
  *         description: Internal server error. An error occurred while processing the request.
  */
-
+/**
+ * @swagger
+ * /studentSession/studentslistbyclassandsection:
+ *   get:
+ *     summary: Get students list by scode, class and section
+ *     tags: [StudentSession]
+ *     parameters:
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The ID of the scode to filter by.
+ *       - in: query
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: The ID of the class to filter by.
+ *       - in: query
+ *         name: sectionId
+ *         schema:
+ *           type: string
+ *         description: The ID of the section to filter by.
+ *     responses:
+ *       '200':
+ *         description: A list of students matching the specified class and section.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student'  # Replace with the actual schema for a student
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
 /**
  * @swagger
  * /studentSession:
