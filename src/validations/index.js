@@ -98,3 +98,5 @@ module.exports.hostelValidation = require('./hostel.validation');
 module.exports.assectValidaton = require('./assect.validation');
 module.exports.attendanceVerifyvalidation = require('./attendance.verify.validation');
 module.exports.menuValidation = require('./menu.validation');
+module.exports.LectureAttendancevalidation = require('./lecture.attendance.validation');
+module.exports.StaffAttendancevalidation = require('./staff.attendance.validation');
