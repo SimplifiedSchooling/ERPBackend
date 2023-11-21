@@ -82,24 +82,14 @@ const deleteSingleClassteacher = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(deletedClassteacher);
 });
 
-const getTotalCountsController = async (req, res) => {
-  try {
-    const { classId, sectionId } = req.query;
-
-    // Validate that classId and sectionId are provided
-    if (!classId || !sectionId) {
-      return res.status(400).json({ error: 'Both classId and sectionId are required in the query parameters.' });
-    }
-
-    // Call the getTotalCounts function
-    const counts = await classTeacherServices.getTotalCounts(classId, sectionId);
-
-    // Return the result as JSON
-    res.json(counts);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+const getTotalCountsController = catchAsync(async (req, res) => {
+  const { classId, sectionId } = req.query;
+  if (!classId || !sectionId) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Both classId and sectionId are required in the query parameters.');
   }
-};
+  const counts = await classTeacherServices.getTotalCounts(classId, sectionId);
+  res.json(counts);
+});
 
 module.exports = {
   createClassteacher,

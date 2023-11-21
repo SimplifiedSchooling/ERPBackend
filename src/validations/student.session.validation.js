@@ -34,6 +34,15 @@ const getAllStudentByclassAndsection = {
     scode: Joi.string().required(),
     classId: Joi.string().required(),
     sectionId: Joi.string().required(),
+    date: Joi.string().required(),
+  }),
+};
+
+const getAllStudentListByclassAndsection = {
+  query: Joi.object().keys({
+    scode: Joi.string().required(),
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
   }),
 };
 
@@ -50,15 +59,10 @@ const updateStudentSessionById = {
   params: Joi.object().keys({
     studentSessionId: Joi.required().custom(objectId).required(),
   }),
-  body: Joi.object()
-    .keys({
-      sessionId: Joi.string(),
-      studentId: Joi.number(),
-      classId: Joi.string(),
-      sectionId: Joi.string(),
-      scode: Joi.string(),
-    })
-    .min(1),
+  body: Joi.object().keys({
+    classId: Joi.string(),
+    sectionId: Joi.string(),
+  }),
 };
 const deleteStudentSessionById = {
   params: Joi.object().keys({
@@ -75,4 +79,5 @@ module.exports = {
   getAllStudentByclassAndsection,
   getAllStudentByclassIdAndScode,
   getStudentByStudentId,
+  getAllStudentListByclassAndsection,
 };

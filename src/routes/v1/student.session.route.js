@@ -5,10 +5,17 @@ const studentSessionController = require('../../controllers/student.session.cont
 
 const router = express.Router();
 router
-  .route('/studentsByClassAndSection')
+  .route('/studentsbyclassandsection')
   .get(
     validate(StudentSessionValidation.getAllStudentByclassAndsection),
     studentSessionController.getStudentsByClassAndSection
+  );
+
+router
+  .route('/studentslistbyclassandsection')
+  .get(
+    validate(StudentSessionValidation.getAllStudentListByclassAndsection),
+    studentSessionController.getStudentsListByClassAndSection
   );
 router
   .route('/')
@@ -42,9 +49,50 @@ module.exports = router;
 
 /**
  * @swagger
- * /studentSession/studentsByClassAndSection:
+ * /studentSession/studentsbyclassandsection:
  *   get:
- *     summary: Get students by scode class and section
+ *     summary: Get students by scode, class and section or check attendance for matching date
+ *     tags: [StudentSession]
+ *     parameters:
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The ID of the scode to filter by.
+ *       - in: query
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: The ID of the class to filter by.
+ *       - in: query
+ *         name: sectionId
+ *         schema:
+ *           type: string
+ *         description: The ID of the section to filter by.
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The attendance date to filter by.
+ *     responses:
+ *       '200':
+ *         description: A list of students matching the specified class and section.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Student'  # Replace with the actual schema for a student
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
+ */
+/**
+ * @swagger
+ * /studentSession/studentslistbyclassandsection:
+ *   get:
+ *     summary: Get students list by scode, class and section
  *     tags: [StudentSession]
  *     parameters:
  *       - in: query
@@ -76,7 +124,6 @@ module.exports = router;
  *       '500':
  *         description: Internal server error. An error occurred while processing the request.
  */
-
 /**
  * @swagger
  * /studentSession:
@@ -338,27 +385,15 @@ module.exports = router;
  *     StudentSessionUpdateInput:
  *       type: object
  *       properties:
- *         session_Id:
- *           type: string
- *           description: ID of the session_Id
- *         student_Id:
- *           type: string
- *           description: ID of the student_Id
- *         class_Id:
+ *         classId:
  *           type: string
  *           description: ID of the class_Id
- *         section_Id:
+ *         sectionId:
  *           type: string
  *           description: ID of the section_Id
- *         scode:
- *           type: string
- *           description: ID of the scode
  *       example:
- *         session_Id: 614a7e7d7f1d813bbf8e89a9
- *         student_Id: 614a7e7d7f1d813bbf8e89a9
- *         class_Id: 614a7e7d7f1d813bbf8e89a9
- *         section_Id: 614a7e7d7f1d813bbf8e89a9
- *         scode: 5896c340-6828-11ee-a348-e9de56c6f44e
+ *         classId: 614a7e7d7f1d813bbf8e89a9
+ *         sectionId: 614a7e7d7f1d813bbf8e89a9
  */
 
 // /**

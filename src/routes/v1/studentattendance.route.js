@@ -123,6 +123,26 @@ module.exports = router;
  *     summary:  get week status of attendance
  *     tags: [StudentAttendance]
  *     parameters:
+ *       - in: query
+ *         name: scode
+ *         schema:
+ *           type: string
+ *         description: The scode to filter by.
+ *       - in: classId
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: The classId to filter by.
+ *       - in: sectionId
+ *         name: sectionId
+ *         schema:
+ *           type: string
+ *         description: The sectionId to filter by.
+ *       - in: query
+ *         name: date
+ *         schema:
+ *           type: string
+ *         description: The date to filter by.
  *     responses:
  *       '200':
  *         description: A list of students attendence matching the specified class, section and date
