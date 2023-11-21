@@ -3,10 +3,11 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { chapterService } = require('../services');
+const { filterPath } = require('../utils/s3middleware');
 
 const createChapter = catchAsync(async (req, res) => {
   const { file } = req;
-  req.body.thumbnail = await file.location;
+  req.body.thumbnail = await filterPath(file.location);
   const newChapter = await chapterService.createChapter(req.body);
   res.status(httpStatus.CREATED).send(newChapter);
 });

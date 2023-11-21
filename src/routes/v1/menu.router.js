@@ -2,13 +2,13 @@ const express = require('express');
 const validate = require('../../middlewares/validate');
 const { menuController } = require('../../controllers');
 const { menuValidation } = require('../../validations');
-const S3Middleware = require('../../utils/s3middleware');
+const { createS3Middleware } = require('../../utils/s3middleware');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(S3Middleware('lmscontent'), validate(menuValidation.createMenu), menuController.createMenu)
+  .post(createS3Middleware('lmscontent'), validate(menuValidation.createMenu), menuController.createMenu)
   .get(validate(menuValidation.getAllMenu), menuController.getAllMenu);
 
 module.exports = router;

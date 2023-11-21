@@ -35,6 +35,15 @@ const getQuizeById = catchAsync(async (req, res) => {
   }
   res.send(quize);
 });
+
+const getQuizeByChapterId = catchAsync(async (req, res) => {
+  const quize = await quizeService.getQuizeBychapterId(req.params.chapterId);
+  if (!quize) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Quize not found');
+  }
+  res.send(quize);
+});
+
 const getQuizeByQuizName = catchAsync(async (req, res) => {
   const quize = await quizeService.getQuizeByQestion(req.body.quizName);
   if (!quize) {
@@ -80,4 +89,5 @@ module.exports = {
   uploadFiles,
   getQuizByClassIdAndDayWise,
   getQuizeByQuizName,
+  getQuizeByChapterId,
 };

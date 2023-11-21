@@ -2,13 +2,13 @@ const express = require('express');
 const validate = require('../../middlewares/validate');
 const chapterValidation = require('../../validations/chapter.validation');
 const chaterController = require('../../controllers/chapter.controller');
-const S3Middleware = require('../../utils/s3middleware');
+const { createS3Middleware } = require('../../utils/s3middleware');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(S3Middleware('subject'), validate(chapterValidation.createChapter), chaterController.createChapter)
+  .post(createS3Middleware('subject'), validate(chapterValidation.createChapter), chaterController.createChapter)
   .get(validate(chapterValidation.getAllChapter), chaterController.getChapter);
 
 router
@@ -18,7 +18,7 @@ router
 router
   .route('/:chapterId')
   .get(validate(chapterValidation.getChapter), chaterController.getSingleChapter)
-  .patch(S3Middleware('subject'), chaterController.updateSingleClass)
+  .patch(createS3Middleware('subject'), chaterController.updateSingleClass)
   .delete(validate(chapterValidation.deleteChapterById), chaterController.deleteSingleChapter);
 
 // validate(chapterValidation.updateChapterById),

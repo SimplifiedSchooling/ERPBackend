@@ -37,6 +37,10 @@ router
 router.post('/upload_files', upload.single('files'), quizeController.uploadFiles);
 
 router
+  .route('/getquiz-by-chapter/:chapterId')
+  .get(validate(quizeValidation.getQuizeByChapterId), quizeController.getQuizeByChapterId);
+
+router
   .route('/getquizByDayWise/:classId')
   .get(validate(quizeValidation.getQuizDayWise), quizeController.getQuizByClassIdAndDayWise);
 
@@ -591,6 +595,35 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: classId
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /quizes/getquiz-by-chapter/{chapterId}:
+ *   get:
+ *     summary: Get a Quize By chapterId
+ *     tags: [Quiz]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: chapterId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Quize
  *     responses:
  *       "200":
  *         description: OK
