@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const randomstring = require('randomstring');
 const { Student, User, StudentSession, Parent } = require('../models');
 const ApiError = require('../utils/ApiError');
+const parentService = require('./parent.service');
 
 const generateUsernameFromName = (name) => {
   const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
@@ -27,25 +28,29 @@ const generate8DigitNumericID = () => {
  * @returns {Promise<Object>}
  */
 const createStudent = async (studentData) => {
-  const userName = generateUsernameFromName(studentData.middlename);
   const studentId = await generate8DigitNumericID();
-  const checkParent = await Parent.find({ name: studentData.middlename, mobNumber: studentData.mobNumber });
   const newStudent = await Student.create({
     ...studentData,
     studentId, // Assign the generated studentId
   });
-  let parentUser;
-  const randomPassword = crypto.randomBytes(16).toString('hex');
-  if (!checkParent) {
-    parentUser = await User.create({
-      name: newStudent.middlename,
-      userId: studentId,
-      scode: newStudent.scode,
-      mobNumber: newStudent.mobNumber,
-      userName,
-      password: randomPassword,
+  // Check if a parent with the same name and mobile number exists
+  let existingParent = await Parent.findOne({ name: studentData.middlename, mobNumber: studentData.mobNumber });
+
+  if (existingParent) {
+    // Add the student to the existing parent's student list
+    existingParent.students.push(studentId);
+    await existingParent.save();
+    existingParent = await User.findOne({ name: studentData.middlename, mobNumber: studentData.mobNumber });
+  } else {
+    // Create a new parent
+    const parentData = {
+      name: studentData.middlename,
+      mobNumber: studentData.mobNumber,
+      email: studentData.email,
+      students: [studentId],
       role: 'parent',
-    });
+    };
+    existingParent = await parentService.createParent(parentData);
   }
 
   const username = generateUsernameFromName(studentData.firstname);
@@ -67,7 +72,7 @@ const createStudent = async (studentData) => {
     sectionId: studentData.sectionId,
     scode: newStudent.scode,
   });
-  return { parentUser, newStudent, studentUser, studentSession };
+  return { existingParent, newStudent, studentUser, studentSession };
 };
 
 /**
@@ -298,17 +303,24 @@ const bulkUpload = async (studentArray, csvFilePath = null, sessionId, classId, 
             role: 'student',
           });
 
-          const userName = await generateUsernameFromName(student.middlename);
-          const randomPassword = crypto.randomBytes(16).toString('hex');
-          await User.create({
-            name: student.middlename,
-            userId: studentId,
-            scode: student.scode,
-            mobNumber: student.mobNumber,
-            userName,
-            password: randomPassword,
-            role: 'parent',
-          });
+          let existingParent = await Parent.findOne({ name: student.middlename, mobNumber: student.mobNumber });
+
+          if (existingParent) {
+            // Add the student to the existing parent's student list
+            existingParent.students.push(studentId);
+            await existingParent.save();
+            existingParent = await User.findOne({ name: student.middlename, mobNumber: student.mobNumber });
+          } else {
+            // Create a new parent
+            const parentData = {
+              name: student.middlename,
+              mobNumber: student.mobNumber,
+              email: student.email,
+              students: [studentId],
+              role: 'parent',
+            };
+            existingParent = await parentService.createParent(parentData);
+          }
 
           // Create the student session
           await createStudentSession(sessionId, classId, sectionId, studentId, student.scode);
