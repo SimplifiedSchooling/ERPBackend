@@ -108,6 +108,8 @@ const hostel = require('./hostel.route');
 const attendanceVerifyRoute = require('./attendance.verify.route');
 const assectMasterRoute = require('./masterRoutes/assetMaster.route');
 const menuRoute = require('./menu.router');
+const lectureAttendance = require('./lecture.attendance.route');
+const staffAttendance = require('./staff.attendance.route');
 
 const router = express.Router();
 
@@ -443,6 +445,14 @@ const defaultRoutes = [
   {
     path: '/studentattendance',
     route: StudentAttendanceRoute,
+  },
+  {
+    path: '/lectureattendance',
+    route: lectureAttendance,
+  },
+  {
+    path: '/staffattendancenew',
+    route: staffAttendance,
   },
   {
     path: '/applyloan',

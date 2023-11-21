@@ -102,3 +102,5 @@ module.exports.attendanceVerifyController = require('./attendance.verify.control
 module.exports.assetMasterController = require('./masterControllers/assetMaster.controller');
 module.exports.parentController = require('./parent.controller');
 module.exports.menuController = require('./menu.controller');
+module.exports.lectureAttendanceController = require('./lecture.attendance.controller');
+module.exports.staffAttendanceController = require('./staff.attendance.controller');

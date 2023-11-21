@@ -114,3 +114,5 @@ module.exports.AttendanceVerify = require('./attendance.verification.model');
 module.exports.AssetMaster = require('./masterModels/assetMaster.model');
 module.exports.LeavingCert = require('./leavingcertificate.model');
 module.exports.Menu = require('./menu.model');
+module.exports.LectureAttendance = require('./lecture.attendance.model');
+module.exports.StaffAttendanceSchema = require('./staff.attendance.model');
