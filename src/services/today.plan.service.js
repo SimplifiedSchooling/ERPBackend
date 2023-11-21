@@ -30,11 +30,29 @@ const getAllPlans = async (filter, options) => {
  * @param {Object} date
  * @returns {Promise<TodayPlan>}
  */
-const getTodayPlans = async (date) => {
-  const videos = await TodayPlan.find({ date });
-  return videos;
-};
+// const getTodayPlans = async (date) => {
+//   const videos = await TodayPlan.find({ date });
+//   return videos;
+// };
 
+const getTodayPlans = async () => {
+  const today = new Date();
+  const todayDate = today.toLocaleDateString('en-GB'); // Format: 'DD/MM/YYYY'
+
+  const todayPlans = await TodayPlan.aggregate([
+    {
+      $match: { date: todayDate },
+    },
+    {
+      $group: {
+        _id: '$class',
+        plans: { $push: '$$ROOT' },
+      },
+    },
+  ]);
+
+  return todayPlans;
+};
 /**
  * Get TodayPlan by id
  * @param {ObjectId} planId
