@@ -1,7 +1,7 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
-const planvideoController = require('../../controllers/planvideo.controller');
-const planValidation = require('../../validations/planvideo.validation');
+const planvideoController = require('../../controllers/today.plan.controller');
+const planValidation = require('../../validations/today.plan.validation');
 
 const router = express.Router();
 
@@ -23,16 +23,16 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: PlanVideo
+ *   name: TodayPlan
  *   description: APIs for managing plan videos
  */
 
 /**
  * @swagger
- * /planvideos:
+ * /todayplan:
  *   post:
  *     summary: Create a new plan video
- *     tags: [PlanVideo]
+ *     tags: [TodayPlan]
  *     requestBody:
  *       required: true
  *       content:
@@ -44,13 +44,13 @@ module.exports = router;
  *               - date
  *               - time
  *               - type
- *               - boardId
- *               - classId
- *               - subjectId
- *               - bookId
- *               - chapterId
- *               - lessonId
- *               - orderId
+ *               - board
+ *               - class
+ *               - subject
+ *               - book
+ *               - chapter
+ *               - lesson
+ *               - order
  *               - studioName
  *             properties:
  *               name:
@@ -59,43 +59,46 @@ module.exports = router;
  *                 type: string
  *               time:
  *                 type: string
- *               boardId:
+ *               board:
  *                 type: string
- *               classId:
+ *               class:
  *                 type: string
- *               subjectId:
+ *               subject:
  *                 type: string
- *               bookId:
+ *               book:
  *                 type: string
- *               chapterId:
+ *               chapter:
  *                 type: string
- *               lessonId:
+ *               lesson:
  *                 type: string
- *               mediumId:
+ *               medium:
  *                 type: string
  *               type:
  *                 type: string
- *               orderId :
+ *               order :
  *                 type: string
  *               studioName :
  *                 type: string
  *               liveStreamingPath:
  *                 type: string
+ *               presenterName:
+ *                 type: string
  *             example:
  *               name: Today Plan title
- *               date: 2023-07-25
+ *               date: 21/11/2023
  *               time: 10:00
  *               type: video
- *               boardId: 64bf7a68c0797a1734b71faa
- *               classId: 64bf7a68c0797a1734b71faa
- *               subjectId: 64bf7a68c0797a1734b71faa
- *               bookId:  64bf7a68c0797a1734b71faa
- *               chapterId: 64bf7a68c0797a1734b71faa
- *               mediumId: 64bf7a68c0797a1734b71faa
- *               lessonId: 64bf7a68c0797a1734b71faa
- *               orderId: Order No 1
+ *               board: CBSC
+ *               class: class 08
+ *               subject: Math
+ *               book: Hindi
+ *               chapter: chapter
+ *               medium: hindi
+ *               lesson: abc
+ *               order: Order No 1
  *               studioName: Studio 1
  *               liveStreamingPath: Live Stream
+ *               presenterName: onkar
  *     responses:
  *       201:
  *         description: Plan video successfully created
@@ -113,7 +116,7 @@ module.exports = router;
  *   get:
  *     summary: Get all videos
  *     description: Only admins can retrieve all video.
- *     tags: [Today Lesson]
+ *     tags: [TodayPlan]
  *     parameters:
  *       - in: query
  *         name: name
@@ -171,10 +174,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /planvideos:
+ * /todayplan:
  *   get:
  *     summary: Get all plan videos
- *     tags: [PlanVideo]
+ *     tags: [TodayPlan]
  *     responses:
  *       200:
  *         description: List of plan videos
@@ -192,10 +195,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /planvideos/{planId}:
+ * /todayplan/{planId}:
  *   get:
  *     summary: Get a single plan video by ID
- *     tags: [PlanVideo]
+ *     tags: [TodayPlan]
  *     parameters:
  *       - name: planId
  *         in: path
@@ -220,10 +223,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /planvideos/{planId}:
+ * /todayplan/{planId}:
  *   patch:
  *     summary: Update a plan video by ID
- *     tags: [PlanVideo]
+ *     tags: [TodayPlan]
  *     parameters:
  *       - name: planId
  *         in: path
@@ -244,23 +247,23 @@ module.exports = router;
  *                 type: string
  *               time:
  *                 type: string
- *               boardId:
+ *               board:
  *                 type: string
- *               classId:
+ *               class:
  *                 type: string
- *               subjectId:
+ *               subject:
  *                 type: string
- *               bookId:
+ *               book:
  *                 type: string
- *               chapterId:
+ *               chapter:
  *                 type: string
- *               lessonId:
+ *               lesson:
  *                 type: string
- *               mediumId:
+ *               medium:
  *                 type: string
  *               type:
  *                 type: string
- *               orderId :
+ *               order:
  *                 type: string
  *               studioName :
  *                 type: string
@@ -268,19 +271,20 @@ module.exports = router;
  *                 type: string
  *             example:
  *               name: Today Plan title
- *               date: 2023-07-25
+ *               date: 21/11/2023
  *               time: 10:00
  *               type: video
- *               boardId: 64bf7a68c0797a1734b71faa
- *               classId: 64bf7a68c0797a1734b71faa
- *               subjectId: 64bf7a68c0797a1734b71faa
- *               bookId:  64bf7a68c0797a1734b71faa
- *               chapterId: 64bf7a68c0797a1734b71faa
- *               mediumId: 64bf7a68c0797a1734b71faa
- *               lessonId: 64bf7a68c0797a1734b71faa
- *               orderId: Order No 1
+ *               board: CBSC
+ *               class: class 08
+ *               subject: Math
+ *               book: Hindi
+ *               chapter: chapter
+ *               medium: hindi
+ *               lesson: abc
+ *               order: Order No 1
  *               studioName: Studio 1
  *               liveStreamingPath: Live Stream
+ *               presenterName: onkar
  *     responses:
  *       200:
  *         description: Plan video successfully updated
@@ -300,10 +304,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /planvideos/{planId}:
+ * /todayplan/{planId}:
  *   delete:
  *     summary: Delete a plan video by ID
- *     tags: [PlanVideo]
+ *     tags: [TodayPlan]
  *     parameters:
  *       - name: planId
  *         in: path
@@ -324,10 +328,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /planvideos/todayplan:
+ * /todayplan/todayplan:
  *   get:
  *     summary: Get all today plan videos
- *     tags: [PlanVideo]
+ *     tags: [TodayPlan]
  *     responses:
  *       200:
  *         description: List of  videos
@@ -358,40 +362,42 @@ module.exports = router;
  *           type: string
  *         type:
  *           type: string
- *         boardId:
+ *         board:
  *           type: string
- *         mediumId:
+ *         medium:
  *           type: string
- *         classId:
+ *         class:
  *           type: string
- *         subjectId:
+ *         subject:
  *           type: string
- *         bookId:
+ *         book:
  *           type: string
- *         chapterId:
+ *         chapter:
  *           type: string
- *         lessonId:
+ *         lesson:
  *           type: string
- *         orderId:
+ *         order:
  *           type: string
  *         studioName:
  *           type: string
  *         status:
  *           type: string
  *           default: active
+ *         presenterName:
+ *           type: string
  *       required:
  *         - name
  *         - date
  *         - time
  *         - type
- *         - boardId
- *         - mediumId
- *         - classId
- *         - subjectId
- *         - bookId
- *         - chapterId
- *         - lessonId
- *         - orderId
+ *         - board
+ *         - medium
+ *         - class
+ *         - subject
+ *         - book
+ *         - chapter
+ *         - lesson
+ *         - order
  *         - studioName
  */
 

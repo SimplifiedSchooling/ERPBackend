@@ -3,7 +3,7 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const roleRoute = require('./role.route');
 const videoRoute = require('./video.route');
-const planvideoRoute = require('./planvideo.route');
+const planvideoRoute = require('./today.plan.route');
 const boardRoute = require('./board.route');
 const classesRoute = require('./classes.route');
 const chapterRoute = require('./chapter.route');
@@ -129,7 +129,7 @@ const defaultRoutes = [
     route: videoRoute,
   },
   {
-    path: '/planvideos',
+    path: '/todayplan',
     route: planvideoRoute,
   },
   {

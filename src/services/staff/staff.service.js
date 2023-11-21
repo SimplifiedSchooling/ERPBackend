@@ -68,6 +68,16 @@ const getStaffById = async (id) => {
 const getStaffByUserName = async (userName) => {
   return Staff.findOne({ userName });
 };
+
+/**
+ * Get Staff by scode
+ * @param {ObjectId} scode
+ * @returns {Promise<Staff>}
+ */
+const getStaffByScode = async (scode) => {
+  return Staff.find(scode);
+};
+
 /**
  * Update Staff by id
  * @param {ObjectId} userId
@@ -174,4 +184,5 @@ module.exports = {
   deleteStaffById,
   bulkUpload,
   getStaffByUserName,
+  getStaffByScode,
 };
