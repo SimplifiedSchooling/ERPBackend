@@ -1,3 +1,22 @@
+// const multer = require('multer');
+// const multerS3 = require('multer-s3');
+// const { v4: uuidv4 } = require('uuid');
+// const s3Client = require('./cdn');
+
+// const createStorage = (location) =>
+//   multerS3({
+//     s3: s3Client,
+//     bucket: location, // Dynamic bucket based on location
+//     acl: 'public-read',
+//     key(req, file, cb) {
+//       cb(null, `${uuidv4()}${file.originalname}`);
+//     },
+//   });
+
+// const createS3Middleware = (location) => multer({ storage: createStorage(location) }).single('file');
+
+// module.exports = createS3Middleware;
+
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const { v4: uuidv4 } = require('uuid');
@@ -9,10 +28,22 @@ const createStorage = (location) =>
     bucket: location, // Dynamic bucket based on location
     acl: 'public-read',
     key(req, file, cb) {
-      cb(null, `${uuidv4()}${file.originalname}`);
+      // Extract the file name from the full path and store it
+      const fileName = `${uuidv4()}${file.originalname}`;
+      cb(null, fileName);
     },
   });
 
 const createS3Middleware = (location) => multer({ storage: createStorage(location) }).single('file');
 
-module.exports = createS3Middleware;
+const filterPath = async (cdnUrl) => {
+  const parts = await cdnUrl.split('/');
+  const folderName = parts[parts.length - 2]; // Get the second-to-last part (folder name)
+  const fileName = parts[parts.length - 1]; // Get the last part (filename)
+  return `/${folderName}/${fileName}`;
+};
+
+module.exports = {
+  createS3Middleware,
+  filterPath,
+};

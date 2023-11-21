@@ -58,6 +58,12 @@ const getQuize = {
     quizeId: Joi.string().custom(objectId),
   }),
 };
+
+const getQuizeByChapterId = {
+  params: Joi.object().keys({
+    chapterId: Joi.string().custom(objectId),
+  }),
+};
 const getQuizDayWise = {
   params: Joi.object().keys({
     classId: Joi.string(),
@@ -118,4 +124,5 @@ module.exports = {
   uploadFiles,
   getQuizDayWise,
   getQuizeByQuizName,
+  getQuizeByChapterId,
 };
