@@ -5,7 +5,8 @@ const catchAsync = require('../utils/catchAsync');
 const { chapterService } = require('../services');
 
 const createChapter = catchAsync(async (req, res) => {
-  req.body.thumbnail = await req.file.path;
+  const { file } = req;
+  req.body.thumbnail = await file.location;
   const newChapter = await chapterService.createChapter(req.body);
   res.status(httpStatus.CREATED).send(newChapter);
 });
@@ -49,8 +50,9 @@ const getChaptersByBookId = catchAsync(async (req, res) => {
 });
 
 const updateSingleClass = catchAsync(async (req, res) => {
-  if (req.file) {
-    req.body = req.file.thumbnail;
+  const { file } = req;
+  if (file) {
+    req.body.thumbnail = await file.location;
   }
   const updateddClass = await chapterService.updateChapterById(req.params.chapterId, req.body);
   res.send(updateddClass);

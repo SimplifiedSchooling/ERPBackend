@@ -1,25 +1,14 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const chapterValidation = require('../../validations/chapter.validation');
 const chaterController = require('../../controllers/chapter.controller');
+const S3Middleware = require('../../utils/s3middleware');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'http://143.244.136.201/uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
 router
   .route('/')
-  .post(upload.single('thumbnail'), validate(chapterValidation.createChapter), chaterController.createChapter)
+  .post(S3Middleware('subject'), validate(chapterValidation.createChapter), chaterController.createChapter)
   .get(validate(chapterValidation.getAllChapter), chaterController.getChapter);
 
 router
@@ -29,8 +18,10 @@ router
 router
   .route('/:chapterId')
   .get(validate(chapterValidation.getChapter), chaterController.getSingleChapter)
-  .patch(upload.single('thumbnail'), validate(chapterValidation.updateChapterById), chaterController.updateSingleClass)
+  .patch(S3Middleware('subject'), chaterController.updateSingleClass)
   .delete(validate(chapterValidation.deleteChapterById), chaterController.deleteSingleChapter);
+
+// validate(chapterValidation.updateChapterById),
 
 router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId')
@@ -38,6 +29,28 @@ router
 
 router.route('/mobile/getbybookId/:bookId').get(chaterController.getByBookIdChapter);
 
+// router.post('/demolished', S3Middleware, async (req, res) => {
+//   try {
+//     const file = req.file;
+
+//     const demolishedData = {
+//       asset: req.body.asset,
+//       imagePath: file.location, // Assuming your middleware sets 'location' property
+//       totalAsset: req.body.totalAsset,
+//       totalDestroyed: req.body.totalDestroyed,
+//       reason: req.body.reason,
+//       date: req.body.date,
+//     };
+// console.log(demolishedData)
+//     // const result = await collection.insertOne(demolishedData);
+
+//     // Respond with the stored data
+//     res.status(201).json(result);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 module.exports = router;
 
 /**
@@ -46,13 +59,12 @@ module.exports = router;
  *   name: Chapter
  *   description: Chapter management and retrieval
  */
-
 /**
  * @swagger
  * /chapter:
  *   post:
  *     summary: Create a Chapter
- *     description: Create other Chapter.
+ *     description: Create another Chapter.
  *     tags: [Chapter]
  *     security:
  *       - bearerAuth: []
@@ -65,8 +77,8 @@ module.exports = router;
  *             properties:
  *               chapterName:
  *                 type: string
- *               thumbnail:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *               order:
  *                 type: number
@@ -82,7 +94,6 @@ module.exports = router;
  *                 type: string
  *             example:
  *               chapterName: English
- *               thumbnail: imagelink/icon1
  *               order: 1
  *               boardId: 64d9ceaef49e9f5dc06502c6
  *               mediumId: 64d327a41128844220f0cce4
@@ -209,7 +220,7 @@ module.exports = router;
  *         schema:
  *           type: string
  *     requestBody:
- *       required: true
+ *       required: false
  *       content:
  *         multipart/form-data:
  *           schema:
@@ -217,8 +228,8 @@ module.exports = router;
  *             properties:
  *               chapterName:
  *                 type: string
- *               thumbnail:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *               order:
  *                 type: number
@@ -234,7 +245,6 @@ module.exports = router;
  *                 type: string
  *             example:
  *               chapterName: English
- *               thumbnail: imagelink/icon1
  *               order: 1
  *               boardId: 64d9ceaef49e9f5dc06502c6
  *               mediumId: 64d327a41128844220f0cce4
@@ -412,4 +422,61 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       '404':
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /chapter/demolished:
+ *   post:
+ *     summary: Create a Demolished
+ *     description: Create other Demolished.
+ *     tags: [Chapter]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               asset:
+ *                 type: string
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *               totalAsset:
+ *                 type: number
+ *               totalDestroyed:
+ *                 type: string
+ *               reason:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *             example:
+ *               asset: Test
+ *               file: [binary data]
+ *               totalAsset: 12
+ *               totalDestroyed: test123
+ *               reason: 2
+ *               date: 2/01/2023
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Demolished'
+ *       "401":
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         description: Forbidden
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Forbidden'
  */

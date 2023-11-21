@@ -109,3 +109,5 @@ module.exports.assectService = require('./assect.service');
 module.exports.attendanceVerifyService = require('./attendance.verify.service');
 module.exports.assetMasterService = require('./masterService/assetMaster.service');
 module.exports.parentService = require('./parent.service');
+module.exports.LeavingcertService = require('./leavingcert.service');
+module.exports.menuService = require('./menu.service');

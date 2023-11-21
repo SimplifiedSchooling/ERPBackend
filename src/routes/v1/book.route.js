@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const bookController = require('../../controllers/book.controller');
 const bookValidation = require('../../validations/book.validation');
+// const S3 = require('../../utils/cdn');
 
 const router = express.Router();
 
@@ -18,10 +19,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router
-  .route('/')
-  .post(upload.single('thumbnail'), validate(bookValidation.createBook), bookController.createBook)
-  .get(validate(bookValidation.getBooks), bookController.queryBook);
+// validate(bookValidation.createBook),
+router.route('/upload').post(bookController.createBook).get(validate(bookValidation.getBooks), bookController.queryBook);
 
 router
   .route('/:bookId')
@@ -45,9 +44,9 @@ module.exports = router;
 
 /**
  * @swagger
- * /books:
+ * /books/upload:
  *   post:
- *     summary: Create a book
+ *     summary: Upload a book
  *     tags:
  *       - Book
  *     security:
@@ -69,9 +68,11 @@ module.exports = router;
  *                 type: string
  *               subjectId:
  *                 type: string
- *               thumbnail:
- *                 type: string
- *                 format: binary
+ *               file:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
  *             required:
  *               - name
  *               - boardId
@@ -81,16 +82,19 @@ module.exports = router;
  *               - thumbnail
  *     responses:
  *       '201':
- *         description: Created
+ *         description: Book created successfully
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Book'
+ *       '400':
+ *         description: Bad request. Check your request parameters.
  *       '401':
  *         $ref: '#/components/responses/Unauthorized'
  *       '403':
  *         $ref: '#/components/responses/Forbidden'
  *
+
  *   get:
  *     summary: Get all book
  *     tags: [Book]

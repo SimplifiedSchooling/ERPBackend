@@ -50,13 +50,13 @@ const updateChapterById = {
   }),
   body: Joi.object()
     .keys({
-      boardId: Joi.string().custom(objectId).required(),
-      mediumId: Joi.string().custom(objectId).required(),
-      classId: Joi.string().custom(objectId).required(),
-      subjectId: Joi.string().custom(objectId).required(),
-      bookId: Joi.string().custom(objectId).required(),
-      chapterName: Joi.string().required(),
-      order: Joi.number().required(),
+      boardId: Joi.string().custom(objectId),
+      mediumId: Joi.string().custom(objectId),
+      classId: Joi.string().custom(objectId),
+      subjectId: Joi.string().custom(objectId),
+      bookId: Joi.string().custom(objectId),
+      chapterName: Joi.string(),
+      order: Joi.number(),
       thumbnail: Joi.string(),
     })
     .min(1),

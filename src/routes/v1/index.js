@@ -107,6 +107,7 @@ const assectRoute = require('./assect.route');
 const hostel = require('./hostel.route');
 const attendanceVerifyRoute = require('./attendance.verify.route');
 const assectMasterRoute = require('./masterRoutes/assetMaster.route');
+const menuRoute = require('./menu.router');
 
 const router = express.Router();
 
@@ -534,6 +535,10 @@ const defaultRoutes = [
   {
     path: '/attendance-verify',
     route: attendanceVerifyRoute,
+  },
+  {
+    path: '/menu',
+    route: menuRoute,
   },
 ];
 

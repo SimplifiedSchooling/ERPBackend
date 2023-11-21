@@ -1,6 +1,17 @@
 const httpStatus = require('http-status');
-const { Parent } = require('../models');
+const crypto = require('crypto');
+const randomstring = require('randomstring');
+const { Parent, User } = require('../models');
 const ApiError = require('../utils/ApiError');
+
+const generateUsernameFromName = (name) => {
+  const sanitizedName = name.replace(/\s+/g, '').toLowerCase();
+  const randomString = randomstring.generate({
+    length: 4,
+    charset: 'alphanumeric',
+  });
+  return `${sanitizedName}${randomString}`;
+};
 
 /**
  * Create a parent
@@ -8,7 +19,19 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Parent>}
  */
 const createParent = async (reqBody) => {
-  return Parent.create(reqBody);
+  const parent = await Parent.create(reqBody);
+  const userName = await generateUsernameFromName(reqBody.name);
+  const randomPassword = crypto.randomBytes(16).toString('hex');
+  const parentData = await User.create({
+    name: reqBody.name,
+    userId: parent._id,
+    scode: reqBody.scode,
+    mobNumber: reqBody.mobNumber,
+    userName,
+    password: randomPassword,
+    role: 'parent',
+  });
+  return parentData;
 };
 
 /**

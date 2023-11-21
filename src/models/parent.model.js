@@ -17,7 +17,7 @@ const parentSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    studentId: [
+    students: [
       {
         type: String,
       },
