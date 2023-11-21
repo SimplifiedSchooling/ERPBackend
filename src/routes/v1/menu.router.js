@@ -57,10 +57,13 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
- *
+ */
+
+/**
+ * @swagger
+ * /menu:
  *   get:
- *     summary: Get all Menu
- *     description: all Menu.
+ *     summary: Get a menu
  *     tags: [Menu]
  *     security:
  *       - bearerAuth: []
@@ -69,8 +72,12 @@ module.exports = router;
  *         description: OK
  *         content:
  *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Menu'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */
