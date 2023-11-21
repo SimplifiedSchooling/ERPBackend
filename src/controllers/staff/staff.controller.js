@@ -46,6 +46,14 @@ const getStaff = catchAsync(async (req, res) => {
   res.send(staff);
 });
 
+const getStaffByScode = catchAsync(async (req, res) => {
+  const staff = await staffService.getStaffByScode(req.params.scode);
+  if (!staff) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Staff not found');
+  }
+  res.send(staff);
+});
+
 const updateStaffById = catchAsync(async (req, res) => {
   const satff = await staffService.updateStaffById(req.params.staffId, req.body);
   res.send(satff);
@@ -64,4 +72,5 @@ module.exports = {
   deleteStaffById,
   bulkUpload,
   bulkUploadFile,
+  getStaffByScode,
 };

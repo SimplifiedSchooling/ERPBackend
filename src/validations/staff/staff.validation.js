@@ -129,6 +129,12 @@ const getStaff = {
   }),
 };
 
+const getStaffByScode = {
+  params: Joi.object().keys({
+    scode: Joi.string(),
+  }),
+};
+
 const updateStaff = {
   params: Joi.object().keys({
     staffId: Joi.required().custom(objectId),
@@ -254,4 +260,5 @@ module.exports = {
   getStaff,
   updateStaff,
   deleteStaff,
+  getStaffByScode,
 };

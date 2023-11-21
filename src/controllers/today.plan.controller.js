@@ -26,9 +26,9 @@ const getSinglePlan = catchAsync(async (req, res) => {
 });
 
 const getTodayPlans = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name', 'board', 'class', 'subject', 'book', 'chapter', 'videoid']);
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await planvideoService.getTodayPlans(filter, options);
+  const today = new Date();
+  const todayDate = today.toLocaleDateString('en-GB');
+  const result = await planvideoService.getTodayPlans(todayDate);
   res.send(result);
 });
 
