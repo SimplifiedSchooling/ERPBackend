@@ -59,9 +59,9 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Medium
- *     description: all medium.
- *     tags: [Medium]
+ *     summary: Get all Menu
+ *     description: all Menu.
+ *     tags: [Menu]
  *     security:
  *       - bearerAuth: []
  *     responses:
