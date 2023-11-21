@@ -18,10 +18,8 @@ router
 router
   .route('/:chapterId')
   .get(validate(chapterValidation.getChapter), chaterController.getSingleChapter)
-  .patch(createS3Middleware('subject'), chaterController.updateSingleClass)
+  .patch(createS3Middleware('subject'), validate(chapterValidation.updateChapterById), chaterController.updateSingleClass)
   .delete(validate(chapterValidation.deleteChapterById), chaterController.deleteSingleChapter);
-
-// validate(chapterValidation.updateChapterById),
 
 router
   .route('/filter/:boardId/:mediumId/:classId/:subjectId/:bookId')
@@ -29,28 +27,6 @@ router
 
 router.route('/mobile/getbybookId/:bookId').get(chaterController.getByBookIdChapter);
 
-// router.post('/demolished', S3Middleware, async (req, res) => {
-//   try {
-//     const file = req.file;
-
-//     const demolishedData = {
-//       asset: req.body.asset,
-//       imagePath: file.location, // Assuming your middleware sets 'location' property
-//       totalAsset: req.body.totalAsset,
-//       totalDestroyed: req.body.totalDestroyed,
-//       reason: req.body.reason,
-//       date: req.body.date,
-//     };
-// console.log(demolishedData)
-//     // const result = await collection.insertOne(demolishedData);
-
-//     // Respond with the stored data
-//     res.status(201).json(result);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
 module.exports = router;
 
 /**
