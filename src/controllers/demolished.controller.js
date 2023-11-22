@@ -3,9 +3,11 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { demolishedService } = require('../services');
+const { filterPath } = require('../utils/s3middleware');
 
 const createDemolished = catchAsync(async (req, res) => {
-  req.body.imagePath = await req.file.path;
+  const { file } = req;
+  req.body.imagePath = await filterPath(file.location);
   const demolished = await demolishedService.createDemolished(req.body);
   res.status(httpStatus.CREATED).send(demolished);
 });
@@ -26,6 +28,10 @@ const getDemolishedById = catchAsync(async (req, res) => {
 });
 
 const updateDemolishedById = catchAsync(async (req, res) => {
+  const { file } = req;
+  if (file) {
+    req.body.imagePath = await filterPath(file.location);
+  }
   const demolished = await demolishedService.updateDemolishedById(req.params.demolishedId, req.body);
   res.send(demolished);
 });

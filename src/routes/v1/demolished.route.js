@@ -1,21 +1,9 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const auth = require('../../middlewares/auth');
 const { demolishedController } = require('../../controllers');
 const { demolishedValidation } = require('../../validations');
-
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
+const { createS3Middleware } = require('../../utils/s3middleware');
 
 const router = express.Router();
 
@@ -23,7 +11,7 @@ router
   .route('/')
   .post(
     auth('CREATE'),
-    upload.single('imagePath'),
+    createS3Middleware('lmscontent'),
     validate(demolishedValidation.createDemolished),
     demolishedController.createDemolished
   )
@@ -33,7 +21,12 @@ router
 router
   .route('/:demolishedId')
   .get(auth('GET'), validate(demolishedValidation.getDemolishedById), demolishedController.getDemolishedById)
-  .patch(auth('UPDATE'), validate(demolishedValidation.updateDemolishedById), demolishedController.updateDemolishedById)
+  .patch(
+    auth('UPDATE'),
+    createS3Middleware('lmscontent'),
+    validate(demolishedValidation.updateDemolishedById),
+    demolishedController.updateDemolishedById
+  )
   .delete(auth('DELETE'), validate(demolishedValidation.deleteDemolishedById), demolishedController.deleteDemolishedById);
 
 module.exports = router;
@@ -63,8 +56,8 @@ module.exports = router;
  *             properties:
  *               asset:
  *                 type: string
- *               imagePath:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *               totalAsset:
  *                 type: number
@@ -209,8 +202,8 @@ module.exports = router;
  *             properties:
  *               asset:
  *                 type: string
- *               imagePath:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *               totalAsset:
  *                 type: number

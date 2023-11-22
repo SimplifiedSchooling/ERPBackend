@@ -1,26 +1,15 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const { attendanceVerifyController } = require('../../controllers');
 const { attendanceVerifyvalidation } = require('../../validations');
+const { createS3Middleware } = require('../../utils/s3middleware');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
 router
   .route('/')
   .post(
-    upload.single('file'),
+    createS3Middleware('lmscontent'),
     validate(attendanceVerifyvalidation.createAVerify),
     attendanceVerifyController.createAttendanceVerify
   )
@@ -95,7 +84,7 @@ module.exports = router;
  *             type: object
  *             properties:
  *               file:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *               studentId1:
  *                 type: string

@@ -1,31 +1,19 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const subjectController = require('../../controllers/subject.controller');
 const subjectValidation = require('../../validations/subject.validation');
+const { createS3Middleware } = require('../../utils/s3middleware');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
-
 router
   .route('/')
-  .post(upload.single('thumbnail'), validate(subjectValidation.createSubject), subjectController.createSubject)
+  .post(createS3Middleware('lmscontent'), validate(subjectValidation.createSubject), subjectController.createSubject)
   .get(validate(subjectValidation.getAllSubject), subjectController.getAllSubject);
 
 router
   .route('/:subjectId')
-  .patch(upload.single('thumbnail'), validate(subjectValidation.updateSubject), subjectController.updateSubject)
+  .patch(createS3Middleware('lmscontent'), validate(subjectValidation.updateSubject), subjectController.updateSubject)
   .delete(validate(subjectValidation.deleteSubject), subjectController.deleteSubject)
   .get(validate(subjectValidation.getSubject), subjectController.getSubjectById);
 
@@ -70,8 +58,8 @@ module.exports = router;
  *                 type: string
  *               classId:
  *                 type: string
- *               thumbnail:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *               code:
  *                 type: string
@@ -215,8 +203,8 @@ module.exports = router;
  *                 type: string
  *               classId:
  *                 type: string
- *               thumbnail:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *               code:
  *                 type: string

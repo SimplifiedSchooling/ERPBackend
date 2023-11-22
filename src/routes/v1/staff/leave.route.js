@@ -1,31 +1,20 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../../middlewares/validate');
-const LeaveController = require('../../../controllers/staff/leave.controller');
-const LeaveValidation = require('../../../validations/staff/leave.validation');
+const { LeaveController } = require('../../../controllers');
+const { LeaveValidation } = require('../../../validations');
+const { createS3Middleware } = require('../../../utils/s3middleware');
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
 const router = express.Router();
 
 router
   .route('/')
-  .post(upload.single('files'), validate(LeaveValidation.createLeave), LeaveController.createLeave)
+  .post(createS3Middleware('lmscontent'), validate(LeaveValidation.createLeave), LeaveController.createLeave)
   .get(validate(LeaveValidation.getAllLeave), LeaveController.getAllLeave);
 
 router
   .route('/:LeaveId')
   .get(validate(LeaveValidation.getLeave), LeaveController.getLeaveById)
-  .patch(validate(LeaveValidation.updateLeave), LeaveController.updateLeave)
+  .patch(createS3Middleware('lmscontent'), validate(LeaveValidation.updateLeave), LeaveController.updateLeave)
   .delete(validate(LeaveValidation.deleteLeave), LeaveController.deleteLeave);
 
 module.exports = router;
@@ -55,7 +44,7 @@ module.exports = router;
  *               files:
  *                 type: array
  *                 items:
- *                   type: string
+ *                   type: file
  *                   format: binary
  *               fromdate:
  *                 type: string
