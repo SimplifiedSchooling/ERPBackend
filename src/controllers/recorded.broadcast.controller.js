@@ -5,6 +5,8 @@ const catchAsync = require('../utils/catchAsync');
 const { recordedBroadcastService } = require('../services');
 
 const createRecordedBroadcast = catchAsync(async (req, res) => {
+  req.body.landscapeImage = await req.files.landscapeImage[0].path;
+  req.body.portraitImage = await req.files.portraitImage[0].path;
   const newRecordedBroadcast = await recordedBroadcastService.createRecordedBroadcast(req.body);
   res.status(httpStatus.CREATED).send(newRecordedBroadcast);
 });
@@ -25,6 +27,10 @@ const getRecordedBroadcastById = catchAsync(async (req, res) => {
 });
 
 const updateRecordedBroadcastById = catchAsync(async (req, res) => {
+  if (req.file) {
+    req.body = req.file.landscapeImage;
+    req.body = req.file.portraitImage;
+  }
   const updatedRecordedBroadcast = await recordedBroadcastService.updateRecordedBroadcastById(
     req.params.recordedBroadcastId,
     req.body

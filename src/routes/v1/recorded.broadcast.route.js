@@ -1,18 +1,43 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const recordedBroadcastValidation = require('../../validations/recorded.broadcast.validation');
 const recordedBroadcastController = require('../../controllers/recorded.broadcast.controller');
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, callback) => {
+    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+    callback(null, uniqueFileName);
+  },
+});
+
+const upload = multer({ storage });
+
 router
   .route('/')
-  .post(validate(recordedBroadcastValidation.createRecordedBroadcast), recordedBroadcastController.createRecordedBroadcast)
+  .post(
+    upload.fields([
+      { name: 'landscapeImage', maxCount: 1 },
+      { name: 'portraitImage', maxCount: 1 },
+    ]),
+    validate(recordedBroadcastValidation.createRecordedBroadcast),
+    recordedBroadcastController.createRecordedBroadcast
+  )
   .get(validate(recordedBroadcastValidation.getAllRecordedBroadcasts), recordedBroadcastController.getAllRecordedBroadcast);
 
 router
   .route('/:recordedBroadcastId')
   .get(validate(recordedBroadcastValidation.getRecordedBroadcast), recordedBroadcastController.getRecordedBroadcastById)
   .patch(
+    upload.fields([
+      { name: 'landscapeImage', maxCount: 1 },
+      { name: 'portraitImage', maxCount: 1 },
+    ]),
     validate(recordedBroadcastValidation.updateRecordedBroadcastById),
     recordedBroadcastController.updateRecordedBroadcastById
   )
@@ -46,7 +71,7 @@ module.exports = router;
  *       description: RecordedBroadcast object to be created
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             $ref: '#/components/schemas/RecordedBroadcast'
  *     responses:
@@ -72,7 +97,7 @@ module.exports = router;
  *         description: ID of the recordedBroadcast
  *     requestBody:
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             $ref: '#/components/schemas/RecordedBroadcastUpdate'
  *     responses:
@@ -187,9 +212,11 @@ module.exports = router;
  *           description: Presenter's name.
  *         landscapeImage:
  *           type: string
+ *           format: binary
  *           description: URL of the landscape image.
  *         portraitImage:
  *           type: string
+ *           format: binary
  *           description: URL of the portrait image.
  *       example:
  *         boardId: "6516761d9cee04ae5df9fb6f"
@@ -245,9 +272,11 @@ module.exports = router;
  *           description: Presenter's name.
  *         landscapeImage:
  *           type: string
+ *           format: binary
  *           description: URL of the landscape image.
  *         portraitImage:
  *           type: string
+ *           format: binary
  *           description: URL of the portrait image.
  *       example:
  *         boardId: "6516761d9cee04ae5df9fb6f"

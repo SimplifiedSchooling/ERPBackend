@@ -13,8 +13,8 @@ const createRecordedBroadcast = {
     time: Joi.string().required(),
     title: Joi.string().required(),
     presenterName: Joi.string().required(),
-    landscapeImage: Joi.string().required(),
-    portraitImage: Joi.string().required(),
+    landscapeImage: Joi.string(),
+    portraitImage: Joi.string(),
   }),
 };
 
