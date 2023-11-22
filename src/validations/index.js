@@ -100,3 +100,4 @@ module.exports.attendanceVerifyvalidation = require('./attendance.verify.validat
 module.exports.menuValidation = require('./menu.validation');
 module.exports.LectureAttendancevalidation = require('./lecture.attendance.validation');
 module.exports.StaffAttendancevalidation = require('./staff.attendance.validation');
+module.exports.recordedBroadcastValidation = require('./recorded.broadcast.validation');

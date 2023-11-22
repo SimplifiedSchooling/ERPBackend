@@ -113,3 +113,4 @@ module.exports.LeavingcertService = require('./leavingcert.service');
 module.exports.menuService = require('./menu.service');
 module.exports.lectureAttendanceService = require('./lecture.attendance.service');
 module.exports.staffAttendanceService = require('./staff.attendance.service');
+module.exports.recordedBroadcastService = require('./recorded.broadcast.service');

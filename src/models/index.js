@@ -116,3 +116,4 @@ module.exports.LeavingCert = require('./leavingcertificate.model');
 module.exports.Menu = require('./menu.model');
 module.exports.LectureAttendance = require('./lecture.attendance.model');
 module.exports.StaffAttendanceSchema = require('./staff.attendance.model');
+module.exports.RecordedBroadcast = require('./recorded.broadcast.model');
