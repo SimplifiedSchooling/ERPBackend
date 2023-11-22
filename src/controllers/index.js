@@ -104,3 +104,4 @@ module.exports.parentController = require('./parent.controller');
 module.exports.menuController = require('./menu.controller');
 module.exports.lectureAttendanceController = require('./lecture.attendance.controller');
 module.exports.staffAttendanceController = require('./staff.attendance.controller');
+module.exports.recordedBroadcastController = require('./recorded.broadcast.controller');
