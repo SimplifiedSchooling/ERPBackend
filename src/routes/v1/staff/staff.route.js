@@ -31,6 +31,8 @@ router
   .patch(validate(staffValidation.updateStaff), staffController.updateStaffById)
   .delete(validate(staffValidation.deleteStaff), staffController.deleteStaffById);
 
+router.route('/get-by-scode/:scode').get(validate(staffValidation.getStaffByScode), staffController.getStaffByScode);
+
 module.exports = router;
 
 /**
@@ -460,6 +462,35 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
+ * /staff/get-by-scode/{scode}:
+ *   get:
+ *     summary: Get a satff
+ *     tags: [Staff]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: scode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: scode
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/Staff'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
  */
 
 /**

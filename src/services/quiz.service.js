@@ -57,7 +57,7 @@ const getQuizeByQestion = async (quizName) => {
  * @returns {Promise<Quize>}
  */
 const getQuizeBychapterId = async (chapterId) => {
-  return Quize.findOne({ chapterId });
+  return Quize.find({ chapterId });
 };
 /**
  * Query for board

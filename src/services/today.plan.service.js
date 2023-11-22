@@ -1,14 +1,14 @@
 const httpStatus = require('http-status');
-const { Planvideo } = require('../models');
+const { TodayPlan } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
  * Create a todaysPlan
  * @param {Object} planBody
- * @returns {Promise<Planvideo>}
+ * @returns {Promise<TodayPlan>}
  */
 const createNewPlan = async (planBody) => {
-  return Planvideo.create(planBody);
+  return TodayPlan.create(planBody);
 };
 
 /**
@@ -21,38 +21,52 @@ const createNewPlan = async (planBody) => {
  * @returns {Promise<QueryResult>}
  */
 const getAllPlans = async (filter, options) => {
-  const videos = await Planvideo.paginate(filter, options);
+  const videos = await TodayPlan.paginate(filter, options);
   return videos;
 };
 
 /**
- * Query for TodayPlans
- * @param {Object} filter - Mongo filter
- * @param {Object} options - Query options
- * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
- * @param {number} [options.limit] - Maximum number of results per page (default = 10)
- * @param {number} [options.page] - Current page (default = 1)
- * @returns {Promise<QueryResult>}
+ * Query for TodayPlan
+ * @param {Object} date
+ * @returns {Promise<TodayPlan>}
  */
-const getTodayPlans = async (filter, options) => {
-  const videos = await Planvideo.paginate(filter, options);
-  return videos;
-};
+// const getTodayPlans = async (date) => {
+//   const videos = await TodayPlan.find({ date });
+//   return videos;
+// };
 
+const getTodayPlans = async () => {
+  const today = new Date();
+  const todayDate = today.toLocaleDateString('en-GB'); // Format: 'DD/MM/YYYY'
+
+  const todayPlans = await TodayPlan.aggregate([
+    {
+      $match: { date: todayDate },
+    },
+    {
+      $group: {
+        _id: '$class',
+        plans: { $push: '$$ROOT' },
+      },
+    },
+  ]);
+
+  return todayPlans;
+};
 /**
- * Get Planvideo by id
+ * Get TodayPlan by id
  * @param {ObjectId} planId
- * @returns {Promise<Planvideo>}
+ * @returns {Promise<TodayPlan>}
  */
 const getPlanById = async (planId) => {
-  return Planvideo.findById(planId);
+  return TodayPlan.findById(planId);
 };
 
 /**
- * Update Planvideo by id
+ * Update TodayPlan by id
  * @param {ObjectId} planId
  * @param {Object} updateBody
- * @returns {Promise<Planvideo>}
+ * @returns {Promise<TodayPlan>}
  */
 const updatePlanById = async (planId, updateBody) => {
   const todaysPlan = await getPlanById(planId);
@@ -67,7 +81,7 @@ const updatePlanById = async (planId, updateBody) => {
 /**
  * Delete user by id
  * @param {ObjectId} planId
- * @returns {Promise<Planvideo>}
+ * @returns {Promise<TodayPlan>}
  */
 
 const deletePlanById = async (planId) => {
