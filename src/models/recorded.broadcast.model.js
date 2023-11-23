@@ -47,6 +47,10 @@ const recordedBroadcast = mongoose.Schema(
       type: String,
       trim: true,
     },
+    type: {
+      type: String,
+      trim: true,
+    },
     presenterName: {
       type: String,
       trim: true,
