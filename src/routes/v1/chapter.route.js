@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(createS3Middleware('subject'), validate(chapterValidation.createChapter), chaterController.createChapter)
+  .post(createS3Middleware('lmscontent'), validate(chapterValidation.createChapter), chaterController.createChapter)
   .get(validate(chapterValidation.getAllChapter), chaterController.getChapter);
 
 router
@@ -18,7 +18,7 @@ router
 router
   .route('/:chapterId')
   .get(validate(chapterValidation.getChapter), chaterController.getSingleChapter)
-  .patch(createS3Middleware('subject'), validate(chapterValidation.updateChapterById), chaterController.updateSingleClass)
+  .patch(createS3Middleware('lmscontent'), validate(chapterValidation.updateChapterById), chaterController.updateSingleClass)
   .delete(validate(chapterValidation.deleteChapterById), chaterController.deleteSingleChapter);
 
 router

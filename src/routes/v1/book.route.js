@@ -1,31 +1,19 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const bookController = require('../../controllers/book.controller');
 const bookValidation = require('../../validations/book.validation');
-// const S3 = require('../../utils/cdn');
+const { createS3Middleware } = require('../../utils/s3middleware');
 
 const router = express.Router();
-
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
-
-// validate(bookValidation.createBook),
-router.route('/upload').post(bookController.createBook).get(validate(bookValidation.getBooks), bookController.queryBook);
+router
+  .route('/upload')
+  .post(createS3Middleware('lmscontent'), validate(bookValidation.createBook), bookController.createBook)
+  .get(validate(bookValidation.getBooks), bookController.queryBook);
 
 router
   .route('/:bookId')
   .get(validate(bookValidation.getBook), bookController.getBookById)
-  .patch(upload.single('thumbnail'), validate(bookValidation.updateBook), bookController.updateBook)
+  .patch(createS3Middleware('lmscontent'), validate(bookValidation.updateBook), bookController.updateBook)
   .delete(validate(bookValidation.deleteBook), bookController.deleteBook);
 
 router
@@ -69,17 +57,15 @@ module.exports = router;
  *               subjectId:
  *                 type: string
  *               file:
- *                 type: array
- *                 items:
- *                   type: string
- *                   format: binary
+ *                 type: file
+ *                 format: binary
  *             required:
  *               - name
  *               - boardId
  *               - mediumId
  *               - classId
  *               - subjectId
- *               - thumbnail
+ *               - file
  *     responses:
  *       '201':
  *         description: Book created successfully
@@ -315,8 +301,8 @@ module.exports = router;
  *                 type: string
  *               subjectId:
  *                 type: string
- *               thumbnail:
- *                 type: string
+ *               file:
+ *                 type: file
  *                 format: binary
  *             required:
  *               - name

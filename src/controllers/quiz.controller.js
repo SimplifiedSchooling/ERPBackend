@@ -36,6 +36,20 @@ const getQuizeById = catchAsync(async (req, res) => {
   res.send(quize);
 });
 
+const getQuizeByFilter = catchAsync(async (req, res) => {
+  const { boardId, mediumId, classId, bookId, subjectId, chapterId } = req.query;
+  // const filter = { boardId, mediumId, classId, bookId, subjectId, chapterId };
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+
+  const quizes = await quizeService.getQuizeByFilter(boardId, mediumId, classId, bookId, subjectId, chapterId, options);
+
+  if (!quizes) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Quizes not found');
+  }
+
+  res.send(quizes);
+});
+
 const getQuizeByChapterId = catchAsync(async (req, res) => {
   const quize = await quizeService.getQuizeBychapterId(req.params.chapterId);
   if (!quize) {
@@ -83,6 +97,7 @@ module.exports = {
   getAllQuize,
   getQuizeById,
   QuizeByIdSubmit,
+  getQuizeByFilter,
   updateQuizeById,
   deleteQuizeById,
   getAllNotSelected,

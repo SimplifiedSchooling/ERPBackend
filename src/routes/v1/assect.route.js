@@ -1,21 +1,9 @@
 const express = require('express');
-// const multer = require('multer');
-// const path = require('path');
-// const { v4: uuidv4 } = require('node-uuid');
+
 const validate = require('../../middlewares/validate');
 const { assectController } = require('../../controllers');
 const { assectValidaton } = require('../../validations');
 
-// const storage = multer.diskStorage({
-//   destination: 'uploads/',
-//   filename: (req, file, callback) => {
-//     const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-//     callback(null, uniqueFileName);
-//   },
-// });
-
-// const upload = multer({ storage });
-// upload.single('imagePath'),
 const router = express.Router();
 
 router

@@ -1,46 +1,20 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const lessionController = require('../../controllers/lession.controller');
 const lessionValidation = require('../../validations/lession.validation');
+const { multipleFileS3 } = require('../../utils/s3middleware');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storage });
-
 router
   .route('/')
-  .post(
-    upload.fields([
-      { name: 'thumbnail', maxCount: 1 },
-      { name: 'poster', maxCount: 1 },
-    ]),
-    validate(lessionValidation.createLession),
-    lessionController.createLession
-  )
+  .post(multipleFileS3('lmscontent'), validate(lessionValidation.createLession), lessionController.createLession)
   .get(validate(lessionValidation.getLessions), lessionController.queryLessions);
 
 router
   .route('/:lessionId')
   .get(validate(lessionValidation.getLession), lessionController.getLession)
-  .patch(
-    upload.fields([
-      { name: 'thumbnail', maxCount: 1 },
-      { name: 'poster', maxCount: 1 },
-    ]),
-    validate(lessionValidation.updateLession),
-    lessionController.updateLession
-  )
+  .patch(multipleFileS3('lmscontent'), validate(lessionValidation.updateLession), lessionController.updateLession)
   .delete(validate(lessionValidation.deleteLession), lessionController.deleteLession);
 
 router
@@ -57,7 +31,7 @@ module.exports = router;
  * @swagger
  * /lession:
  *   post:
- *     summary: Create a lession
+ *     summary: Create a lesson
  *     tags: [Lesson]
  *     security:
  *       - bearerAuth: []
@@ -83,17 +57,22 @@ module.exports = router;
  *               chapterId:
  *                 type: string
  *               name:
- *                 type: string *
+ *                 type: string
  *               type:
  *                 type: string
  *               order:
  *                 type: number
- *               thumbnail:
- *                 type: string
- *                 format: binary
- *               poster:
- *                 type: string
- *                 format: binary
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     thumbnail:
+ *                       type: file
+ *                       format: binary
+ *                     poster:
+ *                       type: file
+ *                       format: binary
  *             example:
  *               name: English
  *               type: "https://www.youtube.com/watch?v=D52_BL9sVMU"

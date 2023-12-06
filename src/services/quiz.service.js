@@ -75,6 +75,26 @@ const QuizeNotSelected = async (filter, options) => {
 };
 
 /**
+ * Get quize by id
+ * @param {ObjectId} id
+ * @returns {Promise<Quize>}
+ */
+const getQuizeByFilter = async (boardId, mediumId, classId, bookId, subjectId, chapterId, options) => {
+  const filters = {};
+
+  if (boardId) filters.boardId = boardId;
+  if (mediumId) filters.mediumId = mediumId;
+  if (classId) filters.classId = classId;
+  if (bookId) filters.bookId = bookId;
+  if (subjectId) filters.subjectId = subjectId;
+  if (chapterId) filters.chapterId = chapterId;
+
+  // Call the paginate method on Quize schema
+  const quizzes = await Quize.paginate(filters, options);
+  return quizzes;
+};
+
+/**
  * create quize by id
  * @param {ObjectId} quizeId
  * @param {Object} updateBody
@@ -181,6 +201,7 @@ module.exports = {
   createQuize,
   queryQuize,
   getQuizeById,
+  getQuizeByFilter,
   QuizeByIdSubmit,
   updateQuizeById,
   deleteQuizeById,

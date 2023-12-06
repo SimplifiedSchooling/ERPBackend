@@ -3,9 +3,11 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { subjectService } = require('../services');
+const { filterPath } = require('../utils/s3middleware');
 
 const createSubject = catchAsync(async (req, res) => {
-  req.body.thumbnail = await req.file.path;
+  const { file } = req;
+  req.body.thumbnail = await filterPath(file.location);
   const subject = await subjectService.createSubject(req.body);
   res.status(httpStatus.CREATED).send(subject);
 });
@@ -51,8 +53,9 @@ const getUbjectByFilter = catchAsync(async (req, res) => {
 });
 
 const updateSubject = catchAsync(async (req, res) => {
-  if (req.file) {
-    req.body.thumbnail = req.file.path;
+  const { file } = req;
+  if (file) {
+    req.body.thumbnail = await filterPath(file.location);
   }
   const subject = await subjectService.updatSubjectById(req.params.subjectId, req.body);
   res.send(subject);

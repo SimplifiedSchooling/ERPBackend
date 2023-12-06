@@ -3,9 +3,11 @@ const pick = require('../../utils/pick');
 const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
 const LeaveService = require('../../services/staff/leave.service');
+const { filterPath } = require('../../utils/s3middleware');
 
 const createLeave = catchAsync(async (req, res) => {
-  req.body.files = await req.file.path;
+  const { file } = req;
+  req.body.files = await filterPath(file.location);
   const Leave = await LeaveService.createLeave(req.body);
   res.status(httpStatus.CREATED).send(Leave);
 });
@@ -26,6 +28,8 @@ const getLeaveById = catchAsync(async (req, res) => {
 });
 
 const updateLeave = catchAsync(async (req, res) => {
+  const { file } = req;
+  req.body.files = await filterPath(file.location);
   const Leave = await LeaveService.updateLeaveById(req.params.LeaveId, req.body);
   res.send(Leave);
 });

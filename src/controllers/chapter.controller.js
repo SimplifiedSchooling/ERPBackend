@@ -53,7 +53,7 @@ const getChaptersByBookId = catchAsync(async (req, res) => {
 const updateSingleClass = catchAsync(async (req, res) => {
   const { file } = req;
   if (file) {
-    req.body.thumbnail = await file.location;
+    req.body.thumbnail = await filterPath(file.location);
   }
   const updateddClass = await chapterService.updateChapterById(req.params.chapterId, req.body);
   res.send(updateddClass);
