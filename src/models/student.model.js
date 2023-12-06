@@ -120,6 +120,7 @@ const studentSchema = new mongoose.Schema(
     app_key: String,
     parent_app_key: String,
     disable_at: String,
+    measure_date: String,
     relaxAgeLimit: String,
     studentnationality: String,
     identificationMark1: String,
