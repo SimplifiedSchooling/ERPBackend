@@ -18,8 +18,7 @@ const createS3Middleware = (location) => multer({ storage: createStorage(locatio
 
 const multipleFileS3 = (location) => {
   const storage = createStorage(location);
-
-  return multer({ storage }).array('files', 10);
+  return multer({ storage }).fields([{ name: 'files', maxCount: 10 }]);
 };
 
 const filterPath = async (cdnUrl) => {

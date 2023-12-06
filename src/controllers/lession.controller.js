@@ -6,10 +6,10 @@ const { lessionService } = require('../services');
 const { multipleFilterPath } = require('../utils/s3middleware');
 
 const createLession = catchAsync(async (req, res) => {
-  console.log(req.files)
+  console.log(req.files);
   req.body.thumbnail = await multipleFilterPath(req.files.thumbnail);
   req.body.poster = await multipleFilterPath(req.files.poster);
-console.log(thumbnailPaths, posterPaths)
+
   const lesson = await lessionService.createLession(req.body);
 
   res.status(httpStatus.CREATED).send(lesson);

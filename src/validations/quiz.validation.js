@@ -70,6 +70,17 @@ const getQuizDayWise = {
   }),
 };
 
+const getQuizFilter = {
+  query: Joi.object().keys({
+    classId: Joi.string(),
+    boardId: Joi.string(),
+    mediumId: Joi.string(),
+    bookId: Joi.string(),
+    subjectId: Joi.string(),
+    chapterId: Joi.string(),
+  }),
+};
+
 const submitQuize = {
   params: Joi.object().keys({
     quizeId: Joi.string().custom(objectId),
@@ -117,6 +128,7 @@ module.exports = {
   createQuize,
   getQuizes,
   getQuize,
+  getQuizFilter,
   submitQuize,
   updateQuize,
   deleteQuize,

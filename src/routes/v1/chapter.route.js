@@ -293,6 +293,7 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  */
+
 /**
  * @swagger
  * /chapter/filter/{boardId}/{mediumId}/{classId}/{subjectId}/{bookId}:

@@ -62,12 +62,17 @@ module.exports = router;
  *                 type: string
  *               order:
  *                 type: number
- *               thumbnail:
- *                 type: string
- *                 format: binary
- *               poster:
- *                 type: string
- *                 format: binary
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     thumbnail:
+ *                       type: file
+ *                       format: binary
+ *                     poster:
+ *                       type: file
+ *                       format: binary
  *             example:
  *               name: English
  *               type: "https://www.youtube.com/watch?v=D52_BL9sVMU"

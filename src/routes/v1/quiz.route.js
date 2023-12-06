@@ -44,6 +44,8 @@ router
   .route('/getquizByDayWise/:classId')
   .get(validate(quizeValidation.getQuizDayWise), quizeController.getQuizByClassIdAndDayWise);
 
+router.route('/get/quiz/filter/section').get(validate(quizeValidation.getQuizFilter), quizeController.getQuizeByFilter);
+
 module.exports = router;
 
 /**
@@ -630,6 +632,96 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /quizes/get/quiz/filter/section:
+ *   get:
+ *     summary: Get quizzes based on filters
+ *     tags: [Quiz]
+ *     parameters:
+ *       - in: query
+ *         name: boardId
+ *         schema:
+ *           type: string
+ *         description: ID of the board
+ *       - in: query
+ *         name: mediumId
+ *         schema:
+ *           type: string
+ *         description: ID of the medium
+ *       - in: query
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: ID of the class
+ *       - in: query
+ *         name: bookId
+ *         schema:
+ *           type: string
+ *         description: ID of the book
+ *       - in: query
+ *         name: subjectId
+ *         schema:
+ *           type: string
+ *         description: ID of the subject
+ *       - in: query
+ *         name: chapterId
+ *         schema:
+ *           type: string
+ *         description: ID of the chapter
+ *     responses:
+ *       "200":
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             example:
+ *               quizzes:
+ *                 - quizName: Sample Quiz 1
+ *                   options:
+ *                     - Option 1
+ *                     - Option 2
+ *                     - Option 3
+ *                     - Option 4
+ *                   correctOptions:
+ *                     - 1
+ *                   explain: Explanation for Sample Quiz 1
+ *                   hint: Hint for Sample Quiz 1
+ *                   types: easy
+ *                   isVerified: true
+ *                   marks: 10
+ *                   boardId: Board1
+ *                   mediumId: Medium1
+ *                   classId: Class1
+ *                   bookId: Book1
+ *                   subjectId: Subject1
+ *                   chapterId: Chapter1
+ *                 - quizName: Sample Quiz 2
+ *                   options:
+ *                     - Option A
+ *                     - Option B
+ *                     - Option C
+ *                     - Option D
+ *                   correctOptions:
+ *                     - 2
+ *                   explain: Explanation for Sample Quiz 2
+ *                   hint: Hint for Sample Quiz 2
+ *                   types: medium
+ *                   isVerified: false
+ *                   marks: 15
+ *                   boardId: Board2
+ *                   mediumId: Medium2
+ *                   classId: Class2
+ *                   bookId: Book2
+ *                   subjectId: Subject2
+ *                   chapterId: Chapter2
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

@@ -93,6 +93,7 @@ const getByBookIdChapter = async (bookId) => {
 const getChaptersByBookId = async (bookId) => {
   return Chapter.find({ bookId });
 };
+
 /**
  * Get Chapter by filter
  * @param {ObjectId} boardId
