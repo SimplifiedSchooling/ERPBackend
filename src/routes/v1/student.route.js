@@ -181,6 +181,7 @@ module.exports = router;
  *       404:
  *         description: Student not found
  */
+
 /**
  * @swagger
  * components:
@@ -462,6 +463,204 @@ module.exports = router;
  *         updated_at:
  *           type: string
  *           description: Date of last update
+ *         relaxAgeLimit:
+ *           type: string
+ *           description: Relaxation of age limit for the student
+ *         studentnationality:
+ *           type: string
+ *           description: Nationality of the student
+ *         identificationMark1:
+ *           type: string
+ *           description: First identification mark of the student
+ *         identificationMark2:
+ *           type: string
+ *           description: Second identification mark of the student
+ *         agerelaxation:
+ *           type: string
+ *           description: Age relaxation information
+ *         hostel_id:
+ *           type: string
+ *           description: ID of the hostel where the student resides
+ *         academicstreamopt:
+ *           type: string
+ *           description: Academic stream option chosen by the student
+ *         statustudprevyear:
+ *           type: string
+ *           description: Status of the student in the previous academic year
+ *         admitunderpvt:
+ *           type: string
+ *           description: Admission under private institution information
+ *         prevclassstudiedappe:
+ *           type: string
+ *           description: Class studied in the previous academic year (appearing)
+ *         prevclassstudiedres:
+ *           type: string
+ *           description: Class studied in the previous academic year (result declared)
+ *         facilitiesprov:
+ *           type: string
+ *           description: Facilities provided to the student
+ *         schstudent:
+ *           type: string
+ *           description: Scholarship information for the student
+ *         centralsch:
+ *           type: string
+ *           description: Central scholarship information
+ *         stateschol:
+ *           type: string
+ *           description: State scholarship information
+ *         otherschol:
+ *           type: string
+ *           description: Other scholarship information
+ *         scholamout:
+ *           type: string
+ *           description: Scholarship amount
+ *         sldchild:
+ *           type: string
+ *           description: Specific learning disability status of the student
+ *         cwsnfacilitie1:
+ *           type: string
+ *           description: CWSN (Children with Special Needs) facility 1
+ *         asdchild:
+ *           type: string
+ *           description: Autism spectrum disorder status of the student
+ *         adhdchild:
+ *           type: string
+ *           description: Attention deficit hyperactivity disorder status of the student
+ *         stdinvextacurricularact:
+ *           type: string
+ *           description: Student involvement in extracurricular activities
+ *         cwsnfacilitie:
+ *           type: string
+ *           description: CWSN facility information
+ *         math:
+ *           type: string
+ *           description: Mathematics proficiency of the student
+ *         technical:
+ *           type: string
+ *           description: Technical proficiency of the student
+ *         language:
+ *           type: string
+ *           description: Language proficiency of the student
+ *         sport:
+ *           type: string
+ *           description: Sports proficiency of the student
+ *         science:
+ *           type: string
+ *           description: Science proficiency of the student
+ *         art:
+ *           type: string
+ *           description: Art proficiency of the student
+ *         mentorprovid:
+ *           type: string
+ *           description: Mentor provided to the student
+ *         nurturance:
+ *           type: string
+ *           description: Nurturance information
+ *         nurturancestate:
+ *           type: string
+ *           description: Nurturance state information
+ *         nurturancenational:
+ *           type: string
+ *           description: Nurturance national information
+ *         appeareslc:
+ *           type: string
+ *           description: Appearance in SSLC (Secondary School Leaving Certificate) examination
+ *         participncc:
+ *           type: string
+ *           description: Participation in NCC (National Cadet Corps)
+ *         vocationalcourse:
+ *           type: string
+ *           description: Vocational course information
+ *         classstudprev:
+ *           type: string
+ *           description: Class studied in the previous academic year
+ *         facilities1:
+ *           type: string
+ *           description: Facility 1 information
+ *         facilities2:
+ *           type: string
+ *           description: Facility 2 information
+ *         facilities3:
+ *           type: string
+ *           description: Facility 3 information
+ *         facilities4:
+ *           type: string
+ *           description: Facility 4 information
+ *         facilities5:
+ *           type: string
+ *           description: Facility 5 information
+ *         facilities6:
+ *           type: string
+ *           description: Facility 6 information
+ *         facilities7:
+ *           type: string
+ *           description: Facility 7 information
+ *         facilities8:
+ *           type: string
+ *           description: Facility 8 information
+ *         facilities9:
+ *           type: string
+ *           description: Facility 9 information
+ *         facilities10:
+ *           type: string
+ *           description: Facility 10 information
+ *         facilities11:
+ *           type: string
+ *           description: Facility 11 information
+ *         facilities12:
+ *           type: string
+ *           description: Facility 12 information
+ *         facilities13:
+ *           type: string
+ *           description: Facility 13 information
+ *         facilities14:
+ *           type: string
+ *           description: Facility 14 information
+ *         facilities15:
+ *           type: string
+ *           description: Facility 15 information
+ *         facilities16:
+ *          type: string
+ *          description: Facility 16 information
+ *         facilities17:
+ *          type: string
+ *          description: Facility 17 information
+ *         facilities18:
+ *          type: string
+ *          description: Facility 18 information
+ *         facilities19:
+ *          type: string
+ *          description: Facility 19 information
+ *         trade:
+ *          type: string
+ *          description: Trade information
+ *         jobrole:
+ *          type: string
+ *          description: Job role information
+ *       theoryhrs:
+ *          type: string
+ *          description: Number of theory hours
+ *       practicalhrs:
+ *          type: string
+ *          description: Number of practical hours
+ *       traininghrs:
+ *          type: string
+ *          description: Number of training hours
+ *       fieldvisit:
+ *          type: string
+ *          description: Field visit information
+ *       examprevclasvocsub:
+ *          type: string
+ *          description: Examination of the previous class in vocational subjects
+ *       marksobtain:
+ *          type: string
+ *          description: Marks obtained by the student
+ *       studappliedforplacemant:
+ *          type: string
+ *          description: Student applied for placement information
+ *       studeappliedforapprentice:
+ *          type: string
+ *          description: Student applied for apprentice information
  *       example:
  *         sectionId: 651cf2fc2c054218ddd660c5
  *         classId: 651cf2fc2c054218ddd660c5
@@ -554,6 +753,72 @@ module.exports = router;
  *         app_key: "APPKEY123"
  *         parent_app_key: "PARENTAPPKEY123"
  *         disable_at: "2023-08-15"
+ *         relaxAgeLimit: "2 years"
+ *         studentnationality: "Indian"
+ *         identificationMark1: "Mole on the left cheek"
+ *         identificationMark2: "Scar on the right hand"
+ *         agerelaxation: "Yes, for specified categories"
+ *         hostel_id: "H123"
+ *         academicstreamopt: "Science"
+ *         statustudprevyear: "Pass"
+ *         admitunderpvt: "No"
+ *         prevclassstudiedappe: "10th Standard"
+ *         prevclassstudiedres: "11th Standard"
+ *         facilitiesprov: "Library, Sports Ground"
+ *         schstudent: "Yes"
+ *         centralsch: "No"
+ *         stateschol: "Yes, Maharashtra State Scholarship"
+ *         otherschol: "No"
+ *         scholamout: "5000 INR"
+ *         sldchild: "No"
+ *         cwsnfacilitie1: "Special teaching assistant"
+ *         asdchild: "No"
+ *         adhdchild: "No"
+ *         stdinvextacurricularact: "Active participant in debate club"
+ *         cwsnfacilitie: "Ramp for wheelchair access"
+ *         math: "A"
+ *         technical: "B+"
+ *         language: "A-"
+ *         sport: "Football - Intermediate"
+ *         science: "A"
+ *         art: "C"
+ *         mentorprovid: "Yes"
+ *         nurturance: "Regular counseling sessions"
+ *         nurturancestate: "Satisfactory"
+ *         nurturancenational: "Excellent"
+ *         appeareslc: "Yes"
+ *         participncc: "No"
+ *         vocationalcourse: "Yes, Computer Programming"
+ *         classstudprev: "11th Standard"
+ *         facilities1: "Computer Lab"
+ *         facilities2: "Science Lab"
+ *         facilities3: "Sports Ground"
+ *         facilities4: "Library"
+ *         facilities5: "Cafeteria"
+ *         facilities6: "Hostel"
+ *         facilities7: "Transportation"
+ *         facilities8: "Medical Facilities"
+ *         facilities9: "Gym"
+ *         facilities10: "Auditorium"
+ *         facilities11: "Wi-Fi"
+ *         facilities12: "Security Personnel"
+ *         facilities13: "Counseling Center"
+ *         facilities14: "Music Room"
+ *         facilities15: "Dance Studio"
+ *         facilities16: "Art Studio"
+ *         facilities17: "Swimming Pool"
+ *         facilities18: "Outdoor Play Area"
+ *         facilities19: "Student Lounge"
+ *         trade: "Information Technology"
+ *         jobrole: "Software Developer"
+ *         theoryhrs: "120 hours"
+ *         practicalhrs: "80 hours"
+ *         traininghrs: "100 hours"
+ *         fieldvisit: "Industry visit to IT companies"
+ *         examprevclasvocsub: "Yes, in Computer Programming"
+ *         marksobtain: "85%"
+ *         studappliedforplacemant: "Yes"
+ *         studeappliedforapprentice: "No"
  */
 
 /**
