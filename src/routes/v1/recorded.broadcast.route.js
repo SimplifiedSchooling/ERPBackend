@@ -207,6 +207,9 @@ module.exports = router;
  *         title:
  *           type: string
  *           description: Title of the broadcast.
+ *         type:
+ *           type: string
+ *           description: type of the broadcast.
  *         presenterName:
  *           type: string
  *           description: Presenter's name.
@@ -228,6 +231,7 @@ module.exports = router;
  *         date: "2023-01-01"
  *         time: "12:00 PM"
  *         title: "Broadcast Title"
+ *         type: "Broadcast type"
  *         presenterName: "Presenter Name"
  *         landscapeImage: "https://example.com/landscape.jpg"
  *         portraitImage: "https://example.com/portrait.jpg"
@@ -267,6 +271,9 @@ module.exports = router;
  *         title:
  *           type: string
  *           description: Title of the broadcast.
+ *         type:
+ *           type: string
+ *           description: type of the broadcast.
  *         presenterName:
  *           type: string
  *           description: Presenter's name.
@@ -288,6 +295,7 @@ module.exports = router;
  *         date: "2023-01-01"
  *         time: "12:00 PM"
  *         title: "Broadcast Title"
+ *         type: "Broadcast type"
  *         presenterName: "Presenter Name"
  *         landscapeImage: "https://example.com/landscape.jpg"
  *         portraitImage: "https://example.com/portrait.jpg"
