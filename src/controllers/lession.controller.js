@@ -3,12 +3,11 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { lessionService } = require('../services');
-const { multipleFilterPath } = require('../utils/s3middleware');
+const { filterPath } = require('../utils/s3middleware');
 
 const createLession = catchAsync(async (req, res) => {
-  console.log(req.files);
-  req.body.thumbnail = await multipleFilterPath(req.files.thumbnail);
-  req.body.poster = await multipleFilterPath(req.files.poster);
+  req.body.thumbnail = await filterPath(req.files[0].location);
+  req.body.poster = await filterPath(req.files[0].location);
 
   const lesson = await lessionService.createLession(req.body);
 

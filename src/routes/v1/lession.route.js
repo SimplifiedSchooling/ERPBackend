@@ -2,19 +2,19 @@ const express = require('express');
 const validate = require('../../middlewares/validate');
 const lessionController = require('../../controllers/lession.controller');
 const lessionValidation = require('../../validations/lession.validation');
-const { multipleFileS3 } = require('../../utils/s3middleware');
+const { upload } = require('../../utils/cdn');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(multipleFileS3('lmscontent'), validate(lessionValidation.createLession), lessionController.createLession)
+  .post(upload.array('files', 2), validate(lessionValidation.createLession), lessionController.createLession)
   .get(validate(lessionValidation.getLessions), lessionController.queryLessions);
 
 router
   .route('/:lessionId')
   .get(validate(lessionValidation.getLession), lessionController.getLession)
-  .patch(multipleFileS3('lmscontent'), validate(lessionValidation.updateLession), lessionController.updateLession)
+  .patch(upload.array('files', 2), validate(lessionValidation.updateLession), lessionController.updateLession)
   .delete(validate(lessionValidation.deleteLession), lessionController.deleteLession);
 
 router
@@ -44,6 +44,11 @@ module.exports = router;
  *             required:
  *               - name
  *             properties:
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
  *               boardId:
  *                 type: string
  *               mediumId:
@@ -62,17 +67,6 @@ module.exports = router;
  *                 type: string
  *               order:
  *                 type: number
- *               files:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     thumbnail:
- *                       type: file
- *                       format: binary
- *                     poster:
- *                       type: file
- *                       format: binary
  *             example:
  *               name: English
  *               type: "https://www.youtube.com/watch?v=D52_BL9sVMU"
