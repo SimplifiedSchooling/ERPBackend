@@ -3,10 +3,11 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { multimediaService } = require('../services');
+const { filterPath } = require('../utils/s3middleware');
 
 const createMultimedia = catchAsync(async (req, res) => {
-  req.body.icon1 = await req.files.icon1[0].path;
-  req.body.icon2 = await req.files.icon2[0].path;
+  req.body.icon1 = await filterPath(req.files[0].location);
+  req.body.icon2 = await filterPath(req.files[0].location);
   const multimedia = await multimediaService.createMultimedia(req.body);
   res.status(httpStatus.CREATED).send(multimedia);
 });

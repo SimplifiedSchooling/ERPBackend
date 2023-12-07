@@ -1,46 +1,39 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const multimediaController = require('../../controllers/multimedia.controller');
 const multimediaValidation = require('../../validations/multimedia.validation');
+const { upload } = require('../../utils/cdn');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: 'uploads/',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: 'uploads/',
+//   filename: (req, file, callback) => {
+//     const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+//     callback(null, uniqueFileName);
+//   },
+// });
 
-const upload = multer({ storage });
-
+// const upload = multer({ storage });
+// validate(multimediaValidation.createMultimeda),
 router
   .route('/')
-  .post(
-    upload.fields([
-      { name: 'icon2', maxCount: 1 },
-      { name: 'icon1', maxCount: 1 },
-    ]),
-    validate(multimediaValidation.createMultimeda),
-    multimediaController.createMultimedia
-  )
+  .post(upload.array('files', 2), multimediaController.createMultimedia)
   .get(validate(multimediaValidation.getAllMultimedia), multimediaController.getMultimedia);
-
+// router
+//   .route('/')
+//   .post(
+//     upload.fields([
+//       { name: 'icon2', maxCount: 1 },
+//       { name: 'icon1', maxCount: 1 },
+//     ]),
+//     validate(multimediaValidation.createMultimeda),
+//     multimediaController.createMultimedia
+//   )
 router
   .route('/:multimediaId')
   .get(validate(multimediaValidation.getMultimediaById), multimediaController.getMultimediaById)
-  .patch(
-    upload.fields([
-      { name: 'icon2', maxCount: 1 },
-      { name: 'icon1', maxCount: 1 },
-    ]),
-    validate(multimediaValidation.updateMultimedia),
-    multimediaController.updateMultimedia
-  )
+  .patch(upload.array('files', 2), validate(multimediaValidation.updateMultimedia), multimediaController.updateMultimedia)
   .delete(validate(multimediaValidation.deleteMultimedia), multimediaController.deleteMultimedia);
 
 router
@@ -92,14 +85,13 @@ module.exports = router;
  *               - bookId
  *               - chapterId
  *             properties:
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
  *               lessionName:
  *                 type: string
- *               icon1:
- *                 type: string
- *                 format: binary
- *               icon2:
- *                 type: string
- *                 format: binary
  *               path:
  *                 type: string
  *               multimediaType:
@@ -260,14 +252,13 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
  *               lessionName:
  *                 type: string
- *               icon1:
- *                 type: string
- *                 format: binary
- *               icon2:
- *                 type: string
- *                 format: binary
  *               path:
  *                 type: string
  *               multimediaType:

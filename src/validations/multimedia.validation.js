@@ -4,8 +4,7 @@ const { objectId } = require('./custom.validation');
 const createMultimeda = {
   body: Joi.object().keys({
     lessionName: Joi.string().required(),
-    icon1: Joi.string(),
-    icon2: Joi.string(),
+    files: Joi.array().items(Joi.string()),
     path: Joi.string().required(),
     multimediaType: Joi.string(),
     order: Joi.number().required(),
@@ -64,8 +63,7 @@ const updateMultimedia = {
   body: Joi.object()
     .keys({
       lessionName: Joi.string(),
-      icon1: Joi.string(),
-      icon2: Joi.string(),
+      files: Joi.array().items(Joi.string()),
       path: Joi.string(),
       multimediaType: Joi.string(),
       order: Joi.number(),
