@@ -6,12 +6,14 @@ const { multimediaService } = require('../services');
 const { filterPath } = require('../utils/s3middleware');
 
 const createMultimedia = catchAsync(async (req, res) => {
+
   if (req.files[0] && req.files[0].location) {
     req.body.icon1 = await filterPath(req.files[0].location);
   }
   if (req.files[1] && req.files[1].location) {
     req.body.icon2 = await filterPath(req.files[1].location);
   }
+
   const multimedia = await multimediaService.createMultimedia(req.body);
   res.status(httpStatus.CREATED).send(multimedia);
 });
