@@ -57,10 +57,22 @@ const deleteHomework = {
   }),
 };
 
+const getHomeworkFilter = {
+  query: Joi.object().keys({
+    classId: Joi.string(),
+    boardId: Joi.string(),
+    mediumId: Joi.string(),
+    bookId: Joi.string(),
+    subjectId: Joi.string(),
+    chapterId: Joi.string(),
+  }),
+};
+
 module.exports = {
   createHomework,
   getAllHomework,
   getHomework,
   updateHomework,
   deleteHomework,
+  getHomeworkFilter,
 };

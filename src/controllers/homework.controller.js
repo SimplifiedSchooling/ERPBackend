@@ -24,6 +24,15 @@ const getHomeworkById = catchAsync(async (req, res) => {
   res.send(homework);
 });
 
+const getHomeworkByFilterId = catchAsync(async (req, res) => {
+  const { boardId, mediumId, classId, bookId, subjectId, chapterId } = req.query;
+  const homework = await HomeworkSerices.getHomeworkByFilterId(boardId, mediumId, classId, bookId, subjectId, chapterId);
+  if (!homework) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Homework not found');
+  }
+  res.send(homework);
+});
+
 const updateHomework = catchAsync(async (req, res) => {
   const updateHomeworks = await HomeworkSerices.updateHomeworkById(req.params.homeworkId, req.body);
   res.send(updateHomeworks);
@@ -37,6 +46,7 @@ const deleteHomework = catchAsync(async (req, res) => {
 module.exports = {
   createHomework,
   getAllHomework,
+  getHomeworkByFilterId,
   getHomeworkById,
   updateHomework,
   deleteHomework,
