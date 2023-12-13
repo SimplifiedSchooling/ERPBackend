@@ -5,31 +5,11 @@ const multimediaValidation = require('../../validations/multimedia.validation');
 const { upload } = require('../../utils/cdn');
 
 const router = express.Router();
-
-// const storage = multer.diskStorage({
-//   destination: 'uploads/',
-//   filename: (req, file, callback) => {
-//     const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-//     callback(null, uniqueFileName);
-//   },
-// });
-
-// const upload = multer({ storage });
-// validate(multimediaValidation.createMultimeda),
 router
   .route('/')
   .post(upload.array('files', 2), multimediaController.createMultimedia)
   .get(validate(multimediaValidation.getAllMultimedia), multimediaController.getMultimedia);
-// router
-//   .route('/')
-//   .post(
-//     upload.fields([
-//       { name: 'icon2', maxCount: 1 },
-//       { name: 'icon1', maxCount: 1 },
-//     ]),
-//     validate(multimediaValidation.createMultimeda),
-//     multimediaController.createMultimedia
-//   )
+
 router
   .route('/:multimediaId')
   .get(validate(multimediaValidation.getMultimediaById), multimediaController.getMultimediaById)
@@ -281,8 +261,6 @@ module.exports = router;
  *                 type: string
  *             example:
  *               lessionName: English
- *               icon1: imagelink/icon1
- *               icon2: imagelink/icon2
  *               path: multimedia/path
  *               multimediaType: video
  *               order: 1
