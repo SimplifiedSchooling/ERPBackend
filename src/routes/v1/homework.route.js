@@ -16,6 +16,7 @@ router
   .patch(validate(homeworkValidation.updateHomework), homeworkController.updateHomework)
   .delete(validate(homeworkValidation.deleteHomework), homeworkController.deleteHomework);
 
+router.route('/get-by/filter').get(validate(homeworkValidation.getHomeworkFilter), homeworkController.getHomeworkByFilterId);
 module.exports = router;
 
 /**
@@ -65,8 +66,6 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *       "400":
- *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -229,6 +228,54 @@ module.exports = router;
  *     responses:
  *       "200":
  *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /homework/get-by/filter:
+ *   get:
+ *     summary: Get homework based on filters
+ *     tags: [homework]
+ *     parameters:
+ *       - in: query
+ *         name: boardId
+ *         schema:
+ *           type: string
+ *         description: ID of the board
+ *       - in: query
+ *         name: mediumId
+ *         schema:
+ *           type: string
+ *         description: ID of the medium
+ *       - in: query
+ *         name: classId
+ *         schema:
+ *           type: string
+ *         description: ID of the class
+ *       - in: query
+ *         name: bookId
+ *         schema:
+ *           type: string
+ *         description: ID of the book
+ *       - in: query
+ *         name: subjectId
+ *         schema:
+ *           type: string
+ *         description: ID of the subject
+ *       - in: query
+ *         name: chapterId
+ *         schema:
+ *           type: string
+ *         description: ID of the chapter
+ *     responses:
+ *       "200":
+ *         $ref: '#/components/responses/Unauthorized'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

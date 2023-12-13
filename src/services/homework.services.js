@@ -35,6 +35,20 @@ const getHomeworkById = async (id) => {
 };
 
 /**
+ * Get homework by filter
+ * @param {ObjectId} boardId
+ * @param {ObjectId} mediumId
+ * @param {ObjectId} bookId
+ * @param {ObjectId} chapterId
+ * @param {ObjectId} subjectId
+ * @param {ObjectId} classId
+ * @returns {Promise<Homework>}
+ */
+const getHomeworkByFilterId = async (boardId, mediumId, classId, bookId, subjectId, chapterId) => {
+  return Homework.find({ boardId, mediumId, classId, bookId, subjectId, chapterId });
+};
+
+/**
  * Update homework by id
  * @param {ObjectId} homeworkId
  * @param {Object} updateBody
@@ -67,6 +81,7 @@ const deleteHomeworkById = async (HomeworkId) => {
 module.exports = {
   createHomework,
   queryHomework,
+  getHomeworkByFilterId,
   getHomeworkById,
   updateHomeworkById,
   deleteHomeworkById,
