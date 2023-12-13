@@ -8,7 +8,7 @@ const createBook = {
     subjectId: Joi.string().custom(objectId).required(),
     mediumId: Joi.string().custom(objectId).required(),
     boardId: Joi.string().custom(objectId).required(),
-    thumbnail: Joi.string(),
+    file: Joi.string(),
   }),
 };
 
@@ -52,7 +52,7 @@ const updateBook = {
       subjectId: Joi.string(),
       mediumId: Joi.string(),
       boardId: Joi.string(),
-      thumbnail: Joi.string(),
+      file: Joi.string(),
     })
     .min(1),
 };

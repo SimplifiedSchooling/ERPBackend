@@ -8,7 +8,7 @@ const createDemolished = {
     totalDestroyed: Joi.string().required(),
     reason: Joi.string().required(),
     date: Joi.date().required(),
-    imagePath: Joi.string(),
+    file: Joi.string(),
   }),
 };
 
@@ -38,7 +38,7 @@ const updateDemolishedById = {
       totalDestroyed: Joi.string().required(),
       reason: Joi.string().required(),
       date: Joi.date().required(),
-      imagePath: Joi.string(),
+      file: Joi.string(),
     })
     .min(1),
 };

@@ -285,7 +285,6 @@ module.exports = router;
  *           type: string
  *         description: bookId
  *     requestBody:
- *       required: true
  *       content:
  *         multipart/form-data:
  *           schema:
@@ -310,7 +309,7 @@ module.exports = router;
  *               - mediumId
  *               - classId
  *               - subjectId
- *               - thumbnail
+ *               - file
  *     responses:
  *       "200":
  *         description: OK

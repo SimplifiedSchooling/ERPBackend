@@ -76,6 +76,7 @@ module.exports = router;
  *               classId: 64d327811128844220f0cce0
  *               subjectId: 64d9d4666205c371563fcadb
  *               bookId: 64d9d7143ac675796cdcd433
+ *               file: e892f517-c5a4-4b04-b62c-1054ca09e61c32580.jpg
  *     responses:
  *       "201":
  *         description: Created
@@ -227,6 +228,7 @@ module.exports = router;
  *               classId: 64d327811128844220f0cce0
  *               subjectId: 64d9d4666205c371563fcadb
  *               bookId: 64d9d7143ac675796cdcd433
+ *               file: e892f517-c5a4-4b04-b62c-1054ca09e61c32580.jpg
  *     responses:
  *       "200":
  *         description: OK
