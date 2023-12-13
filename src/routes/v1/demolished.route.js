@@ -69,7 +69,7 @@ module.exports = router;
  *                 type: string
  *             example:
  *               asset: Test
- *               imagePath: imagelink/icon1
+ *               file: imagelink/icon1
  *               totalAsset: 12
  *               totalDestroyed: test123
  *               reason: 2
@@ -190,7 +190,7 @@ module.exports = router;
  *     parameters:
  *       - in: path
  *         name: demolishedId
- *         required: true
+ *         required: false
  *         schema:
  *           type: string
  *     requestBody:
@@ -215,7 +215,7 @@ module.exports = router;
  *                 type: string
  *             example:
  *               asset: English
- *               imagePath: imagelink/icon1
+ *               file: imagelink/icon1
  *               totalAsset: 1
  *               totalDestroyed: abc
  *               reason: test123
