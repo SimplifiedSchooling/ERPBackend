@@ -66,6 +66,7 @@ const updatePlanById = {
       order: Joi.string(),
       studioName: Joi.string(),
       liveStreamingPath: Joi.string().allow('', null),
+      presenterName: Joi.string(),
     })
     .min(1),
 };
