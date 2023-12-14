@@ -269,6 +269,8 @@ module.exports = router;
  *                 type: string
  *               liveStreamingPath:
  *                 type: string
+ *               presenterName:
+ *                 type: string
  *             example:
  *               name: Today Plan title
  *               date: 21/11/2023
