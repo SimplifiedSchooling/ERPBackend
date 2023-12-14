@@ -197,8 +197,6 @@ module.exports = router;
  *           type: string
  *         role:
  *           type: string
- *         department:
- *           type: string
  *         saral_id:
  *           type: string
  *           description: SARAL ID for the student
@@ -668,7 +666,6 @@ module.exports = router;
  *         saral_id: "ABC12345"
  *         scode: "XYZ456"
  *         age: 23
- *         department: xyz
  *         role: student
  *         admission_no: "A12345"
  *         roll_no: "R67890"
@@ -835,8 +832,6 @@ module.exports = router;
  *         sectionId:
  *           type: string
  *         role:
- *           type: string
- *         department:
  *           type: string
  *         saral_id:
  *           type: string
@@ -1106,7 +1101,6 @@ module.exports = router;
  *         saral_id: "ABC12345"
  *         scode: "XYZ456"
  *         age: 23
- *         department: xyz
  *         role: student
  *         admission_no: "A12345"
  *         roll_no: "R67890"

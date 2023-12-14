@@ -17,6 +17,7 @@ router
   .delete(validate(assectValidaton.deleteAssect), assectController.deleteAssect);
 
 router.route('/update/asset').patch(validate(assectValidaton.updateAssectSchema), assectController.updateAssect);
+
 module.exports = router;
 
 /**
@@ -226,6 +227,7 @@ module.exports = router;
  *       '500':
  *         description: Internal server error
  */
+
 /**
  * @swagger
  * /assets/{id}:
