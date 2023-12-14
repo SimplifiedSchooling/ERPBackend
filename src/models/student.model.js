@@ -15,7 +15,6 @@ const studentSchema = new mongoose.Schema(
     },
     scode: {
       type: String,
-      required: true,
     },
     role: {
       type: String,
@@ -26,7 +25,6 @@ const studentSchema = new mongoose.Schema(
     },
     mobNumber: {
       type: Number,
-      required: true,
     },
     age: {
       type: Number,
@@ -34,9 +32,6 @@ const studentSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-    },
-    department: {
-      type: String,
     },
     parent_id: String,
     admission_no: String,
