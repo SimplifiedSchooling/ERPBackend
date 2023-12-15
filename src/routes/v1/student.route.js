@@ -572,63 +572,63 @@ module.exports = router;
  *         classstudprev:
  *           type: string
  *           description: Class studied in the previous academic year
- *         facilities1:
+ *         free_Text_Book:
+ *           type: boolean
+ *           description: free_Text_Book information
+ *         free_Uniforms:
+ *           type: boolean
+ *           description: free_Uniforms information
+ *         free_Transport_Facility:
+ *           type: boolean
+ *           description: free_Transport_Facility information
+ *         free_Escort:
+ *           type: boolean
+ *           description: free_Escort information
+ *         free_By_Cycle:
+ *           type: boolean
+ *           description: free_By_Cycle information
+ *         free_Mobile_Tablet_Computer:
+ *           type: boolean
+ *           description: free_Mobile_Tablet_Computer information
+ *         free_Hostel:
+ *           type: boolean
+ *           description: free_Hostel information
+ *         braille_Book:
+ *           type: boolean
+ *           description: braille_Book information
+ *         braille_Kit:
+ *           type: boolean
+ *           description: braille_Kit information
+ *         low_Vision_Kit:
+ *           type: boolean
+ *           description: low_Vision_Kit information
+ *         hearing_Aid:
+ *           type: boolean
+ *           description: hearing_Aid information
+ *         braces:
+ *           type: boolean
+ *           description: braces information
+ *         crutches:
  *           type: string
- *           description: Facility 1 information
- *         facilities2:
- *           type: string
- *           description: Facility 2 information
- *         facilities3:
- *           type: string
- *           description: Facility 3 information
- *         facilities4:
- *           type: string
- *           description: Facility 4 information
- *         facilities5:
- *           type: string
- *           description: Facility 5 information
- *         facilities6:
- *           type: string
- *           description: Facility 6 information
- *         facilities7:
- *           type: string
- *           description: Facility 7 information
- *         facilities8:
- *           type: string
- *           description: Facility 8 information
- *         facilities9:
- *           type: string
- *           description: Facility 9 information
- *         facilities10:
- *           type: string
- *           description: Facility 10 information
- *         facilities11:
- *           type: string
- *           description: Facility 11 information
- *         facilities12:
- *           type: string
- *           description: Facility 12 information
- *         facilities13:
- *           type: string
- *           description: Facility 13 information
- *         facilities14:
- *           type: string
- *           description: Facility 14 information
- *         facilities15:
- *           type: string
- *           description: Facility 15 information
- *         facilities16:
- *          type: string
- *          description: Facility 16 information
- *         facilities17:
- *          type: string
- *          description: Facility 17 information
- *         facilities18:
- *          type: string
- *          description: Facility 18 information
- *         facilities19:
- *          type: string
- *          description: Facility 19 information
+ *           description: crutches information
+ *         wheel_Chair:
+ *           type: boolean
+ *           description: wheel_Chair information
+ *         tri_cycle:
+ *           type: boolean
+ *           description: tri_cycle information
+ *         caliper:
+ *          type: boolean
+ *          description: caliper information
+ *         escort:
+ *          type: boolean
+ *          description: escort information
+ *         stipend:
+ *          type: boolean
+ *          description: stipend information
+ *         other:
+ *          type: boolean
+ *          description: other information
  *         trade:
  *          type: string
  *          description: Trade information
@@ -787,25 +787,25 @@ module.exports = router;
  *         participncc: "No"
  *         vocationalcourse: "Yes, Computer Programming"
  *         classstudprev: "11th Standard"
- *         facilities1: "Computer Lab"
- *         facilities2: "Science Lab"
- *         facilities3: "Sports Ground"
- *         facilities4: "Library"
- *         facilities5: "Cafeteria"
- *         facilities6: "Hostel"
- *         facilities7: "Transportation"
- *         facilities8: "Medical Facilities"
- *         facilities9: "Gym"
- *         facilities10: "Auditorium"
- *         facilities11: "Wi-Fi"
- *         facilities12: "Security Personnel"
- *         facilities13: "Counseling Center"
- *         facilities14: "Music Room"
- *         facilities15: "Dance Studio"
- *         facilities16: "Art Studio"
- *         facilities17: "Swimming Pool"
- *         facilities18: "Outdoor Play Area"
- *         facilities19: "Student Lounge"
+ *         free_Text_Book: true
+ *         free_Uniforms: true
+ *         free_Transport_Facility: true
+ *         free_Escort: true
+ *         free_By_Cycle: true
+ *         free_Mobile_Tablet_Computer: true
+ *         free_Hostel: true
+ *         braille_Book: true
+ *         braille_Kit: true
+ *         low_Vision_Kit: true
+ *         hearing_Aid: true
+ *         braces: true
+ *         crutches: true
+ *         wheel_Chair: true
+ *         tri_cycle: true
+ *         caliper: true
+ *         escort: true
+ *         stipend: true
+ *         other: true
  *         trade: "Information Technology"
  *         jobrole: "Software Developer"
  *         theoryhrs: "120 hours"
