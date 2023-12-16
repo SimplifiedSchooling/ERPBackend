@@ -320,10 +320,10 @@ const staffSchema = mongoose.Schema(
       type: String,
     },
     String_of_joiningss: {
-      type: String,
+      type: Date,
     },
     String_of_joiningpresentschool: {
-      type: String,
+      type: Date,
     },
     appointedlevel: {
       type: String,
