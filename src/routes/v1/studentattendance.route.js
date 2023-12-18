@@ -34,6 +34,8 @@ router
     StudentAttendanceController.deleteStudentAttendance
   );
 
+router.route('/update-attendance').post(StudentAttendanceController.updateAttendanceStatusAndRemark);
+
 module.exports = router;
 
 /**
@@ -362,4 +364,66 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /StudentAttendance/update-attendance:
+ *   post:
+ *     summary: Update Student Attendance Entries
+ *     tags: [StudentAttendance]
+ *     requestBody:
+ *       description: JSON object containing attendance entries update information.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               scode:
+ *                 type: string
+ *                 description: The ID of the scode.
+ *               classId:
+ *                 type: string
+ *                 description: The ID of the class.
+ *               sectionId:
+ *                 type: string
+ *                 description: The ID of the section.
+ *               date:
+ *                 type: string
+ *                 description: The date of the attendance.
+ *               entryUpdates:
+ *                 type: array
+ *                 description: An array of attendance updates.
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     studentId:
+ *                       type: number
+ *                       description: The ID of the student.
+ *                     attendanceStatus:
+ *                       type: string
+ *                       enum: ['present', 'absent', 'late']
+ *                       description: The attendance status.
+ *                     remark:
+ *                       type: string
+ *                       description: The remark for the attendance.
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates whether the update was successful.
+ *                 message:
+ *                   type: string
+ *                   description: A message indicating the result of the update.
+ *       '400':
+ *         description: Bad request. Invalid parameters provided.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
  */
