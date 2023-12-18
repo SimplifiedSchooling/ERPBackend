@@ -80,6 +80,15 @@ const getClasswiseAttendanceStudentList = catchAsync(async (req, res) => {
 //   }
 // };
 
+const updateAttendanceStatusAndRemark = catchAsync(async (req, res) => {
+  const { scode, classId, sectionId, date, entryUpdates } = req.body;
+  const result = await StudentAttendanceService.updateStudentAttendance(scode, classId, sectionId, date, entryUpdates);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Attendance not updated');
+  }
+  res.status(httpStatus.OK).json({ success: true, message: 'Attendance updated successfully' });
+});
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -91,4 +100,5 @@ module.exports = {
   todaysAttendanceForSchool,
   getClasswiseAttendanceStudentList,
   // getAttendanceStatsController,
+  updateAttendanceStatusAndRemark,
 };

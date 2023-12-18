@@ -741,6 +741,38 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
   };
 };
 
+/**
+ * Update student attendance status and remark
+ * @param {string} scode - The ID of the scode.
+ * @param {string} classId - The ID of the class.
+ * @param {string} sectionId - The ID of the section.
+ * @param {string} date - The date of the attendance.
+ * @param {Array} entryUpdates - An array of attendance updates containing studentId, attendanceStatus, and remark.
+ * @returns {Promise<boolean>} - Returns true if the update is successful.
+ * @throws {Error} - If there is an error while updating the database.
+ */
+const updateStudentAttendance = async (scode, classId, sectionId, date, entryUpdates) => {
+  const filter = {
+    scode,
+    classId: mongoose.Types.ObjectId(classId),
+    sectionId: mongoose.Types.ObjectId(sectionId),
+    date,
+  };
+  const update = {
+    $set: {},
+  };
+  entryUpdates.forEach((entry) => {
+    const { studentId } = entry;
+    update.$set[`entries.$[elem${studentId}].attendanceStatus`] = entry.attendanceStatus || 'present';
+    update.$set[`entries.$[elem${studentId}].remark`] = entry.remark || null;
+  });
+  const options = {
+    arrayFilters: entryUpdates.map((entry) => ({ [`elem${entry.studentId}.studentId`]: entry.studentId })),
+  };
+  const result = await StudentAttendanceSchema.updateOne(filter, update, options);
+  return result.nModified > 0;
+};
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -753,4 +785,5 @@ module.exports = {
   getPresentStudentsCount,
   getAttendanceStats,
   // getClasswiseStudentAttendanceList,
+  updateStudentAttendance,
 };
