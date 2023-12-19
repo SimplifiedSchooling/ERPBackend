@@ -3,6 +3,7 @@ const { objectId } = require('../custom.validation');
 
 const createSaralInfo4 = {
   body: Joi.object().keys({
+    saralId: Joi.string(),
     scode: Joi.string(),
     typeofactivity: Joi.string(),
     feestructapprove: Joi.string(),
@@ -52,6 +53,7 @@ const updateSaralInfo4ById = {
   }),
   body: Joi.object()
     .keys({
+      saralId: Joi.string(),
       typeofactivity: Joi.string(),
       feestructapprove: Joi.string(),
       feerevisionpendstatelev: Joi.string(),

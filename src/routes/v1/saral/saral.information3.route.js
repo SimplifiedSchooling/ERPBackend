@@ -41,6 +41,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - saralId
  *               - totallaptop
  *               - totalprinter
  *               - totalprinterfun
@@ -86,6 +87,7 @@ module.exports = router;
  *               - teacherarticlepublish
  *               - curriculumdetails
  *             properties:
+ *               saralId : string
  *               totallaptop: number
  *               totalprinter: number
  *               totalprinterfun: number
@@ -131,6 +133,7 @@ module.exports = router;
  *               teacherarticlepublish: number
  *               curriculumdetails: string
  *             example:
+ *               saralId: "3242424222"
  *               scode: mh00001
  *               totallaptop: 3
  *               totalprinter: 4

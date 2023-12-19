@@ -41,6 +41,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - saralId
  *               - typeofactivity
  *               - feestructapprove
  *               - feerevisionpendstatelev
@@ -66,6 +67,7 @@ module.exports = router;
  *               - committeeconstitutemdmc
  *               - committedetailmdmc
  *             properties:
+ *               saralId : string
  *               scode: string
  *               typeofactivity: string
  *               feestructapprove: string
@@ -92,6 +94,7 @@ module.exports = router;
  *               committeeconstitutemdmc: string
  *               committedetailmdmc: string
  *             example:
+ *               saralId : "234223423424"
  *               scode: mh00001
  *               typeofactivity: test
  *               feestructapprove: Test1
