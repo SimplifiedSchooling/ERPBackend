@@ -3,6 +3,7 @@ const { objectId } = require('../custom.validation');
 
 const createSaralInfo3 = {
   body: Joi.object().keys({
+    saralId: Joi.string(),
     scode: Joi.string(),
     totallaptop: Joi.number(),
     totalprinter: Joi.number(),
@@ -72,6 +73,7 @@ const updateSaralInfo3ById = {
   }),
   body: Joi.object()
     .keys({
+      saralId: Joi.string(),
       totallaptop: Joi.number(),
       totalprinter: Joi.number(),
       totalprinterfun: Joi.number(),

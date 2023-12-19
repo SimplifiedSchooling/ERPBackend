@@ -41,6 +41,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - saralId
  *               - maintenancegrant
  *               - buildingrant
  *               - pariposhan
@@ -70,6 +71,7 @@ module.exports = router;
  *               - tfet
  *               - evidencetobacco
  *             properties:
+ *               saralId: string
  *               scode: string
  *               maintenancegrant: string
  *               buildingrant: string
@@ -100,6 +102,7 @@ module.exports = router;
  *               tfet: string
  *               evidencetobacco: string
  *             example:
+ *               saralId: "324232342432"
  *               scode: mh00001
  *               maintenancegrant: Yes
  *               buildingrant: No

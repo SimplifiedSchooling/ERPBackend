@@ -41,6 +41,7 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
+ *               - saralId
  *               - anganwadicenteradj
  *               - noofanganwadinear
  *               - noofsevika
@@ -82,6 +83,8 @@ module.exports = router;
  *               - shetkiallowance
  *               - idmifund
  *             properties:
+ *               saralId:
+ *                 type: string
  *               anganwadicenteradj:
  *                 type: string
  *               noofanganwadinear:
@@ -134,6 +137,7 @@ module.exports = router;
  *               shetkiallowance: number
  *               idmifund: number
  *             example:
+ *               saralId: "34242424242"
  *               scode: mh00001
  *               anganwadicenteradj: fake anganwadicenter
  *               noofanganwadinear: 1
