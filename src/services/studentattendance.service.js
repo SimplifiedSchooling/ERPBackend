@@ -3,15 +3,33 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const { Student, StudentAttendanceSchema, StudentSession } = require('../models');
 const ApiError = require('../utils/ApiError');
+// /**
+//  * Create a StudentAttendanceSchema
+//  * @param {Object} StudentAttendanceSchemaBody
+//  * @returns {Promise<StudentAttendanceSchema>}
+//  */
+// const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+//   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
+// };
 /**
  * Create a StudentAttendanceSchema
  * @param {Object} StudentAttendanceSchemaBody
  * @returns {Promise<StudentAttendanceSchema>}
  */
 const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+  const { scode, classId, sectionId, date } = StudentAttendanceSchemaBody;
+
+  // Check if data with the same scode, classId, sectionId, and date already exists
+  const existingEntry = await StudentAttendanceSchema.findOne({ scode, classId, sectionId, date });
+
+  if (existingEntry) {
+    // If entry already exists, you can handle this case accordingly (throw an error, update the existing entry, etc.)
+    throw new Error('Attendance entry already exists for the given scode, classId, sectionId, and date.');
+  }
+
+  // If entry doesn't exist, create a new one
   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
 };
-
 // const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
 //   let { AttendenceStatus } = StudentAttendanceSchemaBody;
 //   if (!AttendenceStatus) {
