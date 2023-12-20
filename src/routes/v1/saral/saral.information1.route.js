@@ -12,10 +12,14 @@ router
   .get(validate(saralInformation1Validation.getAllSaralInfo1s), saralInfo1Controller.getSaralInfo1s);
 
 router
-  .route('/:saralInfo1Id')
-  .get(validate(saralInformation1Validation.getSaralInfo1), saralInfo1Controller.getSaralInfo1)
+  .route('/:saralId')
+  .get(validate(saralInformation1Validation.getSaralByobjectId), saralInfo1Controller.getSaralInfo1)
   .patch(validate(saralInformation1Validation.updateSaralInfo1ById), saralInfo1Controller.updateSaralInfo1)
   .delete(validate(saralInformation1Validation.deleteSaralInfo1ById), saralInfo1Controller.deleteSaralInfo1);
+
+router
+  .route('/saral-info/:saralId')
+  .get(validate(saralInformation1Validation.getSaralInfo1), saralInfo1Controller.getSaralInfoBysaralId);
 
 module.exports = router;
 
@@ -247,19 +251,19 @@ module.exports = router;
 
 /**
  * @swagger
- * /saralInformation1/{saralInfo1Id}:
+ * /saralInformation1/{saralId}:
  *   get:
- *     summary: Get a Saral Information1 by Id
+ *     summary: Get a Saral Information1 by saral Object Id
  *     tags: [SaralInformation1]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: saralInfo1Id
+ *         name: saralId
  *         required: true
  *         schema:
  *           type: string
- *         description: Saral Information1 id
+ *         description: Saral Information1 saralId
  *     responses:
  *       "200":
  *         description: OK
@@ -281,11 +285,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: saralInfo1Id
+ *         name: saralId
  *         required: true
  *         schema:
  *           type: string
- *         description: Saral Information 1 id
+ *         description: Saral Information 1 saralId
  *     requestBody:
  *       required: true
  *       content:
@@ -407,11 +411,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: saralInfo1Id
+ *         name: saralId
  *         required: true
  *         schema:
  *           type: string
- *         description: Saral Information1 id
+ *         description: Saral Information1 saralId
  *     responses:
  *       "200":
  *         description: No content
@@ -421,4 +425,64 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+// /**
+//  * @swagger
+//  * /saralInformation1/saral-info:
+//  *   get:
+//  *     summary: Get Saral Information1 by saralId
+//  *     tags: [SaralInformation1]
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             type: object
+//  *             required:
+//  *               - saralId
+//  *             properties:
+//  *               saralId:
+//  *                 type: string
+//  *             example:
+//  *               saralId: "34242424242"
+//  *         description: The ID of the Saral Information1.
+//  *     responses:
+//  *       '200':
+//  *         description: Successful response
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               properties:
+//  *                 // Define your response properties here based on the result structure.
+//  *       '404':
+//  *         description: Saral Information1 not found.
+//  *       '500':
+//  *         description: Internal server error. An error occurred while processing the request.
+//  */
+/**
+ * @swagger
+ * /saralInformation1/saral-info/{saralId}:
+ *   get:
+ *     summary: Get Saral Information1 by saralId
+ *     tags: [SaralInformation1]
+ *     parameters:
+ *       - in: path
+ *         name: saralId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the Saral Information1.
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SaralInformation1'
+ *       '404':
+ *         description: Saral Information1 not found.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
  */

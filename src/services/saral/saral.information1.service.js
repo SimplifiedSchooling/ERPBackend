@@ -27,21 +27,29 @@ const getAllSaralInfo1s = async (filter, options) => {
 
 /**
  * Get Saral information1 by id
- * @param {ObjectId} id
+ * @param {Object} id
  * @returns {Promise<SaralInformation1>}
  */
 const getSaralInfo1ById = async (id) => {
-  return SaralInformation1.findById(id);
+  return SaralInformation1.find(id);
 };
 
 /**
+ * Get Saral Information1 by saralId
+ * @param {string} saralId - The ID of the Saral Information1.
+ * @returns {Promise<SaralInformation1>}
+ */
+const getSaralInfo1BySaralId = async (saralId) => {
+  return SaralInformation1.findOne({ saralId });
+};
+/**
  * Update Saral Information1 by id
- * @param {ObjectId} saralInfo1Id
+ * @param {ObjectId} saralId
  * @param {Object} updateBody
  * @returns {Promise<SaralInformation1>}
  */
-const updateSaralInfo1ById = async (saralInfo1Id, updateBody) => {
-  const saral = await getSaralInfo1ById(saralInfo1Id);
+const updateSaralInfo1ById = async (saralId, updateBody) => {
+  const saral = await getSaralInfo1BySaralId(saralId);
   if (!saral) {
     throw new ApiError(httpStatus.NOT_FOUND, 'saral Information1 not found');
   }
@@ -52,11 +60,11 @@ const updateSaralInfo1ById = async (saralInfo1Id, updateBody) => {
 
 /**
  * Delete Saral Information1 by id
- * @param {ObjectId} saralInfo1Id
+ * @param {ObjectId} saralId
  * @returns {Promise<SaralInformation1>}
  */
-const deleteSaralInfo1ById = async (saralInfo1Id) => {
-  const saral = await getSaralInfo1ById(saralInfo1Id);
+const deleteSaralInfo1ById = async (saralId) => {
+  const saral = await getSaralInfo1BySaralId(saralId);
   if (!saral) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Saral Information1 not found');
   }
@@ -70,4 +78,5 @@ module.exports = {
   getSaralInfo1ById,
   updateSaralInfo1ById,
   deleteSaralInfo1ById,
+  getSaralInfo1BySaralId,
 };
