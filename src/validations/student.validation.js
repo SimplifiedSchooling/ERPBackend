@@ -7,7 +7,7 @@ const createStudent = {
     sectionId: Joi.string(),
     classId: Joi.string(),
     sessionId: Joi.string(),
-    scode: Joi.string(),
+    scode: Joi.string().required(),
     role: Joi.string().required(),
     mobNumber: Joi.number(),
     age: Joi.number().required(),
