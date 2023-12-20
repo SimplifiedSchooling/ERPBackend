@@ -12,10 +12,13 @@ router
   .get(validate(saralInformation3Validation.getAllSaralInfo3s), saralInfo3Controller.getSaralInfo3s);
 
 router
-  .route('/:saralInfo3Id')
+  .route('/:saralId')
   .get(validate(saralInformation3Validation.getSaralInfo3), saralInfo3Controller.getSaralInfo3)
   .patch(validate(saralInformation3Validation.updateSaralInfo3ById), saralInfo3Controller.updateSaralInfo3)
   .delete(validate(saralInformation3Validation.deleteSaralInfo3ById), saralInfo3Controller.deleteSaralInfo3);
+router
+  .route('/saral-info/:saralId')
+  .get(validate(saralInformation3Validation.getSaralInfo), saralInfo3Controller.getSaralInfoBysaralId);
 
 module.exports = router;
 
@@ -247,19 +250,19 @@ module.exports = router;
 
 /**
  * @swagger
- * /saralInformation3/{saralInfo3Id}:
+ * /saralInformation3/{saralId}:
  *   get:
- *     summary: Get a Saral Information3 by Id
+ *     summary: Get a Saral Information3 by object ID
  *     tags: [SaralInformation3]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: saralInfo3Id
+ *         name: saralId
  *         required: true
  *         schema:
  *           type: string
- *         description: Saral Information3 id
+ *         description: Saral Information3 saralId
  *     responses:
  *       "200":
  *         description: OK
@@ -281,11 +284,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: saralInfo3Id
+ *         name: saralId
  *         required: true
  *         schema:
  *           type: string
- *         description: Saral Information3 id
+ *         description: Saral Information3 saralId
  *     requestBody:
  *       required: true
  *       content:
@@ -403,11 +406,11 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: saralInfo3Id
+ *         name: saralId
  *         required: true
  *         schema:
  *           type: string
- *         description: Saral Information3 id
+ *         description: Saral Information3 saralId
  *     responses:
  *       "200":
  *         description: No content
@@ -417,4 +420,30 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /saralInformation3/saral-info/{saralId}:
+ *   get:
+ *     summary: Get  SaralInformation2 by saralId
+ *     tags: [SaralInformation3]
+ *     parameters:
+ *       - in: path
+ *         name: saralId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the Saral SaralInformation3.
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SaralInformation3'
+ *       '404':
+ *         description:  SaralInformation3 not found.
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
  */

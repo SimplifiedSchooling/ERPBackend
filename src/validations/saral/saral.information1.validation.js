@@ -59,13 +59,18 @@ const getAllSaralInfo1s = {
 
 const getSaralInfo1 = {
   params: Joi.object().keys({
-    saralInfo1Id: Joi.string().custom(objectId),
+    saralId: Joi.string(),
+  }),
+};
+const getSaralByobjectId = {
+  params: Joi.object().keys({
+    saralId: Joi.string().custom(objectId),
   }),
 };
 
 const updateSaralInfo1ById = {
   params: Joi.object().keys({
-    saralInfo1Id: Joi.custom(objectId),
+    saralId: Joi.string(),
   }),
   body: Joi.object()
     .keys({
@@ -115,7 +120,7 @@ const updateSaralInfo1ById = {
 };
 const deleteSaralInfo1ById = {
   params: Joi.object().keys({
-    saralInfo1Id: Joi.string().custom(objectId),
+    saralId: Joi.string(),
   }),
 };
 
@@ -125,4 +130,5 @@ module.exports = {
   getSaralInfo1,
   updateSaralInfo1ById,
   deleteSaralInfo1ById,
+  getSaralByobjectId,
 };

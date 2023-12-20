@@ -17,7 +17,7 @@ const getSaralInfo2s = catchAsync(async (req, res) => {
 });
 
 const getSaralInfo2 = catchAsync(async (req, res) => {
-  const saral = await saralInformation2Service.getSaralInfo2ById(req.params.saralInfo2Id);
+  const saral = await saralInformation2Service.getSaralInfo2ById(req.params.saralId);
   if (!saral) {
     throw new ApiError(httpStatus.NOT_FOUND, 'saral information2 not found');
   }
@@ -25,13 +25,19 @@ const getSaralInfo2 = catchAsync(async (req, res) => {
 });
 
 const updateSaralInfo2 = catchAsync(async (req, res) => {
-  const updatedSaral = await saralInformation2Service.updateSaralInfo2ById(req.params.saralInfo2Id, req.body);
+  const updatedSaral = await saralInformation2Service.updateSaralInfo2ById(req.params.saralId, req.body);
   res.send(updatedSaral);
 });
 
 const deleteSaralInfo2 = catchAsync(async (req, res) => {
-  const deletedSaral = await saralInformation2Service.deleteSaralInfo2ById(req.params.saralInfo2Id);
+  const deletedSaral = await saralInformation2Service.deleteSaralInfo2ById(req.params.saralId);
   res.status(httpStatus.NO_CONTENT).send(deletedSaral);
+});
+
+const getSaralInfoBysaralId = catchAsync(async (req, res) => {
+  const { saralId } = req.params;
+  const result = await saralInformation2Service.getSaralInfo1BySaralId(saralId);
+  res.send(result);
 });
 
 module.exports = {
@@ -40,4 +46,5 @@ module.exports = {
   getSaralInfo2,
   updateSaralInfo2,
   deleteSaralInfo2,
+  getSaralInfoBysaralId,
 };
