@@ -178,12 +178,18 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               lectureId:
+ *                 type: string
+ *                 example: 6516761d9cee04ae5df9fb6f
  *               classId:
  *                 type: string
  *                 example: 6516761d9cee04ae5df9fb6f
  *               sectionId:
  *                 type: string
  *                 example: 650d6dfa60838756a214b436
+ *               teacherName:
+ *                 type: string
+ *                 example: Anand Mishra
  *               date:
  *                 type: string
  *                 example: "2023-10-25"
@@ -387,6 +393,9 @@ module.exports = router;
  *               classId:
  *                 type: string
  *                 example: 6516761d9cee04ae5df9fb6f
+ *               lectureId:
+ *                 type: string
+ *                 example: 6516761d9cee04ae5df9fb6f
  *               sectionId:
  *                 type: string
  *                 example: 650d6dfa60838756a214b436
@@ -399,6 +408,9 @@ module.exports = router;
  *               scode:
  *                 type: string
  *                 example: 222e6ae0-61e0-11ee-8482-6f09799e735c
+ *               teacherName:
+ *                 type: string
+ *                 example: Anand Mishra
  *               entries:
  *                 type: array
  *                 items:
