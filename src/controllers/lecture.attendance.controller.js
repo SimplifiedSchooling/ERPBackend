@@ -61,6 +61,15 @@ const deleteLectureAttendance = catchAsync(async (req, res) => {
 //   res.send(classwiseAttendanceStudentList);
 // });
 
+const createOrUpdateLectureAttendance = catchAsync(async (req, res) => {
+  const lectureAttendanceBody = req.body;
+  const result = await LectureAttendanceService.createOrUpdateLectureAttendance(lectureAttendanceBody);
+  if (!result) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Failed to create or update lecture attendance');
+  }
+  res.status(httpStatus.OK).json({ success: true, message: 'Lecture attendance created or updated successfully' });
+});
+
 module.exports = {
   newLectureAttendance,
   getAllLectureAttendanceData,
@@ -71,4 +80,5 @@ module.exports = {
   //   getWeekStatus,
   //   todaysAttendanceForSchool,
   //   getClasswiseAttendanceStudentList,
+  createOrUpdateLectureAttendance,
 };

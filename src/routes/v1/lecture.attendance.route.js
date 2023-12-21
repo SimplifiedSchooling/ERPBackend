@@ -36,6 +36,7 @@ router
     validate(lectureAttendanceValidation.deleteLectureAttendance),
     lectureAttendanceController.deleteLectureAttendance
   );
+router.post('/create-or-update', lectureAttendanceController.createOrUpdateLectureAttendance);
 
 module.exports = router;
 
@@ -366,4 +367,65 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /lectureattendance/create-or-update:
+ *   post:
+ *     summary: Create or update lecture attendance
+ *     tags: [LectureAttendance]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               classId:
+ *                 type: string
+ *                 example: 6516761d9cee04ae5df9fb6f
+ *               sectionId:
+ *                 type: string
+ *                 example: 650d6dfa60838756a214b436
+ *               date:
+ *                 type: string
+ *                 example: "2023-10-25"
+ *               time:
+ *                 type: string
+ *                 example: "10:30am"
+ *               scode:
+ *                 type: string
+ *                 example: 222e6ae0-61e0-11ee-8482-6f09799e735c
+ *               entries:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     attendanceStatus:
+ *                       type: string
+ *                       enum: ["present", "absent", "late"]
+ *                       example: "present"
+ *                     remark:
+ *                       type: string
+ *                       example: "present in class"
+ *                     studentId:
+ *                       type: number
+ *                       example: 74351449
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
+ *       '500':
+ *         description: Internal server error. An error occurred while processing the request.
  */
