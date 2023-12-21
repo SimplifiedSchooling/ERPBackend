@@ -63,7 +63,14 @@ const deleteLectureAttendance = {
     LectureAttendanceId: Joi.string().custom(objectId),
   }),
 };
-
+const getAllStudentByclassAndsection = {
+  body: Joi.object().keys({
+    scode: Joi.string().required(),
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
+    date: Joi.string().required(),
+  }),
+};
 module.exports = {
   lectureAttendanceSchema,
   getAllLectureAttendance,
@@ -72,4 +79,5 @@ module.exports = {
   deleteLectureAttendance,
   attendanceData,
   todaysAttendanceForSchool,
+  getAllStudentByclassAndsection,
 };

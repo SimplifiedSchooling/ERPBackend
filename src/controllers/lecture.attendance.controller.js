@@ -3,6 +3,7 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const LectureAttendanceService = require('../services/lecture.attendance.service');
+const studentSessionService = require('../services/student.session.service');
 
 const newLectureAttendance = catchAsync(async (req, res) => {
   const LectureAttendance = await LectureAttendanceService.createLectureAttendance(req.body);
@@ -70,6 +71,15 @@ const createOrUpdateLectureAttendance = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, message: 'Lecture attendance created or updated successfully' });
 });
 
+const getStudentsByClassAndSection = async (req, res) => {
+  const { scode, classId, sectionId, date } = req.body;
+  const data = await studentSessionService.getStudentsByClassAndSectionForLectureAttendance(scode, classId, sectionId, date);
+  if (!data) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Internal Server Error');
+  }
+  res.status(200).json({ data });
+};
+
 module.exports = {
   newLectureAttendance,
   getAllLectureAttendanceData,
@@ -81,4 +91,5 @@ module.exports = {
   //   todaysAttendanceForSchool,
   //   getClasswiseAttendanceStudentList,
   createOrUpdateLectureAttendance,
+  getStudentsByClassAndSection,
 };
