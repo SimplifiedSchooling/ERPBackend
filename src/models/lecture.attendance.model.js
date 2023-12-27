@@ -31,6 +31,15 @@ const lectureAttendanceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    teacherName: {
+      type: String,
+      required: true,
+    },
+    lectureId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'TodayPlan',
+      required: true,
+    },
     classId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Classes',

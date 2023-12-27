@@ -398,6 +398,90 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
     absentStudents,
   };
 };
+// /**
+//  * Update student attendance status and remark
+//  * @param {string} scode - The ID of the scode.
+//  * @param {string} classId - The ID of the class.
+//  * @param {string} sectionId - The ID of the section.
+//  * @param {string} date - The date of the attendance.
+//  * @param {Array} entryUpdates - An array of attendance updates containing studentId, attendanceStatus, and remark.
+//  * @returns {Promise<boolean>} - Returns true if the update is successful.
+//  * @throws {Error} - If there is an error while updating the database.
+//  */
+// const updateLectureAttendance = async (scode, classId, sectionId, date, entryUpdates) => {
+//   const filter = {
+//     scode,
+//     classId: mongoose.Types.ObjectId(classId),
+//     sectionId: mongoose.Types.ObjectId(sectionId),
+//     date,
+//   };
+//   const update = {
+//     $set: {},
+//   };
+//   entryUpdates.forEach((entry) => {
+//     const { studentId } = entry;
+//     update.$set[`entries.$[elem${studentId}].attendanceStatus`] = entry.attendanceStatus || 'present';
+//     update.$set[`entries.$[elem${studentId}].remark`] = entry.remark || null;
+//   });
+//   const options = {
+//     arrayFilters: entryUpdates.map((entry) => ({ [`elem${entry.studentId}.studentId`]: entry.studentId })),
+//   };
+//   const result = await LectureAttendance.updateOne(filter, update, options);
+//   return result.nModified > 0;
+// };
+/**
+ * Update student attendance status, remark, teacherName, and lectureId
+ * @param {string} scode - The ID of the scode.
+ * @param {string} classId - The ID of the class.
+ * @param {string} sectionId - The ID of the section.
+ * @param {string} date - The date of the attendance.
+ * @param {string} teacherName - The updated teacherName.
+ * @param {string} lectureId - The ID of the lecture.
+ * @param {Array} entryUpdates - An array of attendance updates containing studentId, attendanceStatus, and remark.
+ * @returns {Promise<boolean>} - Returns true if the update is successful.
+ * @throws {Error} - If there is an error while updating the database.
+ */
+const updateLectureAttendance = async (scode, classId, sectionId, date, teacherName, lectureId, entryUpdates) => {
+  const filter = {
+    scode,
+    classId: mongoose.Types.ObjectId(classId),
+    sectionId: mongoose.Types.ObjectId(sectionId),
+    date,
+  };
+  const update = {
+    $set: {
+      teacherName,
+      lectureId: mongoose.Types.ObjectId(lectureId),
+    },
+  };
+  entryUpdates.forEach((entry) => {
+    const { studentId } = entry;
+    update.$set[`entries.$[elem${studentId}].attendanceStatus`] = entry.attendanceStatus || 'present';
+    update.$set[`entries.$[elem${studentId}].remark`] = entry.remark || null;
+  });
+  const options = {
+    arrayFilters: entryUpdates.map((entry) => ({ [`elem${entry.studentId}.studentId`]: entry.studentId })),
+  };
+  const result = await LectureAttendance.updateOne(filter, update, options);
+  return result.nModified > 0;
+};
+
+/**
+ * Create or update lecture attendance
+ * @param {Object} lectureAttendanceBody - The lecture attendance data to be created or updated.
+ * @returns {Promise<boolean>} - Returns true if the update is successful.
+ * @throws {Error} - If there is an error while updating the database.
+ */
+const createOrUpdateLectureAttendance = async (lectureAttendanceBody) => {
+  const { scode, classId, sectionId, date, teacherName, lectureId, entries } = lectureAttendanceBody;
+  const existingAttendance = await LectureAttendance.findOne({ scode, classId, sectionId, date });
+  if (existingAttendance) {
+    const updateData = await updateLectureAttendance(scode, classId, sectionId, date, teacherName, lectureId, entries);
+    return updateData;
+  }
+  const createData = await createLectureAttendance(lectureAttendanceBody);
+  return createData;
+};
 
 module.exports = {
   createLectureAttendance,
@@ -411,4 +495,5 @@ module.exports = {
   getPresentStudentsCount,
   getAttendanceStats,
   // getClasswiseLectureAttendanceList,
+  createOrUpdateLectureAttendance,
 };
