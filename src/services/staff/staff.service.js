@@ -158,6 +158,17 @@ const bulkUpload = async (staffsArray, csvFilePath = null) => {
       } else {
         let record = new Staff(staff);
         record = await record.save();
+        const userName = generateUsernameFromName(staff.name);
+        const randomPassword = crypto.randomBytes(16).toString('hex');
+        await User.create({
+          name: staff.name,
+          userId: staff.id,
+          scode: staff.scode,
+          mobNumber: staff.mobNumber,
+          userName,
+          password: randomPassword,
+          role: staff.role,
+        });
         if (record) {
           records.push(staff);
         }
