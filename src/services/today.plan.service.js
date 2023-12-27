@@ -35,6 +35,23 @@ const getAllPlans = async (filter, options) => {
 //   return videos;
 // };
 
+// const getTodayPlans = async () => {
+//   const today = new Date();
+//   const todayDate = today.toLocaleDateString('en-GB'); // Format: 'DD/MM/YYYY'
+
+//   const todayPlans = await TodayPlan.aggregate([
+//     {
+//       $match: { date: todayDate },
+//     },
+//     {
+//       $group: {
+//         _id: '$class',
+//         plans: { $push: '$$ROOT' },
+//       },
+//     },
+//   ]);
+//   return todayPlans;
+// };
 const getTodayPlans = async () => {
   const today = new Date();
   const todayDate = today.toLocaleDateString('en-GB'); // Format: 'DD/MM/YYYY'
@@ -44,15 +61,28 @@ const getTodayPlans = async () => {
       $match: { date: todayDate },
     },
     {
+      $lookup: {
+        from: 'classes', // Assuming the collection name is 'classes'. Change it accordingly.
+        localField: 'class',
+        foreignField: 'className',
+        as: 'classDetails',
+      },
+    },
+    {
+      $unwind: '$classDetails', // Unwind to access fields of the 'classDetails' array
+    },
+    {
       $group: {
         _id: '$class',
-        plans: { $push: '$$ROOT' },
+        classID: { $first: '$classDetails._id' }, // Use the class name
+        className: { $first: '$classDetails.className' }, // Use the class name
+        plans: { $addToSet: '$$ROOT' },
       },
     },
   ]);
-
   return todayPlans;
 };
+
 /**
  * Get TodayPlan by id
  * @param {ObjectId} planId

@@ -3,6 +3,7 @@ const { objectId } = require('../custom.validation');
 
 const createSaralInfo4 = {
   body: Joi.object().keys({
+    saralId: Joi.string(),
     scode: Joi.string(),
     typeofactivity: Joi.string(),
     feestructapprove: Joi.string(),
@@ -48,10 +49,11 @@ const getSaralInfo4 = {
 
 const updateSaralInfo4ById = {
   params: Joi.object().keys({
-    saralInfo4Id: Joi.custom(objectId),
+    saralId: Joi.string(),
   }),
   body: Joi.object()
     .keys({
+      saralId: Joi.string(),
       typeofactivity: Joi.string(),
       feestructapprove: Joi.string(),
       feerevisionpendstatelev: Joi.string(),
@@ -81,14 +83,19 @@ const updateSaralInfo4ById = {
 };
 const deleteSaralInfo4ById = {
   params: Joi.object().keys({
-    saralInfo4Id: Joi.string().custom(objectId),
+    saralId: Joi.string(),
   }),
 };
-
+const getSaralInfo = {
+  params: Joi.object().keys({
+    saralId: Joi.string(),
+  }),
+};
 module.exports = {
   createSaralInfo4,
   getAllSaralInfo4s,
   getSaralInfo4,
   updateSaralInfo4ById,
   deleteSaralInfo4ById,
+  getSaralInfo,
 };

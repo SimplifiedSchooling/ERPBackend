@@ -3,6 +3,9 @@ const { toJSON, paginate } = require('../plugins');
 
 const saralInformation1Schema = mongoose.Schema(
   {
+    saralId: {
+      type: String,
+    },
     scode: {
       type: String,
     },

@@ -3,15 +3,33 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const { Student, StudentAttendanceSchema, StudentSession } = require('../models');
 const ApiError = require('../utils/ApiError');
+// /**
+//  * Create a StudentAttendanceSchema
+//  * @param {Object} StudentAttendanceSchemaBody
+//  * @returns {Promise<StudentAttendanceSchema>}
+//  */
+// const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+//   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
+// };
 /**
  * Create a StudentAttendanceSchema
  * @param {Object} StudentAttendanceSchemaBody
  * @returns {Promise<StudentAttendanceSchema>}
  */
 const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
+  const { scode, classId, sectionId, date } = StudentAttendanceSchemaBody;
+
+  // Check if data with the same scode, classId, sectionId, and date already exists
+  const existingEntry = await StudentAttendanceSchema.findOne({ scode, classId, sectionId, date });
+
+  if (existingEntry) {
+    // If entry already exists, you can handle this case accordingly (throw an error, update the existing entry, etc.)
+    throw new Error('Attendance entry already exists for the given scode, classId, sectionId, and date.');
+  }
+
+  // If entry doesn't exist, create a new one
   return StudentAttendanceSchema.create(StudentAttendanceSchemaBody);
 };
-
 // const createStudentAttendance = async (StudentAttendanceSchemaBody) => {
 //   let { AttendenceStatus } = StudentAttendanceSchemaBody;
 //   if (!AttendenceStatus) {
@@ -741,6 +759,38 @@ const getAttendanceStats = async (classId, sectionId, date, scode) => {
   };
 };
 
+/**
+ * Update student attendance status and remark
+ * @param {string} scode - The ID of the scode.
+ * @param {string} classId - The ID of the class.
+ * @param {string} sectionId - The ID of the section.
+ * @param {string} date - The date of the attendance.
+ * @param {Array} entryUpdates - An array of attendance updates containing studentId, attendanceStatus, and remark.
+ * @returns {Promise<boolean>} - Returns true if the update is successful.
+ * @throws {Error} - If there is an error while updating the database.
+ */
+const updateStudentAttendance = async (scode, classId, sectionId, date, entryUpdates) => {
+  const filter = {
+    scode,
+    classId: mongoose.Types.ObjectId(classId),
+    sectionId: mongoose.Types.ObjectId(sectionId),
+    date,
+  };
+  const update = {
+    $set: {},
+  };
+  entryUpdates.forEach((entry) => {
+    const { studentId } = entry;
+    update.$set[`entries.$[elem${studentId}].attendanceStatus`] = entry.attendanceStatus || 'present';
+    update.$set[`entries.$[elem${studentId}].remark`] = entry.remark || null;
+  });
+  const options = {
+    arrayFilters: entryUpdates.map((entry) => ({ [`elem${entry.studentId}.studentId`]: entry.studentId })),
+  };
+  const result = await StudentAttendanceSchema.updateOne(filter, update, options);
+  return result.nModified > 0;
+};
+
 module.exports = {
   createStudentAttendance,
   getAllStudentAttendance,
@@ -753,4 +803,5 @@ module.exports = {
   getPresentStudentsCount,
   getAttendanceStats,
   // getClasswiseStudentAttendanceList,
+  updateStudentAttendance,
 };
