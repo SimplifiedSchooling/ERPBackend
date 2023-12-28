@@ -111,6 +111,7 @@ const menuRoute = require('./menu.router');
 const lectureAttendance = require('./lecture.attendance.route');
 const staffAttendance = require('./staff.attendance.route');
 const recordedBroadcastRoute = require('./recorded.broadcast.route');
+const studentPromoteRoute = require('./student.promote.route');
 
 const router = express.Router();
 
@@ -118,6 +119,10 @@ const defaultRoutes = [
   {
     path: '/auth',
     route: authRoute,
+  },
+  {
+    path: '/studentpromote',
+    route: studentPromoteRoute,
   },
   {
     path: '/users',
