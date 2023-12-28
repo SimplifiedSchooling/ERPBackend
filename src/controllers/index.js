@@ -106,3 +106,5 @@ module.exports.lectureAttendanceController = require('./lecture.attendance.contr
 module.exports.staffAttendanceController = require('./staff.attendance.controller');
 module.exports.recordedBroadcastController = require('./recorded.broadcast.controller');
 module.exports.studentPromoteController = require('./student.promote.controller');
+module.exports.leavingCertController = require('./leavingcert.controller');
+

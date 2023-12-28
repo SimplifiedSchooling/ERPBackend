@@ -65,6 +65,14 @@ const deleteStudent = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(deletedStudent);
 });
 
+const getAllStudentOfLeaveCert = catchAsync(async (req, res) => {
+  const { name } = req.query;
+  const filter = { name, laboratoryDue: true, libraryDue: true, feedDue: true, otherDue: true };
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const allStudents = await studentService.getAllStudentOfLeaveCert(filter, options);
+  res.send(allStudents);
+});
+
 module.exports = {
   createStudent,
   getStudents,
@@ -74,4 +82,5 @@ module.exports = {
   bulkUpload,
   bulkUploadFile,
   getStudentByScode,
+  getAllStudentOfLeaveCert,
 };
