@@ -341,7 +341,19 @@ const bulkUpload = async (studentArray, csvFilePath = null, sessionId, classId, 
 };
 
 // Existing helper functions...
-
+/**
+ * Query for Classes
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getAllStudentOfLeaveCert = async (filter, options) => {
+  const students = await Student.paginate(filter, options);
+  return students;
+};
 module.exports = {
   createStudent,
   getAllStudents,
@@ -351,4 +363,5 @@ module.exports = {
   getStudentMobNumber,
   bulkUpload,
   getStudentScode,
+  getAllStudentOfLeaveCert,
 };

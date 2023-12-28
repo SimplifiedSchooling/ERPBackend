@@ -183,6 +183,22 @@ const studentSchema = new mongoose.Schema(
     marksobtain: String,
     studappliedforplacemant: String,
     studeappliedforapprentice: String,
+    laboratoryDue: {
+      type: Boolean,
+      default: false,
+    },
+    libraryDue: {
+      type: Boolean,
+      default: false,
+    },
+    feedDue: {
+      type: Boolean,
+      default: false,
+    },
+    otherDue: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

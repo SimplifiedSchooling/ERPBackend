@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
+// const httpStatus = require('http-status');
 const { LeavingCert } = require('../models');
-const ApiError = require('../utils/ApiError');
+// const ApiError = require('../utils/ApiError');
 
 /**
  * Create a LeavingCert
@@ -34,40 +34,40 @@ const getLeavingcertById = async (id) => {
   return LeavingCert.findById(id);
 };
 
-/**
- * Update leavingcert by id
- * @param {ObjectId} userId
- * @param {Object} updateBody
- * @returns {Promise<Board>}
- */
-const updateLeavingcertById = async (leavingcertId, updateBody) => {
-  const board = await getLeavingcertById(leavingcertId);
-  if (!board) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Board not found');
-  }
-  Object.assign(board, updateBody);
-  await board.save();
-  return board;
-};
+// /**
+//  * Update leavingcert by id
+//  * @param {ObjectId} userId
+//  * @param {Object} updateBody
+//  * @returns {Promise<Board>}
+//  */
+// const updateLeavingcertById = async (leavingcertId, updateBody) => {
+//   const board = await getLeavingcertById(leavingcertId);
+//   if (!board) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Board not found');
+//   }
+//   Object.assign(board, updateBody);
+//   await board.save();
+//   return board;
+// };
 
-/**
- * Delete leavingcert by id
- * @param {ObjectId} boardId
- * @returns {Promise<Board>}
- */
-const deleteLeavingcertById = async (boardId) => {
-  const board = await getLeavingcertById(boardId);
-  if (!board) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Board not found');
-  }
-  await board.remove();
-  return board;
-};
+// /**
+//  * Delete leavingcert by id
+//  * @param {ObjectId} boardId
+//  * @returns {Promise<Board>}
+//  */
+// const deleteLeavingcertById = async (boardId) => {
+//   const board = await getLeavingcertById(boardId);
+//   if (!board) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'Board not found');
+//   }
+//   await board.remove();
+//   return board;
+// };
 
 module.exports = {
   createLeaveCert,
   queryLeavingcert,
   getLeavingcertById,
-  updateLeavingcertById,
-  deleteLeavingcertById,
+  // updateLeavingcertById,
+  // deleteLeavingcertById,
 };

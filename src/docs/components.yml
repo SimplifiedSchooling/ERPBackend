@@ -1431,6 +1431,29 @@ components:
         questionId: 'sdvbjh2376r37862'
         selectedOptions: [0,2]
     
+    LeavingCert:
+      type: object
+      properties:
+        apllyedName:
+          type: string
+          trim: true
+          required: true
+        scode:
+          type: string
+        StudentId:
+          type: string
+        date:
+          type: date
+        status:
+          type: boolean
+          default: true
+      example:
+        apllyedName: fake name
+        scode: sdvbjh2376r37862
+        StudentId: fake student ID
+        date: 2020-05-12T16:18:04.793Z
+        status: true
+
 
     Token:
       type: object
