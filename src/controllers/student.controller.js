@@ -67,14 +67,7 @@ const deleteStudent = catchAsync(async (req, res) => {
 
 const getAllStudentOfLeaveCert = catchAsync(async (req, res) => {
   const { name } = req.query;
-  const { laboratoryDue, libraryDue, feedDue, otherDue } = req.query;
-  const filter = {
-    name,
-    ...(laboratoryDue === 'true' && { laboratoryDue: true }),
-    ...(libraryDue === 'true' && { libraryDue: true }),
-    ...(feedDue === 'true' && { feedDue: true }),
-    ...(otherDue === 'true' && { otherDue: true }),
-  };
+  const filter = { name, laboratoryDue: true, libraryDue: true, feedDue: true, otherDue: true };
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const allStudents = await studentService.getAllStudentOfLeaveCert(filter, options);
   res.send(allStudents);

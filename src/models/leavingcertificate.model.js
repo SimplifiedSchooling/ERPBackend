@@ -8,6 +8,9 @@ const leavingCertSchema = mongoose.Schema(
       trim: true,
       required: true,
     },
+    scode: {
+      type: String,
+    },
     StudentId: {
       type: String,
     },
