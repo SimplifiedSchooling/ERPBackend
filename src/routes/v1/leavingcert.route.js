@@ -11,8 +11,8 @@ router
   .get(validate(leaveingCertValidation.queryLeavingcert), leavingCertController.queryLeavingcert);
 
 router
-  .route('/:leavingCertId')
-  .get(validate(leaveingCertValidation.getLeavingcertById), leavingCertController.getLeavingcertById);
+  .route('/get-student-applied-for/leaving-cert')
+  .get(validate(leaveingCertValidation.getLeavingcertById), leavingCertController.getStudentsByFilter);
 
 router.route('/search/students').post(validate(leaveingCertValidation.searchStudents), leavingCertController.searchStudents);
 module.exports = router;
@@ -51,7 +51,8 @@ module.exports = router;
  *              date: 2020-05-12T16:18:04.793Z
  *              status: true
  *              certificate: transfer certificate
- *              class: class 10
+ *              classId: 614a7e7d7f1d813bbf8e89b7
+ *              sectionId: 614a7e7d7f1d813bbf8e89b7
  *              gender: Male
  *              admissionNo: 12424
  *
@@ -184,19 +185,37 @@ module.exports = router;
 
 /**
  * @swagger
- * /leaving-cert/{leavingCertId}:
+ * /leaving-cert/get-student-applied-for/leaving-cert:
  *   get:
  *     summary: Get a Leaving Cert.
  *     tags: [LeavingCert]
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: leavingCertId
+ *       - in: query
+ *         name: scode
  *         required: true
  *         schema:
  *           type: string
- *         description: leavingCertId
+ *         description: certificate
+ *       - in: query
+ *         name: classId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: certificate
+ *       - in: query
+ *         name: sectionId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: certificate
+ *       - in: query
+ *         name: certificate
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: certificate
  *     responses:
  *       "200":
  *         description: OK

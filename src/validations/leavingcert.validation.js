@@ -8,7 +8,8 @@ const createLeaveCert = {
     StudentId: Joi.string().required(),
     date: Joi.string().required(),
     status: Joi.boolean(),
-    class: Joi.string(),
+    classId: Joi.string(),
+    sectionId: Joi.string(),
     gender: Joi.string().valid('Male', 'Female', 'Other'),
     certificate: Joi.string(),
     admissionNo: Joi.string(),
@@ -35,8 +36,11 @@ const searchStudents = {
 };
 
 const getLeavingcertById = {
-  params: Joi.object().keys({
-    leavingCertId: Joi.string(),
+  query: Joi.object().keys({
+    scode: Joi.string().required(),
+    classId: Joi.string().required(),
+    sectionId: Joi.string().required(),
+    certificate: Joi.string().required(),
   }),
 };
 

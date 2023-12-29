@@ -1462,7 +1462,8 @@ components:
         date: 2020-05-12T16:18:04.793Z
         status: true
         certificate: transfer certificate
-        class: class 10
+        classId: 614a7e7d7f1d813bbf8e89b7
+        sectionId: 614a7e7d7f1d813bbf8e89b7
         gender: Male
         admissionNo: '1234251'
 
