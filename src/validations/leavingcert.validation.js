@@ -11,6 +11,7 @@ const createLeaveCert = {
     class: Joi.string(),
     gender: Joi.string().valid('Male', 'Female', 'Other'),
     certificate: Joi.string(),
+    admission_no: Joi.string(),
   }),
 };
 

@@ -52,6 +52,7 @@ module.exports = router;
  *              certificate: transfer certificate
  *              class: class 10
  *              gender: Male
+ *              admission_no: 12424
  *
  *     responses:
  *       "201":

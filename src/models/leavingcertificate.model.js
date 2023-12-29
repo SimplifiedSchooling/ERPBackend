@@ -3,6 +3,9 @@ const { toJSON, paginate } = require('./plugins');
 
 const leavingCertSchema = mongoose.Schema(
   {
+    admission_no: {
+      type: String,
+    },
     apllyedName: {
       type: String,
       trim: true,
