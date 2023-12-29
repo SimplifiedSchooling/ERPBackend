@@ -49,6 +49,7 @@ module.exports = router;
  *              StudentId: fake student ID
  *              date: 2020-05-12T16:18:04.793Z
  *              status: true
+ *              certificate: transfer certificate
  *
  *     responses:
  *       "201":

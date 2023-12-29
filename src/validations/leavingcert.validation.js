@@ -7,7 +7,10 @@ const createLeaveCert = {
     scode: Joi.string().required(),
     StudentId: Joi.string().required(),
     date: Joi.string().required(),
-    status: Joi.boolean().required(),
+    status: Joi.boolean(),
+    class: Joi.string(),
+    gender: Joi.string().valid('Male', 'Female', 'Other'),
+    certificate: Joi.string(),
   }),
 };
 
