@@ -1,5 +1,5 @@
 // const httpStatus = require('http-status');
-const { LeavingCert } = require('../models');
+const { LeavingCert, Student } = require('../models');
 // const ApiError = require('../utils/ApiError');
 
 /**
@@ -27,11 +27,32 @@ const queryLeavingcert = async (filter, options) => {
 
 /**
  * Get leavingcert by id
- * @param {ObjectId} id
- * @returns {Promise<Board>}
+ * @param {ObjectId} scode
+ * @param {ObjectId} classId
+ * @param {ObjectId} sectionId
+ * @param {ObjectId} certificate
+ * @returns {Promise<studentIds>}
  */
-const getLeavingcertById = async (id) => {
-  return LeavingCert.findById(id);
+const getStudentIds = async (scode, classId, sectionId, certificate) => {
+  const query = {
+    scode,
+    classId,
+    sectionId,
+    certificate,
+  };
+
+  const studentIds = await LeavingCert.find(query).distinct('StudentId').exec();
+  return studentIds;
+};
+
+/**
+ * Get leavingcert by id
+ * @param {ObjectId} studentIds
+ * @returns {Promise<Student>}
+ */
+const getStudentsByIds = async (studentIds) => {
+  const students = await Student.find({ studentId: { $in: studentIds } }).exec();
+  return students;
 };
 
 // Function to escape special characters in a string for RegExp
@@ -89,8 +110,9 @@ const searchStudents = async (scode, searchQuery) => {
 module.exports = {
   createLeaveCert,
   queryLeavingcert,
-  getLeavingcertById,
+  getStudentIds,
   searchStudents,
+  getStudentsByIds,
   // updateLeavingcertById,
   // deleteLeavingcertById,
 };

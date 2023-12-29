@@ -27,7 +27,10 @@ const leavingCertSchema = mongoose.Schema(
     certificate: {
       type: String,
     },
-    class: {
+    classId: {
+      type: String,
+    },
+    sectionId: {
       type: String,
     },
     gender: {

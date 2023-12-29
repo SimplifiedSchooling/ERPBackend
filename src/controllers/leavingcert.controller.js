@@ -17,12 +17,15 @@ const queryLeavingcert = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const getLeavingcertById = catchAsync(async (req, res) => {
-  const leavingCert = await LeavingcertService.getLeavingcertById(req.params.leavingCertId);
-  if (!leavingCert) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'leaving Cert not found');
+const getStudentsByFilter = catchAsync(async (req, res) => {
+  const { scode, classId, sectionId, certificate } = req.query;
+
+  const studentIds = await LeavingcertService.getStudentIds(scode, classId, sectionId, certificate);
+  const students = await LeavingcertService.getStudentsByIds(studentIds);
+  if (!students) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'students not found');
   }
-  res.send(leavingCert);
+  res.send(students);
 });
 
 const searchStudents = catchAsync(async (req, res) => {
@@ -37,6 +40,6 @@ const searchStudents = catchAsync(async (req, res) => {
 module.exports = {
   createLeaveVert,
   queryLeavingcert,
-  getLeavingcertById,
+  getStudentsByFilter,
   searchStudents,
 };
