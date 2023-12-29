@@ -10,8 +10,8 @@ const createLeaveVert = catchAsync(async (req, res) => {
 });
 
 const queryLeavingcert = catchAsync(async (req, res) => {
-  const { scode } = req.query;
-  const filter = { status: true, scode }; // Filter for status true only
+  const { scode, admissionNo, apllyedName, StudentId } = req.query;
+  const filter = { status: true, scode, admissionNo, apllyedName, StudentId }; // Filter for status true only
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await LeavingcertService.queryLeavingcert(filter, options);
   res.send(result);
@@ -25,8 +25,17 @@ const getLeavingcertById = catchAsync(async (req, res) => {
   res.send(leavingCert);
 });
 
+const searchStudents = catchAsync(async (req, res) => {
+  const leavingCert = await LeavingcertService.searchStudents(req.body);
+  if (!leavingCert) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'leaving Cert not found');
+  }
+  res.send(leavingCert);
+});
+
 module.exports = {
   createLeaveVert,
   queryLeavingcert,
   getLeavingcertById,
+  searchStudents,
 };

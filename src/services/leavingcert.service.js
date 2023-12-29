@@ -34,6 +34,29 @@ const getLeavingcertById = async (id) => {
   return LeavingCert.findById(id);
 };
 
+// Function to escape special characters in a string for RegExp
+function escapeRegExp(string) {
+  if (typeof string !== 'string') {
+    return '';
+  }
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const searchStudents = async (searchQuery) => {
+  const query = {
+    scode: searchQuery.scode,
+    $or: [
+      // eslint-disable-next-line security/detect-non-literal-regexp
+      { apllyedName: new RegExp(`^${escapeRegExp(searchQuery.apllyedName)}`, 'i') },
+      { StudentId: searchQuery.StudentId },
+      { admissionNo: searchQuery.admissionNo },
+    ],
+  };
+
+  const students = await LeavingCert.find(query).exec();
+  return students;
+};
+
 // /**
 //  * Update leavingcert by id
 //  * @param {ObjectId} userId
@@ -68,6 +91,7 @@ module.exports = {
   createLeaveCert,
   queryLeavingcert,
   getLeavingcertById,
+  searchStudents,
   // updateLeavingcertById,
   // deleteLeavingcertById,
 };
