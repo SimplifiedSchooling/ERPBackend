@@ -21,6 +21,16 @@ const leavingCertSchema = mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    certificate: {
+      type: String,
+    },
+    class: {
+      type: String,
+    },
+    gender: {
+      type: String,
+      enum: ['Male', 'Female', 'Other'],
+    },
   },
   { timestamps: true }
 );
