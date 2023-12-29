@@ -42,17 +42,16 @@ function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-const searchStudents = async (searchQuery) => {
+const searchStudents = async (scode, searchQuery) => {
   const query = {
-    scode: searchQuery.scode,
+    scode,
     $or: [
       // eslint-disable-next-line security/detect-non-literal-regexp
-      { apllyedName: new RegExp(`^${escapeRegExp(searchQuery.apllyedName)}`, 'i') },
-      { StudentId: searchQuery.StudentId },
-      { admissionNo: searchQuery.admissionNo },
+      { apllyedName: new RegExp(`^${escapeRegExp(searchQuery)}`, 'i') },
+      { StudentId: searchQuery },
+      { admissionNo: searchQuery },
     ],
   };
-
   const students = await LeavingCert.find(query).exec();
   return students;
 };

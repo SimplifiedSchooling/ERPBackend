@@ -29,10 +29,8 @@ const queryLeavingcert = {
 
 const searchStudents = {
   body: Joi.object().keys({
-    scode: Joi.string(),
-    admissionNo: Joi.string(),
-    apllyedName: Joi.string(),
-    StudentId: Joi.string(),
+    scode: Joi.string().required(),
+    searchQuery: Joi.string(),
   }),
 };
 
