@@ -10,8 +10,8 @@ const createLeaveVert = catchAsync(async (req, res) => {
 });
 
 const queryLeavingcert = catchAsync(async (req, res) => {
-  const { scode, admissionNo, apllyedName, StudentId } = req.query;
-  const filter = { status: true, scode, admissionNo, apllyedName, StudentId }; // Filter for status true only
+  const { scode } = req.query;
+  const filter = { status: true, scode }; // Filter for status true only
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await LeavingcertService.queryLeavingcert(filter, options);
   res.send(result);
