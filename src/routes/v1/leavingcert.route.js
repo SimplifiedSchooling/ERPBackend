@@ -50,6 +50,8 @@ module.exports = router;
  *              date: 2020-05-12T16:18:04.793Z
  *              status: true
  *              certificate: transfer certificate
+ *              class: class 10
+ *              gender: Male
  *
  *     responses:
  *       "201":
@@ -73,10 +75,10 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: name
+ *         name: scode
  *         schema:
  *           type: string
- *         description: Medium name *
+ *         description: scode name *
  *       - in: query
  *         name: sortBy
  *         schema:
