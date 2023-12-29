@@ -16,7 +16,7 @@ const createLeaveCert = {
 
 const queryLeavingcert = {
   query: Joi.object().keys({
-    apllyedName: Joi.string(),
+    scode: Joi.string().required(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
