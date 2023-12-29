@@ -214,8 +214,6 @@ module.exports = router;
  *                 type: string
  *               nextClassId:
  *                 type: string
- *               nextSectionId:
- *                 type: string
  *               scode:
  *                 type: string
  *               studentData:
@@ -229,6 +227,8 @@ module.exports = router;
  *                       type: string
  *                     studentId:
  *                       type: number
+ *                     nextSectionId:
+ *                       type: string
  *     responses:
  *       201:
  *         description: Student Promote and Student Session entries created successfully
