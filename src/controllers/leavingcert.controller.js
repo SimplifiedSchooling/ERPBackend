@@ -26,7 +26,8 @@ const getLeavingcertById = catchAsync(async (req, res) => {
 });
 
 const searchStudents = catchAsync(async (req, res) => {
-  const leavingCert = await LeavingcertService.searchStudents(req.body);
+  const { scode, searchQuery } = req.body;
+  const leavingCert = await LeavingcertService.searchStudents(scode, searchQuery);
   if (!leavingCert) {
     throw new ApiError(httpStatus.NOT_FOUND, 'leaving Cert not found');
   }

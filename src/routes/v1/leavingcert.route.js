@@ -164,10 +164,9 @@ module.exports = router;
  *               name:
  *                 type: string *
  *             example:
- *              apllyedName: fake name
+ *              searchQuery: fake name
  *              scode: sdvbjh2376r37862
- *              StudentId: fake student ID
- *              admissionNo: 12424
+
  *     responses:
  *       "201":
  *         description: Created
