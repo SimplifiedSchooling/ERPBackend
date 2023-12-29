@@ -35,13 +35,12 @@ const deleteStudentPromote = catchAsync(async (req, res) => {
 });
 
 const createStudentData = catchAsync(async (req, res) => {
-  const { currentClassId, currentSectionId, nextSessionId, nextClassId, nextSectionId, scode, studentData } = req.body;
+  const { currentClassId, currentSectionId, nextSessionId, nextClassId, scode, studentData } = req.body;
   const createdRecords = await studentPromoteServices.createStudentData({
     currentClassId,
     currentSectionId,
     nextSessionId,
     nextClassId,
-    nextSectionId,
     scode,
     studentData,
   });

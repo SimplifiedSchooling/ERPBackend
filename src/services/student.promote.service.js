@@ -70,15 +70,7 @@ const deleteStudentPromoteById = async (StudentPromoteId) => {
  * @returns {Promise<StudentPromote>}
  * @returns {Promise<StudentSession>}
  */
-const createStudentData = async ({
-  currentClassId,
-  currentSectionId,
-  nextSessionId,
-  nextClassId,
-  nextSectionId,
-  scode,
-  studentData,
-}) => {
+const createStudentData = async ({ currentClassId, currentSectionId, nextSessionId, nextClassId, scode, studentData }) => {
   const createdRecords = [];
 
   await Promise.all(
@@ -93,7 +85,7 @@ const createStudentData = async ({
             sessionId: nextSessionId,
             studentId,
             classId: nextClassId,
-            sectionId: nextSectionId,
+            sectionId: data.nextSectionId,
             scode,
           };
         } else if (currentResult === 'Fail') {
@@ -119,7 +111,7 @@ const createStudentData = async ({
           currentResult,
           studentId,
           classId: nextClassId,
-          sectionId: nextSectionId,
+          sectionId: data.nextSectionId,
           sessionId: nextSessionId,
         });
         createdRecords.push({ studentSession: createdStudentSession, studentPromote: createdStudentPromote });
