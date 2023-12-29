@@ -1452,6 +1452,8 @@ components:
         class:
           type: string    
         gender:
+          type: string  
+        admission_no: 
           type: string                                 
       example:
         apllyedName: fake name
@@ -1462,6 +1464,7 @@ components:
         certificate: transfer certificate
         class: class 10
         gender: Male
+        admission_no: '1234251'
 
 
     Token:

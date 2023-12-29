@@ -11,12 +11,13 @@ const createLeaveCert = {
     class: Joi.string(),
     gender: Joi.string().valid('Male', 'Female', 'Other'),
     certificate: Joi.string(),
+    admission_no: Joi.string(),
   }),
 };
 
 const queryLeavingcert = {
   query: Joi.object().keys({
-    apllyedName: Joi.string(),
+    scode: Joi.string().required(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
