@@ -14,6 +14,7 @@ router
   .route('/:leavingCertId')
   .get(validate(leaveingCertValidation.getLeavingcertById), leavingCertController.getLeavingcertById);
 
+router.route('/search/students').post(validate(leaveingCertValidation.searchStudents), leavingCertController.searchStudents);
 module.exports = router;
 
 /**
@@ -52,7 +53,7 @@ module.exports = router;
  *              certificate: transfer certificate
  *              class: class 10
  *              gender: Male
- *              admission_no: 12424
+ *              admissionNo: 12424
  *
  *     responses:
  *       "201":
@@ -80,6 +81,21 @@ module.exports = router;
  *         schema:
  *           type: string
  *         description: scode name *
+ *       - in: query
+ *         name: admissionNo
+ *         schema:
+ *           type: string
+ *         description: admissionNo *
+ *       - in: query
+ *         name: apllyedName
+ *         schema:
+ *           type: string
+ *         description: apllyedName *
+ *       - in: query
+ *         name: StudentId
+ *         schema:
+ *           type: string
+ *         description: StudentId  *
  *       - in: query
  *         name: sortBy
  *         schema:
@@ -128,6 +144,45 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  */
+
+/**
+ * @swagger
+ * /leaving-cert/search/students:
+ *   post:
+ *     summary: Create a leave cert
+ *     description: Create a leave cert
+ *     tags: [LeavingCert]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string *
+ *             example:
+ *              apllyedName: fake name
+ *              scode: sdvbjh2376r37862
+ *              StudentId: fake student ID
+ *              admissionNo: 12424
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/LeavingCert'
+ *       "400":
+ *         $ref: '#/components/responses/DuplicateEmail'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
 /**
  * @swagger
  * /leaving-cert/{leavingCertId}:

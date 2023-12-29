@@ -116,7 +116,6 @@ const studentPromoteRoute = require('./student.promote.route');
 
 const leavingCertRoute = require('./leavingcert.route');
 
-
 const router = express.Router();
 
 const defaultRoutes = [

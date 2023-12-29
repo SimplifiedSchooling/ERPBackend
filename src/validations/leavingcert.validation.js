@@ -11,16 +11,28 @@ const createLeaveCert = {
     class: Joi.string(),
     gender: Joi.string().valid('Male', 'Female', 'Other'),
     certificate: Joi.string(),
-    admission_no: Joi.string(),
+    admissionNo: Joi.string(),
   }),
 };
 
 const queryLeavingcert = {
   query: Joi.object().keys({
     scode: Joi.string().required(),
+    // admissionNo: Joi.string(),
+    // apllyedName: Joi.string(),
+    // StudentId: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
+  }),
+};
+
+const searchStudents = {
+  body: Joi.object().keys({
+    scode: Joi.string(),
+    admissionNo: Joi.string(),
+    apllyedName: Joi.string(),
+    StudentId: Joi.string(),
   }),
 };
 
@@ -34,4 +46,5 @@ module.exports = {
   createLeaveCert,
   queryLeavingcert,
   getLeavingcertById,
+  searchStudents,
 };
