@@ -105,4 +105,6 @@ module.exports.menuController = require('./menu.controller');
 module.exports.lectureAttendanceController = require('./lecture.attendance.controller');
 module.exports.staffAttendanceController = require('./staff.attendance.controller');
 module.exports.recordedBroadcastController = require('./recorded.broadcast.controller');
+module.exports.studentPromoteController = require('./student.promote.controller');
 module.exports.leavingCertController = require('./leavingcert.controller');
+
