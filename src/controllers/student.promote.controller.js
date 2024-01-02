@@ -48,6 +48,13 @@ const createStudentData = catchAsync(async (req, res) => {
   res.status(201).json({ createdRecords });
 });
 
+const getStudentPromoteData = catchAsync(async (req, res) => {
+  const { classId, sessionId } = req.params;
+  const result = await studentPromoteServices.getStudentPromoteData(classId, sessionId);
+
+  res.status(200).json(result);
+});
+
 module.exports = {
   createStudentPromote,
   getStudentPromotes,
@@ -55,4 +62,5 @@ module.exports = {
   updateStudentPromote,
   deleteStudentPromote,
   createStudentData,
+  getStudentPromoteData,
 };

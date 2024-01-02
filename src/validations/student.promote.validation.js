@@ -18,6 +18,12 @@ const getStudentPromote = {
     studentPromoteId: Joi.string().custom(objectId).required(),
   }),
 };
+const getStudentPromoteReports = {
+  params: Joi.object().keys({
+    classId: Joi.string().custom(objectId).required(),
+    sessionId: Joi.string().custom(objectId).required(),
+  }),
+};
 
 const getAllStudentPromote = {
   query: Joi.object().keys({
@@ -54,4 +60,5 @@ module.exports = {
   getStudentPromote,
   updateStudentPromoteById,
   deleteStudentPromoteById,
+  getStudentPromoteReports,
 };
