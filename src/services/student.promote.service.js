@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { StudentPromote, StudentSession } = require('../models');
+const { StudentPromote, StudentSession, Student } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -124,6 +124,38 @@ const createStudentData = async ({ currentClassId, currentSectionId, nextSession
   return createdRecords;
 };
 
+// Assuming you have a Student model, import it here
+/**
+ * Create a StudentPromote and StudentSession
+ * @param {Object} classId
+ * @param {Object} sessionId
+ * @returns {Promise<StudentPromote>}
+ * @returns {Promise<Student>}
+ */
+const getStudentPromoteData = async (classId, sessionId) => {
+  // Fetch student promote data based on classId and sessionId
+  const studentPromotes = await StudentPromote.find({
+    classId,
+    sessionId,
+  })
+    .populate('classId')
+    .populate('sectionId');
+
+  // Fetch student data for each studentPromote
+  const studentData = await Promise.all(
+    studentPromotes.map(async (promote) => {
+      const student = await Student.findOne({ studentId: promote.studentId });
+      return {
+        student,
+        sectionName: promote.sectionId.sectionName,
+        ...promote.toJSON(),
+      };
+    })
+  );
+
+  return studentData;
+};
+
 module.exports = {
   createStudentPromote,
   getAllStudentPromotes,
@@ -131,4 +163,5 @@ module.exports = {
   updateStudentPromoteById,
   deleteStudentPromoteById,
   createStudentData,
+  getStudentPromoteData,
 };
