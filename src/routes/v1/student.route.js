@@ -727,6 +727,10 @@ module.exports = router;
  *       studeappliedforapprentice:
  *          type: string
  *          description: Student applied for apprentice information
+ *       transferStatus:
+ *          type: boolean
+ *       studentEnroll:
+ *          type: boolean
  *       example:
  *         sectionId: 651cf2fc2c054218ddd660c5
  *         classId: 651cf2fc2c054218ddd660c5
