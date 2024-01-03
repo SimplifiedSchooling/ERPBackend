@@ -64,11 +64,69 @@ const deleteStudentPromoteById = async (StudentPromoteId) => {
   return studentPromote;
 };
 
+// /**
+//  * Create a StudentPromote and StudentSession
+//  * @param {Object} StudentPromoteData
+//  * @returns {Promise<StudentPromote>}
+//  * @returns {Promise<StudentSession>}
+//  */
+// const createStudentData = async ({ currentClassId, currentSectionId, nextSessionId, nextClassId, scode, studentData }) => {
+//   const createdRecords = [];
+
+//   await Promise.all(
+//     studentData.map(async (data) => {
+//       const { nextSessionStatus, currentResult, studentId } = data;
+
+//       let studentSessionData = null;
+
+//       if (nextSessionStatus === 'Continue') {
+//         if (currentResult === 'Pass') {
+//           studentSessionData = {
+//             sessionId: nextSessionId,
+//             studentId,
+//             classId: nextClassId,
+//             sectionId: data.nextSectionId,
+//             scode,
+//           };
+//         } else if (currentResult === 'Fail') {
+//           studentSessionData = {
+//             sessionId: nextSessionId,
+//             studentId,
+//             classId: currentClassId,
+//             sectionId: currentSectionId,
+//             scode,
+//           };
+//         }
+//       }
+
+//       let createdStudentSession = null;
+//       if (studentSessionData) {
+//         createdStudentSession = await StudentSession.create(studentSessionData);
+//       }
+
+//       try {
+//         const createdStudentPromote = await StudentPromote.create({
+//           scode,
+//           nextSessionStatus,
+//           currentResult,
+//           studentId,
+//           classId: nextClassId,
+//           sectionId: data.nextSectionId,
+//           sessionId: nextSessionId,
+//         });
+//         createdRecords.push({ studentSession: createdStudentSession, studentPromote: createdStudentPromote });
+//       } catch (promoteError) {
+//         createdRecords.push({ studentSession: createdStudentSession, studentPromote: null });
+//       }
+//     })
+//   );
+
+//   return createdRecords;
+// };
 /**
  * Create a StudentPromote and StudentSession
  * @param {Object} StudentPromoteData
- * @returns {Promise<StudentPromote>}
- * @returns {Promise<StudentSession>}
+ * @returns {Promise<{ studentSession: StudentSession | null, studentPromote: StudentPromote | null }[]>}
  */
 const createStudentData = async ({ currentClassId, currentSectionId, nextSessionId, nextClassId, scode, studentData }) => {
   const createdRecords = [];
@@ -101,20 +159,39 @@ const createStudentData = async ({ currentClassId, currentSectionId, nextSession
 
       let createdStudentSession = null;
       if (studentSessionData) {
-        createdStudentSession = await StudentSession.create(studentSessionData);
+        // Check if the student session already exists
+        const existingStudentSession = await StudentSession.findOne({
+          sessionId: studentSessionData.sessionId,
+          studentId: studentSessionData.studentId,
+        });
+
+        if (!existingStudentSession) {
+          createdStudentSession = await StudentSession.create(studentSessionData);
+        }
       }
 
       try {
-        const createdStudentPromote = await StudentPromote.create({
-          scode,
-          nextSessionStatus,
-          currentResult,
-          studentId,
-          classId: nextClassId,
-          sectionId: data.nextSectionId,
+        // Check if the student promote already exists
+        const existingStudentPromote = await StudentPromote.findOne({
           sessionId: nextSessionId,
+          studentId,
         });
-        createdRecords.push({ studentSession: createdStudentSession, studentPromote: createdStudentPromote });
+
+        if (!existingStudentPromote) {
+          const createdStudentPromote = await StudentPromote.create({
+            scode,
+            nextSessionStatus,
+            currentResult,
+            studentId,
+            classId: nextClassId,
+            sectionId: data.nextSectionId,
+            sessionId: nextSessionId,
+          });
+
+          createdRecords.push({ studentSession: createdStudentSession, studentPromote: createdStudentPromote });
+        } else {
+          createdRecords.push({ studentSession: createdStudentSession, studentPromote: null });
+        }
       } catch (promoteError) {
         createdRecords.push({ studentSession: createdStudentSession, studentPromote: null });
       }
