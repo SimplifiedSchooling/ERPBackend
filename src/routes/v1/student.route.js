@@ -40,6 +40,8 @@ router
   .get(validate(StudentValidation.getAllStudents), StudentController.getStudents);
 
 module.exports = router;
+
+// ajfh
 /**
  * @swagger
  * tags:
