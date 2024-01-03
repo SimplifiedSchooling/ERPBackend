@@ -364,7 +364,7 @@ const updateStudentById = {
       transferStatus: Joi.boolean(),
       studentEnroll: Joi.boolean(),
     })
-    .min(2),
+    .min(),
 };
 const deleteStudentById = {
   params: Joi.object().keys({

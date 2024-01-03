@@ -15,6 +15,9 @@ router
   .get(validate(studentPromoteValidation.getStudentPromote), studentPromoteController.getStudentPromote)
   .patch(validate(studentPromoteValidation.updateStudentPromoteById), studentPromoteController.updateStudentPromote)
   .delete(validate(studentPromoteValidation.deleteStudentPromoteById), studentPromoteController.deleteStudentPromote);
+router
+  .route('/getstudentpromotereport/:classId/:sessionId')
+  .get(validate(studentPromoteValidation.getStudentPromoteReports), studentPromoteController.getStudentPromoteData);
 
 module.exports = router;
 
@@ -43,8 +46,8 @@ module.exports = router;
  *               - classId
  *               - sectionId
  *               - scode
- *               - current_result
- *               - next_session_status
+ *               - currentResult
+ *               - nextSessionStatus
  *             properties:
  *               sessionId:
  *                 type: string
@@ -56,9 +59,9 @@ module.exports = router;
  *                 type: string
  *               scode:
  *                 type:string
- *               current_result:
+ *               currentResult:
  *                 type:string
- *               next_session_status:
+ *               nextSessionStatus:
  *                 type:string
  *             example:
  *               sessionId: 650d6ee360838756a214b446
@@ -66,8 +69,8 @@ module.exports = router;
  *               classId: 650d6e6660838756a214b43c
  *               sectionId: 650d6dfa60838756a214b436
  *               scode: 5896c340-6828-11ee-a348-e9de56c6f44e
- *               current_result: Pass or Fail
- *               next_session_status: Continue or Leave
+ *               currentResult: Pass or Fail
+ *               nextSessionStatus: Continue or Leave
  *     responses:
  *       "201":
  *         description: Created
@@ -235,7 +238,29 @@ module.exports = router;
  *       500:
  *         description: Internal Server Error
  */
-
+/**
+ * @swagger
+ * /studentpromote/getstudentpromotereport/{classId}/{sessionId}:
+ *   get:
+ *     summary: Get student promote data with student information and sectionName
+ *     tags: [StudentPromote]
+ *     parameters:
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         description: The ID of the class.
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: sessionId
+ *         required: true
+ *         description: The ID of the session.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ */
 /**
  * @swagger
  * components:
