@@ -357,6 +357,12 @@ const updateStudentById = {
       marksobtain: Joi.string(),
       studappliedforplacemant: Joi.string(),
       studeappliedforapprentice: Joi.string(),
+      laboratoryDue: Joi.boolean(),
+      libraryDue: Joi.boolean(),
+      feedDue: Joi.boolean(),
+      otherDue: Joi.boolean(),
+      transferStatus: Joi.boolean(),
+      studentEnroll: Joi.boolean(),
     })
     .min(2),
 };

@@ -199,6 +199,14 @@ const studentSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    transferStatus: {
+      type: Boolean,
+      default: false,
+    },
+    studentEnroll: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
