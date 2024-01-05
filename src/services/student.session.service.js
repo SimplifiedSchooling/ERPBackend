@@ -53,7 +53,7 @@ const getStudentyId = async (studentId) => {
  * @throws {Error} - If there is an error while querying the database.
  */
 
-const getStudentsByClassAndSection = async (scode, classId, sectionId, date) => {
+const getStudentsByClassAndSection = async (scode, classId, sectionId, sessionId, date) => {
   const attendanceData = await StudentAttendanceSchema.findOne({
     scode,
     classId: mongoose.Types.ObjectId(classId),
@@ -68,6 +68,7 @@ const getStudentsByClassAndSection = async (scode, classId, sectionId, date) => 
           scode,
           classId: mongoose.Types.ObjectId(classId),
           sectionId: mongoose.Types.ObjectId(sectionId),
+          sessionId: mongoose.Types.ObjectId(sessionId),
         },
       },
       {
@@ -392,13 +393,14 @@ const getStudentsByClassAndSectionForLectureAttendance = async (scode, classId, 
  * @throws {Error} - If there is an error while querying the database.
  */
 
-const getStudentsListByClassAndSection = async (scode, classId, sectionId) => {
+const getStudentsListByClassAndSection = async (scode, classId, sectionId, sessionId) => {
   const students = await StudentSession.aggregate([
     {
       $match: {
         scode,
         classId: mongoose.Types.ObjectId(classId),
         sectionId: mongoose.Types.ObjectId(sectionId),
+        sessionId: mongoose.Types.ObjectId(sessionId),
       },
     },
     {
