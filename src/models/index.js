@@ -118,3 +118,4 @@ module.exports.LectureAttendance = require('./lecture.attendance.model');
 module.exports.StaffAttendanceSchema = require('./staff.attendance.model');
 module.exports.RecordedBroadcast = require('./recorded.broadcast.model');
 module.exports.StudentPromote = require('./student.promote.model');
+module.exports.GeneralSetting = require('./general.setting.model');

@@ -111,6 +111,7 @@ const menuRoute = require('./menu.router');
 const lectureAttendance = require('./lecture.attendance.route');
 const staffAttendance = require('./staff.attendance.route');
 const recordedBroadcastRoute = require('./recorded.broadcast.route');
+const generalSettingRoute = require('./general.setting.route');
 
 const studentPromoteRoute = require('./student.promote.route');
 
@@ -126,6 +127,10 @@ const defaultRoutes = [
   {
     path: '/studentpromote',
     route: studentPromoteRoute,
+  },
+  {
+    path: '/generalsetting',
+    route: generalSettingRoute,
   },
   {
     path: '/users',
